@@ -16,5 +16,9 @@ A modern, responsive, and fast landing page built for "787 Rumbos", a travel age
 
 ## 🛠️ How to run locally
 1. Clone the repository:
-   ```bash
-   git clone [https://github.com/ValenFelizia/787-Rumbos.git](https://github.com/ValenFelizia/787-Rumbos.git)
+   ```bash git clone [https://github.com/ValenFelizia/787-Rumbos.git](https://github.com/ValenFelizia/787-Rumbos.git)
+2. Install dependencies
+   ```bash npm install
+3. Run the development server
+   ```bash npm run dev
+4. Open http://localhost:3xxx in your browser.
