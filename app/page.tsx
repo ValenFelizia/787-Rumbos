@@ -1,3 +1,12 @@
+/**
+ * Comentarios añadidos con fines educativos.
+ * page.tsx — Página de inicio (`/`).
+ *
+ * En el App Router, este archivo exporta el componente por defecto que Next.js
+ * renderiza como `children` dentro de `app/layout.tsx`. Toda la landing está
+ * declarada en un solo árbol JSX: datos en constantes al inicio y composición
+ * con secciones semánticas más navegación y pie de página.
+ */
 import {
   BedDouble,
   Bus,
@@ -21,6 +30,7 @@ const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600"] });
 const whatsappApiLink =
   "https://api.whatsapp.com/send?phone=5493516157398&text=Hola%2C%20quiero%20consultar%20por%20un%20viaje.";
 
+/** Lista de destinos: cada objeto describe una tarjeta (nombre, duración, ruta de imagen). */
 const featuredDestinations = [
   {
     name: "Río de Janeiro",
@@ -44,6 +54,11 @@ const featuredDestinations = [
   },
 ];
 
+/**
+ * Servicios: cada ítem incluye título, texto y referencia a un icono de Lucide.
+ * Guardar el componente del icono en la propiedad `icon` permite renderizarlo
+ * dinámicamente dentro del `.map()` (ver más abajo).
+ */
 const services = [
   {
     title: "Pasajes Aéreos",
@@ -70,6 +85,7 @@ const services = [
 export default function Home() {
   return (
     <main className={`${inter.className} min-h-screen bg-[#f9f9f9] text-[#0b4058]`}>
+      {/* Barra superior: marca y enlace de contacto; se repite en todas las secciones visibles al hacer scroll */}
       <nav className="sticky top-0 z-20 border-b border-white/10 bg-[#0b4058]/90 backdrop-blur-md">
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-3 md:py-4">
           <a href="/" className="inline-flex items-center transition duration-300 hover:opacity-90">
@@ -94,6 +110,7 @@ export default function Home() {
         </div>
       </nav>
 
+      {/* Hero: primera impresión — titular, texto de apoyo y llamadas a la acción */}
       <section className="relative flex min-h-[calc(100vh-73px)] items-center bg-[url('/hero-bg.jpg')] bg-cover bg-center">
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative mx-auto w-full max-w-6xl px-6 py-24 text-white md:py-28">
@@ -130,6 +147,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Propuesta de valor: mensaje central y tres pilares fijos (tarjetas estáticas, sin lista desde array) */}
       <section className="border-y border-[#0b4058]/10 bg-white">
         <div className="mx-auto w-full max-w-6xl px-6 py-20">
           <h2 className={`${montserrat.className} text-3xl font-bold tracking-tight md:text-4xl`}>
@@ -170,6 +188,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* “Quiénes somos”: narrativa de la agencia con imagen y texto en dos columnas */}
       <section className="bg-[#f9f9f9]">
         <div className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-20 md:grid-cols-12 md:items-center md:gap-12">
           <div className="group overflow-hidden rounded-2xl shadow-md shadow-[#0b4058]/10 md:col-span-5">
@@ -195,6 +214,23 @@ export default function Home() {
         </div>
       </section>
 
+      {/*
+        Destinos destacados: las tarjetas se generan desde `featuredDestinations`.
+
+        Cómo funciona `.map()` aquí:
+        1) `featuredDestinations` es un array de objetos; `.map()` recorre cada elemento
+           y, por cada uno, ejecuta la función flecha y devuelve un nuevo array del mismo
+           tamaño cuyos ítems son nodos React (aquí, un <article> por destino).
+        2) La función recibe `destination`: el objeto actual (name, duration, imageSrc).
+           Esas propiedades se “inyectan” en el JSX como expresiones entre llaves:
+           `destination.name` en el título y el alt de la imagen, `destination.imageSrc`
+           en `Image`, `destination.duration` en el párrafo.
+        3) `key={destination.name}` le dice a React qué fila es cuál en la lista. Las keys
+           deben ser estables y únicas entre hermanos para que el reconciliador pueda
+           actualizar el DOM de forma eficiente cuando el array cambie.
+        4) El resultado del `.map()` es un array de elementos; React lo acepta como hijos
+           del contenedor (grid) y lo renderiza en orden.
+      */}
       <section className="mx-auto w-full max-w-6xl px-6 py-20">
         <div className="mb-8 flex items-end justify-between gap-4">
           <div>
@@ -235,6 +271,19 @@ export default function Home() {
         </div>
       </section>
 
+      {/*
+        Servicios: otra lista construida con `.map()`, esta vez sobre `services`.
+
+        Diferencia clave con destinos: cada ítem trae `icon: Plane`, etc. En React los
+        nombres de componente deben empezar con mayúscula. Por eso dentro del callback
+        hacemos `const Icon = service.icon`: guardamos la referencia al componente en
+        una variable con mayúscula y luego renderizamos `<Icon />`. Si escribiéramos
+        `<service.icon />` fallaría la sintaxis; si renderizáramos el icono como función
+        sin asignarlo a una variable en mayúscula, React lo trataría como elemento DOM.
+
+        El flujo de datos es el mismo: por cada `service`, `service.title` y
+        `service.description` alimentan el texto; `key={service.title}` identifica la fila.
+      */}
       <section className="border-t border-[#0b4058]/10 bg-white">
         <div className="mx-auto w-full max-w-6xl px-6 py-20">
           <h2 className={`${montserrat.className} text-3xl font-bold tracking-tight md:text-4xl`}>
@@ -258,6 +307,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Pie: datos legales, ubicación y enlaces; contenido fijo, no depende de arrays */}
       <footer className="bg-[#0b4058] text-white">
         <div className="mx-auto grid w-full max-w-6xl gap-8 px-6 py-14 md:grid-cols-3">
           <div>
