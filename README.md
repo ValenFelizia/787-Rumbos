@@ -6,7 +6,7 @@ A modern, responsive, and fast landing page built for "787 Rumbos", a travel age
 * **Framework:** Next.js (React)
 * **Styling:** Tailwind CSS
 * **Icons:** Lucide React
-* **Deployment:** Vercel (Coming soon)
+* **Deployment:** Vercel
 
 ## ✨ Features
 * **Modern UI:** Clean aesthetic following the brand's official guidelines (dark blues and vibrant green/yellow accents).
@@ -14,14 +14,5 @@ A modern, responsive, and fast landing page built for "787 Rumbos", a travel age
 * **Direct Communication:** Call-to-action buttons directly integrated with WhatsApp API for customer support.
 * **Optimized Assets:** Uses `next/image` for fast-loading, high-quality visuals.
 
-## 🛠️ How to run locally
-1. Clone the repository:
-   ```bash 
-   git clone [https://github.com/ValenFelizia/787-Rumbos.git](https://github.com/ValenFelizia/787-Rumbos.git)
-2. Install dependencies
-   ```bash
-   npm install
-3. Run the development server
-   ```bash 
-   npm run dev
-4. Open http://localhost:3xxx in your browser.
+## 🛠️ Useful Links
+* **Link to the website:** https://787-rumbos.vercel.app/
