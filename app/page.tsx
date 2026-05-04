@@ -362,6 +362,33 @@ export default function Home() {
             </a>
           </div>
         </div>
+        <div className="mx-auto mt-8 flex w-full max-w-6xl flex-wrap items-center justify-center gap-6 border-t border-white/10 px-6 pb-8 pt-8">
+          <a
+            href="http://qr.afip.gob.ar/?qr=Huvxa1kUae-1lE_yjNzL2w,,"
+            target="_F960AFIPInfo"
+            rel="noreferrer"
+            className="inline-flex h-12 items-center transition-opacity hover:opacity-80"
+          >
+            <img
+              src="/afip.jpg?v=20260503"
+              alt="Data Fiscal ARCA"
+              className="h-full w-auto object-contain"
+            />
+          </a>
+    
+          <div className="inline-flex h-12 items-center">
+            <Image
+              src="/camara-turismo.png"
+              alt="Miembro Cámara de Turismo"
+              width={64}
+              height={80}
+              className="h-full w-auto object-contain transition-opacity hover:opacity-80"
+            />
+          </div>
+          <p className="text-center text-sm text-white/70">
+            ©787 Rumbos® - Todos los derechos reservados.
+          </p>
+        </div>
       </footer>
     </main>
   );
