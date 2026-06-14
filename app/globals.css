@@ -3,16 +3,26 @@
 /*
  * globals.css — Estilos globales y variables de diseño de 787 Rumbos.
  *
- * Este archivo se importa una vez en app/layout.tsx y aplica a toda la app.
  * Estructura:
- *   1. Paleta de colores y gradientes de marca (variables CSS custom)
- *   2. Estilos base
+ *   1. Tipografías de marca → conecta las CSS vars de next/localFont con Tailwind
+ *   2. Paleta de colores y gradientes de marca
+ *   3. Estilos base
+ *   4. Utilidades de animación (scroll reveal)
  */
 
 /* ─────────────────────────────────────────
-   1. Paleta de marca — variables CSS globales
-   Definidas en :root para que estén disponibles
-   en cualquier parte del proyecto vía var(--brand-*).
+   1. Tipografías de marca
+   Las variables --font-elaine y --font-zalando son inyectadas en el <body>
+   por next/localFont (ver lib/fonts.ts y app/layout.tsx).
+   Aquí las registramos en el sistema de Tailwind como utilidades de fuente.
+   ───────────────────────────────────────── */
+@theme inline {
+  --font-brand-heading: var(--font-elaine);
+  --font-brand-body:    var(--font-zalando);
+}
+
+/* ─────────────────────────────────────────
+   2. Paleta de marca — variables CSS globales
    ───────────────────────────────────────── */
 :root {
   /* Colores principales */
@@ -24,8 +34,8 @@
   --brand-verde:         #a2c745;
 
   /* Fondos neutros */
-  --brand-crema:         #f9f9f9;
-  --brand-blanco:        #ffffff;
+  --brand-crema:  #f9f9f9;
+  --brand-blanco: #ffffff;
 
   /* Gradientes de marca */
   --gradient-brand-warm: linear-gradient(135deg, #f7a92a, #e6b451);
@@ -33,11 +43,40 @@
 }
 
 /* ─────────────────────────────────────────
-   2. Estilos base
+   3. Estilos base
    ───────────────────────────────────────── */
 @layer base {
   body {
+    font-family: var(--font-zalando), system-ui, sans-serif;
     background-color: var(--brand-crema);
     color: var(--brand-azul-petroleo);
+  }
+}
+
+/* ─────────────────────────────────────────
+   4. Animaciones de scroll reveal
+   El componente ScrollReveal (components/ScrollReveal.tsx) agrega la clase
+   `.reveal` a los elementos cuando entran en el viewport via IntersectionObserver.
+   Estado inicial: invisible y desplazado hacia abajo.
+   Estado final: visible en su posición original.
+   ───────────────────────────────────────── */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respeto por las preferencias del usuario: si prefiere movimiento reducido,
+   desactivamos todas las transiciones y animaciones. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

@@ -11,10 +11,7 @@
  */
 import Image from "next/image";
 import { Send } from "lucide-react";
-import { Montserrat } from "next/font/google";
 import { WHATSAPP_LINK } from "@/lib/constants";
-
-const montserrat = Montserrat({ subsets: ["latin"], weight: ["600", "700", "800"] });
 
 export function Navbar() {
   return (
@@ -38,7 +35,7 @@ export function Navbar() {
           target="_blank"
           rel="noreferrer"
           aria-label="Consultar por WhatsApp — abre WhatsApp en una nueva pestaña"
-          className={`${montserrat.className} inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#f7a92a] to-[#e6b451] px-4 py-2 text-xs font-semibold text-[#0b4058] shadow-sm shadow-[#f7a92a]/30 transition-all duration-300 hover:-translate-y-0.5 hover:brightness-105 hover:shadow-md hover:shadow-[#f7a92a]/40 md:px-5 md:py-2.5 md:text-sm`}
+          className="font-[family-name:var(--font-elaine)] inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#f7a92a] to-[#e6b451] px-4 py-2 text-xs font-semibold text-[#0b4058] shadow-sm shadow-[#f7a92a]/30 transition-all duration-300 hover:-translate-y-0.5 hover:brightness-105 hover:shadow-md hover:shadow-[#f7a92a]/40 md:px-5 md:py-2.5 md:text-sm"
         >
           <Send className="h-4 w-4" />
           Consultar por WhatsApp

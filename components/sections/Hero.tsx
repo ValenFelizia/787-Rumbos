@@ -14,10 +14,7 @@
  */
 import Image from "next/image";
 import { Send, Wallet } from "lucide-react";
-import { Montserrat } from "next/font/google";
 import { WHATSAPP_LINK } from "@/lib/constants";
-
-const montserrat = Montserrat({ subsets: ["latin"], weight: ["600", "700", "800"] });
 
 export function Hero() {
   return (
@@ -38,7 +35,7 @@ export function Hero() {
       <div className="relative mx-auto w-full max-w-6xl px-6 py-24 text-white md:py-28">
         <div className="max-w-3xl space-y-7">
           <h1
-            className={`${montserrat.className} text-4xl font-extrabold leading-tight tracking-tight md:text-6xl`}
+            className="font-[family-name:var(--font-elaine)] text-4xl font-extrabold leading-tight tracking-tight md:text-6xl"
           >
             Descubrí el mundo con el acompañamiento cercano de 787 Rumbos
           </h1>
@@ -53,7 +50,7 @@ export function Hero() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Consultar por WhatsApp — abre WhatsApp en una nueva pestaña"
-                className={`${montserrat.className} inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#f7a92a] to-[#e6b451] px-6 py-3 font-semibold text-[#0b4058] shadow-md shadow-[#f7a92a]/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#f7a92a]/40`}
+                className="font-[family-name:var(--font-elaine)] inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#f7a92a] to-[#e6b451] px-6 py-3 font-semibold text-[#0b4058] shadow-md shadow-[#f7a92a]/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#f7a92a]/40"
               >
                 <Send className="h-4 w-4" />
                 Armá tu viaje ahora

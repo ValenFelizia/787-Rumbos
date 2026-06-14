@@ -10,6 +10,7 @@
  */
 import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/next'
+import { elaineSans, zalandoSans } from '@/lib/fonts'
 import './globals.css'
 
 /** Metadatos del sitio leídos por Next.js para SEO, pestaña del navegador y previews sociales.
@@ -57,7 +58,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className="antialiased">
+      <body className={`${elaineSans.variable} ${zalandoSans.variable} antialiased`}>
         {children}
         {/* Analytics solo en producción para no contaminar datos en desarrollo */}
         {process.env.NODE_ENV === 'production' && <Analytics />}

@@ -6,9 +6,7 @@
  * En mobile, la imagen aparece primero (orden visual natural).
  */
 import Image from "next/image";
-import { Montserrat } from "next/font/google";
 
-const montserrat = Montserrat({ subsets: ["latin"], weight: ["600", "700", "800"] });
 
 export function AboutUs() {
   return (
@@ -28,7 +26,7 @@ export function AboutUs() {
           />
         </div>
         <div className="md:col-span-7 md:pl-4">
-          <h2 className={`${montserrat.className} text-3xl font-bold tracking-tight md:text-4xl`}>
+          <h2 className="font-[family-name:var(--font-elaine)] text-3xl font-bold tracking-tight md:text-4xl">
             De la terminal al mundo
           </h2>
           <p className="mt-5 max-w-2xl text-[1.03rem] leading-relaxed text-[#0b4058]/80">

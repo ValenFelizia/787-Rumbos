@@ -9,17 +9,14 @@
  */
 import Image from "next/image";
 import { Send, Timer } from "lucide-react";
-import { Montserrat } from "next/font/google";
 import { featuredDestinations, whatsappDestino } from "@/lib/constants";
-
-const montserrat = Montserrat({ subsets: ["latin"], weight: ["600", "700", "800"] });
 
 export function FeaturedDestinations() {
   return (
     <section className="mx-auto w-full max-w-6xl px-6 py-20">
       <div className="mb-8 flex items-end justify-between gap-4">
         <div>
-          <h2 className={`${montserrat.className} text-3xl font-bold tracking-tight md:text-4xl`}>
+          <h2 className="font-[family-name:var(--font-elaine)] text-3xl font-bold tracking-tight md:text-4xl">
             Destinos destacados
           </h2>
           <p className="mt-2 text-[#0b4058]/75">
@@ -53,7 +50,7 @@ export function FeaturedDestinations() {
             </div>
             <div className="space-y-3 p-6">
               <h3
-                className={`${montserrat.className} text-[1.35rem] font-bold leading-tight transition-colors duration-300 group-hover:text-[#006183]`}
+                className="font-[family-name:var(--font-elaine)] text-[1.35rem] font-bold leading-tight transition-colors duration-300 group-hover:text-[#006183]"
               >
                 {destination.name}
               </h3>
@@ -67,7 +64,7 @@ export function FeaturedDestinations() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={`Consultar por viaje a ${destination.name} — abre WhatsApp`}
-                className={`${montserrat.className} mt-1 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#0b4058] px-4 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#006183]`}
+                className="font-[family-name:var(--font-elaine)] mt-1 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#0b4058] px-4 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#006183]"
               >
                 <Send className="h-3.5 w-3.5" />
                 Consultá este destino
