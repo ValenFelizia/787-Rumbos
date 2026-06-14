@@ -8,7 +8,7 @@
  * Fondo con degradado de marca para marcar visualmente el cierre de
  * la página y crear contraste con la sección de servicios (crema).
  */
-import { Send } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { WHATSAPP_LINK } from "@/lib/constants";
 
 export function CTASection() {
@@ -41,7 +41,7 @@ export function CTASection() {
             aria-label="Iniciar consulta por WhatsApp — abre WhatsApp en una nueva pestaña"
             className="font-[family-name:var(--font-elaine)] inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#f7a92a] to-[#e6b451] px-8 py-3.5 text-base font-bold text-[#0b4058] shadow-lg shadow-[#f7a92a]/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#f7a92a]/30"
           >
-            <Send className="h-4 w-4" />
+            <WhatsAppIcon size={16} className="h-4 w-4" />
             Hablemos por WhatsApp
           </a>
           <span className="text-sm text-white/50">Respondemos en menos de 2 horas</span>

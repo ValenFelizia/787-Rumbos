@@ -8,7 +8,8 @@
  * pre-rellenado en el mensaje, usando `whatsappDestino()` de constants.
  */
 import Image from "next/image";
-import { Send, Timer } from "lucide-react";
+import { Timer } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { featuredDestinations, whatsappDestino } from "@/lib/constants";
 
 export function FeaturedDestinations() {
@@ -66,7 +67,7 @@ export function FeaturedDestinations() {
                 aria-label={`Consultar por viaje a ${destination.name} — abre WhatsApp`}
                 className="font-[family-name:var(--font-elaine)] mt-1 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#0b4058] px-4 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#006183]"
               >
-                <Send className="h-3.5 w-3.5" />
+                <WhatsAppIcon size={14} className="h-3.5 w-3.5" />
                 Consultá este destino
               </a>
             </div>

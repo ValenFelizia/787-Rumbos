@@ -56,12 +56,52 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  /**
+   * JSON-LD (JavaScript Object Notation for Linked Data) — Datos estructurados.
+   * Este script no es visible para el usuario pero sí para Google.
+   * Permite que Google entienda que este sitio es una agencia de viajes
+   * con una ubicación física, número de teléfono y URL propios.
+   * Puede generar "rich results" en las búsquedas: resultados con datos
+   * de contacto, mapa de Google, horarios, etc. directamente en la SERP.
+   *
+   * Schema.org es el vocabulario estándar que usan Google, Bing y Yahoo.
+   * TravelAgency hereda de LocalBusiness que hereda de Organization.
+   */
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": ["TravelAgency", "LocalBusiness"],
+    name: "787 Rumbos",
+    description:
+      "Agencia de viajes en Córdoba. Paquetes personalizados, atención humana y financiación disponible.",
+    url: "https://787rumbos.com.ar",
+    telephone: "+5493516157398",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Av. Voz del Interior 8500",
+      addressLocality: "Córdoba",
+      addressRegion: "Córdoba",
+      addressCountry: "AR",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: -31.3117,
+      longitude: -64.208,
+    },
+    sameAs: ["https://www.instagram.com/787rumbos/"],
+    priceRange: "$$",
+  };
+
   return (
     <html lang="es">
       <body className={`${elaineSans.variable} ${zalandoSans.variable} antialiased`}>
         {children}
         {/* Analytics solo en producción para no contaminar datos en desarrollo */}
         {process.env.NODE_ENV === 'production' && <Analytics />}
+        {/* Datos estructurados JSON-LD — visible para buscadores, no para usuarios */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </body>
     </html>
   )

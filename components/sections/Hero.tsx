@@ -13,7 +13,8 @@
  *   para que Next.js genere el srcset correcto.
  */
 import Image from "next/image";
-import { Send, Wallet } from "lucide-react";
+import { Wallet } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { WHATSAPP_LINK } from "@/lib/constants";
 
 export function Hero() {
@@ -52,7 +53,7 @@ export function Hero() {
                 aria-label="Consultar por WhatsApp — abre WhatsApp en una nueva pestaña"
                 className="font-[family-name:var(--font-elaine)] inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#f7a92a] to-[#e6b451] px-6 py-3 font-semibold text-[#0b4058] shadow-md shadow-[#f7a92a]/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#f7a92a]/40"
               >
-                <Send className="h-4 w-4" />
+                <WhatsAppIcon size={16} className="h-4 w-4" />
                 Armá tu viaje ahora
               </a>
               {/* Micro-copy de confianza */}
