@@ -110,12 +110,28 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero: primera impresión — titular, texto de apoyo y llamadas a la acción */}
-      <section className="relative flex min-h-[calc(100vh-73px)] items-center bg-[url('/hero-bg.jpg')] bg-cover bg-center">
-        <div className="absolute inset-0 bg-black/40" />
+      {/* Hero: primera impresión — titular, texto de apoyo y llamadas a la acción.
+          La imagen de fondo usa el componente <Image> de Next.js con `priority` porque
+          es el LCP (Largest Contentful Paint): el elemento más grande de la página y el
+          que Google mide para calcular el score de performance. Con `fill` + `object-cover`
+          replicamos el comportamiento visual del antiguo background-image CSS, pero ahora
+          Next.js genera automáticamente versiones WebP/AVIF y las sirve desde el CDN de Vercel. */}
+      <section className="relative flex min-h-[calc(100vh-73px)] items-center overflow-hidden">
+        {/* Imagen de fondo optimizada — priority evita lazy loading en el LCP */}
+        <Image
+          src="/hero-bg.jpg"
+          alt="Paisaje de viaje — 787 Rumbos agencia de viajes en Córdoba"
+          fill
+          priority
+          quality={80}
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        {/* Overlay: degradado de marca (más intenso a la izquierda donde va el texto) */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0b4058]/85 via-[#0b4058]/50 to-transparent" />
         <div className="relative mx-auto w-full max-w-6xl px-6 py-24 text-white md:py-28">
           <div className="max-w-3xl space-y-7">
-            <span className="inline-flex items-center gap-2 rounded-full bg-[#dae553]/30 px-4 py-2 text-sm font-medium text-white">
+            <span className="inline-flex items-center gap-2 rounded-full bg-[#dae553]/30 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm">
               <Sparkles className="h-4 w-4 text-[#dae553]" />
               Experiencias a tu medida
             </span>
@@ -129,15 +145,20 @@ export default function Home() {
               atención realmente humana de principio a fin.
             </p>
             <div className="flex flex-wrap items-center gap-4">
-              <a
-                href={whatsappApiLink}
-                target="_blank"
-                rel="noreferrer"
-                className={`${montserrat.className} inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#f7a92a] to-[#e6b451] px-6 py-3 font-semibold text-[#0b4058] shadow-md shadow-[#f7a92a]/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#f7a92a]/40`}
-              >
-                <Send className="h-4 w-4" />
-                Consultar por WhatsApp
-              </a>
+              <div className="flex flex-col gap-1.5">
+                <a
+                  href={whatsappApiLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Consultar por WhatsApp — abre WhatsApp en una nueva pestaña"
+                  className={`${montserrat.className} inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#f7a92a] to-[#e6b451] px-6 py-3 font-semibold text-[#0b4058] shadow-md shadow-[#f7a92a]/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#f7a92a]/40`}
+                >
+                  <Send className="h-4 w-4" />
+                  Armá tu viaje ahora
+                </a>
+                {/* Micro-copy de confianza: debajo del CTA principal */}
+                <span className="pl-1 text-xs text-white/70">Respondemos en menos de 2 horas</span>
+              </div>
               <span className="inline-flex items-center gap-2 rounded-full border border-[#a2c745] bg-white/95 px-4 py-2 text-sm text-[#006183] shadow-sm shadow-[#0b4058]/10">
                 <Wallet className="h-4 w-4" />
                 Financiación disponible
@@ -194,9 +215,10 @@ export default function Home() {
           <div className="group overflow-hidden rounded-2xl shadow-md shadow-[#0b4058]/10 md:col-span-5">
             <Image
               src="/nosotros.png"
-              alt="Fundadores de 787 Rumbos"
+              alt="Equipo de 787 Rumbos — agencia de viajes en el Aeropuerto de Córdoba"
               width={800}
               height={600}
+              sizes="(max-width: 768px) 100vw, 42vw"
               className="h-[300px] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] md:h-[420px]"
             />
           </div>
@@ -237,7 +259,7 @@ export default function Home() {
             <h2 className={`${montserrat.className} text-3xl font-bold tracking-tight md:text-4xl`}>
               Destinos destacados
             </h2>
-            <p className="mt-2 text-[#0b4058]/75">Inspirate con algunas propuestas del mes.</p>
+            <p className="mt-2 text-[#0b4058]/75">Algunos de los destinos que podemos armar para vos.</p>
           </div>
         </div>
         <div className="grid gap-7 md:grid-cols-2 xl:grid-cols-4">
@@ -249,8 +271,9 @@ export default function Home() {
               <div className="relative h-52 w-full">
                 <Image
                   src={destination.imageSrc}
-                  alt={destination.name}
+                  alt={`${destination.name} — paquete de viaje con 787 Rumbos`}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100" />
@@ -265,6 +288,17 @@ export default function Home() {
                   <Timer className="h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
                   {destination.duration}
                 </p>
+                {/* CTA por destino: el mensaje de WhatsApp se pre-rellena con el nombre del destino */}
+                <a
+                  href={`https://api.whatsapp.com/send?phone=5493516157398&text=Hola%2C%20quiero%20consultar%20por%20un%20viaje%20a%20${encodeURIComponent(destination.name)}.`}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`Consultar por viaje a ${destination.name} — abre WhatsApp`}
+                  className={`${montserrat.className} mt-1 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#0b4058] px-4 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#006183]`}
+                >
+                  <Send className="h-3.5 w-3.5" />
+                  Consultá este destino
+                </a>
               </div>
             </article>
           ))}
@@ -379,9 +413,10 @@ export default function Home() {
           <div className="inline-flex h-12 items-center">
             <Image
               src="/camara-turismo.png"
-              alt="Miembro Cámara de Turismo"
-              width={64}
+              alt="Miembro Cámara de Turismo de la Provincia de Córdoba"
+              width={200}
               height={80}
+              sizes="200px"
               className="h-full w-auto object-contain transition-opacity hover:opacity-80"
             />
           </div>

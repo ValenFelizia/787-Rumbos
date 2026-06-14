@@ -9,31 +9,41 @@
  * compartido, no el contenido específico de una ruta.
  */
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
-
-/** Metadatos del sitio (título, descripción, íconos) leídos por Next.js para SEO y pestaña del navegador. */
+/** Metadatos del sitio leídos por Next.js para SEO, pestaña del navegador y previews sociales.
+ *  El objeto Metadata de Next.js genera automáticamente las etiquetas <meta> correspondientes
+ *  en el <head> del HTML. El campo `openGraph` genera las etiquetas og: que WhatsApp e
+ *  Instagram usan para mostrar el preview enriquecido cuando alguien comparte el link.
+ */
 export const metadata: Metadata = {
-  title: '787 Rumbos | Agencia de Viajes',
-  description: 'Tu viaje, nuestra prioridad. Atención humana y personalizada.',
-  generator: 'v0.app',
+  title: '787 Rumbos | Agencia de Viajes en Córdoba',
+  description:
+    'Agencia de viajes en Córdoba, Argentina. Paquetes personalizados a Río de Janeiro, Bariloche, Cartagena, Ushuaia y más. Financiación disponible. Asesoramiento humano por WhatsApp.',
+  metadataBase: new URL('https://787rumbos.com.ar'),
+  alternates: {
+    canonical: 'https://787rumbos.com.ar',
+  },
+  openGraph: {
+    title: '787 Rumbos | Agencia de Viajes en Córdoba',
+    description:
+      'Viajá con el respaldo de 787 Rumbos. Atención personalizada, financiación disponible y paquetes a medida desde Córdoba.',
+    url: 'https://787rumbos.com.ar',
+    siteName: '787 Rumbos',
+    locale: 'es_AR',
+    type: 'website',
+    // og:image se puede agregar aquí cuando tengamos una imagen OG (1200x630px)
+    // images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
+  },
   icons: {
-    icon: [
-      {
-        url: '/logo.png',
-        type: 'image/png',
-      },
-    ],
+    icon: [{ url: '/logo.png', type: 'image/png' }],
     apple: '/logo.png',
   },
 }
 
 /**
- * `children` es un prop especial de React: representa el “hueco” donde Next.js
+ * `children` es un prop especial de React: representa el "hueco" donde Next.js
  * inyecta el árbol de componentes de la ruta activa (por ejemplo `app/page.tsx`
  * para la raíz `/`, u otras carpetas con `page.tsx`). No es un texto fijo: es
  * el resultado de resolver la ruta actual y renderizar su página dentro de este layout.
@@ -47,7 +57,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className="font-sans antialiased">
+      <body className="antialiased">
         {children}
         {/* Analytics solo en producción para no contaminar datos en desarrollo */}
         {process.env.NODE_ENV === 'production' && <Analytics />}

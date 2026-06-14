@@ -9,23 +9,28 @@
 
 ## Fase 1 — Performance
 
-- [ ] **1.1** Activar optimización de imágenes en `next.config.mjs`
-  - [ ] Eliminar `images: { unoptimized: true }`
-  - [ ] Eliminar `typescript: { ignoreBuildErrors: true }` y arreglar errores TS
-  - [ ] Verificar `npm run build` sin errores
-- [ ] **1.2** Refactorizar hero image
-  - [ ] Reemplazar `bg-[url('/hero-bg.jpg')]` por `<Image>` de Next.js
-  - [ ] Agregar `priority`, `fill`, `sizes="100vw"`, `quality={80}`
-  - [ ] Implementar `placeholder="blur"` con blurDataURL
-  - [ ] Mantener overlay como div absoluto
-- [ ] **1.3** Optimizar imágenes restantes
-  - [ ] Agregar `sizes` a imágenes de destinos
-  - [ ] Agregar `sizes` a imagen de "nosotros"
-  - [ ] Verificar lazy loading en imágenes below-the-fold
-- [ ] **1.4** Limpiar imágenes no usadas de `/public`
-  - [ ] Eliminar placeholders (placeholder.jpg, placeholder.svg, placeholder-logo.*, placeholder-user.jpg)
-  - [ ] Verificar uso de icon.svg, icon-dark-32x32.png, icon-light-32x32.png
-- [ ] **Verificación Fase 1**: Lighthouse Performance > 85, page weight < 1 MB
+- [x] **1.1** Activar optimización de imágenes en `next.config.mjs`
+  - [x] Eliminar `images: { unoptimized: true }` → reemplazado por `formats: ["image/avif", "image/webp"]`
+  - [x] Eliminar `typescript: { ignoreBuildErrors: true }`
+  - [ ] Verificar `npm run build` sin errores (en progreso...)
+- [x] **1.2** Refactorizar hero image
+  - [x] Reemplazar `bg-[url('/hero-bg.jpg')]` por `<Image>` de Next.js
+  - [x] Agregar `priority`, `fill`, `sizes="100vw"`, `quality={80}`
+  - [x] Overlay reemplazado por degradado de marca (`from-[#0b4058]/85`)
+  - [x] CTA hero: "Consultar por WhatsApp" → "Armá tu viaje ahora"
+  - [x] Micro-copy agregado: "Respondemos en menos de 2 horas"
+  - [x] `aria-label` agregado al CTA de WhatsApp del hero
+  - [x] Subtexto destinos: "propuestas del mes" → texto más honesto
+  - [ ] `placeholder="blur"` con blurDataURL (pendiente — requiere import estático)
+- [x] **1.3** Optimizar imágenes restantes
+  - [x] Agregar `sizes` a imagen de "nosotros"
+  - [x] Agregar `sizes` + alt mejorado a imágenes de destinos
+  - [x] CTA por tarjeta de destino con mensaje pre-rellenado por destino
+  - [x] Lazy loading en imágenes below-the-fold (default de Next.js `<Image>`)
+- [x] **1.4** Limpiar imágenes no usadas de `/public`
+  - [x] Eliminados: placeholder.jpg, placeholder.svg, placeholder-logo.*, placeholder-user.jpg
+  - [x] Eliminados: icon.svg, icon-dark-32x32.png, icon-light-32x32.png, apple-icon.png
+- [ ] **Verificación Fase 1**: `npm run build` en progreso...
 
 ---
 
