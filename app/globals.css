@@ -51,6 +51,15 @@
     background-color: var(--brand-crema);
     color: var(--brand-azul-petroleo);
   }
+
+  /* Focus visible — outline de marca para navegación por teclado.
+     :focus-visible solo aplica cuando el usuario navega con teclado o Tab,
+     no cuando hace click con el mouse (evita el ring antiestético en CTAs). */
+  :focus-visible {
+    outline: 2px solid var(--brand-dorado);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
 }
 
 /* ─────────────────────────────────────────
