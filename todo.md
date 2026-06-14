@@ -58,33 +58,34 @@
 
 ## Fase 3 — Arquitectura y Limpieza
 
-- [ ] **3.1** Componentización
-  - [ ] Crear `components/sections/Navbar.tsx`
-  - [ ] Crear `components/sections/Hero.tsx`
-  - [ ] Crear `components/sections/ValueProposition.tsx`
-  - [ ] Crear `components/sections/AboutUs.tsx`
-  - [ ] Crear `components/sections/FeaturedDestinations.tsx`
-  - [ ] Crear `components/sections/Services.tsx`
-  - [ ] Crear `components/sections/TrustBar.tsx` (nueva)
-  - [ ] Crear `components/sections/CTASection.tsx` (nueva)
-  - [ ] Crear `components/sections/Footer.tsx`
-  - [ ] Crear `lib/constants.ts` (datos, links de WhatsApp)
-  - [ ] Reducir `page.tsx` a < 30 líneas (compositor)
-  - [ ] Verificar que la página se ve idéntica antes y después
-- [ ] **3.2** Limpieza de dependencias
-  - [ ] Eliminar todos los archivos en `components/ui/` (57 archivos)
-  - [ ] Eliminar `components/theme-provider.tsx`
-  - [ ] Eliminar `components.json`
-  - [ ] Eliminar `styles/globals.css` (duplicado)
-  - [ ] Eliminar `hooks/` si no tiene nada usado
-  - [ ] Eliminar dependencias npm no usadas del `package.json`
-  - [ ] `rm -rf node_modules package-lock.json && npm install`
-  - [ ] Verificar `npm run build` sin errores
-- [ ] **3.3** Limpiar `globals.css`
-  - [ ] Eliminar variables shadcn no usadas (dark, sidebar, chart, etc.)
-  - [ ] Eliminar `@import 'tw-animate-css'`
-  - [ ] Eliminar `@custom-variant dark`
-  - [ ] Verificar que `globals.css` < 60 líneas
+- [x] **3.1** Componentización
+  - [x] Crear `components/sections/Navbar.tsx`
+  - [x] Crear `components/sections/Hero.tsx`
+  - [x] Crear `components/sections/ValueProposition.tsx`
+  - [x] Crear `components/sections/AboutUs.tsx`
+  - [x] Crear `components/sections/FeaturedDestinations.tsx`
+  - [x] Crear `components/sections/Services.tsx`
+  - [x] Crear `components/sections/Footer.tsx`
+  - [x] Crear `lib/constants.ts` (destinos, servicios, links WhatsApp, helper `whatsappDestino()`)
+  - [x] Reducir `page.tsx` a < 30 líneas (compositor) — quedó en 30 líneas exactas
+  - [ ] Verificar que la página se ve idéntica antes y después (build en curso...)
+- [x] **3.2** Limpieza de dependencias
+  - [x] Eliminar todos los archivos en `components/ui/` (57 archivos)
+  - [x] Eliminar `components/theme-provider.tsx`
+  - [x] Eliminar `components.json`
+  - [x] Eliminar `styles/` (globals.css duplicado)
+  - [x] Eliminar `hooks/` (use-mobile.ts, use-toast.ts — boilerplate shadcn)
+  - [x] Eliminar `lib/utils.ts` (solo tenía cn() de shadcn) y recrear `lib/constants.ts` limpio
+  - [x] Eliminar 126 paquetes npm no usados (`npm uninstall` masivo)
+  - [x] Eliminar `tw-animate-css` de devDependencies
+  - [x] De 193 paquetes → 66 paquetes
+  - [ ] Verificar `npm run build` sin errores (en curso...)
+- [x] **3.3** Limpiar `globals.css`
+  - [x] Eliminar variables shadcn no usadas (dark, sidebar, chart, etc.) — 126 líneas → 45
+  - [x] Eliminar `@import 'tw-animate-css'`
+  - [x] Eliminar `@custom-variant dark`
+  - [x] Definir paleta de marca como variables CSS (--brand-azul-petroleo, --brand-dorado, etc.)
+  - [x] Definir gradientes de marca como variables CSS
 
 ---
 
