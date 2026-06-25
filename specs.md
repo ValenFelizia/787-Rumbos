@@ -517,5 +517,5 @@ main (producción actual)
 ```
 
 - Todo el trabajo va a `development`
-- Merge a `main` cuando esté completo y testeado
+- Merge a `master` cuando esté completo y testeado
 - `feature/testimonials` se mergea a `development` cuando se tengan testimonios reales

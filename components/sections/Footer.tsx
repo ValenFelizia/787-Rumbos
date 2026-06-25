@@ -111,6 +111,18 @@ export function Footer() {
           ©787 Rumbos® - Todos los derechos reservados.
         </p>
       </div>
+
+      <p className="pb-5 text-center text-[11px] tracking-wide text-white/30">
+        Sitio creado por{" "}
+        <a
+          href="https://portfolio-vfelizia.pages.dev/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="transition-colors duration-200 hover:text-white/50 underline decoration-transparent hover:decoration-white/25"
+        >
+          V. Felizia
+        </a>
+      </p>
     </footer>
   );
 }
