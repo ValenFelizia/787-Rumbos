@@ -20,42 +20,45 @@ export function PartnersMarquee() {
         </p>
         
         {/* Contenedor del carrusel */}
-        <div className="relative flex w-full overflow-hidden">
+        <div className="relative flex w-full overflow-hidden group">
           {/* Track de movimiento */}
           {/* ponytail: duplicate logo list to enable seamless loop using pure CSS transform animation */}
-          <div className="flex shrink-0 gap-12 md:gap-20 animate-marquee hover:[animation-play-state:paused] motion-reduce:animate-none">
+          <div className="flex w-max">
             {/* Lista original */}
-            {partnerLogos.map((logo) => (
-              <div
-                key={logo.name}
-                className="flex items-center justify-center grayscale opacity-50 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
-              >
-                <Image
-                  src={logo.imageSrc}
-                  alt={logo.name}
-                  width={logo.width}
-                  height={logo.height}
-                  className="h-8 w-auto object-contain md:h-9"
-                />
-              </div>
-            ))}
+            <div className="flex shrink-0 gap-12 md:gap-20 pr-12 md:pr-20 animate-marquee group-hover:[animation-play-state:paused] motion-reduce:animate-none">
+              {partnerLogos.map((logo) => (
+                <div
+                  key={logo.name}
+                  className="flex items-center justify-center grayscale opacity-50 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
+                >
+                  <Image
+                    src={logo.imageSrc}
+                    alt={logo.name}
+                    width={logo.width}
+                    height={logo.height}
+                    className="h-8 w-auto object-contain md:h-9"
+                  />
+                </div>
+              ))}
+            </div>
             
             {/* Lista duplicada para loop infinito (oculta para lectores de pantalla) */}
-            {partnerLogos.map((logo, index) => (
-              <div
-                key={`${logo.name}-clone-${index}`}
-                aria-hidden="true"
-                className="flex items-center justify-center grayscale opacity-50 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
-              >
-                <Image
-                  src={logo.imageSrc}
-                  alt=""
-                  width={logo.width}
-                  height={logo.height}
-                  className="h-8 w-auto object-contain md:h-9"
-                />
-              </div>
-            ))}
+            <div className="flex shrink-0 gap-12 md:gap-20 pr-12 md:pr-20 animate-marquee group-hover:[animation-play-state:paused] motion-reduce:animate-none" aria-hidden="true">
+              {partnerLogos.map((logo, index) => (
+                <div
+                  key={`${logo.name}-clone-${index}`}
+                  className="flex items-center justify-center grayscale opacity-50 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
+                >
+                  <Image
+                    src={logo.imageSrc}
+                    alt=""
+                    width={logo.width}
+                    height={logo.height}
+                    className="h-8 w-auto object-contain md:h-9"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
