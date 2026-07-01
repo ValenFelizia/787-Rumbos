@@ -89,3 +89,23 @@ export const services: Service[] = [
     icon: HeartPulse,
   },
 ];
+
+// ─── Aerolíneas Aliadas ────────────────────────────────────────────────────────
+
+export interface Partner {
+  name: string;
+  imageSrc: string;
+  width: number;
+  height: number;
+}
+
+export const partnerLogos: Partner[] = [
+  { name: "Copa Airlines", imageSrc: "/partners/copa.png", width: 130, height: 40 },
+  { name: "JetSmart", imageSrc: "/partners/jetsmart.svg", width: 110, height: 40 },
+  { name: "GOL", imageSrc: "/partners/gol.svg", width: 100, height: 40 },
+  { name: "Avianca", imageSrc: "/partners/avianca.svg", width: 120, height: 40 },
+  { name: "Air Europa", imageSrc: "/partners/aireuropa.svg", width: 130, height: 40 },
+  { name: "LATAM Airlines", imageSrc: "/partners/latam.svg", width: 130, height: 40 },
+  { name: "Arajet", imageSrc: "/partners/arajet.png", width: 130, height: 40 },
+];
+
