@@ -9,13 +9,13 @@
 import { Navbar } from "@/components/sections/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { TrustBar } from "@/components/sections/TrustBar";
+import { PartnersMarquee } from "@/components/sections/PartnersMarquee";
 import { ValueProposition } from "@/components/sections/ValueProposition";
 import { AboutUs } from "@/components/sections/AboutUs";
 import { FeaturedDestinations } from "@/components/sections/FeaturedDestinations";
 import { Services } from "@/components/sections/Services";
 import { CTASection } from "@/components/sections/CTASection";
 import { Footer } from "@/components/sections/Footer";
-import { WhatsAppFloat } from "@/components/sections/WhatsAppFloat";
 import { ScrollReveal } from "@/components/ScrollReveal";
 
 export default function Home() {
@@ -25,6 +25,7 @@ export default function Home() {
       <Hero />
       {/* TrustBar sin animación — debe ser visible de inmediato debajo del hero */}
       <TrustBar />
+      <PartnersMarquee />
       <ScrollReveal>
         <ValueProposition />
       </ScrollReveal>
@@ -42,8 +43,6 @@ export default function Home() {
         <CTASection />
       </ScrollReveal>
       <Footer />
-      {/* Botón flotante WhatsApp — solo mobile, aparece a los 3s, se oculta con el footer */}
-      <WhatsAppFloat />
     </main>
   );
 }

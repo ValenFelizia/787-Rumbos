@@ -149,6 +149,14 @@
 
 ## Post-launch / Futuro (no parte de este sprint)
 
+- [ ] **Banner animado de Partners / Aerolíneas (Slider Infinito)**
+  - [ ] Diseñar el componente `components/sections/PartnersMarquee.tsx`
+  - [ ] Agregar constantes de partners en `lib/constants.ts` (Aerolíneas, mayoristas de turismo, etc.)
+  - [ ] Configurar animación de scroll infinito horizontal con CSS puro (keyframe translate en `globals.css`)
+  - [ ] Ajustar estética premium: logos consistentes en escala de grises/opacidad que pasen a color/100% al hacer hover
+  - [ ] Optimizar accesibilidad: usar `aria-hidden` en la lista clonada y respetar `prefers-reduced-motion`
+  - [ ] Definir ubicación óptima (debajo del `TrustBar` para credibilidad temprana, o arriba del `Footer` para cierre)
+  - [ ] Recopilar y optimizar assets de logos (formato SVG preferentemente o PNG optimizados)
 - [ ] Imagen OG 1200×630px (requiere diseño)
 - [ ] Google Business Profile — clave para SEO local en Córdoba
 - [ ] Testimonios reales (branch `feature/testimonials` lista para cuando lleguen los datos)
