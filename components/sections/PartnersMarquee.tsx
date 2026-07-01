@@ -16,9 +16,9 @@ export function PartnersMarquee() {
       <div className="mx-auto max-w-6xl px-6">
         {/* Título de sección sutil */}
         <p className="mb-6 text-center font-[family-name:var(--font-elaine)] text-xs font-semibold uppercase tracking-wider text-[#0b4058]/40">
-          Volá con las mejores aerolíneas
+          Viajá con las mejores aerolíneas
         </p>
-        
+
         {/* Contenedor del carrusel */}
         <div className="relative flex w-full overflow-hidden group">
           {/* Track de movimiento */}
@@ -29,7 +29,7 @@ export function PartnersMarquee() {
               {partnerLogos.map((logo) => (
                 <div
                   key={logo.name}
-                  className="flex items-center justify-center py-1 grayscale opacity-50 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
+                  className="flex items-center justify-center py-0.5 grayscale opacity-50 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
                 >
                   <Image
                     src={logo.imageSrc}
@@ -41,13 +41,13 @@ export function PartnersMarquee() {
                 </div>
               ))}
             </div>
-            
+
             {/* Lista duplicada para loop infinito (oculta para lectores de pantalla) */}
             <div className="flex shrink-0 gap-12 md:gap-20 pr-12 md:pr-20 animate-marquee group-hover:[animation-play-state:paused] motion-reduce:animate-none" aria-hidden="true">
               {partnerLogos.map((logo, index) => (
                 <div
                   key={`${logo.name}-clone-${index}`}
-                  className="flex items-center justify-center py-1 grayscale opacity-50 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
+                  className="flex items-center justify-center py-0.5 grayscale opacity-50 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
                 >
                   <Image
                     src={logo.imageSrc}
