@@ -29,7 +29,7 @@ export function PartnersMarquee() {
               {partnerLogos.map((logo) => (
                 <div
                   key={logo.name}
-                  className="flex items-center justify-center grayscale opacity-50 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
+                  className="flex items-center justify-center py-1 grayscale opacity-50 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
                 >
                   <Image
                     src={logo.imageSrc}
@@ -47,7 +47,7 @@ export function PartnersMarquee() {
               {partnerLogos.map((logo, index) => (
                 <div
                   key={`${logo.name}-clone-${index}`}
-                  className="flex items-center justify-center grayscale opacity-50 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
+                  className="flex items-center justify-center py-1 grayscale opacity-50 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
                 >
                   <Image
                     src={logo.imageSrc}
