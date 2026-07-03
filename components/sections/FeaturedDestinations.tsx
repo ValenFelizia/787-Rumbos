@@ -1,18 +1,13 @@
-/**
- * components/sections/FeaturedDestinations.tsx
- *
- * Grid de destinos ilustrativos — no son paquetes reales en venta.
- * Los datos vienen de `lib/constants.ts` (featuredDestinations).
- *
- * Cada tarjeta incluye un CTA que abre WhatsApp con el nombre del destino
- * pre-rellenado en el mensaje, usando `whatsappDestino()` de constants.
- */
+"use client";
 import Image from "next/image";
 import { Timer } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
-import { featuredDestinations, whatsappDestino } from "@/lib/constants";
+import { featuredDestinations } from "@/lib/constants";
+import { useModal } from "@/lib/context/ModalContext";
 
 export function FeaturedDestinations() {
+  const { openModal } = useModal();
+
   return (
     <section className="mx-auto w-full max-w-6xl px-6 py-20">
       <div className="mb-8 flex items-end justify-between gap-4">
@@ -26,14 +21,6 @@ export function FeaturedDestinations() {
         </div>
       </div>
       <div className="grid gap-7 md:grid-cols-2 xl:grid-cols-4">
-        {/*
-          Cómo funciona `.map()` aquí:
-          1) `featuredDestinations` es un array de objetos; `.map()` recorre cada elemento
-             y devuelve un nuevo array de nodos React (un <article> por destino).
-          2) La función recibe `destination`: el objeto actual (name, duration, imageSrc).
-             Sus propiedades se inyectan en el JSX entre llaves.
-          3) `key={destination.name}` identifica cada elemento para el reconciliador de React.
-        */}
         {featuredDestinations.map((destination) => (
           <article
             key={destination.name}
@@ -59,17 +46,14 @@ export function FeaturedDestinations() {
                 <Timer className="h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
                 {destination.duration}
               </p>
-              {/* CTA por destino: el mensaje de WhatsApp se pre-rellena con el nombre del destino */}
-              <a
-                href={whatsappDestino(destination.name)}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={`Consultar por viaje a ${destination.name} — abre WhatsApp`}
-                className="font-[family-name:var(--font-elaine)] mt-1 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#0b4058] px-4 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#006183]"
+              <button
+                onClick={() => openModal(destination.name)}
+                aria-label={`Consultar por viaje a ${destination.name} — abre el cotizador personalizado`}
+                className="font-[family-name:var(--font-elaine)] mt-1 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#0b4058] px-4 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#006183] cursor-pointer"
               >
                 <WhatsAppIcon size={14} className="h-3.5 w-3.5" />
                 Consultá este destino
-              </a>
+              </button>
             </div>
           </article>
         ))}

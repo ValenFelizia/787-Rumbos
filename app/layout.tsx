@@ -11,6 +11,8 @@
 import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/next'
 import { elaineSans, zalandoSans } from '@/lib/fonts'
+import { ModalProvider } from '@/lib/context/ModalContext'
+import { QuoteModal } from '@/components/sections/QuoteModal'
 import './globals.css'
 
 /** Metadatos del sitio leídos por Next.js para SEO, pestaña del navegador y previews sociales.
@@ -95,9 +97,13 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`${elaineSans.variable} ${zalandoSans.variable} antialiased`}>
-        {children}
-        {/* Analytics solo en producción para no contaminar datos en desarrollo */}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        <ModalProvider>
+          {children}
+          {/* Analytics solo en producción para no contaminar datos en desarrollo */}
+          {process.env.NODE_ENV === 'production' && <Analytics />}
+          {/* Modal del cotizador */}
+          <QuoteModal />
+        </ModalProvider>
         {/* Datos estructurados JSON-LD — visible para buscadores, no para usuarios */}
         <script
           type="application/ld+json"
