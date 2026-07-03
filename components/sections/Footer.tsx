@@ -37,11 +37,7 @@ export function Footer() {
           <p className="flex items-start gap-2">
             <MapPin className="mt-1 h-4 w-4 shrink-0 text-[#dae553]" />
             <span>
-              Av. La Voz del Interior 8500,
-              <br />
-              En el Aeropuerto Internacional Ingeniero Aeronáutico Ambrosio Taravella,
-              <br />
-              CP X5147XAA, Córdoba, Argentina
+              Av. La Voz del Interior 8500, Córdoba, Argentina
             </span>
           </p>
           <p className="flex items-center gap-2">
@@ -68,7 +64,7 @@ export function Footer() {
             </li>
             <li>
               <a
-                href="https://camaraturismocordoba.org.ar/"
+                href="https://camaracbaturismo.org.ar/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/80 transition hover:text-[#dae553]"
@@ -142,7 +138,7 @@ export function Footer() {
         </a>
 
         <a
-          href="https://camaraturismocordoba.org.ar/"
+          href="https://camaracbaturismo.org.ar/"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex h-12 items-center transition-opacity hover:opacity-80"
