@@ -68,11 +68,20 @@ export function QuoteModal() {
 
   if (!isOpen) return null;
 
-  const handleNext = () => setStep((prev) => prev + 1);
+  const handleNext = () => {
+    if (step < 3) {
+      setStep((prev) => prev + 1);
+    }
+  };
+
   const handleBack = () => setStep((prev) => prev - 1);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (step < 3) {
+      handleNext();
+      return;
+    }
     const passengerText = `${adultos} ${adultos === 1 ? "adulto" : "adultos"}${
       menores > 0 ? ` y ${menores} ${menores === 1 ? "menor" : "menores"}` : ""
     }`;
