@@ -173,11 +173,11 @@
 
 ---
 
-## Fase 8 — Conversión Interactiva (Quiz/Cotizador) (Post-V1.0)
-- [ ] **8.1** Asistente de Cotización Rápida
-  - [ ] Crear un mini-formulario/quiz interactivo de 3 pasos antes de abrir WhatsApp (Destino ➔ Fechas ➔ Pasajeros).
-  - [ ] Generar mensaje pre-rellenado altamente específico para los dueños de la agencia (ej: "Hola, quiero cotizar un viaje a Río para 2 adultos en Septiembre...").
-  - [ ] Animaciones y transiciones premium entre pantallas para mantener la experiencia fluida y elegante.
+## Fase 8 — Conversión Interactiva (Quiz/Cotizador) (Post-V1.0) ✅
+- [x] **8.1** Asistente de Cotización Rápida
+  - [x] Crear un mini-formulario/quiz interactivo de 3 pasos antes de abrir WhatsApp (Destino ➔ Fechas ➔ Pasajeros).
+  - [x] Generar mensaje pre-rellenado altamente específico para los dueños de la agencia (ej: "Hola, quiero cotizar un viaje a Río para 2 adultos en Septiembre...").
+  - [x] Animaciones y transiciones premium entre pantallas para mantener la experiencia fluida y elegante.
 
 ---
 

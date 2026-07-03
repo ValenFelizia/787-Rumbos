@@ -30,11 +30,11 @@ export function Navbar() {
         </a>
         <button
           onClick={() => openModal()}
-          aria-label="Consultar por WhatsApp — abre el cotizador personalizado"
-          className="font-[family-name:var(--font-elaine)] inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#f7a92a] to-[#e6b451] px-4 py-2 text-xs font-semibold text-[#0b4058] shadow-sm shadow-[#f7a92a]/30 transition-all duration-300 hover:-translate-y-0.5 hover:brightness-105 hover:shadow-md hover:shadow-[#f7a92a]/40 cursor-pointer md:px-5 md:py-2.5 md:text-sm"
+          aria-label="Cotizar viaje a medida"
+          className="font-[family-name:var(--font-elaine)] inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#f7a92a] to-[#e6b451] text-[#0b4058] shadow-sm shadow-[#f7a92a]/30 transition-all duration-300 hover:-translate-y-0.5 hover:brightness-105 hover:shadow-md hover:shadow-[#f7a92a]/40 cursor-pointer p-3 text-xs md:px-5 md:py-2.5 md:text-sm md:gap-2"
         >
-          <WhatsAppIcon size={16} className="h-4 w-4" />
-          Consultar por WhatsApp
+          <WhatsAppIcon size={16} className="h-4 w-4 shrink-0" />
+          <span className="hidden md:inline">Cotizar Viaje</span>
         </button>
       </div>
     </nav>
