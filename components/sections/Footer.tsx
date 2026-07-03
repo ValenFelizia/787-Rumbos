@@ -79,7 +79,7 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="text-white/80 transition hover:text-[#dae553]"
               >
-                Estado de Vuelos Taravella
+                Estado de Vuelos
               </a>
             </li>
           </ul>
