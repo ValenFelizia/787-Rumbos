@@ -87,36 +87,47 @@ export function Footer() {
 
         {/* Columna 4: Contacto */}
         <div className="space-y-3 text-sm">
-          <a
-            href={WHATSAPP_LINK}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Contactar por WhatsApp — atención personalizada"
-            className="flex items-center gap-2 text-white/90 transition hover:text-[#dae553]"
-          >
-            <Send className="h-4 w-4" />
-            Atención Personalizada: +54 9 351 615-7398
-          </a>
-          <a
-            href="https://api.whatsapp.com/send?phone=5493513448724"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Contactar administración por WhatsApp"
-            className="flex items-center gap-2 text-white/90 transition hover:text-[#dae553]"
-          >
-            <Send className="h-4 w-4" />
-            Administración/Agencia: +54 9 351 344-8724
-          </a>
-          <a
-            href="https://www.instagram.com/787rumbos/"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Ver Instagram de 787 Rumbos — @787rumbos"
-            className="flex items-center gap-2 text-white/90 transition hover:text-[#dae553]"
-          >
-            <Instagram className="h-4 w-4" />
-            Instagram: @787rumbos
-          </a>
+          <h4 className="font-[family-name:var(--font-elaine)] text-xs font-bold uppercase tracking-wider text-white/60">
+            Contacto
+          </h4>
+          <ul className="space-y-2">
+            <li>
+              <a
+                href={WHATSAPP_LINK}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Contactar por WhatsApp — atención personalizada"
+                className="flex items-center gap-2 text-white/90 transition hover:text-[#dae553]"
+              >
+                <Send className="h-4 w-4" />
+                Atención Personalizada: +54 9 351 615-7398
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://api.whatsapp.com/send?phone=5493513448724"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Contactar administración por WhatsApp"
+                className="flex items-center gap-2 text-white/90 transition hover:text-[#dae553]"
+              >
+                <Send className="h-4 w-4" />
+                Administración/Agencia: +54 9 351 344-8724
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.instagram.com/787rumbos/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Ver Instagram de 787 Rumbos — @787rumbos"
+                className="flex items-center gap-2 text-white/90 transition hover:text-[#dae553]"
+              >
+                <Instagram className="h-4 w-4" />
+                Instagram: @787rumbos
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
 

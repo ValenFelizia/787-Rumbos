@@ -162,14 +162,14 @@
 
 ---
 
-## Fase 7 — SEO Local y Credibilidad Institucional (Post-V1.0)
-- [ ] **7.1** Sincronizar Google Business Profile (GBP) con la Web
-  - [ ] Validar consistencia de datos NAP (Name, Address, Phone) en Footer y JSON-LD con la ficha oficial verificada.
-  - [ ] Añadir botón de geolocalización tipo "Nuestra oficina" enlazado a Google Maps.
-- [ ] **7.2** Enlaces Oficiales de Autoridad y Utilidad Local
-  - [ ] Vincular el logo de la Cámara de Turismo de Córdoba en la `TrustBar` o Footer a su web oficial (`target="_blank"`).
-  - [ ] Crear sección de "Enlaces de Interés / Links Útiles" en el Footer (Agencia Córdoba Turismo, Cámara de Turismo).
-  - [ ] Añadir enlace útil al "Estado de Vuelos del Aeropuerto de Córdoba (AA2000)" para captar tráfico orgánico de pasajeros.
+## Fase 7 — SEO Local y Credibilidad Institucional (Post-V1.0) ✅
+- [x] **7.1** Sincronizar Google Business Profile (GBP) con la Web
+  - [x] Validar consistencia de datos NAP (Name, Address, Phone) en Footer y JSON-LD con la ficha oficial verificada.
+  - [x] Añadir botón de geolocalización tipo "Nuestra oficina" enlazado a Google Maps.
+- [x] **7.2** Enlaces Oficiales de Autoridad y Utilidad Local
+  - [x] Vincular el logo de la Cámara de Turismo de Córdoba en la `TrustBar` o Footer a su web oficial (`target="_blank"`).
+  - [x] Crear sección de "Enlaces de Interés / Links Útiles" en el Footer (Agencia Córdoba Turismo, Cámara de Turismo).
+  - [x] Añadir enlace útil al "Estado de Vuelos del Aeropuerto de Córdoba (AA2000)" para captar tráfico orgánico de pasajeros.
 
 ---
 
