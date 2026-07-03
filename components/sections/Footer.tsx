@@ -19,7 +19,7 @@ import { WHATSAPP_LINK } from "@/lib/constants";
 export function Footer() {
   return (
     <footer className="bg-[#0b4058] text-white">
-      <div className="mx-auto grid w-full max-w-6xl gap-8 px-6 py-14 md:grid-cols-3">
+      <div className="mx-auto grid w-full max-w-6xl gap-8 px-6 py-14 md:grid-cols-4">
         {/* Columna 1: Logo y habilitación */}
         <div>
           <Image
@@ -34,17 +34,62 @@ export function Footer() {
 
         {/* Columna 2: Ubicación y servicios */}
         <div className="space-y-3 text-sm">
-          <p className="flex items-center gap-2">
-            <MapPin className="h-4 w-4 text-[#dae553]" />
-            Aeropuerto Internacional de Córdoba, Av. Voz del Interior 8500
+          <p className="flex items-start gap-2">
+            <MapPin className="mt-1 h-4 w-4 shrink-0 text-[#dae553]" />
+            <span>
+              Av. La Voz del Interior 8500,
+              <br />
+              En el Aeropuerto Internacional Ingeniero Aeronáutico Ambrosio Taravella,
+              <br />
+              CP X5147XAA, Córdoba, Argentina
+            </span>
           </p>
           <p className="flex items-center gap-2">
             <ShieldCheck className="h-4 w-4 text-[#dae553]" />
-            Asesoramiento profesional y cobertura integral
+            <span>Asesoramiento profesional y cobertura integral</span>
           </p>
         </div>
 
-        {/* Columna 3: Contacto */}
+        {/* Columna 3: Enlaces de Interés */}
+        <div className="space-y-3 text-sm">
+          <h4 className="font-[family-name:var(--font-elaine)] text-xs font-bold uppercase tracking-wider text-white/60">
+            Enlaces de Interés
+          </h4>
+          <ul className="space-y-2">
+            <li>
+              <a
+                href="https://www.cordobaturismo.gov.ar/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/80 transition hover:text-[#dae553]"
+              >
+                Agencia Córdoba Turismo
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://camaraturismocordoba.org.ar/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/80 transition hover:text-[#dae553]"
+              >
+                Cámara de Turismo
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.aa2000.com.ar/cordoba"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/80 transition hover:text-[#dae553]"
+              >
+                Estado de Vuelos Taravella
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        {/* Columna 4: Contacto */}
         <div className="space-y-3 text-sm">
           <a
             href={WHATSAPP_LINK}
@@ -96,16 +141,22 @@ export function Footer() {
           />
         </a>
 
-        <div className="inline-flex h-12 items-center">
+        <a
+          href="https://camaraturismocordoba.org.ar/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex h-12 items-center transition-opacity hover:opacity-80"
+          aria-label="Sitio web de la Cámara de Turismo de la Provincia de Córdoba"
+        >
           <Image
             src="/camara-turismo.png"
             alt="Miembro Cámara de Turismo de la Provincia de Córdoba"
             width={200}
             height={80}
             sizes="200px"
-            className="h-full w-auto object-contain transition-opacity hover:opacity-80"
+            className="h-full w-auto object-contain"
           />
-        </div>
+        </a>
 
         <p className="text-center text-sm text-white/70">
           ©787 Rumbos® - Todos los derechos reservados.

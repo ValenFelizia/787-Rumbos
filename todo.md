@@ -149,20 +149,50 @@
 
 ## Post-launch / Futuro (no parte de este sprint)
 
-- [ ] **Banner animado de Partners / Aerolíneas (Slider Infinito)**
-  - [ ] Diseñar el componente `components/sections/PartnersMarquee.tsx`
-  - [ ] Agregar constantes de partners en `lib/constants.ts` (Aerolíneas, mayoristas de turismo, etc.)
-  - [ ] Configurar animación de scroll infinito horizontal con CSS puro (keyframe translate en `globals.css`)
-  - [ ] Ajustar estética premium: logos consistentes en escala de grises/opacidad que pasen a color/100% al hacer hover
-  - [ ] Optimizar accesibilidad: usar `aria-hidden` en la lista clonada y respetar `prefers-reduced-motion`
-  - [ ] Definir ubicación óptima (debajo del `TrustBar` para credibilidad temprana, o arriba del `Footer` para cierre)
-  - [ ] Recopilar y optimizar assets de logos (formato SVG preferentemente o PNG optimizados)
+- [x] **Banner animado de Partners / Aerolíneas (Slider Infinito)**
+  - [x] Diseñar el componente `components/sections/PartnersMarquee.tsx`
+  - [x] Agregar constantes de partners en `lib/constants.ts` (Aerolíneas, mayoristas de turismo, etc.)
+  - [x] Configurar animación de scroll infinito horizontal con CSS puro (keyframe translate en `globals.css`)
+  - [x] Ajustar estética premium: logos consistentes en escala de grises/opacidad que pasen a color/100% al hacer hover
+  - [x] Optimizar accesibilidad: usar `aria-hidden` en la lista clonada y respetar `prefers-reduced-motion`
+  - [x] Definir ubicación óptima (debajo del `TrustBar` para credibilidad temprana, o arriba del `Footer` para cierre)
+  - [x] Recopilar y optimizar assets de logos (formato SVG preferentemente o PNG optimizados)
 - [ ] Imagen OG 1200×630px (requiere diseño)
-- [ ] Google Business Profile — clave para SEO local en Córdoba
 - [ ] Testimonios reales (branch `feature/testimonials` lista para cuando lleguen los datos)
-- [ ] Headless CMS si los dueños quieren gestionar destinos sin tocar código
-- [ ] Blog / contenido SEO si crece el tráfico orgánico
-- [ ] Página de destino individual (`/destinos/bariloche`) si se activan paquetes reales
+
+---
+
+## Fase 7 — SEO Local y Credibilidad Institucional (Post-V1.0)
+- [ ] **7.1** Sincronizar Google Business Profile (GBP) con la Web
+  - [ ] Validar consistencia de datos NAP (Name, Address, Phone) en Footer y JSON-LD con la ficha oficial verificada.
+  - [ ] Añadir botón de geolocalización tipo "Nuestra oficina" enlazado a Google Maps.
+- [ ] **7.2** Enlaces Oficiales de Autoridad y Utilidad Local
+  - [ ] Vincular el logo de la Cámara de Turismo de Córdoba en la `TrustBar` o Footer a su web oficial (`target="_blank"`).
+  - [ ] Crear sección de "Enlaces de Interés / Links Útiles" en el Footer (Agencia Córdoba Turismo, Cámara de Turismo).
+  - [ ] Añadir enlace útil al "Estado de Vuelos del Aeropuerto de Córdoba (AA2000)" para captar tráfico orgánico de pasajeros.
+
+---
+
+## Fase 8 — Conversión Interactiva (Quiz/Cotizador) (Post-V1.0)
+- [ ] **8.1** Asistente de Cotización Rápida
+  - [ ] Crear un mini-formulario/quiz interactivo de 3 pasos antes de abrir WhatsApp (Destino ➔ Fechas ➔ Pasajeros).
+  - [ ] Generar mensaje pre-rellenado altamente específico para los dueños de la agencia (ej: "Hola, quiero cotizar un viaje a Río para 2 adultos en Septiembre...").
+  - [ ] Animaciones y transiciones premium entre pantallas para mantener la experiencia fluida y elegante.
+
+---
+
+## Fase 9 — Arquitectura Multipágina de Destinos (Post-V1.0)
+- [ ] **9.1** Rutas Dinámicas de Destino (`/destinos/[slug]`)
+  - [ ] Migrar de estructura Single-Page a Multi-Page configurando rutas de Next.js App Router.
+  - [ ] Diseñar plantilla premium de destino (itinerario sugerido, galería de imágenes optimizadas, qué incluye el servicio).
+  - [ ] Optimizar metadatos SEO de cada página para búsquedas como "Paquetes a Río de Janeiro desde Córdoba".
+
+---
+
+## Fase 10 — Escalabilidad y Gestión
+- [ ] **10.1** Integración de Headless CMS (Sanity/Strapi) para que los dueños gestionen destinos sin tocar código.
+- [ ] **10.2** Blog de Contenidos / Guías de viaje si crece el tráfico orgánico.
+
 
 ---
 

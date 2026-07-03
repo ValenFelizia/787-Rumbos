@@ -26,6 +26,7 @@ const trustItems = [
     icon: Building2,
     label: "Cámara de Turismo",
     sublabel: "Provincia de Córdoba",
+    link: "https://camaraturismocordoba.org.ar/",
   },
   {
     icon: CreditCard,
@@ -36,6 +37,7 @@ const trustItems = [
     icon: MapPin,
     label: "En el Aeropuerto",
     sublabel: "Córdoba, Argentina",
+    link: "https://maps.google.com/?q=Aeropuerto+Internacional+Ingeniero+Aeron%C3%A1utico+Ambrosio+Taravella",
   },
 ];
 
@@ -48,16 +50,36 @@ export function TrustBar() {
       <div className="mx-auto grid w-full max-w-6xl grid-cols-2 gap-px px-6 py-0 md:grid-cols-4">
         {trustItems.map((item) => {
           const Icon = item.icon;
-          return (
-            <div
-              key={item.label}
-              className="flex flex-col items-center gap-1 px-4 py-5 text-center transition-colors duration-200 hover:bg-white/5"
-            >
+          const content = (
+            <>
               <Icon className="h-5 w-5 text-[#dae553]" />
               <span className="font-[family-name:var(--font-elaine)] text-sm font-semibold text-white">
                 {item.label}
               </span>
               <span className="text-xs text-white/60">{item.sublabel}</span>
+            </>
+          );
+
+          if (item.link) {
+            return (
+              <a
+                key={item.label}
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col items-center gap-1 px-4 py-5 text-center transition-colors duration-200 hover:bg-white/5 outline-none focus-visible:bg-white/10"
+              >
+                {content}
+              </a>
+            );
+          }
+
+          return (
+            <div
+              key={item.label}
+              className="flex flex-col items-center gap-1 px-4 py-5 text-center"
+            >
+              {content}
             </div>
           );
         })}
