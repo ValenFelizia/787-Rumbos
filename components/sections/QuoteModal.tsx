@@ -305,6 +305,7 @@ export function QuoteModal() {
           <div className="mt-8 flex gap-3 border-t border-gray-100 pt-5">
             {step > 1 && (
               <button
+                key="back-btn"
                 type="button"
                 onClick={handleBack}
                 className="flex items-center justify-center gap-1 rounded-xl border border-gray-200 px-5 py-3 text-sm font-medium text-gray-600 transition hover:bg-gray-50"
@@ -316,6 +317,7 @@ export function QuoteModal() {
             
             {step < 3 ? (
               <button
+                key="next-btn"
                 type="button"
                 disabled={step === 1 && !destino.trim()}
                 onClick={handleNext}
@@ -326,6 +328,7 @@ export function QuoteModal() {
               </button>
             ) : (
               <button
+                key="submit-btn"
                 type="submit"
                 className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#f7a92a] to-[#e6b451] px-5 py-3 text-sm font-bold text-[#0b4058] shadow-md shadow-[#f7a92a]/20 transition duration-300 hover:brightness-105"
               >
