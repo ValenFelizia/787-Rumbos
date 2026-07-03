@@ -165,7 +165,7 @@
 ## Fase 7 — SEO Local y Credibilidad Institucional (Post-V1.0)
 - [ ] **7.1** Sincronizar Google Business Profile (GBP) con la Web
   - [ ] Validar consistencia de datos NAP (Name, Address, Phone) en Footer y JSON-LD con la ficha oficial verificada.
-  - [ ] Añadir botón de geolocalización tipo "Cómo llegar a nuestra oficina en el Aeropuerto" enlazado a Google Maps.
+  - [ ] Añadir botón de geolocalización tipo "Nuestra oficina" enlazado a Google Maps.
 - [ ] **7.2** Enlaces Oficiales de Autoridad y Utilidad Local
   - [ ] Vincular el logo de la Cámara de Turismo de Córdoba en la `TrustBar` o Footer a su web oficial (`target="_blank"`).
   - [ ] Crear sección de "Enlaces de Interés / Links Útiles" en el Footer (Agencia Córdoba Turismo, Cámara de Turismo).
