@@ -74,12 +74,13 @@ export default function RootLayout({
     description:
       "Agencia de viajes en Córdoba. Paquetes personalizados, atención humana y financiación disponible.",
     url: "https://787rumbos.com.ar",
-    telephone: "+5493516157398",
+    telephone: "+543513448724",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Av. Voz del Interior 8500",
+      streetAddress: "Av. La Voz del Interior 8500, En el Aeropuerto Internacional Ingeniero Aeronáutico Ambrosio Taravella",
       addressLocality: "Córdoba",
       addressRegion: "Córdoba",
+      postalCode: "X5147XAA",
       addressCountry: "AR",
     },
     geo: {
