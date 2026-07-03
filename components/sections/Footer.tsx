@@ -68,7 +68,7 @@ export function Footer() {
             </li>
             <li>
               <a
-                href="https://camaraturismocordoba.org.ar/"
+                href="https://camaracbaturismo.org.ar/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/80 transition hover:text-[#dae553]"
@@ -142,7 +142,7 @@ export function Footer() {
         </a>
 
         <a
-          href="https://camaraturismocordoba.org.ar/"
+          href="https://camaracbaturismo.org.ar/"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex h-12 items-center transition-opacity hover:opacity-80"

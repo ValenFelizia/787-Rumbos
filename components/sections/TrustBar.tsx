@@ -26,7 +26,7 @@ const trustItems = [
     icon: Building2,
     label: "Cámara de Turismo",
     sublabel: "Provincia de Córdoba",
-    link: "https://camaraturismocordoba.org.ar/",
+    link: "https://camaracbaturismo.org.ar/",
   },
   {
     icon: CreditCard,
