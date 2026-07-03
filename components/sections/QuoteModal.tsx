@@ -27,7 +27,7 @@ const getNext12Months = () => {
 export function QuoteModal() {
   const { isOpen, destination, closeModal } = useModal();
   const [step, setStep] = useState(1);
-  
+
   // Form state
   const [destino, setDestino] = useState("");
   const [fecha, setFecha] = useState("");
@@ -82,9 +82,8 @@ export function QuoteModal() {
       handleNext();
       return;
     }
-    const passengerText = `${adultos} ${adultos === 1 ? "adulto" : "adultos"}${
-      menores > 0 ? ` y ${menores} ${menores === 1 ? "menor" : "menores"}` : ""
-    }`;
+    const passengerText = `${adultos} ${adultos === 1 ? "adulto" : "adultos"}${menores > 0 ? ` y ${menores} ${menores === 1 ? "menor" : "menores"}` : ""
+      }`;
     const text = `Hola 787 Rumbos! Quiero cotizar un viaje personalizado.\n\n📍 *Destino:* ${destino}\n📅 *Fecha estimada:* ${fecha}\n👥 *Pasajeros:* ${passengerText}\n✈️ *Aerolínea:* ${aerolinea}`;
     const phone = "5493516157398"; // Número de atención de la agencia
     const url = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(text)}`;
@@ -99,7 +98,7 @@ export function QuoteModal() {
 
       {/* Modal Card */}
       <div className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-white/10 bg-white shadow-2xl transition-all duration-300">
-        
+
         {/* Header */}
         <div className="bg-gradient-to-r from-[#0b4058] to-[#006183] px-6 py-5 text-white">
           <div className="flex items-center justify-between">
@@ -114,15 +113,14 @@ export function QuoteModal() {
               <X className="h-5 w-5" />
             </button>
           </div>
-          
+
           {/* Progress bar */}
           <div className="mt-4 flex gap-2">
             {[1, 2, 3].map((s) => (
               <div
                 key={s}
-                className={`h-1.5 flex-1 rounded-full transition-all duration-300 ${
-                  s <= step ? "bg-[#f7a92a]" : "bg-white/20"
-                }`}
+                className={`h-1.5 flex-1 rounded-full transition-all duration-300 ${s <= step ? "bg-[#f7a92a]" : "bg-white/20"
+                  }`}
               />
             ))}
           </div>
@@ -130,7 +128,7 @@ export function QuoteModal() {
 
         {/* Form Body */}
         <form onSubmit={handleSubmit} className="p-6">
-          
+
           {/* STEP 1: DESTINATION */}
           {step === 1 && (
             <div className="space-y-4">
@@ -146,7 +144,7 @@ export function QuoteModal() {
                 className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm focus:border-[#f7a92a] focus:outline-none focus:ring-1 focus:ring-[#f7a92a]"
                 autoFocus
               />
-              
+
               {/* Optional Suggestions */}
               <div className="pt-2">
                 <span className="text-xs text-gray-400">Sugerencias populares:</span>
@@ -156,11 +154,10 @@ export function QuoteModal() {
                       key={sug}
                       type="button"
                       onClick={() => setDestino(sug)}
-                      className={`rounded-full px-3 py-1.5 text-xs transition duration-250 ${
-                        destino.toLowerCase() === sug.toLowerCase()
-                          ? "bg-[#0b4058] text-white font-medium"
-                          : "bg-gray-100 text-[#0b4058] hover:bg-gray-200"
-                      }`}
+                      className={`rounded-full px-3 py-1.5 text-xs transition duration-250 ${destino.toLowerCase() === sug.toLowerCase()
+                        ? "bg-[#0b4058] text-white font-medium"
+                        : "bg-gray-100 text-[#0b4058] hover:bg-gray-200"
+                        }`}
                     >
                       {sug}
                     </button>
@@ -173,7 +170,7 @@ export function QuoteModal() {
           {/* STEP 2: DATE & PASSENGERS */}
           {step === 2 && (
             <div className="space-y-5">
-              
+
               {/* Date selection */}
               <div className="space-y-2">
                 <label htmlFor="fecha-select" className="flex items-center gap-1.5 text-sm font-semibold text-[#0b4058]">
@@ -200,7 +197,7 @@ export function QuoteModal() {
                   <Users className="h-4 w-4 text-[#f7a92a]" />
                   ¿Cuántas personas viajan?
                 </span>
-                
+
                 <div className="rounded-xl border border-gray-100 p-4 space-y-4">
                   {/* Adults count */}
                   <div className="flex items-center justify-between">
@@ -265,29 +262,27 @@ export function QuoteModal() {
                 <Plane className="h-4 w-4 text-[#f7a92a]" />
                 ¿Preferencia de aerolínea? (Opcional)
               </label>
-              
+
               <div className="flex flex-wrap gap-2">
                 <button
                   type="button"
                   onClick={() => setAerolinea("Sin preferencia")}
-                  className={`rounded-full px-3.5 py-2 text-xs transition duration-250 ${
-                    aerolinea === "Sin preferencia"
-                      ? "bg-[#0b4058] text-white font-medium"
-                      : "bg-gray-100 text-[#0b4058] hover:bg-gray-200"
-                  }`}
+                  className={`rounded-full px-3.5 py-2 text-xs transition duration-250 ${aerolinea === "Sin preferencia"
+                    ? "bg-[#0b4058] text-white font-medium"
+                    : "bg-gray-100 text-[#0b4058] hover:bg-gray-200"
+                    }`}
                 >
-                  Sin preferencia
+                  Sin preferencia/No viajo en avión
                 </button>
                 {AIRLINES.map((air) => (
                   <button
                     key={air}
                     type="button"
                     onClick={() => setAerolinea(air)}
-                    className={`rounded-full px-3.5 py-2 text-xs transition duration-250 ${
-                      aerolinea === air
-                        ? "bg-[#0b4058] text-white font-medium"
-                        : "bg-gray-100 text-[#0b4058] hover:bg-gray-200"
-                    }`}
+                    className={`rounded-full px-3.5 py-2 text-xs transition duration-250 ${aerolinea === air
+                      ? "bg-[#0b4058] text-white font-medium"
+                      : "bg-gray-100 text-[#0b4058] hover:bg-gray-200"
+                      }`}
                   >
                     {air}
                   </button>
@@ -314,7 +309,7 @@ export function QuoteModal() {
                 Atrás
               </button>
             )}
-            
+
             {step < 3 ? (
               <button
                 key="next-btn"
