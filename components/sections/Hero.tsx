@@ -45,12 +45,8 @@ export function Hero() {
                 Armá tu viaje ahora
               </button>
               {/* Micro-copy de confianza */}
-              <span className="pl-1 text-center text-xs text-white/70 sm:text-left">Respondemos en menos de 2 horas</span>
+              <span className="pl-1 text-center text-xs text-white/70 sm:text-center">Respondemos en menos de 2 horas</span>
             </div>
-            <span className="inline-flex items-center justify-center gap-2 rounded-full border border-[#a2c745] bg-white/95 px-4 py-2.5 text-sm text-[#006183] shadow-sm shadow-[#0b4058]/10">
-              <Wallet className="h-4 w-4" />
-              Financiación disponible
-            </span>
           </div>
         </div>
       </div>
