@@ -181,11 +181,103 @@
 
 ---
 
-## Fase 9 — Arquitectura Multipágina de Destinos (Post-V1.0)
-- [ ] **9.1** Rutas Dinámicas de Destino (`/destinos/[slug]`)
-  - [ ] Migrar de estructura Single-Page a Multi-Page configurando rutas de Next.js App Router.
-  - [ ] Diseñar plantilla premium de destino (itinerario sugerido, galería de imágenes optimizadas, qué incluye el servicio).
-  - [ ] Optimizar metadatos SEO de cada página para búsquedas como "Paquetes a Río de Janeiro desde Córdoba".
+## Fase 9A — Confianza, Conversión y UX (Ola 1)
+
+> **Origen**: Auditoría de marketing, social proof y UX realizada el 2026-07-04.
+> **Objetivo**: Resolver las brechas críticas de confianza legal, social proof y UX
+> identificadas antes de expandir a páginas de destinos (Fase 9B).
+> **Prioridad**: 🔴 Alta — impacta conversión y credibilidad inmediata.
+
+### 9A.1 — Página Legal y Compliance (`/legal`)
+- [ ] Crear `app/legal/page.tsx` con:
+  - [ ] Términos y Condiciones básicos (servicios de intermediación turística)
+  - [ ] Política de Privacidad (tratamiento de datos, Ley 25.326)
+  - [ ] Información sobre derecho de arrepentimiento (Ley 24.240)
+  - [ ] Datos del titular: CUIT, Razón Social, Legajo 20455
+- [ ] Agregar link a `/legal` en el footer (columna de Enlaces de Interés)
+- [ ] Agregar metadatos SEO a la página legal (`title`, `description`)
+
+### 9A.2 — Footer: Datos Legales y Defensa del Consumidor
+- [ ] Agregar al footer (barra inferior, junto a sellos AFIP y Cámara):
+  - [ ] CUIT y Razón Social visible en texto
+  - [ ] Legajo 20455 (duplicar desde TrustBar para reforzar credibilidad en zona legal)
+  - [ ] Botón/link de **Defensa del Consumidor** (`https://autogestion.produccion.gob.ar/consumidores`)
+  - [ ] Link a la página `/legal` (Términos y Condiciones)
+
+### 9A.3 — Imagen Open Graph (1200×630px)
+- [ ] Diseñar imagen OG profesional para previews de links:
+  - [ ] Dimensiones: 1200×630px (formato rectangular para WhatsApp/redes)
+  - [ ] Contenido: logo 787 Rumbos + paisaje atractivo + texto "Agencia de Viajes en Córdoba"
+  - [ ] Guardar en `public/og-image.jpg`
+- [ ] Configurar en `layout.tsx` → `metadata.openGraph.images`
+- [ ] Verificar preview en WhatsApp y redes sociales
+
+### 9A.4 — Navegación con Anclas + Menú Hamburguesa Mobile
+- [ ] **Desktop**: agregar links de navegación por anclas en la navbar
+  - [ ] Links: Inicio, Destinos, Servicios, Contacto
+  - [ ] Scroll suave (`scroll-behavior: smooth` o JS con `scrollIntoView`)
+  - [ ] Estilo: links en `text-white/70` con hover `text-white`, coherente con la estética actual
+- [ ] **Mobile**: menú hamburguesa
+  - [ ] Icono hamburguesa (3 líneas) que reemplaza los links en pantallas `< md`
+  - [ ] Panel desplegable con los mismos links + CTAs (Cotizar Viaje, WhatsApp)
+  - [ ] Animación de apertura/cierre suave (CSS transitions, sin librerías)
+  - [ ] Cerrar al hacer clic en un link o fuera del menú
+  - [ ] Implementar sin dependencias npm adicionales (CSS + JS nativo)
+
+### 9A.5 — Sección de Testimonios (estructura lista)
+- [ ] Crear `components/sections/Testimonials.tsx`:
+  - [ ] Diseño premium: tarjetas con foto de cliente, nombre, destino visitado, texto del testimonio
+  - [ ] Layout: carrusel o grid de 3 testimonios en desktop, stack en mobile
+  - [ ] Estrellas de rating (SVG inline, no librería)
+  - [ ] Espacio preparado para futuro widget de Google Reviews
+- [ ] Integrar en `page.tsx` entre Services y CTASection
+- [ ] **Datos**: usar datos reales cuando estén disponibles (1-2 semanas)
+  - [ ] Mientras tanto: NO mostrar la sección en producción (condicional o comentada)
+  - [ ] Formato de datos en `lib/constants.ts`: `{ nombre, destino, texto, foto?, rating }`
+
+### 9A.6 — Mejoras JSON-LD y SEO técnico
+- [ ] Agregar `openingHours` al JSON-LD en `layout.tsx`:
+  - [ ] `"openingHoursSpecification": { "dayOfWeek": ["Monday"..."Friday"], "opens": "08:00", "closes": "20:00" }`
+- [ ] Agregar `hasMap` con link a Google Maps
+- [ ] Revisar `sameAs`: actualmente solo Instagram — agregar más perfiles si existen
+- [ ] Limpiar import muerto de `Wallet` en `Hero.tsx`
+
+### 9A.7 — Página 404 personalizada
+- [ ] Crear `app/not-found.tsx`:
+  - [ ] Diseño coherente con la marca (azul petróleo, tipografía Elaine Sans)
+  - [ ] Mensaje amigable: "Esta página no existe, pero tu próximo viaje sí"
+  - [ ] CTA a WhatsApp y link a la home
+  - [ ] Sin dependencias adicionales
+
+---
+
+## Fase 9B — Arquitectura Multipágina de Destinos (Ola 3)
+
+> **Nota**: Renombrada de "Fase 9" a "Fase 9B" para distinguir de la Ola 1 (9A).
+> Los destinos se extraerán de las publicaciones de Instagram de la agencia.
+> Contenido mixto: info real de destinos + precios "desde" orientativos + CTA a WhatsApp.
+
+- [ ] **9B.1** Rutas Dinámicas de Destino (`/destinos/[slug]`)
+  - [ ] Crear `app/destinos/[slug]/page.tsx` con plantilla premium
+  - [ ] Crear `app/destinos/page.tsx` — índice con grid de todos los destinos
+  - [ ] Crear `lib/destinations-data.ts` con datos de 4-8 destinos reales (extraídos de Instagram)
+  - [ ] Estructura de cada destino:
+    - [ ] Descripción del destino (optimizada para SEO long-tail)
+    - [ ] Itinerario sugerido (resumido desde publicaciones de Instagram)
+    - [ ] Precio "desde" orientativo (se actualiza periódicamente)
+    - [ ] Galería de imágenes optimizadas
+    - [ ] CTA a WhatsApp con mensaje pre-rellenado del destino
+  - [ ] Optimizar metadatos SEO de cada página para búsquedas como "Paquetes a Río de Janeiro desde Córdoba"
+  - [ ] Actualizar `sitemap.ts` para incluir rutas de destinos
+  - [ ] Internal linking desde tarjetas de `FeaturedDestinations.tsx` a las páginas individuales
+
+### Ola 2 — Social Proof y Contenido (entre Ola 1 y Ola 3)
+- [ ] **Ola2.1** Sección Instagram estática curada
+  - [ ] Crear `components/sections/InstagramFeed.tsx`
+  - [ ] Descargar 4-6 mejores imágenes de publicaciones recientes de @787rumbos
+  - [ ] Grid premium con link directo al perfil de Instagram
+  - [ ] Actualización manual mensual
+- [ ] **Ola2.2** Página 404 personalizada (ver 9A.7 si no se completó en Ola 1)
 
 ---
 
@@ -207,3 +299,10 @@
 | 2026-06-14 | Fases 1→5 completadas y mergeadas a `main` |
 | 2026-06-14 | Fase 2 (tipografías) unificada con Fase 4 — implementadas juntas |
 | 2026-06-14 | Parallax descartado — puede perjudicar mobile y Core Web Vitals |
+| 2026-07-04 | Auditoría de marketing, social proof, UX y SEO completada |
+| 2026-07-04 | Decisiones clave: versión legal completa, testimonios en 1-2 semanas, Instagram estático curado, navegación con anclas + hamburguesa mobile, imagen OG 1200×630, destinos reales extraídos de Instagram |
+| 2026-07-04 | Fase 9 dividida en 9A (confianza/conversión/UX) y 9B (destinos multipágina) |
+| 2026-07-04 | Confirmado: legajo 20455 es real y verificado |
+| 2026-07-04 | Confirmado: CUIT y Razón Social disponibles para publicar |
+| 2026-07-04 | Confirmado: Google Business Profile en proceso de verificación |
+| 2026-07-04 | Confirmado: Google Search Console activo — 1 página indexada |

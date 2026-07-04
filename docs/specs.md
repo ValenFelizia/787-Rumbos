@@ -65,14 +65,30 @@ Estos datos están sincronizados en el footer, schema JSON-LD, y Google Maps par
 
 ## Fases Pendientes y Siguientes Pasos
 
-### Fase 9 — Expansión de Destinos (Páginas Dinámicas)
+### Fase 9A — Confianza, Conversión y UX (Ola 1) ← PRÓXIMA
+> Derivada de la auditoría de marketing/UX/SEO del 2026-07-04.
+
+*   **Compliance Legal:** Crear página `/legal` con T&C, Política de Privacidad y datos del titular (CUIT, Razón Social, Legajo). Agregar botón de Defensa del Consumidor y datos legales en el footer.
+*   **Imagen OG:** Diseñar imagen 1200×630px para previews de links en WhatsApp/redes. Actualmente usa `logo.png` como fallback (se ve cortado en previews rectangulares).
+*   **Navegación:** Agregar links por anclas en desktop (Inicio, Destinos, Servicios, Contacto) + menú hamburguesa en mobile. Preparación para la futura expansión multipágina.
+*   **Testimonios:** Crear estructura del componente `Testimonials.tsx` para integrar datos reales en 1-2 semanas. No publicar hasta tener testimonios verificados.
+*   **SEO técnico:** Agregar `openingHours` y `hasMap` al JSON-LD. Página 404 personalizada con CTA.
+
+### Fase 9B — Expansión de Destinos (Páginas Dinámicas)
 *   **Objetivo:** Crear la ruta dinámica `app/destinos/[slug]/page.tsx` para optimizar el posicionamiento orgánico de palabras clave específicas (ej. "paquetes a río de janeiro desde cordoba").
-*   **Estructura del Contenido a recopilar:**
-    *   Título comercial (ej. "Río de Janeiro Clásico").
-    *   Itinerario descriptivo sugerido.
-    *   Detalle de servicios incluidos (Vuelos con equipaje, noches de hotel, traslados, seguro médico).
-    *   Precios de referencia y esquemas de financiación.
+*   **Fuente de datos:** Publicaciones de Instagram de @787rumbos (la agenciera sube al menos un paquete por semana con itinerario, destino, días, hotel y precios).
+*   **Tipo de contenido:** Mixto — info real de destinos + precios "desde" orientativos + CTA a WhatsApp.
+*   **Cantidad inicial:** 4 a 8 destinos reales (extraídos de Instagram).
+*   **Estructura del Contenido:**
+    *   Descripción del destino (optimizada para SEO long-tail).
+    *   Itinerario sugerido (resumido desde publicaciones de Instagram).
+    *   Precio "desde" orientativo (se actualiza periódicamente).
+    *   Galería de imágenes optimizadas.
     *   WhatsApp link personalizado por destino.
+
+### Ola 2 — Social Proof y Contenido (entre 9A y 9B)
+*   **Sección Instagram estática curada:** Grid de 4-6 imágenes descargadas de las mejores publicaciones de @787rumbos, con link al perfil. Actualización manual mensual. Sin APIs ni widgets externos.
+*   **FAQ (evaluación futura):** Sección de preguntas frecuentes para SEO (featured snippets) y reducción de fricción.
 
 ### Fase 10 — Blog de Viajes y SEO Local
 *   **Objetivo:** Publicar artículos informativos para capturar búsquedas de cola larga desde Córdoba (ej. "cómo viajar con equipaje de mano en flybondi", "mejor época para viajar a brasil").
@@ -80,12 +96,40 @@ Estos datos están sincronizados en el footer, schema JSON-LD, y Google Maps par
 
 ---
 
+## Diferenciadores Estratégicos (Confirmados)
+
+Pilares de marca validados durante la auditoría del 2026-07-04:
+
+1.  **Atención humana 100%** — Nada de bots ni chatbots. Cada cliente habla con una persona real.
+2.  **Ubicación DENTRO del aeropuerto** — Oficina física en el hall de arribos. No "cerca del aeropuerto", dentro.
+3.  **Background en transporte terrestre** — Experiencia operando Vía Bariloche. Conocimiento profundo del rubro.
+4.  **Precios competitivos** — Acuerdos directos con aerolíneas y mayoristas.
+5.  **Especialización en viajes desde Córdoba** — No es Buenos Aires-céntrica. Conocen las rutas, conexiones y realidad del pasajero cordobés.
+6.  **Atención post-venta** — Acompañamiento durante y después del viaje.
+
+> Estos diferenciadores deben reflejarse de forma prominente en la sección ValueProposition y en las futuras páginas de destinos.
+
+---
+
+## Estado de Herramientas Externas
+
+| Herramienta | Estado | Nota |
+|-------------|--------|------|
+| Google Search Console | ✅ Activo | 1 página indexada, 2 sin indexar |
+| Vercel Analytics | ✅ Activo | `@vercel/analytics` en producción |
+| Google Business Profile | ⏳ En verificación | Crítico para SEO local y Google Reviews |
+| Instagram | ✅ Activo (@787rumbos) | Publicaciones semanales de paquetes — fuente de datos para destinos |
+
+---
+
 ## Constraints Técnicas de Desarrollo
 
-1.  **No agregar dependencias npm adicionales:** Mantener el bundle liviano. Toda interactividad o animación debe resolverse con CSS vanilla, Tailwind v4 y JavaScript nativo (`IntersectionObserver`, Web APIs).
+1.  **No agregar dependencias npm innecesarias:** Mantener el bundle liviano. Toda interactividad o animación debe resolverse con CSS vanilla, Tailwind v4 y JavaScript nativo (`IntersectionObserver`, Web APIs). Las dependencias se permiten cuando son la solución inteligente, no la perezosa.
 2.  **Estrategia de Ramas:**
     *   `development`: Es la rama de trabajo diaria. Todo cambio se sube y valida aquí.
     *   `master` / `main`: Rama de producción. **Nunca subir cambios directamente a master.** El usuario realiza la integración de desarrollo a producción de forma manual tras validar en local.
 3.  **Respetar la identidad:** Elaine Sans para encabezados/botones y Zalando Sans para cuerpo de texto.
 4.  **No usar placeholders:** Usar imágenes reales o assets libres limpios e integrados correctamente.
-5.  **Aesthetics First:** Los deños deben verse premium, con un balance de contrastes acorde a las pautas de marca (azul petróleo de fondo, detalles en dorado y verde limón).
+5.  **Aesthetics First:** Los diseños deben verse premium, con un balance de contrastes acorde a las pautas de marca (azul petróleo de fondo, detalles en dorado y verde limón).
+6.  **Documentación:** Actualizar `docs/todo.md` y `docs/specs.md` a medida que se implementan cambios.
+
