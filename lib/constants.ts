@@ -112,6 +112,6 @@ export const partnerLogos: Partner[] = [
   { name: "Air Europa", imageSrc: "/partners/aireuropa.svg", width: 130, height: 40 },
   { name: "LATAM Airlines", imageSrc: "/partners/latam.svg", width: 130, height: 40 },
   { name: "Arajet", imageSrc: "/partners/arajet.png", width: 130, height: 40 },
-  { name: "Vía Bariloche", imageSrc: "/partners/viabariloche.svg", width: 140, height: 40 },
+  { name: "Vía Bariloche", imageSrc: "/partners/viabariloche.png", width: 150, height: 40 },
 ];
 
