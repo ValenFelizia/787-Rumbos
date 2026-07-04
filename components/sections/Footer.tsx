@@ -86,6 +86,24 @@ export function Footer() {
                 Estado de Vuelos
               </a>
             </li>
+            <li>
+              <a
+                href="/legal"
+                className="text-white/80 transition hover:text-[#dae553]"
+              >
+                Términos y Condiciones
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://autogestion.produccion.gob.ar/consumidores"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/80 transition hover:text-[#dae553]"
+              >
+                Defensa del Consumidor
+              </a>
+            </li>
           </ul>
         </div>
 
@@ -136,40 +154,68 @@ export function Footer() {
       </div>
 
       {/* Barra inferior: badges de confianza + copyright */}
-      <div className="mx-auto mt-8 flex w-full max-w-6xl flex-wrap items-center justify-center gap-6 border-t border-white/10 px-6 pb-8 pt-8">
-        {/* Badge AFIP — usa <img> estándar, no <Image>. Ver comentario en el JSDoc del componente. */}
-        <a
-          href="http://qr.afip.gob.ar/?qr=Huvxa1kUae-1lE_yjNzL2w,,"
-          target="_F960AFIPInfo"
-          rel="noreferrer"
-          aria-label="Verificar datos fiscales en AFIP"
-          className="inline-flex h-12 items-center transition-opacity hover:opacity-80"
-        >
-          <img
-            src="/afip.jpg?v=20260503"
-            alt="Data Fiscal ARCA"
-            className="h-full w-auto object-contain"
-          />
-        </a>
+      <div className="mx-auto mt-8 flex w-full max-w-6xl flex-col items-center justify-center gap-4 border-t border-white/10 px-6 pb-8 pt-8">
+        <div className="flex flex-wrap items-center justify-center gap-6">
+          {/* Badge AFIP — usa <img> estándar, no <Image>. Ver comentario en el JSDoc del componente. */}
+          <a
+            href="http://qr.afip.gob.ar/?qr=Huvxa1kUae-1lE_yjNzL2w,,"
+            target="_F960AFIPInfo"
+            rel="noreferrer"
+            aria-label="Verificar datos fiscales en AFIP"
+            className="inline-flex h-12 items-center transition-opacity hover:opacity-80"
+          >
+            <img
+              src="/afip.jpg?v=20260503"
+              alt="Data Fiscal ARCA"
+              className="h-full w-auto object-contain"
+            />
+          </a>
 
-        <a
-          href="https://camaracbaturismo.org.ar/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex h-12 items-center transition-opacity hover:opacity-80"
-          aria-label="Sitio web de la Cámara de Turismo de la Provincia de Córdoba"
-        >
-          <Image
-            src="/camara-turismo.png"
-            alt="Miembro Cámara de Turismo de la Provincia de Córdoba"
-            width={200}
-            height={80}
-            sizes="200px"
-            className="h-full w-auto object-contain"
-          />
-        </a>
+          <a
+            href="https://camaracbaturismo.org.ar/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex h-12 items-center transition-opacity hover:opacity-80"
+            aria-label="Sitio web de la Cámara de Turismo de la Provincia de Córdoba"
+          >
+            <Image
+              src="/camara-turismo.png"
+              alt="Miembro Cámara de Turismo de la Provincia de Córdoba"
+              width={200}
+              height={80}
+              sizes="200px"
+              className="h-full w-auto object-contain"
+            />
+          </a>
+        </div>
 
-        <p className="text-center text-sm text-white/70">
+        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-center text-xs text-white/50">
+          <span>MARIA FERNANDA RAMOS</span>
+          <span className="hidden sm:inline">|</span>
+          <span>CUIT: 27-26220871-6</span>
+          <span className="hidden sm:inline">|</span>
+          <span>Legajo Habilitación N° 20455</span>
+        </div>
+
+        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs text-white/70">
+          <a
+            href="/legal"
+            className="underline hover:text-[#dae553] transition-colors"
+          >
+            Términos y Condiciones
+          </a>
+          <span>·</span>
+          <a
+            href="https://autogestion.produccion.gob.ar/consumidores"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-[#dae553] transition-colors"
+          >
+            Defensa del Consumidor
+          </a>
+        </div>
+
+        <p className="text-center text-sm text-white/70 mt-1">
           ©787 Rumbos® - Todos los derechos reservados.
         </p>
       </div>
