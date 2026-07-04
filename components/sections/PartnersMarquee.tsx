@@ -10,13 +10,13 @@ import { partnerLogos } from "@/lib/constants";
 export function PartnersMarquee() {
   return (
     <section
-      aria-label="Aerolíneas asociadas"
+      aria-label="Compañías asociadas"
       className="w-full overflow-hidden border-y border-[#0b4058]/5 bg-white py-6 md:py-8"
     >
       <div className="mx-auto max-w-6xl px-6">
         {/* Título de sección sutil */}
         <p className="mb-6 text-center font-[family-name:var(--font-elaine)] text-xs font-semibold uppercase tracking-wider text-[#0b4058]/40">
-          Viajá con las mejores aerolíneas
+          Viajá con las mejores compañías
         </p>
 
         {/* Contenedor del carrusel */}

@@ -20,7 +20,7 @@ export function Services() {
         <h2 className="font-[family-name:var(--font-elaine)] text-3xl font-bold tracking-tight md:text-4xl">
           Servicios que resolvemos por vos
         </h2>
-        <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {services.map((service) => {
             // Asignación a variable con mayúscula para renderizado dinámico de componente
             const Icon = service.icon;

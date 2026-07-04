@@ -37,7 +37,11 @@ export function Footer() {
           <p className="flex items-start gap-2">
             <MapPin className="mt-1 h-4 w-4 shrink-0 text-[#dae553]" />
             <span>
-              Av. La Voz del Interior 8500, Córdoba, Argentina
+              Av. La Voz del Interior 8500, Córdoba
+              <br />
+              <span className="text-xs text-white/60">
+                (Hall de arribos, local de Vía Bariloche)
+              </span>
             </span>
           </p>
           <p className="flex items-center gap-2">

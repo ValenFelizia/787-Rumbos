@@ -8,7 +8,7 @@
  * En el futuro, si se integra un CMS (Sanity, Strapi, etc.), estos arrays
  * se reemplazarían por fetches a la API y los componentes no tendrían que cambiar.
  */
-import { BedDouble, Bus, HeartPulse, Plane } from "lucide-react";
+import { BedDouble, Bus, HeartPulse, Plane, Ticket } from "lucide-react";
 
 // ─── Links de WhatsApp ────────────────────────────────────────────────────────
 
@@ -88,6 +88,11 @@ export const services: Service[] = [
     description: "Cobertura para que viajes tranquilo en cada tramo del recorrido.",
     icon: HeartPulse,
   },
+  {
+    title: "Pasajes de Ómnibus",
+    description: "Boletería oficial de Vía Bariloche, Vía Tac y El Valle para todo el país.",
+    icon: Ticket,
+  },
 ];
 
 // ─── Aerolíneas Aliadas ────────────────────────────────────────────────────────
@@ -107,5 +112,6 @@ export const partnerLogos: Partner[] = [
   { name: "Air Europa", imageSrc: "/partners/aireuropa.svg", width: 130, height: 40 },
   { name: "LATAM Airlines", imageSrc: "/partners/latam.svg", width: 130, height: 40 },
   { name: "Arajet", imageSrc: "/partners/arajet.png", width: 130, height: 40 },
+  { name: "Vía Bariloche", imageSrc: "/partners/viabariloche.svg", width: 140, height: 40 },
 ];
 
