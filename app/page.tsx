@@ -31,10 +31,10 @@ export default function Home() {
         <ValueProposition />
       </ScrollReveal>
       <ScrollReveal>
-        <AboutUs />
+        <FeaturedDestinations />
       </ScrollReveal>
       <ScrollReveal>
-        <FeaturedDestinations />
+        <AboutUs />
       </ScrollReveal>
       <ScrollReveal>
         <Services />
