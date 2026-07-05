@@ -33,10 +33,10 @@ export function Navbar() {
 
   const navLinks = [
     { label: "Inicio", href: "/#" },
-    { label: "Destinos", href: "/#destinos" },
+    { label: "Destinos", href: "/destinos" },
     { label: "Servicios", href: "/#servicios" },
     { label: "Nosotros", href: "/#nosotros" },
-    { label: "Contacto", href: "#contacto" },
+    { label: "Contacto", href: "/#contacto" },
   ];
 
   return (

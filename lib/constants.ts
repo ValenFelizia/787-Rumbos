@@ -24,36 +24,40 @@ export function whatsappDestino(destino: string): string {
 // ─── Destinos ─────────────────────────────────────────────────────────────────
 
 export interface Destination {
+  slug: string;
   name: string;
   duration: string;
   imageSrc: string;
 }
 
 /**
- * Destinos ilustrativos — no son paquetes reales en venta.
- * Representan algunos de los destinos que la agencia puede armar.
- * Para agregar o modificar destinos, editar este array.
+ * Destinos destacados para la landing page.
+ * Vinculados directamente a las páginas de destino individuales mediante el slug.
  */
 export const featuredDestinations: Destination[] = [
   {
-    name: "Río de Janeiro",
-    duration: "7 noches / 8 días",
-    imageSrc: "/destino1.jpg",
+    slug: "salta",
+    name: "Salta",
+    duration: "3 noches / 4 días",
+    imageSrc: "/destinos/salta.jpg",
   },
   {
+    slug: "bariloche",
     name: "Bariloche",
     duration: "5 noches / 6 días",
-    imageSrc: "/destino2.jpg",
+    imageSrc: "/destinos/bariloche.jpg",
   },
   {
-    name: "Cartagena",
-    duration: "6 noches / 7 días",
-    imageSrc: "/destino3.jpg",
+    slug: "rio-de-janeiro",
+    name: "Río de Janeiro",
+    duration: "7 noches / 8 días",
+    imageSrc: "/destinos/rio.jpg",
   },
   {
-    name: "Ushuaia",
+    slug: "cataratas-del-iguazu",
+    name: "Cataratas del Iguazú",
     duration: "4 noches / 5 días",
-    imageSrc: "/destino4.jpg",
+    imageSrc: "/destinos/cataratas.jpg",
   },
 ];
 
