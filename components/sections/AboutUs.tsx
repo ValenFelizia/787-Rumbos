@@ -26,10 +26,10 @@ export function AboutUs() {
           />
         </div>
         <div className="md:col-span-7 md:pl-4">
-          <h2 className="font-[family-name:var(--font-elaine)] text-3xl font-bold tracking-tight md:text-4xl">
+          <h2 className="font-[family-name:var(--font-elaine)] text-3xl font-bold tracking-tight md:text-4xl text-balance">
             De la terminal al mundo
           </h2>
-          <p className="mt-5 max-w-2xl text-[1.03rem] leading-relaxed text-[#0b4058]/80">
+          <p className="mt-5 max-w-2xl text-[1.03rem] leading-relaxed text-[#0b4058]/80 text-pretty">
             Llevamos años dedicados al rubro del transporte y el turismo. Conocemos lo que
             significa viajar porque lo vivimos todos los días desde nuestro local en el
             aeropuerto. Decidimos abrir 787 Rumbos para ir un paso más allá y ofrecer a nuestros
