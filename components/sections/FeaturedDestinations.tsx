@@ -9,7 +9,7 @@ export function FeaturedDestinations() {
   const { openModal } = useModal();
 
   return (
-    <section className="mx-auto w-full max-w-6xl px-6 py-20">
+    <section id="destinos" className="mx-auto w-full max-w-6xl px-6 py-20">
       <div className="mb-8 flex items-end justify-between gap-4">
         <div>
           <h2 className="font-[family-name:var(--font-elaine)] text-3xl font-bold tracking-tight md:text-4xl">

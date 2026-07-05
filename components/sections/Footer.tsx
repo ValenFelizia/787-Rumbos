@@ -18,7 +18,7 @@ import { WHATSAPP_LINK } from "@/lib/constants";
 
 export function Footer() {
   return (
-    <footer className="bg-[#0b4058] text-white">
+    <footer id="contacto" className="bg-[#0b4058] text-white">
       <div className="mx-auto grid w-full max-w-6xl gap-8 px-6 py-14 md:grid-cols-4">
         {/* Columna 1: Logo y habilitación */}
         <div>

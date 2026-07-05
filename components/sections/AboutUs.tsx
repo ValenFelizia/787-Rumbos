@@ -10,7 +10,7 @@ import Image from "next/image";
 
 export function AboutUs() {
   return (
-    <section className="bg-[#f9f9f9]">
+    <section id="nosotros" className="bg-[#f9f9f9]">
       <div className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-20 md:grid-cols-12 md:items-center md:gap-12">
         {/* La clase `group` en el contenedor permite que los hijos usen `group-hover:*`
             para reaccionar al hover del padre — en este caso, la imagen escala al

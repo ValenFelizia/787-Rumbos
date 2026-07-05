@@ -46,6 +46,10 @@
    3. Estilos base
    ───────────────────────────────────────── */
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     font-family: var(--font-zalando), system-ui, sans-serif;
     background-color: var(--brand-crema);

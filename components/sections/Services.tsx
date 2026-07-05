@@ -15,7 +15,7 @@ import { services } from "@/lib/constants";
 
 export function Services() {
   return (
-    <section className="border-t border-[#0b4058]/10 bg-white">
+    <section id="servicios" className="border-t border-[#0b4058]/10 bg-white">
       <div className="mx-auto w-full max-w-6xl px-6 py-20">
         <h2 className="font-[family-name:var(--font-elaine)] text-3xl font-bold tracking-tight md:text-4xl">
           Servicios que resolvemos por vos
