@@ -181,73 +181,73 @@
 
 ---
 
-## Fase 9A — Confianza, Conversión y UX (Ola 1)
+## Fase 9A — Confianza, Conversión y UX (Ola 1) ✅
 
 > **Origen**: Auditoría de marketing, social proof y UX realizada el 2026-07-04.
 > **Objetivo**: Resolver las brechas críticas de confianza legal, social proof y UX
 > identificadas antes de expandir a páginas de destinos (Fase 9B).
 > **Prioridad**: 🔴 Alta — impacta conversión y credibilidad inmediata.
 
-### 9A.1 — Página Legal y Compliance (`/legal`)
-- [ ] Crear `app/legal/page.tsx` con:
-  - [ ] Términos y Condiciones básicos (servicios de intermediación turística)
-  - [ ] Política de Privacidad (tratamiento de datos, Ley 25.326)
-  - [ ] Información sobre derecho de arrepentimiento (Ley 24.240)
-  - [ ] Datos del titular: CUIT, Razón Social, Legajo 20455
-- [ ] Agregar link a `/legal` en el footer (columna de Enlaces de Interés)
-- [ ] Agregar metadatos SEO a la página legal (`title`, `description`)
+### 9A.1 — Página Legal y Compliance (`/legal`) ✅
+- [x] Crear `app/legal/page.tsx` con:
+  - [x] Términos y Condiciones básicos (servicios de intermediación turística)
+  - [x] Política de Privacidad (tratamiento de datos, Ley 25.326)
+  - [x] Información sobre derecho de arrepentimiento (Ley 24.240)
+  - [x] Datos del titular: CUIT, Razón Social, Legajo 20455
+- [x] Agregar link a `/legal` en el footer (columna de Enlaces de Interés)
+- [x] Agregar metadatos SEO a la página legal (`title`, `description`)
 
-### 9A.2 — Footer: Datos Legales y Defensa del Consumidor
-- [ ] Agregar al footer (barra inferior, junto a sellos AFIP y Cámara):
-  - [ ] CUIT y Razón Social visible en texto
-  - [ ] Legajo 20455 (duplicar desde TrustBar para reforzar credibilidad en zona legal)
-  - [ ] Botón/link de **Defensa del Consumidor** (`https://autogestion.produccion.gob.ar/consumidores`)
-  - [ ] Link a la página `/legal` (Términos y Condiciones)
+### 9A.2 — Footer: Datos Legales y Defensa del Consumidor ✅
+- [x] Agregar al footer (barra inferior, junto a sellos AFIP y Cámara):
+  - [x] CUIT y Razón Social visible en texto
+  - [x] Legajo 20455 (duplicar desde TrustBar para reforzar credibilidad en zona legal)
+  - [x] Botón/link de **Defensa del Consumidor** (`https://autogestion.produccion.gob.ar/consumidores`)
+  - [x] Link a la página `/legal` (Términos y Condiciones)
 
-### 9A.3 — Imagen Open Graph (1200×630px)
-- [ ] Diseñar imagen OG profesional para previews de links:
-  - [ ] Dimensiones: 1200×630px (formato rectangular para WhatsApp/redes)
-  - [ ] Contenido: logo 787 Rumbos + paisaje atractivo + texto "Agencia de Viajes en Córdoba"
-  - [ ] Guardar en `public/og-image.jpg`
-- [ ] Configurar en `layout.tsx` → `metadata.openGraph.images`
-- [ ] Verificar preview en WhatsApp y redes sociales
+### 9A.3 — Imagen Open Graph (1200×630px) ✅
+- [x] Diseñar imagen OG profesional para previews de links:
+  - [x] Dimensiones: 1200×630px (formato rectangular para WhatsApp/redes)
+  - [x] Contenido: logo 787 Rumbos + paisaje atractivo + texto "Agencia de Viajes en Córdoba"
+  - [x] Guardar en `public/og-image.png` (formato original optimizado de alta fidelidad)
+- [x] Configurar en `layout.tsx` → `metadata.openGraph.images`
+- [x] Verificar preview en WhatsApp y redes sociales
 
-### 9A.4 — Navegación con Anclas + Menú Hamburguesa Mobile
-- [ ] **Desktop**: agregar links de navegación por anclas en la navbar
-  - [ ] Links: Inicio, Destinos, Servicios, Contacto
-  - [ ] Scroll suave (`scroll-behavior: smooth` o JS con `scrollIntoView`)
-  - [ ] Estilo: links en `text-white/70` con hover `text-white`, coherente con la estética actual
-- [ ] **Mobile**: menú hamburguesa
-  - [ ] Icono hamburguesa (3 líneas) que reemplaza los links en pantallas `< md`
-  - [ ] Panel desplegable con los mismos links + CTAs (Cotizar Viaje, WhatsApp)
-  - [ ] Animación de apertura/cierre suave (CSS transitions, sin librerías)
-  - [ ] Cerrar al hacer clic en un link o fuera del menú
-  - [ ] Implementar sin dependencias npm adicionales (CSS + JS nativo)
+### 9A.4 — Navegación con Anclas + Menú Hamburguesa Mobile ✅
+- [x] **Desktop**: agregar links de navegación por anclas en la navbar
+  - [x] Links: Inicio, Destinos, Servicios, Contacto
+  - [x] Scroll suave (`scroll-behavior: smooth` o JS con `scrollIntoView`)
+  - [x] Estilo: links en `text-white/70` con hover `text-white`, coherente con la estética actual
+- [x] **Mobile**: menú hamburguesa
+  - [x] Icono hamburguesa (3 líneas) que reemplaza los links en pantallas `< md`
+  - [x] Panel desplegable con los mismos links + CTAs (Cotizar Viaje, WhatsApp)
+  - [x] Animación de apertura/cierre suave (CSS transitions, sin librerías)
+  - [x] Cerrar al hacer clic en un link o fuera del menú
+  - [x] Implementar sin dependencias npm adicionales (CSS + JS nativo)
 
-### 9A.5 — Sección de Testimonios (estructura lista)
-- [ ] Crear `components/sections/Testimonials.tsx`:
-  - [ ] Diseño premium: tarjetas con foto de cliente, nombre, destino visitado, texto del testimonio
-  - [ ] Layout: carrusel o grid de 3 testimonios en desktop, stack en mobile
-  - [ ] Estrellas de rating (SVG inline, no librería)
-  - [ ] Espacio preparado para futuro widget de Google Reviews
-- [ ] Integrar en `page.tsx` entre Services y CTASection
-- [ ] **Datos**: usar datos reales cuando estén disponibles (1-2 semanas)
-  - [ ] Mientras tanto: NO mostrar la sección en producción (condicional o comentada)
-  - [ ] Formato de datos en `lib/constants.ts`: `{ nombre, destino, texto, foto?, rating }`
+### 9A.5 — Sección de Testimonios (estructura lista) ✅
+- [x] Crear `components/sections/Testimonials.tsx`:
+  - [x] Diseño premium: tarjetas con foto de cliente, nombre, destino visitado, texto del testimonio
+  - [x] Layout: carrusel o grid de 3 testimonios en desktop, stack en mobile
+  - [x] Estrellas de rating (SVG inline, no librería)
+  - [x] Espacio preparado para futuro widget de Google Reviews
+- [x] Integrar en `page.tsx` entre Services y CTASection
+- [x] **Datos**: usar datos reales cuando estén disponibles (1-2 semanas)
+  - [x] Mientras tanto: NO mostrar la sección en producción (comentada en page.tsx)
+  - [x] Formato de datos en `lib/constants.ts`: `{ nombre, destino, texto, foto?, rating }`
 
-### 9A.6 — Mejoras JSON-LD y SEO técnico
-- [ ] Agregar `openingHours` al JSON-LD en `layout.tsx`:
-  - [ ] `"openingHoursSpecification": { "dayOfWeek": ["Monday"..."Friday"], "opens": "08:00", "closes": "20:00" }`
-- [ ] Agregar `hasMap` con link a Google Maps
-- [ ] Revisar `sameAs`: actualmente solo Instagram — agregar más perfiles si existen
-- [ ] Limpiar import muerto de `Wallet` en `Hero.tsx`
+### 9A.6 — Mejoras JSON-LD y SEO técnico ✅
+- [x] Agregar `openingHours` al JSON-LD en `layout.tsx`:
+  - [x] `"openingHoursSpecification": { "dayOfWeek": ["Monday"..."Friday"], "opens": "08:00", "closes": "20:00" }`
+- [x] Agregar `hasMap` con link a Google Maps
+- [x] Revisar `sameAs`: actualmente solo Instagram — agregar más perfiles si existen
+- [x] Limpiar import muerto de `Wallet` en `Hero.tsx`
 
-### 9A.7 — Página 404 personalizada
-- [ ] Crear `app/not-found.tsx`:
-  - [ ] Diseño coherente con la marca (azul petróleo, tipografía Elaine Sans)
-  - [ ] Mensaje amigable: "Esta página no existe, pero tu próximo viaje sí"
-  - [ ] CTA a WhatsApp y link a la home
-  - [ ] Sin dependencias adicionales
+### 9A.7 — Página 404 personalizada ✅
+- [x] Crear `app/not-found.tsx`:
+  - [x] Diseño coherente con la marca (azul petróleo, tipografía Elaine Sans)
+  - [x] Mensaje amigable: "Esta página no existe, pero tu próximo viaje sí"
+  - [x] CTA a WhatsApp y link a la home
+  - [x] Sin dependencias adicionales
 
 ---
 
