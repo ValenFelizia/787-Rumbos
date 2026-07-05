@@ -6,7 +6,7 @@ import { Plane, Bus, ArrowRight, Calendar, MapPin } from "lucide-react";
 export function FeaturedDestinations() {
   // Seleccionamos exactamente los 4 destinos destacados de forma ordenada
   const featuredSlugs = ["salta", "bariloche", "rio-de-janeiro", "cataratas-del-iguazu"];
-  
+
   const featured = featuredSlugs
     .map(slug => destinationsData.find(d => d.slug === slug))
     .filter((d): d is DestinationPage => !!d);
@@ -16,9 +16,6 @@ export function FeaturedDestinations() {
       {/* Header de la sección */}
       <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div className="space-y-3">
-          <span className="text-[11px] uppercase font-black tracking-widest text-[#006183] bg-[#006183]/5 px-3 py-1 rounded-full border border-[#006183]/10">
-            Catálogo destacado
-          </span>
           <h2 className="font-[family-name:var(--font-brand-heading)] text-3xl font-extrabold tracking-tight md:text-4xl text-[#0b4058] text-balance">
             ¿Cuál es tu próximo rumbo?
           </h2>
@@ -60,20 +57,16 @@ export function FeaturedDestinations() {
                 />
                 {/* 1px image outline for consistent depth */}
                 <div className="absolute inset-0 border border-black/5 rounded-t-2xl pointer-events-none" />
-                
-                {/* Badges superiores */}
+
+                {/* Badges superiores / inferiores */}
                 <div className="absolute top-3 left-3 bg-[#0b4058]/90 backdrop-blur-sm text-white px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">
                   {dest.region === "nacional" ? "Nacional" : "Internacional"}
                 </div>
 
-                {nextDepDate ? (
-                  <div className="absolute top-3 right-3 bg-[#dae553] text-[#0b4058] px-2.5 py-1 rounded-full text-[10px] font-black shadow-sm flex items-center gap-1">
+                {nextDepDate && (
+                  <div className="absolute bottom-3 right-3 bg-[#dae553] text-[#0b4058] px-2.5 py-1 rounded-full text-[10px] font-black shadow-sm flex items-center gap-1">
                     <Calendar className="h-3 w-3 shrink-0" />
                     <span>Salida: {nextDepDate}</span>
-                  </div>
-                ) : (
-                  <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm text-[#0b4058] px-2.5 py-1 rounded-full text-[10px] font-black shadow-sm">
-                    A Medida
                   </div>
                 )}
               </div>
@@ -84,7 +77,7 @@ export function FeaturedDestinations() {
                   <h3 className="font-[family-name:var(--font-brand-heading)] text-xl font-bold tracking-tight text-[#0b4058] group-hover:text-[#006183] transition-colors duration-200">
                     {dest.name}
                   </h3>
-                  
+
                   {/* Duración y Transporte */}
                   <div className="flex items-center gap-1.5 text-xs text-[#0b4058]/70">
                     {transportType === "aereo" ? (
@@ -146,7 +139,7 @@ export function FeaturedDestinations() {
           <span>Explorar todos los destinos</span>
           <ArrowRight className="h-4 w-4 shrink-0" />
         </Link>
-        
+
         {/* Subtle decorative background light */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-white/5 rounded-full blur-3xl pointer-events-none" />
