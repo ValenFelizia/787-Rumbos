@@ -14,6 +14,7 @@ import { ValueProposition } from "@/components/sections/ValueProposition";
 import { AboutUs } from "@/components/sections/AboutUs";
 import { FeaturedDestinations } from "@/components/sections/FeaturedDestinations";
 import { Services } from "@/components/sections/Services";
+import { Testimonials } from "@/components/sections/Testimonials";
 import { CTASection } from "@/components/sections/CTASection";
 import { Footer } from "@/components/sections/Footer";
 import { ScrollReveal } from "@/components/ScrollReveal";
@@ -38,7 +39,10 @@ export default function Home() {
       <ScrollReveal>
         <Services />
       </ScrollReveal>
-      {/* <Testimonials /> → branch feature/testimonials — no mergear hasta tener datos reales */}
+      {/* ponytail: uncomment this block when real customer reviews are obtained */}
+      {/* <ScrollReveal>
+        <Testimonials />
+      </ScrollReveal> */}
       <ScrollReveal>
         <CTASection />
       </ScrollReveal>
