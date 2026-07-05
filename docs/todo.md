@@ -251,25 +251,27 @@
 
 ---
 
-## Fase 9B — Arquitectura Multipágina de Destinos (Ola 3)
+## Fase 9B — Arquitectura Multipágina de Destinos (Ola 3) ✅
 
 > **Nota**: Renombrada de "Fase 9" a "Fase 9B" para distinguir de la Ola 1 (9A).
 > Los destinos se extraerán de las publicaciones de Instagram de la agencia.
 > Contenido mixto: info real de destinos + precios "desde" orientativos + CTA a WhatsApp.
 
-- [ ] **9B.1** Rutas Dinámicas de Destino (`/destinos/[slug]`)
-  - [ ] Crear `app/destinos/[slug]/page.tsx` con plantilla premium
-  - [ ] Crear `app/destinos/page.tsx` — índice con grid de todos los destinos
-  - [ ] Crear `lib/destinations-data.ts` con datos de 4-8 destinos reales (extraídos de Instagram)
-  - [ ] Estructura de cada destino:
-    - [ ] Descripción del destino (optimizada para SEO long-tail)
-    - [ ] Itinerario sugerido (resumido desde publicaciones de Instagram)
-    - [ ] Precio "desde" orientativo (se actualiza periódicamente)
-    - [ ] Galería de imágenes optimizadas
-    - [ ] CTA a WhatsApp con mensaje pre-rellenado del destino
-  - [ ] Optimizar metadatos SEO de cada página para búsquedas como "Paquetes a Río de Janeiro desde Córdoba"
-  - [ ] Actualizar `sitemap.ts` para incluir rutas de destinos
-  - [ ] Internal linking desde tarjetas de `FeaturedDestinations.tsx` a las páginas individuales
+- [x] **9B.1** Rutas Dinámicas de Destino (`/destinos/[slug]`) ✅
+  - [x] Crear `app/destinos/[slug]/page.tsx` con plantilla premium
+  - [x] Crear `app/destinos/page.tsx` — índice con grid de todos los destinos
+  - [x] Crear `lib/destinations-data.ts` con datos de 13 destinos reales (extraídos de Instagram y ampliados)
+  - [x] Estructura de cada destino:
+    - [x] Descripción del destino (optimizada para SEO de larga cola)
+    - [x] Excursiones sugeridas e itinerario típico
+    - [x] Precio "desde" en ARS/USD orientativo
+    - [x] Galería de imágenes reales y libres de derechos
+    - [x] CTA a WhatsApp con mensaje pre-rellenado específico por fecha y destino
+  - [x] Optimizar metadatos SEO de cada página para búsquedas específicas desde Córdoba
+  - [x] Actualizar `sitemap.ts` para incluir rutas de destinos de forma dinámica
+  - [x] Internal linking desde tarjetas de `FeaturedDestinations.tsx` a las páginas individuales e índice general
+  - [x] Comprobación inteligente de expiración y estado de cupos en salidas grupales.
+  - [x] Redirección limpia a cotización a medida cuando no hay salidas activas.
 
 ### Ola 2 — Social Proof y Contenido (entre Ola 1 y Ola 3)
 - [ ] **Ola2.1** Sección Instagram estática curada
