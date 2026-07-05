@@ -25,7 +25,7 @@ export function Hero() {
       <div className="relative mx-auto w-full max-w-6xl px-6 py-20 text-white md:py-28">
         <div className="max-w-3xl space-y-6">
           <h1
-            className="font-[family-name:var(--font-elaine)] text-[2rem] font-extrabold leading-tight tracking-tight sm:text-4xl md:text-6xl"
+            className="font-[family-name:var(--font-elaine)] text-[2rem] font-extrabold leading-tight tracking-tight sm:text-4xl md:text-6xl text-balance"
           >
             Descubrí el mundo con el acompañamiento cercano de 787 Rumbos
           </h1>
@@ -38,7 +38,7 @@ export function Hero() {
               <button
                 onClick={() => openModal()}
                 aria-label="Armá tu viaje ahora — abre el cotizador personalizado"
-                className="font-[family-name:var(--font-elaine)] inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#f7a92a] to-[#e6b451] px-6 py-3.5 font-semibold text-[#0b4058] shadow-md shadow-[#f7a92a]/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#f7a92a]/40 cursor-pointer sm:py-3"
+                className="font-[family-name:var(--font-elaine)] inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#f7a92a] to-[#e6b451] px-6 py-3.5 font-semibold text-[#0b4058] shadow-md shadow-[#f7a92a]/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#f7a92a]/40 active:scale-[0.96] transition-transform duration-200 cursor-pointer sm:py-3"
               >
                 <WhatsAppIcon size={16} className="h-4 w-4" />
                 Armá tu viaje ahora
