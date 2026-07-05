@@ -36,8 +36,14 @@ export const metadata: Metadata = {
     siteName: '787 Rumbos',
     locale: 'es_AR',
     type: 'website',
-    // og:image se puede agregar aquí cuando tengamos una imagen OG (1200x630px)
-    // images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: '787 Rumbos — Agencia de Viajes en Córdoba',
+      },
+    ],
   },
   icons: {
     icon: [{ url: '/logo.png', type: 'image/png' }],
