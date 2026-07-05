@@ -12,10 +12,10 @@ export function FeaturedDestinations() {
     <section id="destinos" className="mx-auto w-full max-w-6xl px-6 py-20">
       <div className="mb-8 flex items-end justify-between gap-4">
         <div>
-          <h2 className="font-[family-name:var(--font-elaine)] text-3xl font-bold tracking-tight md:text-4xl">
+          <h2 className="font-[family-name:var(--font-elaine)] text-3xl font-bold tracking-tight md:text-4xl text-balance">
             Destinos destacados
           </h2>
-          <p className="mt-2 text-[#0b4058]/75">
+          <p className="mt-2 text-[#0b4058]/75 text-pretty">
             Algunos de los destinos que podemos armar para vos.
           </p>
         </div>
@@ -49,7 +49,7 @@ export function FeaturedDestinations() {
               <button
                 onClick={() => openModal(destination.name)}
                 aria-label={`Consultar por viaje a ${destination.name} — abre el cotizador personalizado`}
-                className="font-[family-name:var(--font-elaine)] mt-1 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#0b4058] px-4 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#006183] cursor-pointer"
+                className="font-[family-name:var(--font-elaine)] mt-1 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#0b4058] px-4 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#006183] active:scale-[0.96] transition-transform duration-200 cursor-pointer"
               >
                 <WhatsAppIcon size={14} className="h-3.5 w-3.5" />
                 Consultá este destino
