@@ -28,10 +28,10 @@ export function CTASection() {
       />
 
       <div className="relative mx-auto w-full max-w-6xl px-6 py-20 text-center">
-        <h2 className="font-[family-name:var(--font-elaine)] text-3xl font-bold tracking-tight text-white md:text-4xl">
+        <h2 className="font-[family-name:var(--font-elaine)] text-3xl font-bold tracking-tight text-white md:text-4xl text-balance">
           ¿Ya sabés a dónde querés ir?
         </h2>
-        <p className="mx-auto mt-5 max-w-xl text-[1.05rem] leading-relaxed text-white/80">
+        <p className="mx-auto mt-5 max-w-xl text-[1.05rem] leading-relaxed text-white/80 text-pretty">
           Mandanos un mensaje y lo organizamos juntos. Hablás directo con un asesor o personalizá tu consulta en segundos:
         </p>
 
@@ -39,7 +39,7 @@ export function CTASection() {
           <button
             onClick={() => openModal()}
             aria-label="Iniciar consulta de viaje — abre el cotizador personalizado"
-            className="font-[family-name:var(--font-elaine)] inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#f7a92a] to-[#e6b451] px-8 py-3.5 text-base font-bold text-[#0b4058] shadow-lg shadow-[#f7a92a]/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#f7a92a]/30 cursor-pointer"
+            className="font-[family-name:var(--font-elaine)] inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#f7a92a] to-[#e6b451] px-8 py-3.5 text-base font-bold text-[#0b4058] shadow-lg shadow-[#f7a92a]/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#f7a92a]/30 active:scale-[0.96] transition-transform duration-200 cursor-pointer"
           >
             <WhatsAppIcon size={16} className="h-4 w-4" />
             Hablemos por WhatsApp
