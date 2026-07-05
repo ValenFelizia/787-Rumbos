@@ -57,7 +57,7 @@ export const destinationsData: DestinationPage[] = [
       "3 o 4 noches de alojamiento con desayuno",
       "Traslados aeropuerto / hotel / aeropuerto",
       "City Tour pedestre por la ciudad",
-      "Asistencia al viajero premium"
+      "Asistencia al viajero"
     ],
     optionalExcursions: [
       "Excursión de día completo a Cafayate con degustación en bodega",

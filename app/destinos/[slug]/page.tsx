@@ -183,7 +183,7 @@ export default async function DestinoDetailPage({ params }: Props) {
           className="object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0b4058]/95 via-[#0b4058]/40 to-transparent" />
-        
+
         <div className="absolute bottom-0 left-0 w-full py-10 px-6">
           <div className="mx-auto max-w-6xl space-y-4">
             <Link
@@ -193,13 +193,13 @@ export default async function DestinoDetailPage({ params }: Props) {
               <ArrowLeft className="h-4 w-4" />
               <span>Volver al catálogo</span>
             </Link>
-            
+
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
               <span className="text-xs uppercase font-extrabold tracking-widest text-[#dae553] bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/15">
                 {dest.region === "nacional" ? "Argentina" : dest.country}
               </span>
             </div>
-            
+
             <h1 className="font-[family-name:var(--font-brand-heading)] text-3xl md:text-5xl font-extrabold text-white tracking-tight text-balance">
               Paquetes a {dest.name}
             </h1>
@@ -210,7 +210,7 @@ export default async function DestinoDetailPage({ params }: Props) {
       {/* Main Content Layout */}
       <section className="mx-auto w-full max-w-6xl px-6 py-12">
         <div className="grid gap-10 lg:grid-cols-12 items-start">
-          
+
           {/* Columna Izquierda: Información de Destino */}
           <div className="lg:col-span-7 space-y-10">
             {/* Descripción */}
@@ -274,14 +274,14 @@ export default async function DestinoDetailPage({ params }: Props) {
             <div className="rounded-xl bg-gray-50 border border-gray-200/60 p-5 flex gap-3 text-xs text-gray-500 leading-relaxed">
               <AlertCircle className="h-5 w-5 text-gray-400 shrink-0 mt-0.5" />
               <p className="text-pretty">
-                <strong>Nota aclaratoria:</strong> Las tarifas publicadas, itinerarios y excursiones son de carácter referencial y corresponden a nuestros paquetes estándar. 787 Rumbos es hiper-flexible y nos adaptamos a tus necesidades. Las tarifas definitivas se confirman al momento de realizar la consulta directa y reserva con el asesor.
+                <strong>Nota aclaratoria:</strong> Las tarifas publicadas, itinerarios y excursiones son de carácter referencial y corresponden a nuestros paquetes estándar, aunque están sujetos a cambios. En 787 Rumbos nos destacamos por nuestra flexibilidad y paquetes a medida, así que nos adaptamos a tus necesidades. Las tarifas definitivas se confirman al momento de realizar la consulta directa y reserva con el asesor.
               </p>
             </div>
           </div>
 
           {/* Columna Derecha: Salidas Programadas (Panel Lateral Sticky) */}
           <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-6">
-            
+
             {/* Si no hay salidas activas */}
             {activeUpcomingDepartures.length === 0 ? (
               <div className="rounded-2xl bg-white border border-[#0b4058]/10 p-7 shadow-md space-y-6 text-center">
@@ -325,11 +325,10 @@ export default async function DestinoDetailPage({ params }: Props) {
                     return (
                       <div
                         key={idx}
-                        className={`rounded-xl border p-4 space-y-3 transition-all duration-200 ${
-                          statusInfo.isSelectable 
-                            ? "border-gray-200 hover:border-[#0b4058]/30 hover:shadow-md bg-white" 
-                            : "border-gray-100 bg-gray-50/50"
-                        }`}
+                        className={`rounded-xl border p-4 space-y-3 transition-all duration-200 ${statusInfo.isSelectable
+                          ? "border-gray-200 hover:border-[#0b4058]/30 hover:shadow-md bg-white"
+                          : "border-gray-100 bg-gray-50/50"
+                          }`}
                       >
                         <div className="flex justify-between items-start gap-2">
                           <div className="space-y-1">
