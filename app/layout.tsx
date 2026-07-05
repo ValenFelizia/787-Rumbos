@@ -96,6 +96,19 @@ export default function RootLayout({
       latitude: -31.3117,
       longitude: -64.208,
     },
+    openingHoursSpecification: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      opens: "08:00",
+      closes: "20:00"
+    },
+    hasMap: "https://maps.google.com/?q=Aeropuerto+Internacional+Ingeniero+Aeron%C3%A1utico+Ambrosio+Taravella",
     sameAs: ["https://www.instagram.com/787rumbos/"],
     priceRange: "$$",
   };

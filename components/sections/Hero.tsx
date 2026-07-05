@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import { Wallet } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { useModal } from "@/lib/context/ModalContext";
 
