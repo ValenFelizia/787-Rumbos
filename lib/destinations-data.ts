@@ -44,7 +44,7 @@ export const destinationsData: DestinationPage[] = [
     region: "nacional",
     metaTitle: "Paquetes a Salta desde Córdoba en Aéreo | 787 Rumbos",
     metaDescription: "Viajá a Salta con salida desde Córdoba. Incluye aéreos, alojamiento con desayuno, traslados y city tour. Salidas confirmadas y financiación.",
-    heroImage: "/destinos/salta.jpg",
+    heroImage: "/destinos/salta.png",
     description: "Conocida como 'La Linda', Salta ofrece una mezcla única de historia colonial, peñas folclóricas y paisajes andinos de ensueño. Podrás recorrer sus iglesias coloniales, subir al Cerro San Bernardo en teleférico y saborear las mejores empanadas del país en sus históricas peñas.",
     highlights: [
       "Plaza 9 de Julio y Cabildo Histórico",

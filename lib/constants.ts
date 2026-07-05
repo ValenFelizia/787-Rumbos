@@ -39,7 +39,7 @@ export const featuredDestinations: Destination[] = [
     slug: "salta",
     name: "Salta",
     duration: "3 noches / 4 días",
-    imageSrc: "/destinos/salta.jpg",
+    imageSrc: "/destinos/salta.png",
   },
   {
     slug: "bariloche",
