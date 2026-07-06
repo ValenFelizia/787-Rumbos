@@ -24,6 +24,7 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#f9f9f9] text-[#0b4058]">
+      <SpecialPromo />
       <Navbar />
       <Hero />
       {/* TrustBar sin animación — debe ser visible de inmediato debajo del hero */}
@@ -31,9 +32,6 @@ export default function Home() {
       <PartnersMarquee />
       <ScrollReveal>
         <ValueProposition />
-      </ScrollReveal>
-      <ScrollReveal>
-        <SpecialPromo />
       </ScrollReveal>
       <ScrollReveal>
         <FeaturedDestinations />
