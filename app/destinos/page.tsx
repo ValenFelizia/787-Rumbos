@@ -17,6 +17,11 @@ export default function DestinosIndex() {
     return d.region === filter;
   });
 
+  // Reordenar para que el GP de São Paulo aparezca al inicio si está en la lista
+  const f1Item = filteredDestinations.find(d => d.slug === "f1-grand-premio-sao-paulo");
+  const otherItems = filteredDestinations.filter(d => d.slug !== "f1-grand-premio-sao-paulo");
+  const sortedDestinations = f1Item ? [f1Item, ...otherItems] : otherItems;
+
   return (
     <main className="min-h-screen bg-[#f9f9f9] text-[#0b4058]">
       <Navbar />
@@ -56,7 +61,7 @@ export default function DestinosIndex() {
 
         {/* Grid of Destinations */}
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {filteredDestinations.map((dest: DestinationPage) => {
+          {sortedDestinations.map((dest: DestinationPage) => {
             const activeDepartures = dest.departures.filter(dep => {
               const depDate = new Date(dep.date + "T00:00:00");
               const today = new Date();
@@ -67,7 +72,11 @@ export default function DestinosIndex() {
             return (
               <article
                 key={dest.slug}
-                className="group flex flex-col overflow-hidden rounded-2xl border border-[#0b4058]/10 bg-white shadow-sm shadow-[#0b4058]/5 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#0b4058]/20 hover:shadow-xl hover:shadow-[#0b4058]/15"
+                className={`group flex flex-col overflow-hidden rounded-2xl border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl ${
+                  dest.slug === "f1-grand-premio-sao-paulo"
+                    ? "border-red-600/30 shadow-red-600/5 hover:border-red-600/40 hover:shadow-red-600/10"
+                    : "border-[#0b4058]/10 shadow-[#0b4058]/5 hover:border-[#0b4058]/20 hover:shadow-[#0b4058]/15"
+                }`}
               >
                 {/* Destination Image */}
                 <div className="relative h-60 w-full overflow-hidden">
@@ -93,10 +102,15 @@ export default function DestinosIndex() {
                 {/* Card Content */}
                 <div className="p-6 flex-1 flex flex-col justify-between space-y-6">
                   <div className="space-y-3">
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-wrap items-center gap-2">
                       <span className="text-[10px] uppercase font-extrabold tracking-widest text-[#006183] bg-[#006183]/5 px-2 py-0.5 rounded">
                         {dest.region === "nacional" ? "Nacional" : "Internacional"}
                       </span>
+                      {dest.slug === "f1-grand-premio-sao-paulo" && (
+                        <span className="text-[10px] uppercase font-extrabold tracking-widest text-white bg-red-600 px-2 py-0.5 rounded">
+                          🏎️ Salida Especial
+                        </span>
+                      )}
                     </div>
                     <h2 className="font-[family-name:var(--font-brand-heading)] text-2xl font-bold tracking-tight text-[#0b4058] group-hover:text-[#006183] transition-colors duration-200">
                       {dest.name}

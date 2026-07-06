@@ -544,7 +544,7 @@ export const destinationsData: DestinationPage[] = [
     region: "internacional",
     metaTitle: "Vuelo Charter GP São Paulo F1 desde Córdoba y Rosario | 787 Rumbos",
     metaDescription: "Viajá al Gran Premio de Fórmula 1 en Interlagos. Paquete con vuelo charter desde Córdoba y Rosario, 4 noches de hotel, traslados y entradas al autódromo.",
-    heroImage: "/destinos/gp-sao-paulo-hero.png",
+    heroImage: "/destinos/gp-sao-paulo-hero.jpg",
     flyerImage: "/destinos/gp-sao-paulo.png",
     description: "Viví la máxima adrenalina del automovilismo mundial con nuestro paquete exclusivo para el Grand Premio de São Paulo de Fórmula 1 en el histórico Autódromo de Interlagos. Te ofrecemos una solución llave en mano con vuelo charter directo, alojamiento seleccionado, traslados especiales al autódromo y tus entradas ya aseguradas para disfrutar del rugido de los motores sin preocuparte por nada.",
     highlights: [
