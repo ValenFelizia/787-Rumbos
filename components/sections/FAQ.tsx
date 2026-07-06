@@ -67,9 +67,19 @@ export function FAQ() {
             Preguntas frecuentes
           </h2>
           <p className="mt-4 text-[1.02rem] leading-relaxed text-[#0b4058]/80 text-pretty">
-            Resolvemos las dudas más comunes antes de que armes tu viaje. Si
-            necesitás algo más específico, escribinos y te respondemos en persona.
+            Si necesitás resolver una duda más específica, {' '}
+            <a
+              href="https://wa.me/5493513448724"
+              className="font-semibold text-[#006183] underline decoration-[#006183]/30 underline-offset-2 transition-colors hover:text-[#0b4058] hover:decoration-[#0b4058]/40"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Consultar por WhatsApp con 787 Rumbos"
+            >
+              consultanos
+            </a>
+            .
           </p>
+     
         </div>
 
         <div className="space-y-3">

@@ -104,10 +104,11 @@ export default function RootLayout({
         "Tuesday",
         "Wednesday",
         "Thursday",
-        "Friday"
+        "Friday",
+        "Saturday",
       ],
-      opens: "08:00",
-      closes: "20:00"
+      opens: "08:30",
+      closes: "18:00"
     },
     hasMap: GOOGLE_MAPS_LINK,
     sameAs: ["https://www.instagram.com/787rumbos/"],

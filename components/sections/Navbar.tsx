@@ -80,7 +80,7 @@ export function Navbar() {
               className="hidden sm:inline-flex font-[family-name:var(--font-brand-heading)] items-center justify-center rounded-full bg-gradient-to-r from-[#f7a92a] to-[#e6b451] text-[#0b4058] shadow-sm shadow-[#f7a92a]/30 transition-all duration-300 hover:-translate-y-0.5 hover:brightness-105 hover:shadow-md hover:shadow-[#f7a92a]/40 active:scale-[0.96] transition-transform duration-200 cursor-pointer px-5 py-2 md:py-2.5 text-xs md:text-sm md:gap-2"
             >
               <WhatsAppIcon size={14} className="h-6 w-6 shrink-0" />
-              <span className="font-semibold">Consultanos por WhatsApp</span>
+              <span className="font-semibold">Consultar por WhatsApp</span>
             </button>
 
             {/* Botón de Menú Hamburguesa en Mobile */}

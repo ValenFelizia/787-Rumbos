@@ -52,7 +52,7 @@ export const faqItems: FaqItem[] = [
       {
         type: "text",
         value:
-          "Sí. Contamos con oficina en el Hall de arribos del Aeropuerto Internacional de Córdoba, dentro del local oficial de Vía Bariloche (Av. La Voz del Interior 8500). Podés visitarnos de lunes a viernes de 8 a 20 hs. ",
+          "Sí. Contamos con oficina en el Hall de arribos del Aeropuerto Internacional de Córdoba, dentro del local oficial de Vía Bariloche (Av. La Voz del Interior 8500). Podés visitarnos de lunes a viernes de 8:30 a 18:00 hs y sábados de 8:30 a 13:00 hs. ",
       },
       { type: "link", label: "Cómo llegar", href: GOOGLE_MAPS_LINK, external: true },
       { type: "text", value: "." },
