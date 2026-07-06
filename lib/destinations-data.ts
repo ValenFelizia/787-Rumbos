@@ -106,6 +106,40 @@ export const destinationsData: DestinationPage[] = [
     ]
   },
   {
+    slug: "mendoza",
+    name: "Mendoza",
+    country: "Argentina",
+    region: "nacional",
+    metaTitle: "Paquetes a Mendoza desde Córdoba en Aéreo | 787 Rumbos",
+    metaDescription: "Viajá a Mendoza con aéreo desde Córdoba. Incluye hotel con desayuno, traslados, excursión al Camino del Vino y bodegas. Consultá tarifas y armá tu viaje.",
+    heroImage: "/destinos/mendoza.jpg",
+    description: "La capital del vino argentino te espera entre viñedos infinitos y la imponente Cordillera de los Andes. Mendoza combina bodegas de clase mundial, gastronomía de autor y paisajes de alta montaña en una escapada ideal para disfrutar en pareja o con amigos, recorriendo el legendario Camino del Vino.",
+    highlights: [
+      "Camino del Vino y bodegas de Luján de Cuyo",
+      "Vistas a la Cordillera y al Cerro Aconcagua",
+      "Parque General San Martín y su Rosedal",
+      "Gastronomía regional y maridajes en bodega"
+    ],
+    typicalInclusions: [
+      "Aéreo Córdoba - Mendoza - Córdoba (COR-MZA / MZA-CBA)",
+      "Alojamiento en Hotel Raíces Aconcagua, habitación doble ejecutiva con desayuno",
+      "Traslados aeropuerto Mendoza / hotel / aeropuerto",
+      "Excursión Bus Vitivinícola: Camino del Vino \"El Sol\" (día completo)",
+      "Asistencia al viajero"
+    ],
+    optionalExcursions: [
+      "Alta montaña: Puente del Inca y monumento al Aconcagua",
+      "Maipú y bodegas históricas con almuerzo gourmet",
+      "Potrerillos, dique y actividades al aire libre",
+      "Cañón del Atuel y San Rafael (excursión de varios días)"
+    ],
+    travelTip: "En las bodegas, el sol mendocino es intenso: usá sombrero, protector solar y ropa cómoda. Si vas en temporada alta, reservá con anticipación las degustaciones y cenas en viñedos.",
+    priceFrom: 460029,
+    currency: "ARS",
+    priceNote: "por persona en base doble",
+    departures: [] // Sin salidas grupales confirmadas (paquete a medida)
+  },
+  {
     slug: "termas-rio-hondo",
     name: "Termas de Río Hondo",
     country: "Argentina",
