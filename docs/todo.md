@@ -181,7 +181,7 @@
 
 ---
 
-## Fase 9A — Confianza, Conversión y UX (Ola 1) ✅
+## Fase 9A — Confianza, Conversión y UX ✅
 
 > **Origen**: Auditoría de marketing, social proof y UX realizada el 2026-07-04.
 > **Objetivo**: Resolver las brechas críticas de confianza legal, social proof y UX
@@ -251,7 +251,7 @@
 
 ---
 
-## Fase 9B — Arquitectura Multipágina de Destinos (Ola 3) ✅
+## Fase 9B — Arquitectura Multipágina de Destinos ✅
 
 > **Nota**: Renombrada de "Fase 9" a "Fase 9B" para distinguir de la Ola 1 (9A).
 > Los destinos se extraerán de las publicaciones de Instagram de la agencia.
@@ -273,23 +273,23 @@
   - [x] Comprobación inteligente de expiración y estado de cupos en salidas grupales.
   - [x] Redirección limpia a cotización a medida cuando no hay salidas activas.
 
-### Ola 2 — Social Proof y Contenido (entre Ola 1 y Ola 3)
-- [ ] **Ola2.1** Sección Instagram estática curada
+### Fase 9C — Social Proof y Contenido
+- [ ] **9C.1** Sección Instagram estática curada
   - [ ] Crear `components/sections/InstagramFeed.tsx`
   - [ ] Descargar 4-6 mejores imágenes de publicaciones recientes de @787rumbos
   - [ ] Grid premium con link directo al perfil de Instagram
   - [ ] Actualización manual mensual
-- [ ] **Ola2.2** Página 404 personalizada (ver 9A.7 si no se completó en Ola 1)
+- [ ] **9C.2** Página 404 personalizada (ver 9A.7 si no se completó en Ola 1)
 
 ---
 
-## Fase 9C — Promociones Especiales (Vuelo Charter F1 GP São Paulo) ✅
+## Fase 9D — Promociones Especiales (Vuelo Charter F1 GP São Paulo) ✅
 
-- [x] **9C.1** Agregar F1 Grand Premio de São Paulo a `destinations-data.ts`.
-- [x] **9C.2** Copiar imagen de hero generada y folleto promocional a `/public/destinos/`.
-- [x] **9C.3** Modificar la vista de detalle `[slug]/page.tsx` para mostrar folletos promocionales si están disponibles (`flyerImage`).
-- [x] **9C.4** Diseñar componente premium de banner destacado en la home (`SpecialPromo.tsx`) con estética oscura, acentos de color de F1, datos completos y CTAs específicos.
-- [x] **9C.5** Integrar el banner en la Home en `app/page.tsx` con IntersectionObserver scroll reveal.
+- [x] **9D.1** Agregar F1 Grand Premio de São Paulo a `destinations-data.ts`.
+- [x] **9D.2** Copiar imagen de hero generada y folleto promocional a `/public/destinos/`.
+- [x] **9D.3** Modificar la vista de detalle `[slug]/page.tsx` para mostrar folletos promocionales si están disponibles (`flyerImage`).
+- [x] **9D.4** Diseñar componente premium de banner destacado en la home (`SpecialPromo.tsx`) con estética oscura, acentos de color de F1, datos completos y CTAs específicos.
+- [x] **9D.5** Integrar el banner en la Home en `app/page.tsx` con IntersectionObserver scroll reveal.
 
 ---
 

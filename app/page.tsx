@@ -12,6 +12,7 @@ import { TrustBar } from "@/components/sections/TrustBar";
 import { PartnersMarquee } from "@/components/sections/PartnersMarquee";
 import { ValueProposition } from "@/components/sections/ValueProposition";
 import { AboutUs } from "@/components/sections/AboutUs";
+import { InstagramFeed } from "@/components/sections/InstagramFeed";
 import { FeaturedDestinations } from "@/components/sections/FeaturedDestinations";
 import { SpecialPromo } from "@/components/sections/SpecialPromo"; // ponytail: added for São Paulo F1 promo
 import { Services } from "@/components/sections/Services";
@@ -39,6 +40,9 @@ export default function Home() {
       </ScrollReveal>
       <ScrollReveal>
         <AboutUs />
+      </ScrollReveal>
+      <ScrollReveal>
+        <InstagramFeed />
       </ScrollReveal>
       <ScrollReveal>
         <Services />
