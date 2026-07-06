@@ -16,33 +16,33 @@ const instagramPosts: InstagramPost[] = [
   },
   {
     id: 2,
-    imageSrc: "/instagram/post2.jpg",
+    imageSrc: "/instagram/post2.png",
     caption: "¿Planeando tu próximo viaje? Recordá que podés financiar tus pasajes en cuotas. Consultá las opciones de financiación vigentes con nuestros asesores. ✈️💳",
     alt: "Vista aérea desde la ventana de un avión con nubes"
   },
   {
     id: 3,
-    imageSrc: "/instagram/post3.jpg",
-    caption: "¡Un descanso bien merecido! Conocé las opciones de paquetes All Inclusive en Cancún y Playa del Carmen con tarifas exclusivas. 🌴🍹",
+    imageSrc: "/instagram/post3.png",
+    caption: "¡Un descanso bien merecido!🌴🍹",
     alt: "Playa paradisíaca en el Caribe con reposeras y palmeras"
   },
   {
     id: 4,
-    imageSrc: "/instagram/post4.jpg",
-    caption: "Tip viajero: ¿Qué no puede faltar en tu equipaje de mano? Documentación, cargador portátil, una muda de ropa y... ¡muchas ganas de disfrutar! 🧳✈",
-    alt: "Equipaje de mano y accesorios listos para viajar"
+    imageSrc: "/instagram/post4.png",
+    caption: "🌴 Brasil te espera en Junio 2026 ✈️. Playas increíbles, calor todo el año y opciones para todos los gustos.",
+    alt: "Vista panorámica de playas de Brasil con aguas cristalinas y arena blanca"
   },
   {
     id: 5,
-    imageSrc: "/instagram/post5.jpg",
-    caption: "Compartir el camino hace que cada destino sea único. Sumate a nuestras próximas salidas grupales confirmadas desde Córdoba. ⛰️🥾",
+    imageSrc: "/instagram/post5.png",
+    caption: "Viajar se disfruta el doble cuando se comparte. Una playa, un brindis, una escapada juntos… 💛🌊🥂",
     alt: "Grupo de personas haciendo trekking en un sendero montañoso"
   },
   {
     id: 6,
-    imageSrc: "/instagram/post6.jpg",
-    caption: "Sabores de nuestra tierra: ¿Sabías que en Salta las empanadas se disfrutan tradicionalmente con un vino Torrontés local? ¿Cuál es tu comida de viaje favorita? 🥟🍷",
-    alt: "Empanadas tradicionales y vino en una mesa rústica"
+    imageSrc: "/instagram/post6.png",
+    caption: "El Caribe te está esperando 🌴☀️. Playas de agua turquesa, all inclusive, vuelos desde Córdoba y todo resuelto para que vos solo disfrutes.",
+    alt: "Playa paradisíaca en el Caribe con reposeras y palmeras"
   }
 ];
 
@@ -52,14 +52,11 @@ export function InstagramFeed() {
       <div className="mx-auto w-full max-w-6xl px-6">
         {/* Encabezado */}
         <div className="mb-12 text-center space-y-3">
-          <span className="text-[11px] uppercase font-black tracking-widest text-[#006183] bg-[#006183]/5 px-3 py-1 rounded-full border border-[#006183]/10">
-            Social Proof
-          </span>
           <h2 className="font-[family-name:var(--font-brand-heading)] text-3xl font-extrabold tracking-tight md:text-4xl text-[#0b4058]">
             Comunidad 787 Rumbos
           </h2>
           <p className="max-w-xl mx-auto text-[#0b4058]/80 text-sm md:text-base leading-relaxed text-pretty">
-            Compartimos consejos, novedades de aerolíneas, fotos reales de nuestros pasajeros y las próximas salidas en nuestra cuenta.
+            Compartimos consejos, novedades de aerolíneas, fotos reales de viajes y las próximas salidas en nuestra cuenta.
           </p>
         </div>
 
@@ -99,11 +96,11 @@ export function InstagramFeed() {
                   <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
                   <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
                 </svg>
-                
+
                 <p className="text-[10px] leading-relaxed line-clamp-3 text-white/95">
                   {post.caption}
                 </p>
-                
+
                 <span className="text-[9px] font-black uppercase tracking-wider text-[#dae553]">
                   Ver en Instagram →
                 </span>
