@@ -25,6 +25,7 @@ export interface DestinationPage {
   metaTitle: string;
   metaDescription: string;
   heroImage: string;
+  flyerImage?: string; // ponytail: added for rendering flyer promo image if available
   description: string;
   highlights: string[];
   typicalInclusions: string[];
@@ -533,6 +534,46 @@ export const destinationsData: DestinationPage[] = [
         transport: "bus-cama",
         nights: 6,
         note: "Gran Vuelta al Norte"
+      }
+    ]
+  },
+  {
+    slug: "f1-grand-premio-sao-paulo",
+    name: "F1 Grand Premio de São Paulo",
+    country: "Brasil",
+    region: "internacional",
+    metaTitle: "Vuelo Charter GP São Paulo F1 desde Córdoba y Rosario | 787 Rumbos",
+    metaDescription: "Viajá al Gran Premio de Fórmula 1 en Interlagos. Paquete con vuelo charter desde Córdoba y Rosario, 4 noches de hotel, traslados y entradas al autódromo.",
+    heroImage: "/destinos/gp-sao-paulo-hero.png",
+    flyerImage: "/destinos/gp-sao-paulo.png",
+    description: "Viví la máxima adrenalina del automovilismo mundial con nuestro paquete exclusivo para el Grand Premio de São Paulo de Fórmula 1 en el histórico Autódromo de Interlagos. Te ofrecemos una solución llave en mano con vuelo charter directo, alojamiento seleccionado, traslados especiales al autódromo y tus entradas ya aseguradas para disfrutar del rugido de los motores sin preocuparte por nada.",
+    highlights: [
+      "Vuelo Charter directo desde Córdoba (COR) y Rosario (ROS)",
+      "Entradas aseguradas para el sector G-A-HEINEKEN",
+      "Kit exclusivo de Fórmula 1 para el evento",
+      "Traslados especiales de ida y vuelta al Autódromo de Interlagos"
+    ],
+    typicalInclusions: [
+      "Vuelo Charter ida y vuelta COR-ROS / GRU",
+      "4 noches de alojamiento en hotel seleccionado con desayuno",
+      "Traslados de llegada y salida (In-Out)",
+      "Traslados diarios al Autódromo (Sábado y Domingo)",
+      "Entradas para el Sector G-A-HEINEKEN",
+      "Kit de Fórmula 1 de obsequio",
+      "Asistencia al viajero integral"
+    ],
+    travelTip: "El sector G-A-HEINEKEN ofrece una excelente visibilidad en una de las rectas más rápidas de Interlagos. Se recomienda llevar ropa cómoda, gorra, protector solar y abrigo ligero, ya que el clima en São Paulo puede ser muy cambiante durante el día.",
+    priceFrom: 2770,
+    currency: "USD",
+    priceNote: "por persona en base doble. + USD 260 de gastos e impuestos",
+    departures: [
+      {
+        date: "2026-11-05",
+        displayDate: "5 de Noviembre",
+        status: "confirmed",
+        transport: "aereo",
+        nights: 4,
+        note: "Vuelo Charter Especial F1 COR/ROS"
       }
     ]
   }
