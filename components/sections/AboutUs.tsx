@@ -7,6 +7,7 @@
  */
 import Image from "next/image";
 import { MapPin } from "lucide-react";
+import { GOOGLE_MAPS_LINK } from "@/lib/constants";
 
 export function AboutUs() {
   return (
@@ -52,7 +53,7 @@ export function AboutUs() {
           </p>
           <div className="mt-8">
             <a
-              href="https://maps.google.com/?q=Aeropuerto+Internacional+Ingeniero+Aeron%C3%A1utico+Ambrosio+Taravella"
+              href={GOOGLE_MAPS_LINK}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-xl border-2 border-[#0b4058] hover:bg-[#0b4058] hover:text-white text-[#0b4058] px-6 py-3 text-sm font-bold shadow-sm transition-all duration-200 active:scale-[0.97] cursor-pointer"

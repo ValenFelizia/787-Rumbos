@@ -13,6 +13,7 @@ import { Analytics } from '@vercel/analytics/next'
 import { elaineSans, zalandoSans } from '@/lib/fonts'
 import { ModalProvider } from '@/lib/context/ModalContext'
 import { QuoteModal } from '@/components/sections/QuoteModal'
+import { GOOGLE_MAPS_LINK } from '@/lib/constants'
 import './globals.css'
 
 /** Metadatos del sitio leídos por Next.js para SEO, pestaña del navegador y previews sociales.
@@ -108,7 +109,7 @@ export default function RootLayout({
       opens: "08:00",
       closes: "20:00"
     },
-    hasMap: "https://maps.google.com/?q=Aeropuerto+Internacional+Ingeniero+Aeron%C3%A1utico+Ambrosio+Taravella",
+    hasMap: GOOGLE_MAPS_LINK,
     sameAs: ["https://www.instagram.com/787rumbos/"],
     priceRange: "$$",
   };

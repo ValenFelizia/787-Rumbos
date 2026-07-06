@@ -17,6 +17,7 @@ import { FeaturedDestinations } from "@/components/sections/FeaturedDestinations
 import { SpecialPromo } from "@/components/sections/SpecialPromo"; // ponytail: added for São Paulo F1 promo
 import { Services } from "@/components/sections/Services";
 import { Testimonials } from "@/components/sections/Testimonials";
+import { FAQ } from "@/components/sections/FAQ";
 import { CTASection } from "@/components/sections/CTASection";
 import { Footer } from "@/components/sections/Footer";
 import { ScrollReveal } from "@/components/ScrollReveal";
@@ -45,6 +46,9 @@ export default function Home() {
       <ScrollReveal>
         <Services />
       </ScrollReveal>
+      <ScrollReveal>
+        <FAQ />
+      </ScrollReveal>
       {/* ponytail: uncomment this block when real customer reviews are obtained */}
       {/* <ScrollReveal>
         <Testimonials />
@@ -55,4 +59,4 @@ export default function Home() {
       <Footer />
     </main>
   );
-}
+}

@@ -15,6 +15,7 @@
  * entre el hero y la sección siguiente (blanca).
  */
 import { BadgeCheck, Building2, CreditCard, MapPin } from "lucide-react";
+import { GOOGLE_MAPS_LINK } from "@/lib/constants";
 
 const trustItems = [
   {
@@ -37,7 +38,7 @@ const trustItems = [
     icon: MapPin,
     label: "En el Aeropuerto",
     sublabel: "Córdoba, Argentina",
-    link: "https://maps.google.com/?q=Aeropuerto+Internacional+Ingeniero+Aeron%C3%A1utico+Ambrosio+Taravella",
+    link: GOOGLE_MAPS_LINK,
   },
 ];
 
