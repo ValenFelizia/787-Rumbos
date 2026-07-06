@@ -7,6 +7,7 @@ import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { destinationsData, DestinationPage } from "@/lib/destinations-data";
 import { MapPin, Calendar, ArrowRight, Plane, Bus } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 
 export default function DestinosIndex() {
   const [filter, setFilter] = useState<"todos" | "nacional" | "internacional">("todos");
@@ -134,6 +135,31 @@ export default function DestinosIndex() {
               </article>
             );
           })}
+        </div>
+
+        {/* Banner Editorial Final */}
+        <div className="bg-gradient-to-br from-[#0b4058] to-[#00516e] text-white p-8 md:p-12 rounded-3xl mt-16 shadow-xl shadow-[#0b4058]/10 text-center relative overflow-hidden flex flex-col items-center justify-center gap-6 border border-white/5">
+          <div className="space-y-2 relative z-10 max-w-2xl">
+            <h3 className="font-[family-name:var(--font-brand-heading)] text-2xl md:text-3xl font-extrabold tracking-tight text-white">
+              ¿No encontrás tu destino ideal?
+            </h3>
+            <p className="text-white/80 text-xs md:text-sm leading-relaxed text-pretty">
+              ¡No te preocupes! Recordá que 787 Rumbos es una agencia totalmente flexible. Tenemos convenios directos con múltiples operadores y aerolíneas para diseñar a medida el viaje de tus sueños a cualquier lugar del mundo.
+            </p>
+          </div>
+          <a
+            href="https://api.whatsapp.com/send?phone=5493516157398&text=Hola%2C%20estuve%20viendo%20la%20web%20pero%20no%20encontr%C3%A9%20el%20destino%20que%20buscaba.%20Me%20gustar%C3%ADa%20consultar%20por..."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-[family-name:var(--font-brand-heading)] relative z-10 inline-flex items-center gap-2 rounded-xl bg-[#dae553] hover:bg-[#c3cf3e] text-[#0b4058] px-8 py-3.5 text-xs font-black shadow-md transition-all duration-200 active:scale-[0.96] cursor-pointer"
+          >
+            <WhatsAppIcon size={14} className="h-3.5 w-3.5 shrink-0" />
+            <span>Consultar por mi viaje a medida</span>
+          </a>
+          
+          {/* Sutiles luces decorativas */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-white/5 rounded-full blur-3xl pointer-events-none" />
         </div>
       </section>
 

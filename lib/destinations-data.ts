@@ -192,7 +192,7 @@ export const destinationsData: DestinationPage[] = [
       "Asistencia al viajero nacional"
     ],
     travelTip: "No dejes de subir al Cerro Campanario: National Geographic la calificó como una de las 8 vistas panorámicas más bellas del mundo.",
-    priceFrom: 695000,
+    priceFrom: 597000,
     currency: "ARS",
     priceNote: "por persona en base doble",
     departures: [] // Sin salidas activas en este momento (Paquete a medida)
@@ -264,7 +264,7 @@ export const destinationsData: DestinationPage[] = [
       "Asistencia al viajero"
     ],
     travelTip: "Los domingos no te pierdas la Feria de San Telmo, repleta de antigüedades, artistas callejeros y bailarines de tango al aire libre.",
-    priceFrom: 220000,
+    priceFrom: 360000,
     currency: "ARS",
     priceNote: "por persona en base doble",
     departures: []
@@ -466,7 +466,7 @@ export const destinationsData: DestinationPage[] = [
       "Asistencia médica internacional de alta cobertura"
     ],
     travelTip: "En Cusco y el Valle Sagrado (a más de 3400 msnm), descansa las primeras horas y toma té de coca para aclimatarte y evitar el mal de altura.",
-    priceFrom: 1980,
+    priceFrom: 2434,
     currency: "USD",
     priceNote: "por persona en base doble",
     departures: []
@@ -494,7 +494,7 @@ export const destinationsData: DestinationPage[] = [
       "Coordinador permanente y guías de habla hispana"
     ],
     travelTip: "Para visitar templos religiosos, es obligatorio vestir ropa que cubra hombros y rodillas. Llevá calzado fácil de sacar, ya que en muchos recintos sagrados se entra descalzo.",
-    priceFrom: 3450,
+    priceFrom: 4650,
     currency: "USD",
     priceNote: "por persona en base doble",
     departures: []

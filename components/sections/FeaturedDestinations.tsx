@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { destinationsData, DestinationPage } from "@/lib/destinations-data";
 import { Plane, Bus, ArrowRight, Calendar, MapPin } from "lucide-react";
+import { WHATSAPP_LINK } from "@/lib/constants";
 
 export function FeaturedDestinations() {
   // Seleccionamos exactamente los 4 destinos destacados de forma ordenada
@@ -129,12 +130,20 @@ export function FeaturedDestinations() {
             ¿Buscás otro destino?
           </h3>
           <p className="text-white/80 text-xs md:text-sm leading-relaxed text-pretty">
-            Tenemos salidas confirmadas adicionales y armamos itinerarios a medida nacionales e internacionales con la financiación que necesitás. Conversá con tu asesor directo.
+            Tenemos salidas confirmadas adicionales y armamos itinerarios a medida nacionales e internacionales con la financiación que necesitás. También podés consultarnos por cualquier otro destino.
+            <a
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#dae553] hover:text-[#c3cf3e] font-bold underline transition-colors duration-200"
+            >
+              &nbsp;¡Conversá con nosotros!
+            </a>
           </p>
         </div>
         <Link
           href="/destinos"
-          className="font-[family-name:var(--font-brand-heading)] relative z-10 inline-flex items-center gap-2 rounded-xl bg-[#dae553] hover:bg-[#c3cf3e] text-[#0b4058] px-8 py-3.5 text-xs font-black shadow-md transition-all duration-200 active:scale-[0.96] cursor-pointer"
+          className="font-[family-name:var(--font-brand-heading)] relative z-10 inline-flex items-center gap-2 rounded-xl bg-[#dae553] hover:bg-[#c3cf3e] text-[#0b4058] px-8 py-3.5 text-sm font-black shadow-md transition-all duration-200 active:scale-[0.96] cursor-pointer"
         >
           <span>Explorar todos los destinos</span>
           <ArrowRight className="h-4 w-4 shrink-0" />
