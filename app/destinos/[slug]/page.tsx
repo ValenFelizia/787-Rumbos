@@ -270,6 +270,26 @@ export default async function DestinoDetailPage({ params }: Props) {
               </div>
             )}
 
+            {/* Folleto Promocional Oficial */}
+            {dest.flyerImage && (
+              <div className="space-y-4">
+                <h3 className="font-[family-name:var(--font-brand-heading)] text-xl font-bold tracking-tight">
+                  Folleto Promocional Oficial
+                </h3>
+                <div className="relative flex justify-center overflow-hidden rounded-2xl border border-[#0b4058]/10 bg-white p-4 shadow-sm">
+                  <div className="relative w-full max-w-lg aspect-[4/5]">
+                    <Image
+                      src={dest.flyerImage}
+                      alt={`Folleto Promocional de ${dest.name}`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 480px"
+                      className="object-contain rounded-xl"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Nota Aclaratoria */}
             <div className="rounded-xl bg-gray-50 border border-gray-200/60 p-5 flex gap-3 text-xs text-gray-500 leading-relaxed">
               <AlertCircle className="h-5 w-5 text-gray-400 shrink-0 mt-0.5" />
