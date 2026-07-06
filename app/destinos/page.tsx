@@ -43,11 +43,10 @@ export default function DestinosIndex() {
               <button
                 key={type}
                 onClick={() => setFilter(type)}
-                className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-200 capitalize cursor-pointer active:scale-95 ${
-                  filter === type
-                    ? "bg-[#0b4058] text-white shadow-sm"
-                    : "text-[#0b4058]/70 hover:text-[#0b4058] hover:bg-[#0b4058]/5"
-                }`}
+                className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-200 capitalize cursor-pointer active:scale-95 ${filter === type
+                  ? "bg-[#0b4058] text-white shadow-sm"
+                  : "text-[#0b4058]/70 hover:text-[#0b4058] hover:bg-[#0b4058]/5"
+                  }`}
               >
                 {type === "todos" ? "Todos" : type === "nacional" ? "Nacionales" : "Internacionales"}
               </button>
@@ -144,19 +143,19 @@ export default function DestinosIndex() {
               ¿No encontrás tu destino ideal?
             </h3>
             <p className="text-white/80 text-xs md:text-sm leading-relaxed text-pretty">
-              ¡No te preocupes! Recordá que 787 Rumbos es una agencia totalmente flexible. Tenemos convenios directos con múltiples operadores y aerolíneas para diseñar a medida el viaje de tus sueños a cualquier lugar del mundo.
+              ¡No te preocupés! Recordá que 787 Rumbos es una agencia totalmente flexible. Tenemos convenios directos con múltiples operadores y aerolíneas para diseñar a medida el viaje de tus sueños a cualquier lugar del mundo.
             </p>
           </div>
           <a
             href="https://api.whatsapp.com/send?phone=5493516157398&text=Hola%2C%20estuve%20viendo%20la%20web%20pero%20no%20encontr%C3%A9%20el%20destino%20que%20buscaba.%20Me%20gustar%C3%ADa%20consultar%20por..."
             target="_blank"
             rel="noopener noreferrer"
-            className="font-[family-name:var(--font-brand-heading)] relative z-10 inline-flex items-center gap-2 rounded-xl bg-[#dae553] hover:bg-[#c3cf3e] text-[#0b4058] px-8 py-3.5 text-xs font-black shadow-md transition-all duration-200 active:scale-[0.96] cursor-pointer"
+            className="font-[family-name:var(--font-brand-heading)] relative z-10 inline-flex items-center gap-2 rounded-xl bg-[#dae553] hover:bg-[#c3cf3e] text-[#0b4058] px-8 py-3.5 text-sm font-black shadow-md transition-all duration-200 active:scale-[0.96] cursor-pointer"
           >
-            <WhatsAppIcon size={14} className="h-3.5 w-3.5 shrink-0" />
+            <WhatsAppIcon size={14} className="h-5 w-5 shrink-0" />
             <span>Consultar por mi viaje a medida</span>
           </a>
-          
+
           {/* Sutiles luces decorativas */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-white/5 rounded-full blur-3xl pointer-events-none" />
