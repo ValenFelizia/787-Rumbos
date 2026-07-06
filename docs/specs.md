@@ -150,7 +150,7 @@ La web ya no debe tratarse como una landing aislada. Con destinos multipágina, 
 ### Fases Nuevas
 
 * **Fase 11 — Fundación de Distribución Local:** GBP, reseñas, fotos, citaciones NAP y tracking básico.
-* **Fase 12 — Conversión y Confianza:** testimonios, Instagram curado, FAQ, página/bloque del local en aeropuerto y medición fina de CTAs.
+* **Fase 12 — Conversión y Confianza:** testimonios, Instagram curado, FAQ comercial general (home, Fase 12.3 ✅), página/bloque del local en aeropuerto y medición fina de CTAs.
 * **Fase 13 — SEO de Crecimiento:** categorías por demanda, blog corto, FAQ por destino, interlinking y backlinks locales.
 * **Fase 14 — Pauta Controlada:** Google Ads Search local/destino, Instagram Ads para promos y reporte mensual de costo por lead/venta.
 

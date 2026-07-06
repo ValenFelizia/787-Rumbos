@@ -1,6 +1,6 @@
 # 787 Rumbos — TODO
 
-> Derivado de [`specs.md`](./specs.md). Actualizar a medida que avanzamos.
+> Derivado de `[specs.md](./specs.md)`. Actualizar a medida que avanzamos.
 > Convención: `[ ]` pendiente · `[/]` en progreso · `[x]` completado
 >
 > **Branch activa**: `development` (salvo donde se indique)
@@ -33,6 +33,8 @@
 
 ---
 
+
+
 ## Fase 2 — Identidad de Marca ✅ (unificada con Fase 4)
 
 - [x] **2.1** Tipografías de marca
@@ -49,6 +51,8 @@
   - [x] Gradientes de marca como variables CSS
 
 ---
+
+
 
 ## Fase 3 — Arquitectura y Limpieza ✅
 
@@ -74,6 +78,8 @@
 
 ---
 
+
+
 ## Fase 4 — UI/UX y Diseño ✅
 
 - [x] **4.1** Hero mejorado
@@ -83,7 +89,7 @@
 - [x] **4.2** Destinos mejorados
   - [x] Subtítulo actualizado ("Algunos de los destinos que podemos armar para vos")
   - [x] CTA por tarjeta con mensaje pre-rellenado por destino
-- [ ] **4.3** Testimonios (**branch `feature/testimonials`**)
+- [ ] **4.3** Testimonios (**branch** `feature/testimonials`)
   - [ ] Pendiente hasta tener datos reales de clientes
   - [ ] NO mergear a production hasta tener datos reales
 - [x] **4.4** Trust Bar
@@ -101,6 +107,8 @@
   - [x] Aplicado en Navbar, Hero, FeaturedDestinations, CTASection
 
 ---
+
+
 
 ## Fase 5 — SEO y Meta ✅
 
@@ -123,6 +131,8 @@
 
 ---
 
+
+
 ## Fase 6 — Mobile-First Polish ✅
 
 - [x] **6.1** Responsive desde 360px — Hero
@@ -133,7 +143,9 @@
   - [x] Touch targets >= 44px en CTAs principales (`py-3.5`)
 - [ ] **6.2** Navbar mobile
   - [ ] Menú hamburguesa (descartado por ahora — la página es una landing de scroll,
-          el CTA de WhatsApp en la navbar es suficiente acceso en mobile)
+    ```
+      el CTA de WhatsApp en la navbar es suficiente acceso en mobile)
+    ```
   - [ ] Re-evaluar si se agrega navegación por anclas en el futuro
 - [x] **6.3** WhatsApp floating button
   - [x] `components/sections/WhatsAppFloat.tsx` — fixed bottom-right, solo mobile (`md:hidden`)
@@ -146,6 +158,8 @@
   - [x] Solo visible en navegación por teclado (no en clicks con mouse)
 
 ---
+
+
 
 ## Post-launch / Futuro (no parte de este sprint)
 
@@ -162,7 +176,10 @@
 
 ---
 
+
+
 ## Fase 7 — SEO Local y Credibilidad Institucional (Post-V1.0) ✅
+
 - [x] **7.1** Sincronizar Google Business Profile (GBP) con la Web
   - [x] Validar consistencia de datos NAP (Name, Address, Phone) en Footer y JSON-LD con la ficha oficial verificada.
   - [x] Añadir botón de geolocalización tipo "Nuestra oficina" enlazado a Google Maps.
@@ -173,13 +190,18 @@
 
 ---
 
+
+
 ## Fase 8 — Conversión Interactiva (Quiz/Cotizador) (Post-V1.0) ✅
+
 - [x] **8.1** Asistente de Cotización Rápida
   - [x] Crear un mini-formulario/quiz interactivo de 3 pasos antes de abrir WhatsApp (Destino ➔ Fechas ➔ Pasajeros).
   - [x] Generar mensaje pre-rellenado altamente específico para los dueños de la agencia (ej: "Hola, quiero cotizar un viaje a Río para 2 adultos en Septiembre...").
   - [x] Animaciones y transiciones premium entre pantallas para mantener la experiencia fluida y elegante.
 
 ---
+
+
 
 ## Fase 9A — Confianza, Conversión y UX ✅
 
@@ -188,7 +210,10 @@
 > identificadas antes de expandir a páginas de destinos (Fase 9B).
 > **Prioridad**: 🔴 Alta — impacta conversión y credibilidad inmediata.
 
+
+
 ### 9A.1 — Página Legal y Compliance (`/legal`) ✅
+
 - [x] Crear `app/legal/page.tsx` con:
   - [x] Términos y Condiciones básicos (servicios de intermediación turística)
   - [x] Política de Privacidad (tratamiento de datos, Ley 25.326)
@@ -197,14 +222,20 @@
 - [x] Agregar link a `/legal` en el footer (columna de Enlaces de Interés)
 - [x] Agregar metadatos SEO a la página legal (`title`, `description`)
 
+
+
 ### 9A.2 — Footer: Datos Legales y Defensa del Consumidor ✅
+
 - [x] Agregar al footer (barra inferior, junto a sellos AFIP y Cámara):
   - [x] CUIT y Razón Social visible en texto
   - [x] Legajo 20455 (duplicar desde TrustBar para reforzar credibilidad en zona legal)
   - [x] Botón/link de **Defensa del Consumidor** (`https://autogestion.produccion.gob.ar/consumidores`)
   - [x] Link a la página `/legal` (Términos y Condiciones)
 
+
+
 ### 9A.3 — Imagen Open Graph (1200×630px) ✅
+
 - [x] Diseñar imagen OG profesional para previews de links:
   - [x] Dimensiones: 1200×630px (formato rectangular para WhatsApp/redes)
   - [x] Contenido: logo 787 Rumbos + paisaje atractivo + texto "Agencia de Viajes en Córdoba"
@@ -212,7 +243,10 @@
 - [x] Configurar en `layout.tsx` → `metadata.openGraph.images`
 - [x] Verificar preview en WhatsApp y redes sociales
 
+
+
 ### 9A.4 — Navegación con Anclas + Menú Hamburguesa Mobile ✅
+
 - [x] **Desktop**: agregar links de navegación por anclas en la navbar
   - [x] Links: Inicio, Destinos, Servicios, Contacto
   - [x] Scroll suave (`scroll-behavior: smooth` o JS con `scrollIntoView`)
@@ -224,7 +258,10 @@
   - [x] Cerrar al hacer clic en un link o fuera del menú
   - [x] Implementar sin dependencias npm adicionales (CSS + JS nativo)
 
+
+
 ### 9A.5 — Sección de Testimonios (estructura lista) ✅
+
 - [x] Crear `components/sections/Testimonials.tsx`:
   - [x] Diseño premium: tarjetas con foto de cliente, nombre, destino visitado, texto del testimonio
   - [x] Layout: carrusel o grid de 3 testimonios en desktop, stack en mobile
@@ -235,14 +272,20 @@
   - [x] Mientras tanto: NO mostrar la sección en producción (comentada en page.tsx)
   - [x] Formato de datos en `lib/constants.ts`: `{ nombre, destino, texto, foto?, rating }`
 
+
+
 ### 9A.6 — Mejoras JSON-LD y SEO técnico ✅
+
 - [x] Agregar `openingHours` al JSON-LD en `layout.tsx`:
   - [x] `"openingHoursSpecification": { "dayOfWeek": ["Monday"..."Friday"], "opens": "08:00", "closes": "20:00" }`
 - [x] Agregar `hasMap` con link a Google Maps
 - [x] Revisar `sameAs`: actualmente solo Instagram — agregar más perfiles si existen
 - [x] Limpiar import muerto de `Wallet` en `Hero.tsx`
 
+
+
 ### 9A.7 — Página 404 personalizada ✅
+
 - [x] Crear `app/not-found.tsx`:
   - [x] Diseño coherente con la marca (azul petróleo, tipografía Elaine Sans)
   - [x] Mensaje amigable: "Esta página no existe, pero tu próximo viaje sí"
@@ -250,6 +293,8 @@
   - [x] Sin dependencias adicionales
 
 ---
+
+
 
 ## Fase 9B — Arquitectura Multipágina de Destinos ✅
 
@@ -273,15 +318,20 @@
   - [x] Comprobación inteligente de expiración y estado de cupos en salidas grupales.
   - [x] Redirección limpia a cotización a medida cuando no hay salidas activas.
 
+
+
 ### Fase 9C — Social Proof y Contenido
-- [ ] **9C.1** Sección Instagram estática curada
-  - [ ] Crear `components/sections/InstagramFeed.tsx`
-  - [ ] Descargar 4-6 mejores imágenes de publicaciones recientes de @787rumbos
-  - [ ] Grid premium con link directo al perfil de Instagram
-  - [ ] Actualización manual mensual
-- [ ] **9C.2** Página 404 personalizada (ver 9A.7 si no se completó en Ola 1)
+
+- [x] **9C.1** Sección Instagram estática curada
+  - [x] Crear `components/sections/InstagramFeed.tsx`
+  - [x] Descargar 4-6 mejores imágenes de publicaciones recientes de @787rumbos
+  - [x] Grid premium con link directo al perfil de Instagram
+  - [x] Actualización manual mensual
+- [x] **9C.2** Página 404 personalizada (ver 9A.7 si no se completó en Ola 1)
 
 ---
+
+
 
 ## Fase 9D — Promociones Especiales (Vuelo Charter F1 GP São Paulo) ✅
 
@@ -293,17 +343,21 @@
 
 ---
 
+
+
 ## Fase 10 — Escalabilidad y Gestión
+
 - [ ] **10.1** Integración de Headless CMS (Sanity/Strapi) para que los dueños gestionen destinos sin tocar código.
 - [ ] **10.2** Blog de Contenidos / Guías de viaje si crece el tráfico orgánico.
 
-
 ---
+
+
 
 ## Fase 11 — Fundación de Distribución Local y GBP
 
 > **Origen**: Auditoría competitiva, marketing, turismo y SEO del 2026-07-06.  
-> **Documento base**: [`marketing-growth-audit.md`](./marketing-growth-audit.md)  
+> **Documento base**: `[marketing-growth-audit.md](./marketing-growth-audit.md)`  
 > **Objetivo**: Resolver el principal cuello de botella actual: baja autoridad externa, pocas señales locales y poco tráfico de intención.
 
 - [ ] **11.1** Completar/verificar Google Business Profile
@@ -333,6 +387,8 @@
 
 ---
 
+
+
 ## Fase 12 — Confianza, Comunidad y Conversión
 
 - [ ] **12.1** Prueba social real
@@ -340,15 +396,17 @@
   - [ ] Activar la sección `Testimonials` cuando haya datos reales
   - [ ] Preparar proceso post-viaje para pedir reseña + testimonio
 - [ ] **12.2** Instagram curado en web
-  - [ ] Completar la Fase 9C.1 con 4-6 publicaciones reales
-  - [ ] Priorizar piezas con personas, destinos, folletos claros y vigencia
+  - [x] Completar la Fase 9C.1 con 4-6 publicaciones reales
+  - [x] Priorizar piezas con personas, destinos, folletos claros y vigencia
   - [ ] Definir actualización manual mensual
-- [ ] **12.3** FAQ comercial general
-  - [ ] Qué incluyen los paquetes
-  - [ ] Medios de pago y financiación
-  - [ ] Asistencia al viajero
-  - [ ] Salidas desde Córdoba
-  - [ ] Paquetes a medida vs salidas grupales
+- [x] **12.3** FAQ comercial general
+  - [x] Qué incluyen los paquetes
+  - [x] Medios de pago y financiación
+  - [x] Asistencia al viajero
+  - [x] Salidas desde Córdoba
+  - [x] Paquetes a medida vs salidas grupales
+  - [x] Local físico en aeropuerto, cómo reservar, ómnibus y post-venta
+  - [x] Componente `FAQ.tsx` con schema `FAQPage` y ancla `#preguntas-frecuentes`
 - [ ] **12.4** Refuerzo del diferencial aeropuerto
   - [ ] Crear contenido específico: "Agencia de viajes en el Aeropuerto de Córdoba"
   - [ ] Explicar cómo llegar al local dentro del hall de arribos
@@ -359,6 +417,8 @@
   - [ ] Crear planilla simple de leads: fecha, fuente, destino, estado, venta/no venta
 
 ---
+
+
 
 ## Fase 13 — SEO de Crecimiento
 
@@ -385,6 +445,8 @@
   - [ ] Retirar o marcar correctamente promociones vencidas
 
 ---
+
+
 
 ## Fase 14 — Pauta Controlada
 
@@ -413,23 +475,28 @@
 
 ---
 
+
+
 ## Notas y Cambios
 
-| Fecha | Nota |
-|-------|------|
-| 2026-06-14 | Plan inicial creado y aprobado por el usuario |
-| 2026-06-14 | Confirmado: destinos son ilustrativos, no paquetes reales |
-| 2026-06-14 | Confirmado: testimonios van en branch separada (`feature/testimonials`) |
-| 2026-06-14 | Confirmado: branching strategy → `main` ← `development` ← `feature/testimonials` |
-| 2026-06-14 | Fases 1→5 completadas y mergeadas a `main` |
-| 2026-06-14 | Fase 2 (tipografías) unificada con Fase 4 — implementadas juntas |
-| 2026-06-14 | Parallax descartado — puede perjudicar mobile y Core Web Vitals |
-| 2026-07-04 | Auditoría de marketing, social proof, UX y SEO completada |
+
+| Fecha      | Nota                                                                                                                                                                                                    |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-06-14 | Plan inicial creado y aprobado por el usuario                                                                                                                                                           |
+| 2026-06-14 | Confirmado: destinos son ilustrativos, no paquetes reales                                                                                                                                               |
+| 2026-06-14 | Confirmado: testimonios van en branch separada (`feature/testimonials`)                                                                                                                                 |
+| 2026-06-14 | Confirmado: branching strategy → `main` ← `development` ← `feature/testimonials`                                                                                                                        |
+| 2026-06-14 | Fases 1→5 completadas y mergeadas a `main`                                                                                                                                                              |
+| 2026-06-14 | Fase 2 (tipografías) unificada con Fase 4 — implementadas juntas                                                                                                                                        |
+| 2026-06-14 | Parallax descartado — puede perjudicar mobile y Core Web Vitals                                                                                                                                         |
+| 2026-07-04 | Auditoría de marketing, social proof, UX y SEO completada                                                                                                                                               |
 | 2026-07-04 | Decisiones clave: versión legal completa, testimonios en 1-2 semanas, Instagram estático curado, navegación con anclas + hamburguesa mobile, imagen OG 1200×630, destinos reales extraídos de Instagram |
-| 2026-07-04 | Fase 9 dividida en 9A (confianza/conversión/UX) y 9B (destinos multipágina) |
-| 2026-07-04 | Confirmado: legajo 20455 es real y verificado |
-| 2026-07-04 | Confirmado: CUIT y Razón Social disponibles para publicar |
-| 2026-07-04 | Confirmado: Google Business Profile en proceso de verificación |
-| 2026-07-04 | Confirmado: Google Search Console activo — 1 página indexada |
-| 2026-07-06 | Integrado el paquete especial de F1 GP São Paulo con banner destacado en Home y vista de folleto en detalle |
-| 2026-07-06 | Auditoría competitiva/marketing/SEO creada; se abren Fases 11 a 14 para GBP, prueba social, SEO de crecimiento y pauta controlada |
+| 2026-07-04 | Fase 9 dividida en 9A (confianza/conversión/UX) y 9B (destinos multipágina)                                                                                                                             |
+| 2026-07-04 | Confirmado: legajo 20455 es real y verificado                                                                                                                                                           |
+| 2026-07-04 | Confirmado: CUIT y Razón Social disponibles para publicar                                                                                                                                               |
+| 2026-07-04 | Confirmado: Google Business Profile en proceso de verificación                                                                                                                                          |
+| 2026-07-04 | Confirmado: Google Search Console activo — 1 página indexada                                                                                                                                            |
+| 2026-07-06 | Integrado el paquete especial de F1 GP São Paulo con banner destacado en Home y vista de folleto en detalle                                                                                             |
+| 2026-07-06 | Auditoría competitiva/marketing/SEO creada; se abren Fases 11 a 14 para GBP, prueba social, SEO de crecimiento y pauta controlada                                                                       |
+
+
