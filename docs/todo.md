@@ -300,6 +300,119 @@
 
 ---
 
+## Fase 11 — Fundación de Distribución Local y GBP
+
+> **Origen**: Auditoría competitiva, marketing, turismo y SEO del 2026-07-06.  
+> **Documento base**: [`marketing-growth-audit.md`](./marketing-growth-audit.md)  
+> **Objetivo**: Resolver el principal cuello de botella actual: baja autoridad externa, pocas señales locales y poco tráfico de intención.
+
+- [ ] **11.1** Completar/verificar Google Business Profile
+  - [ ] Categoría principal: Agencia de viajes
+  - [ ] Evaluar categorías secundarias sin diluir intención: operador turístico, agencia de excursiones, servicios vinculados
+  - [ ] Sincronizar NAP exacto con web, Instagram y directorios
+  - [ ] Agregar link de contacto/WhatsApp específico para GBP
+  - [ ] Cargar horarios reales
+- [ ] **11.2** Subir fotos reales al GBP
+  - [ ] Local dentro del Aeropuerto de Córdoba
+  - [ ] Mostrador/local de Vía Bariloche
+  - [ ] Equipo/personas atendiendo
+  - [ ] Flyers o salidas destacadas
+  - [ ] Referencias visuales para encontrar el local
+- [ ] **11.3** Rutina de publicaciones GBP
+  - [ ] 2 publicaciones por semana durante 8 semanas
+  - [ ] Alternar ofertas, salidas, consejos y "cómo encontrarnos"
+  - [ ] Linkear cada publicación a página de destino o WhatsApp medible
+- [ ] **11.4** Reseñas iniciales
+  - [ ] Conseguir 10 reseñas reales en 30 días
+  - [ ] Conseguir 20 reseñas reales en 60 días
+  - [ ] Responder el 100% de reseñas con tono humano y keywords naturales
+- [ ] **11.5** Citaciones locales y backlinks base
+  - [ ] Revisar presencia en directorios turísticos/locales
+  - [ ] Gestionar menciones o links desde aliados/partners si es posible
+  - [ ] Verificar consistencia de nombre, dirección y teléfono en todas las plataformas
+
+---
+
+## Fase 12 — Confianza, Comunidad y Conversión
+
+- [ ] **12.1** Prueba social real
+  - [ ] Recolectar 3 testimonios reales con nombre, destino y autorización
+  - [ ] Activar la sección `Testimonials` cuando haya datos reales
+  - [ ] Preparar proceso post-viaje para pedir reseña + testimonio
+- [ ] **12.2** Instagram curado en web
+  - [ ] Completar la Fase 9C.1 con 4-6 publicaciones reales
+  - [ ] Priorizar piezas con personas, destinos, folletos claros y vigencia
+  - [ ] Definir actualización manual mensual
+- [ ] **12.3** FAQ comercial general
+  - [ ] Qué incluyen los paquetes
+  - [ ] Medios de pago y financiación
+  - [ ] Asistencia al viajero
+  - [ ] Salidas desde Córdoba
+  - [ ] Paquetes a medida vs salidas grupales
+- [ ] **12.4** Refuerzo del diferencial aeropuerto
+  - [ ] Crear contenido específico: "Agencia de viajes en el Aeropuerto de Córdoba"
+  - [ ] Explicar cómo llegar al local dentro del hall de arribos
+  - [ ] Reforzar servicios mixtos: vuelos, paquetes y ómnibus
+- [ ] **12.5** Medición de WhatsApp
+  - [ ] Diferenciar mensajes pre-rellenados por fuente: home, destino, GBP, Instagram, Ads
+  - [ ] Definir UTMs para campañas y links externos
+  - [ ] Crear planilla simple de leads: fecha, fuente, destino, estado, venta/no venta
+
+---
+
+## Fase 13 — SEO de Crecimiento
+
+- [ ] **13.1** Clusters de demanda "desde Córdoba"
+  - [ ] Brasil desde Córdoba
+  - [ ] Caribe desde Córdoba
+  - [ ] Argentina en bus desde Córdoba
+  - [ ] Salidas grupales desde Córdoba
+  - [ ] Escapadas de fin de semana largo
+- [ ] **13.2** FAQ por destino
+  - [ ] Agregar preguntas reales de usuarios a cada destino prioritario
+  - [ ] Evaluar schema `FAQPage`
+  - [ ] Priorizar Río de Janeiro, Brasil/Caribe, Bariloche, Cataratas, Termas y F1
+- [ ] **13.3** Interlinking editorial
+  - [ ] Linkear destino ↔ categoría ↔ artículos relacionados
+  - [ ] Agregar breadcrumbs si se implementa navegación multipágina más profunda
+  - [ ] Evitar páginas huérfanas
+- [ ] **13.4** Blog mínimo
+  - [ ] Publicar 2 piezas mensuales durante 3 meses
+  - [ ] Priorizar artículos cortos con intención real, no contenido genérico
+  - [ ] Temas iniciales: requisitos Brasil, mejor época para Río, qué incluye un paquete, viajar en bus cama
+- [ ] **13.5** Mantenimiento de catálogo
+  - [ ] Actualizar precios, salidas y estados al menos una vez por mes
+  - [ ] Retirar o marcar correctamente promociones vencidas
+
+---
+
+## Fase 14 — Pauta Controlada
+
+> No iniciar inversión fuerte antes de tener tracking básico de WhatsApp y GBP activo.
+
+- [ ] **14.1** Google Ads Search local
+  - [ ] Keywords: agencia de viajes Córdoba, agencia de turismo Córdoba, agencia de viajes aeropuerto Córdoba
+  - [ ] Excluir búsquedas demasiado amplias como vuelos baratos/hoteles baratos
+  - [ ] Medir costo por click a WhatsApp y costo por lead
+- [ ] **14.2** Google Ads por destino
+  - [ ] Paquetes a Brasil desde Córdoba
+  - [ ] Río de Janeiro desde Córdoba
+  - [ ] Caribe desde Córdoba
+  - [ ] Salidas grupales desde Córdoba
+- [ ] **14.3** Instagram / Meta Ads
+  - [ ] Promocionar salidas con fecha concreta
+  - [ ] Usar piezas visuales reales, no genéricas
+  - [ ] Campañas a WhatsApp solo con mensaje específico por destino/promoción
+- [ ] **14.4** Reporte mensual
+  - [ ] Gasto
+  - [ ] Leads
+  - [ ] Costo por lead
+  - [ ] Presupuestos enviados
+  - [ ] Ventas cerradas
+  - [ ] Destinos más consultados
+
+---
+
 ## Notas y Cambios
 
 | Fecha | Nota |
@@ -319,3 +432,4 @@
 | 2026-07-04 | Confirmado: Google Business Profile en proceso de verificación |
 | 2026-07-04 | Confirmado: Google Search Console activo — 1 página indexada |
 | 2026-07-06 | Integrado el paquete especial de F1 GP São Paulo con banner destacado en Home y vista de folleto en detalle |
+| 2026-07-06 | Auditoría competitiva/marketing/SEO creada; se abren Fases 11 a 14 para GBP, prueba social, SEO de crecimiento y pauta controlada |

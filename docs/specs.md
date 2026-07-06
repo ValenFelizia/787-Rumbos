@@ -1,7 +1,7 @@
 # 787 Rumbos — Landing Page Overhaul Specs
 
-> **Última actualización**: 2026-07-04
-> **Estado**: Fases 1 a 8 completadas. Integración de Vía Bariloche completada.
+> **Última actualización**: 2026-07-06
+> **Estado**: Fases 1 a 9D completadas. Nueva etapa abierta: crecimiento orgánico/local, comunidad, medición y pauta controlada.
 > **Branch principal de trabajo**: `development` (Las integraciones a `master`/`main` las realiza el usuario manualmente tras chequear en local).
 
 ---
@@ -119,6 +119,40 @@ Pilares de marca validados durante la auditoría del 2026-07-04:
 | Vercel Analytics | ✅ Activo | `@vercel/analytics` en producción |
 | Google Business Profile | ⏳ En verificación | Crítico para SEO local y Google Reviews |
 | Instagram | ✅ Activo (@787rumbos) | Publicaciones semanales de paquetes — fuente de datos para destinos |
+
+---
+
+## Nueva Etapa Estratégica — Crecimiento, Marketing y SEO Local
+
+> Derivada de la auditoría competitiva, marketing, UI/UX, turismo y SEO del 2026-07-06.  
+> Documento completo: [`marketing-growth-audit.md`](./marketing-growth-audit.md)
+
+### Diagnóstico
+
+La web ya no debe tratarse como una landing aislada. Con destinos multipágina, promos especiales, datos legales, cotizador y base SEO técnica, el cuello de botella pasa a ser distribución y autoridad externa: Google Business Profile, reseñas, citaciones locales, contenido recurrente, backlinks y medición real de leads por WhatsApp.
+
+### Competencia Relevante
+
+787 Rumbos no debe competir frontalmente con OTAs gigantes como Despegar, Almundo o Booking. El benchmark útil son agencias locales/medianas con foco en atención humana, salidas desde Córdoba, WhatsApp, financiación y catálogo visible: Planisferio Viajes, Reiseburo, Tijuca Travel, Departure Viajes, Domundo y Buteler.
+
+### Posicionamiento Recomendado
+
+> Agencia de viajes en el Aeropuerto de Córdoba: paquetes, vuelos, ómnibus y salidas grupales con atención humana por WhatsApp.
+
+### Prioridades de Crecimiento
+
+1. **Google Business Profile y Maps:** completar verificación, fotos reales del local/equipo, posts semanales, servicios/productos y objetivo de 20 reseñas reales en 60 días.
+2. **Prueba social:** testimonios verificados, feed curado de Instagram, fotos reales de viajeros/local y respuestas públicas a reseñas.
+3. **SEO long-tail desde Córdoba:** clusters por Brasil, Caribe, Argentina, salidas grupales, viajes en bus y páginas/artículos informacionales.
+4. **Medición de WhatsApp:** UTMs, mensajes pre-rellenados por fuente, eventos de analytics y registro simple de leads.
+5. **Pauta controlada:** Google Ads solo para búsquedas locales o de destino con intención clara; Instagram/Meta para promos concretas y remarketing.
+
+### Fases Nuevas
+
+* **Fase 11 — Fundación de Distribución Local:** GBP, reseñas, fotos, citaciones NAP y tracking básico.
+* **Fase 12 — Conversión y Confianza:** testimonios, Instagram curado, FAQ, página/bloque del local en aeropuerto y medición fina de CTAs.
+* **Fase 13 — SEO de Crecimiento:** categorías por demanda, blog corto, FAQ por destino, interlinking y backlinks locales.
+* **Fase 14 — Pauta Controlada:** Google Ads Search local/destino, Instagram Ads para promos y reporte mensual de costo por lead/venta.
 
 ---
 
