@@ -283,6 +283,16 @@
 
 ---
 
+## Fase 9C — Promociones Especiales (Vuelo Charter F1 GP São Paulo) ✅
+
+- [x] **9C.1** Agregar F1 Grand Premio de São Paulo a `destinations-data.ts`.
+- [x] **9C.2** Copiar imagen de hero generada y folleto promocional a `/public/destinos/`.
+- [x] **9C.3** Modificar la vista de detalle `[slug]/page.tsx` para mostrar folletos promocionales si están disponibles (`flyerImage`).
+- [x] **9C.4** Diseñar componente premium de banner destacado en la home (`SpecialPromo.tsx`) con estética oscura, acentos de color de F1, datos completos y CTAs específicos.
+- [x] **9C.5** Integrar el banner en la Home en `app/page.tsx` con IntersectionObserver scroll reveal.
+
+---
+
 ## Fase 10 — Escalabilidad y Gestión
 - [ ] **10.1** Integración de Headless CMS (Sanity/Strapi) para que los dueños gestionen destinos sin tocar código.
 - [ ] **10.2** Blog de Contenidos / Guías de viaje si crece el tráfico orgánico.
@@ -308,3 +318,4 @@
 | 2026-07-04 | Confirmado: CUIT y Razón Social disponibles para publicar |
 | 2026-07-04 | Confirmado: Google Business Profile en proceso de verificación |
 | 2026-07-04 | Confirmado: Google Search Console activo — 1 página indexada |
+| 2026-07-06 | Integrado el paquete especial de F1 GP São Paulo con banner destacado en Home y vista de folleto en detalle |
