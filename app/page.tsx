@@ -13,6 +13,7 @@ import { PartnersMarquee } from "@/components/sections/PartnersMarquee";
 import { ValueProposition } from "@/components/sections/ValueProposition";
 import { AboutUs } from "@/components/sections/AboutUs";
 import { FeaturedDestinations } from "@/components/sections/FeaturedDestinations";
+import { SpecialPromo } from "@/components/sections/SpecialPromo"; // ponytail: added for São Paulo F1 promo
 import { Services } from "@/components/sections/Services";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { CTASection } from "@/components/sections/CTASection";
@@ -29,6 +30,9 @@ export default function Home() {
       <PartnersMarquee />
       <ScrollReveal>
         <ValueProposition />
+      </ScrollReveal>
+      <ScrollReveal>
+        <SpecialPromo />
       </ScrollReveal>
       <ScrollReveal>
         <FeaturedDestinations />
