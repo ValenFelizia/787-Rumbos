@@ -6,25 +6,40 @@
  * En mobile, la imagen aparece primero (orden visual natural).
  */
 import Image from "next/image";
-
+import { MapPin } from "lucide-react";
 
 export function AboutUs() {
   return (
     <section id="nosotros" className="bg-[#f9f9f9]">
       <div className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-20 md:grid-cols-12 md:items-center md:gap-12">
-        {/* La clase `group` en el contenedor permite que los hijos usen `group-hover:*`
-            para reaccionar al hover del padre — en este caso, la imagen escala al
-            hacer hover sobre el contenedor completo, no solo sobre la imagen. */}
-        <div className="group overflow-hidden rounded-2xl shadow-md shadow-[#0b4058]/10 md:col-span-5">
-          <Image
-            src="/nosotros.png"
-            alt="Equipo de 787 Rumbos — agencia de viajes en el Aeropuerto de Córdoba"
-            width={800}
-            height={600}
-            sizes="(max-width: 768px) 100vw, 42vw"
-            className="h-[300px] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] md:h-[420px]"
-          />
+        {/* Lado izquierdo: Collage asimétrico con efecto hover parallax 3D */}
+        <div className="group relative md:col-span-5 pb-10 md:pb-12 pr-10 md:pr-12">
+          {/* Imagen principal: El equipo */}
+          <div className="overflow-hidden rounded-3xl shadow-lg shadow-[#0b4058]/5 border border-white/40">
+            <Image
+              src="/nosotros.png"
+              alt="Equipo de 787 Rumbos — agencia de viajes en el Aeropuerto de Córdoba"
+              width={800}
+              height={600}
+              sizes="(max-width: 768px) 100vw, 42vw"
+              className="h-[260px] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02] md:h-[380px]"
+            />
+          </div>
+          {/* Imagen secundaria: El local físico en el aeropuerto, superpuesta abajo a la derecha */}
+          {/* ponytail: border-[6px] y shadow-2xl para generar sensación táctil de superposición */}
+          <div className="absolute bottom-0 right-0 w-[55%] md:w-[60%] overflow-hidden rounded-2xl border-4 md:border-[6px] border-white shadow-2xl transition-all duration-700 ease-out group-hover:translate-x-2 group-hover:-translate-y-2">
+            <Image
+              src="/nosotros-local.jpg"
+              alt="Local de 787 Rumbos y Vía Bariloche en el Aeropuerto de Córdoba"
+              width={500}
+              height={375}
+              sizes="(max-width: 768px) 55vw, 25vw"
+              className="h-[150px] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05] md:h-[220px]"
+            />
+          </div>
         </div>
+
+        {/* Lado derecho: Texto descriptivo y botón de localización */}
         <div className="md:col-span-7 md:pl-4">
           <h2 className="font-[family-name:var(--font-elaine)] text-3xl font-bold tracking-tight md:text-4xl text-balance">
             De la terminal al mundo
@@ -32,9 +47,21 @@ export function AboutUs() {
           <p className="mt-5 max-w-2xl text-[1.03rem] leading-relaxed text-[#0b4058]/80 text-pretty">
             Llevamos años dedicados al rubro del transporte y el turismo. Conocemos lo que
             significa viajar porque lo vivimos todos los días desde nuestro local en el
-            aeropuerto. Decidimos abrir 787 Rumbos para ir un paso más allá y ofrecer a nuestros
+            aeropuerto, junto a las boleterías oficiales de Vía Bariloche en el hall de arribos. Decidimos abrir 787 Rumbos para ir un paso más allá y ofrecer a nuestros
             pasajeros el acompañamiento total que siempre quisimos darles.
           </p>
+          <div className="mt-8">
+            <a
+              href="https://maps.google.com/?q=Aeropuerto+Internacional+Ingeniero+Aeron%C3%A1utico+Ambrosio+Taravella"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl border-2 border-[#0b4058] hover:bg-[#0b4058] hover:text-white text-[#0b4058] px-6 py-3 text-sm font-bold shadow-sm transition-all duration-200 active:scale-[0.97] cursor-pointer"
+              aria-label="Cómo llegar a nuestra oficina en el Aeropuerto de Córdoba"
+            >
+              <MapPin className="h-4 w-4 shrink-0 text-current" />
+              <span>Cómo llegar a nuestra oficina</span>
+            </a>
+          </div>
         </div>
       </div>
     </section>
