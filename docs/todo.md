@@ -498,5 +498,6 @@
 | 2026-07-04 | Confirmado: Google Search Console activo — 1 página indexada                                                                                                                                            |
 | 2026-07-06 | Integrado el paquete especial de F1 GP São Paulo con banner destacado en Home y vista de folleto en detalle                                                                                             |
 | 2026-07-06 | Auditoría competitiva/marketing/SEO creada; se abren Fases 11 a 14 para GBP, prueba social, SEO de crecimiento y pauta controlada                                                                       |
+| 2026-07-08 | Fix `PartnersMarquee`: un solo track animado a `-50%` (antes dos listas a `-100%` causaban solapamiento y salto al reiniciar)                                                                          |
 
 

@@ -55,7 +55,7 @@ Estos datos están sincronizados en el footer, schema JSON-LD, y Google Maps par
 *   **CTAs Contextuales:** Las tarjetas de destinos destacados abren el modal pre-seleccionando el destino y saltando directamente al paso 2.
 
 ### Integración de Vía Bariloche / Vía Tac ✅
-*   **Carrusel de Socios (`PartnersMarquee.tsx`):** Se integró el logotipo oficial de Vía Bariloche (`/partners/viabariloche.png`) con dimensiones de 150x40px. El título de sección se cambió a **"Viajá con las mejores compañías"** para englobar el transporte aéreo y terrestre de manera coherente.
+*   **Carrusel de Socios (`PartnersMarquee.tsx`):** Se integró el logotipo oficial de Vía Bariloche (`/partners/viabariloche.png`) con dimensiones de 150x40px. El título de sección se cambió a **"Viajá con las mejores compañías"** para englobar el transporte aéreo y terrestre de manera coherente. Loop CSS seamless: un solo track con dos secuencias idénticas animado a `translate3d(-50%, 0, 0)` (evita solapamiento y saltos al reiniciar).
 *   **Ficha de Servicios (`Services.tsx`):** Agregada la tarjeta de servicio **"Pasajes de Ómnibus"** con el icono `Ticket` de Lucide. El grid se amplió a **5 columnas** en pantallas anchas (`xl:grid-cols-5`) manteniendo la simetría visual.
 *   **Ubicación en el Footer (`Footer.tsx`):** Dirección simplificada a una sola línea con una aclaración pequeña y elegante justo debajo:
     `Av. La Voz del Interior 8500, Córdoba`
