@@ -146,7 +146,7 @@ export const faqItems: FaqItem[] = [
       {
         type: "text",
         value:
-          "Es una cobertura médica para imprevistos durante tu viaje: consultas, medicación, traslados por emergencia y otros servicios según el plan. En muchos destinos internacionales es un requisito de ingreso. Te indicamos la cobertura adecuada según tu destino y duración del viaje.",
+          "Es una cobertura médica para imprevistos durante tu viaje: consultas, medicación, traslados por emergencia y otros servicios según el plan. Trabajamos con las principales coberturas del mercado como AssistCard e InterAssist para garantizarte la mejor asistencia médica nacional e internacional. En muchos destinos internacionales es un requisito de ingreso. Te indicamos la cobertura adecuada según tu destino y duración del viaje.",
       },
     ],
   },
@@ -280,5 +280,7 @@ export const partnerLogos: Partner[] = [
   { name: "LATAM Airlines", imageSrc: "/partners/latam.svg", width: 130, height: 40 },
   { name: "Arajet", imageSrc: "/partners/arajet.png", width: 130, height: 40 },
   { name: "Vía Bariloche", imageSrc: "/partners/viabariloche.png", width: 150, height: 40 },
+  { name: "AssistCard", imageSrc: "/partners/assistcard.png", width: 120, height: 40 },
+  { name: "InterAssist", imageSrc: "/partners/interassist.png", width: 130, height: 40 },
 ];
 

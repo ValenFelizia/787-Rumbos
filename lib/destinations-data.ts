@@ -58,7 +58,7 @@ export const destinationsData: DestinationPage[] = [
       "3 o 4 noches de alojamiento con desayuno",
       "Traslados aeropuerto / hotel / aeropuerto",
       "City Tour pedestre por la ciudad",
-      "Asistencia al viajero"
+      "Asistencia al viajero nacional (InterAssist)"
     ],
     optionalExcursions: [
       "Excursión de día completo a Cafayate con degustación en bodega",
@@ -125,7 +125,7 @@ export const destinationsData: DestinationPage[] = [
       "Alojamiento en Hotel Raíces Aconcagua, habitación doble ejecutiva con desayuno",
       "Traslados aeropuerto Mendoza / hotel / aeropuerto",
       "Excursión Bus Vitivinícola: Camino del Vino \"El Sol\" (día completo)",
-      "Asistencia al viajero"
+      "Asistencia al viajero nacional (InterAssist)"
     ],
     optionalExcursions: [
       "Alta montaña: Puente del Inca y monumento al Aconcagua",
@@ -159,7 +159,7 @@ export const destinationsData: DestinationPage[] = [
       "8 noches de alojamiento en Hotel Principado",
       "Régimen de Pensión Completa (bebida incluida en almuerzo y cena)",
       "Coordinador permanente en viaje",
-      "Asistencia médica de viaje"
+      "Asistencia médica nacional (InterAssist)"
     ],
     travelTip: "Las aguas de Río Hondo son ricas en sales minerales y sodio. Se recomienda tomar baños de inmersión cortos (15-20 min) para un efecto óptimo de relajación.",
     priceFrom: 329000,
@@ -224,7 +224,7 @@ export const destinationsData: DestinationPage[] = [
       "5 noches de alojamiento c/desayuno",
       "Traslados in/out aeropuerto-hotel",
       "Excursión clásica Circuito Chico incluida",
-      "Asistencia al viajero nacional"
+      "Asistencia al viajero nacional (InterAssist)"
     ],
     travelTip: "No dejes de subir al Cerro Campanario: National Geographic la calificó como una de las 8 vistas panorámicas más bellas del mundo.",
     priceFrom: 597000,
@@ -252,7 +252,7 @@ export const destinationsData: DestinationPage[] = [
       "4 noches de alojamiento con desayuno",
       "Traslados a los parques nacionales",
       "Coordinador permanente y guías locales",
-      "Asistencia médica integral"
+      "Asistencia médica nacional (InterAssist)"
     ],
     travelTip: "Llevá siempre una muda de ropa extra y protector para el celular en la excursión del lado argentino, ¡la bruma de la Garganta del Diablo te va a mojar por completo!",
     priceFrom: 410000,
@@ -296,7 +296,7 @@ export const destinationsData: DestinationPage[] = [
       "3 noches de alojamiento en hotel céntrico",
       "City Tour guiado por la ciudad",
       "Traslados in/out terminal/aeropuerto",
-      "Asistencia al viajero"
+      "Asistencia al viajero nacional (InterAssist)"
     ],
     travelTip: "Los domingos no te pierdas la Feria de San Telmo, repleta de antigüedades, artistas callejeros y bailarines de tango al aire libre.",
     priceFrom: 360000,
@@ -324,7 +324,7 @@ export const destinationsData: DestinationPage[] = [
       "4 noches de alojamiento con desayuno",
       "Traslados in/out aeropuerto-hotel",
       "Navegación del Canal Beagle incluida",
-      "Asistencia médica de viaje"
+      "Asistencia al viajero nacional (InterAssist)"
     ],
     travelTip: "Ushuaia tiene un clima sumamente cambiante. Vestirse en capas ('sistema cebolla') es fundamental incluso en pleno verano.",
     priceFrom: 820000,
@@ -360,7 +360,7 @@ export const destinationsData: DestinationPage[] = [
       "Aéreo internacional desde Córdoba (vía Copa o LATAM)",
       "7 noches en hotel All Inclusive seleccionado",
       "Traslados aeropuerto / hotel / aeropuerto",
-      "Seguro médico internacional de alta cobertura",
+      "Seguro médico internacional de alta cobertura (AssistCard)",
       "Asesoramiento personalizado para excursiones"
     ],
     travelTip: "La moneda local es el Peso Mexicano, pero los dólares estadounidenses son ampliamente aceptados en toda la zona turística.",
@@ -397,7 +397,7 @@ export const destinationsData: DestinationPage[] = [
       "Aéreo internacional saliendo de Córdoba",
       "7 noches en hotel seleccionado (All Inclusive o c/desayuno)",
       "Traslados in/out aeropuerto-hotel",
-      "Asistencia médica internacional",
+      "Asistencia médica internacional (AssistCard)",
       "Coordinación local"
     ],
     travelTip: "Para comprar artesanías y comer comida local a precios más accesibles, camina dos o tres cuadras en paralelo alejándote de la Quinta Avenida.",
@@ -426,7 +426,7 @@ export const destinationsData: DestinationPage[] = [
       "7 noches de alojamiento con desayuno en Copacabana",
       "Traslados in/out en destino",
       "City Tour clásico c/Cristo y Pan de Azúcar",
-      "Asistencia al viajero internacional"
+      "Asistencia al viajero internacional (AssistCard)"
     ],
     travelTip: "Para una experiencia carioca auténtica, disfrutá de una caipiriña helada en los quioscos de la costanera al caer la tarde.",
     priceFrom: 980,
@@ -469,7 +469,7 @@ export const destinationsData: DestinationPage[] = [
       "Aéreo internacional desde Córdoba a Recife",
       "7 noches de alojamiento con régimen seleccionado",
       "Traslado Recife - Porto de Galinhas - Recife",
-      "Asistencia médica internacional",
+      "Asistencia médica internacional (AssistCard)",
       "Asistencia receptiva local"
     ],
     travelTip: "La visita a las piscinas naturales depende 100% de la tabla de mareas. Consultá el horario de marea baja cada día para ir en jangada.",
@@ -498,7 +498,7 @@ export const destinationsData: DestinationPage[] = [
       "10 noches de alojamiento en hoteles seleccionados",
       "Boletos de tren Expedition/Vistadome y buses a Machu Picchu",
       "Excursiones y traslados internos incluidos c/guía local",
-      "Asistencia médica internacional de alta cobertura"
+      "Asistencia médica internacional de alta cobertura (AssistCard)"
     ],
     travelTip: "En Cusco y el Valle Sagrado (a más de 3400 msnm), descansa las primeras horas y toma té de coca para aclimatarte y evitar el mal de altura.",
     priceFrom: 2434,
@@ -526,7 +526,8 @@ export const destinationsData: DestinationPage[] = [
       "14 noches de alojamiento en hoteles de categoría superior",
       "Vuelos internos e inter-países incluidos",
       "Traslados privados, excursiones y entradas a los templos",
-      "Coordinador permanente y guías de habla hispana"
+      "Coordinador permanente y guías de habla hispana",
+      "Asistencia médica internacional (AssistCard)"
     ],
     travelTip: "Para visitar templos religiosos, es obligatorio vestir ropa que cubra hombros y rodillas. Llevá calzado fácil de sacar, ya que en muchos recintos sagrados se entra descalzo.",
     priceFrom: 4650,
@@ -554,7 +555,7 @@ export const destinationsData: DestinationPage[] = [
       "6 noches de alojamiento (2 Tilcara, 2 Uyuni, 2 Salta) con desayuno",
       "Traslados in/out y excursiones en programa",
       "Coordinador permanente del grupo",
-      "Asistencia médica de viaje con cobertura internacional"
+      "Asistencia médica internacional (AssistCard)"
     ],
     travelTip: "El Salar de Uyuni es el desierto de sal continuo más alto del mundo (3650 msnm). Traé abrigo fuerte e impermeable: la temperatura baja abruptamente al ponerse el sol.",
     priceFrom: 564,
@@ -594,7 +595,7 @@ export const destinationsData: DestinationPage[] = [
       "Traslados diarios al Autódromo (Sábado y Domingo)",
       "Entradas para el Sector G-A-HEINEKEN",
       "Kit de Fórmula 1 de obsequio",
-      "Asistencia al viajero integral"
+      "Asistencia médica internacional (AssistCard)"
     ],
     travelTip: "El sector G-A-HEINEKEN ofrece una excelente visibilidad en una de las rectas más rápidas de Interlagos. Se recomienda llevar ropa cómoda, gorra, protector solar y abrigo ligero, ya que el clima en São Paulo puede ser muy cambiante durante el día.",
     priceFrom: 2770,
