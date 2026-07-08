@@ -18,7 +18,7 @@ export function AboutUs() {
           {/* Imagen principal: El equipo */}
           <div className="overflow-hidden rounded-3xl shadow-lg shadow-[#0b4058]/5 border border-white/40">
             <Image
-              src="/nosotros.png"
+              src="/nosotros.jpg"
               alt="Equipo de 787 Rumbos — agencia de viajes en el Aeropuerto de Córdoba"
               width={800}
               height={600}

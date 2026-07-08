@@ -180,6 +180,7 @@ export default async function DestinoDetailPage({ params }: Props) {
           alt={`Viajar a ${dest.name} con 787 Rumbos`}
           fill
           priority
+          sizes="100vw"
           className="object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0b4058]/95 via-[#0b4058]/40 to-transparent" />
