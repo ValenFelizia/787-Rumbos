@@ -280,5 +280,7 @@ export const partnerLogos: Partner[] = [
   { name: "LATAM Airlines", imageSrc: "/partners/latam.svg", width: 130, height: 40 },
   { name: "Arajet", imageSrc: "/partners/arajet.png", width: 130, height: 40 },
   { name: "Vía Bariloche", imageSrc: "/partners/viabariloche.png", width: 150, height: 40 },
+  { name: "AssistCard", imageSrc: "/partners/assistcard.png", width: 120, height: 40 },
+  { name: "InterAssist", imageSrc: "/partners/interassist.png", width: 130, height: 40 },
 ];
 
