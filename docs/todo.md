@@ -407,14 +407,14 @@
   - [x] Paquetes a medida vs salidas grupales
   - [x] Local físico en aeropuerto, cómo reservar, ómnibus y post-venta
   - [x] Componente `FAQ.tsx` con schema `FAQPage` y ancla `#preguntas-frecuentes`
-- [ ] **12.4** Refuerzo del diferencial aeropuerto
-  - [ ] Crear contenido específico: "Agencia de viajes en el Aeropuerto de Córdoba"
-  - [ ] Explicar cómo llegar al local dentro del hall de arribos
-  - [ ] Reforzar servicios mixtos: vuelos, paquetes y ómnibus
-- [ ] **12.5** Medición de WhatsApp
-  - [ ] Diferenciar mensajes pre-rellenados por fuente: home, destino, GBP, Instagram, Ads
-  - [ ] Definir UTMs para campañas y links externos
-  - [ ] Crear planilla simple de leads: fecha, fuente, destino, estado, venta/no venta
+- [x] **12.4** Refuerzo del diferencial aeropuerto ✅
+  - [x] Crear contenido específico: "Agencia de viajes en el Aeropuerto de Córdoba" (integrado orgánicamente en el texto descriptivo del Hero)
+  - [x] Explicar cómo llegar al local dentro del hall de arribos (agregado bloque explicativo detallado en Nosotros/AboutUs)
+  - [x] Reforzar servicios mixtos: vuelos, paquetes y ómnibus
+- [x] **12.5** Medición de WhatsApp ✅
+  - [x] Diferenciar mensajes pre-rellenados por fuente: home, destino, GBP, Instagram, Ads (parametrizado con etiquetas de seguimiento en constants.ts y aplicados a todos los componentes)
+  - [x] Definir UTMs para campañas y links externos
+  - [x] Crear planilla simple de leads: fecha, fuente, destino, estado, venta/no venta
 
 ---
 

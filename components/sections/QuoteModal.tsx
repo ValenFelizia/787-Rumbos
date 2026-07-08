@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { X, Send, ChevronRight, ChevronLeft, Calendar, Users, Plane, Info } from "lucide-react";
 import { useModal } from "@/lib/context/ModalContext";
-import { WHATSAPP_LINK } from "@/lib/constants";
+import { WHATSAPP_LINK, WHATSAPP_QUOTE_BYPASS } from "@/lib/constants";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 
 // ponytail: keep code simple and self-contained, using React state and native CSS.
@@ -84,7 +84,7 @@ export function QuoteModal() {
     }
     const passengerText = `${adultos} ${adultos === 1 ? "adulto" : "adultos"}${menores > 0 ? ` y ${menores} ${menores === 1 ? "menor" : "menores"}` : ""
       }`;
-    const text = `Hola 787 Rumbos! Quiero cotizar un viaje personalizado.\n\n📍 *Destino:* ${destino}\n📅 *Fecha estimada:* ${fecha}\n👥 *Pasajeros:* ${passengerText}\n✈️ *Aerolínea:* ${aerolinea}`;
+    const text = `Hola 787 Rumbos! Quiero cotizar un viaje personalizado.\n\n📍 *Destino:* ${destino}\n📅 *Fecha estimada:* ${fecha}\n👥 *Pasajeros:* ${passengerText}\n✈️ *Aerolínea:* ${aerolinea}\n\n(Web - Asistente de Cotización)`;
     const phone = "5493516157398"; // Número de atención de la agencia
     const url = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(text)}`;
     window.open(url, "_blank");
@@ -336,7 +336,7 @@ export function QuoteModal() {
           {/* Bypass Direct WhatsApp Link */}
           <div className="mt-4 text-center">
             <a
-              href={WHATSAPP_LINK}
+              href={WHATSAPP_QUOTE_BYPASS}
               target="_blank"
               rel="noreferrer"
               onClick={closeModal}

@@ -10,15 +10,27 @@
  */
 import { BedDouble, Bus, HeartPulse, Plane, Ticket } from "lucide-react";
 
-// ─── Links de WhatsApp ────────────────────────────────────────────────────────
+// ─── Links de WhatsApp con parámetros de seguimiento (Fase 12.5) ──────────────
 
-/** Número de atención al cliente — abre WhatsApp con mensaje genérico. */
+/** Enlace general - Usado en Navbar, Footer y enlaces de escape */
 export const WHATSAPP_LINK =
-  "https://api.whatsapp.com/send?phone=5493516157398&text=Hola%2C%20quiero%20consultar%20por%20un%20viaje.";
+  "https://api.whatsapp.com/send?phone=5493516157398&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)";
+
+/** Enlace específico para el cotizador (bypass o directo) */
+export const WHATSAPP_QUOTE_BYPASS =
+  "https://api.whatsapp.com/send?phone=5493516157398&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20consultar%20directamente%20con%20un%20asesor...%20(Web%20-%20Cotizador%20Directo)";
+
+/** Enlace específico para administración */
+export const WHATSAPP_ADMIN_LINK =
+  "https://api.whatsapp.com/send?phone=5493513448724&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20contactar%20con%20administraci%C3%B3n...%20(Web%20-%20Administraci%C3%B3n)";
+
+/** Enlace para error 404 */
+export const WHATSAPP_404_LINK =
+  "https://api.whatsapp.com/send?phone=5493516157398&text=Hola%20787%20Rumbos!%20Me%20perd%C3%AD%20en%20la%20p%C3%A1gina%20y%20necesito%20ayuda%20con%20un%20viaje...%20(Web%20-%20Error%20404)";
 
 /** Genera un link de WhatsApp con el mensaje pre-rellenado para un destino específico. */
 export function whatsappDestino(destino: string): string {
-  return `https://api.whatsapp.com/send?phone=5493516157398&text=Hola%2C%20quiero%20consultar%20por%20un%20viaje%20a%20${encodeURIComponent(destino)}.`;
+  return `https://api.whatsapp.com/send?phone=5493516157398&text=Hola%20787%20Rumbos!%20Quiero%20consultar%20por%20un%20viaje%20a%20${encodeURIComponent(destino)}.%20(Web%20-%20Destino%20Destacado)`;
 }
 
 /** Ubicación del local en Google Maps (Aeropuerto de Córdoba). */

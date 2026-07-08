@@ -14,7 +14,7 @@
  */
 import Image from "next/image";
 import { Instagram, MapPin, Send, ShieldCheck } from "lucide-react";
-import { WHATSAPP_LINK } from "@/lib/constants";
+import { WHATSAPP_LINK, WHATSAPP_ADMIN_LINK } from "@/lib/constants";
 
 export function Footer() {
   return (
@@ -127,7 +127,7 @@ export function Footer() {
             </li>
             <li>
               <a
-                href="https://api.whatsapp.com/send?phone=5493513448724"
+                href={WHATSAPP_ADMIN_LINK}
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Contactar administración por WhatsApp"

@@ -46,11 +46,19 @@ export function AboutUs() {
             De la terminal al mundo
           </h2>
           <p className="mt-5 max-w-2xl text-[1.03rem] leading-relaxed text-[#0b4058]/80 text-pretty">
-            Llevamos años dedicados al rubro del transporte y el turismo. Conocemos lo que
-            significa viajar porque lo vivimos todos los días desde nuestro local en el
-            aeropuerto, junto a las boleterías oficiales de Vía Bariloche en el hall de arribos. Decidimos abrir 787 Rumbos para ir un paso más allá y ofrecer a nuestros
-            pasajeros el acompañamiento total que siempre quisimos darles.
+            Llevamos años dedicados al rubro del transporte y el turismo. Conocemos lo que significa viajar porque lo vivimos todos los días desde nuestro local en el aeropuerto, junto a las boleterías oficiales de Vía Bariloche en el hall de arribos. Decidimos abrir 787 Rumbos para ir un paso más allá y ofrecer a nuestros pasajeros el acompañamiento total que siempre quisimos darles.
           </p>
+
+          {/* Información práctica del local físico del aeropuerto */}
+          <div className="mt-6 border-l-4 border-[#e6b451] pl-4 py-1 space-y-2 max-w-2xl">
+            <p className="text-xs font-bold text-[#0b4058] uppercase tracking-wider">📍 ¿Dónde encontrarnos?</p>
+            <p className="text-xs text-[#0b4058]/80 leading-relaxed text-pretty">
+              Buscá nuestro mostrador oficial de <strong>Vía Bariloche</strong> directamente en la zona de <strong>Arribos Nacionales</strong> del Aeropuerto Internacional Taravella.
+            </p>
+            <p className="text-xs text-[#0b4058]/80 leading-relaxed text-pretty">
+              <strong>Servicios integrales:</strong> Presupuestamos tus paquetes turísticos a medida y pasajes aéreos, y emitimos pasajes terrestres de ómnibus nacionales en el acto.
+            </p>
+          </div>
           <div className="mt-8">
             <a
               href={GOOGLE_MAPS_LINK}

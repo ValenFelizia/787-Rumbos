@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
-import { WHATSAPP_LINK } from "@/lib/constants";
+import { WHATSAPP_404_LINK } from "@/lib/constants";
 
 export default function NotFound() {
   return (
@@ -25,7 +25,7 @@ export default function NotFound() {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <a
-            href={WHATSAPP_LINK}
+            href={WHATSAPP_404_LINK}
             target="_blank"
             rel="noopener noreferrer"
             className="font-[family-name:var(--font-brand-heading)] inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#f7a92a] to-[#e6b451] text-[#0b4058] px-6 py-3.5 font-bold shadow-lg shadow-[#f7a92a]/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl cursor-pointer"

@@ -113,13 +113,13 @@ function getDepartureStatus(dep: Departure): {
 
 // 4. Generador de link de WhatsApp personalizado por salida
 function getWhatsAppDepartureLink(destinoName: string, displayDate: string): string {
-  const text = `Hola, quiero consultar disponibilidad para la salida a ${destinoName} del ${displayDate}.`;
+  const text = `Hola, quiero consultar disponibilidad para la salida a ${destinoName} del ${displayDate}. (Web - Detalle Destino)`;
   return `https://api.whatsapp.com/send?phone=5493516157398&text=${encodeURIComponent(text)}`;
 }
 
 // 5. Generador de link de WhatsApp genérico para cotización a medida
 function getWhatsAppCustomLink(destinoName: string): string {
-  const text = `Hola, quiero consultar para armar un viaje a medida a ${destinoName}.`;
+  const text = `Hola, quiero consultar para armar un viaje a medida a ${destinoName}. (Web - Detalle Destino)`;
   return `https://api.whatsapp.com/send?phone=5493516157398&text=${encodeURIComponent(text)}`;
 }
 

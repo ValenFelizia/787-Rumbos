@@ -69,7 +69,7 @@ export function FAQ() {
           <p className="mt-4 text-[1.02rem] leading-relaxed text-[#0b4058]/80 text-pretty">
             Si necesitás resolver una duda más específica, {' '}
             <a
-              href="https://wa.me/5493513448724"
+              href="https://api.whatsapp.com/send?phone=5493516157398&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20consultar%20por%20una%20duda%20del%20FAQ...%20(Web%20-%20FAQ)"
               className="font-semibold text-[#006183] underline decoration-[#006183]/30 underline-offset-2 transition-colors hover:text-[#0b4058] hover:decoration-[#0b4058]/40"
               target="_blank"
               rel="noopener noreferrer"

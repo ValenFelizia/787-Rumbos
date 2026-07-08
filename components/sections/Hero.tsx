@@ -30,8 +30,7 @@ export function Hero() {
             Descubrí el mundo con el acompañamiento cercano de 787 Rumbos
           </h1>
           <p className="max-w-2xl text-base leading-relaxed text-white/90 md:text-[1.08rem]">
-            Diseñamos propuestas personalizadas para que viajes con tranquilidad, respaldo y una
-            atención realmente humana de principio a fin.
+            Diseñamos propuestas personalizadas desde nuestra oficina en el Aeropuerto de Córdoba. Viajá con tranquilidad, respaldo y atención humana de principio a fin.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             <div className="flex flex-col gap-1.5">
