@@ -53,10 +53,10 @@ export function AboutUs() {
           <div className="mt-6 border-l-4 border-[#e6b451] pl-4 py-1 space-y-2 max-w-2xl">
             <p className="text-xs font-bold text-[#0b4058] uppercase tracking-wider">📍 ¿Dónde encontrarnos?</p>
             <p className="text-xs text-[#0b4058]/80 leading-relaxed text-pretty">
-              Buscá nuestro mostrador oficial de <strong>Vía Bariloche</strong> directamente en la zona de <strong>Arribos Nacionales</strong> del Aeropuerto Internacional Taravella.
+              Buscá nuestra oficina oficial en la boletería de <strong>Vía Bariloche</strong> directamente en la zona de <strong>Arribos</strong> del Aeropuerto Internacional de Córdoba.
             </p>
             <p className="text-xs text-[#0b4058]/80 leading-relaxed text-pretty">
-              <strong>Servicios integrales:</strong> Presupuestamos tus paquetes turísticos a medida y pasajes aéreos, y emitimos pasajes terrestres de ómnibus nacionales en el acto.
+              <strong>Servicios integrales:</strong> Presupuestamos tus paquetes turísticos a medida, pasajes aéreos y también emitimos pasajes terrestres de ómnibus nacionales en el acto.
             </p>
           </div>
           <div className="mt-8">
