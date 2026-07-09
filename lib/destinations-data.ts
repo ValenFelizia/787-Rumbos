@@ -713,6 +713,107 @@ export const destinationsData: DestinationPage[] = [
     ],
   },
   {
+    slug: "riviera-maya",
+    name: "Riviera Maya",
+    country: "México",
+    region: "internacional",
+    metaTitle: "Paquetes a Riviera Maya All Inclusive desde Córdoba | 787 Rumbos",
+    metaDescription:
+      "Riviera Maya con hotel 5 estrellas All Inclusive. Ocean Coral & Turquesa, 8 noches, traslados y asistencia. Family Plan desde Córdoba.",
+    heroImage: "/destinos/riviera-maya.jpg",
+    description:
+      "La Riviera Maya concentra playas de arena blanca, cenotes y ruinas mayas a pocos kilómetros. Ideal para familias y parejas que buscan un resort All Inclusive de categoría frente al Caribe, con excursiones a Tulum, Cozumel y parques ecológicos a un paso.",
+    highlights: [
+      "Resort Ocean Coral & Turquesa 5 estrellas All Inclusive",
+      "Playas del Caribe mexicano y aguas turquesa",
+      "Base perfecta para Tulum, cenotes y Cozumel",
+      "Family Plan pensado para viajar en familia"
+    ],
+    typicalInclusions: [
+      "Aéreo internacional desde Córdoba",
+      "8 noches en Ocean Coral & Turquesa (5★) All Inclusive",
+      "Traslados aeropuerto / hotel / aeropuerto",
+      "Asistencia al viajero internacional (AssistCard)",
+      "Asesoramiento para excursiones en destino"
+    ],
+    optionalExcursions: [
+      "Ruinas de Tulum frente al mar",
+      "Parques Xcaret / Xel-Há",
+      "Ferry a Isla Cozumel",
+      "Cenotes y Chichén Itzá"
+    ],
+    travelTip:
+      "El Family Plan suele ser la opción más conveniente si viajan adultos con menores. Confirmá edades de los chicos al cotizar: impactan en tarifa e impuestos.",
+    priceFrom: 1795,
+    currency: "USD",
+    priceNote: "por persona en Family Plan. + USD 265 de impuestos",
+    departures: [],
+    faq: [
+      {
+        id: "rm-hotel",
+        question: "¿En qué hotel se hospedan?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "El paquete de referencia es en Ocean Coral & Turquesa, resort 5 estrellas All Inclusive en la Riviera Maya. Si preferís otra categoría o ubicación, te armamos alternativas.",
+          },
+        ],
+      },
+      {
+        id: "rm-family",
+        question: "¿Qué es el Family Plan?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Es una tarifa pensada para familias (adultos + menores) con condiciones especiales según edades. El precio publicado es orientativo desde USD 1795 + impuestos; te cotizamos el total exacto según composición del grupo.",
+          },
+        ],
+      },
+      {
+        id: "rm-incluye",
+        question: "¿Qué incluye el paquete a Riviera Maya?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Aéreo desde Córdoba, 8 noches All Inclusive, traslados y asistencia al viajero. Las excursiones (Tulum, parques, Cozumel) se pueden sumar según lo que quieras vivir.",
+          },
+        ],
+      },
+      {
+        id: "rm-vs-cancun",
+        question: "¿Riviera Maya, Cancún o Playa del Carmen?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Cancún concentra la zona hotelera clásica; Playa del Carmen tiene más vida peatonal; Riviera Maya suele referirse a resorts All Inclusive un poco más al sur, ideales para relax en familia. Te orientamos según tu estilo de viaje.",
+          },
+        ],
+      },
+      {
+        id: "rm-cotizar",
+        question: "¿Cómo cotizo Riviera Maya desde Córdoba?",
+        answer: [
+          { type: "text", value: "Escribinos por " },
+          {
+            type: "link",
+            label: "WhatsApp",
+            href: whatsappDestinoFaq("Riviera Maya"),
+            external: true,
+          },
+          {
+            type: "text",
+            value:
+              " con fechas, cantidad de adultos y menores. Te enviamos el Family Plan y otras opciones.",
+          },
+        ],
+      },
+    ],
+  },
+  {
     slug: "rio-de-janeiro",
     name: "Río de Janeiro",
     country: "Brasil",
@@ -847,6 +948,96 @@ export const destinationsData: DestinationPage[] = [
     currency: "USD",
     priceNote: "por persona en base doble",
     departures: []
+  },
+  {
+    slug: "camboriu",
+    name: "Camboriú",
+    country: "Brasil",
+    region: "internacional",
+    metaTitle: "Viajes a Camboriú en bus desde Córdoba | 787 Rumbos",
+    metaDescription:
+      "Paquete a Camboriú en bus semicama desde Córdoba. 7 noches en Hotel Sagres con desayuno y cena, asistencia al viajero. Desde USD 599.",
+    heroImage: "/destinos/camboriu.jpg",
+    description:
+      "Balneario de Santa Catarina famoso por su playa urbana, el teleférico Unipraias y la vida nocturna. Camboriú es una de nuestras salidas clásicas en bus desde Córdoba, con convenio terrestre y hotelería céntrica para disfrutar playa y ciudad sin complicaciones.",
+    highlights: [
+      "Playa central y paseo peatonal frente al mar",
+      "Teleférico Unipraias y vistas panorámicas",
+      "Vida nocturna y gastronomía de balneario",
+      "Salida en bus semicama desde Córdoba"
+    ],
+    typicalInclusions: [
+      "Traslado en bus semicama ida y vuelta desde Córdoba",
+      "7 noches de alojamiento en Hotel Sagres",
+      "Régimen con desayuno y cena incluidos",
+      "Asistencia al viajero",
+      "Coordinación del viaje"
+    ],
+    optionalExcursions: [
+      "Balneario Camboriú y miradores",
+      "Betos World / parques temáticos",
+      "Paseo a Florianópolis (día completo)",
+      "Compras en Itajaí / Brás"
+    ],
+    travelTip:
+      "El bus semicama es una opción cómoda y económica para llegar a la playa brasileña. Llevá abrigo liviano para el viaje nocturno y documento de viaje vigente (DNI o pasaporte).",
+    priceFrom: 599,
+    currency: "USD",
+    priceNote: "por persona en base doble",
+    departures: [],
+    faq: [
+      {
+        id: "camboriu-bus",
+        question: "¿Cómo es el viaje en bus a Camboriú?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Salís desde Córdoba en bus semicama. Es una de nuestras salidas estándar por convenio con el transportista terrestre: cómoda, con precio competitivo y sin depender de aéreos.",
+          },
+        ],
+      },
+      {
+        id: "camboriu-incluye",
+        question: "¿Qué incluye el paquete a Camboriú?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Bus semicama ida y vuelta, 7 noches en Hotel Sagres, desayuno y cena, y asistencia al viajero. Excursiones opcionales se cotizan aparte.",
+          },
+        ],
+      },
+      {
+        id: "camboriu-requisitos",
+        question: "¿Qué documentos necesito para Brasil?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Los argentinos suelen ingresar con DNI vigente en buen estado (o pasaporte). Te confirmamos requisitos actualizados al cotizar.",
+          },
+        ],
+      },
+      {
+        id: "camboriu-cotizar",
+        question: "¿Cómo consulto por Camboriú?",
+        answer: [
+          { type: "text", value: "Escribinos por " },
+          {
+            type: "link",
+            label: "WhatsApp",
+            href: whatsappDestinoFaq("Camboriú"),
+            external: true,
+          },
+          {
+            type: "text",
+            value:
+              " y te confirmamos próximas salidas, cupos y el total del paquete.",
+          },
+        ],
+      },
+    ],
   },
   {
     slug: "peru",
@@ -1086,7 +1277,8 @@ export function getRelatedDestinations(
   const clusterMateSlugs = new Set<string>();
   // Import lazy via inline to avoid circular deps: cluster mates from known lists
   const fixedClusters: string[][] = [
-    ["rio-de-janeiro", "porto-de-galinhas", "f1-grand-premio-sao-paulo"],
+    ["rio-de-janeiro", "porto-de-galinhas", "camboriu", "f1-grand-premio-sao-paulo"],
+    ["cancun", "playa-del-carmen", "riviera-maya"],
     ["termas-rio-hondo", "cataratas-del-iguazu", "salar-de-uyuni"],
   ];
   for (const group of fixedClusters) {
