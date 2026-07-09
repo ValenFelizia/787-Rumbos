@@ -426,7 +426,7 @@
 
 - [/] **13.1** Clusters de demanda "desde Córdoba"
   - [x] Brasil desde Córdoba (`/destinos/brasil-desde-cordoba`)
-  - [ ] Caribe desde Córdoba (ola siguiente — inventario fino)
+  - [x] Caribe desde Córdoba (`/destinos/caribe-desde-cordoba`)
   - [x] Argentina en bus desde Córdoba (`/destinos/argentina-en-bus-desde-cordoba`)
   - [x] Salidas grupales desde Córdoba (`/destinos/salidas-grupales-desde-cordoba`)
   - [ ] Escapadas de fin de semana largo (ola siguiente)
