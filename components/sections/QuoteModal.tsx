@@ -1,13 +1,29 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { X, Send, ChevronRight, ChevronLeft, Calendar, Users, Plane, Info } from "lucide-react";
+import { X, ChevronRight, ChevronLeft, Calendar, Users, Plane, Info, Clock } from "lucide-react";
 import { useModal } from "@/lib/context/ModalContext";
-import { WHATSAPP_LINK, WHATSAPP_QUOTE_BYPASS } from "@/lib/constants";
+import { featuredDestinations, WHATSAPP_QUOTE_BYPASS } from "@/lib/constants";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 
 // ponytail: keep code simple and self-contained, using React state and native CSS.
 
-const SUGGESTIONS = ["Río de Janeiro", "Bariloche", "Cartagena", "Ushuaia"];
+// Destinos reales del catálogo (featured + demanda alta del FAQ prioritario)
+const SUGGESTIONS = [
+  ...featuredDestinations.map((d) => d.name),
+  "Cancún",
+  "Playa del Carmen",
+  "Ushuaia",
+].filter((name, i, arr) => arr.indexOf(name) === i);
+
+const DURATION_OPTIONS = [
+  "A definir",
+  "3-4 días",
+  "5-7 días",
+  "8-10 días",
+  "11-14 días",
+  "Más de 14 días",
+];
+
 const AIRLINES = ["Copa Airlines", "JetSmart", "GOL", "Avianca", "Air Europa", "LATAM Airlines", "Arajet"];
 
 const getNext12Months = () => {
@@ -31,6 +47,7 @@ export function QuoteModal() {
   // Form state
   const [destino, setDestino] = useState("");
   const [fecha, setFecha] = useState("");
+  const [duracion, setDuracion] = useState(DURATION_OPTIONS[0]);
   const [adultos, setAdultos] = useState(2);
   const [menores, setMenores] = useState(0);
   const [aerolinea, setAerolinea] = useState("Sin preferencia");
@@ -49,6 +66,7 @@ export function QuoteModal() {
       }
       // Set default date to first option if empty
       setFecha(months[0]);
+      setDuracion(DURATION_OPTIONS[0]);
       setAdultos(2);
       setMenores(0);
       setAerolinea("Sin preferencia");
@@ -84,7 +102,7 @@ export function QuoteModal() {
     }
     const passengerText = `${adultos} ${adultos === 1 ? "adulto" : "adultos"}${menores > 0 ? ` y ${menores} ${menores === 1 ? "menor" : "menores"}` : ""
       }`;
-    const text = `Hola 787 Rumbos! Quiero cotizar un viaje personalizado.\n\n📍 *Destino:* ${destino}\n📅 *Fecha estimada:* ${fecha}\n👥 *Pasajeros:* ${passengerText}\n✈️ *Aerolínea:* ${aerolinea}\n\n(Web - Asistente de Cotización)`;
+    const text = `Hola 787 Rumbos! Quiero cotizar un viaje personalizado.\n\n📍 *Destino:* ${destino}\n📅 *Fecha estimada:* ${fecha}\n🗓️ *Duración estimada:* ${duracion}\n👥 *Pasajeros:* ${passengerText}\n✈️ *Aerolínea:* ${aerolinea}\n\n(Web - Asistente de Cotización)`;
     const phone = "5493516157398"; // Número de atención de la agencia
     const url = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(text)}`;
     window.open(url, "_blank");
@@ -147,7 +165,7 @@ export function QuoteModal() {
 
               {/* Optional Suggestions */}
               <div className="pt-2">
-                <span className="text-xs text-gray-400">Sugerencias populares:</span>
+                <span className="text-xs text-gray-400">Destinos populares:</span>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {SUGGESTIONS.map((sug) => (
                     <button
@@ -186,6 +204,26 @@ export function QuoteModal() {
                   {months.map((m) => (
                     <option key={m} value={m}>
                       {m}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Estimated duration */}
+              <div className="space-y-2">
+                <label htmlFor="duracion-select" className="flex items-center gap-1.5 text-sm font-semibold text-[#0b4058]">
+                  <Clock className="h-4 w-4 text-[#f7a92a]" />
+                  ¿Cuántos días aproximados?
+                </label>
+                <select
+                  id="duracion-select"
+                  value={duracion}
+                  onChange={(e) => setDuracion(e.target.value)}
+                  className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm focus:border-[#f7a92a] focus:outline-none focus:ring-1 focus:ring-[#f7a92a]"
+                >
+                  {DURATION_OPTIONS.map((d) => (
+                    <option key={d} value={d}>
+                      {d}
                     </option>
                   ))}
                 </select>
