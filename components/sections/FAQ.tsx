@@ -1,14 +1,16 @@
 /**
  * components/sections/FAQ.tsx
  *
- * Preguntas frecuentes comerciales — reduce fricción pre-venta y alimenta
- * el schema FAQPage para posibles rich results en Google.
+ * Preguntas frecuentes — home comercial o por destino.
+ * Emite schema FAQPage a partir de los `items` recibidos.
  */
+import type { ReactNode } from "react";
 import { ChevronDown } from "lucide-react";
 import {
-  faqItems,
+  faqItems as defaultFaqItems,
   faqAnswerToPlainText,
   type FaqAnswerSegment,
+  type FaqItem,
 } from "@/lib/constants";
 
 function renderFaqAnswer(segments: FaqAnswerSegment[]) {
@@ -38,52 +40,84 @@ function renderFaqAnswer(segments: FaqAnswerSegment[]) {
   });
 }
 
-const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqItems.map((item) => ({
-    "@type": "Question",
-    name: item.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: faqAnswerToPlainText(item.answer),
-    },
-  })),
-};
+export interface FAQProps {
+  items?: FaqItem[];
+  id?: string;
+  headingId?: string;
+  title?: string;
+  description?: ReactNode;
+  /** Variante más compacta para páginas de destino */
+  compact?: boolean;
+}
 
-export function FAQ() {
+export function FAQ({
+  items = defaultFaqItems,
+  id = "preguntas-frecuentes",
+  headingId = "faq-heading",
+  title = "Preguntas frecuentes",
+  description,
+  compact = false,
+}: FAQProps) {
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faqAnswerToPlainText(item.answer),
+      },
+    })),
+  };
+
+  const defaultDescription = (
+    <>
+      Si necesitás resolver una duda más específica,{" "}
+      <a
+        href="https://api.whatsapp.com/send?phone=5493516157398&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20consultar%20por%20una%20duda%20del%20FAQ...%20(Web%20-%20FAQ)"
+        className="font-semibold text-[#006183] underline decoration-[#006183]/30 underline-offset-2 transition-colors hover:text-[#0b4058] hover:decoration-[#0b4058]/40"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Consultar por WhatsApp con 787 Rumbos"
+      >
+        consultanos
+      </a>
+      .
+    </>
+  );
+
   return (
     <section
-      id="preguntas-frecuentes"
-      aria-labelledby="faq-heading"
-      className="border-t border-[#0b4058]/10 bg-[#f9f9f9]"
+      id={id}
+      aria-labelledby={headingId}
+      className={
+        compact
+          ? "border-t border-[#0b4058]/10 bg-white"
+          : "border-t border-[#0b4058]/10 bg-[#f9f9f9]"
+      }
     >
-      <div className="mx-auto w-full max-w-6xl px-6 py-20">
+      <div
+        className={
+          compact
+            ? "mx-auto w-full max-w-6xl px-6 py-12 md:py-14"
+            : "mx-auto w-full max-w-6xl px-6 py-20"
+        }
+      >
         <div className="mb-10 max-w-2xl">
           <h2
-            id="faq-heading"
+            id={headingId}
             className="font-[family-name:var(--font-elaine)] text-3xl font-bold tracking-tight md:text-4xl text-balance"
           >
-            Preguntas frecuentes
+            {title}
           </h2>
           <p className="mt-4 text-[1.02rem] leading-relaxed text-[#0b4058]/80 text-pretty">
-            Si necesitás resolver una duda más específica, {' '}
-            <a
-              href="https://api.whatsapp.com/send?phone=5493516157398&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20consultar%20por%20una%20duda%20del%20FAQ...%20(Web%20-%20FAQ)"
-              className="font-semibold text-[#006183] underline decoration-[#006183]/30 underline-offset-2 transition-colors hover:text-[#0b4058] hover:decoration-[#0b4058]/40"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Consultar por WhatsApp con 787 Rumbos"
-            >
-              consultanos
-            </a>
-            .
+            {description ?? defaultDescription}
           </p>
-     
         </div>
 
         <div className="space-y-3">
-          {faqItems.map((item) => (
+          {items.map((item) => (
             <details
               key={item.id}
               className="group rounded-2xl border border-[#0b4058]/10 bg-white shadow-sm shadow-[#0b4058]/5 transition-[border-color,box-shadow] duration-200 open:border-[#a2c745]/40 open:shadow-md open:shadow-[#0b4058]/10"
