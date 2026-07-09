@@ -1,0 +1,27 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { ClusterHub } from "@/components/sections/ClusterHub";
+import { getClusterBySlug } from "@/lib/clusters-data";
+
+const SLUG = "brasil-desde-cordoba";
+
+export function generateMetadata(): Metadata {
+  const cluster = getClusterBySlug(SLUG);
+  if (!cluster) return {};
+  return {
+    title: cluster.metaTitle,
+    description: cluster.metaDescription,
+    alternates: { canonical: `https://787rumbos.com.ar/destinos/${SLUG}` },
+    openGraph: {
+      title: cluster.metaTitle,
+      description: cluster.metaDescription,
+      url: `https://787rumbos.com.ar/destinos/${SLUG}`,
+    },
+  };
+}
+
+export default function BrasilDesdeCordobaPage() {
+  const cluster = getClusterBySlug(SLUG);
+  if (!cluster) notFound();
+  return <ClusterHub cluster={cluster} />;
+}
