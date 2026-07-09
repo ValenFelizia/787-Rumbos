@@ -11,6 +11,8 @@ import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 // simplemente editá este objeto. Los íconos soportados son: 'plane', 'calendar', 'ticket', 'map-pin'.
 const PROMO_CONFIG = {
   slug: "f1-grand-premio-sao-paulo",
+  /** ISO date: el banner se oculta automáticamente el día siguiente a la salida. */
+  endsAt: "2026-11-05",
   topBarText: "🏎️ Salida Especial Charter: F1 GP de São Paulo (5 de Nov). ¡Últimos cupos! Ver Detalles →",
   badgeText: "🏎️ EVENTO DESTACADO F1",
   charterText: "✈️ VUELO CHARTER DIRECTO",
@@ -20,7 +22,7 @@ const PROMO_CONFIG = {
   priceNote: "por persona en base doble",
   taxNote: "+ USD 260 de gastos e impuestos",
   imageSrc: "/destinos/gp-sao-paulo.png",
-  whatsappMsg: "Hola 787 Rumbos! Quiero consultar disponibilidad y detalles del paquete para el Vuelo Charter F1 Grand Premio de Sao Paulo del 5 de Noviembre.",
+  whatsappMsg: "Hola 787 Rumbos! Quiero consultar disponibilidad y detalles del paquete para el Vuelo Charter F1 Grand Premio de Sao Paulo del 5 de Noviembre. (Web - Promo F1)",
   inclusions: [
     { label: "Aéreo Charter COR-ROS / GRU", icon: "plane" },
     { label: "4 Noches de hotel con desayuno", icon: "calendar" },
@@ -28,6 +30,12 @@ const PROMO_CONFIG = {
     { label: "Traslados Autódromo + Kit F1", icon: "map-pin" }
   ]
 };
+
+function isPromoActive(endsAt: string): boolean {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return new Date(endsAt + "T00:00:00") >= today;
+}
 
 // Mapeo dinámico de íconos
 function InclusionIcon({ name, className }: { name: string; className?: string }) {
@@ -49,7 +57,7 @@ export function SpecialPromo() {
   const [isBannerVisible, setIsBannerVisible] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  if (!isBannerVisible) return null;
+  if (!isPromoActive(PROMO_CONFIG.endsAt) || !isBannerVisible) return null;
 
   const whatsappUrl = `https://api.whatsapp.com/send?phone=5493516157398&text=${encodeURIComponent(PROMO_CONFIG.whatsappMsg)}`;
 
