@@ -11,7 +11,7 @@ import {
   type DestinationPage,
 } from "@/lib/destinations-data";
 
-export type ClusterId = "brasil" | "argentina-bus" | "salidas-grupales";
+export type ClusterId = "brasil" | "caribe" | "argentina-bus" | "salidas-grupales";
 
 export interface ClusterPage {
   id: ClusterId;
@@ -35,12 +35,13 @@ export const clustersData: ClusterPage[] = [
     title: "Brasil desde Córdoba",
     metaTitle: "Paquetes a Brasil desde Córdoba | 787 Rumbos",
     metaDescription:
-      "Río, Porto de Galinhas y salidas especiales a Brasil desde Córdoba. Paquetes a medida o grupales con atención humana por WhatsApp.",
+      "Río, Porto de Galinhas, Camboriú y salidas especiales a Brasil desde Córdoba. Paquetes a medida o grupales con atención humana por WhatsApp.",
     intro:
       "Armamos viajes a Brasil saliendo desde Córdoba: playa, ciudad o eventos. Cotizás por WhatsApp con una persona real y te enviamos opciones claras según fechas y presupuesto.",
     howWeWork: [
       "Salidas grupales cuando hay cupos, o paquete 100% a tu medida.",
       "Aéreos desde Córdoba, hoteles y asistencia internacional (AssistCard).",
+      "También salidas en bus a balnearios como Camboriú, por convenio terrestre.",
       "Oficina en el Aeropuerto de Córdoba y seguimiento durante el viaje.",
     ],
     ctaLabel: "Cotizar Brasil por WhatsApp",
@@ -49,8 +50,29 @@ export const clustersData: ClusterPage[] = [
     destinationSlugs: [
       "rio-de-janeiro",
       "porto-de-galinhas",
+      "camboriu",
       "f1-grand-premio-sao-paulo",
     ],
+  },
+  {
+    id: "caribe",
+    slug: "caribe-desde-cordoba",
+    title: "Caribe desde Córdoba",
+    metaTitle: "Paquetes al Caribe desde Córdoba | 787 Rumbos",
+    metaDescription:
+      "Cancún, Playa del Carmen y Riviera Maya desde Córdoba. All Inclusive, Family Plan, traslados y asistencia. Cotizá por WhatsApp.",
+    intro:
+      "El Caribe mexicano es uno de los pedidos más fuertes desde Córdoba: playa, All Inclusive y resorts familiares. Te armamos opciones claras con vuelos, hotel y asistencia, sin bots.",
+    howWeWork: [
+      "Paquetes a medida o salidas cuando hay cupos publicados.",
+      "All Inclusive, Family Plan y hoteles según tu estilo de viaje.",
+      "Aéreos desde Córdoba, traslados y AssistCard incluidos en la propuesta.",
+      "Oficina en el Aeropuerto de Córdoba para resolver dudas en persona.",
+    ],
+    ctaLabel: "Cotizar Caribe por WhatsApp",
+    whatsappText:
+      "Hola 787 Rumbos! Quiero consultar por un viaje al Caribe desde Córdoba. (Web - Cluster Caribe)",
+    destinationSlugs: ["cancun", "playa-del-carmen", "riviera-maya"],
   },
   {
     id: "argentina-bus",
