@@ -83,14 +83,6 @@ export const destinationsData: DestinationPage[] = [
     priceNote: "por persona en base doble",
     departures: [
       {
-        date: "2026-07-08",
-        displayDate: "8 de Julio",
-        status: "sold-out",
-        transport: "aereo",
-        nights: 4,
-        note: "Vacaciones de Julio"
-      },
-      {
         date: "2026-08-15",
         displayDate: "15 de Agosto",
         status: "confirmed",
@@ -176,20 +168,6 @@ export const destinationsData: DestinationPage[] = [
     currency: "ARS",
     priceNote: "por persona en base doble",
     departures: [
-      {
-        date: "2026-07-05",
-        displayDate: "5 de Julio",
-        status: "sold-out",
-        transport: "bus",
-        nights: 8
-      },
-      {
-        date: "2026-07-08",
-        displayDate: "8 de Julio",
-        status: "sold-out",
-        transport: "bus",
-        nights: 8
-      },
       {
         date: "2026-07-11",
         displayDate: "11 de Julio",
@@ -1070,10 +1048,34 @@ export const destinationsData: DestinationPage[] = [
   }
 ];
 
+/** Fecha de hoy a medianoche local (para comparar salidas ISO). */
+export function getTodayLocal(): Date {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return today;
+}
+
+/** True si la salida aún no pasó (incluye el día de hoy). */
+export function isDepartureUpcoming(dep: Departure, today = getTodayLocal()): boolean {
+  return new Date(dep.date + "T00:00:00") >= today;
+}
+
+/** Salidas futuras (cualquier status). */
+export function getUpcomingDepartures(dest: DestinationPage): Departure[] {
+  const today = getTodayLocal();
+  return dest.departures.filter((dep) => isDepartureUpcoming(dep, today));
+}
+
+/** Salidas futuras consultables (no sold-out). */
+export function getActiveUpcomingDepartures(dest: DestinationPage): Departure[] {
+  return getUpcomingDepartures(dest).filter((dep) => dep.status !== "sold-out");
+}
+
 export function getDestinationBySlug(slug: string): DestinationPage | undefined {
   return destinationsData.find(d => d.slug === slug);
 }
 
+/** Relacionados: mismo cluster fijo primero, luego mismo país, luego región. */
 export function getRelatedDestinations(
   slug: string,
   limit = 3
@@ -1081,9 +1083,33 @@ export function getRelatedDestinations(
   const current = getDestinationBySlug(slug);
   if (!current) return [];
 
-  return destinationsData
-    .filter((d) => d.slug !== slug && d.region === current.region)
-    .slice(0, limit);
+  const clusterMateSlugs = new Set<string>();
+  // Import lazy via inline to avoid circular deps: cluster mates from known lists
+  const fixedClusters: string[][] = [
+    ["rio-de-janeiro", "porto-de-galinhas", "f1-grand-premio-sao-paulo"],
+    ["termas-rio-hondo", "cataratas-del-iguazu", "salar-de-uyuni"],
+  ];
+  for (const group of fixedClusters) {
+    if (group.includes(slug)) {
+      group.forEach((s) => {
+        if (s !== slug) clusterMateSlugs.add(s);
+      });
+    }
+  }
+
+  const others = destinationsData.filter((d) => d.slug !== slug);
+  const clusterMates = others.filter((d) => clusterMateSlugs.has(d.slug));
+  const sameCountry = others.filter(
+    (d) => d.country === current.country && !clusterMateSlugs.has(d.slug)
+  );
+  const sameRegion = others.filter(
+    (d) =>
+      d.region === current.region &&
+      d.country !== current.country &&
+      !clusterMateSlugs.has(d.slug)
+  );
+
+  return [...clusterMates, ...sameCountry, ...sameRegion].slice(0, limit);
 }
 
 export function getAllDestinationSlugs(): string[] {
