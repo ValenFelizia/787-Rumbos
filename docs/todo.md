@@ -428,14 +428,15 @@
   - [ ] Argentina en bus desde Córdoba
   - [ ] Salidas grupales desde Córdoba
   - [ ] Escapadas de fin de semana largo
-- [ ] **13.2** FAQ por destino
-  - [ ] Agregar preguntas reales de usuarios a cada destino prioritario
-  - [ ] Evaluar schema `FAQPage`
-  - [ ] Priorizar Río de Janeiro, Brasil/Caribe, Bariloche, Cataratas, Termas y F1
-- [ ] **13.3** Interlinking editorial
-  - [ ] Linkear destino ↔ categoría ↔ artículos relacionados
-  - [ ] Agregar breadcrumbs si se implementa navegación multipágina más profunda
-  - [ ] Evitar páginas huérfanas
+- [x] **13.2** FAQ por destino ✅ (ola 1 — destinos prioritarios)
+  - [x] Agregar preguntas reales de usuarios a cada destino prioritario (Río, Cancún, Playa del Carmen, Bariloche, Cataratas, Termas, F1)
+  - [x] Schema `FAQPage` por página de destino (reusa `FAQ.tsx` props-driven)
+  - [x] Highlights, breadcrumbs (UI + JSON-LD) y destinos relacionados en detalle
+  - [ ] Ampliar FAQ al resto de slugs cuando haya consultas reales
+- [/] **13.3** Interlinking editorial
+  - [x] Destinos relacionados por región en detalle (`getRelatedDestinations`)
+  - [x] Breadcrumbs Inicio → Destinos → {nombre}
+  - [ ] Linkear destino ↔ categoría ↔ artículos (pendiente clusters 13.1 / blog)
 - [ ] **13.4** Blog mínimo
   - [ ] Publicar 2 piezas mensuales durante 3 meses
   - [ ] Priorizar artículos cortos con intención real, no contenido genérico
@@ -499,5 +500,6 @@
 | 2026-07-06 | Integrado el paquete especial de F1 GP São Paulo con banner destacado en Home y vista de folleto en detalle                                                                                             |
 | 2026-07-06 | Auditoría competitiva/marketing/SEO creada; se abren Fases 11 a 14 para GBP, prueba social, SEO de crecimiento y pauta controlada                                                                       |
 | 2026-07-08 | Fix `PartnersMarquee`: un solo track animado a `-50%` (antes dos listas a `-100%` causaban solapamiento y salto al reiniciar)                                                                          |
+| 2026-07-08 | Sprint SEO sin GBP: FAQ por destino (7 prioritarios), highlights, breadcrumbs, related + metadata `/destinos`                                                                                         |
 
 
