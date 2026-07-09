@@ -43,8 +43,8 @@ Estos datos están sincronizados en el footer, schema JSON-LD, y Google Maps par
 ### Fase 8 — Conversión Interactiva (Quiz/Cotizador) ✅
 *   **Estado Global:** Implementado `ModalContext.tsx` para coordinar la apertura/cierre y pre-selección de destinos del cotizador desde cualquier CTA de la web.
 *   **Asistente de Cotización (`QuoteModal.tsx`):**
-    *   **Paso 1: Destino.** Input de texto libre con píldoras de sugerencias rápidas autocompletables (Río, Bariloche, Cartagena, Ushuaia).
-    *   **Paso 2: Fechas y Pasajeros.** Selectores dinámicos generados con JS de los próximos 12 meses + contadores numéricos interactivos de pasajeros (Adultos y Menores).
+    *   **Paso 1: Destino.** Input de texto libre con píldoras de sugerencias reales del catálogo (featured + Cancún, Playa del Carmen, Ushuaia).
+    *   **Paso 2: Fechas, duración y pasajeros.** Selectores de los próximos 12 meses + duración estimada del viaje (rangos en días) + contadores de Adultos y Menores.
     *   **Paso 3: Aerolíneas.** Selector visual de logos con la opción *"Sin preferencia"* pre-seleccionada por defecto.
     *   **Bypass de Formulario:** Enlace directo inferior para saltar al WhatsApp sin realizar el quiz.
     *   **Prevención de Submit Prematuro:** Interceptación del evento de submit del navegador en los pasos 1 y 2 para evitar redirecciones accidentales.

@@ -198,6 +198,8 @@
   - [x] Crear un mini-formulario/quiz interactivo de 3 pasos antes de abrir WhatsApp (Destino ➔ Fechas ➔ Pasajeros).
   - [x] Generar mensaje pre-rellenado altamente específico para los dueños de la agencia (ej: "Hola, quiero cotizar un viaje a Río para 2 adultos en Septiembre...").
   - [x] Animaciones y transiciones premium entre pantallas para mantener la experiencia fluida y elegante.
+  - [x] Sugerencias populares alineadas a destinos reales del catálogo (featured + Cancún, Playa del Carmen, Ushuaia)
+  - [x] Campo de duración estimada (días) incluido en el mensaje de WhatsApp
 
 ---
 
@@ -504,6 +506,7 @@
 | 2026-07-06 | Auditoría competitiva/marketing/SEO creada; se abren Fases 11 a 14 para GBP, prueba social, SEO de crecimiento y pauta controlada                                                                       |
 | 2026-07-08 | Fix `PartnersMarquee`: un solo track animado a `-50%` (antes dos listas a `-100%` causaban solapamiento y salto al reiniciar)                                                                          |
 | 2026-07-08 | Sprint SEO sin GBP: FAQ por destino (7 prioritarios), highlights, breadcrumbs, related + metadata `/destinos`                                                                                         |
+| 2026-07-08 | Cotizador: sugerencias alineadas a destinos reales del catálogo + campo de duración estimada en el mensaje de WhatsApp                                                                              |
 | 2026-07-08 | Sprint 2: higiene catálogo (salidas pasadas + SpecialPromo endsAt) + 3 hubs SEO (Brasil, Argentina bus, Salidas grupales) + interlinking/sitemap                                                      |
 
 
