@@ -5,6 +5,7 @@
  * Soporta destinos evergreen, monedas mixtas (ARS/USD), tipos de transporte,
  * excursiones opcionales y lógica inteligente de vencimiento de salidas.
  */
+import type { FaqItem } from "@/lib/constants";
 
 export interface Departure {
   date: string;          // Formato ISO "YYYY-MM-DD"
@@ -35,6 +36,15 @@ export interface DestinationPage {
   currency: "ARS" | "USD";
   priceNote?: string;      // "por persona en base doble"
   departures: Departure[];
+  /** FAQ específicas del destino (Fase 13.2). Opcional: solo destinos prioritarios. */
+  faq?: FaqItem[];
+}
+
+/** WhatsApp con tracking por página de destino (FAQ / detalle). */
+function whatsappDestinoFaq(destino: string): string {
+  return `https://api.whatsapp.com/send?phone=5493516157398&text=${encodeURIComponent(
+    `Hola 787 Rumbos! Quiero consultar por un viaje a ${destino}. (Web - FAQ Destino)`
+  )}`;
 }
 
 export const destinationsData: DestinationPage[] = [
@@ -202,7 +212,71 @@ export const destinationsData: DestinationPage[] = [
         transport: "bus",
         nights: 8
       }
-    ]
+    ],
+    faq: [
+      {
+        id: "termas-incluye",
+        question: "¿Qué incluye el viaje a Termas de Río Hondo?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Nuestras salidas grupales típicas incluyen traslado en bus desde Córdoba, alojamiento en Hotel Principado con pensión completa (bebida en almuerzo y cena), coordinador permanente e asistencia médica nacional. El detalle exacto se confirma al cotizar.",
+          },
+        ],
+      },
+      {
+        id: "termas-duracion",
+        question: "¿Cuántos días dura la salida?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Las salidas publicadas suelen ser de 8 noches. Si preferís otras fechas o menos días, armamos un paquete a medida.",
+          },
+        ],
+      },
+      {
+        id: "termas-transporte",
+        question: "¿Salgo en bus desde Córdoba?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Sí. Las salidas grupales a Termas parten en bus desde Córdoba, ida y vuelta. También podemos cotizar otras combinaciones si lo necesitás.",
+          },
+        ],
+      },
+      {
+        id: "termas-mejor-epoca",
+        question: "¿Cuál es la mejor época para ir a las Termas?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Se puede disfrutar todo el año. El invierno es muy pedido para el relax termal; en vacaciones de julio conviene reservar con anticipación porque los cupos se agotan rápido.",
+          },
+        ],
+      },
+      {
+        id: "termas-cotizar",
+        question: "¿Cómo consulto disponibilidad?",
+        answer: [
+          { type: "text", value: "Escribinos por " },
+          {
+            type: "link",
+            label: "WhatsApp",
+            href: whatsappDestinoFaq("Termas de Río Hondo"),
+            external: true,
+          },
+          {
+            type: "text",
+            value:
+              " con la fecha que te interesa y te confirmamos cupos y precio actualizado.",
+          },
+        ],
+      },
+    ],
   },
   {
     slug: "bariloche",
@@ -230,7 +304,71 @@ export const destinationsData: DestinationPage[] = [
     priceFrom: 597000,
     currency: "ARS",
     priceNote: "por persona en base doble",
-    departures: [] // Sin salidas activas en este momento (Paquete a medida)
+    departures: [], // Sin salidas activas en este momento (Paquete a medida)
+    faq: [
+      {
+        id: "bariloche-incluye",
+        question: "¿Qué incluyen los paquetes a Bariloche?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "En general: aéreo Córdoba–Bariloche, noches de hotel con desayuno, traslados aeropuerto–hotel, Circuito Chico e asistencia al viajero. Podemos sumar o sacar servicios según lo que busques.",
+          },
+        ],
+      },
+      {
+        id: "bariloche-epoca",
+        question: "¿Conviene ir en invierno o en verano?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Depende de lo que quieras vivir. En invierno: nieve y Cerro Catedral. En verano: lagos, senderismo y navegación. Ambos son excelentes; te ayudamos a elegir según fechas y presupuesto.",
+          },
+        ],
+      },
+      {
+        id: "bariloche-bus-o-avion",
+        question: "¿Puedo ir en bus o solo en avión?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Cotizamos ambas opciones. El aéreo es más rápido; el bus suele ser más económico. Contanos tu prioridad y armamos la mejor combinación.",
+          },
+        ],
+      },
+      {
+        id: "bariloche-asistencia",
+        question: "¿Incluye asistencia al viajero?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Sí, en los paquetes estándar incluimos asistencia nacional (InterAssist). Si viajás con menores o querés mayor cobertura, te asesoramos sobre el plan adecuado.",
+          },
+        ],
+      },
+      {
+        id: "bariloche-cotizar",
+        question: "¿Cómo armo mi viaje a Bariloche?",
+        answer: [
+          { type: "text", value: "Escribinos por " },
+          {
+            type: "link",
+            label: "WhatsApp",
+            href: whatsappDestinoFaq("Bariloche"),
+            external: true,
+          },
+          {
+            type: "text",
+            value:
+              " con fechas aproximadas y cantidad de pasajeros. Te armamos una propuesta a medida desde Córdoba.",
+          },
+        ],
+      },
+    ],
   },
   {
     slug: "cataratas-del-iguazu",
@@ -274,7 +412,70 @@ export const destinationsData: DestinationPage[] = [
         transport: "aereo",
         nights: 4
       }
-    ]
+    ],
+    faq: [
+      {
+        id: "iguazu-incluye",
+        question: "¿Qué incluye el paquete a Cataratas?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Según la salida: pasaje en bus coche cama o aéreo desde Córdoba, noches de hotel con desayuno, traslados a los parques, coordinación e asistencia al viajero. Entradas a los parques y excursiones náuticas pueden cotizarse aparte.",
+          },
+        ],
+      },
+      {
+        id: "iguazu-lados",
+        question: "¿Se visita el lado argentino y el brasileño?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Sí, en los itinerarios estándar se contempla ambos parques. El lado argentino tiene más pasarelas; el brasileño ofrece una vista panorámica espectacular. Te detallamos el programa al cotizar.",
+          },
+        ],
+      },
+      {
+        id: "iguazu-bus-avion",
+        question: "¿Conviene ir en bus o en avión?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "El bus coche cama suele ser más económico; el aéreo ahorra tiempo de viaje. Tenemos salidas en ambas modalidades: elegí según presupuesto y días disponibles.",
+          },
+        ],
+      },
+      {
+        id: "iguazu-documentos",
+        question: "¿Necesito pasaporte para el lado brasileño?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Los argentinos pueden ingresar a Brasil con DNI vigente en buen estado. Igual te confirmamos requisitos vigentes al armar el viaje, porque pueden actualizarse.",
+          },
+        ],
+      },
+      {
+        id: "iguazu-cotizar",
+        question: "¿Cómo reservo una salida a Iguazú?",
+        answer: [
+          { type: "text", value: "Escribinos por " },
+          {
+            type: "link",
+            label: "WhatsApp",
+            href: whatsappDestinoFaq("Cataratas del Iguazú"),
+            external: true,
+          },
+          {
+            type: "text",
+            value: " indicando la fecha de la lista o si preferís fechas a medida.",
+          },
+        ],
+      },
+    ],
   },
   {
     slug: "buenos-aires",
@@ -376,7 +577,71 @@ export const destinationsData: DestinationPage[] = [
         nights: 7,
         note: "Salida acompañada"
       }
-    ]
+    ],
+    faq: [
+      {
+        id: "cancun-requisitos",
+        question: "¿Qué documentos necesito para viajar a Cancún?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Pasaporte vigente (recomendamos al menos 6 meses de validez) y, según el caso, visa u otros requisitos según tu nacionalidad. Te guiamos con la documentación y la asistencia al viajero exigida.",
+          },
+        ],
+      },
+      {
+        id: "cancun-incluye",
+        question: "¿Los paquetes son All Inclusive?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Podemos armar All Inclusive frente al mar o hoteles con desayuno, según tu estilo. Los paquetes típicos incluyen aéreo desde Córdoba, traslados, hotel y AssistCard. Excursiones (Chichén Itzá, cenotes, Isla Mujeres) se cotizan aparte o se suman al paquete.",
+          },
+        ],
+      },
+      {
+        id: "cancun-epoca",
+        question: "¿Cuál es la mejor época para Cancún?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "El Caribe mexicano se disfruta casi todo el año. Noviembre a abril suele tener clima más estable; en temporada de lluvias/huracanes te avisamos riesgos y alternativas. Contanos tus fechas y te orientamos.",
+          },
+        ],
+      },
+      {
+        id: "cancun-asistencia",
+        question: "¿Es obligatoria la asistencia al viajero?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Para destinos internacionales recomendamos (y en muchos casos exigimos) cobertura médica adecuada. En nuestros paquetes incluimos AssistCard de alta cobertura; te explicamos qué cubre según el plan.",
+          },
+        ],
+      },
+      {
+        id: "cancun-cotizar",
+        question: "¿Cómo cotizo Cancún desde Córdoba?",
+        answer: [
+          { type: "text", value: "Escribinos por " },
+          {
+            type: "link",
+            label: "WhatsApp",
+            href: whatsappDestinoFaq("Cancún"),
+            external: true,
+          },
+          {
+            type: "text",
+            value:
+              " con fechas, cantidad de pasajeros y si preferís All Inclusive. Te armamos opciones con vuelos desde Córdoba.",
+          },
+        ],
+      },
+    ],
   },
   {
     slug: "playa-del-carmen",
@@ -404,7 +669,70 @@ export const destinationsData: DestinationPage[] = [
     priceFrom: 1720,
     currency: "USD",
     priceNote: "por persona en base doble",
-    departures: []
+    departures: [],
+    faq: [
+      {
+        id: "pdc-vs-cancun",
+        question: "¿Playa del Carmen o Cancún?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Cancún concentra resorts All Inclusive en la zona hotelera. Playa del Carmen tiene más vida peatonal (Quinta Avenida) y queda más cerca de Tulum, Xcaret y Cozumel. Te ayudamos a elegir según si buscás relax de resort o más movimiento.",
+          },
+        ],
+      },
+      {
+        id: "pdc-incluye",
+        question: "¿Qué incluye un paquete a Playa del Carmen?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Aéreo desde Córdoba, hotel (All Inclusive o con desayuno), traslados y asistencia internacional. Parques y ferry a Cozumel se pueden sumar según tu presupuesto.",
+          },
+        ],
+      },
+      {
+        id: "pdc-requisitos",
+        question: "¿Qué requisitos hay para México?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Pasaporte vigente y los requisitos migratorios vigentes para tu nacionalidad. Te confirmamos todo al cotizar para que viajes sin sorpresas.",
+          },
+        ],
+      },
+      {
+        id: "pdc-excursiones",
+        question: "¿Puedo visitar Tulum y Xcaret?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Sí. Desde Playa del Carmen son excursiones muy pedidas. Las cotizamos aparte o las integramos al paquete según lo que quieras vivir.",
+          },
+        ],
+      },
+      {
+        id: "pdc-cotizar",
+        question: "¿Cómo consulto por Playa del Carmen?",
+        answer: [
+          { type: "text", value: "Escribinos por " },
+          {
+            type: "link",
+            label: "WhatsApp",
+            href: whatsappDestinoFaq("Playa del Carmen"),
+            external: true,
+          },
+          {
+            type: "text",
+            value: " y te armamos opciones desde Córdoba.",
+          },
+        ],
+      },
+    ],
   },
   {
     slug: "rio-de-janeiro",
@@ -448,7 +776,71 @@ export const destinationsData: DestinationPage[] = [
         transport: "aereo",
         nights: 7
       }
-    ]
+    ],
+    faq: [
+      {
+        id: "rio-requisitos",
+        question: "¿Qué necesito para viajar a Río desde Argentina?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Los argentinos ingresan a Brasil con DNI vigente en buen estado (o pasaporte). Te confirmamos requisitos actualizados al cotizar, incluyendo asistencia al viajero recomendada.",
+          },
+        ],
+      },
+      {
+        id: "rio-incluye",
+        question: "¿Qué incluye un paquete a Río de Janeiro?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "En general: aéreo desde Córdoba, noches en Copacabana con desayuno, traslados, city tour con Cristo y Pan de Azúcar, y AssistCard. Podemos ajustar noches, hotel y excursiones a tu medida.",
+          },
+        ],
+      },
+      {
+        id: "rio-epoca",
+        question: "¿Cuál es la mejor época para ir a Río?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Río se disfruta todo el año. Septiembre–noviembre suele tener buen clima y menos aglomeración que el Carnaval. En verano hace más calor y humedad; te orientamos según tus fechas.",
+          },
+        ],
+      },
+      {
+        id: "rio-salidas",
+        question: "¿Hay salidas grupales o solo a medida?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Publicamos salidas cuando hay cupos confirmados y también armamos viajes individuales a tu fecha. Revisá el panel de salidas de esta página o consultanos por WhatsApp.",
+          },
+        ],
+      },
+      {
+        id: "rio-cotizar",
+        question: "¿Cómo cotizo Río desde Córdoba?",
+        answer: [
+          { type: "text", value: "Escribinos por " },
+          {
+            type: "link",
+            label: "WhatsApp",
+            href: whatsappDestinoFaq("Río de Janeiro"),
+            external: true,
+          },
+          {
+            type: "text",
+            value:
+              " con fechas y cantidad de pasajeros. Te enviamos opciones claras con precio orientativo.",
+          },
+        ],
+      },
+    ],
   },
   {
     slug: "porto-de-galinhas",
@@ -610,12 +1002,88 @@ export const destinationsData: DestinationPage[] = [
         nights: 4,
         note: "Vuelo Charter Especial F1 COR/ROS"
       }
-    ]
+    ],
+    faq: [
+      {
+        id: "f1-incluye",
+        question: "¿Qué incluye el paquete del GP de São Paulo?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Vuelo charter COR/ROS–GRU, 4 noches de hotel con desayuno, traslados in/out, traslados al autódromo sábado y domingo, entradas sector G-A-HEINEKEN, kit F1 y AssistCard. Los gastos e impuestos se detallan aparte en la cotización.",
+          },
+        ],
+      },
+      {
+        id: "f1-salidas",
+        question: "¿Desde qué ciudades sale el charter?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "El vuelo charter especial contempla Córdoba (COR) y Rosario (ROS). Confirmamos horarios y puntos de embarque al reservar.",
+          },
+        ],
+      },
+      {
+        id: "f1-entradas",
+        question: "¿Las entradas al autódromo están incluidas?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Sí, el paquete incluye entradas para el sector G-A-HEINEKEN. Es un sector con buena visibilidad en una de las rectas rápidas de Interlagos.",
+          },
+        ],
+      },
+      {
+        id: "f1-cupos",
+        question: "¿Hasta cuándo hay cupos?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Los cupos del charter y del hotel son limitados. Te recomendamos consultar pronto: la demanda del GP suele agotar lugares con anticipación.",
+          },
+        ],
+      },
+      {
+        id: "f1-cotizar",
+        question: "¿Cómo reservo el paquete F1?",
+        answer: [
+          { type: "text", value: "Escribinos por " },
+          {
+            type: "link",
+            label: "WhatsApp",
+            href: whatsappDestinoFaq("F1 Grand Premio de São Paulo"),
+            external: true,
+          },
+          {
+            type: "text",
+            value:
+              " indicando ciudad de embarque (Córdoba o Rosario) y cantidad de pasajeros.",
+          },
+        ],
+      },
+    ],
   }
 ];
 
 export function getDestinationBySlug(slug: string): DestinationPage | undefined {
   return destinationsData.find(d => d.slug === slug);
+}
+
+export function getRelatedDestinations(
+  slug: string,
+  limit = 3
+): DestinationPage[] {
+  const current = getDestinationBySlug(slug);
+  if (!current) return [];
+
+  return destinationsData
+    .filter((d) => d.slug !== slug && d.region === current.region)
+    .slice(0, limit);
 }
 
 export function getAllDestinationSlugs(): string[] {
