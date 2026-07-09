@@ -422,28 +422,31 @@
 
 ## Fase 13 — SEO de Crecimiento
 
-- [ ] **13.1** Clusters de demanda "desde Córdoba"
-  - [ ] Brasil desde Córdoba
-  - [ ] Caribe desde Córdoba
-  - [ ] Argentina en bus desde Córdoba
-  - [ ] Salidas grupales desde Córdoba
-  - [ ] Escapadas de fin de semana largo
+- [/] **13.1** Clusters de demanda "desde Córdoba"
+  - [x] Brasil desde Córdoba (`/destinos/brasil-desde-cordoba`)
+  - [ ] Caribe desde Córdoba (ola siguiente — inventario fino)
+  - [x] Argentina en bus desde Córdoba (`/destinos/argentina-en-bus-desde-cordoba`)
+  - [x] Salidas grupales desde Córdoba (`/destinos/salidas-grupales-desde-cordoba`)
+  - [ ] Escapadas de fin de semana largo (ola siguiente)
 - [x] **13.2** FAQ por destino ✅ (ola 1 — destinos prioritarios)
   - [x] Agregar preguntas reales de usuarios a cada destino prioritario (Río, Cancún, Playa del Carmen, Bariloche, Cataratas, Termas, F1)
   - [x] Schema `FAQPage` por página de destino (reusa `FAQ.tsx` props-driven)
   - [x] Highlights, breadcrumbs (UI + JSON-LD) y destinos relacionados en detalle
   - [ ] Ampliar FAQ al resto de slugs cuando haya consultas reales
 - [/] **13.3** Interlinking editorial
-  - [x] Destinos relacionados por región en detalle (`getRelatedDestinations`)
-  - [x] Breadcrumbs Inicio → Destinos → {nombre}
-  - [ ] Linkear destino ↔ categoría ↔ artículos (pendiente clusters 13.1 / blog)
+  - [x] Destinos relacionados por región/país/cluster en detalle (`getRelatedDestinations`)
+  - [x] Breadcrumbs Inicio → Destinos → {hub?} → {nombre}
+  - [x] Links hub ↔ catálogo ↔ detalle (chips en `/destinos`, link “Ver más” en detalle)
+  - [ ] Linkear destino ↔ artículos (pendiente blog 13.4)
 - [ ] **13.4** Blog mínimo
   - [ ] Publicar 2 piezas mensuales durante 3 meses
   - [ ] Priorizar artículos cortos con intención real, no contenido genérico
   - [ ] Temas iniciales: requisitos Brasil, mejor época para Río, qué incluye un paquete, viajar en bus cama
-- [ ] **13.5** Mantenimiento de catálogo
-  - [ ] Actualizar precios, salidas y estados al menos una vez por mes
-  - [ ] Retirar o marcar correctamente promociones vencidas
+- [/] **13.5** Mantenimiento de catálogo
+  - [x] Podar salidas pasadas del data + ocultarlas en UI de detalle
+  - [x] Auto-ocultar `SpecialPromo` post fecha de salida (`endsAt`)
+  - [ ] Actualizar precios, salidas y estados al menos una vez por mes (proceso operativo)
+  - [ ] Retirar o marcar correctamente promociones vencidas (revisión mensual)
 
 ---
 
@@ -501,5 +504,6 @@
 | 2026-07-06 | Auditoría competitiva/marketing/SEO creada; se abren Fases 11 a 14 para GBP, prueba social, SEO de crecimiento y pauta controlada                                                                       |
 | 2026-07-08 | Fix `PartnersMarquee`: un solo track animado a `-50%` (antes dos listas a `-100%` causaban solapamiento y salto al reiniciar)                                                                          |
 | 2026-07-08 | Sprint SEO sin GBP: FAQ por destino (7 prioritarios), highlights, breadcrumbs, related + metadata `/destinos`                                                                                         |
+| 2026-07-08 | Sprint 2: higiene catálogo (salidas pasadas + SpecialPromo endsAt) + 3 hubs SEO (Brasil, Argentina bus, Salidas grupales) + interlinking/sitemap                                                      |
 
 
