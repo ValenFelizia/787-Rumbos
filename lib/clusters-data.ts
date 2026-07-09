@@ -60,9 +60,9 @@ export const clustersData: ClusterPage[] = [
     metaDescription:
       "Salidas en bus y bus cama desde Córdoba: Termas, Cataratas, Salar y más. También boletería oficial de Vía Bariloche en el aeropuerto.",
     intro:
-      "Si preferís tierra, armamos salidas en bus o bus cama desde Córdoba. Además, en el hall de arribos del aeropuerto somos boletería oficial de Vía Bariloche, Vía Tac y El Valle.",
+      "Si preferís tierra, armamos salidas bus desde Córdoba. Además, en el hall de arribos del aeropuerto somos boletería oficial de Vía Bariloche, Vía Tac y El Valle.",
     howWeWork: [
-      "Salidas grupales coordinadas con hotel y asistencia nacional.",
+      "Salidas grupales o paquetes 100% a tu medida, coordinadas con hotel y asistencia nacional.",
       "Opción de pasaje de ómnibus suelto si solo necesitás el traslado.",
       "Asesoramiento humano para elegir fechas y régimen (pensión, desayuno, etc.).",
     ],
