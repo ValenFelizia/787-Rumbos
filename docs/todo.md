@@ -483,6 +483,43 @@
 
 
 
+## Next steps (pausa de código — post Sprint hubs)
+
+> **Estado (2026-07-09):** pausamos desarrollo de features nuevas. Prioridad operativa: **GBP + reseñas/testimonios**. La web ya no es el cuello de botella.
+>
+> **Medición actual:** `@vercel/analytics` activo en producción (`app/layout.tsx`). Google Analytics 4 (GA4) es opcional — ver nota abajo.
+
+### Bloqueado por contenido / operación (casi no es código)
+
+- [ ] **GBP (Fase 11):** verificación, fotos del local/equipo, posts, reseñas, NAP consistente
+- [ ] **Testimonios (12.1):** 3 reales con autorización → recién ahí descomentar `Testimonials` en `page.tsx`
+- [ ] **Instagram mensual (12.2):** checklist/rutina de actualización del feed curado (proceso en docs, no feature)
+- [ ] **Catálogo mensual (13.5):** revisar precios, salidas y promos; F1 se auto-oculta post-`endsAt`
+
+### Siguiente ola de producto (cuando retome código)
+
+- [ ] Hub **Escapadas de fin de semana largo** (si hay inventario/copy propio)
+- [ ] Ampliar **FAQ** a más destinos cuando lleguen consultas reales
+- [ ] **Blog mínimo (13.4)** — 1–2 artículos con intención real + interlinking a destinos/hubs
+- [ ] **CMS (Fase 10)** — solo cuando editar `destinations-data.ts` a mano empiece a doler
+- [ ] **Ads (Fase 14)** — después de GBP verificado + tracking de leads estable
+
+### Ideas extra (fuera del TODO original — quick wins técnicos)
+
+- [ ] Checklist mensual Instagram en `docs/` (cierra 12.2 como proceso)
+- [ ] OG absolutos en `generateMetadata` de destinos (previews WhatsApp/redes más fiables)
+- [ ] Documentar teléfono NAP canónico (JSON-LD vs WhatsApp) al verificar GBP
+- [ ] Eventos Analytics en CTAs WhatsApp (clicks por fuente: home, destino, cluster, promo)
+- [ ] Evaluar **GA4** además de Vercel Analytics (ver nota)
+
+### Nota: ¿Google Analytics?
+
+Ya medimos tráfico básico con **Vercel Analytics**. GA4 aporta valor si necesitamos: embudos, fuentes/UTM detalladas, eventos custom (click WhatsApp), o vincular con Google Ads / Search Console. No es urgente mientras el foco sea GBP; cuando retome medición fina, GA4 + eventos WhatsApp es el siguiente paso técnico natural.
+
+---
+
+
+
 ## Notas y Cambios
 
 
@@ -508,5 +545,6 @@
 | 2026-07-08 | Sprint SEO sin GBP: FAQ por destino (7 prioritarios), highlights, breadcrumbs, related + metadata `/destinos`                                                                                         |
 | 2026-07-08 | Cotizador: sugerencias alineadas a destinos reales del catálogo + campo de duración estimada en el mensaje de WhatsApp                                                                              |
 | 2026-07-08 | Sprint 2: higiene catálogo (salidas pasadas + SpecialPromo endsAt) + 3 hubs SEO (Brasil, Argentina bus, Salidas grupales) + interlinking/sitemap                                                      |
+| 2026-07-09 | Pausa de código documentada: next steps + ideas extra; medición actual = Vercel Analytics; GA4 opcional post-GBP                                                                                        |
 
 
