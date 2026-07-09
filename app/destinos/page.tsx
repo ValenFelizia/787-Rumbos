@@ -5,8 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
-import { destinationsData, DestinationPage } from "@/lib/destinations-data";
-import { MapPin, Calendar, ArrowRight, Plane, Bus } from "lucide-react";
+import { destinationsData, DestinationPage, getActiveUpcomingDepartures } from "@/lib/destinations-data";
+import { clustersData } from "@/lib/clusters-data";
+import { MapPin, Calendar, ArrowRight } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 
 export default function DestinosIndex() {
@@ -41,6 +42,19 @@ export default function DestinosIndex() {
 
       {/* Main Catalog Section */}
       <section className="mx-auto w-full max-w-6xl px-6 py-12">
+        {/* Hubs SEO */}
+        <div className="mb-10 flex flex-wrap justify-center gap-2">
+          {clustersData.map((cluster) => (
+            <Link
+              key={cluster.id}
+              href={`/destinos/${cluster.slug}`}
+              className="rounded-full border border-[#0b4058]/15 bg-white px-4 py-2 text-xs md:text-sm font-semibold text-[#0b4058]/80 shadow-sm transition-all hover:border-[#0b4058]/35 hover:text-[#0b4058] hover:shadow-md"
+            >
+              {cluster.title}
+            </Link>
+          ))}
+        </div>
+
         {/* Filters */}
         <div className="flex justify-center mb-12">
           <div className="bg-white p-1.5 rounded-full border border-[#0b4058]/10 shadow-sm flex gap-1">
@@ -62,12 +76,7 @@ export default function DestinosIndex() {
         {/* Grid of Destinations */}
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {sortedDestinations.map((dest: DestinationPage) => {
-            const activeDepartures = dest.departures.filter(dep => {
-              const depDate = new Date(dep.date + "T00:00:00");
-              const today = new Date();
-              today.setHours(0, 0, 0, 0);
-              return depDate >= today && dep.status !== "sold-out";
-            });
+            const activeDepartures = getActiveUpcomingDepartures(dest);
 
             return (
               <article

@@ -9,8 +9,11 @@ import {
   destinationsData,
   getDestinationBySlug,
   getRelatedDestinations,
+  getActiveUpcomingDepartures,
+  getUpcomingDepartures,
   type Departure,
 } from "@/lib/destinations-data";
+import { getPrimaryClusterForDestination } from "@/lib/clusters-data";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import {
   Calendar,
@@ -146,13 +149,9 @@ export default async function DestinoDetailPage({ params }: Props) {
     notFound();
   }
 
-  // Filtrar salidas futuras activas
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const activeUpcomingDepartures = dest.departures.filter((dep) => {
-    const depDate = new Date(dep.date + "T00:00:00");
-    return depDate >= today && dep.status !== "sold-out";
-  });
+  // Solo salidas futuras en el panel (pasadas se podan del catálogo / no se listan)
+  const upcomingDepartures = getUpcomingDepartures(dest);
+  const activeUpcomingDepartures = getActiveUpcomingDepartures(dest);
 
   // JSON-LD estructurado
   const jsonLd = {
@@ -204,6 +203,7 @@ export default async function DestinoDetailPage({ params }: Props) {
   };
 
   const related = getRelatedDestinations(slug, 3);
+  const primaryCluster = getPrimaryClusterForDestination(slug);
 
   return (
     <main className="min-h-screen bg-[#f9f9f9] text-[#0b4058]">
@@ -245,6 +245,19 @@ export default async function DestinoDetailPage({ params }: Props) {
                     Destinos
                   </Link>
                 </li>
+                {primaryCluster && primaryCluster.id !== "salidas-grupales" && (
+                  <>
+                    <li aria-hidden="true">/</li>
+                    <li>
+                      <Link
+                        href={`/destinos/${primaryCluster.slug}`}
+                        className="hover:text-[#dae553] transition-colors"
+                      >
+                        {primaryCluster.title}
+                      </Link>
+                    </li>
+                  </>
+                )}
                 <li aria-hidden="true">/</li>
                 <li className="text-[#dae553] font-semibold" aria-current="page">
                   {dest.name}
@@ -264,6 +277,14 @@ export default async function DestinoDetailPage({ params }: Props) {
               <span className="text-xs uppercase font-extrabold tracking-widest text-[#dae553] bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/15">
                 {dest.region === "nacional" ? "Argentina" : dest.country}
               </span>
+              {primaryCluster && primaryCluster.id !== "salidas-grupales" && (
+                <Link
+                  href={`/destinos/${primaryCluster.slug}`}
+                  className="text-xs font-semibold text-white/80 hover:text-[#dae553] underline underline-offset-2 transition-colors"
+                >
+                  Ver más: {primaryCluster.title}
+                </Link>
+              )}
             </div>
 
             <h1 className="font-[family-name:var(--font-brand-heading)] text-3xl md:text-5xl font-extrabold text-white tracking-tight text-balance">
@@ -425,7 +446,7 @@ export default async function DestinoDetailPage({ params }: Props) {
                 </div>
 
                 <div className="space-y-4">
-                  {dest.departures.map((dep, idx) => {
+                  {upcomingDepartures.map((dep, idx) => {
                     const statusInfo = getDepartureStatus(dep);
 
                     return (
