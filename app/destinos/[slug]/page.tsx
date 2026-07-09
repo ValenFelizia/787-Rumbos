@@ -4,9 +4,24 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
-import { destinationsData, getDestinationBySlug, DestinationPage, Departure } from "@/lib/destinations-data";
+import { FAQ } from "@/components/sections/FAQ";
+import {
+  destinationsData,
+  getDestinationBySlug,
+  getRelatedDestinations,
+  type Departure,
+} from "@/lib/destinations-data";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
-import { MapPin, Calendar, Check, AlertCircle, Compass, Clock, ArrowLeft, Plane, Bus, Star } from "lucide-react";
+import {
+  Calendar,
+  Check,
+  AlertCircle,
+  Compass,
+  ArrowLeft,
+  Plane,
+  Bus,
+  Sparkles,
+} from "lucide-react";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -163,14 +178,44 @@ export default async function DestinoDetailPage({ params }: Props) {
     })
   };
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Inicio",
+        item: "https://787rumbos.com.ar",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Destinos",
+        item: "https://787rumbos.com.ar/destinos",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: dest.name,
+        item: `https://787rumbos.com.ar/destinos/${slug}`,
+      },
+    ],
+  };
+
+  const related = getRelatedDestinations(slug, 3);
+
   return (
     <main className="min-h-screen bg-[#f9f9f9] text-[#0b4058]">
       <Navbar />
 
-      {/* Script de JSON-LD */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
       {/* Hero Section */}
@@ -187,6 +232,26 @@ export default async function DestinoDetailPage({ params }: Props) {
 
         <div className="absolute bottom-0 left-0 w-full py-10 px-6">
           <div className="mx-auto max-w-6xl space-y-4">
+            <nav aria-label="Breadcrumb" className="text-xs md:text-sm text-white/70">
+              <ol className="flex flex-wrap items-center gap-1.5">
+                <li>
+                  <Link href="/" className="hover:text-[#dae553] transition-colors">
+                    Inicio
+                  </Link>
+                </li>
+                <li aria-hidden="true">/</li>
+                <li>
+                  <Link href="/destinos" className="hover:text-[#dae553] transition-colors">
+                    Destinos
+                  </Link>
+                </li>
+                <li aria-hidden="true">/</li>
+                <li className="text-[#dae553] font-semibold" aria-current="page">
+                  {dest.name}
+                </li>
+              </ol>
+            </nav>
+
             <Link
               href="/destinos"
               className="inline-flex items-center gap-1.5 text-xs md:text-sm font-semibold text-[#dae553] hover:text-white transition-colors duration-200"
@@ -223,6 +288,26 @@ export default async function DestinoDetailPage({ params }: Props) {
                 {dest.description}
               </p>
             </div>
+
+            {/* Highlights */}
+            {dest.highlights.length > 0 && (
+              <div className="space-y-4">
+                <h3 className="font-[family-name:var(--font-brand-heading)] text-xl font-bold tracking-tight">
+                  Lo imperdible
+                </h3>
+                <ul className="grid gap-3 sm:grid-cols-2">
+                  {dest.highlights.map((item, i) => (
+                    <li
+                      key={i}
+                      className="flex items-start gap-2.5 text-sm text-[#0b4058]/90"
+                    >
+                      <Sparkles className="h-5 w-5 text-[#e6b451] shrink-0 mt-0.5" />
+                      <span className="leading-snug">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {/* Qué Incluye */}
             <div className="space-y-4">
@@ -415,6 +500,71 @@ export default async function DestinoDetailPage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      {/* Destinos relacionados */}
+      {related.length > 0 && (
+        <section className="border-t border-[#0b4058]/10 bg-white">
+          <div className="mx-auto w-full max-w-6xl px-6 py-12">
+            <h2 className="font-[family-name:var(--font-brand-heading)] text-2xl font-bold tracking-tight mb-6">
+              También te puede interesar
+            </h2>
+            <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {related.map((item) => (
+                <li key={item.slug}>
+                  <Link
+                    href={`/destinos/${item.slug}`}
+                    className="group flex flex-col overflow-hidden rounded-2xl border border-[#0b4058]/10 bg-[#f9f9f9] transition-all duration-200 hover:border-[#0b4058]/25 hover:shadow-md"
+                  >
+                    <div className="relative h-36 w-full overflow-hidden">
+                      <Image
+                        src={item.heroImage}
+                        alt={`Paquetes a ${item.name}`}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    </div>
+                    <div className="p-4">
+                      <p className="text-xs font-semibold uppercase tracking-wider text-[#006183]/70">
+                        {item.region === "nacional" ? "Argentina" : item.country}
+                      </p>
+                      <p className="mt-1 font-[family-name:var(--font-brand-heading)] text-lg font-bold text-[#0b4058] group-hover:text-[#006183] transition-colors">
+                        {item.name}
+                      </p>
+                    </div>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
+      {/* FAQ por destino */}
+      {dest.faq && dest.faq.length > 0 && (
+        <FAQ
+          items={dest.faq}
+          id={`faq-${slug}`}
+          headingId={`faq-heading-${slug}`}
+          title={`Preguntas frecuentes sobre ${dest.name}`}
+          compact
+          description={
+            <>
+              Dudas típicas de quienes viajan a {dest.name} desde Córdoba. Si tu consulta es otra,{" "}
+              <a
+                href={getWhatsAppCustomLink(dest.name)}
+                className="font-semibold text-[#006183] underline decoration-[#006183]/30 underline-offset-2 transition-colors hover:text-[#0b4058] hover:decoration-[#0b4058]/40"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Consultar por WhatsApp sobre ${dest.name}`}
+              >
+                escribinos por WhatsApp
+              </a>
+              .
+            </>
+          }
+        />
+      )}
 
       <Footer />
     </main>
