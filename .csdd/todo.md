@@ -6,19 +6,13 @@
 
 ## Bloqueado por contenido u operación
 
-- [ ] T-002 — Completar la presencia de Google Business Profile
-  - Owner: Valen
-  - Agent: Cursor Grok
-  - Scope: Google Business Profile, enlace exacto de Maps, fotos; roles de teléfono ya alineados en web/schema
-  - Updated: 2026-07-14
-  - Blocked by: verificación de la ficha GBP, fotos reales del local/equipo, URL exacta de Maps.
-  - Note: roles NAP resueltos. Agencia `344-8724` = CTAs/schema; urgencias `615-7398` = footer/FAQ. Constantes `AGENCY_PHONE` / `URGENT_PHONE` / `whatsappLink`. Pendiente UI footer: el ícono de “Urgencias” se ve raro (misma familia Send, label largo en 2 líneas); rediseñar (p. ej. icono distinto, tipografía secundaria, o layout que no achique el ícono) — no tocar aún. GBP y Maps genérico siguen pendientes.
-
 - [ ] T-003 — Resolver la prueba social
   - Owner: Valen
-  - Scope: `components/sections/Testimonials.tsx`, `app/page.tsx` y contenido curado de Instagram
-  - Blocked by: obtener reseñas o testimonios reales con autorización y la URL verificada de Google Business Profile.
-  - Note: los testimonios de ejemplo existen en el componente, pero la home no los renderiza. Deben sustituirse antes de habilitar la sección; ubicar la prueba social real cerca de la primera tanda de paquetes. Pedir reseñas auténticas de forma sostenida, sin incentivos, selección sesgada ni texto dictado. Casos reales de acompañamiento (imprevistos, documentación especial) son candidatos fuertes cuando haya autorización.
+  - Agent: Cursor Grok
+  - Scope: `components/sections/Testimonials.tsx`, `lib/testimonials-data.ts`, `app/page.tsx`, `GOOGLE_WRITE_REVIEW_LINK` / `GOOGLE_REVIEWS_LINK`
+  - Updated: 2026-07-14
+  - Blocked by: primeras reseñas/testimonios reales con autorización para curar en la web (pedido a clientes ya en marcha).
+  - Note: reclamada. Sección activa cerca de destacados: CTA al formulario `g.page/r/CZ_gdDN4llrIEBI/review`. QR en `public/qr-resenas-787.png`. Array vacío en `testimonials-data.ts`; al sumar entradas autorizadas se muestran solas. Copy-paste para pedir reseñas en handoff.
 
 - [ ] T-004 — Mantener el catálogo y las promociones vigentes
   - Owner: Valen
@@ -59,12 +53,19 @@
 
 ## Completado recientemente
 
+- [x] T-002 — Completar la presencia de Google Business Profile
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-07-14
+  - Note: ficha verificada; fotos/horarios/teléfonos en GBP; Maps + geo/`hasMap`/`sameAs` en web. CTA WhatsApp de chat en GBP rechazado por Google (mitigado con click-to-call + WhatsApp web). Pedido de reseñas y formulario `g.page` pasan a T-003.
+
 - [x] T-012 — Definir el alcance operativo del acompañamiento
   - Owner: Valen
   - Agent: Cursor Grok
   - Scope: released
   - Updated: 2026-07-14
-  - Note: grilling cerrado. Specs + FAQ/hero/AboutUs/ValueProp/footer/schema alineados. Reembolsos formales aplazados (preguntas a agencieros en handoff). Roles de teléfono resueltos con T-002 (web); GBP sigue en T-002.
+  - Note: grilling cerrado. Specs + FAQ/hero/AboutUs/ValueProp/footer/schema alineados. Reembolsos formales aplazados (preguntas a agencieros en handoff). Roles de teléfono resueltos en web; GBP cerrado en T-002.
 
 - [x] T-015 — Diagnosticar y corregir el marquee de partners
   - Owner: Valen

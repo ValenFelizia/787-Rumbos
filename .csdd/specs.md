@@ -62,11 +62,18 @@ mantenerse consistentes:
 | Código postal | X5147XAA |
 | Teléfono de agencia (principal) | 0351 344-8724 (`+54 9 351 344-8724`) — CTAs, schema, NAP, GBP |
 | Línea de urgencias (viaje en curso) | 0351 615-7398 (`+54 9 351 615-7398`) — footer y FAQ; no CTAs comerciales |
+| Google Maps / GBP | [maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7](https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7) (place `787 Rumbos`) |
+| Coordenadas (schema) | `-31.3172806, -64.2131382` |
+| Place key (Maps) | `0x94329becff1264df:0xc85a96783374e09f` · feature `/g/11nr4bc4fc` |
+| Reseñas (escribir) | [g.page/r/CZ_gdDN4llrIEBI/review](https://g.page/r/CZ_gdDN4llrIEBI/review) (`GOOGLE_WRITE_REVIEW_LINK`) |
+| QR reseñas | `public/qr-resenas-787.png` (`GOOGLE_REVIEW_QR_SRC`) |
 
 Canal público principal: WhatsApp de agencia (`AGENCY_PHONE` en `lib/constants.ts`).
 La línea de urgencias (`URGENT_PHONE`) es un celular del equipo para imprevistos con
 viaje en curso; no debe monopolizar cotización ni presentarse como “administración”.
 Footer, schema, Google Business Profile y citaciones deben reflejar estos roles.
+El enlace de Maps del sitio (`GOOGLE_MAPS_LINK`) debe apuntar a la ficha de
+**787 Rumbos**, no a una búsqueda genérica del aeropuerto.
 
 Precios, salidas, disponibilidad, promociones, fotos y testimonios deben ser
 reales, vigentes y verificables. Las promociones con fecha de finalización deben
@@ -85,9 +92,11 @@ a Instagram); no se impone un formateador monetario distinto.
   sitemap actualizado.
 - Los hubs de Brasil, Caribe, Argentina en bus y salidas grupales desde Córdoba
   están publicados y enlazados con el catálogo y las fichas de destino.
-- La home no publica testimonios mientras solo existan datos de ejemplo. Cuando
-  haya prueba social real y autorizada, debe aparecer cerca del catálogo o de un
-  punto de decisión comercial, sin desplazar la información esencial de servicios.
+- La home publica una sección de prueba social cerca del catálogo destacado.
+  Mientras no haya testimonios curados y autorizados, solo invita a dejar una
+  reseña real en Google (`GOOGLE_WRITE_REVIEW_LINK`). No se muestran ejemplos
+  ficticios. Cuando existan entradas en `lib/testimonials-data.ts`, se listan
+  ahí mismo y se mantiene el CTA a Google.
 - En la home, el hero y la propuesta de valor priorizan la oficina en el
   Aeropuerto de Córdoba, la experiencia en transporte y la oferta aérea +
   terrestre. La sección de Servicios precede al feed social (“Comunidad”).
