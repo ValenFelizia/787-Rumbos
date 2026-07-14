@@ -11,6 +11,7 @@ import {
   getRelatedDestinations,
   getActiveUpcomingDepartures,
   getUpcomingDepartures,
+  getTransportLabel,
   type Departure,
 } from "@/lib/destinations-data";
 import { getPrimaryClusterForDestination } from "@/lib/clusters-data";
@@ -465,12 +466,12 @@ export default async function DestinoDetailPage({ params }: Props) {
                             </span>
                             <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-[#0b4058]/70">
                               <span className="flex items-center gap-1">
-                                {dep.transport === "aereo" ? (
-                                  <Plane className="h-3 w-3 text-sky-600" />
+                                {dep.transport === "aereo" || dep.transport === "mix" ? (
+                                  <Plane className="h-3 w-3 text-sky-600" aria-hidden />
                                 ) : (
-                                  <Bus className="h-3 w-3 text-emerald-600" />
+                                  <Bus className="h-3 w-3 text-emerald-600" aria-hidden />
                                 )}
-                                <span className="capitalize">{dep.transport === "bus-cama" ? "Bus Coche Cama" : dep.transport}</span>
+                                <span>{getTransportLabel(dep.transport)}</span>
                               </span>
                               <span>·</span>
                               <span>{dep.nights} {dep.nights === 1 ? "noche" : "noches"}</span>

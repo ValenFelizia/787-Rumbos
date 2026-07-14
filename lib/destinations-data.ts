@@ -7,13 +7,29 @@
  */
 import type { FaqItem } from "@/lib/constants";
 
+export type TransportType = "aereo" | "bus" | "bus-cama" | "mix";
+
+/** Etiqueta legible para UI; el valor canónico en datos sigue sin tilde (`aereo`). */
+export function getTransportLabel(transport: TransportType): string {
+  switch (transport) {
+    case "aereo":
+      return "Aéreo";
+    case "bus":
+      return "Bus";
+    case "bus-cama":
+      return "Bus Coche Cama";
+    case "mix":
+      return "Aéreo / Bus";
+  }
+}
+
 export interface Departure {
   date: string;          // Formato ISO "YYYY-MM-DD"
   displayDate: string;   // Ej: "8 de Julio"
   priceFrom?: number;    // Opcional, si difiere del precio base del destino
   currency?: "ARS" | "USD";
   status: "confirmed" | "few-seats" | "sold-out" | "inquire";
-  transport: "aereo" | "bus" | "bus-cama" | "mix";
+  transport: TransportType;
   nights: number;
   note?: string;
 }
