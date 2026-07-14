@@ -9,6 +9,7 @@ import { ChevronDown } from "lucide-react";
 import {
   faqItems as defaultFaqItems,
   faqAnswerToPlainText,
+  WHATSAPP_FAQ_LINK,
   type FaqAnswerSegment,
   type FaqItem,
 } from "@/lib/constants";
@@ -29,9 +30,11 @@ function renderFaqAnswer(segments: FaqAnswerSegment[]) {
         aria-label={
           segment.label === "WhatsApp"
             ? "Consultar por WhatsApp con 787 Rumbos"
-            : segment.label === "Cómo llegar"
-              ? "Ver ubicación del local en Google Maps"
-              : segment.label
+            : segment.label === "línea de urgencias"
+              ? "WhatsApp de urgencias — viaje en curso"
+              : segment.label === "Cómo llegar"
+                ? "Ver ubicación del local en Google Maps"
+                : segment.label
         }
       >
         {segment.label}
@@ -75,7 +78,7 @@ export function FAQ({
     <>
       Si necesitás resolver una duda más específica,{" "}
       <a
-        href="https://api.whatsapp.com/send?phone=5493516157398&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20consultar%20por%20una%20duda%20del%20FAQ...%20(Web%20-%20FAQ)"
+        href={WHATSAPP_FAQ_LINK}
         className="font-semibold text-[#006183] underline decoration-[#006183]/30 underline-offset-2 transition-colors hover:text-[#0b4058] hover:decoration-[#0b4058]/40"
         target="_blank"
         rel="noopener noreferrer"

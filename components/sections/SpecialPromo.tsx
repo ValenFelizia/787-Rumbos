@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Plane, Calendar, Ticket, MapPin, X, ArrowRight } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { AGENCY_PHONE, whatsappLink } from "@/lib/constants";
 
 // ─── CONFIGURACIÓN DE LA PROMOCIÓN DESTACADA ────────────────────────────────
 // Para cambiar el evento destacado en el futuro (ej: Disney, Copa América, etc.),
@@ -59,7 +60,7 @@ export function SpecialPromo() {
 
   if (!isPromoActive(PROMO_CONFIG.endsAt) || !isBannerVisible) return null;
 
-  const whatsappUrl = `https://api.whatsapp.com/send?phone=5493516157398&text=${encodeURIComponent(PROMO_CONFIG.whatsappMsg)}`;
+  const whatsappUrl = whatsappLink(AGENCY_PHONE.whatsapp, PROMO_CONFIG.whatsappMsg);
 
   return (
     <>

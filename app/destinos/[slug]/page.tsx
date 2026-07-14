@@ -15,6 +15,7 @@ import {
   type Departure,
 } from "@/lib/destinations-data";
 import { getPrimaryClusterForDestination } from "@/lib/clusters-data";
+import { AGENCY_PHONE, whatsappLink } from "@/lib/constants";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import {
   Calendar,
@@ -132,14 +133,18 @@ function getDepartureStatus(dep: Departure): {
 
 // 4. Generador de link de WhatsApp personalizado por salida
 function getWhatsAppDepartureLink(destinoName: string, displayDate: string): string {
-  const text = `Hola, quiero consultar disponibilidad para la salida a ${destinoName} del ${displayDate}. (Web - Detalle Destino)`;
-  return `https://api.whatsapp.com/send?phone=5493516157398&text=${encodeURIComponent(text)}`;
+  return whatsappLink(
+    AGENCY_PHONE.whatsapp,
+    `Hola, quiero consultar disponibilidad para la salida a ${destinoName} del ${displayDate}. (Web - Detalle Destino)`,
+  );
 }
 
 // 5. Generador de link de WhatsApp genérico para cotización a medida
 function getWhatsAppCustomLink(destinoName: string): string {
-  const text = `Hola, quiero consultar para armar un viaje a medida a ${destinoName}. (Web - Detalle Destino)`;
-  return `https://api.whatsapp.com/send?phone=5493516157398&text=${encodeURIComponent(text)}`;
+  return whatsappLink(
+    AGENCY_PHONE.whatsapp,
+    `Hola, quiero consultar para armar un viaje a medida a ${destinoName}. (Web - Detalle Destino)`,
+  );
 }
 
 export default async function DestinoDetailPage({ params }: Props) {
@@ -164,7 +169,7 @@ export default async function DestinoDetailPage({ params }: Props) {
     "provider": {
       "@type": "TravelAgency",
       "name": "787 Rumbos",
-      "telephone": "+543513448724",
+      "telephone": AGENCY_PHONE.tel,
       "url": "https://787rumbos.com.ar"
     },
     ...(dest.priceFrom && {

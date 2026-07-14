@@ -6,6 +6,7 @@
  * excursiones opcionales y lógica inteligente de vencimiento de salidas.
  */
 import type { FaqItem } from "@/lib/constants";
+import { AGENCY_PHONE, whatsappLink } from "@/lib/constants";
 
 export type TransportType = "aereo" | "bus" | "bus-cama" | "mix";
 
@@ -58,9 +59,10 @@ export interface DestinationPage {
 
 /** WhatsApp con tracking por página de destino (FAQ / detalle). */
 function whatsappDestinoFaq(destino: string): string {
-  return `https://api.whatsapp.com/send?phone=5493516157398&text=${encodeURIComponent(
-    `Hola 787 Rumbos! Quiero consultar por un viaje a ${destino}. (Web - FAQ Destino)`
-  )}`;
+  return whatsappLink(
+    AGENCY_PHONE.whatsapp,
+    `Hola 787 Rumbos! Quiero consultar por un viaje a ${destino}. (Web - FAQ Destino)`,
+  );
 }
 
 export const destinationsData: DestinationPage[] = [

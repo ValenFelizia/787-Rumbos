@@ -12,6 +12,7 @@ import {
   getTransportLabel,
 } from "@/lib/destinations-data";
 import { clustersData } from "@/lib/clusters-data";
+import { AGENCY_PHONE, whatsappLink } from "@/lib/constants";
 import { MapPin, Calendar, ArrowRight } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 
@@ -200,7 +201,10 @@ export default function DestinosIndex() {
             </p>
           </div>
           <a
-            href="https://api.whatsapp.com/send?phone=5493516157398&text=Hola%2C%20estuve%20viendo%20la%20web%20pero%20no%20encontr%C3%A9%20el%20destino%20que%20buscaba.%20Me%20gustar%C3%ADa%20consultar%20por..."
+            href={whatsappLink(
+              AGENCY_PHONE.whatsapp,
+              "Hola, estuve viendo la web pero no encontré el destino que buscaba. Me gustaría consultar por...",
+            )}
             target="_blank"
             rel="noopener noreferrer"
             className="font-[family-name:var(--font-brand-heading)] relative z-10 inline-flex items-center gap-2 rounded-xl bg-[#dae553] hover:bg-[#c3cf3e] text-[#0b4058] px-8 py-3.5 text-sm font-black shadow-md transition-all duration-200 active:scale-[0.96] cursor-pointer"

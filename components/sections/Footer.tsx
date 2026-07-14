@@ -13,8 +13,14 @@
  * 2. El ?v= al final del src es un cache buster que ellos controlan.
  */
 import Image from "next/image";
-import { Instagram, MapPin, Send, ShieldCheck } from "lucide-react";
-import { WHATSAPP_LINK, WHATSAPP_ADMIN_LINK } from "@/lib/constants";
+import { Instagram, MapPin, Send, ShieldCheck, Clock } from "lucide-react";
+import {
+  AGENCY_PHONE,
+  URGENT_PHONE,
+  WHATSAPP_LINK,
+  WHATSAPP_URGENT_LINK,
+  OFFICE_HOURS,
+} from "@/lib/constants";
 
 export function Footer() {
   return (
@@ -113,28 +119,32 @@ export function Footer() {
             Contacto
           </h4>
           <ul className="space-y-2">
+            <li className="flex items-start gap-2 text-white/80">
+              <Clock className="mt-0.5 h-4 w-4 shrink-0 text-[#dae553]" />
+              <span>{OFFICE_HOURS.short}</span>
+            </li>
             <li>
               <a
                 href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noreferrer"
-                aria-label="Contactar por WhatsApp — atención personalizada"
+                aria-label={`WhatsApp de la agencia ${AGENCY_PHONE.display}`}
                 className="flex items-center gap-2 text-white/90 transition hover:text-[#dae553]"
               >
                 <Send className="h-4 w-4" />
-                Atención Personalizada: +54 9 351 615-7398
+                Agencia: {AGENCY_PHONE.display}
               </a>
             </li>
             <li>
               <a
-                href={WHATSAPP_ADMIN_LINK}
+                href={WHATSAPP_URGENT_LINK}
                 target="_blank"
                 rel="noreferrer"
-                aria-label="Contactar administración por WhatsApp"
+                aria-label={`Línea de urgencias ${URGENT_PHONE.display} — viaje en curso`}
                 className="flex items-center gap-2 text-white/90 transition hover:text-[#dae553]"
               >
                 <Send className="h-4 w-4" />
-                Administración/Agencia: +54 9 351 344-8724
+                Urgencias: {URGENT_PHONE.display}
               </a>
             </li>
             <li>

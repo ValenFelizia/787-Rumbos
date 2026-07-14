@@ -14,11 +14,12 @@ import {
   type ClusterPage,
 } from "@/lib/clusters-data";
 import { getActiveUpcomingDepartures } from "@/lib/destinations-data";
+import { AGENCY_PHONE, whatsappLink } from "@/lib/constants";
 import { ArrowLeft, ArrowRight, Calendar, Check, MapPin } from "lucide-react";
 
 export function ClusterHub({ cluster }: { cluster: ClusterPage }) {
   const destinations = getClusterDestinations(cluster);
-  const whatsappUrl = `https://api.whatsapp.com/send?phone=5493516157398&text=${encodeURIComponent(cluster.whatsappText)}`;
+  const whatsappUrl = whatsappLink(AGENCY_PHONE.whatsapp, cluster.whatsappText);
 
   return (
     <main className="min-h-screen bg-[#f9f9f9] text-[#0b4058]">
@@ -165,7 +166,7 @@ export function ClusterHub({ cluster }: { cluster: ClusterPage }) {
             ¿Arrancamos tu cotización?
           </h2>
           <p className="text-white/80 text-sm max-w-xl mx-auto text-pretty">
-            Contanos fechas y cantidad de pasajeros. Te respondemos con opciones concretas, sin bots.
+            Contanos fechas y cantidad de pasajeros. Te respondemos con opciones concretas.
           </p>
           <a
             href={whatsappUrl}

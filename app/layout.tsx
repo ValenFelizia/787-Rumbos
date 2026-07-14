@@ -13,7 +13,7 @@ import { Analytics } from '@vercel/analytics/next'
 import { elaineSans, zalandoSans } from '@/lib/fonts'
 import { ModalProvider } from '@/lib/context/ModalContext'
 import { QuoteModal } from '@/components/sections/QuoteModal'
-import { GOOGLE_MAPS_LINK } from '@/lib/constants'
+import { GOOGLE_MAPS_LINK, AGENCY_PHONE } from '@/lib/constants'
 import './globals.css'
 
 /** Metadatos del sitio leídos por Next.js para SEO, pestaña del navegador y previews sociales.
@@ -83,7 +83,7 @@ export default function RootLayout({
     description:
       "Agencia de viajes en Córdoba. Paquetes personalizados, atención humana y financiación disponible.",
     url: "https://787rumbos.com.ar",
-    telephone: "+543513448724",
+    telephone: AGENCY_PHONE.tel,
     address: {
       "@type": "PostalAddress",
       streetAddress: "Av. La Voz del Interior 8500, En el Aeropuerto Internacional Ingeniero Aeronáutico Ambrosio Taravella",
@@ -97,19 +97,20 @@ export default function RootLayout({
       latitude: -31.3117,
       longitude: -64.208,
     },
-    openingHoursSpecification: {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-      ],
-      opens: "08:30",
-      closes: "18:00"
-    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "08:30",
+        closes: "18:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Saturday",
+        opens: "08:30",
+        closes: "13:00",
+      },
+    ],
     hasMap: GOOGLE_MAPS_LINK,
     sameAs: ["https://www.instagram.com/787rumbos/"],
     priceRange: "$$",

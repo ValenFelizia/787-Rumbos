@@ -10,27 +10,78 @@
  */
 import { BedDouble, Bus, HeartPulse, Plane, Ticket } from "lucide-react";
 
-// ─── Links de WhatsApp con parámetros de seguimiento (Fase 12.5) ──────────────
+// ─── Teléfonos y WhatsApp ─────────────────────────────────────────────────────
 
-/** Enlace general - Usado en Navbar, Footer y enlaces de escape */
-export const WHATSAPP_LINK =
-  "https://api.whatsapp.com/send?phone=5493516157398&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)";
+/**
+ * Teléfono de agencia — canal público principal (CTAs, schema, NAP, GBP).
+ * No etiquetar como “administración”.
+ */
+export const AGENCY_PHONE = {
+  whatsapp: "5493513448724",
+  display: "+54 9 351 344-8724",
+  /** E.164 para schema / tel: */
+  tel: "+543513448724",
+} as const;
 
-/** Enlace específico para el cotizador (bypass o directo) */
-export const WHATSAPP_QUOTE_BYPASS =
-  "https://api.whatsapp.com/send?phone=5493516157398&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20consultar%20directamente%20con%20un%20asesor...%20(Web%20-%20Cotizador%20Directo)";
+/**
+ * Línea de urgencias (viaje en curso). Visible en footer/FAQ; no usar en CTAs
+ * comerciales. Internamente es un celular personal del equipo.
+ */
+export const URGENT_PHONE = {
+  whatsapp: "5493516157398",
+  display: "+54 9 351 615-7398",
+  tel: "+5493516157398",
+} as const;
 
-/** Enlace específico para administración */
-export const WHATSAPP_ADMIN_LINK =
-  "https://api.whatsapp.com/send?phone=5493513448724&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20contactar%20con%20administraci%C3%B3n...%20(Web%20-%20Administraci%C3%B3n)";
+/** Horario oficial del local en el aeropuerto (atención comercial). */
+export const OFFICE_HOURS = {
+  weekdays: "Lunes a viernes 8:30–18:00",
+  saturday: "Sábados 8:30–13:00",
+  sunday: "Domingos cerrado",
+  short: "lun–vie 8:30–18:00 · sáb 8:30–13:00",
+} as const;
 
-/** Enlace para error 404 */
-export const WHATSAPP_404_LINK =
-  "https://api.whatsapp.com/send?phone=5493516157398&text=Hola%20787%20Rumbos!%20Me%20perd%C3%AD%20en%20la%20p%C3%A1gina%20y%20necesito%20ayuda%20con%20un%20viaje...%20(Web%20-%20Error%20404)";
+/** Arma un enlace wa.me/api.whatsapp.com con texto prellenado. */
+export function whatsappLink(phone: string, text: string): string {
+  return `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(text)}`;
+}
 
-/** Genera un link de WhatsApp con el mensaje pre-rellenado para un destino específico. */
+/** CTA comercial / contacto general → agencia */
+export const WHATSAPP_LINK = whatsappLink(
+  AGENCY_PHONE.whatsapp,
+  "Hola 787 Rumbos! Quería hacer una consulta general... (Web - Contacto Directo)",
+);
+
+/** Cotizador (bypass o envío) → agencia */
+export const WHATSAPP_QUOTE_BYPASS = whatsappLink(
+  AGENCY_PHONE.whatsapp,
+  "Hola 787 Rumbos! Quería consultar directamente con un asesor... (Web - Cotizador Directo)",
+);
+
+/** Urgencias con viaje en curso — no usar en embudos de cotización */
+export const WHATSAPP_URGENT_LINK = whatsappLink(
+  URGENT_PHONE.whatsapp,
+  "Hola 787 Rumbos! Estoy de viaje y necesito ayuda con un imprevisto... (Web - Urgencias)",
+);
+
+/** Error 404 → agencia */
+export const WHATSAPP_404_LINK = whatsappLink(
+  AGENCY_PHONE.whatsapp,
+  "Hola 787 Rumbos! Me perdí en la página y necesito ayuda con un viaje... (Web - Error 404)",
+);
+
+/** FAQ home → agencia */
+export const WHATSAPP_FAQ_LINK = whatsappLink(
+  AGENCY_PHONE.whatsapp,
+  "Hola 787 Rumbos! Quería consultar por una duda del FAQ... (Web - FAQ)",
+);
+
+/** Destino destacado → agencia */
 export function whatsappDestino(destino: string): string {
-  return `https://api.whatsapp.com/send?phone=5493516157398&text=Hola%20787%20Rumbos!%20Quiero%20consultar%20por%20un%20viaje%20a%20${encodeURIComponent(destino)}.%20(Web%20-%20Destino%20Destacado)`;
+  return whatsappLink(
+    AGENCY_PHONE.whatsapp,
+    `Hola 787 Rumbos! Quiero consultar por un viaje a ${destino}. (Web - Destino Destacado)`,
+  );
 }
 
 /** Ubicación del local en Google Maps (Aeropuerto de Córdoba). */
@@ -63,8 +114,7 @@ export const faqItems: FaqItem[] = [
     answer: [
       {
         type: "text",
-        value:
-          "Sí. Contamos con oficina en el Hall de arribos del Aeropuerto Internacional de Córdoba, dentro del local oficial de Vía Bariloche (Av. La Voz del Interior 8500). Podés visitarnos de lunes a viernes de 8:30 a 18:00 hs y sábados de 8:30 a 13:00 hs. ",
+        value: `Sí. Contamos con oficina en el Hall de arribos del Aeropuerto Internacional de Córdoba, dentro del local oficial de Vía Bariloche (Av. La Voz del Interior 8500). Podés visitarnos ${OFFICE_HOURS.weekdays.toLowerCase()} y ${OFFICE_HOURS.saturday.toLowerCase()}. `,
       },
       { type: "link", label: "Cómo llegar", href: GOOGLE_MAPS_LINK, external: true },
       { type: "text", value: "." },
@@ -117,7 +167,7 @@ export const faqItems: FaqItem[] = [
       {
         type: "text",
         value:
-          "Una salida grupal tiene fecha, cupos e itinerario ya definidos: viajás con otros pasajeros en las mismas condiciones. Un paquete a medida lo diseñamos para vos: elegís fechas, hotel, noches y servicios según tu pedido. En ambos casos te asesora una persona real, no un bot.",
+          "Una salida grupal tiene fecha, cupos e itinerario ya definidos: viajás con otros pasajeros en las mismas condiciones. Un paquete a medida lo diseñamos para vos: elegís fechas, hotel, noches y servicios según tu pedido. En ambos casos te asesora una persona real.",
       },
     ],
   },
@@ -168,17 +218,17 @@ export const faqItems: FaqItem[] = [
       {
         type: "text",
         value:
-          "Sí. Nuestra atención no termina cuando comprás el pasaje: te acompañamos antes, durante y después del viaje. Si surge un inconveniente, escribinos por ",
+          "Sí. Te acompañamos antes, durante y después del viaje: te ayudamos a gestionar con aerolínea, hotel o asistencia al viajero lo vinculado a tu reserva. La resolución final depende de cada proveedor; no somos una guardia 24/7 ni reemplazamos a la asistencia médica. Si estás de viaje y surge un imprevisto, escribinos a la ",
       },
       {
         type: "link",
-        label: "WhatsApp",
-        href: WHATSAPP_LINK,
+        label: "línea de urgencias",
+        href: WHATSAPP_URGENT_LINK,
         external: true,
       },
       {
         type: "text",
-        value: " y te ayudamos a resolverlo con atención humana.",
+        value: `. Para cotizaciones y consultas generales, usá el WhatsApp de la agencia (${AGENCY_PHONE.display}).`,
       },
     ],
   },

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { X, ChevronRight, ChevronLeft, Calendar, Users, Plane, Info, Clock } from "lucide-react";
 import { useModal } from "@/lib/context/ModalContext";
-import { featuredDestinations, WHATSAPP_QUOTE_BYPASS } from "@/lib/constants";
+import { featuredDestinations, WHATSAPP_QUOTE_BYPASS, whatsappLink, AGENCY_PHONE } from "@/lib/constants";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 
 // ponytail: keep code simple and self-contained, using React state and native CSS.
@@ -103,9 +103,7 @@ export function QuoteModal() {
     const passengerText = `${adultos} ${adultos === 1 ? "adulto" : "adultos"}${menores > 0 ? ` y ${menores} ${menores === 1 ? "menor" : "menores"}` : ""
       }`;
     const text = `Hola 787 Rumbos! Quiero cotizar un viaje personalizado.\n\n📍 *Destino:* ${destino}\n📅 *Fecha estimada:* ${fecha}\n🗓️ *Duración estimada:* ${duracion}\n👥 *Pasajeros:* ${passengerText}\n✈️ *Aerolínea:* ${aerolinea}\n\n(Web - Asistente de Cotización)`;
-    const phone = "5493516157398"; // Número de atención de la agencia
-    const url = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(text)}`;
-    window.open(url, "_blank");
+    window.open(whatsappLink(AGENCY_PHONE.whatsapp, text), "_blank");
     closeModal();
   };
 
