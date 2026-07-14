@@ -31,14 +31,6 @@
 
 ## Próxima ola de producto
 
-- [ ] T-011 — Reordenar la home alrededor del diferencial verificable
-  - Owner: Valen
-  - Agent: Cursor Grok
-  - Scope: `components/sections/Hero.tsx`, `components/sections/ValueProposition.tsx` y orden de secciones en `app/page.tsx`
-  - Depends on: T-012 para el texto definitivo de acompañamiento.
-  - Updated: 2026-07-13
-  - Note: hacer explícitos en la primera pantalla la oficina en el Aeropuerto de Córdoba y la oferta aérea + terrestre; subir la experiencia en transporte/Vía Bariloche, mover Servicios antes de Comunidad y reducir el protagonismo de “sin bots”. No requiere un rediseño visual. Copy de acompañamiento/tiempos de respuesta queda provisorio hasta T-012.
-
 - [ ] T-013 — Pulir la presentación del catálogo y el feed social
   - Owner: Valen
   - Scope: tarjetas de `app/destinos/page.tsx`, `components/sections/FeaturedDestinations.tsx`, `components/sections/InstagramFeed.tsx` y datos asociados
@@ -70,6 +62,13 @@
   - Depends on: GBP verificado y tracking de leads estable.
 
 ## Completado recientemente
+
+- [x] T-011 — Reordenar la home alrededor del diferencial verificable
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-07-13
+  - Note: hero y propuesta de valor priorizan aeropuerto + aéreo/terrestre + transporte/Vía Bariloche; Servicios va antes de Comunidad. El microcopy de tiempos de respuesta y el alcance definitivo del acompañamiento quedan para T-012.
 
 - [x] T-010 — Auditar el análisis de posicionamiento y convertirlo en trabajo verificable
   - Owner: Valen

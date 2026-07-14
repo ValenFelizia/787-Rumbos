@@ -65,6 +65,9 @@ incentivos, selección de opiniones positivas ni texto dictado.
 - La home no publica testimonios mientras solo existan datos de ejemplo. Cuando
   haya prueba social real y autorizada, debe aparecer cerca del catálogo o de un
   punto de decisión comercial, sin desplazar la información esencial de servicios.
+- En la home, el hero y la propuesta de valor priorizan la oficina en el
+  Aeropuerto de Córdoba, la experiencia en transporte y la oferta aérea +
+  terrestre. La sección de Servicios precede al feed social (“Comunidad”).
 - La interfaz debe seguir siendo responsive, accesible por teclado y respetar
   `prefers-reduced-motion`.
 - Vercel Analytics es la medición disponible actualmente. GA4 y eventos
