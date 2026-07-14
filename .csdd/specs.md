@@ -19,7 +19,7 @@ guiar al usuario hacia ese canal; no reemplaza la atención comercial humana.
   Ingeniero Aeronáutico Ambrosio Taravella, dentro del local oficial de Vía
   Bariloche.
 - El servicio combina viajes emisivos, vuelos, paquetes y pasajes de ómnibus de
-  Vía Bariloche, Vía Tac y El Valle.
+  Via Bariloche y Via Tac.
 - La jerarquía del mensaje debe partir de diferenciales verificables: presencia
   física en el aeropuerto, experiencia en transporte y oferta aérea + terrestre.
   La atención humana y el acompañamiento deben explicarse con evidencia y un
@@ -51,7 +51,9 @@ Precios, salidas, disponibilidad, promociones, fotos y testimonios deben ser
 reales, vigentes y verificables. Las promociones con fecha de finalización deben
 ocultarse al vencer. No deben presentarse testimonios ficticios como si fueran
 reales. Las solicitudes de reseñas deben dirigirse a clientes reales, sin
-incentivos, selección de opiniones positivas ni texto dictado.
+incentivos, selección de opiniones positivas ni texto dictado. El formato visible
+de precios sigue la convención comercial de la agencia (`USD`/`$` + monto, alineada
+a Instagram); no se impone un formateador monetario distinto.
 
 ## Comportamiento vigente del producto
 

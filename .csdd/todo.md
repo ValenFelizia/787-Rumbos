@@ -31,10 +31,15 @@
 
 ## Próxima ola de producto
 
-- [ ] T-013 — Pulir la presentación del catálogo y el feed social
+- [ ] T-014 — Analizar automatización ligera de salidas grupales desde Instagram
   - Owner: Valen
-  - Scope: tarjetas de `app/destinos/page.tsx`, `components/sections/FeaturedDestinations.tsx`, `components/sections/InstagramFeed.tsx` y datos asociados
-  - Note: usar un formato monetario compartido y legible, mostrar “aéreo” con tilde y enlazar cada pieza de Instagram a su publicación cuando la URL esté disponible. Mantener las descripciones completas en las fichas: el listado ya limita visualmente el texto a tres líneas.
+  - Scope: flujo editorial de salidas grupales, posibles integraciones Instagram/Meta y alternativas sin hardcode ni Headless CMS
+  - Note: investigar si se puede reducir la carga de cargar salidas a mano cuando ya se publican en Instagram, sin introducir un CMS. Evaluar opciones (API Graph, export manual asistido, sheet/CSV, webhook, scrapes desaconsejados, etc.), costos, límites de Meta, mantenimiento y riesgo; entregar recomendación go/no-go antes de implementar.
+
+- [ ] T-015 — Diagnosticar y corregir el marquee de partners
+  - Owner: Valen
+  - Scope: `components/sections/PartnersMarquee.tsx`, animación en `app/globals.css` y dependencias si se justifica
+  - Note: el loop actual se corta o reinicia de forma brusca; no es smooth. Analizar causa (duplicación del track, `%` vs ancho real, gap/padding, GPU, reduced-motion) y arreglar. Evaluar si una librería externa (p. ej. Embla, Swiper free-mode, o un marquee dedicado) es preferible a seguir con CSS puro; preferir la solución más simple que quede estable.
 
 - [ ] T-005 — Crear el hub de escapadas de fin de semana largo
   - Owner: Valen
@@ -54,7 +59,7 @@
 - [ ] T-008 — Evaluar un CMS cuando el catálogo manual deje de escalar
   - Owner: Valen
   - Scope: modelo y gestión de contenido de destinos
-  - Note: no introducir un CMS antes de que editar `destinations-data.ts` manualmente sea un problema real.
+  - Note: no introducir un CMS antes de que editar `destinations-data.ts` manualmente sea un problema real. Relacionada con T-014: si la automatización de salidas cubre el dolor, puede retrasar o evitar un CMS.
 
 - [ ] T-009 — Ejecutar pauta controlada
   - Owner: Valen
@@ -62,6 +67,13 @@
   - Depends on: GBP verificado y tracking de leads estable.
 
 ## Completado recientemente
+
+- [x] T-013 — Pulir la presentación del catálogo y el feed social
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-07-14
+  - Note: labels de transporte, permalinks IG (post 3 → perfil hasta tener URL), priceNote/empty state/CTA en destacados, badge de próxima salida en `/destinos`. Sin reformateo monetario. Permalink del post 3 queda pendiente en handoff.
 
 - [x] T-011 — Reordenar la home alrededor del diferencial verificable
   - Owner: Valen
