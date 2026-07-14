@@ -13,7 +13,7 @@ import { Analytics } from '@vercel/analytics/next'
 import { elaineSans, zalandoSans } from '@/lib/fonts'
 import { ModalProvider } from '@/lib/context/ModalContext'
 import { QuoteModal } from '@/components/sections/QuoteModal'
-import { GOOGLE_MAPS_LINK, AGENCY_PHONE } from '@/lib/constants'
+import { GOOGLE_MAPS_LINK, AGENCY_PHONE, OFFICE_GEO } from '@/lib/constants'
 import './globals.css'
 
 /** Metadatos del sitio leídos por Next.js para SEO, pestaña del navegador y previews sociales.
@@ -94,8 +94,8 @@ export default function RootLayout({
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: -31.3117,
-      longitude: -64.208,
+      latitude: OFFICE_GEO.latitude,
+      longitude: OFFICE_GEO.longitude,
     },
     openingHoursSpecification: [
       {
@@ -112,7 +112,10 @@ export default function RootLayout({
       },
     ],
     hasMap: GOOGLE_MAPS_LINK,
-    sameAs: ["https://www.instagram.com/787rumbos/"],
+    sameAs: [
+      "https://www.instagram.com/787rumbos/",
+      GOOGLE_MAPS_LINK,
+    ],
     priceRange: "$$",
   };
 

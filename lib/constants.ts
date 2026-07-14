@@ -84,9 +84,31 @@ export function whatsappDestino(destino: string): string {
   );
 }
 
-/** Ubicación del local en Google Maps (Aeropuerto de Córdoba). */
-export const GOOGLE_MAPS_LINK =
-  "https://maps.google.com/?q=Aeropuerto+Internacional+Ingeniero+Aeron%C3%A1utico+Ambrosio+Taravella";
+/**
+ * Ficha de Google Maps / Google Business Profile de 787 Rumbos
+ * (Hall de arribos, Aeropuerto de Córdoba — no usar búsqueda genérica del aeropuerto).
+ */
+export const GOOGLE_MAPS_LINK = "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7";
+
+/** Place key hex + CID derivados del place GBP (schema / citaciones). */
+export const GOOGLE_PLACE_KEY = "0x94329becff1264df:0xc85a96783374e09f";
+export const GOOGLE_MAPS_CID = "14437016998493085855";
+
+/** Ver la ficha en Maps (reseñas existentes + datos del local). */
+export const GOOGLE_REVIEWS_LINK = GOOGLE_MAPS_LINK;
+
+/** Formulario directo “Escribir una reseña” (GBP → Obtener más reseñas). */
+export const GOOGLE_WRITE_REVIEW_LINK =
+  "https://g.page/r/CZ_gdDN4llrIEBI/review";
+
+/** QR del mismo enlace de reseña (impresión / mostrador). */
+export const GOOGLE_REVIEW_QR_SRC = "/qr-resenas-787.png";
+
+/** Coordenadas del place GBP (schema LocalBusiness). */
+export const OFFICE_GEO = {
+  latitude: -31.3172806,
+  longitude: -64.2131382,
+} as const;
 
 // ─── FAQ ──────────────────────────────────────────────────────────────────────
 
