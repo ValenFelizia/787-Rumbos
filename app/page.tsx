@@ -41,10 +41,10 @@ export default function Home() {
         <AboutUs />
       </ScrollReveal>
       <ScrollReveal>
-        <InstagramFeed />
+        <Services />
       </ScrollReveal>
       <ScrollReveal>
-        <Services />
+        <InstagramFeed />
       </ScrollReveal>
       <ScrollReveal>
         <FAQ />
