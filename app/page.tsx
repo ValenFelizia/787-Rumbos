@@ -38,6 +38,9 @@ export default function Home() {
         <FeaturedDestinations />
       </ScrollReveal>
       <ScrollReveal>
+        <Testimonials />
+      </ScrollReveal>
+      <ScrollReveal>
         <AboutUs />
       </ScrollReveal>
       <ScrollReveal>
@@ -49,10 +52,6 @@ export default function Home() {
       <ScrollReveal>
         <FAQ />
       </ScrollReveal>
-      {/* ponytail: uncomment this block when real customer reviews are obtained */}
-      {/* <ScrollReveal>
-        <Testimonials />
-      </ScrollReveal> */}
       <ScrollReveal>
         <CTASection />
       </ScrollReveal>

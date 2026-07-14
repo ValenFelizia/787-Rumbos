@@ -1,94 +1,101 @@
 /**
- * components/sections/Testimonials.tsx
- *
- * Sección de Testimonios y Reseñas de clientes.
- * Presenta las experiencias en tarjetas elegantes con estrellas, avatar y destino.
- * Por el momento, esta sección está estructurada y lista para mostrarse
- * en producción una vez que se cuente con testimonios reales.
+ * Prueba social cerca del catálogo.
+ * Sin testimonios curados: invita a reseñar en Google.
+ * Con testimonios autorizados en `lib/testimonials-data.ts`: los muestra y mantiene el CTA.
  */
-import { Star } from "lucide-react";
+import { Star, ExternalLink } from "lucide-react";
+import {
+  GOOGLE_REVIEWS_LINK,
+  GOOGLE_WRITE_REVIEW_LINK,
+} from "@/lib/constants";
+import { testimonials, type Testimonial } from "@/lib/testimonials-data";
 
-export interface Testimonial {
-  name: string;
-  destination: string;
-  text: string;
-  rating: number;
-  date: string;
+function Stars({ rating }: { rating: number }) {
+  return (
+    <div className="flex gap-0.5" aria-label={`Calificación: ${rating} de 5 estrellas`}>
+      {Array.from({ length: rating }).map((_, i) => (
+        <Star key={i} className="h-4 w-4 fill-[#e6b451] text-[#e6b451]" />
+      ))}
+    </div>
+  );
 }
 
-// ponytail: keep mock data inside the component file until real data arrives, avoids constant file bloat
-const mockTestimonials: Testimonial[] = [
-  {
-    name: "Claudio G.",
-    destination: "Río de Janeiro, Brasil",
-    text: "Excelente atención y acompañamiento de Fernanda en todo momento. El paquete a Río estuvo impecable, los traslados a término y el hotel súper cómodo. Muy recomendable viajar así.",
-    rating: 5,
-    date: "Marzo 2026",
-  },
-  {
-    name: "Mariela S.",
-    destination: "Bariloche, Argentina",
-    text: "Elegimos 787 Rumbos por la comodidad de tener oficina física en el aeropuerto. La financiación en cuotas nos facilitó todo. Viajamos sin preocupaciones y siempre respondieron rápido.",
-    rating: 5,
-    date: "Mayo 2026",
-  },
-  {
-    name: "Federico B.",
-    destination: "Ushuaia, Argentina",
-    text: "Una atención humana que ya no se encuentra en las webs de viajes comunes. Nos armaron un itinerario a medida que superó nuestras expectativas. Sin dudas volveremos a cotizar con ellos.",
-    rating: 5,
-    date: "Junio 2026",
-  },
-];
+function TestimonialCard({ t }: { t: Testimonial }) {
+  return (
+    <article className="border-t-4 border-[#e6b451] bg-white pt-6">
+      <Stars rating={t.rating} />
+      <p className="mt-4 text-sm leading-relaxed text-[#0b4058]/85 text-pretty">
+        &ldquo;{t.text}&rdquo;
+      </p>
+      <div className="mt-5 border-t border-[#0b4058]/10 pt-4">
+        <p className="font-[family-name:var(--font-elaine)] text-sm font-bold text-[#0b4058]">
+          {t.name}
+        </p>
+        <p className="mt-0.5 text-xs text-[#0b4058]/60">
+          Viajó a {t.destination} · {t.date}
+        </p>
+      </div>
+    </article>
+  );
+}
 
 export function Testimonials() {
+  const hasReviews = testimonials.length > 0;
+
   return (
-    <section id="testimonios" className="bg-[#f9f9f9] border-t border-[#0b4058]/10">
-      <div className="mx-auto w-full max-w-6xl px-6 py-20">
-        <div className="text-center mb-12">
-          <h2 className="font-[family-name:var(--font-elaine)] text-3xl font-bold tracking-tight md:text-4xl">
-            La experiencia de nuestros viajeros
-          </h2>
-          <p className="mt-3 text-sm md:text-base text-[#0b4058]/75 max-w-2xl mx-auto">
-            Opiniones reales de pasajeros que confiaron en 787 Rumbos para planificar sus vacaciones.
-          </p>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-3">
-          {mockTestimonials.map((t, idx) => (
-            <article
-              key={`${t.name}-${idx}`}
-              className="rounded-2xl bg-white p-7 border border-[#0b4058]/5 shadow-sm shadow-[#0b4058]/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#0b4058]/10"
+    <section
+      id="testimonios"
+      className="border-y border-[#0b4058]/10 bg-white"
+      aria-labelledby="testimonios-heading"
+    >
+      <div className="mx-auto w-full max-w-6xl px-6 py-16 md:py-20">
+        <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-2xl space-y-3">
+            <h2
+              id="testimonios-heading"
+              className="font-[family-name:var(--font-elaine)] text-3xl font-bold tracking-tight text-[#0b4058] md:text-4xl text-balance"
             >
-              {/* Estrellas */}
-              <div className="flex gap-0.5 mb-4" aria-label={`Calificación: ${t.rating} de 5 estrellas`}>
-                {Array.from({ length: t.rating }).map((_, i) => (
-                  <Star key={i} className="h-4.5 w-4.5 fill-[#f7a92a] text-[#f7a92a]" />
-                ))}
-              </div>
+              {hasReviews
+                ? "Lo que cuentan quienes ya viajaron"
+                : "Tu opinión también construye confianza"}
+            </h2>
+            <p className="text-sm leading-relaxed text-[#0b4058]/75 md:text-base text-pretty">
+              {hasReviews
+                ? "Experiencias reales de pasajeros que eligieron 787 Rumbos. Si viajaste con nosotros, sumá tu reseña en Google."
+                : "Estamos reuniendo reseñas reales en Google. Si ya viajaste con nosotros, tu experiencia ayuda a la próxima familia que está eligiendo agencia."}
+            </p>
+          </div>
 
-              {/* Texto del testimonio */}
-              <p className="text-sm text-[#0b4058]/85 italic leading-relaxed mb-6">
-                &quot;{t.text}&quot;
-              </p>
-
-              {/* Autor info */}
-              <div className="flex items-center gap-3 border-t border-gray-100 pt-4 mt-auto">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#006183]/10 font-bold text-[#006183] text-sm">
-                  {t.name.split(" ").map(n => n[0]).join("")}
-                </div>
-                <div>
-                  <h3 className="font-[family-name:var(--font-elaine)] text-sm font-bold text-[#0b4058]">
-                    {t.name}
-                  </h3>
-                  <p className="text-xs text-[#0b4058]/60">
-                    Viajó a <span className="font-semibold">{t.destination}</span> · {t.date}
-                  </p>
-                </div>
-              </div>
-            </article>
-          ))}
+          <div className="flex shrink-0 flex-wrap gap-3">
+            <a
+              href={GOOGLE_WRITE_REVIEW_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#0b4058] px-5 py-3 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#006183] active:scale-[0.97]"
+            >
+              Dejar reseña en Google
+              <ExternalLink className="h-3.5 w-3.5 shrink-0 opacity-80" aria-hidden />
+            </a>
+            {hasReviews && (
+              <a
+                href={GOOGLE_REVIEWS_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-xl border-2 border-[#0b4058] px-5 py-3 text-sm font-bold text-[#0b4058] transition-all duration-200 hover:bg-[#0b4058] hover:text-white active:scale-[0.97]"
+              >
+                Ver en Maps
+              </a>
+            )}
+          </div>
         </div>
+
+        {hasReviews && (
+          <div className="mt-12 grid gap-8 md:grid-cols-3">
+            {testimonials.map((t, idx) => (
+              <TestimonialCard key={`${t.name}-${idx}`} t={t} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
