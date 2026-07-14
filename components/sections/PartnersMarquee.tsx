@@ -4,44 +4,26 @@
  * Banner animado infinito de aerolíneas socias.
  * Aporta credibilidad mostrando con quién opera 787 Rumbos directamente.
  *
- * Loop seamless: un solo track con dos secuencias idénticas (cada una con
- * padding-right = gap). Se anima translateX(0 → -50%) para que el reinicio
- * coincida exactamente con el inicio de la segunda secuencia.
+ * Loop seamless vía react-fast-marquee (mide anchos reales + autoFill).
  */
+"use client";
+
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import Marquee from "react-fast-marquee";
 import { partnerLogos } from "@/lib/constants";
 
-function LogoRow({
-  logos,
-  ariaHidden = false,
-}: {
-  logos: typeof partnerLogos;
-  ariaHidden?: boolean;
-}) {
-  return (
-    <div
-      className="flex shrink-0 items-center gap-12 pr-12 md:gap-20 md:pr-20"
-      aria-hidden={ariaHidden || undefined}
-    >
-      {logos.map((logo, index) => (
-        <div
-          key={ariaHidden ? `${logo.name}-clone-${index}` : logo.name}
-          className="flex shrink-0 items-center justify-center py-0.5 grayscale opacity-50 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
-        >
-          <Image
-            src={logo.imageSrc}
-            alt={ariaHidden ? "" : logo.name}
-            width={logo.width}
-            height={logo.height}
-            className="h-8 w-auto max-w-none object-contain md:h-9"
-          />
-        </div>
-      ))}
-    </div>
-  );
-}
-
 export function PartnersMarquee() {
+  const [reduceMotion, setReduceMotion] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduceMotion(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setReduceMotion(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
   return (
     <section
       aria-label="Compañías asociadas"
@@ -52,13 +34,28 @@ export function PartnersMarquee() {
           Viajá con las mejores compañías
         </p>
 
-        <div className="group relative w-full overflow-hidden">
-          {/* Un solo track animado: dos mitades idénticas → -50% = loop sin salto */}
-          <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused] motion-reduce:animate-none">
-            <LogoRow logos={partnerLogos} />
-            <LogoRow logos={partnerLogos} ariaHidden />
-          </div>
-        </div>
+        <Marquee
+          autoFill
+          pauseOnHover
+          gradient={false}
+          play={!reduceMotion}
+          speed={40}
+        >
+          {partnerLogos.map((logo) => (
+            <div
+              key={logo.name}
+              className="mx-6 flex shrink-0 items-center justify-center py-0.5 grayscale opacity-50 transition-all duration-300 hover:grayscale-0 hover:opacity-100 md:mx-10"
+            >
+              <Image
+                src={logo.imageSrc}
+                alt={logo.name}
+                width={logo.width}
+                height={logo.height}
+                className="h-8 w-auto max-w-none object-contain md:h-9"
+              />
+            </div>
+          ))}
+        </Marquee>
       </div>
     </section>
   );
