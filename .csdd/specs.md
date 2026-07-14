@@ -1,6 +1,6 @@
 # 787 Rumbos — Especificaciones vigentes
 
-> **Última actualización:** 2026-07-12
+> **Última actualización:** 2026-07-13
 > **Estado:** la base del producto está implementada. Se priorizan la operación
 > comercial, la vigencia del contenido y el crecimiento local antes de nuevas
 > funcionalidades.
@@ -20,9 +20,14 @@ guiar al usuario hacia ese canal; no reemplaza la atención comercial humana.
   Bariloche.
 - El servicio combina viajes emisivos, vuelos, paquetes y pasajes de ómnibus de
   Vía Bariloche, Vía Tac y El Valle.
-- Los diferenciales que debe comunicar el sitio son la atención humana, la
-  presencia física en el aeropuerto, la especialización en salidas desde Córdoba,
-  los acuerdos competitivos y el acompañamiento post-venta.
+- La jerarquía del mensaje debe partir de diferenciales verificables: presencia
+  física en el aeropuerto, experiencia en transporte y oferta aérea + terrestre.
+  La atención humana y el acompañamiento deben explicarse con evidencia y un
+  alcance operativo concreto; “sin bots” no debe funcionar como promesa central.
+- Toda promesa pública de tiempo de respuesta o asistencia durante el viaje debe
+  corresponder a una operación sostenible y explicitar, donde corresponda, canal,
+  horarios, incidencias cubiertas y límites. El sitio no debe sugerir soporte 24/7
+  si ese servicio no existe.
 
 ## Datos oficiales y contenido comercial
 
@@ -35,12 +40,18 @@ mantenerse consistentes:
 | Dirección | Av. La Voz del Interior 8500, Córdoba, Argentina |
 | Referencia | Hall de arribos, dentro del local oficial de Vía Bariloche |
 | Código postal | X5147XAA |
-| WhatsApp | 0351 344-8724 (`+54 9 351 344-8724`) |
+| WhatsApp comercial | 0351 615-7398 (`+54 9 351 615-7398`) |
+| Administración/agencia | 0351 344-8724 (`+54 9 351 344-8724`) |
+
+Debe existir un canal público principal inequívoco. Una vez definido, footer,
+schema, Google Business Profile, enlaces de contacto y citaciones deben reflejar
+el rol correcto de cada número sin presentar ambos como alternativas equivalentes.
 
 Precios, salidas, disponibilidad, promociones, fotos y testimonios deben ser
 reales, vigentes y verificables. Las promociones con fecha de finalización deben
 ocultarse al vencer. No deben presentarse testimonios ficticios como si fueran
-reales.
+reales. Las solicitudes de reseñas deben dirigirse a clientes reales, sin
+incentivos, selección de opiniones positivas ni texto dictado.
 
 ## Comportamiento vigente del producto
 
@@ -51,6 +62,9 @@ reales.
   sitemap actualizado.
 - Los hubs de Brasil, Caribe, Argentina en bus y salidas grupales desde Córdoba
   están publicados y enlazados con el catálogo y las fichas de destino.
+- La home no publica testimonios mientras solo existan datos de ejemplo. Cuando
+  haya prueba social real y autorizada, debe aparecer cerca del catálogo o de un
+  punto de decisión comercial, sin desplazar la información esencial de servicios.
 - La interfaz debe seguir siendo responsive, accesible por teclado y respetar
   `prefers-reduced-motion`.
 - Vercel Analytics es la medición disponible actualmente. GA4 y eventos

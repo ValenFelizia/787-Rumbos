@@ -329,3 +329,80 @@ Si hay que elegir solo cinco acciones inmediatas:
 4. Armar clusters "desde Cordoba" por Brasil, Caribe, Argentina y grupales.
 5. Medir WhatsApp por fuente antes de invertir fuerte en anuncios.
 
+---
+
+## Adenda de auditoria — 2026-07-13
+
+Esta adenda contrasta una segunda opinion sobre la home con el codigo, la version
+publica y el estado CSDD. El roadmap anterior se conserva como contexto; la lista
+operativa vigente y sus dependencias viven exclusivamente en
+[`../.csdd/todo.md`](../.csdd/todo.md).
+
+### Conclusion
+
+El diagnostico central es razonable: la web no necesita un rediseño general, sino
+una jerarquia comercial mas precisa y mas evidencia real. El activo menos
+copiable —oficina en el Aeropuerto de Cordoba, experiencia en transporte y oferta
+aerea + terrestre— aparece en la home, pero no domina la primera pantalla. La
+recomendacion de subirlo y concretar la promesa de acompañamiento queda aceptada.
+
+### Hallazgos confirmados
+
+- El hero prioriza “acompañamiento cercano”; la ubicacion en el aeropuerto queda
+  en el parrafo secundario y la experiencia junto a Via Bariloche aparece mas
+  abajo, en “De la terminal al mundo”. Conviene invertir esa jerarquia.
+- “Comunidad 787 Rumbos” se renderiza antes que “Servicios que resolvemos por
+  vos”. Para conversion, Servicios debe preceder al feed social.
+- “No usamos respuestas automaticas” y “no un bot” aparecen como parte del
+  argumento de marca. Conviene reemplazar absolutos tecnologicos por
+  responsabilidad, competencia y continuidad de la persona que atiende.
+- La FAQ promete ayuda antes, durante y despues del viaje, y el hero promete
+  respuesta en menos de dos horas, pero el repositorio no define horarios,
+  incidencias cubiertas ni limites. Antes de reforzar esas frases hay que definir
+  la operacion y evitar cualquier lectura de soporte 24/7.
+- El enlace de Maps apunta al aeropuerto en general, no a una ficha exacta de 787
+  Rumbos. Debe cambiarse cuando el perfil verificado provea una URL estable.
+- La home dirige consultas comerciales al `+54 9 351 615-7398`, mientras el
+  schema `TravelAgency` usa `+54 351 344-8724`, que el footer identifica como
+  administracion/agencia. La coexistencia puede ser valida, pero falta definir
+  cual es el telefono publico principal y alinear cada superficie con ese rol.
+- Las seis tarjetas del feed enlazan al perfil general de Instagram. Enlazar cada
+  imagen a su publicacion mejora la correspondencia entre promesa y destino.
+- La etiqueta de transporte puede mostrar `aereo` sin tilde y el render de moneda
+  concatena simbolo/codigo y monto sin un formateador compartido. Son ajustes de
+  consistencia validos, pero de prioridad menor.
+
+### Hallazgos aceptados con matices
+
+- Google Business Profile y las reseñas reales siguen siendo la prioridad de
+  autoridad local, pero “30 reseñas” no es un umbral garantizado ni permite
+  prometer posicionamiento. Si se solicitan reseñas, deben provenir de
+  experiencias reales, sin incentivos, seleccion de clientes satisfechos ni
+  texto dictado. Google permite compartir un enlace o QR para pedirlas y prohibe
+  incentivos: [guia oficial](https://support.google.com/business/answer/3474122).
+- La prueba social debe ubicarse cerca de la primera tanda de paquetes cuando
+  exista material real. Hoy `Testimonials.tsx` conserva ejemplos, pero
+  `app/page.tsx` no renderiza la seccion; por lo tanto no hay testimonios ficticios
+  publicados en la home actual. La tarea correcta es sustituirlos antes de
+  habilitarla, no retirar una seccion visible.
+- Acortar el catalogo no justifica recortar las descripciones canonicas: el listado
+  `/destinos` ya limita el texto a tres lineas y las tarjetas destacadas de la home
+  no muestran descripcion. Si mas adelante la exploracion sigue densa, conviene
+  crear un resumen corto separado y conservar el texto rico en cada ficha.
+- El titulo `787 Rumbos | Agencia de Viajes en Cordoba` esta configurado y visible
+  en el HTML publico. Eso no prueba por si solo que Google haya indexado la home ni
+  que extraiga una descripcion determinada. Esa afirmacion debe verificarse en
+  Search Console o mediante una busqueda reproducible antes de tratarla como
+  estado vigente.
+
+### Trabajo derivado
+
+- `T-011`: reposicionar el hero y ordenar Servicios antes de Comunidad.
+- `T-012`: definir alcance, horarios y limites del acompañamiento antes de cerrar
+  el copy definitivo.
+- `T-013`: corregir formato monetario, `aereo` y enlaces individuales del feed.
+- `T-002`: ampliar la reconciliacion de GBP/NAP para incluir URL exacta de Maps y
+  roles de ambos telefonos en footer y schema.
+- `T-003`: habilitar prueba social solo con reseñas o testimonios reales y
+  autorizados, cerca del primer punto de decision comercial.
+
