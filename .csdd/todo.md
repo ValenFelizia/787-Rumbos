@@ -8,23 +8,17 @@
 
 - [ ] T-002 — Completar la presencia de Google Business Profile
   - Owner: Valen
-  - Scope: Google Business Profile, enlace exacto de Maps, datos NAP, schema `TravelAgency` y activos operativos relacionados
-  - Blocked by: verificación de la ficha, definición del teléfono público principal, fotos reales del local/equipo y disponibilidad para publicar.
-  - Note: reconciliar el WhatsApp comercial `+54 9 351 615-7398` con el número de administración/agencia `+54 9 351 344-8724`; luego alinear footer, schema, GBP y citaciones. Reemplazar el enlace genérico al aeropuerto por la ficha exacta cuando exista.
+  - Agent: Cursor Grok
+  - Scope: Google Business Profile, enlace exacto de Maps, fotos; roles de teléfono ya alineados en web/schema
+  - Updated: 2026-07-14
+  - Blocked by: verificación de la ficha GBP, fotos reales del local/equipo, URL exacta de Maps.
+  - Note: roles NAP resueltos. Agencia `344-8724` = CTAs/schema; urgencias `615-7398` = footer/FAQ. Constantes `AGENCY_PHONE` / `URGENT_PHONE` / `whatsappLink`. Pendiente UI footer: el ícono de “Urgencias” se ve raro (misma familia Send, label largo en 2 líneas); rediseñar (p. ej. icono distinto, tipografía secundaria, o layout que no achique el ícono) — no tocar aún. GBP y Maps genérico siguen pendientes.
 
 - [ ] T-003 — Resolver la prueba social
   - Owner: Valen
   - Scope: `components/sections/Testimonials.tsx`, `app/page.tsx` y contenido curado de Instagram
   - Blocked by: obtener reseñas o testimonios reales con autorización y la URL verificada de Google Business Profile.
-  - Note: los testimonios de ejemplo existen en el componente, pero la home no los renderiza. Deben sustituirse antes de habilitar la sección; ubicar la prueba social real cerca de la primera tanda de paquetes. Pedir reseñas auténticas de forma sostenida, sin incentivos, selección sesgada ni texto dictado.
-
-- [ ] T-012 — Definir el alcance operativo del acompañamiento
-  - Owner: Valen
-  - Agent: Cursor Grok
-  - Scope: política de atención, promesa de respuesta y copy de hero, propuesta de valor y FAQ; grilling para fijar definición verificable en specs y web
-  - Updated: 2026-07-14
-  - Blocked by: definir canal, horarios, tipos de incidencias cubiertas, tiempos de respuesta sostenibles y límites del servicio durante el viaje.
-  - Note: reclamada para sesión de grilling. Hoy el hero dice “Respondemos en menos de 2 horas” sin política operativa detrás; no publicar ni mantener promesa 24/7 ni SLA no verificable. Resultados del grilling → `specs.md` + copy.
+  - Note: los testimonios de ejemplo existen en el componente, pero la home no los renderiza. Deben sustituirse antes de habilitar la sección; ubicar la prueba social real cerca de la primera tanda de paquetes. Pedir reseñas auténticas de forma sostenida, sin incentivos, selección sesgada ni texto dictado. Casos reales de acompañamiento (imprevistos, documentación especial) son candidatos fuertes cuando haya autorización.
 
 - [ ] T-004 — Mantener el catálogo y las promociones vigentes
   - Owner: Valen
@@ -64,6 +58,13 @@
   - Depends on: GBP verificado y tracking de leads estable.
 
 ## Completado recientemente
+
+- [x] T-012 — Definir el alcance operativo del acompañamiento
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-07-14
+  - Note: grilling cerrado. Specs + FAQ/hero/AboutUs/ValueProp/footer/schema alineados. Reembolsos formales aplazados (preguntas a agencieros en handoff). Roles de teléfono resueltos con T-002 (web); GBP sigue en T-002.
 
 - [x] T-015 — Diagnosticar y corregir el marquee de partners
   - Owner: Valen
