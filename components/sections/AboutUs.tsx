@@ -46,7 +46,7 @@ export function AboutUs() {
             De la terminal al mundo
           </h2>
           <p className="mt-5 max-w-2xl text-[1.03rem] leading-relaxed text-[#0b4058]/80 text-pretty">
-            Llevamos años dedicados al rubro del transporte y el turismo. Conocemos lo que significa viajar porque lo vivimos todos los días desde nuestro local en el aeropuerto, junto a las boleterías oficiales de Vía Bariloche en el hall de arribos. Decidimos abrir 787 Rumbos para ir un paso más allá y ofrecer a nuestros pasajeros el acompañamiento total que siempre quisimos darles.
+            Llevamos años dedicados al rubro del transporte y el turismo. Conocemos lo que significa viajar porque lo vivimos todos los días desde nuestro local en el aeropuerto, junto a las boleterías oficiales de Vía Bariloche en el hall de arribos. Decidimos abrir 787 Rumbos para ir un paso más allá y ofrecer a nuestros pasajeros el acompañamiento cercano de punta a punta que siempre quisimos darles.
           </p>
 
           {/* Información práctica del local físico del aeropuerto */}

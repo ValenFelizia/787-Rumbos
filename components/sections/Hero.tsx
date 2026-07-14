@@ -43,7 +43,7 @@ export function Hero() {
                 Armá tu viaje ahora
               </button>
               <span className="pl-1 text-center text-xs text-white/70 sm:text-center">
-                Respondemos en menos de 2 horas
+                En horario de atención, respondemos en menos de 2 horas
               </span>
             </div>
           </div>

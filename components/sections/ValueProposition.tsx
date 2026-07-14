@@ -19,7 +19,7 @@ export function ValueProposition() {
         <p className="mt-5 max-w-4xl text-[1.02rem] leading-relaxed text-[#0b4058]/80 text-pretty">
           Trabajamos desde el hall de arribos del Aeropuerto de Córdoba, dentro del local oficial
           de Vía Bariloche. Combinamos años en transporte turístico con una oferta clara: vuelos,
-          paquetes y pasajes de ómnibus nacionales, con la misma persona que te asesora de punta a punta.
+          paquetes y pasajes de ómnibus nacionales, con el mismo equipo de punta a punta.
         </p>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           <article className="rounded-2xl bg-white p-7 border-t-4 border-[#e6b451] shadow-md shadow-[#0b4058]/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#0b4058]/15">

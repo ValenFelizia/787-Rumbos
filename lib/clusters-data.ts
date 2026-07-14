@@ -62,7 +62,7 @@ export const clustersData: ClusterPage[] = [
     metaDescription:
       "Cancún, Playa del Carmen y Riviera Maya desde Córdoba. All Inclusive, Family Plan, traslados y asistencia. Cotizá por WhatsApp.",
     intro:
-      "El Caribe mexicano es uno de los pedidos más fuertes desde Córdoba: playa, All Inclusive y resorts familiares. Te armamos opciones claras con vuelos, hotel y asistencia, sin bots.",
+      "El Caribe mexicano es uno de los pedidos más fuertes desde Córdoba: playa, All Inclusive y resorts familiares. Te armamos opciones claras con vuelos, hotel y asistencia.",
     howWeWork: [
       "Paquetes a medida o salidas cuando hay cupos publicados.",
       "All Inclusive, Family Plan y hoteles según tu estilo de viaje.",
