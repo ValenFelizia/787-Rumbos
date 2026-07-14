@@ -27,10 +27,10 @@ export function Hero() {
           <h1
             className="font-[family-name:var(--font-elaine)] text-[2rem] font-extrabold leading-tight tracking-tight sm:text-4xl md:text-6xl text-balance"
           >
-            Descubrí el mundo con el acompañamiento cercano de 787 Rumbos
+            787 Rumbos: tu agencia en el Aeropuerto de Córdoba
           </h1>
           <p className="max-w-2xl text-base leading-relaxed text-white/90 md:text-[1.08rem]">
-            Diseñamos propuestas personalizadas desde nuestra oficina en el Aeropuerto de Córdoba. Viajá con tranquilidad, respaldo y atención humana de principio a fin.
+            Paquetes aéreos y pasajes terrestres con Vía Bariloche, Vía Tac y El Valle. Te asesoramos en persona desde el hall de arribos.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             <div className="flex flex-col gap-1.5">
@@ -42,8 +42,9 @@ export function Hero() {
                 <WhatsAppIcon size={16} className="h-4 w-4" />
                 Armá tu viaje ahora
               </button>
-              {/* Micro-copy de confianza */}
-              <span className="pl-1 text-center text-xs text-white/70 sm:text-center">Respondemos en menos de 2 horas</span>
+              <span className="pl-1 text-center text-xs text-white/70 sm:text-center">
+                Consultá por WhatsApp o visitanos en el aeropuerto
+              </span>
             </div>
           </div>
         </div>
