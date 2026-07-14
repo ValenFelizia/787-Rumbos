@@ -5,7 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
-import { destinationsData, DestinationPage, getActiveUpcomingDepartures } from "@/lib/destinations-data";
+import {
+  destinationsData,
+  DestinationPage,
+  getActiveUpcomingDepartures,
+  getTransportLabel,
+} from "@/lib/destinations-data";
 import { clustersData } from "@/lib/clusters-data";
 import { MapPin, Calendar, ArrowRight } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
@@ -87,7 +92,7 @@ export default function DestinosIndex() {
                     : "border-[#0b4058]/10 shadow-[#0b4058]/5 hover:border-[#0b4058]/20 hover:shadow-[#0b4058]/15"
                 }`}
               >
-                {/* Destination Image */}
+                {/* Destination Image — country pin + next-departure strip (hierarchy over count pill) */}
                 <div className="relative h-60 w-full overflow-hidden">
                   <Image
                     src={dest.heroImage}
@@ -96,14 +101,39 @@ export default function DestinosIndex() {
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
-                  <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm text-[#0b4058] px-3.5 py-1.5 rounded-full text-xs font-bold shadow-sm flex items-center gap-1.5 border border-black/5">
-                    <MapPin className="h-3.5 w-3.5 text-[#e6b451]" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0b4058]/55 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute top-4 left-4 bg-white/95 text-[#0b4058] px-3 py-1.5 rounded-full text-xs font-bold shadow-sm flex items-center gap-1.5 border border-black/5">
+                    <MapPin className="h-3.5 w-3.5 text-[#e6b451] shrink-0" aria-hidden />
                     <span>{dest.country}</span>
                   </div>
-                  {activeDepartures.length > 0 && (
-                    <div className="absolute top-4 right-4 bg-[#dae553] text-[#0b4058] px-3.5 py-1.5 rounded-full text-xs font-bold shadow-sm flex items-center gap-1">
-                      <Calendar className="h-3.5 w-3.5" />
-                      <span>{activeDepartures.length} {activeDepartures.length === 1 ? "salida" : "salidas"}</span>
+                  {activeDepartures.length > 0 ? (
+                    <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-4">
+                      <div className="min-w-0 flex items-center gap-2 rounded-lg bg-[#dae553] px-3 py-2 text-[#0b4058] shadow-sm">
+                        <Calendar className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                        <div className="min-w-0 leading-tight">
+                          <p className="text-[9px] font-bold uppercase tracking-wider text-[#0b4058]/70">
+                            Próxima salida
+                          </p>
+                          <p className="text-xs font-extrabold truncate">
+                            {activeDepartures[0].displayDate}
+                            <span className="font-semibold text-[#0b4058]/70">
+                              {" "}
+                              · {getTransportLabel(activeDepartures[0].transport)}
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                      {activeDepartures.length > 1 && (
+                        <span className="shrink-0 rounded-lg bg-white/95 px-2.5 py-2 text-[10px] font-bold text-[#0b4058] border border-black/5 tabular-nums">
+                          +{activeDepartures.length - 1} más
+                        </span>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <span className="inline-flex rounded-lg bg-white/95 px-3 py-2 text-xs font-bold text-[#0b4058]/75 border border-black/5">
+                        Consultar fechas
+                      </span>
                     </div>
                   )}
                 </div>
