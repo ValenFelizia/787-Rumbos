@@ -20,9 +20,11 @@
 
 - [ ] T-012 — Definir el alcance operativo del acompañamiento
   - Owner: Valen
-  - Scope: política de atención, promesa de respuesta y copy de hero, propuesta de valor y FAQ
+  - Agent: Cursor Grok
+  - Scope: política de atención, promesa de respuesta y copy de hero, propuesta de valor y FAQ; grilling para fijar definición verificable en specs y web
+  - Updated: 2026-07-14
   - Blocked by: definir canal, horarios, tipos de incidencias cubiertas, tiempos de respuesta sostenibles y límites del servicio durante el viaje.
-  - Note: no publicar ni mantener una promesa que pueda interpretarse como soporte 24/7 hasta contar con una definición operativa verificable.
+  - Note: reclamada para sesión de grilling. Hoy el hero dice “Respondemos en menos de 2 horas” sin política operativa detrás; no publicar ni mantener promesa 24/7 ni SLA no verificable. Resultados del grilling → `specs.md` + copy.
 
 - [ ] T-004 — Mantener el catálogo y las promociones vigentes
   - Owner: Valen
@@ -35,11 +37,6 @@
   - Owner: Valen
   - Scope: flujo editorial de salidas grupales, posibles integraciones Instagram/Meta y alternativas sin hardcode ni Headless CMS
   - Note: investigar si se puede reducir la carga de cargar salidas a mano cuando ya se publican en Instagram, sin introducir un CMS. Evaluar opciones (API Graph, export manual asistido, sheet/CSV, webhook, scrapes desaconsejados, etc.), costos, límites de Meta, mantenimiento y riesgo; entregar recomendación go/no-go antes de implementar.
-
-- [ ] T-015 — Diagnosticar y corregir el marquee de partners
-  - Owner: Valen
-  - Scope: `components/sections/PartnersMarquee.tsx`, animación en `app/globals.css` y dependencias si se justifica
-  - Note: el loop actual se corta o reinicia de forma brusca; no es smooth. Analizar causa (duplicación del track, `%` vs ancho real, gap/padding, GPU, reduced-motion) y arreglar. Evaluar si una librería externa (p. ej. Embla, Swiper free-mode, o un marquee dedicado) es preferible a seguir con CSS puro; preferir la solución más simple que quede estable.
 
 - [ ] T-005 — Crear el hub de escapadas de fin de semana largo
   - Owner: Valen
@@ -67,6 +64,13 @@
   - Depends on: GBP verificado y tracking de leads estable.
 
 ## Completado recientemente
+
+- [x] T-015 — Diagnosticar y corregir el marquee de partners
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-07-14
+  - Note: CSS con `-50%` falló varias veces (subpíxel / anchos de Image). Reemplazado por `react-fast-marquee` (`autoFill`, `pauseOnHover`, `prefers-reduced-motion`). Keyframes `.animate-marquee` eliminados de `globals.css`.
 
 - [x] T-013 — Pulir la presentación del catálogo y el feed social
   - Owner: Valen
