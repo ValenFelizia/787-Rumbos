@@ -48,7 +48,7 @@ export function ValueProposition() {
               Aéreo y terrestre
             </h3>
             <p className="mt-2 text-sm text-[#0b4058]/80 text-pretty">
-              Paquetes con vuelos, salidas en bus y pasajes de ómnibus nacionales emitidos en el
+              Paquetes con vuelos, salidas grupales y pasajes de ómnibus nacionales emitidos en el
               acto, según lo que más te convenga.
             </p>
           </article>
