@@ -79,9 +79,14 @@ Precios, salidas, disponibilidad, promociones, fotos y testimonios deben ser
 reales, vigentes y verificables. Las promociones con fecha de finalización deben
 ocultarse al vencer. No deben presentarse testimonios ficticios como si fueran
 reales. Las solicitudes de reseñas deben dirigirse a clientes reales, sin
-incentivos, selección de opiniones positivas ni texto dictado. El formato visible
-de precios sigue la convención comercial de la agencia (`USD`/`$` + monto, alineada
-a Instagram); no se impone un formateador monetario distinto.
+incentivos, selección de opiniones positivas ni texto dictado. No existe un
+umbral mínimo de cantidad de reseñas en Google para curar testimonios en la web:
+con pocas reseñas auténticas y autorización basta para publicarlas (p. ej. 2–3).
+El crecimiento del volumen en GBP sigue en paralelo como señal de autoridad local.
+Cada testimonio en la web debe poder atribuirse a una reseña o cliente real
+(idealmente con enlace o mención de origen Google) para no leerse como fabricado.
+El formato visible de precios sigue la convención comercial de la agencia
+(`USD`/`$` + monto, alineada a Instagram); no se impone un formateador monetario distinto.
 
 ## Comportamiento vigente del producto
 
@@ -93,10 +98,14 @@ a Instagram); no se impone un formateador monetario distinto.
 - Los hubs de Brasil, Caribe, Argentina en bus y salidas grupales desde Córdoba
   están publicados y enlazados con el catálogo y las fichas de destino.
 - La home publica una sección de prueba social cerca del catálogo destacado.
-  Mientras no haya testimonios curados y autorizados, solo invita a dejar una
-  reseña real en Google (`GOOGLE_WRITE_REVIEW_LINK`). No se muestran ejemplos
-  ficticios. Cuando existan entradas en `lib/testimonials-data.ts`, se listan
-  ahí mismo y se mantiene el CTA a Google.
+  Los testimonios curados viven en `lib/testimonials-data.ts` (hoy: 3 reseñas
+  Google autorizadas). Cada cita con `source: "google"` muestra atribución
+  “Reseña en Google” hacia la ficha Maps, más CTAs “Dejar reseña” y “Ver en Maps”.
+  Si el array queda vacío, la sección vuelve al estado solo-CTA sin ejemplos
+  ficticios. No hay umbral mínimo de volumen en Maps para publicar citas
+  autorizadas. El pedido sostenido de reseñas en Google sigue en paralelo
+  (autoridad local), sin incentivos ni texto dictado. No se usan widgets de
+  terceros ni embeds no oficiales de reseñas Google.
 - En la home, el hero y la propuesta de valor priorizan la oficina en el
   Aeropuerto de Córdoba, la experiencia en transporte y la oferta aérea +
   terrestre. La sección de Servicios precede al feed social (“Comunidad”).

@@ -9,10 +9,9 @@
 - [ ] T-003 — Resolver la prueba social
   - Owner: Valen
   - Agent: Cursor Grok
-  - Scope: `components/sections/Testimonials.tsx`, `lib/testimonials-data.ts`, `app/page.tsx`, `GOOGLE_WRITE_REVIEW_LINK` / `GOOGLE_REVIEWS_LINK`
+  - Scope: released
   - Updated: 2026-07-14
-  - Blocked by: primeras reseñas/testimonios reales con autorización para curar en la web (pedido a clientes ya en marcha).
-  - Note: reclamada. Sección activa cerca de destacados: CTA al formulario `g.page/r/CZ_gdDN4llrIEBI/review`. QR en `public/qr-resenas-787.png`. Array vacío en `testimonials-data.ts`; al sumar entradas autorizadas se muestran solas. Copy-paste para pedir reseñas en handoff.
+  - Note: implementado en `development` — 3 citas Google (Matias, Magalí, Denisse) + atribución “Reseña en Google” + CTAs. Tipografía imperfecta de Denisse conservada. **Pendiente revisión humana** (UI + merge a main). Operativo: seguir pidiendo reseñas; monitorear listado público en Maps.
 
 - [ ] T-004 — Mantener el catálogo y las promociones vigentes
   - Owner: Valen

@@ -22,18 +22,25 @@ Datos canónicos en `specs.md`. Pedido de reseñas / `g.page` / QR → T-003.
 
 ---
 
-## T-003 — Prueba social (activa)
+## T-003 — Prueba social (implementada; pendiente review)
 
-**Estado:** reclamada. Sección en home activa sin mocks; esperando primeras reseñas reales.
+**Estado:** citas + atribución Google en `development`. Valen revisa UI/código antes de merge a `main`. Scope de escritura liberado.
 
-### Hecho en web
+### Hecho
 
-- Sección después de destacados: CTA “Dejar reseña en Google”
-- Datos: `lib/testimonials-data.ts` (vacío) → al cargar entradas autorizadas se muestran solas
-- Links en `lib/constants.ts`:
-  - Ficha Maps: `GOOGLE_MAPS_LINK` / `GOOGLE_REVIEWS_LINK` → `https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7`
-  - Escribir reseña: `GOOGLE_WRITE_REVIEW_LINK` → `https://g.page/r/CZ_gdDN4llrIEBI/review`
-  - QR (mismo destino): `public/qr-resenas-787.png` → `GOOGLE_REVIEW_QR_SRC`
+- `lib/testimonials-data.ts`: Matias Manzanelli, Magalí Flores, Denisse (textos literales; typos de Denisse intactos). `destination`/`date` opcionales.
+- `Testimonials.tsx`: grilla activa; por cita “Reseña en Google” → Maps; CTAs “Dejar reseña” + “Ver en Maps”; copy “Reseñas reales publicadas en Google…”.
+- Decisión de formato: citas curadas con atribución (no widget/embed). Google no ofrece iframe oficial de reseñas.
+
+### Rareza Maps (sigue)
+
+Rating/conteo público vs lista vacía en detalle. Chequeos: incógnito, que un pasajero abra su reseña, responder desde GBP. No bloquea la web.
+
+### Next (post-merge / operativo)
+
+1. Valen: review en local + merge `development` → `main` si OK.
+2. Seguir pidiendo reseñas (`g.page` / QR); meta suave ~10+ cuando Maps liste detalle.
+3. Cuando Maps muestre detalle: el link “Ver en Maps” / “Reseña en Google” gana más peso verificable.
 
 ### Mensaje para pedir reseña (WhatsApp / oral)
 
@@ -47,12 +54,6 @@ Datos canónicos en `specs.md`. Pedido de reseñas / `g.page` / QR → T-003.
 ### QR en el local
 
 Usar `public/qr-resenas-787.png` (impresión / mostrador). Apunta al mismo `g.page/.../review`.
-
-### Cuando lleguen reseñas
-
-1. Curar 2–3 con autorización (nombre, destino, cita breve).
-2. Agregar a `lib/testimonials-data.ts`.
-3. Casos fuertes: acompañamiento en imprevistos / documentación especial.
 
 ---
 
