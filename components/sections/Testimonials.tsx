@@ -1,7 +1,8 @@
 /**
  * Prueba social cerca del catálogo.
  * Sin testimonios curados: invita a reseñar en Google.
- * Con testimonios autorizados en `lib/testimonials-data.ts`: los muestra y mantiene el CTA.
+ * Con testimonios autorizados en `lib/testimonials-data.ts`: los muestra con
+ * atribución de origen y mantiene el CTA a Google / Maps.
  */
 import { Star, ExternalLink } from "lucide-react";
 import {
@@ -20,6 +21,44 @@ function Stars({ rating }: { rating: number }) {
   );
 }
 
+function SourceLabel({ source }: { source?: Testimonial["source"] }) {
+  if (source === "google") {
+    return (
+      <a
+        href={GOOGLE_REVIEWS_LINK}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-[#0b4058]/55 transition-colors hover:text-[#006183]"
+      >
+        Reseña en Google
+        <ExternalLink className="h-3 w-3 shrink-0 opacity-70" aria-hidden />
+      </a>
+    );
+  }
+  if (source === "instagram") {
+    return <p className="mt-1 text-xs text-[#0b4058]/55">Desde Instagram</p>;
+  }
+  return null;
+}
+
+function TestimonialMeta({ t }: { t: Testimonial }) {
+  const parts: string[] = [];
+  if (t.destination) parts.push(`Viajó a ${t.destination}`);
+  if (t.date) parts.push(t.date);
+
+  return (
+    <div className="mt-5 border-t border-[#0b4058]/10 pt-4">
+      <p className="font-[family-name:var(--font-elaine)] text-sm font-bold text-[#0b4058]">
+        {t.name}
+      </p>
+      {parts.length > 0 && (
+        <p className="mt-0.5 text-xs text-[#0b4058]/60">{parts.join(" · ")}</p>
+      )}
+      <SourceLabel source={t.source} />
+    </div>
+  );
+}
+
 function TestimonialCard({ t }: { t: Testimonial }) {
   return (
     <article className="border-t-4 border-[#e6b451] bg-white pt-6">
@@ -27,14 +66,7 @@ function TestimonialCard({ t }: { t: Testimonial }) {
       <p className="mt-4 text-sm leading-relaxed text-[#0b4058]/85 text-pretty">
         &ldquo;{t.text}&rdquo;
       </p>
-      <div className="mt-5 border-t border-[#0b4058]/10 pt-4">
-        <p className="font-[family-name:var(--font-elaine)] text-sm font-bold text-[#0b4058]">
-          {t.name}
-        </p>
-        <p className="mt-0.5 text-xs text-[#0b4058]/60">
-          Viajó a {t.destination} · {t.date}
-        </p>
-      </div>
+      <TestimonialMeta t={t} />
     </article>
   );
 }
@@ -61,7 +93,7 @@ export function Testimonials() {
             </h2>
             <p className="text-sm leading-relaxed text-[#0b4058]/75 md:text-base text-pretty">
               {hasReviews
-                ? "Experiencias reales de pasajeros que eligieron 787 Rumbos. Si viajaste con nosotros, sumá tu reseña en Google."
+                ? "Reseñas reales publicadas en Google. Si viajaste con nosotros, sumá la tuya."
                 : "Estamos reuniendo reseñas reales en Google. Si ya viajaste con nosotros, tu experiencia ayuda a la próxima familia que está eligiendo agencia."}
             </p>
           </div>
