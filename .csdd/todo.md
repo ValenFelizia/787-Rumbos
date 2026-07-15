@@ -53,6 +53,13 @@
 
 ## Completado recientemente
 
+- [x] T-016 — Mejorar SpecialPromo modal en mobile
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-07-14
+  - Note: sheet mobile (max-h 90dvh, scroll interno, body lock, Escape); folleto arriba + CTAs sticky; desktop 2 cols conservado.
+
 - [x] T-002 — Completar la presencia de Google Business Profile
   - Owner: Valen
   - Agent: Cursor Grok
