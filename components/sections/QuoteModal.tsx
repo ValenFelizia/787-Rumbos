@@ -112,13 +112,21 @@ export function QuoteModal() {
       {/* Click outside to close */}
       <div className="absolute inset-0" onClick={closeModal} />
 
-      {/* Modal Card */}
-      <div className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-white/10 bg-white shadow-2xl transition-all duration-300">
+      {/* Modal Card — role=dialog para accesibilidad y para que Playwright lo encuentre */}
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="quote-modal-title"
+        className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-white/10 bg-white shadow-2xl transition-all duration-300"
+      >
 
         {/* Header */}
         <div className="bg-gradient-to-r from-[#0b4058] to-[#006183] px-6 py-5 text-white">
           <div className="flex items-center justify-between">
-            <h3 className="font-[family-name:var(--font-elaine)] text-lg font-bold">
+            <h3
+              id="quote-modal-title"
+              className="font-[family-name:var(--font-elaine)] text-lg font-bold"
+            >
               Armá tu viaje a medida
             </h3>
             <button
