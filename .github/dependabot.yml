@@ -1,0 +1,23 @@
+# Dependabot: bot de GitHub que abre PRs cuando hay actualizaciones de paquetes.
+# No "arregla" vulnerabilidades solo: te propone bumps para que las revises.
+# Docs: https://docs.github.com/en/code-security/dependabot
+
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+    # Priorizamos seguridad y parches; majors de Next/React conviene revisar a mano.
+    groups:
+      production-patch-and-minor:
+        dependency-type: production
+        update-types:
+          - patch
+          - minor
+      development-dependencies:
+        dependency-type: development
