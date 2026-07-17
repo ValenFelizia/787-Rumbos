@@ -12,12 +12,38 @@ updates:
     open-pull-requests-limit: 5
     labels:
       - dependencies
-    # Priorizamos seguridad y parches; majors de Next/React conviene revisar a mano.
+    # Solo patch/minor en grupos. Los majors de frameworks/tooling
+    # se hacen a mano (changelog + smoke), no por Dependabot.
     groups:
       production-patch-and-minor:
         dependency-type: production
         update-types:
           - patch
           - minor
-      development-dependencies:
+      development-patch-and-minor:
         dependency-type: development
+        update-types:
+          - patch
+          - minor
+    ignore:
+      # Majors: revisar siempre con tarea propia
+      - dependency-name: "next"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "eslint-config-next"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "lucide-react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@vercel/analytics"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "eslint"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@playwright/test"
+        update-types: ["version-update:semver-major"]
