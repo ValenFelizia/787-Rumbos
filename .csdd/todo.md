@@ -18,6 +18,28 @@
   - Scope: `lib/destinations-data.ts`, promociones y contenido comercial relacionado
   - Note: revisar mensualmente precios, salidas y vigencia; retirar o corregir promociones vencidas.
 
+## Calidad y seguridad (baseline profesional)
+
+> Veredicto 2026-07-17: el sitio es marketing estático + WhatsApp; no hay superficie
+> de app (auth, DB, APIs propias, pagos). No hace falta hardening enterprise ni una
+> suite de tests grande. Sí conviene un baseline liviano (headers + higiene de deps +
+> CI/smoke) para operar como producto profesional y como práctica de aprendizaje.
+> Detalle durable en `specs.md` → “Calidad, seguridad y verificación”.
+
+- [x] T-017 — Aplicar baseline de seguridad HTTP e higiene de dependencias
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-07-17
+  - Note: headers en `next.config.mjs` (CSP, nosniff, referrer, frame denial, Permissions-Policy, HSTS en prod). Dependabot semanal. Script `audit:deps`. Next parcheado a 15.5.20 (cerró highs de audit; queda moderate de postcss anidado en Next, sin fix seguro vía force).
+
+- [x] T-018 — Montar CI mínimo y smoke tests de rutas críticas
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-07-17
+  - Note: ESLint flat + `typecheck`. Playwright smokes en `e2e/smoke.spec.ts` (home, destinos, salta, legal, cotizador). CI en `.github/workflows/ci.yml`. QuoteModal con `role="dialog"` para a11y/tests. Navbar logo a `next/link` para pasar lint.
+
 ## Próxima ola de producto
 
 - [ ] T-014 — Analizar automatización ligera de salidas grupales desde Instagram
