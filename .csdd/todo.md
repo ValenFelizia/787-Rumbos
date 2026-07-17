@@ -74,6 +74,13 @@
 
 ## Completado recientemente
 
+- [x] T-019 — Actualizar README al estado actual del producto
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-07-17
+  - Note: README alineado con stack (Next 15 / React 19 / Tailwind 4), rutas, scripts, CSDD, NAP y flujo `development` → `master`.
+
 - [x] T-016 — Mejorar SpecialPromo modal en mobile
   - Owner: Valen
   - Agent: Cursor Grok
