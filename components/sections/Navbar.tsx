@@ -9,6 +9,7 @@
  */
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { useModal } from "@/lib/context/ModalContext";
@@ -48,7 +49,7 @@ export function Navbar() {
       >
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-3 md:py-4">
           {/* Logo */}
-          <a href="/" className="inline-flex items-center transition duration-300 hover:opacity-90">
+          <Link href="/" className="inline-flex items-center transition duration-300 hover:opacity-90">
             <Image
               src="/logo.png"
               alt="Logo 787 Rumbos"
@@ -57,7 +58,7 @@ export function Navbar() {
               priority
               className="h-10 w-auto object-contain md:h-12"
             />
-          </a>
+          </Link>
 
           {/* Enlaces de navegación en Desktop */}
           <div className="hidden md:flex items-center gap-8">
@@ -103,7 +104,7 @@ export function Navbar() {
       >
         {/* Cabecera del menú móvil */}
         <div className="flex items-center justify-between px-6 py-3 border-b border-white/10 bg-[#0b4058]/90">
-          <a href="/" onClick={() => setIsOpen(false)} className="inline-flex items-center">
+          <Link href="/" onClick={() => setIsOpen(false)} className="inline-flex items-center">
             <Image
               src="/logo.png"
               alt="Logo 787 Rumbos"
@@ -112,7 +113,7 @@ export function Navbar() {
               priority
               className="h-10 w-auto object-contain"
             />
-          </a>
+          </Link>
           <button
             onClick={() => setIsOpen(false)}
             aria-label="Cerrar menú de navegación"

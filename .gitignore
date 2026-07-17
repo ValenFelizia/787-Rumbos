@@ -25,6 +25,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# playwright
+/playwright-report/
+/test-results/
+/blob-report/
+/playwright/.cache/
+
 # agent skills (install globally; do not version in this repo)
 .agents/
 skills-lock.json
