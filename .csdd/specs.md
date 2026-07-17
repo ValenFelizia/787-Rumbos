@@ -1,9 +1,11 @@
 # 787 Rumbos — Especificaciones vigentes
 
-> **Última actualización:** 2026-07-14
+> **Última actualización:** 2026-07-17
 > **Estado:** la base del producto está implementada. Se priorizan la operación
 > comercial, la vigencia del contenido y el crecimiento local antes de nuevas
-> funcionalidades.
+> funcionalidades. El baseline de seguridad HTTP, higiene de dependencias y
+> CI/smoke queda como mejora de calidad profesional (T-017 / T-018), no como
+> bloqueante de producto.
 
 El estado operativo vive en [todo.md](./todo.md). El análisis de mercado y
 crecimiento que sirve de contexto, pero no de lista de trabajo activa, se
@@ -128,6 +130,32 @@ El formato visible de precios sigue la convención comercial de la agencia
   limón, con contraste suficiente.
 - Los metadatos, canonical, Open Graph, robots, sitemap y datos estructurados
   deben seguir alineados con las páginas que se publiquen.
+
+## Calidad, seguridad y verificación
+
+El producto es un sitio de captación (contenido estático + CTAs a WhatsApp). No
+hay autenticación, base de datos, APIs propias que persistan datos ni pagos en
+la web. La postura de seguridad y testing debe ser proporcional a esa superficie.
+
+- **Seguridad en alcance:** headers HTTP de endurecimiento en el deploy
+  (Next/Vercel), CSP compatible con Analytics y assets propios, políticas de
+  framing/referrer/permisos, e higiene de dependencias (auditorías y parches,
+  especialmente Next.js). El cotizador no envía datos a un backend propio: arma
+  un enlace WhatsApp en el cliente.
+- **Seguridad fuera de alcance (salvo que cambie la arquitectura):** WAF
+  dedicado, hardening de auth/sesiones, rate limiting de APIs propias, pentests
+  formales, secret scanning de app (hoy no hay secretos de aplicación), y
+  controles pensados para formularios server-side o UGC.
+- **Si en el futuro aparece CMS, formularios con backend o datos de usuarios:**
+  reabrir el alcance (validación/sanitización server-side, secretos, privacidad
+  operativa y tests de esos contratos). El `dangerouslySetInnerHTML` de JSON-LD
+  solo es aceptable mientras el JSON provenga de datos controlados en el repo.
+- **Testing en alcance:** CI que ejecute lint, typecheck y build; smoke tests de
+  rutas y CTAs críticos. Tests unitarios solo para utilidades puras con riesgo
+  de regresión real.
+- **Testing fuera de alcance por ahora:** cobertura alta de componentes,
+  snapshots masivos, E2E exhaustivos de todo el catálogo y suites de
+  regresión visual.
 
 ## Operación y evolución
 
