@@ -8,19 +8,6 @@
 
 ## Ready to Land
 
-### Visual, conversión y motion
-
-- [ ] T-021 — Corregir accesibilidad de las interacciones principales
-  - Owner: Valen
-  - Agent: Codex
-  - Scope: `components/sections/SpecialPromo.tsx`, `components/sections/Navbar.tsx`, `components/sections/QuoteModal.tsx`
-  - Target: `master`
-  - Base: `b672653` (`origin/master`; `master` local está dos commits detrás)
-  - Updated: 2026-07-18
-  - Landing: revisión humana en localhost; después actualizar `master` desde `origin/master` y fusionar `development` → `master`.
-  - Verification: lint sin errores (queda 1 warning preexistente en Footer), typecheck y build pasan; recorrido mobile verificado con teclado para menú, promo y cotizador, incluidos trap/retorno de foco, Escape, scroll lock, pasos y contadores; sin errores de consola.
-  - Note: implementación en `230c057` y `ca1170a`. T-022 puede retomarse después del landing de T-021.
-
 ## Blocked
 
 ## Pending
@@ -113,6 +100,14 @@
 
 Retention: 12
 
+- [x] T-021 — Corregir accesibilidad de las interacciones principales
+  - Owner: Valen
+  - Agent: Codex
+  - Scope: released
+  - Updated: 2026-07-18
+  - Landed: `7eb9f7b` on `master`
+  - Note: navegación, promo y cotizador incorporan semántica accesible, foco administrado, Escape, scroll lock y controles anunciados. Revisión humana mobile aprobada; lint sin errores (1 warning preexistente en Footer), typecheck y build de 29 páginas pasan sobre el merge.
+
 - [x] T-003 — Resolver la prueba social
   - Owner: Valen
   - Agent: Cursor Grok
@@ -189,10 +184,3 @@ Retention: 12
   - Scope: released
   - Updated: 2026-07-13
   - Note: auditoría contrastada con código, versión pública y políticas oficiales; conclusiones incorporadas en `specs.md`, este estado operativo y la adenda de `docs/marketing-growth-audit.md`.
-
-- [x] T-001 — Migrar el estado del proyecto a CSDD
-  - Owner: Valen
-  - Agent: Codex
-  - Scope: released
-  - Updated: 2026-07-12
-  - Note: `todo.md` y `specs.md` se trasladaron desde `docs/`, se ajustaron a sus roles CSDD y se conservaron los documentos de análisis como contexto no operativo.
