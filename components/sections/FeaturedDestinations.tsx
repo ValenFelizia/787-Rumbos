@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -6,9 +8,15 @@ import {
   getTransportLabel,
 } from "@/lib/destinations-data";
 import { Plane, Bus, ArrowRight, Calendar } from "lucide-react";
-import { WHATSAPP_LINK } from "@/lib/constants";
+import {
+  PrimaryCta,
+  SecondaryCta,
+  CTA_DESTINATION_LABEL,
+} from "@/components/conversion";
+import { useModal } from "@/lib/context/ModalContext";
 
 export function FeaturedDestinations() {
+  const { openModal } = useModal();
   const featuredSlugs = ["salta", "bariloche", "rio-de-janeiro", "cataratas-del-iguazu"];
 
   const featured = featuredSlugs
@@ -49,12 +57,15 @@ export function FeaturedDestinations() {
           const transportType = nextDep?.transport ?? "mix";
 
           return (
-            <Link
+            <article
               key={dest.slug}
-              href={`/destinos/${dest.slug}`}
-              className="group flex flex-col overflow-hidden rounded-2xl border border-[#0b4058]/10 bg-white shadow-sm shadow-[#0b4058]/5 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#0b4058]/20 hover:shadow-xl hover:shadow-[#0b4058]/15 active:scale-[0.96] cursor-pointer"
+              className="group flex flex-col overflow-hidden rounded-2xl border border-[#0b4058]/10 bg-white shadow-sm shadow-[#0b4058]/5 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#0b4058]/20 hover:shadow-xl hover:shadow-[#0b4058]/15"
             >
-              <div className="relative h-56 w-full overflow-hidden">
+              <Link
+                href={`/destinos/${dest.slug}`}
+                className="relative block h-56 w-full overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0b4058]"
+                aria-label={`Ver detalles de ${dest.name}`}
+              >
                 <Image
                   src={dest.heroImage}
                   alt={`${dest.name} — paquete de viaje con 787 Rumbos`}
@@ -78,12 +89,17 @@ export function FeaturedDestinations() {
                     Consultar fechas
                   </div>
                 )}
-              </div>
+              </Link>
 
               <div className="p-5 flex-1 flex flex-col justify-between space-y-5">
                 <div className="space-y-2">
                   <h3 className="font-[family-name:var(--font-brand-heading)] text-xl font-bold tracking-tight text-[#0b4058] group-hover:text-[#006183] transition-colors duration-200">
-                    {dest.name}
+                    <Link
+                      href={`/destinos/${dest.slug}`}
+                      className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0b4058]"
+                    >
+                      {dest.name}
+                    </Link>
                   </h3>
 
                   <div className="flex items-center gap-1.5 text-xs text-[#0b4058]/70">
@@ -102,7 +118,7 @@ export function FeaturedDestinations() {
                   </div>
                 </div>
 
-                <div className="space-y-4 pt-3 border-t border-[#0b4058]/5">
+                <div className="space-y-3 pt-3 border-t border-[#0b4058]/5">
                   <div className="flex items-baseline justify-between gap-2">
                     <span className="text-[10px] text-[#0b4058]/50 uppercase font-black tracking-wider">
                       Tarifa base
@@ -125,13 +141,25 @@ export function FeaturedDestinations() {
                     )}
                   </div>
 
-                  <div className="font-[family-name:var(--font-brand-heading)] flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#0b4058] group-hover:bg-[#006183] text-white py-2.5 text-xs font-bold transition-all duration-200">
+                  <Link
+                    href={`/destinos/${dest.slug}`}
+                    className="font-[family-name:var(--font-brand-heading)] flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#0b4058] hover:bg-[#006183] text-white py-2.5 text-xs font-bold transition-all duration-200 active:scale-[0.96]"
+                  >
                     <span>{hasActiveDeps ? "Ver detalles y salidas" : "Consultar este destino"}</span>
                     <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
-                  </div>
+                  </Link>
+
+                  <button
+                    type="button"
+                    onClick={() => openModal(dest.name)}
+                    aria-label={`${CTA_DESTINATION_LABEL}: ${dest.name} — abre el cotizador`}
+                    className="font-[family-name:var(--font-elaine)] flex w-full items-center justify-center rounded-xl border-2 border-[#f7a92a] bg-transparent px-3 py-2.5 text-xs font-bold text-[#0b4058] transition-all duration-200 hover:bg-gradient-to-r hover:from-[#f7a92a] hover:to-[#e6b451] active:scale-[0.96] cursor-pointer"
+                  >
+                    {CTA_DESTINATION_LABEL}
+                  </button>
                 </div>
               </div>
-            </Link>
+            </article>
           );
         })}
       </div>
@@ -143,19 +171,22 @@ export function FeaturedDestinations() {
           </h3>
           <p className="text-white/80 text-xs md:text-sm leading-relaxed text-pretty">
             Tenemos salidas confirmadas adicionales y armamos itinerarios a medida nacionales e internacionales con la financiación que necesitás. También podés consultarnos por cualquier otro destino.
-            <a
-              href={WHATSAPP_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#dae553] hover:text-[#c3cf3e] font-bold underline transition-colors duration-200"
-            >
-              &nbsp;¡Conversá con nosotros!
-            </a>
           </p>
+        </div>
+        <div className="relative z-10 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center">
+          <PrimaryCta
+            onClick={() => openModal()}
+            aria-label="Cotizar viaje — abre el cotizador personalizado"
+            className="font-bold"
+          />
+          <SecondaryCta
+            aria-label="Escribinos por WhatsApp — abre el chat directo"
+            className="font-bold"
+          />
         </div>
         <Link
           href="/destinos"
-          className="font-[family-name:var(--font-brand-heading)] relative z-10 inline-flex items-center gap-2 rounded-xl bg-[#dae553] hover:bg-[#c3cf3e] text-[#0b4058] px-8 py-3.5 text-sm font-black shadow-md transition-all duration-200 active:scale-[0.96] cursor-pointer"
+          className="font-[family-name:var(--font-brand-heading)] relative z-10 inline-flex items-center gap-2 rounded-xl border border-white/30 bg-transparent px-6 py-2.5 text-sm font-bold text-white/90 transition-all duration-200 hover:bg-white/10 active:scale-[0.96] cursor-pointer"
         >
           <span>Explorar todos los destinos</span>
           <ArrowRight className="h-4 w-4 shrink-0" />
