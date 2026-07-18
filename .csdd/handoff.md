@@ -18,42 +18,21 @@ Cuando haya respuestas de 1–2, abrir tarea o ampliar FAQ/legal; no reabrir T-0
 
 **Estado:** completada. Ficha verificada; Maps + geo en web. Residual no bloqueante: CTA chat WhatsApp en GBP rechazado (click-to-call + WhatsApp del sitio).
 
-Datos canónicos en `specs.md`. Pedido de reseñas / `g.page` / QR → T-003.
+Datos canónicos en `specs.md`. La implementación de prueba social cerró en T-003;
+el pedido sostenido de reseñas / `g.page` / QR continúa como operación habitual.
 
 ---
 
-## T-003 — Prueba social (implementada; pendiente review)
+## T-020 — Smoke test del cotizador
 
-**Estado:** citas + atribución Google en `development`. Valen revisa UI/código antes de merge a `main`. Scope de escritura liberado.
+**Estado:** pendiente y asignada a Codex para una sesión posterior. No hay scope de escritura activo en esta sesión.
 
-### Hecho
+### Evidencia para retomar
 
-- `lib/testimonials-data.ts`: Matias Manzanelli, Magalí Flores, Denisse (textos literales; typos de Denisse intactos). `destination`/`date` opcionales.
-- `Testimonials.tsx`: grilla activa; por cita “Reseña en Google” → Maps; CTAs “Dejar reseña” + “Ver en Maps”; copy “Reseñas reales publicadas en Google…”.
-- Decisión de formato: citas curadas con atribución (no widget/embed). Google no ofrece iframe oficial de reseñas.
-
-### Rareza Maps (sigue)
-
-Rating/conteo público vs lista vacía en detalle. Chequeos: incógnito, que un pasajero abra su reseña, responder desde GBP. No bloquea la web.
-
-### Next (post-merge / operativo)
-
-1. Valen: review en local + merge `development` → `main` si OK.
-2. Seguir pidiendo reseñas (`g.page` / QR); meta suave ~10+ cuando Maps liste detalle.
-3. Cuando Maps muestre detalle: el link “Ver en Maps” / “Reseña en Google” gana más peso verificable.
-
-### Mensaje para pedir reseña (WhatsApp / oral)
-
-> Hola! Gracias por viajar con 787 Rumbos.
-> Si te sirvió nuestra atención, ¿nos dejás una reseña en Google? Nos ayuda muchísimo:
-> https://g.page/r/CZ_gdDN4llrIEBI/review
-> Sin presión y solo si te nace. ¡Gracias!
-
-(Sin incentivos, sin pedir 5 estrellas, sin texto dictado.)
-
-### QR en el local
-
-Usar `public/qr-resenas-787.png` (impresión / mostrador). Apunta al mismo `g.page/.../review`.
+- `npm run test:e2e`: pasan los cuatro smokes de rutas y falla el del cotizador.
+- El build de producción agrega `upgrade-insecure-requests`; Playwright sirve `http://127.0.0.1:3000`, por lo que el navegador intenta cargar assets locales por HTTPS y la página queda sin estilos.
+- El cotizador publicado en `https://www.787rumbos.com.ar/` abre correctamente y enfoca el destino; no se observó una regresión equivalente en producción.
+- Al resolver, conservar el hardening del deploy, lograr el smoke verde en local/CI y volver a ejecutar lint, typecheck, build y E2E.
 
 ---
 

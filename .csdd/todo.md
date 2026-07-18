@@ -4,75 +4,113 @@
 > [specs.md](./specs.md); el análisis de crecimiento ampliado permanece en
 > [../docs/marketing-growth-audit.md](../docs/marketing-growth-audit.md).
 
-## Bloqueado por contenido u operación
+## In Progress
 
-- [ ] T-003 — Resolver la prueba social
+## Ready to Land
+
+## Blocked
+
+## Pending
+
+### Visual, conversión y motion
+
+- [ ] T-021 — Corregir accesibilidad de las interacciones principales
   - Owner: Valen
-  - Agent: Cursor Grok
-  - Scope: released
-  - Updated: 2026-07-14
-  - Note: implementado en `development` — 3 citas Google (Matias, Magalí, Denisse) + atribución “Reseña en Google” + CTAs. Tipografía imperfecta de Denisse conservada. **Pendiente revisión humana** (UI + merge a main). Operativo: seguir pidiendo reseñas; monitorear listado público en Maps.
+  - Updated: 2026-07-18
+  - Note: alcance previsto en `components/sections/SpecialPromo.tsx`, `components/sections/Navbar.tsx` y `components/sections/QuoteModal.tsx`. Convertir la barra promocional en control semántico operable por teclado; sacar el menú mobile cerrado del orden de tabulación y exponer su estado; contener y devolver el foco en modales; nombrar los controles `+`/`-`. Mantener Escape y `prefers-reduced-motion`.
+
+- [ ] T-022 — Unificar la arquitectura y el lenguaje de los CTAs de la home
+  - Owner: Valen
+  - Updated: 2026-07-18
+  - Depends on: T-021.
+  - Note: establecer una acción primaria consistente que abra el cotizador y una secundaria explícita para WhatsApp directo; alinear Navbar, Hero, destinos destacados, CTA final y cotizador sin quitar la preselección de destino ni el SLA asociado al horario.
+  - Acceptance: cada CTA anticipa correctamente su resultado, la misma intención conserva el mismo nombre y los dos caminos pueden completarse con teclado en desktop y mobile.
+
+- [ ] T-023 — Convertir la presencia humana en el aeropuerto en la firma visual de la home
+  - Owner: Valen
+  - Updated: 2026-07-18
+  - Depends on: T-022.
+  - Note: articular Hero, TrustBar y AboutUs alrededor de “personas reales dentro del Aeropuerto de Córdoba”, usando las fotos reales del equipo y el local como evidencia temprana. Conservar Elaine Sans, Zalando Sans y la paleta petróleo/dorado/lima; evitar recursos genéricos de aviación que cualquier agencia podría usar.
+  - Acceptance: las primeras dos pantallas comunican ubicación física, atención humana y salida desde Córdoba; existe una composición coherente para desktop y mobile y la firma sigue siendo reconocible sin animación.
+
+- [ ] T-024 — Implementar un sistema de motion mínimo y estratégico
+  - Owner: Valen
+  - Updated: 2026-07-18
+  - Depends on: T-021 y T-023.
+  - Note: reemplazar el reveal uniforme de secciones por un máximo de dos o tres momentos con propósito: apertura breve del hero, gesto propio del bloque humano y microinteracciones simples. Calmar el marquee, eliminar combinaciones repetidas de lift + zoom + sombra y resolver las clases de animación declaradas pero ausentes en SpecialPromo sin sumar una librería salvo necesidad demostrada.
+  - Acceptance: el contenido es visible por defecto aunque JavaScript falle; la secuencia principal no supera aproximadamente 600 ms; sólo se animan `transform`/`opacity` o superficies pequeñas justificadas; `prefers-reduced-motion` produce una experiencia estática completa.
+
+- [ ] T-025 — Reducir la repetición visual y pulir el ritmo completo de la home
+  - Owner: Valen
+  - Updated: 2026-07-18
+  - Depends on: T-022 a T-024.
+  - Note: revisar ValueProposition, destinos, testimonios, AboutUs, Services, Instagram, FAQ, promo y cierre para que no compartan por reflejo la misma combinación de card, radio, borde y sombra. Conservar cards donde aportan una affordance real y variar composición, densidad y pausas sin alterar el contenido comercial aprobado.
+  - Acceptance: la home mantiene jerarquía y conversión, elimina los cuatro anti-patrones accionables de la auditoría Impeccable y conserva una lectura clara desde 390 px hasta desktop amplio.
+
+- [ ] T-026 — Cerrar la mejora visual con QA responsive, accesible y de rendimiento
+  - Owner: Valen
+  - Updated: 2026-07-18
+  - Depends on: T-021 a T-025.
+  - Note: verificar la home completa en desktop y mobile, navegación por teclado, focus visible, modales, `prefers-reduced-motion`, contenido sin JavaScript, hover/touch, estabilidad visual y ausencia de motion costoso. Ejecutar lint, typecheck, build y smokes relevantes sin ampliar la suite de forma desproporcionada.
+  - Acceptance: no quedan bloqueos P0/P1 de la crítica, no hay contenido oculto por fallos del reveal y la experiencia reducida conserva toda la información y conversión.
+
+### Contenido y operación
 
 - [ ] T-004 — Mantener el catálogo y las promociones vigentes
   - Owner: Valen
-  - Scope: `lib/destinations-data.ts`, promociones y contenido comercial relacionado
-  - Note: revisar mensualmente precios, salidas y vigencia; retirar o corregir promociones vencidas.
+  - Note: alcance previsto en `lib/destinations-data.ts`, `lib/instagram-posts.ts`, promociones y contenido comercial relacionado. Revisión manual mensual de precios, salidas, campañas y feed social. Priorizar captions evergreen en la home; retirar o corregir piezas vencidas. La revalidación diaria de Next evita que las páginas estáticas dependientes de fechas queden congeladas hasta el siguiente deploy, pero no reemplaza el control comercial humano.
 
-## Calidad y seguridad (baseline profesional)
-
-> Veredicto 2026-07-17: el sitio es marketing estático + WhatsApp; no hay superficie
-> de app (auth, DB, APIs propias, pagos). No hace falta hardening enterprise ni una
-> suite de tests grande. Sí conviene un baseline liviano (headers + higiene de deps +
-> CI/smoke) para operar como producto profesional y como práctica de aprendizaje.
-> Detalle durable en `specs.md` → “Calidad, seguridad y verificación”.
-
-- [x] T-017 — Aplicar baseline de seguridad HTTP e higiene de dependencias
-  - Owner: Valen
-  - Agent: Cursor Grok
-  - Scope: released
-  - Updated: 2026-07-17
-  - Note: headers en `next.config.mjs` (CSP, nosniff, referrer, frame denial, Permissions-Policy, HSTS en prod). Dependabot semanal. Script `audit:deps`. Next parcheado a 15.5.20 (cerró highs de audit; queda moderate de postcss anidado en Next, sin fix seguro vía force).
-
-- [x] T-018 — Montar CI mínimo y smoke tests de rutas críticas
-  - Owner: Valen
-  - Agent: Cursor Grok
-  - Scope: released
-  - Updated: 2026-07-17
-  - Note: ESLint flat + `typecheck`. Playwright smokes en `e2e/smoke.spec.ts` (home, destinos, salta, legal, cotizador). CI en `.github/workflows/ci.yml`. QuoteModal con `role="dialog"` para a11y/tests. Navbar logo a `next/link` para pasar lint.
-
-## Próxima ola de producto
+### Próxima ola de producto
 
 - [ ] T-014 — Analizar automatización ligera de salidas grupales desde Instagram
   - Owner: Valen
-  - Scope: flujo editorial de salidas grupales, posibles integraciones Instagram/Meta y alternativas sin hardcode ni Headless CMS
-  - Note: investigar si se puede reducir la carga de cargar salidas a mano cuando ya se publican en Instagram, sin introducir un CMS. Evaluar opciones (API Graph, export manual asistido, sheet/CSV, webhook, scrapes desaconsejados, etc.), costos, límites de Meta, mantenimiento y riesgo; entregar recomendación go/no-go antes de implementar.
+  - Note: alcance previsto en el flujo editorial de salidas grupales, posibles integraciones Instagram/Meta y alternativas sin hardcode ni Headless CMS. Investigar si se puede reducir la carga de cargar salidas a mano cuando ya se publican en Instagram, sin introducir un CMS. Evaluar opciones, costos, límites de Meta, mantenimiento y riesgo; entregar recomendación go/no-go antes de implementar.
 
 - [ ] T-005 — Crear el hub de escapadas de fin de semana largo
   - Owner: Valen
-  - Scope: `app/destinos/**`, `lib/**` y contenido propio asociado
   - Depends on: inventario y copy verificables.
+  - Note: alcance previsto en `app/destinos/**`, `lib/**` y contenido propio asociado.
 
 - [ ] T-006 — Extender el contenido SEO solo con demanda validada
   - Owner: Valen
-  - Scope: FAQs de destinos, blog mínimo e interlinking editorial
-  - Note: ampliar FAQs cuando existan consultas reales; priorizar artículos breves con intención de búsqueda concreta.
+  - Note: alcance previsto en FAQs de destinos, blog mínimo e interlinking editorial. Ampliar FAQs cuando existan consultas reales; priorizar artículos breves con intención de búsqueda concreta.
 
 - [ ] T-007 — Mejorar la medición de conversiones
   - Owner: Valen
-  - Scope: eventos de CTA de WhatsApp, UTMs y evaluación de GA4
   - Depends on: Google Business Profile activo y necesidad de embudos o campañas medibles.
+  - Note: alcance previsto en eventos de CTA de WhatsApp, UTMs y evaluación de GA4.
 
 - [ ] T-008 — Evaluar un CMS cuando el catálogo manual deje de escalar
   - Owner: Valen
-  - Scope: modelo y gestión de contenido de destinos
-  - Note: no introducir un CMS antes de que editar `destinations-data.ts` manualmente sea un problema real. Relacionada con T-014: si la automatización de salidas cubre el dolor, puede retrasar o evitar un CMS.
+  - Note: alcance previsto en el modelo y gestión de contenido de destinos. No introducir un CMS antes de que editar `destinations-data.ts` manualmente sea un problema real. Relacionada con T-014: si la automatización de salidas cubre el dolor, puede retrasar o evitar un CMS.
 
 - [ ] T-009 — Ejecutar pauta controlada
   - Owner: Valen
-  - Scope: Google Ads e Instagram/Meta Ads
   - Depends on: GBP verificado y tracking de leads estable.
+  - Note: alcance previsto en Google Ads e Instagram/Meta Ads.
 
-## Completado recientemente
+## Deferred
+
+### Calidad y seguridad
+
+- [ ] T-020 — Revisar y corregir el smoke test del cotizador
+  - Owner: Valen
+  - Scope: released
+  - Reason: Valen pidió diferir este trabajo; el CTA funciona en producción HTTPS y el fallo actual está limitado al entorno HTTP local/CI sin CSS.
+  - Resume when: Valen indique retomar el smoke del cotizador o el fallo empiece a bloquear la integración o el deploy.
+  - Updated: 2026-07-18
+  - Note: reproducir y resolver la interacción entre `upgrade-insecure-requests` del build de producción y el servidor HTTP local/CI. No degradar los headers del deploy para acomodar el test.
+
+## Recently Completed
+
+Retention: 12
+
+- [x] T-003 — Resolver la prueba social
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-07-18
+  - Note: revisión humana completada y sección publicada — 3 citas Google (Matias, Magalí, Denisse), atribución “Reseña en Google” y CTAs. Operativo: seguir pidiendo reseñas reales y monitorear su visibilidad en Maps.
 
 - [x] T-019 — Actualizar README al estado actual del producto
   - Owner: Valen
@@ -80,6 +118,20 @@
   - Scope: released
   - Updated: 2026-07-17
   - Note: README alineado con stack (Next 15 / React 19 / Tailwind 4), rutas, scripts, CSDD, NAP y flujo `development` → `master`.
+
+- [x] T-018 — Montar CI mínimo y smoke tests de rutas críticas
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-07-18
+  - Note: baseline implementado: ESLint flat + `typecheck`, Playwright y CI en `.github/workflows/ci.yml`. Una regresión de entorno descubierta en el smoke del cotizador se sigue por separado en T-020; T-018 conserva el cierre de la capacidad base y no afirma que el follow-up esté resuelto.
+
+- [x] T-017 — Aplicar baseline de seguridad HTTP e higiene de dependencias
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-07-17
+  - Note: headers en `next.config.mjs` (CSP, nosniff, referrer, frame denial, Permissions-Policy, HSTS en prod). Dependabot semanal. Script `audit:deps`. Next parcheado a 15.5.20 (cerró highs de audit; queda moderate de postcss anidado en Next, sin fix seguro vía force).
 
 - [x] T-016 — Mejorar SpecialPromo modal en mobile
   - Owner: Valen
