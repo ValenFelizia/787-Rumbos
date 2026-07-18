@@ -62,7 +62,10 @@ export function Navbar() {
       const lastElement = focusableElements[focusableElements.length - 1];
       const activeElement = document.activeElement;
 
-      if (e.shiftKey && (activeElement === firstElement || !menuDialogRef.current.contains(activeElement))) {
+      if (!menuDialogRef.current.contains(activeElement)) {
+        e.preventDefault();
+        (e.shiftKey ? lastElement : firstElement).focus();
+      } else if (e.shiftKey && activeElement === firstElement) {
         e.preventDefault();
         lastElement.focus();
       } else if (!e.shiftKey && activeElement === lastElement) {

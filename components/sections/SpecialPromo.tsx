@@ -50,13 +50,13 @@ function isPromoActive(endsAt: string): boolean {
 function InclusionIcon({ name, className }: { name: string; className?: string }) {
   switch (name) {
     case "plane":
-      return <Plane className={className} />;
+      return <Plane aria-hidden="true" className={className} />;
     case "calendar":
-      return <Calendar className={className} />;
+      return <Calendar aria-hidden="true" className={className} />;
     case "ticket":
-      return <Ticket className={className} />;
+      return <Ticket aria-hidden="true" className={className} />;
     case "map-pin":
-      return <MapPin className={className} />;
+      return <MapPin aria-hidden="true" className={className} />;
     default:
       return null;
   }
@@ -121,7 +121,7 @@ function PromoPricingAndCtas({
           className="font-[family-name:var(--font-brand-heading)] inline-flex items-center justify-center gap-2 rounded-xl bg-white hover:bg-white/95 text-[#0b4058] px-5 py-3 text-xs font-black shadow-md transition-all duration-200 active:scale-[0.97] cursor-pointer text-center"
         >
           <span>Ver detalles en la web</span>
-          <ArrowRight className="h-3.5 w-3.5 shrink-0" />
+          <ArrowRight aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
         </Link>
         <a
           href={whatsappUrl}
@@ -178,7 +178,10 @@ export function SpecialPromo() {
       const lastElement = focusableElements[focusableElements.length - 1];
       const activeElement = document.activeElement;
 
-      if (e.shiftKey && (activeElement === firstElement || !dialogRef.current.contains(activeElement))) {
+      if (!dialogRef.current.contains(activeElement)) {
+        e.preventDefault();
+        (e.shiftKey ? lastElement : firstElement).focus();
+      } else if (e.shiftKey && activeElement === firstElement) {
         e.preventDefault();
         lastElement.focus();
       } else if (!e.shiftKey && activeElement === lastElement) {
