@@ -18,19 +18,19 @@
   - Note: retomada por solicitud de Valen. Reproducir y resolver la interacción entre `upgrade-insecure-requests` del build de producción y el servidor HTTP local/CI sin degradar los headers del deploy.
   - Acceptance: el smoke del cotizador pasa en el flujo local/CI representativo, los headers de producción conservan su intención de seguridad y las verificaciones relacionadas quedan documentadas.
 
-### Visual, conversión y motion
+## Ready to Land
 
 - [ ] T-022 — Unificar la arquitectura y el lenguaje de los CTAs de la home
   - Owner: Valen
   - Agent: Cursor Grok
   - Scope: `components/conversion/**`, `components/sections/Navbar.tsx`, `components/sections/Hero.tsx`, `components/sections/CTASection.tsx`, `components/sections/FeaturedDestinations.tsx`, `components/sections/QuoteModal.tsx`, `.csdd/todo.md`, `.csdd/specs.md`
   - Target: `development`
+  - Landing: `development`
   - Updated: 2026-07-18
   - Depends on: T-021.
-  - Note: primaria canónica `Cotizar viaje` (cotizador) y secundaria `Escribinos por WhatsApp`; cards destacadas conservan link a detalle + `Cotizar este destino` con preselección; SLA con horario. No tocar scope de T-020.
+  - Note: primaria `Cotizar viaje` / secundaria `Escribinos por WhatsApp` en Navbar, Hero, CTA final y banner de destinos; cards con detalle + `Cotizar este destino` (`openModal(name)`); SLA con horario; SpecialPromo fuera de alcance.
+  - Verification: lint y typecheck; teclado en par primario/secundario; preselección desde card abre paso 2 del cotizador.
   - Acceptance: cada CTA anticipa correctamente su resultado, la misma intención conserva el mismo nombre y los dos caminos pueden completarse con teclado en desktop y mobile.
-
-## Ready to Land
 
 ## Blocked
 
