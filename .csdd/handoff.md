@@ -23,19 +23,6 @@ el pedido sostenido de reseñas / `g.page` / QR continúa como operación habitu
 
 ---
 
-## T-020 — Smoke test del cotizador
-
-**Estado:** pendiente y asignada a Codex para una sesión posterior. No hay scope de escritura activo en esta sesión.
-
-### Evidencia para retomar
-
-- `npm run test:e2e`: pasan los cuatro smokes de rutas y falla el del cotizador.
-- El build de producción agrega `upgrade-insecure-requests`; Playwright sirve `http://127.0.0.1:3000`, por lo que el navegador intenta cargar assets locales por HTTPS y la página queda sin estilos.
-- El cotizador publicado en `https://www.787rumbos.com.ar/` abre correctamente y enfoca el destino; no se observó una regresión equivalente en producción.
-- Al resolver, conservar el hardening del deploy, lograr el smoke verde en local/CI y volver a ejecutar lint, typecheck, build y E2E.
-
----
-
 ## T-013 — Catálogo y feed social
 
 **Estado:** implementada en `development`. Permalink del post 3 del feed sigue pendiente (cae al perfil `@787rumbos`).

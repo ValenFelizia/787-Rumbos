@@ -6,19 +6,19 @@
 
 ## In Progress
 
-### Calidad y seguridad
+## Ready to Land
 
 - [ ] T-020 — Revisar y corregir el smoke test del cotizador
   - Owner: Valen
   - Agent: Codex
-  - Scope: `e2e/smoke.spec.ts`, `playwright.config.ts`, `next.config.mjs`; ampliar sólo si la causa verificada lo requiere.
+  - Scope: configuración de build E2E, Playwright, smoke del cotizador y workflow de CI.
   - Target: `master`
-  - Base: `0b59f6b`
+  - Base: `a32dfde`
   - Updated: 2026-07-18
-  - Note: retomada por solicitud de Valen. Reproducir y resolver la interacción entre `upgrade-insecure-requests` del build de producción y el servidor HTTP local/CI sin degradar los headers del deploy.
+  - Landing: revisión humana del diff; después fusionar `development` → `master`.
+  - Verification: `npm run test:e2e` y `CI=1 npm run test:e2e:ci` pasan 5/5; el smoke confirma CSP con `upgrade-insecure-requests` y HSTS. Lint sin errores (1 warning preexistente en Footer), typecheck, build normal y build E2E de 29 páginas pasan.
+  - Note: la causa verificada no era el CSP sino reutilizar un servidor viejo y compartir `.next` entre desarrollo y producción. La implementación `c1e7ea3` aísla E2E en `.next-e2e` y puerto 3100 sin debilitar headers.
   - Acceptance: el smoke del cotizador pasa en el flujo local/CI representativo, los headers de producción conservan su intención de seguridad y las verificaciones relacionadas quedan documentadas.
-
-## Ready to Land
 
 - [ ] T-022 — Unificar la arquitectura y el lenguaje de los CTAs de la home
   - Owner: Valen
