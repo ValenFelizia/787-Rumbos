@@ -6,6 +6,17 @@
 
 ## In Progress
 
+### Visual, conversión y motion
+
+- [ ] T-021 — Corregir accesibilidad de las interacciones principales
+  - Owner: Valen
+  - Agent: Codex
+  - Scope: `components/sections/SpecialPromo.tsx`, `components/sections/Navbar.tsx`, `components/sections/QuoteModal.tsx`
+  - Target: `master`
+  - Base: `b672653` (`origin/master`; `master` local está dos commits detrás)
+  - Updated: 2026-07-18
+  - Note: convertir la barra promocional en control semántico operable por teclado; sacar el menú mobile cerrado del orden de tabulación y exponer su estado; contener y devolver el foco en modales; nombrar los controles `+`/`-`. Mantener Escape y `prefers-reduced-motion`.
+
 ## Ready to Land
 
 ## Blocked
@@ -13,11 +24,6 @@
 ## Pending
 
 ### Visual, conversión y motion
-
-- [ ] T-021 — Corregir accesibilidad de las interacciones principales
-  - Owner: Valen
-  - Updated: 2026-07-18
-  - Note: alcance previsto en `components/sections/SpecialPromo.tsx`, `components/sections/Navbar.tsx` y `components/sections/QuoteModal.tsx`. Convertir la barra promocional en control semántico operable por teclado; sacar el menú mobile cerrado del orden de tabulación y exponer su estado; contener y devolver el foco en modales; nombrar los controles `+`/`-`. Mantener Escape y `prefers-reduced-motion`.
 
 - [ ] T-022 — Unificar la arquitectura y el lenguaje de los CTAs de la home
   - Owner: Valen
