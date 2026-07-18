@@ -43,7 +43,7 @@ export const instagramPosts: InstagramPost[] = [
     id: 4,
     imageSrc: "/instagram/post4.png",
     caption:
-      "🌴 Brasil te espera en Junio 2026 ✈️. Playas increíbles, calor todo el año y opciones para todos los gustos.",
+      "🌴 Brasil te espera ✈️. Playas increíbles, calor todo el año y opciones para todos los gustos.",
     alt: "Vista panorámica de playas de Brasil con aguas cristalinas y arena blanca",
     permalink: "https://www.instagram.com/p/DXIXc_yjbu2/",
   },
