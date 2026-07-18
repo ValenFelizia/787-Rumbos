@@ -1,4 +1,4 @@
-# robots.txt — 787 Rumbos (787rumbos.com.ar)
+# robots.txt — 787 Rumbos (www.787rumbos.com.ar)
 #
 # Este archivo le dice a los robots de los buscadores (Googlebot, Bingbot, etc.)
 # qué partes del sitio pueden indexar y cuáles no.
@@ -8,4 +8,4 @@ User-agent: *
 Allow: /
 
 # Ubicación del sitemap para que los buscadores lo encuentren automáticamente
-Sitemap: https://787rumbos.com.ar/sitemap.xml
+Sitemap: https://www.787rumbos.com.ar/sitemap.xml

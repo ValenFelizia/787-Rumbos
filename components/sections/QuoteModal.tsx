@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { X, ChevronRight, ChevronLeft, Calendar, Users, Plane, Info, Clock } from "lucide-react";
 import { useModal } from "@/lib/context/ModalContext";
 import { featuredDestinations, WHATSAPP_QUOTE_BYPASS, whatsappLink, AGENCY_PHONE } from "@/lib/constants";
@@ -26,6 +26,15 @@ const DURATION_OPTIONS = [
 
 const AIRLINES = ["Copa Airlines", "JetSmart", "GOL", "Avianca", "Air Europa", "LATAM Airlines", "Arajet"];
 
+const FOCUSABLE_SELECTOR = [
+  "a[href]",
+  "button:not([disabled])",
+  "input:not([disabled])",
+  "select:not([disabled])",
+  "textarea:not([disabled])",
+  '[tabindex]:not([tabindex="-1"])',
+].join(",");
+
 const getNext12Months = () => {
   const months = ["Próximos 3 meses", "Temporada Alta", "Temporada Baja"];
   const date = new Date();
@@ -43,6 +52,8 @@ const getNext12Months = () => {
 export function QuoteModal() {
   const { isOpen, destination, closeModal } = useModal();
   const [step, setStep] = useState(1);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   // Form state
   const [destino, setDestino] = useState("");
@@ -52,7 +63,7 @@ export function QuoteModal() {
   const [menores, setMenores] = useState(0);
   const [aerolinea, setAerolinea] = useState("Sin preferencia");
 
-  const months = getNext12Months();
+  const months = useMemo(getNext12Months, []);
 
   // Reset form or pre-fill destination when modal state changes
   useEffect(() => {
@@ -71,18 +82,61 @@ export function QuoteModal() {
       setMenores(0);
       setAerolinea("Sin preferencia");
     }
-  }, [isOpen, destination]);
+  }, [isOpen, destination, months]);
 
-  // Handle escape key to close modal
+  // El modal bloquea el fondo, contiene el foco y lo devuelve al CTA que lo abrió.
   useEffect(() => {
+    if (!isOpen) return;
+
+    const previouslyFocusedElement =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const previousOverflow = document.body.style.overflow;
+    const focusFrame = window.requestAnimationFrame(() => closeButtonRef.current?.focus());
+
+    document.body.style.overflow = "hidden";
+
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isOpen) {
+      if (e.key === "Escape") {
+        e.preventDefault();
         closeModal();
+        return;
+      }
+
+      if (e.key !== "Tab" || !dialogRef.current) return;
+
+      const focusableElements = Array.from(
+        dialogRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)
+      );
+      if (focusableElements.length === 0) {
+        e.preventDefault();
+        return;
+      }
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+      const activeElement = document.activeElement;
+
+      if (!dialogRef.current.contains(activeElement)) {
+        e.preventDefault();
+        (e.shiftKey ? lastElement : firstElement).focus();
+      } else if (e.shiftKey && activeElement === firstElement) {
+        e.preventDefault();
+        lastElement.focus();
+      } else if (!e.shiftKey && activeElement === lastElement) {
+        e.preventDefault();
+        firstElement.focus();
       }
     };
+
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen]);
+
+    return () => {
+      window.cancelAnimationFrame(focusFrame);
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+      if (previouslyFocusedElement?.isConnected) previouslyFocusedElement.focus();
+    };
+  }, [isOpen, closeModal]);
 
   if (!isOpen) return null;
 
@@ -110,10 +164,11 @@ export function QuoteModal() {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0b4058]/70 p-4 backdrop-blur-sm transition-opacity duration-300">
       {/* Click outside to close */}
-      <div className="absolute inset-0" onClick={closeModal} />
+      <div aria-hidden="true" className="absolute inset-0" onClick={closeModal} />
 
       {/* Modal Card — role=dialog para accesibilidad y para que Playwright lo encuentre */}
       <div
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby="quote-modal-title"
@@ -130,16 +185,26 @@ export function QuoteModal() {
               Armá tu viaje a medida
             </h3>
             <button
+              ref={closeButtonRef}
+              type="button"
               onClick={closeModal}
               className="rounded-full p-1 text-white/80 transition hover:bg-white/10 hover:text-white"
               aria-label="Cerrar modal"
             >
-              <X className="h-5 w-5" />
+              <X aria-hidden="true" className="h-5 w-5" />
             </button>
           </div>
 
           {/* Progress bar */}
-          <div className="mt-4 flex gap-2">
+          <div
+            role="progressbar"
+            aria-label="Progreso de la cotización"
+            aria-valuemin={1}
+            aria-valuemax={3}
+            aria-valuenow={step}
+            aria-valuetext={`Paso ${step} de 3`}
+            className="mt-4 flex gap-2"
+          >
             {[1, 2, 3].map((s) => (
               <div
                 key={s}
@@ -148,6 +213,7 @@ export function QuoteModal() {
               />
             ))}
           </div>
+          <p aria-live="polite" className="sr-only">Paso {step} de 3</p>
         </div>
 
         {/* Form Body */}
@@ -161,12 +227,12 @@ export function QuoteModal() {
               </label>
               <input
                 id="destino-input"
+                name="destino"
                 type="text"
                 value={destino}
                 onChange={(e) => setDestino(e.target.value)}
-                placeholder="Ej: Brasil, Cancún, Bariloche..."
+                placeholder="Ej: Brasil, Cancún, Bariloche…"
                 className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm focus:border-[#f7a92a] focus:outline-none focus:ring-1 focus:ring-[#f7a92a]"
-                autoFocus
               />
 
               {/* Optional Suggestions */}
@@ -177,6 +243,7 @@ export function QuoteModal() {
                     <button
                       key={sug}
                       type="button"
+                      aria-pressed={destino.toLowerCase() === sug.toLowerCase()}
                       onClick={() => setDestino(sug)}
                       className={`rounded-full px-3 py-1.5 text-xs transition duration-250 ${destino.toLowerCase() === sug.toLowerCase()
                         ? "bg-[#0b4058] text-white font-medium"
@@ -198,11 +265,12 @@ export function QuoteModal() {
               {/* Date selection */}
               <div className="space-y-2">
                 <label htmlFor="fecha-select" className="flex items-center gap-1.5 text-sm font-semibold text-[#0b4058]">
-                  <Calendar className="h-4 w-4 text-[#f7a92a]" />
+                  <Calendar aria-hidden="true" className="h-4 w-4 text-[#f7a92a]" />
                   ¿Cuándo tenés pensado viajar?
                 </label>
                 <select
                   id="fecha-select"
+                  name="fecha"
                   value={fecha}
                   onChange={(e) => setFecha(e.target.value)}
                   className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm focus:border-[#f7a92a] focus:outline-none focus:ring-1 focus:ring-[#f7a92a]"
@@ -218,11 +286,12 @@ export function QuoteModal() {
               {/* Estimated duration */}
               <div className="space-y-2">
                 <label htmlFor="duracion-select" className="flex items-center gap-1.5 text-sm font-semibold text-[#0b4058]">
-                  <Clock className="h-4 w-4 text-[#f7a92a]" />
+                  <Clock aria-hidden="true" className="h-4 w-4 text-[#f7a92a]" />
                   ¿Cuántos días aproximados?
                 </label>
                 <select
                   id="duracion-select"
+                  name="duracion"
                   value={duracion}
                   onChange={(e) => setDuracion(e.target.value)}
                   className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm focus:border-[#f7a92a] focus:outline-none focus:ring-1 focus:ring-[#f7a92a]"
@@ -238,7 +307,7 @@ export function QuoteModal() {
               {/* Passengers selector */}
               <div className="space-y-3 pt-2">
                 <span className="flex items-center gap-1.5 text-sm font-semibold text-[#0b4058]">
-                  <Users className="h-4 w-4 text-[#f7a92a]" />
+                  <Users aria-hidden="true" className="h-4 w-4 text-[#f7a92a]" />
                   ¿Cuántas personas viajan?
                 </span>
 
@@ -252,19 +321,23 @@ export function QuoteModal() {
                     <div className="flex items-center gap-3">
                       <button
                         type="button"
+                        aria-label="Quitar un adulto"
+                        aria-controls="adultos-count"
                         disabled={adultos <= 1}
                         onClick={() => setAdultos((a) => a - 1)}
                         className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 text-gray-600 transition hover:bg-gray-50 disabled:opacity-30"
                       >
-                        -
+                        <span aria-hidden="true">−</span>
                       </button>
-                      <span className="w-4 text-center text-sm font-semibold text-gray-800">{adultos}</span>
+                      <span id="adultos-count" aria-live="polite" aria-atomic="true" className="w-4 text-center text-sm font-semibold text-gray-800">{adultos}</span>
                       <button
                         type="button"
+                        aria-label="Agregar un adulto"
+                        aria-controls="adultos-count"
                         onClick={() => setAdultos((a) => a + 1)}
                         className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 text-gray-600 transition hover:bg-gray-50"
                       >
-                        +
+                        <span aria-hidden="true">+</span>
                       </button>
                     </div>
                   </div>
@@ -278,19 +351,23 @@ export function QuoteModal() {
                     <div className="flex items-center gap-3">
                       <button
                         type="button"
+                        aria-label="Quitar un menor"
+                        aria-controls="menores-count"
                         disabled={menores <= 0}
                         onClick={() => setMenores((m) => m - 1)}
                         className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 text-gray-600 transition hover:bg-gray-50 disabled:opacity-30"
                       >
-                        -
+                        <span aria-hidden="true">−</span>
                       </button>
-                      <span className="w-4 text-center text-sm font-semibold text-gray-800">{menores}</span>
+                      <span id="menores-count" aria-live="polite" aria-atomic="true" className="w-4 text-center text-sm font-semibold text-gray-800">{menores}</span>
                       <button
                         type="button"
+                        aria-label="Agregar un menor"
+                        aria-controls="menores-count"
                         onClick={() => setMenores((m) => m + 1)}
                         className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 text-gray-600 transition hover:bg-gray-50"
                       >
-                        +
+                        <span aria-hidden="true">+</span>
                       </button>
                     </div>
                   </div>
@@ -302,14 +379,15 @@ export function QuoteModal() {
           {/* STEP 3: AIRLINE PREFERENCE */}
           {step === 3 && (
             <div className="space-y-4">
-              <label className="flex items-center gap-1.5 text-sm font-semibold text-[#0b4058]">
-                <Plane className="h-4 w-4 text-[#f7a92a]" />
+              <p id="airline-preference-label" className="flex items-center gap-1.5 text-sm font-semibold text-[#0b4058]">
+                <Plane aria-hidden="true" className="h-4 w-4 text-[#f7a92a]" />
                 ¿Preferencia de aerolínea? (Opcional)
-              </label>
+              </p>
 
-              <div className="flex flex-wrap gap-2">
+              <div role="group" aria-labelledby="airline-preference-label" className="flex flex-wrap gap-2">
                 <button
                   type="button"
+                  aria-pressed={aerolinea === "Sin preferencia"}
                   onClick={() => setAerolinea("Sin preferencia")}
                   className={`rounded-full px-3.5 py-2 text-xs transition duration-250 ${aerolinea === "Sin preferencia"
                     ? "bg-[#0b4058] text-white font-medium"
@@ -322,6 +400,7 @@ export function QuoteModal() {
                   <button
                     key={air}
                     type="button"
+                    aria-pressed={aerolinea === air}
                     onClick={() => setAerolinea(air)}
                     className={`rounded-full px-3.5 py-2 text-xs transition duration-250 ${aerolinea === air
                       ? "bg-[#0b4058] text-white font-medium"
@@ -334,7 +413,7 @@ export function QuoteModal() {
               </div>
 
               <div className="flex items-center gap-2 rounded-xl bg-gray-50 p-3.5 text-xs text-gray-500">
-                <Info className="h-4 w-4 shrink-0 text-[#006183]" />
+                <Info aria-hidden="true" className="h-4 w-4 shrink-0 text-[#006183]" />
                 <span>Emitimos con todas las aerolíneas y buscamos siempre la mejor conexión y precio.</span>
               </div>
             </div>
@@ -349,7 +428,7 @@ export function QuoteModal() {
                 onClick={handleBack}
                 className="flex items-center justify-center gap-1 rounded-xl border border-gray-200 px-5 py-3 text-sm font-medium text-gray-600 transition hover:bg-gray-50"
               >
-                <ChevronLeft className="h-4 w-4" />
+                <ChevronLeft aria-hidden="true" className="h-4 w-4" />
                 Atrás
               </button>
             )}
@@ -363,7 +442,7 @@ export function QuoteModal() {
                 className="flex flex-1 items-center justify-center gap-1 rounded-xl bg-[#0b4058] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#006183] disabled:opacity-40"
               >
                 Siguiente
-                <ChevronRight className="h-4 w-4" />
+                <ChevronRight aria-hidden="true" className="h-4 w-4" />
               </button>
             ) : (
               <button

@@ -25,15 +25,15 @@ export const metadata: Metadata = {
   title: '787 Rumbos | Agencia de Viajes en Córdoba',
   description:
     'Agencia de viajes en Córdoba, Argentina. Paquetes personalizados a Río de Janeiro, Bariloche, Cartagena, Ushuaia y más. Financiación disponible. Asesoramiento humano por WhatsApp.',
-  metadataBase: new URL('https://787rumbos.com.ar'),
+  metadataBase: new URL('https://www.787rumbos.com.ar'),
   alternates: {
-    canonical: 'https://787rumbos.com.ar',
+    canonical: 'https://www.787rumbos.com.ar',
   },
   openGraph: {
     title: '787 Rumbos | Agencia de Viajes en Córdoba',
     description:
       'Viajá con el respaldo de 787 Rumbos. Atención personalizada, financiación disponible y paquetes a medida desde Córdoba.',
-    url: 'https://787rumbos.com.ar',
+    url: 'https://www.787rumbos.com.ar',
     siteName: '787 Rumbos',
     locale: 'es_AR',
     type: 'website',
@@ -51,6 +51,9 @@ export const metadata: Metadata = {
     apple: '/logo.png',
   },
 }
+
+// Mantiene frescas las páginas estáticas que dependen de fechas sin sumar un CMS ni un cron.
+export const revalidate = 86_400;
 
 /**
  * `children` es un prop especial de React: representa el "hueco" donde Next.js
@@ -82,7 +85,7 @@ export default function RootLayout({
     name: "787 Rumbos",
     description:
       "Agencia de viajes en Córdoba. Paquetes personalizados, atención humana y financiación disponible.",
-    url: "https://787rumbos.com.ar",
+    url: "https://www.787rumbos.com.ar",
     telephone: AGENCY_PHONE.tel,
     address: {
       "@type": "PostalAddress",

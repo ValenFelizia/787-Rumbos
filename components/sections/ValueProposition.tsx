@@ -38,7 +38,7 @@ export function ValueProposition() {
               Experiencia en transporte
             </h3>
             <p className="mt-2 text-sm text-[#0b4058]/80 text-pretty">
-              Años en el rubro del transporte junto a Via Bariloche nos dan criterio para recomendarte
+              Años en el rubro del transporte junto a Vía Bariloche nos dan criterio para recomendarte
               la mejor opción de viaje desde Córdoba.
             </p>
           </article>

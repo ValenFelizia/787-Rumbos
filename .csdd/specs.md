@@ -1,11 +1,11 @@
 # 787 Rumbos — Especificaciones vigentes
 
-> **Última actualización:** 2026-07-17
+> **Última actualización:** 2026-07-18
 > **Estado:** la base del producto está implementada. Se priorizan la operación
 > comercial, la vigencia del contenido y el crecimiento local antes de nuevas
 > funcionalidades. El baseline de seguridad HTTP, higiene de dependencias y
-> CI/smoke queda como mejora de calidad profesional (T-017 / T-018), no como
-> bloqueante de producto.
+> CI/smoke está implementado; la regresión del smoke del cotizador se sigue en
+> T-020 y no bloquea el producto publicado.
 
 El estado operativo vive en [todo.md](./todo.md). El análisis de mercado y
 crecimiento que sirve de contexto, pero no de lista de trabajo activa, se
@@ -20,8 +20,11 @@ guiar al usuario hacia ese canal; no reemplaza la atención comercial humana.
 - La oficina se encuentra en el hall de arribos del Aeropuerto Internacional
   Ingeniero Aeronáutico Ambrosio Taravella, dentro del local oficial de Vía
   Bariloche.
-- El servicio combina viajes emisivos, vuelos, paquetes y pasajes de ómnibus de
-  Via Bariloche y Via Tac.
+- El servicio combina viajes emisivos, vuelos, paquetes y pasajes de ómnibus del
+  Grupo Vía Bariloche, que incluye, entre otras empresas, Vía Tac y El Valle.
+  En superficies de alta jerarquía como el hero se pueden mencionar solo Vía
+  Bariloche y Vía Tac por reconocimiento de marca y claridad; FAQ y Servicios
+  pueden detallar también El Valle.
 - La jerarquía del mensaje debe partir de diferenciales verificables: presencia
   física en el aeropuerto, experiencia en transporte y oferta aérea + terrestre.
 - La atención humana y el acompañamiento deben explicarse con evidencia y un
@@ -59,6 +62,7 @@ mantenerse consistentes:
 | Dato | Valor canónico |
 | --- | --- |
 | Nombre comercial | 787 Rumbos |
+| URL pública preferida | `https://www.787rumbos.com.ar/` (`www` es el host canónico) |
 | Dirección | Av. La Voz del Interior 8500, Córdoba, Argentina |
 | Referencia | Hall de arribos, dentro del local oficial de Vía Bariloche |
 | Código postal | X5147XAA |
@@ -89,6 +93,10 @@ Cada testimonio en la web debe poder atribuirse a una reseña o cliente real
 (idealmente con enlace o mención de origen Google) para no leerse como fabricado.
 El formato visible de precios sigue la convención comercial de la agencia
 (`USD`/`$` + monto, alineada a Instagram); no se impone un formateador monetario distinto.
+El feed social de la home funciona como prueba de actividad y acceso a Instagram,
+no como catálogo sincronizado. Para mantenerlo lightweight se priorizan captions
+evergreen y una revisión manual mensual dentro de T-004; no se agrega API de Meta,
+CMS ni scraping solo para sostener esa sección.
 
 ## Comportamiento vigente del producto
 
@@ -111,6 +119,26 @@ El formato visible de precios sigue la convención comercial de la agencia
 - En la home, el hero y la propuesta de valor priorizan la oficina en el
   Aeropuerto de Córdoba, la experiencia en transporte y la oferta aérea +
   terrestre. La sección de Servicios precede al feed social (“Comunidad”).
+- La dirección visual aceptada para la próxima mejora de la home prioriza la
+  presencia humana dentro del Aeropuerto de Córdoba como firma diferencial:
+  equipo y local reales deben funcionar como evidencia temprana y la experiencia
+  debe seguir siendo reconocible aun sin animación.
+- La home debe distinguir de forma consistente dos caminos de conversión: una
+  acción primaria que abre el cotizador y una acción secundaria explícita para
+  WhatsApp directo. La misma intención conserva el mismo nombre y cada CTA debe
+  anticipar correctamente su resultado.
+- El motion de la home debe ser mínimo y estratégico: una apertura breve del
+  hero, un gesto propio para la prueba humana y microinteracciones simples. No se
+  oculta contenido por defecto a la espera de JavaScript, no se añade movimiento
+  continuo sin una necesidad de overflow o estado y no se incorpora una librería
+  de animación mientras CSS y APIs web nativas alcancen.
+- El pulido visual debe reducir la repetición automática de cards, radios,
+  bordes, sombras y elevaciones, preservando la identidad petróleo/dorado/lima,
+  las tipografías de marca y todo el contenido comercial verificable.
+- Las rutas estáticas se revalidan como máximo cada 24 horas mediante ISR para
+  recalcular contenido dependiente de fechas sin convertir el sitio en renderizado
+  dinámico ni sumar infraestructura. La primera visita posterior al vencimiento
+  puede recibir la versión en caché mientras Next regenera la siguiente.
 - La interfaz debe seguir siendo responsive, accesible por teclado y respetar
   `prefers-reduced-motion`.
 - Vercel Analytics es la medición disponible actualmente. GA4 y eventos
@@ -129,7 +157,8 @@ El formato visible de precios sigue la convención comercial de la agencia
 - Conservar la identidad visual premium: azul petróleo, acentos dorados y verde
   limón, con contraste suficiente.
 - Los metadatos, canonical, Open Graph, robots, sitemap y datos estructurados
-  deben seguir alineados con las páginas que se publiquen.
+  deben usar `https://www.787rumbos.com.ar` y seguir alineados con las páginas
+  que se publiquen.
 
 ## Calidad, seguridad y verificación
 
@@ -152,7 +181,8 @@ la web. La postura de seguridad y testing debe ser proporcional a esa superficie
   solo es aceptable mientras el JSON provenga de datos controlados en el repo.
 - **Testing en alcance:** CI que ejecute lint, typecheck y build; smoke tests de
   rutas y CTAs críticos. Tests unitarios solo para utilidades puras con riesgo
-  de regresión real.
+  de regresión real. T-020 debe restaurar el smoke del cotizador sin debilitar
+  los headers de seguridad del deployment HTTPS.
 - **Testing fuera de alcance por ahora:** cobertura alta de componentes,
   snapshots masivos, E2E exhaustivos de todo el catálogo y suites de
   regresión visual.
@@ -164,6 +194,8 @@ la web. La postura de seguridad y testing debe ser proporcional a esa superficie
 - La pauta paga requiere GBP verificado y seguimiento estable de leads.
 - El CMS se evalúa únicamente cuando mantener `lib/destinations-data.ts` a mano
   resulte una limitación real.
+- Catálogo, promociones y feed social se revisan manualmente una vez por mes;
+  automatizar ese circuito solo se evalúa si la carga operativa deja de ser razonable.
 - El blog y la expansión de FAQs deben responder a demanda validada; evitar
   contenido genérico sin intención de búsqueda.
 

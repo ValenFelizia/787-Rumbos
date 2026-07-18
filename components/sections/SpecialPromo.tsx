@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Plane, Calendar, Ticket, MapPin, X, ArrowRight } from "lucide-react";
@@ -32,6 +32,15 @@ const PROMO_CONFIG = {
   ]
 };
 
+const FOCUSABLE_SELECTOR = [
+  "a[href]",
+  "button:not([disabled])",
+  "input:not([disabled])",
+  "select:not([disabled])",
+  "textarea:not([disabled])",
+  '[tabindex]:not([tabindex="-1"])',
+].join(",");
+
 function isPromoActive(endsAt: string): boolean {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -41,13 +50,13 @@ function isPromoActive(endsAt: string): boolean {
 function InclusionIcon({ name, className }: { name: string; className?: string }) {
   switch (name) {
     case "plane":
-      return <Plane className={className} />;
+      return <Plane aria-hidden="true" className={className} />;
     case "calendar":
-      return <Calendar className={className} />;
+      return <Calendar aria-hidden="true" className={className} />;
     case "ticket":
-      return <Ticket className={className} />;
+      return <Ticket aria-hidden="true" className={className} />;
     case "map-pin":
-      return <MapPin className={className} />;
+      return <MapPin aria-hidden="true" className={className} />;
     default:
       return null;
   }
@@ -112,7 +121,7 @@ function PromoPricingAndCtas({
           className="font-[family-name:var(--font-brand-heading)] inline-flex items-center justify-center gap-2 rounded-xl bg-white hover:bg-white/95 text-[#0b4058] px-5 py-3 text-xs font-black shadow-md transition-all duration-200 active:scale-[0.97] cursor-pointer text-center"
         >
           <span>Ver detalles en la web</span>
-          <ArrowRight className="h-3.5 w-3.5 shrink-0" />
+          <ArrowRight aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
         </Link>
         <a
           href={whatsappUrl}
@@ -131,23 +140,64 @@ function PromoPricingAndCtas({
 export function SpecialPromo() {
   const [isBannerVisible, setIsBannerVisible] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const promoTriggerRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
-  // Lock page scroll while modal is open (same pattern as Navbar mobile menu)
+  // El modal bloquea el fondo, contiene el foco y lo devuelve al disparador al cerrar.
   useEffect(() => {
     if (!isModalOpen) return;
+
+    const previouslyFocusedElement =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : promoTriggerRef.current;
+    const previousOverflow = document.body.style.overflow;
+    const focusFrame = window.requestAnimationFrame(() => closeButtonRef.current?.focus());
+
     document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isModalOpen]);
 
-  useEffect(() => {
-    if (!isModalOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setIsModalOpen(false);
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setIsModalOpen(false);
+        return;
+      }
+
+      if (e.key !== "Tab" || !dialogRef.current) return;
+
+      const focusableElements = Array.from(
+        dialogRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)
+      );
+      if (focusableElements.length === 0) {
+        e.preventDefault();
+        return;
+      }
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+      const activeElement = document.activeElement;
+
+      if (!dialogRef.current.contains(activeElement)) {
+        e.preventDefault();
+        (e.shiftKey ? lastElement : firstElement).focus();
+      } else if (e.shiftKey && activeElement === firstElement) {
+        e.preventDefault();
+        lastElement.focus();
+      } else if (!e.shiftKey && activeElement === lastElement) {
+        e.preventDefault();
+        firstElement.focus();
+      }
     };
+
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.cancelAnimationFrame(focusFrame);
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+      if (previouslyFocusedElement?.isConnected) previouslyFocusedElement.focus();
+    };
   }, [isModalOpen]);
 
   if (!isPromoActive(PROMO_CONFIG.endsAt) || !isBannerVisible) return null;
@@ -158,23 +208,30 @@ export function SpecialPromo() {
   return (
     <>
       {/* ─── BANNER DE NOTIFICACIÓN SUPERIOR (TOP BAR) ─── */}
-      <div
-        className="relative w-full bg-gradient-to-r from-red-700 via-red-600 to-red-700 text-white py-2.5 px-10 text-center text-xs font-semibold cursor-pointer select-none transition-all duration-300 hover:brightness-110 active:scale-[0.99] z-[40] flex items-center justify-center group"
-        onClick={() => setIsModalOpen(true)}
-      >
-        <span className="font-[family-name:var(--font-brand-heading)] tracking-wider">
-          {PROMO_CONFIG.topBarText}
-        </span>
+      <div className="relative z-[40] flex w-full items-center bg-gradient-to-r from-red-700 via-red-600 to-red-700 text-center text-xs font-semibold text-white">
+        <button
+          ref={promoTriggerRef}
+          type="button"
+          aria-haspopup="dialog"
+          aria-controls="special-promo-dialog"
+          onClick={() => setIsModalOpen(true)}
+          className="flex w-full select-none items-center justify-center py-2.5 pl-10 pr-10 transition duration-300 hover:brightness-110 active:scale-[0.99]"
+        >
+          <span className="font-[family-name:var(--font-brand-heading)] tracking-wider">
+            {PROMO_CONFIG.topBarText}
+          </span>
+        </button>
 
         <button
+          type="button"
           onClick={(e) => {
             e.stopPropagation();
             setIsBannerVisible(false);
           }}
           aria-label="Ocultar anuncio de Fórmula 1"
-          className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-white/75 hover:text-white hover:bg-white/10 rounded-full transition-all duration-200 cursor-pointer"
+          className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full p-1 text-white/75 transition duration-200 hover:bg-white/10 hover:text-white"
         >
-          <X className="h-3.5 w-3.5" />
+          <X aria-hidden="true" className="h-3.5 w-3.5" />
         </button>
       </div>
 
@@ -183,12 +240,14 @@ export function SpecialPromo() {
         <div
           className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center sm:p-4 bg-black/60 backdrop-blur-sm animate-fade-in"
           onClick={closeModal}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="special-promo-title"
         >
           {/* Sheet / card: viewport-constrained; scroll lives inside, not on the backdrop */}
           <div
+            id="special-promo-dialog"
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="special-promo-title"
             className="relative flex w-full max-w-4xl max-h-[90dvh] flex-col overflow-hidden rounded-t-3xl sm:rounded-3xl border border-white/10 bg-gradient-to-br from-[#0b4058] to-[#004e6a] text-white shadow-2xl animate-scale-up"
             onClick={(e) => e.stopPropagation()}
           >
@@ -206,11 +265,13 @@ export function SpecialPromo() {
                 </span>
               </div>
               <button
+                ref={closeButtonRef}
+                type="button"
                 onClick={closeModal}
                 aria-label="Cerrar modal de promoción"
                 className="shrink-0 p-2 -mr-1 -mt-1 text-white/70 hover:text-white hover:bg-white/10 rounded-full transition-all duration-200 cursor-pointer"
               >
-                <X className="h-5 w-5" />
+                <X aria-hidden="true" className="h-5 w-5" />
               </button>
             </div>
 

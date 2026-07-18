@@ -11,11 +11,11 @@ export function generateMetadata(): Metadata {
   return {
     title: cluster.metaTitle,
     description: cluster.metaDescription,
-    alternates: { canonical: `https://787rumbos.com.ar/destinos/${SLUG}` },
+    alternates: { canonical: `https://www.787rumbos.com.ar/destinos/${SLUG}` },
     openGraph: {
       title: cluster.metaTitle,
       description: cluster.metaDescription,
-      url: `https://787rumbos.com.ar/destinos/${SLUG}`,
+      url: `https://www.787rumbos.com.ar/destinos/${SLUG}`,
     },
   };
 }

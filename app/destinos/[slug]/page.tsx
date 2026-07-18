@@ -42,12 +42,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: destination.metaTitle,
     description: destination.metaDescription,
     alternates: {
-      canonical: `https://787rumbos.com.ar/destinos/${slug}`,
+      canonical: `https://www.787rumbos.com.ar/destinos/${slug}`,
     },
     openGraph: {
       title: destination.metaTitle,
       description: destination.metaDescription,
-      url: `https://787rumbos.com.ar/destinos/${slug}`,
+      url: `https://www.787rumbos.com.ar/destinos/${slug}`,
       images: [
         {
           url: destination.heroImage,
@@ -170,7 +170,7 @@ export default async function DestinoDetailPage({ params }: Props) {
       "@type": "TravelAgency",
       "name": "787 Rumbos",
       "telephone": AGENCY_PHONE.tel,
-      "url": "https://787rumbos.com.ar"
+      "url": "https://www.787rumbos.com.ar"
     },
     ...(dest.priceFrom && {
       "offers": {
@@ -191,19 +191,19 @@ export default async function DestinoDetailPage({ params }: Props) {
         "@type": "ListItem",
         position: 1,
         name: "Inicio",
-        item: "https://787rumbos.com.ar",
+        item: "https://www.787rumbos.com.ar",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Destinos",
-        item: "https://787rumbos.com.ar/destinos",
+        item: "https://www.787rumbos.com.ar/destinos",
       },
       {
         "@type": "ListItem",
         position: 3,
         name: dest.name,
-        item: `https://787rumbos.com.ar/destinos/${slug}`,
+        item: `https://www.787rumbos.com.ar/destinos/${slug}`,
       },
     ],
   };
