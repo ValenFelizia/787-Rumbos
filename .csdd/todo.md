@@ -6,6 +6,18 @@
 
 ## In Progress
 
+### Calidad y seguridad
+
+- [ ] T-020 — Revisar y corregir el smoke test del cotizador
+  - Owner: Valen
+  - Agent: Codex
+  - Scope: `e2e/smoke.spec.ts`, `playwright.config.ts`, `next.config.mjs`; ampliar sólo si la causa verificada lo requiere.
+  - Target: `master`
+  - Base: `0b59f6b`
+  - Updated: 2026-07-18
+  - Note: retomada por solicitud de Valen. Reproducir y resolver la interacción entre `upgrade-insecure-requests` del build de producción y el servidor HTTP local/CI sin degradar los headers del deploy.
+  - Acceptance: el smoke del cotizador pasa en el flujo local/CI representativo, los headers de producción conservan su intención de seguridad y las verificaciones relacionadas quedan documentadas.
+
 ## Ready to Land
 
 ## Blocked
@@ -85,16 +97,6 @@
   - Note: alcance previsto en Google Ads e Instagram/Meta Ads.
 
 ## Deferred
-
-### Calidad y seguridad
-
-- [ ] T-020 — Revisar y corregir el smoke test del cotizador
-  - Owner: Valen
-  - Scope: released
-  - Reason: Valen pidió diferir este trabajo; el CTA funciona en producción HTTPS y el fallo actual está limitado al entorno HTTP local/CI sin CSS.
-  - Resume when: Valen indique retomar el smoke del cotizador o el fallo empiece a bloquear la integración o el deploy.
-  - Updated: 2026-07-18
-  - Note: reproducir y resolver la interacción entre `upgrade-insecure-requests` del build de producción y el servidor HTTP local/CI. No degradar los headers del deploy para acomodar el test.
 
 ## Recently Completed
 
