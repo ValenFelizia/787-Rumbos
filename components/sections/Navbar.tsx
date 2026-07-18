@@ -7,7 +7,7 @@
  * En mobile se despliega un overlay a pantalla completa (h-[100dvh])
  * que bloquea el scroll del cuerpo para una experiencia óptima y fluida.
  */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
@@ -15,20 +15,69 @@ import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { useModal } from "@/lib/context/ModalContext";
 import { WHATSAPP_LINK } from "@/lib/constants";
 
+const FOCUSABLE_SELECTOR = [
+  "a[href]",
+  "button:not([disabled])",
+  '[tabindex]:not([tabindex="-1"])',
+].join(",");
+
 export function Navbar() {
   const { openModal } = useModal();
   const [isOpen, setIsOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const menuDialogRef = useRef<HTMLDivElement>(null);
+  const closeMenuButtonRef = useRef<HTMLButtonElement>(null);
 
-  // Bloquear scroll de la página de fondo cuando el menú móvil está abierto
-  // ponytail: use simple, clean vanilla JS inline styling to avoid libraries
+  // El menú mobile funciona como overlay modal: foco contenido, Escape y retorno al disparador.
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    if (!isOpen) return;
+
+    const previouslyFocusedElement =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : menuButtonRef.current;
+    const previousOverflow = document.body.style.overflow;
+    const focusFrame = window.requestAnimationFrame(() => closeMenuButtonRef.current?.focus());
+
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setIsOpen(false);
+        return;
+      }
+
+      if (e.key !== "Tab" || !menuDialogRef.current) return;
+
+      const focusableElements = Array.from(
+        menuDialogRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)
+      );
+      if (focusableElements.length === 0) {
+        e.preventDefault();
+        return;
+      }
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+      const activeElement = document.activeElement;
+
+      if (e.shiftKey && (activeElement === firstElement || !menuDialogRef.current.contains(activeElement))) {
+        e.preventDefault();
+        lastElement.focus();
+      } else if (!e.shiftKey && activeElement === lastElement) {
+        e.preventDefault();
+        firstElement.focus();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
     return () => {
-      document.body.style.overflow = "";
+      window.cancelAnimationFrame(focusFrame);
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+      if (previouslyFocusedElement?.isConnected) previouslyFocusedElement.focus();
     };
   }, [isOpen]);
 
@@ -86,11 +135,15 @@ export function Navbar() {
 
             {/* Botón de Menú Hamburguesa en Mobile */}
             <button
+              ref={menuButtonRef}
+              type="button"
               onClick={() => setIsOpen(true)}
               aria-label="Abrir menú de navegación"
-              className="md:hidden text-white hover:text-[#dae553] p-1.5 transition-colors focus:outline-none"
+              aria-expanded={isOpen}
+              aria-controls="mobile-navigation-dialog"
+              className="md:hidden p-1.5 text-white transition-colors hover:text-[#dae553]"
             >
-              <Menu className="h-6 w-6" />
+              <Menu aria-hidden="true" className="h-6 w-6" />
             </button>
           </div>
         </div>
@@ -99,6 +152,13 @@ export function Navbar() {
       {/* Menú Desplegable a Pantalla Completa en Mobile */}
       {/* ponytail: full viewport height (dvh) overlay with vertical scroll fallback, locks body scroll */}
       <div
+        id="mobile-navigation-dialog"
+        ref={menuDialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menú de navegación"
+        aria-hidden={!isOpen}
+        inert={!isOpen}
         className={`fixed inset-0 z-50 md:hidden flex flex-col bg-[#0b4058] transition-all duration-300 ease-in-out ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none translate-y-2"
           }`}
       >
@@ -115,11 +175,13 @@ export function Navbar() {
             />
           </Link>
           <button
+            ref={closeMenuButtonRef}
+            type="button"
             onClick={() => setIsOpen(false)}
             aria-label="Cerrar menú de navegación"
-            className="text-white hover:text-[#dae553] p-1.5 transition-colors focus:outline-none"
+            className="p-1.5 text-white transition-colors hover:text-[#dae553]"
           >
-            <X className="h-6 w-6" />
+            <X aria-hidden="true" className="h-6 w-6" />
           </button>
         </div>
 
