@@ -18,6 +18,18 @@
   - Note: retomada por solicitud de Valen. Reproducir y resolver la interacción entre `upgrade-insecure-requests` del build de producción y el servidor HTTP local/CI sin degradar los headers del deploy.
   - Acceptance: el smoke del cotizador pasa en el flujo local/CI representativo, los headers de producción conservan su intención de seguridad y las verificaciones relacionadas quedan documentadas.
 
+### Visual, conversión y motion
+
+- [ ] T-022 — Unificar la arquitectura y el lenguaje de los CTAs de la home
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: `components/conversion/**`, `components/sections/Navbar.tsx`, `components/sections/Hero.tsx`, `components/sections/CTASection.tsx`, `components/sections/FeaturedDestinations.tsx`, `components/sections/QuoteModal.tsx`, `.csdd/todo.md`, `.csdd/specs.md`
+  - Target: `development`
+  - Updated: 2026-07-18
+  - Depends on: T-021.
+  - Note: primaria canónica `Cotizar viaje` (cotizador) y secundaria `Escribinos por WhatsApp`; cards destacadas conservan link a detalle + `Cotizar este destino` con preselección; SLA con horario. No tocar scope de T-020.
+  - Acceptance: cada CTA anticipa correctamente su resultado, la misma intención conserva el mismo nombre y los dos caminos pueden completarse con teclado en desktop y mobile.
+
 ## Ready to Land
 
 ## Blocked
@@ -25,13 +37,6 @@
 ## Pending
 
 ### Visual, conversión y motion
-
-- [ ] T-022 — Unificar la arquitectura y el lenguaje de los CTAs de la home
-  - Owner: Valen
-  - Updated: 2026-07-18
-  - Depends on: T-021.
-  - Note: establecer una acción primaria consistente que abra el cotizador y una secundaria explícita para WhatsApp directo; alinear Navbar, Hero, destinos destacados, CTA final y cotizador sin quitar la preselección de destino ni el SLA asociado al horario.
-  - Acceptance: cada CTA anticipa correctamente su resultado, la misma intención conserva el mismo nombre y los dos caminos pueden completarse con teclado en desktop y mobile.
 
 - [ ] T-023 — Convertir la presencia humana en el aeropuerto en la firma visual de la home
   - Owner: Valen
