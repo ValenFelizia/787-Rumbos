@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { PrimaryCta, SecondaryCta, CTA_SLA_TEXT } from "@/components/conversion";
 import { useModal } from "@/lib/context/ModalContext";
 
 export function Hero() {
@@ -19,7 +19,7 @@ export function Hero() {
         className="object-cover object-center"
       />
       {/* Overlay: en mobile de abajo hacia arriba (el texto está centrado),
-          en desktop de izquierda a derecha (el texto está alinado a la izquierda) */}
+          en desktop de izquierda a derecha (el texto está alineado a la izquierda) */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#0b4058]/90 via-[#0b4058]/60 to-[#0b4058]/30 md:bg-gradient-to-r md:from-[#0b4058]/85 md:via-[#0b4058]/50 md:to-transparent" />
 
       <div className="relative mx-auto w-full max-w-6xl px-6 py-20 text-white md:py-28">
@@ -33,20 +33,18 @@ export function Hero() {
             Paquetes aéreos y pasajes terrestres con Vía Bariloche y Vía Tac. Te asesoramos por WhatsApp o en persona para que viajes con tranquilidad y con nuestro respaldo de principio a fin.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-            <div className="flex flex-col gap-1.5">
-              <button
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <PrimaryCta
                 onClick={() => openModal()}
-                aria-label="Armá tu viaje ahora — abre el cotizador personalizado"
-                className="font-[family-name:var(--font-elaine)] inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#f7a92a] to-[#e6b451] px-6 py-3.5 font-semibold text-[#0b4058] shadow-md shadow-[#f7a92a]/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#f7a92a]/40 active:scale-[0.96] transition-transform duration-200 cursor-pointer sm:py-3"
-              >
-                <WhatsAppIcon size={16} className="h-4 w-4" />
-                Armá tu viaje ahora
-              </button>
-              <span className="pl-1 text-center text-xs text-white/70 sm:text-center">
-                En horario de atención, respondemos en menos de 2 horas
-              </span>
+                aria-label="Cotizar viaje — abre el cotizador personalizado"
+              />
+              <SecondaryCta
+                className="shadow-md shadow-black/10"
+                aria-label="Escribinos por WhatsApp — abre el chat directo"
+              />
             </div>
           </div>
+          <p className="pl-1 text-xs text-white/70">{CTA_SLA_TEXT}</p>
         </div>
       </div>
     </section>
