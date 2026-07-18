@@ -8,8 +8,10 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "audit:deps": "npm audit --audit-level=high",
-    "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui",
+    "build:e2e": "node --env-file=e2e.env node_modules/next/dist/bin/next build",
+    "test:e2e": "npm run build:e2e && npm run test:e2e:ci",
+    "test:e2e:ci": "node --env-file=e2e.env node_modules/@playwright/test/cli.js test",
+    "test:e2e:ui": "npm run build:e2e && node --env-file=e2e.env node_modules/@playwright/test/cli.js test --ui",
     "start": "next start"
   },
   "dependencies": {

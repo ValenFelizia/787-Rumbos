@@ -8,18 +8,35 @@
 
 ## Ready to Land
 
+- [ ] T-020 — Revisar y corregir el smoke test del cotizador
+  - Owner: Valen
+  - Agent: Codex
+  - Scope: configuración de build E2E, Playwright, smoke del cotizador y workflow de CI.
+  - Target: `master`
+  - Base: `a32dfde`
+  - Updated: 2026-07-18
+  - Landing: revisión humana del diff; después fusionar `development` → `master`.
+  - Verification: `npm run test:e2e` y `CI=1 npm run test:e2e:ci` pasan 5/5; el smoke confirma CSP con `upgrade-insecure-requests` y HSTS. Lint sin errores (1 warning preexistente en Footer), typecheck, build normal y build E2E de 29 páginas pasan.
+  - Note: la causa verificada no era el CSP sino reutilizar un servidor viejo y compartir `.next` entre desarrollo y producción. La implementación `c1e7ea3` aísla E2E en `.next-e2e` y puerto 3100 sin debilitar headers.
+  - Acceptance: el smoke del cotizador pasa en el flujo local/CI representativo, los headers de producción conservan su intención de seguridad y las verificaciones relacionadas quedan documentadas.
+
+- [ ] T-022 — Unificar la arquitectura y el lenguaje de los CTAs de la home
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: `components/conversion/**`, `components/sections/Navbar.tsx`, `components/sections/Hero.tsx`, `components/sections/CTASection.tsx`, `components/sections/FeaturedDestinations.tsx`, `components/sections/QuoteModal.tsx`, `.csdd/todo.md`, `.csdd/specs.md`
+  - Target: `development`
+  - Landing: `development`
+  - Updated: 2026-07-18
+  - Depends on: T-021.
+  - Note: primaria `Armar viaje` / secundaria `Escribinos por WhatsApp` en Navbar, Hero, CTA final, banner y cards de destinos (`openModal(name)` en cards); SLA con horario; SpecialPromo fuera de alcance. Modal submit sigue `Cotizar por WhatsApp`.
+  - Verification: lint y typecheck; teclado en par primario/secundario; preselección desde card abre paso 2 del cotizador.
+  - Acceptance: cada CTA anticipa correctamente su resultado, la misma intención conserva el mismo nombre y los dos caminos pueden completarse con teclado en desktop y mobile.
+
 ## Blocked
 
 ## Pending
 
 ### Visual, conversión y motion
-
-- [ ] T-022 — Unificar la arquitectura y el lenguaje de los CTAs de la home
-  - Owner: Valen
-  - Updated: 2026-07-18
-  - Depends on: T-021.
-  - Note: establecer una acción primaria consistente que abra el cotizador y una secundaria explícita para WhatsApp directo; alinear Navbar, Hero, destinos destacados, CTA final y cotizador sin quitar la preselección de destino ni el SLA asociado al horario.
-  - Acceptance: cada CTA anticipa correctamente su resultado, la misma intención conserva el mismo nombre y los dos caminos pueden completarse con teclado en desktop y mobile.
 
 - [ ] T-023 — Convertir la presencia humana en el aeropuerto en la firma visual de la home
   - Owner: Valen
@@ -85,16 +102,6 @@
   - Note: alcance previsto en Google Ads e Instagram/Meta Ads.
 
 ## Deferred
-
-### Calidad y seguridad
-
-- [ ] T-020 — Revisar y corregir el smoke test del cotizador
-  - Owner: Valen
-  - Scope: released
-  - Reason: Valen pidió diferir este trabajo; el CTA funciona en producción HTTPS y el fallo actual está limitado al entorno HTTP local/CI sin CSS.
-  - Resume when: Valen indique retomar el smoke del cotizador o el fallo empiece a bloquear la integración o el deploy.
-  - Updated: 2026-07-18
-  - Note: reproducir y resolver la interacción entre `upgrade-insecure-requests` del build de producción y el servidor HTTP local/CI. No degradar los headers del deploy para acomodar el test.
 
 ## Recently Completed
 

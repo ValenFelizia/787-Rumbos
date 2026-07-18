@@ -4,8 +4,8 @@
 > **Estado:** la base del producto está implementada. Se priorizan la operación
 > comercial, la vigencia del contenido y el crecimiento local antes de nuevas
 > funcionalidades. El baseline de seguridad HTTP, higiene de dependencias y
-> CI/smoke está implementado; la regresión del smoke del cotizador se sigue en
-> T-020 y no bloquea el producto publicado.
+> CI/smoke está implementado. Los E2E de producción usan artefactos aislados
+> para no colisionar con un servidor de desarrollo local.
 
 El estado operativo vive en [todo.md](./todo.md). El análisis de mercado y
 crecimiento que sirve de contexto, pero no de lista de trabajo activa, se
@@ -125,8 +125,13 @@ CMS ni scraping solo para sostener esa sección.
   debe seguir siendo reconocible aun sin animación.
 - La home debe distinguir de forma consistente dos caminos de conversión: una
   acción primaria que abre el cotizador y una acción secundaria explícita para
-  WhatsApp directo. La misma intención conserva el mismo nombre y cada CTA debe
-  anticipar correctamente su resultado.
+  WhatsApp directo. Labels canónicos: primaria `Armar viaje`, secundaria
+  `Escribinos por WhatsApp`; en destinos destacados el detalle conserva su link
+  y `Armar viaje` abre el cotizador con preselección. El submit del cotizador
+  es `Cotizar por WhatsApp` (sí termina en WA). La misma intención conserva el
+  mismo nombre y cada CTA debe anticipar correctamente su resultado.
+  El SLA visible junto a los CTAs de conversión es: “En horario de atención,
+  respondemos en menos de 2 horas”.
 - El motion de la home debe ser mínimo y estratégico: una apertura breve del
   hero, un gesto propio para la prueba humana y microinteracciones simples. No se
   oculta contenido por defecto a la espera de JavaScript, no se añade movimiento
@@ -181,8 +186,9 @@ la web. La postura de seguridad y testing debe ser proporcional a esa superficie
   solo es aceptable mientras el JSON provenga de datos controlados en el repo.
 - **Testing en alcance:** CI que ejecute lint, typecheck y build; smoke tests de
   rutas y CTAs críticos. Tests unitarios solo para utilidades puras con riesgo
-  de regresión real. T-020 debe restaurar el smoke del cotizador sin debilitar
-  los headers de seguridad del deployment HTTPS.
+  de regresión real. Los smokes de producción deben construir en `.next-e2e`,
+  servirse en un puerto dedicado y verificar el cotizador con los headers de
+  seguridad del deployment HTTPS intactos.
 - **Testing fuera de alcance por ahora:** cobertura alta de componentes,
   snapshots masivos, E2E exhaustivos de todo el catálogo y suites de
   regresión visual.

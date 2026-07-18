@@ -11,9 +11,8 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { PrimaryCta, SecondaryCta } from "@/components/conversion";
 import { useModal } from "@/lib/context/ModalContext";
-import { WHATSAPP_LINK } from "@/lib/constants";
 
 const FOCUSABLE_SELECTOR = [
   "a[href]",
@@ -125,16 +124,20 @@ export function Navbar() {
             ))}
           </div>
 
-          {/* Botón de Cotizar & Hamburguesa */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => openModal()}
-              aria-label="Cotizar viaje a medida"
-              className="hidden sm:inline-flex font-[family-name:var(--font-brand-heading)] items-center justify-center rounded-full bg-gradient-to-r from-[#f7a92a] to-[#e6b451] text-[#0b4058] shadow-sm shadow-[#f7a92a]/30 transition-all duration-300 hover:-translate-y-0.5 hover:brightness-105 hover:shadow-md hover:shadow-[#f7a92a]/40 active:scale-[0.96] transition-transform duration-200 cursor-pointer px-5 py-2 md:py-2.5 text-xs md:text-sm md:gap-2"
-            >
-              <WhatsAppIcon size={14} className="h-6 w-6 shrink-0" />
-              <span className="font-semibold">Consultar por WhatsApp</span>
-            </button>
+          {/* CTAs de conversión & Hamburguesa */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="hidden sm:flex items-center gap-2">
+              <PrimaryCta
+                size="sm"
+                onClick={() => openModal()}
+                aria-label="Armar viaje — abre el cotizador personalizado"
+                className="shadow-sm shadow-[#f7a92a]/30"
+              />
+              <SecondaryCta
+                size="sm"
+                aria-label="Escribinos por WhatsApp — abre el chat directo"
+              />
+            </div>
 
             {/* Botón de Menú Hamburguesa en Mobile */}
             <button
@@ -204,24 +207,21 @@ export function Navbar() {
           </div>
 
           <div className="flex flex-col gap-3 mt-auto pt-6 border-t border-white/10">
-            <button
+            <PrimaryCta
+              size="full"
               onClick={() => {
                 setIsOpen(false);
                 openModal();
               }}
-              className="font-[family-name:var(--font-brand-heading)] flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#f7a92a] to-[#e6b451] text-[#0b4058] py-3.5 text-sm font-bold shadow-md cursor-pointer active:scale-[0.96] transition-transform duration-200"
-            >
-              <WhatsAppIcon size={16} className="h-4 w-4 shrink-0" />
-              Cotizar viaje
-            </button>
-            <a
-              href={WHATSAPP_LINK}
+              aria-label="Armar viaje — abre el cotizador personalizado"
+              className="font-bold shadow-md"
+            />
+            <SecondaryCta
+              size="full"
               onClick={() => setIsOpen(false)}
-              className="font-[family-name:var(--font-brand-heading)] flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] hover:bg-[#1DA851] text-white py-3.5 text-sm font-bold transition-colors active:scale-[0.96] transition-transform duration-200"
-            >
-              <WhatsAppIcon size={16} className="h-4 w-4 shrink-0" />
-              Escribinos por WhatsApp
-            </a>
+              aria-label="Escribinos por WhatsApp — abre el chat directo"
+              className="font-bold"
+            />
           </div>
         </div>
       </div>

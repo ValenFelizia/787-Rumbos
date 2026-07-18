@@ -4,6 +4,7 @@ import { X, ChevronRight, ChevronLeft, Calendar, Users, Plane, Info, Clock } fro
 import { useModal } from "@/lib/context/ModalContext";
 import { featuredDestinations, WHATSAPP_QUOTE_BYPASS, whatsappLink, AGENCY_PHONE } from "@/lib/constants";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { CTA_MODAL_SUBMIT_LABEL, CTA_SECONDARY_LABEL } from "@/components/conversion";
 
 // ponytail: keep code simple and self-contained, using React state and native CSS.
 
@@ -451,7 +452,7 @@ export function QuoteModal() {
                 className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#f7a92a] to-[#e6b451] px-5 py-3 text-sm font-bold text-[#0b4058] shadow-md shadow-[#f7a92a]/20 transition duration-300 hover:brightness-105"
               >
                 <WhatsAppIcon size={16} className="h-4 w-4" />
-                Cotizar por WhatsApp
+                {CTA_MODAL_SUBMIT_LABEL}
               </button>
             )}
           </div>
@@ -465,7 +466,7 @@ export function QuoteModal() {
               onClick={closeModal}
               className="text-xs text-gray-400 underline transition hover:text-[#0b4058]"
             >
-              ¿Preferís hablar directo con un asesor? Ir a WhatsApp
+              ¿Preferís hablar directo con un asesor? {CTA_SECONDARY_LABEL}
             </a>
           </div>
 

@@ -17,7 +17,11 @@ test.describe("rutas críticas", () => {
       }),
     ).toBeVisible();
     await expect(
-      page.getByRole("button", { name: /armá tu viaje ahora/i }),
+      page
+        .getByRole("button", {
+          name: /abre el cotizador personalizado/i,
+        })
+        .first(),
     ).toBeVisible();
   });
 
@@ -44,9 +48,23 @@ test.describe("rutas críticas", () => {
 });
 
 test.describe("cotizador", () => {
-  test("el CTA del hero abre el modal de cotización", async ({ page }) => {
-    await page.goto("/");
-    await page.getByRole("button", { name: /armá tu viaje ahora/i }).click();
+  test("el CTA principal abre el modal de cotización", async ({ page }) => {
+    const response = await page.goto("/");
+
+    expect(response).not.toBeNull();
+    expect(response?.headers()["content-security-policy"]).toContain(
+      "upgrade-insecure-requests",
+    );
+    expect(response?.headers()["strict-transport-security"]).toContain(
+      "max-age=63072000",
+    );
+
+    await page
+      .getByRole("button", {
+        name: /abre el cotizador personalizado/i,
+      })
+      .first()
+      .click();
 
     const dialog = page.getByRole("dialog", { name: /armá tu viaje a medida/i });
     await expect(dialog).toBeVisible();

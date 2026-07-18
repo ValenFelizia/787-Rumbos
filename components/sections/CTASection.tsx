@@ -3,13 +3,13 @@
  * components/sections/CTASection.tsx
  *
  * Sección de cierre — último empujón de conversión antes del footer.
- * Se diferencia del CTA del hero en tono: allá es "vení a conocernos",
- * acá es más cálido: "¿ya sabés a dónde querés ir? hablemos".
- *
- * Fondo con degradado de marca para marcar visualmente el cierre de
- * la página y crear contraste con la sección de servicios (crema).
+ * Par canónico: Armar viaje (cotizador) + Escribinos por WhatsApp.
  */
-import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import {
+  PrimaryCta,
+  SecondaryCta,
+  CTA_SLA_TEXT,
+} from "@/components/conversion";
 import { useModal } from "@/lib/context/ModalContext";
 
 export function CTASection() {
@@ -32,19 +32,24 @@ export function CTASection() {
           ¿Ya sabés a dónde querés ir?
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-[1.05rem] leading-relaxed text-white/80 text-pretty">
-          Mandanos un mensaje y lo organizamos juntos. Hablás directo con un asesor o personalizá tu consulta en segundos:
+          Personalizá tu consulta en el cotizador o hablá directo con un asesor por WhatsApp. Lo organizamos juntos.
         </p>
 
         <div className="mt-8 flex flex-col items-center gap-3">
-          <button
-            onClick={() => openModal()}
-            aria-label="Iniciar consulta de viaje — abre el cotizador personalizado"
-            className="font-[family-name:var(--font-elaine)] inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#f7a92a] to-[#e6b451] px-8 py-3.5 text-base font-bold text-[#0b4058] shadow-lg shadow-[#f7a92a]/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#f7a92a]/30 active:scale-[0.96] transition-transform duration-200 cursor-pointer"
-          >
-            <WhatsAppIcon size={16} className="h-4 w-4" />
-            Hablemos por WhatsApp
-          </button>
-          <span className="text-sm text-white/50">Respondemos en menos de 2 horas</span>
+          <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center">
+            <PrimaryCta
+              size="lg"
+              onClick={() => openModal()}
+              aria-label="Armar viaje — abre el cotizador personalizado"
+              className="font-bold shadow-lg shadow-[#f7a92a]/20"
+            />
+            <SecondaryCta
+              size="lg"
+              aria-label="Escribinos por WhatsApp — abre el chat directo"
+              className="font-bold"
+            />
+          </div>
+          <span className="text-sm text-white/50">{CTA_SLA_TEXT}</span>
         </div>
       </div>
     </section>
