@@ -6,6 +6,8 @@
 
 ## In Progress
 
+## Ready to Land
+
 ### Visual, conversión y motion
 
 - [ ] T-021 — Corregir accesibilidad de las interacciones principales
@@ -15,9 +17,9 @@
   - Target: `master`
   - Base: `b672653` (`origin/master`; `master` local está dos commits detrás)
   - Updated: 2026-07-18
-  - Note: convertir la barra promocional en control semántico operable por teclado; sacar el menú mobile cerrado del orden de tabulación y exponer su estado; contener y devolver el foco en modales; nombrar los controles `+`/`-`. Mantener Escape y `prefers-reduced-motion`.
-
-## Ready to Land
+  - Landing: revisión humana en localhost; después actualizar `master` desde `origin/master` y fusionar `development` → `master`.
+  - Verification: lint sin errores (queda 1 warning preexistente en Footer), typecheck y build pasan; recorrido mobile verificado con teclado para menú, promo y cotizador, incluidos trap/retorno de foco, Escape, scroll lock, pasos y contadores; sin errores de consola.
+  - Note: implementación en `230c057` y `ca1170a`. T-022 puede retomarse después del landing de T-021.
 
 ## Blocked
 
