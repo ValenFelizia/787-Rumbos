@@ -3,7 +3,7 @@
  * components/sections/CTASection.tsx
  *
  * Sección de cierre — último empujón de conversión antes del footer.
- * Par canónico: Cotizar viaje (cotizador) + Escribinos por WhatsApp.
+ * Par canónico: Armar viaje (cotizador) + Escribinos por WhatsApp.
  */
 import {
   PrimaryCta,
@@ -40,7 +40,7 @@ export function CTASection() {
             <PrimaryCta
               size="lg"
               onClick={() => openModal()}
-              aria-label="Cotizar viaje — abre el cotizador personalizado"
+              aria-label="Armar viaje — abre el cotizador personalizado"
               className="font-bold shadow-lg shadow-[#f7a92a]/20"
             />
             <SecondaryCta

@@ -18,7 +18,7 @@ type PrimaryCtaProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 /**
- * Acción primaria canónica: abre el cotizador.
+ * Acción primaria canónica: abre el asistente de consulta (Armar viaje).
  * Sin ícono de WhatsApp — el resultado no es chat directo.
  */
 export function PrimaryCta({

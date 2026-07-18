@@ -125,11 +125,11 @@ CMS ni scraping solo para sostener esa sección.
   debe seguir siendo reconocible aun sin animación.
 - La home debe distinguir de forma consistente dos caminos de conversión: una
   acción primaria que abre el cotizador y una acción secundaria explícita para
-  WhatsApp directo. Labels canónicos: primaria `Cotizar viaje`, secundaria
+  WhatsApp directo. Labels canónicos: primaria `Armar viaje`, secundaria
   `Escribinos por WhatsApp`; en destinos destacados el detalle conserva su link
-  y `Cotizar este destino` abre el cotizador con preselección. El submit del
-  cotizador es `Cotizar por WhatsApp` (sí termina en WA). La misma intención
-  conserva el mismo nombre y cada CTA debe anticipar correctamente su resultado.
+  y `Armar viaje` abre el cotizador con preselección. El submit del cotizador
+  es `Cotizar por WhatsApp` (sí termina en WA). La misma intención conserva el
+  mismo nombre y cada CTA debe anticipar correctamente su resultado.
   El SLA visible junto a los CTAs de conversión es: “En horario de atención,
   respondemos en menos de 2 horas”.
 - El motion de la home debe ser mínimo y estratégico: una apertura breve del

@@ -130,7 +130,7 @@ export function Navbar() {
               <PrimaryCta
                 size="sm"
                 onClick={() => openModal()}
-                aria-label="Cotizar viaje — abre el cotizador personalizado"
+                aria-label="Armar viaje — abre el cotizador personalizado"
                 className="shadow-sm shadow-[#f7a92a]/30"
               />
               <SecondaryCta
@@ -213,7 +213,7 @@ export function Navbar() {
                 setIsOpen(false);
                 openModal();
               }}
-              aria-label="Cotizar viaje — abre el cotizador personalizado"
+              aria-label="Armar viaje — abre el cotizador personalizado"
               className="font-bold shadow-md"
             />
             <SecondaryCta

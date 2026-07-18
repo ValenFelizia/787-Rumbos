@@ -36,7 +36,7 @@ export function Hero() {
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
               <PrimaryCta
                 onClick={() => openModal()}
-                aria-label="Cotizar viaje — abre el cotizador personalizado"
+                aria-label="Armar viaje — abre el cotizador personalizado"
               />
               <SecondaryCta
                 className="shadow-md shadow-black/10"

@@ -11,7 +11,7 @@ import { Plane, Bus, ArrowRight, Calendar } from "lucide-react";
 import {
   PrimaryCta,
   SecondaryCta,
-  CTA_DESTINATION_LABEL,
+  CTA_PRIMARY_LABEL,
 } from "@/components/conversion";
 import { useModal } from "@/lib/context/ModalContext";
 
@@ -152,10 +152,10 @@ export function FeaturedDestinations() {
                   <button
                     type="button"
                     onClick={() => openModal(dest.name)}
-                    aria-label={`${CTA_DESTINATION_LABEL}: ${dest.name} — abre el cotizador`}
+                    aria-label={`Armar viaje: ${dest.name} — abre el cotizador`}
                     className="font-[family-name:var(--font-elaine)] flex w-full items-center justify-center rounded-xl border-2 border-[#f7a92a] bg-transparent px-3 py-2.5 text-xs font-bold text-[#0b4058] transition-all duration-200 hover:bg-gradient-to-r hover:from-[#f7a92a] hover:to-[#e6b451] active:scale-[0.96] cursor-pointer"
                   >
-                    {CTA_DESTINATION_LABEL}
+                    {CTA_PRIMARY_LABEL}
                   </button>
                 </div>
               </div>
@@ -176,7 +176,7 @@ export function FeaturedDestinations() {
         <div className="relative z-10 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center">
           <PrimaryCta
             onClick={() => openModal()}
-            aria-label="Cotizar viaje — abre el cotizador personalizado"
+            aria-label="Armar viaje — abre el cotizador personalizado"
             className="font-bold"
           />
           <SecondaryCta

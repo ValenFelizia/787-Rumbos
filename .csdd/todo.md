@@ -28,7 +28,7 @@
   - Landing: `development`
   - Updated: 2026-07-18
   - Depends on: T-021.
-  - Note: primaria `Cotizar viaje` / secundaria `Escribinos por WhatsApp` en Navbar, Hero, CTA final y banner de destinos; cards con detalle + `Cotizar este destino` (`openModal(name)`); SLA con horario; SpecialPromo fuera de alcance.
+  - Note: primaria `Armar viaje` / secundaria `Escribinos por WhatsApp` en Navbar, Hero, CTA final, banner y cards de destinos (`openModal(name)` en cards); SLA con horario; SpecialPromo fuera de alcance. Modal submit sigue `Cotizar por WhatsApp`.
   - Verification: lint y typecheck; teclado en par primario/secundario; preselección desde card abre paso 2 del cotizador.
   - Acceptance: cada CTA anticipa correctamente su resultado, la misma intención conserva el mismo nombre y los dos caminos pueden completarse con teclado en desktop y mobile.
 
