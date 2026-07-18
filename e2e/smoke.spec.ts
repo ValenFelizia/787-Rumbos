@@ -19,7 +19,7 @@ test.describe("rutas críticas", () => {
     await expect(
       page
         .getByRole("button", {
-          name: /cotizar viaje — abre el cotizador personalizado/i,
+          name: /abre el cotizador personalizado/i,
         })
         .first(),
     ).toBeVisible();
@@ -61,7 +61,7 @@ test.describe("cotizador", () => {
 
     await page
       .getByRole("button", {
-        name: /cotizar viaje — abre el cotizador personalizado/i,
+        name: /abre el cotizador personalizado/i,
       })
       .first()
       .click();
