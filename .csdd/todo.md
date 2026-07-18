@@ -8,30 +8,6 @@
 
 ## Ready to Land
 
-- [ ] T-020 — Revisar y corregir el smoke test del cotizador
-  - Owner: Valen
-  - Agent: Codex
-  - Scope: configuración de build E2E, Playwright, smoke del cotizador y workflow de CI.
-  - Target: `master`
-  - Base: `a32dfde`
-  - Updated: 2026-07-18
-  - Landing: revisión humana del diff; después fusionar `development` → `master`.
-  - Verification: `npm run test:e2e` y `CI=1 npm run test:e2e:ci` pasan 5/5; el smoke confirma CSP con `upgrade-insecure-requests` y HSTS. Lint sin errores (1 warning preexistente en Footer), typecheck, build normal y build E2E de 29 páginas pasan.
-  - Note: la causa verificada no era el CSP sino reutilizar un servidor viejo y compartir `.next` entre desarrollo y producción. La implementación `c1e7ea3` aísla E2E en `.next-e2e` y puerto 3100 sin debilitar headers.
-  - Acceptance: el smoke del cotizador pasa en el flujo local/CI representativo, los headers de producción conservan su intención de seguridad y las verificaciones relacionadas quedan documentadas.
-
-- [ ] T-022 — Unificar la arquitectura y el lenguaje de los CTAs de la home
-  - Owner: Valen
-  - Agent: Cursor Grok
-  - Scope: `components/conversion/**`, `components/sections/Navbar.tsx`, `components/sections/Hero.tsx`, `components/sections/CTASection.tsx`, `components/sections/FeaturedDestinations.tsx`, `components/sections/QuoteModal.tsx`, `.csdd/todo.md`, `.csdd/specs.md`
-  - Target: `development`
-  - Landing: `development`
-  - Updated: 2026-07-18
-  - Depends on: T-021.
-  - Note: primaria `Armar viaje` / secundaria `Escribinos por WhatsApp` en Navbar, Hero, CTA final, banner y cards de destinos (`openModal(name)` en cards); SLA con horario; SpecialPromo fuera de alcance. Modal submit sigue `Cotizar por WhatsApp`.
-  - Verification: lint y typecheck; teclado en par primario/secundario; preselección desde card abre paso 2 del cotizador.
-  - Acceptance: cada CTA anticipa correctamente su resultado, la misma intención conserva el mismo nombre y los dos caminos pueden completarse con teclado en desktop y mobile.
-
 ## Blocked
 
 ## Pending
@@ -107,6 +83,22 @@
 
 Retention: 12
 
+- [x] T-020 — Revisar y corregir el smoke test del cotizador
+  - Owner: Valen
+  - Agent: Codex
+  - Scope: released
+  - Updated: 2026-07-18
+  - Landed: `757194a` on `master`
+  - Note: E2E aislado en `.next-e2e` y puerto 3100, sin reutilizar servidores; smoke 5/5 local y CI con CSP/HSTS intactos. La causa era compartir artefactos entre desarrollo y producción, no `upgrade-insecure-requests`.
+
+- [x] T-022 — Unificar la arquitectura y el lenguaje de los CTAs de la home
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-07-18
+  - Landed: `757194a` on `master`
+  - Note: CTA primaria `Armar viaje`, secundaria `Escribinos por WhatsApp`, detalle y cotización separados en destinos, preselección conservada y submit final `Cotizar por WhatsApp`; revisión humana aprobada.
+
 - [x] T-021 — Corregir accesibilidad de las interacciones principales
   - Owner: Valen
   - Agent: Codex
@@ -134,7 +126,7 @@ Retention: 12
   - Agent: Cursor Grok
   - Scope: released
   - Updated: 2026-07-18
-  - Note: baseline implementado: ESLint flat + `typecheck`, Playwright y CI en `.github/workflows/ci.yml`. Una regresión de entorno descubierta en el smoke del cotizador se sigue por separado en T-020; T-018 conserva el cierre de la capacidad base y no afirma que el follow-up esté resuelto.
+  - Note: baseline implementado: ESLint flat + `typecheck`, Playwright y CI en `.github/workflows/ci.yml`. La regresión ambiental descubierta en el smoke del cotizador quedó resuelta por separado en T-020.
 
 - [x] T-017 — Aplicar baseline de seguridad HTTP e higiene de dependencias
   - Owner: Valen
@@ -177,17 +169,3 @@ Retention: 12
   - Scope: released
   - Updated: 2026-07-14
   - Note: labels de transporte, permalinks IG (post 3 → perfil hasta tener URL), priceNote/empty state/CTA en destacados, badge de próxima salida en `/destinos`. Sin reformateo monetario. Permalink del post 3 queda pendiente en handoff.
-
-- [x] T-011 — Reordenar la home alrededor del diferencial verificable
-  - Owner: Valen
-  - Agent: Cursor Grok
-  - Scope: released
-  - Updated: 2026-07-13
-  - Note: hero y propuesta de valor priorizan aeropuerto + aéreo/terrestre + transporte/Vía Bariloche; Servicios va antes de Comunidad. El microcopy de tiempos de respuesta y el alcance definitivo del acompañamiento quedan para T-012.
-
-- [x] T-010 — Auditar el análisis de posicionamiento y convertirlo en trabajo verificable
-  - Owner: Valen
-  - Agent: Codex
-  - Scope: released
-  - Updated: 2026-07-13
-  - Note: auditoría contrastada con código, versión pública y políticas oficiales; conclusiones incorporadas en `specs.md`, este estado operativo y la adenda de `docs/marketing-growth-audit.md`.
