@@ -14,6 +14,7 @@
 /** @type {import('next').NextConfig} */
 
 const isProd = process.env.NODE_ENV === "production";
+const distDir = process.env.NEXT_DIST_DIR ?? ".next";
 
 /**
  * Content-Security-Policy (CSP): lista blanca de orígenes permitidos.
@@ -69,6 +70,7 @@ const securityHeaders = [
 ];
 
 const nextConfig = {
+  distDir,
   images: {
     // Formatos modernos: Next.js + Vercel sirven WebP/AVIF automáticamente
     // según lo que soporte el navegador del visitante.
