@@ -6,6 +6,18 @@
 
 ## In Progress
 
+### Visual, conversión y motion
+
+- [ ] T-023 — Convertir la presencia humana en el aeropuerto en la firma visual de la home
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: `components/sections/Hero.tsx`, `components/sections/TrustBar.tsx`, `components/sections/AboutUs.tsx`, `app/page.tsx`, `public/nosotros*.jpg` / hero assets; ampliar sólo si hace falta copy mínimo o constantes de ubicación
+  - Target: `development`
+  - Updated: 2026-07-18
+  - Depends on: T-022.
+  - Note: firma con assets actuales — TrustBar presencia + AboutUs temprano + FIT con framing honesto. Hero local (`nosotros-local.jpg`) en preview sin commit hasta validación visual de Valen; si no convence, conservar `hero-bg.jpg`. Fotos nuevas → T-027. Motion en T-024.
+  - Acceptance: las primeras dos pantallas comunican ubicación física, atención humana y salida desde Córdoba; existe una composición coherente para desktop y mobile y la firma sigue siendo reconocible sin animación.
+
 ## Ready to Land
 
 ## Blocked
@@ -13,13 +25,6 @@
 ## Pending
 
 ### Visual, conversión y motion
-
-- [ ] T-023 — Convertir la presencia humana en el aeropuerto en la firma visual de la home
-  - Owner: Valen
-  - Updated: 2026-07-18
-  - Depends on: T-022.
-  - Note: articular Hero, TrustBar y AboutUs alrededor de “personas reales dentro del Aeropuerto de Córdoba”, usando las fotos reales del equipo y el local como evidencia temprana. Conservar Elaine Sans, Zalando Sans y la paleta petróleo/dorado/lima; evitar recursos genéricos de aviación que cualquier agencia podría usar.
-  - Acceptance: las primeras dos pantallas comunican ubicación física, atención humana y salida desde Córdoba; existe una composición coherente para desktop y mobile y la firma sigue siendo reconocible sin animación.
 
 - [ ] T-024 — Implementar un sistema de motion mínimo y estratégico
   - Owner: Valen
@@ -42,11 +47,15 @@
   - Note: verificar la home completa en desktop y mobile, navegación por teclado, focus visible, modales, `prefers-reduced-motion`, contenido sin JavaScript, hover/touch, estabilidad visual y ausencia de motion costoso. Ejecutar lint, typecheck, build y smokes relevantes sin ampliar la suite de forma desproporcionada.
   - Acceptance: no quedan bloqueos P0/P1 de la crítica, no hay contenido oculto por fallos del reveal y la experiencia reducida conserva toda la información y conversión.
 
+
+
 ### Contenido y operación
 
 - [ ] T-004 — Mantener el catálogo y las promociones vigentes
   - Owner: Valen
   - Note: alcance previsto en `lib/destinations-data.ts`, `lib/instagram-posts.ts`, promociones y contenido comercial relacionado. Revisión manual mensual de precios, salidas, campañas y feed social. Priorizar captions evergreen en la home; retirar o corregir piezas vencidas. La revalidación diaria de Next evita que las páginas estáticas dependientes de fechas queden congeladas hasta el siguiente deploy, pero no reemplaza el control comercial humano.
+
+
 
 ### Próxima ola de producto
 
@@ -77,7 +86,18 @@
   - Depends on: GBP verificado y tracking de leads estable.
   - Note: alcance previsto en Google Ads e Instagram/Meta Ads.
 
+
+
 ## Deferred
+
+- [ ] T-027 — Incorporar fotos nuevas del local/equipo y evaluar reemplazos
+  - Owner: Valen
+  - Updated: 2026-07-18
+  - Depends on: T-023.
+  - Reason: hoy solo hay `nosotros-local.jpg` (local real) y `nosotros.jpg` (FIT); Valen pedirá más fotos a la familia en los próximos días.
+  - Resume when: Valen tenga un lote nuevo de fotos del local/equipo y quiera decidir qué reemplazar (prioridad: sustituir o reencuadrar FIT si hay evidencia más fuerte en el aeropuerto).
+  - Note: sesión corta de curaduría — no rediseñar la firma; elegir 1–2 assets y actualizar Hero/AboutUs/alts.
+
 
 ## Recently Completed
 
@@ -169,3 +189,4 @@ Retention: 12
   - Scope: released
   - Updated: 2026-07-14
   - Note: labels de transporte, permalinks IG (post 3 → perfil hasta tener URL), priceNote/empty state/CTA en destacados, badge de próxima salida en `/destinos`. Sin reformateo monetario. Permalink del post 3 queda pendiente en handoff.
+

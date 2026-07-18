@@ -1,89 +1,95 @@
 /**
  * components/sections/TrustBar.tsx
  *
- * Barra de confianza — aparece inmediatamente debajo del hero.
- * Objetivo: que el visitante vea las señales de legitimidad (AFIP, Cámara,
- * habilitación) antes de scrollear, no al llegar al footer.
- *
- * Contenido:
- *   - Agencia habilitada con legajo oficial
- *   - Miembro de la Cámara de Turismo de Córdoba
- *   - Financiación disponible
- *   - Presencia local (aeropuerto)
- *
- * Fondo oscuro (azul petróleo) para crear una transición visual clara
- * entre el hero y la sección siguiente (blanca).
+ * Franja de presencia bajo el hero: lugar físico + credenciales.
+ * No es un strip de íconos genéricos — la firma es el aeropuerto de Córdoba.
  */
-import { BadgeCheck, Building2, CreditCard, MapPin } from "lucide-react";
+import Image from "next/image";
 import { GOOGLE_MAPS_LINK } from "@/lib/constants";
 
-const trustItems = [
+const credentials = [
   {
-    icon: BadgeCheck,
     label: "Agencia habilitada",
     sublabel: "Legajo 20455",
   },
   {
-    icon: Building2,
     label: "Cámara de Turismo",
     sublabel: "Provincia de Córdoba",
-    link: "https://camaracbaturismo.org.ar/",
+    href: "https://camaracbaturismo.org.ar/",
   },
   {
-    icon: CreditCard,
-    label: "Financiación disponible",
+    label: "Financiación",
     sublabel: "Consultá opciones",
-  },
-  {
-    icon: MapPin,
-    label: "En el Aeropuerto",
-    sublabel: "Córdoba, Argentina",
-    link: GOOGLE_MAPS_LINK,
   },
 ];
 
 export function TrustBar() {
   return (
     <section
-      aria-label="Credenciales y confianza"
+      aria-label="Presencia en el aeropuerto y credenciales"
       className="border-b border-white/10 bg-[#0b4058]"
     >
-      <div className="mx-auto grid w-full max-w-6xl grid-cols-2 gap-px px-6 py-0 md:grid-cols-4">
-        {trustItems.map((item) => {
-          const Icon = item.icon;
-          const content = (
-            <>
-              <Icon className="h-5 w-5 text-[#dae553]" />
-              <span className="font-[family-name:var(--font-elaine)] text-sm font-semibold text-white">
-                {item.label}
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-6 md:flex-row md:items-center md:gap-10 md:py-5">
+        <a
+          href={GOOGLE_MAPS_LINK}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group flex min-w-0 flex-1 items-center gap-4 outline-none focus-visible:ring-2 focus-visible:ring-[#dae553] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0b4058] rounded-lg"
+        >
+          <div className="relative h-16 w-24 shrink-0 overflow-hidden rounded-lg border border-white/15 md:h-[4.5rem] md:w-28">
+            <Image
+              src="/nosotros-local.jpg"
+              alt=""
+              fill
+              sizes="112px"
+              className="object-cover object-[center_35%] transition-transform duration-500 group-hover:scale-105"
+              aria-hidden
+            />
+          </div>
+          <div className="min-w-0 text-left">
+            <p className="font-[family-name:var(--font-elaine)] text-sm font-semibold text-white md:text-base">
+              Hall de arribos · Aeropuerto de Córdoba
+            </p>
+            <p className="mt-0.5 text-xs text-white/65 md:text-sm">
+              Local oficial de Vía Bariloche —{" "}
+              <span className="text-[#dae553] underline-offset-2 group-hover:underline">
+                Cómo llegar
               </span>
-              <span className="text-xs text-white/60">{item.sublabel}</span>
-            </>
-          );
+            </p>
+          </div>
+        </a>
 
-          if (item.link) {
-            return (
-              <a
-                key={item.label}
-                href={item.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col items-center gap-1 px-4 py-5 text-center transition-colors duration-200 hover:bg-white/5 outline-none focus-visible:bg-white/10"
-              >
-                {content}
-              </a>
+        <ul className="grid grid-cols-3 gap-3 border-t border-white/10 pt-4 md:border-t-0 md:border-l md:pt-0 md:pl-8 md:gap-6">
+          {credentials.map((item) => {
+            const body = (
+              <>
+                <span className="font-[family-name:var(--font-elaine)] block text-xs font-semibold text-white sm:text-sm">
+                  {item.label}
+                </span>
+                <span className="mt-0.5 block text-[10px] text-white/55 sm:text-xs">
+                  {item.sublabel}
+                </span>
+              </>
             );
-          }
 
-          return (
-            <div
-              key={item.label}
-              className="flex flex-col items-center gap-1 px-4 py-5 text-center"
-            >
-              {content}
-            </div>
-          );
-        })}
+            return (
+              <li key={item.label} className="text-center md:text-left">
+                {item.href ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block rounded outline-none transition-colors hover:text-[#dae553] focus-visible:ring-2 focus-visible:ring-[#dae553]"
+                  >
+                    {body}
+                  </a>
+                ) : (
+                  body
+                )}
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </section>
   );

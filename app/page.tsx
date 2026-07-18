@@ -28,8 +28,9 @@ export default function Home() {
       <SpecialPromo />
       <Navbar />
       <Hero />
-      {/* TrustBar sin animación — debe ser visible de inmediato debajo del hero */}
       <TrustBar />
+      {/* AboutUs temprano: evidencia humana/lugar antes del catálogo */}
+      <AboutUs />
       <PartnersMarquee />
       <ScrollReveal>
         <ValueProposition />
@@ -39,9 +40,6 @@ export default function Home() {
       </ScrollReveal>
       <ScrollReveal>
         <Testimonials />
-      </ScrollReveal>
-      <ScrollReveal>
-        <AboutUs />
       </ScrollReveal>
       <ScrollReveal>
         <Services />
