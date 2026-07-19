@@ -12,7 +12,7 @@ export function AboutUs() {
   return (
     <section id="nosotros" className="bg-[#f9f9f9]">
       <div className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-20 md:grid-cols-12 md:items-center md:gap-12">
-        <div className="relative md:col-span-5 pb-10 md:pb-12 pr-10 md:pr-12">
+        <div className="motion-about-settle relative md:col-span-5 pb-10 md:pb-12 pr-10 md:pr-12">
           <div className="overflow-hidden rounded-3xl border border-[#0b4058]/10 shadow-lg shadow-[#0b4058]/5">
             <Image
               src="/nosotros-local.jpg"

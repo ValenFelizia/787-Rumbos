@@ -27,7 +27,7 @@ export function Services() {
             return (
               <div
                 key={service.title}
-                className="rounded-2xl border border-[#0b4058]/10 bg-[#f9f9f9] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#a2c745] hover:bg-white hover:shadow-xl hover:shadow-[#0b4058]/10"
+                className="rounded-2xl border border-[#0b4058]/10 bg-[#f9f9f9] p-6 transition-colors duration-200 hover:border-[#a2c745] hover:bg-white"
               >
                 <Icon className="h-8 w-8 text-[#006183]" />
                 <h3 className="font-[family-name:var(--font-elaine)] mt-4 text-lg font-bold">

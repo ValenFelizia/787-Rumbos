@@ -59,7 +59,7 @@ export function FeaturedDestinations() {
           return (
             <article
               key={dest.slug}
-              className="group flex flex-col overflow-hidden rounded-2xl border border-[#0b4058]/10 bg-white shadow-sm shadow-[#0b4058]/5 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#0b4058]/20 hover:shadow-xl hover:shadow-[#0b4058]/15"
+              className="group flex flex-col overflow-hidden rounded-2xl border border-[#0b4058]/10 bg-white shadow-sm shadow-[#0b4058]/5 transition-colors duration-200 hover:border-[#0b4058]/25"
             >
               <Link
                 href={`/destinos/${dest.slug}`}
@@ -71,7 +71,7 @@ export function FeaturedDestinations() {
                   alt={`${dest.name} — paquete de viaje con 787 Rumbos`}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  className="object-cover"
                 />
                 <div className="absolute inset-0 border border-black/5 rounded-t-2xl pointer-events-none" />
 

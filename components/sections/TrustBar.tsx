@@ -42,7 +42,7 @@ export function TrustBar() {
               alt=""
               fill
               sizes="112px"
-              className="object-cover object-[center_35%] transition-transform duration-500 group-hover:scale-105"
+              className="object-cover object-[center_35%]"
               aria-hidden
             />
           </div>

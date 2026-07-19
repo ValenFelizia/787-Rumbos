@@ -39,7 +39,7 @@ export function PartnersMarquee() {
           pauseOnHover
           gradient={false}
           play={!reduceMotion}
-          speed={40}
+          speed={25}
         >
           {partnerLogos.map((logo) => (
             <div

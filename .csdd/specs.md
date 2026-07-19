@@ -134,11 +134,18 @@ CMS ni scraping solo para sostener esa sección.
   mismo nombre y cada CTA debe anticipar correctamente su resultado.
   El SLA visible junto a los CTAs de conversión es: “En horario de atención,
   respondemos en menos de 2 horas”.
-- El motion de la home debe ser mínimo y estratégico: una apertura breve del
-  hero, un gesto propio para la prueba humana y microinteracciones simples. No se
-  oculta contenido por defecto a la espera de JavaScript, no se añade movimiento
-  continuo sin una necesidad de overflow o estado y no se incorpora una librería
-  de animación mientras CSS y APIs web nativas alcancen.
+- El motion de la home es mínimo y estratégico (sin librería de animación):
+  apertura breve del copy del hero (`.motion-hero-enter`), un gesto de asiento
+  del collage en AboutUs (`.motion-about-settle`, solo `transform`) y
+  microinteracciones de feedback (p. ej. `active:scale` en CTAs). No hay
+  scroll-reveal uniforme por sección (`ScrollReveal` retirado): ese patrón
+  oculta contenido y se siente genérico. El contenido permanece legible sin
+  JavaScript. El marquee de partners existe por overflow y corre más lento;
+  con `prefers-reduced-motion` se detiene. En cards de la home se evita el
+  stack repetido lift + zoom + sombra; hovers quedan en color/borde u opacity.
+  Entradas de modal (SpecialPromo) usan keyframes CSS de opacity/transform.
+  La secuencia principal no supera ~600 ms; `prefers-reduced-motion` deja la
+  experiencia estática.
 - El pulido visual debe reducir la repetición automática de cards, radios,
   bordes, sombras y elevaciones, preservando la identidad petróleo/dorado/lima,
   las tipografías de marca y todo el contenido comercial verificable.

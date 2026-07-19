@@ -7,7 +7,7 @@
  *   1. Tipografías de marca → conecta las CSS vars de next/localFont con Tailwind
  *   2. Paleta de colores y gradientes de marca
  *   3. Estilos base
- *   4. Utilidades de animación (scroll reveal)
+ *   4. Motion mínimo (hero, presencia humana, modal promo)
  */
 
 /* ─────────────────────────────────────────
@@ -67,30 +67,78 @@
 }
 
 /* ─────────────────────────────────────────
-   4. Animaciones de scroll reveal
-   El componente ScrollReveal (components/ScrollReveal.tsx) agrega la clase
-   `.reveal` a los elementos cuando entran en el viewport via IntersectionObserver.
-   Estado inicial: invisible y desplazado hacia abajo.
-   Estado final: visible en su posición original.
+   4. Motion mínimo (T-024)
+   Solo transform/opacity. Contenido legible sin depender de JS.
+   prefers-reduced-motion → experiencia estática.
    ───────────────────────────────────────── */
-.reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.reveal-on-scroll.revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Respeto por las preferencias del usuario: si prefiere movimiento reducido,
-   desactivamos todas las transiciones y animaciones. */
-@media (prefers-reduced-motion: reduce) {
-  .reveal-on-scroll {
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
     opacity: 1;
-    transform: none;
-    transition: none;
+    transform: translateY(0);
+  }
+}
+
+@keyframes about-settle {
+  from {
+    transform: translateY(14px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes promo-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes promo-scale-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .motion-hero-enter {
+    animation: hero-enter 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .motion-about-settle {
+    animation: about-settle 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .animate-fade-in {
+    animation: promo-fade-in 0.25s ease-out both;
+  }
+
+  .animate-scale-up {
+    animation: promo-scale-up 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .motion-hero-enter,
+  .motion-about-settle,
+  .animate-fade-in,
+  .animate-scale-up {
+    animation: none !important;
   }
 }
 

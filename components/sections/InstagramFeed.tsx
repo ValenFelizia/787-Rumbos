@@ -42,13 +42,13 @@ export function InstagramFeed() {
                   alt={post.alt}
                   fill
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  className="object-cover"
                 />
                 <div className="absolute inset-0 border border-black/5 rounded-xl pointer-events-none" />
 
-                <div className="absolute inset-0 bg-[#0b4058]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-4 text-center text-white space-y-3">
+                <div className="absolute inset-0 bg-[#0b4058]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center p-4 text-center text-white space-y-3">
                   <svg
-                    className="h-6 w-6 text-white transition-transform duration-300 group-hover:scale-110"
+                    className="h-6 w-6 text-white"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"

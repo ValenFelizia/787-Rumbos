@@ -6,18 +6,6 @@
 
 ## In Progress
 
-### Visual, conversión y motion
-
-- [ ] T-024 — Implementar un sistema de motion mínimo y estratégico
-  - Owner: Valen
-  - Agent: Cursor Grok
-  - Scope: `components/ScrollReveal.tsx`, `components/sections/AboutUs.tsx`, `components/sections/PartnersMarquee.tsx`, `components/sections/SpecialPromo.tsx`, `components/sections/Hero.tsx`, `app/globals.css`, `app/page.tsx`; microinteracciones en cards solo donde se retire lift+zoom+sombra
-  - Target: `development`
-  - Updated: 2026-07-18
-  - Depends on: T-021 y T-023.
-  - Note: reemplazar el reveal uniforme de secciones por un máximo de dos o tres momentos con propósito: apertura breve del hero, gesto propio del bloque humano y microinteracciones simples. Calmar el marquee, eliminar combinaciones repetidas de lift + zoom + sombra y resolver las clases de animación declaradas pero ausentes en SpecialPromo sin sumar una librería salvo necesidad demostrada.
-  - Acceptance: el contenido es visible por defecto aunque JavaScript falle; la secuencia principal no supera aproximadamente 600 ms; sólo se animan `transform`/`opacity` o superficies pequeñas justificadas; `prefers-reduced-motion` produce una experiencia estática completa.
-
 ## Ready to Land
 
 ## Blocked
@@ -30,7 +18,7 @@
   - Owner: Valen
   - Updated: 2026-07-18
   - Depends on: T-022 a T-024.
-  - Note: revisar ValueProposition, destinos, testimonios, AboutUs, Services, Instagram, FAQ, promo y cierre para que no compartan por reflejo la misma combinación de card, radio, borde y sombra. Conservar cards donde aportan una affordance real y variar composición, densidad y pausas sin alterar el contenido comercial aprobado.
+  - Note: revisar ValueProposition, destinos, testimonios, AboutUs, Services, Instagram, FAQ, promo y cierre para que no compartan por reflejo la misma combinación de card, radio, borde y sombra. Conservar cards donde aportan una affordance real y variar composición, densidad y pausas sin alterar el contenido comercial aprobado. No reintroducir scroll-reveal ni stacks lift+zoom+sombra (T-024).
   - Acceptance: la home mantiene jerarquía y conversión, elimina los cuatro anti-patrones accionables de la auditoría Impeccable y conserva una lectura clara desde 390 px hasta desktop amplio.
 
 - [ ] T-026 — Cerrar la mejora visual con QA responsive, accesible y de rendimiento
@@ -96,12 +84,20 @@
 
 Retention: 12
 
-- [x] T-023 — Convertir la presencia humana en el aeropuerto en la firma visual de la home
+- [x] T-024 — Implementar un sistema de motion mínimo y estratégico
   - Owner: Valen
   - Agent: Cursor Grok
   - Scope: released
   - Updated: 2026-07-18
   - Landed: pending-merge
+  - Note: ScrollReveal eliminado; hero-enter + about-settle; marquee más lento; cards sin lift+zoom+sombra; keyframes SpecialPromo; reduced-motion estático. Revisión humana aprobada.
+
+- [x] T-023 — Convertir la presencia humana en el aeropuerto en la firma visual de la home
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-07-18
+  - Landed: `1344c78` on `master`
   - Note: TrustBar de presencia + AboutUs temprano; hero conserva `hero-bg.jpg` (local full-bleed descartado); FIT con framing honesto. Fotos nuevas → T-027.
 
 - [x] T-020 — Revisar y corregir el smoke test del cotizador

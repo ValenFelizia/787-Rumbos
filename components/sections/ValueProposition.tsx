@@ -22,7 +22,7 @@ export function ValueProposition() {
           paquetes y pasajes de ómnibus nacionales, con el mismo equipo de punta a punta.
         </p>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          <article className="rounded-2xl bg-white p-7 border-t-4 border-[#e6b451] shadow-md shadow-[#0b4058]/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#0b4058]/15">
+          <article className="rounded-2xl bg-white p-7 border-t-4 border-[#e6b451] shadow-md shadow-[#0b4058]/10">
             <MapPin className="h-8 w-8 text-[#e6b451]" />
             <h3 className="font-[family-name:var(--font-elaine)] mt-4 text-xl font-bold">
               Oficina en el aeropuerto
@@ -32,7 +32,7 @@ export function ValueProposition() {
               física real, no solo un número de WhatsApp.
             </p>
           </article>
-          <article className="rounded-2xl bg-white p-7 border-t-4 border-[#e6b451] shadow-md shadow-[#0b4058]/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#0b4058]/15">
+          <article className="rounded-2xl bg-white p-7 border-t-4 border-[#e6b451] shadow-md shadow-[#0b4058]/10">
             <Bus className="h-8 w-8 text-[#e6b451]" />
             <h3 className="font-[family-name:var(--font-elaine)] mt-4 text-xl font-bold">
               Experiencia en transporte
@@ -42,7 +42,7 @@ export function ValueProposition() {
               la mejor opción de viaje desde Córdoba.
             </p>
           </article>
-          <article className="rounded-2xl bg-white p-7 border-t-4 border-[#e6b451] shadow-md shadow-[#0b4058]/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#0b4058]/15">
+          <article className="rounded-2xl bg-white p-7 border-t-4 border-[#e6b451] shadow-md shadow-[#0b4058]/10">
             <Plane className="h-8 w-8 text-[#e6b451]" />
             <h3 className="font-[family-name:var(--font-elaine)] mt-4 text-xl font-bold">
               Aéreo y terrestre

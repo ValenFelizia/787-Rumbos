@@ -73,7 +73,7 @@ function PromoFlyer({
     <Link
       href={`/destinos/${PROMO_CONFIG.slug}`}
       onClick={onNavigate}
-      className={`group relative block overflow-hidden rounded-2xl border border-white/10 bg-[#072a3b] p-2 shadow-xl cursor-pointer transition-all duration-300 ease-out md:hover:-translate-y-1 md:hover:rotate-1 ${className ?? ""}`}
+      className={`group relative block overflow-hidden rounded-2xl border border-white/10 bg-[#072a3b] p-2 shadow-xl cursor-pointer transition-colors duration-200 md:hover:border-white/25 ${className ?? ""}`}
     >
       <div className="relative h-full w-full overflow-hidden rounded-xl bg-[#0b4058]">
         <Image
@@ -82,7 +82,7 @@ function PromoFlyer({
           fill
           sizes="(max-width: 1024px) 200px, 260px"
           priority
-          className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+          className="object-cover object-center"
         />
       </div>
       <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none" />

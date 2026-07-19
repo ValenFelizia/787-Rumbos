@@ -23,7 +23,7 @@ export function Hero() {
       <div className="absolute inset-0 bg-gradient-to-t from-[#0b4058]/90 via-[#0b4058]/60 to-[#0b4058]/30 md:bg-gradient-to-r md:from-[#0b4058]/85 md:via-[#0b4058]/50 md:to-transparent" />
 
       <div className="relative mx-auto w-full max-w-6xl px-6 py-20 text-white md:py-28">
-        <div className="max-w-3xl space-y-6">
+        <div className="motion-hero-enter max-w-3xl space-y-6">
           <h1
             className="font-[family-name:var(--font-elaine)] text-[2rem] font-extrabold leading-tight tracking-tight sm:text-4xl md:text-6xl text-balance"
           >
