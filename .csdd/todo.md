@@ -89,7 +89,7 @@ Retention: 12
   - Agent: Cursor Grok
   - Scope: released
   - Updated: 2026-07-18
-  - Landed: pending-merge
+  - Landed: `2f9a445` on `master`
   - Note: ScrollReveal eliminado; hero-enter + about-settle; marquee más lento; cards sin lift+zoom+sombra; keyframes SpecialPromo; reduced-motion estático. Revisión humana aprobada.
 
 - [x] T-023 — Convertir la presencia humana en el aeropuerto en la firma visual de la home
