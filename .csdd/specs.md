@@ -119,10 +119,12 @@ CMS ni scraping solo para sostener esa sección.
 - En la home, el hero y la propuesta de valor priorizan la oficina en el
   Aeropuerto de Córdoba, la experiencia en transporte y la oferta aérea +
   terrestre. La sección de Servicios precede al feed social (“Comunidad”).
-- La dirección visual aceptada para la próxima mejora de la home prioriza la
-  presencia humana dentro del Aeropuerto de Córdoba como firma diferencial:
-  equipo y local reales deben funcionar como evidencia temprana y la experiencia
-  debe seguir siendo reconocible aun sin animación.
+- La dirección visual aceptada prioriza la presencia en el Aeropuerto de Córdoba
+  como firma diferencial: el hero puede conservar una imagen atmosférica de
+  viaje; la evidencia temprana del local y el equipo vive en TrustBar (franja de
+  presencia + credenciales) y AboutUs colocado antes del catálogo. FIT se
+  presenta como feria/industria, no como aeropuerto. La experiencia debe seguir
+  siendo reconocible aun sin animación.
 - La home debe distinguir de forma consistente dos caminos de conversión: una
   acción primaria que abre el cotizador y una acción secundaria explícita para
   WhatsApp directo. Labels canónicos: primaria `Armar viaje`, secundaria

@@ -8,15 +8,15 @@
 
 ### Visual, conversión y motion
 
-- [ ] T-023 — Convertir la presencia humana en el aeropuerto en la firma visual de la home
+- [ ] T-024 — Implementar un sistema de motion mínimo y estratégico
   - Owner: Valen
   - Agent: Cursor Grok
-  - Scope: `components/sections/Hero.tsx`, `components/sections/TrustBar.tsx`, `components/sections/AboutUs.tsx`, `app/page.tsx`, `public/nosotros*.jpg` / hero assets; ampliar sólo si hace falta copy mínimo o constantes de ubicación
+  - Scope: `components/ScrollReveal.tsx`, `components/sections/AboutUs.tsx`, `components/sections/PartnersMarquee.tsx`, `components/sections/SpecialPromo.tsx`, `components/sections/Hero.tsx`, `app/globals.css`, `app/page.tsx`; microinteracciones en cards solo donde se retire lift+zoom+sombra
   - Target: `development`
   - Updated: 2026-07-18
-  - Depends on: T-022.
-  - Note: firma con assets actuales — TrustBar presencia + AboutUs temprano + FIT con framing honesto. Hero local (`nosotros-local.jpg`) en preview sin commit hasta validación visual de Valen; si no convence, conservar `hero-bg.jpg`. Fotos nuevas → T-027. Motion en T-024.
-  - Acceptance: las primeras dos pantallas comunican ubicación física, atención humana y salida desde Córdoba; existe una composición coherente para desktop y mobile y la firma sigue siendo reconocible sin animación.
+  - Depends on: T-021 y T-023.
+  - Note: reemplazar el reveal uniforme de secciones por un máximo de dos o tres momentos con propósito: apertura breve del hero, gesto propio del bloque humano y microinteracciones simples. Calmar el marquee, eliminar combinaciones repetidas de lift + zoom + sombra y resolver las clases de animación declaradas pero ausentes en SpecialPromo sin sumar una librería salvo necesidad demostrada.
+  - Acceptance: el contenido es visible por defecto aunque JavaScript falle; la secuencia principal no supera aproximadamente 600 ms; sólo se animan `transform`/`opacity` o superficies pequeñas justificadas; `prefers-reduced-motion` produce una experiencia estática completa.
 
 ## Ready to Land
 
@@ -25,13 +25,6 @@
 ## Pending
 
 ### Visual, conversión y motion
-
-- [ ] T-024 — Implementar un sistema de motion mínimo y estratégico
-  - Owner: Valen
-  - Updated: 2026-07-18
-  - Depends on: T-021 y T-023.
-  - Note: reemplazar el reveal uniforme de secciones por un máximo de dos o tres momentos con propósito: apertura breve del hero, gesto propio del bloque humano y microinteracciones simples. Calmar el marquee, eliminar combinaciones repetidas de lift + zoom + sombra y resolver las clases de animación declaradas pero ausentes en SpecialPromo sin sumar una librería salvo necesidad demostrada.
-  - Acceptance: el contenido es visible por defecto aunque JavaScript falle; la secuencia principal no supera aproximadamente 600 ms; sólo se animan `transform`/`opacity` o superficies pequeñas justificadas; `prefers-reduced-motion` produce una experiencia estática completa.
 
 - [ ] T-025 — Reducir la repetición visual y pulir el ritmo completo de la home
   - Owner: Valen
@@ -102,6 +95,14 @@
 ## Recently Completed
 
 Retention: 12
+
+- [x] T-023 — Convertir la presencia humana en el aeropuerto en la firma visual de la home
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-07-18
+  - Landed: pending-merge
+  - Note: TrustBar de presencia + AboutUs temprano; hero conserva `hero-bg.jpg` (local full-bleed descartado); FIT con framing honesto. Fotos nuevas → T-027.
 
 - [x] T-020 — Revisar y corregir el smoke test del cotizador
   - Owner: Valen
