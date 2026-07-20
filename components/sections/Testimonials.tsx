@@ -61,7 +61,7 @@ function TestimonialMeta({ t }: { t: Testimonial }) {
 
 function TestimonialCard({ t }: { t: Testimonial }) {
   return (
-    <article className="border-t-4 border-[#e6b451] bg-white pt-6">
+    <article className="bg-white">
       <Stars rating={t.rating} />
       <p className="mt-4 text-sm leading-relaxed text-[#0b4058]/85 text-pretty">
         &ldquo;{t.text}&rdquo;
@@ -81,7 +81,7 @@ export function Testimonials() {
       aria-labelledby="testimonios-heading"
     >
       <div className="mx-auto w-full max-w-6xl px-6 py-16 md:py-20">
-        <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl space-y-3">
             <h2
               id="testimonios-heading"
@@ -122,7 +122,7 @@ export function Testimonials() {
         </div>
 
         {hasReviews && (
-          <div className="mt-12 grid gap-8 md:grid-cols-3">
+          <div className="mt-12 border-t border-[#0b4058]/10 pt-10 grid gap-10 md:grid-cols-3 md:gap-8">
             {testimonials.map((t, idx) => (
               <TestimonialCard key={`${t.name}-${idx}`} t={t} />
             ))}

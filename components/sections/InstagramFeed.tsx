@@ -6,10 +6,10 @@ import {
 
 export function InstagramFeed() {
   return (
-    <section className="bg-white border-t border-[#0b4058]/5 py-20">
+    <section className="bg-white border-t border-[#0b4058]/5 py-14 md:py-16">
       <div className="mx-auto w-full max-w-6xl px-6">
         {/* Encabezado */}
-        <div className="mb-12 text-center space-y-3">
+        <div className="mb-10 text-center space-y-3">
           <h2 className="font-[family-name:var(--font-brand-heading)] text-3xl font-extrabold tracking-tight md:text-4xl text-[#0b4058]">
             Comunidad 787 Rumbos
           </h2>
@@ -19,7 +19,7 @@ export function InstagramFeed() {
         </div>
 
         {/* Grilla de Publicaciones */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 md:gap-3">
           {instagramPosts.map((post) => {
             const href = post.permalink ?? INSTAGRAM_PROFILE_URL;
             const opensSpecificPost = Boolean(post.permalink);
@@ -35,7 +35,7 @@ export function InstagramFeed() {
                     ? `Ver publicación de Instagram: ${post.alt}`
                     : `Ver @787rumbos en Instagram (publicación pendiente de enlace)`
                 }
-                className="group relative aspect-square overflow-hidden rounded-xl border border-[#0b4058]/10 bg-gray-50 shadow-sm transition-all duration-300 hover:shadow-md active:scale-[0.96] cursor-pointer"
+                className="group relative aspect-square overflow-hidden rounded-md bg-gray-50 active:scale-[0.98] cursor-pointer"
               >
                 <Image
                   src={post.imageSrc}
@@ -44,11 +44,10 @@ export function InstagramFeed() {
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
                   className="object-cover"
                 />
-                <div className="absolute inset-0 border border-black/5 rounded-xl pointer-events-none" />
 
-                <div className="absolute inset-0 bg-[#0b4058]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center p-4 text-center text-white space-y-3">
+                <div className="absolute inset-0 bg-[#0b4058]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center p-3 text-center text-white space-y-2">
                   <svg
-                    className="h-6 w-6 text-white"
+                    className="h-5 w-5 text-white"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
