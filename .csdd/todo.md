@@ -18,7 +18,7 @@
   - Owner: Valen
   - Updated: 2026-07-18
   - Depends on: T-021 a T-025.
-  - Note: verificar la home completa en desktop y mobile, navegación por teclado, focus visible, modales, `prefers-reduced-motion`, contenido sin JavaScript, hover/touch, estabilidad visual y ausencia de motion costoso. Ejecutar lint, typecheck, build y smokes relevantes sin ampliar la suite de forma desproporcionada.
+  - Note: verificar la home completa en desktop y mobile, navegación por teclado, focus visible, modales, `prefers-reduced-motion`, contenido sin JavaScript, hover/touch, estabilidad visual y ausencia de motion costoso. Ejecutar lint, typecheck, build y smokes relevantes sin ampliar la suite de forma desproporcionada. Incluye revisar el hide/reveal de CTAs del Navbar (T-028) en reduced-motion y teclado.
   - Acceptance: no quedan bloqueos P0/P1 de la crítica, no hay contenido oculto por fallos del reveal y la experiencia reducida conserva toda la información y conversión.
 
 
@@ -76,6 +76,14 @@
 ## Recently Completed
 
 Retention: 12
+
+- [x] T-028 — Ocultar CTAs del Navbar mientras el Hero está a la vista
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-07-20
+  - Landed: pending-merge
+  - Note: IntersectionObserver sobre `#hero`; desktop hide/reveal con reflow; mobile intacto; `inert` sin Tab fantasma. Revisión humana aprobada.
 
 - [x] T-025 — Reducir la repetición visual y pulir el ritmo completo de la home
   - Owner: Valen

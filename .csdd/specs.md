@@ -137,7 +137,11 @@ CMS ni scraping solo para sostener esa sección.
 - El motion de la home es mínimo y estratégico (sin librería de animación):
   apertura breve del copy del hero (`.motion-hero-enter`), un gesto de asiento
   del collage en AboutUs (`.motion-about-settle`, solo `transform`) y
-  microinteracciones de feedback (p. ej. `active:scale` en CTAs). No hay
+  microinteracciones de feedback (p. ej. `active:scale` en CTAs). En desktop,
+  el Navbar oculta su par de CTAs mientras `#hero` está a la vista y los revela
+  al scrollear fuera (y los vuelve a ocultar al regresar), para no duplicar el
+  primer viewport; mobile mantiene los CTAs en el menú. Sin Tab fantasma
+  (`inert`). No hay
   scroll-reveal uniforme por sección (`ScrollReveal` retirado): ese patrón
   oculta contenido y se siente genérico. El contenido permanece legible sin
   JavaScript. El marquee de partners existe por overflow y corre más lento;
