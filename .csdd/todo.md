@@ -82,7 +82,7 @@ Retention: 12
   - Agent: Cursor Grok
   - Scope: released
   - Updated: 2026-07-20
-  - Landed: pending-merge
+  - Landed: `6c0c480` on `master`
   - Note: FAQ/Instagram más planos; banner de destinos quieto; ValueProp cards middle-ground (sin side-tab/sombra); Services conserva tiles; densidad de padding variada. Revisión humana aprobada.
 
 - [x] T-024 — Implementar un sistema de motion mínimo y estratégico
