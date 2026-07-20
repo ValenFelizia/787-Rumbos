@@ -27,7 +27,7 @@ export function CTASection() {
         className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-[#f7a92a]/10 blur-3xl"
       />
 
-      <div className="relative mx-auto w-full max-w-6xl px-6 py-20 text-center">
+      <div className="relative mx-auto w-full max-w-6xl px-6 py-16 md:py-24 text-center">
         <h2 className="font-[family-name:var(--font-elaine)] text-3xl font-bold tracking-tight text-white md:text-4xl text-balance">
           ¿Ya sabés a dónde querés ir?
         </h2>

@@ -1,28 +1,20 @@
 /**
  * components/sections/Services.tsx
  *
- * Grid de servicios — los 4 servicios principales que ofrece la agencia.
+ * Grid de servicios — tiles con affordance visual de catálogo.
  * Los datos vienen de `lib/constants.ts` (services).
- *
- * Nota sobre iconos dinámicos:
- * Los nombres de componente en React deben empezar con mayúscula.
- * Por eso hacemos `const Icon = service.icon` — guardamos la referencia
- * en una variable con mayúscula y luego renderizamos `<Icon />`.
- * Si escribiéramos `<service.icon />` fallaría; React lo trataría como
- * elemento HTML desconocido en lugar de un componente.
  */
 import { services } from "@/lib/constants";
 
 export function Services() {
   return (
     <section id="servicios" className="border-t border-[#0b4058]/10 bg-white">
-      <div className="mx-auto w-full max-w-6xl px-6 py-20">
+      <div className="mx-auto w-full max-w-6xl px-6 py-14 md:py-16">
         <h2 className="font-[family-name:var(--font-elaine)] text-3xl font-bold tracking-tight md:text-4xl">
           Servicios que resolvemos por vos
         </h2>
         <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {services.map((service) => {
-            // Asignación a variable con mayúscula para renderizado dinámico de componente
             const Icon = service.icon;
             return (
               <div

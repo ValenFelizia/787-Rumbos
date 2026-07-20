@@ -24,8 +24,8 @@ export function FeaturedDestinations() {
     .filter((d): d is DestinationPage => !!d);
 
   return (
-    <section id="destinos" className="mx-auto w-full max-w-6xl px-6 py-20">
-      <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+    <section id="destinos" className="mx-auto w-full max-w-6xl px-6 py-14 md:py-16">
+      <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div className="space-y-3">
           <h2 className="font-[family-name:var(--font-brand-heading)] text-3xl font-extrabold tracking-tight md:text-4xl text-[#0b4058] text-balance">
             ¿Cuál es tu próximo rumbo?
@@ -164,16 +164,16 @@ export function FeaturedDestinations() {
         })}
       </div>
 
-      <div className="bg-gradient-to-br from-[#0b4058] to-[#00516e] text-white p-8 md:p-12 rounded-3xl mt-16 shadow-xl shadow-[#0b4058]/10 text-center relative overflow-hidden flex flex-col items-center justify-center gap-6 border border-white/5">
-        <div className="space-y-2 relative z-10 max-w-2xl">
-          <h3 className="font-[family-name:var(--font-brand-heading)] text-2xl md:text-3xl font-extrabold tracking-tight text-white text-balance">
+      <div className="mt-14 border-t border-[#0b4058]/15 pt-10 text-center">
+        <div className="mx-auto max-w-2xl space-y-3">
+          <h3 className="font-[family-name:var(--font-brand-heading)] text-xl font-bold tracking-tight text-[#0b4058] md:text-2xl text-balance">
             ¿Buscás otro destino?
           </h3>
-          <p className="text-white/80 text-xs md:text-sm leading-relaxed text-pretty">
+          <p className="text-sm leading-relaxed text-[#0b4058]/75 text-pretty">
             Tenemos salidas confirmadas adicionales y armamos itinerarios a medida nacionales e internacionales con la financiación que necesitás. También podés consultarnos por cualquier otro destino.
           </p>
         </div>
-        <div className="relative z-10 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center">
+        <div className="mt-6 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
           <PrimaryCta
             onClick={() => openModal()}
             aria-label="Armar viaje — abre el cotizador personalizado"
@@ -186,14 +186,11 @@ export function FeaturedDestinations() {
         </div>
         <Link
           href="/destinos"
-          className="font-[family-name:var(--font-brand-heading)] relative z-10 inline-flex items-center gap-2 rounded-xl border border-white/30 bg-transparent px-6 py-2.5 text-sm font-bold text-white/90 transition-all duration-200 hover:bg-white/10 active:scale-[0.96] cursor-pointer"
+          className="font-[family-name:var(--font-brand-heading)] mt-5 inline-flex items-center gap-2 text-sm font-bold text-[#006183] transition-colors hover:text-[#0b4058]"
         >
           <span>Explorar todos los destinos</span>
           <ArrowRight className="h-4 w-4 shrink-0" />
         </Link>
-
-        <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-white/5 rounded-full blur-3xl pointer-events-none" />
       </div>
     </section>
   );

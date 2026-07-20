@@ -146,9 +146,12 @@ CMS ni scraping solo para sostener esa sección.
   Entradas de modal (SpecialPromo) usan keyframes CSS de opacity/transform.
   La secuencia principal no supera ~600 ms; `prefers-reduced-motion` deja la
   experiencia estática.
-- El pulido visual debe reducir la repetición automática de cards, radios,
-  bordes, sombras y elevaciones, preservando la identidad petróleo/dorado/lima,
-  las tipografías de marca y todo el contenido comercial verificable.
+- El pulido visual de la home reduce la repetición de cards, radios, bordes y
+  sombras: FAQ e Instagram van más planos; el banner intermedio de destinos es
+  una franja quieta (el closer petroleum queda en CTASection); ValueProposition
+  conserva tres cards sin side-tab dorado ni sombra pesada; Services conserva
+  tiles de catálogo. Se preservan identidad petróleo/dorado/lima, tipografías y
+  el contenido comercial verificable.
 - Las rutas estáticas se revalidan como máximo cada 24 horas mediante ISR para
   recalcular contenido dependiente de fechas sin convertir el sitio en renderizado
   dinámico ni sumar infraestructura. La primera visita posterior al vencimiento

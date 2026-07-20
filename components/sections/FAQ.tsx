@@ -104,10 +104,10 @@ export function FAQ({
         className={
           compact
             ? "mx-auto w-full max-w-6xl px-6 py-12 md:py-14"
-            : "mx-auto w-full max-w-6xl px-6 py-20"
+            : "mx-auto w-full max-w-6xl px-6 py-14 md:py-16"
         }
       >
-        <div className="mb-10 max-w-2xl">
+        <div className="mb-8 max-w-2xl">
           <h2
             id={headingId}
             className="font-[family-name:var(--font-elaine)] text-3xl font-bold tracking-tight md:text-4xl text-balance"
@@ -119,20 +119,20 @@ export function FAQ({
           </p>
         </div>
 
-        <div className="space-y-3">
+        <div className="divide-y divide-[#0b4058]/10 border-y border-[#0b4058]/10">
           {items.map((item) => (
             <details
               key={item.id}
-              className="group rounded-2xl border border-[#0b4058]/10 bg-white shadow-sm shadow-[#0b4058]/5 transition-[border-color,box-shadow] duration-200 open:border-[#a2c745]/40 open:shadow-md open:shadow-[#0b4058]/10"
+              className="group bg-transparent"
             >
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-left font-[family-name:var(--font-elaine)] text-base font-bold text-[#0b4058] marker:content-none md:text-lg [&::-webkit-details-marker]:hidden">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-left font-[family-name:var(--font-elaine)] text-base font-bold text-[#0b4058] marker:content-none md:text-lg [&::-webkit-details-marker]:hidden">
                 <span className="text-pretty">{item.question}</span>
                 <ChevronDown
                   aria-hidden="true"
                   className="h-5 w-5 shrink-0 text-[#006183] transition-transform duration-200 motion-safe:group-open:rotate-180"
                 />
               </summary>
-              <div className="border-t border-[#0b4058]/5 px-6 pb-5 pt-4 text-sm leading-relaxed text-[#0b4058]/85 md:text-[0.95rem] text-pretty">
+              <div className="pb-5 text-sm leading-relaxed text-[#0b4058]/85 md:text-[0.95rem] text-pretty">
                 {renderFaqAnswer(item.answer)}
               </div>
             </details>

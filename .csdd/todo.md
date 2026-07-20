@@ -14,13 +14,6 @@
 
 ### Visual, conversión y motion
 
-- [ ] T-025 — Reducir la repetición visual y pulir el ritmo completo de la home
-  - Owner: Valen
-  - Updated: 2026-07-18
-  - Depends on: T-022 a T-024.
-  - Note: revisar ValueProposition, destinos, testimonios, AboutUs, Services, Instagram, FAQ, promo y cierre para que no compartan por reflejo la misma combinación de card, radio, borde y sombra. Conservar cards donde aportan una affordance real y variar composición, densidad y pausas sin alterar el contenido comercial aprobado. No reintroducir scroll-reveal ni stacks lift+zoom+sombra (T-024).
-  - Acceptance: la home mantiene jerarquía y conversión, elimina los cuatro anti-patrones accionables de la auditoría Impeccable y conserva una lectura clara desde 390 px hasta desktop amplio.
-
 - [ ] T-026 — Cerrar la mejora visual con QA responsive, accesible y de rendimiento
   - Owner: Valen
   - Updated: 2026-07-18
@@ -83,6 +76,14 @@
 ## Recently Completed
 
 Retention: 12
+
+- [x] T-025 — Reducir la repetición visual y pulir el ritmo completo de la home
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-07-20
+  - Landed: `6c0c480` on `master`
+  - Note: FAQ/Instagram más planos; banner de destinos quieto; ValueProp cards middle-ground (sin side-tab/sombra); Services conserva tiles; densidad de padding variada. Revisión humana aprobada.
 
 - [x] T-024 — Implementar un sistema de motion mínimo y estratégico
   - Owner: Valen
