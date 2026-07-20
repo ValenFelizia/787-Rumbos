@@ -7,7 +7,10 @@ export function Hero() {
   const { openModal } = useModal();
 
   return (
-    <section className="relative flex min-h-[calc(100vh-73px)] items-center overflow-hidden">
+    <section
+      id="hero"
+      className="relative flex min-h-[calc(100vh-73px)] items-center overflow-hidden"
+    >
       {/* Imagen de fondo optimizada — priority evita lazy loading en el LCP */}
       <Image
         src="/hero-bg.jpg"
