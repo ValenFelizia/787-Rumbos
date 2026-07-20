@@ -82,7 +82,7 @@ Retention: 12
   - Agent: Cursor Grok
   - Scope: released
   - Updated: 2026-07-20
-  - Landed: pending-merge
+  - Landed: `a087475` on `master`
   - Note: IntersectionObserver sobre `#hero`; desktop hide/reveal con reflow; mobile intacto; `inert` sin Tab fantasma. Revisión humana aprobada.
 
 - [x] T-025 — Reducir la repetición visual y pulir el ritmo completo de la home
