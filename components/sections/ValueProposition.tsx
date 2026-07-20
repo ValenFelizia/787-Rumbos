@@ -1,18 +1,15 @@
 /**
  * components/sections/ValueProposition.tsx
  *
- * Diferenciales verificables de la agencia: oficina en el aeropuerto,
- * experiencia en transporte y oferta aérea + terrestre.
- * Sección estática con tarjetas fijas (no usa un array porque son exactamente 3
- * y cada una tiene su propio ícono diferente).
+ * Diferenciales verificables. Middle ground T-025: conserva las tres cards
+ * (preferencia visual) pero sin side-tab dorado ni sombra pesada.
  */
 import { Bus, MapPin, Plane } from "lucide-react";
-
 
 export function ValueProposition() {
   return (
     <section className="border-y border-[#0b4058]/10 bg-white">
-      <div className="mx-auto w-full max-w-6xl px-6 py-20">
+      <div className="mx-auto w-full max-w-6xl px-6 py-14 md:py-16">
         <h2 className="font-[family-name:var(--font-elaine)] text-3xl font-bold tracking-tight md:text-4xl text-balance">
           Por qué viajar con 787 Rumbos
         </h2>
@@ -21,9 +18,9 @@ export function ValueProposition() {
           de Vía Bariloche. Combinamos años en transporte turístico con una oferta clara: vuelos,
           paquetes y pasajes de ómnibus nacionales, con el mismo equipo de punta a punta.
         </p>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          <article className="rounded-2xl bg-white p-7 border-t-4 border-[#e6b451] shadow-md shadow-[#0b4058]/10">
-            <MapPin className="h-8 w-8 text-[#e6b451]" />
+        <div className="mt-10 grid gap-5 md:grid-cols-3 md:gap-6">
+          <article className="rounded-2xl border border-[#0b4058]/10 bg-[#f9f9f9] p-6 md:p-7">
+            <MapPin className="h-7 w-7 text-[#e6b451]" />
             <h3 className="font-[family-name:var(--font-elaine)] mt-4 text-xl font-bold">
               Oficina en el aeropuerto
             </h3>
@@ -32,8 +29,8 @@ export function ValueProposition() {
               física real, no solo un número de WhatsApp.
             </p>
           </article>
-          <article className="rounded-2xl bg-white p-7 border-t-4 border-[#e6b451] shadow-md shadow-[#0b4058]/10">
-            <Bus className="h-8 w-8 text-[#e6b451]" />
+          <article className="rounded-2xl border border-[#0b4058]/10 bg-[#f9f9f9] p-6 md:p-7">
+            <Bus className="h-7 w-7 text-[#e6b451]" />
             <h3 className="font-[family-name:var(--font-elaine)] mt-4 text-xl font-bold">
               Experiencia en transporte
             </h3>
@@ -42,8 +39,8 @@ export function ValueProposition() {
               la mejor opción de viaje desde Córdoba.
             </p>
           </article>
-          <article className="rounded-2xl bg-white p-7 border-t-4 border-[#e6b451] shadow-md shadow-[#0b4058]/10">
-            <Plane className="h-8 w-8 text-[#e6b451]" />
+          <article className="rounded-2xl border border-[#0b4058]/10 bg-[#f9f9f9] p-6 md:p-7">
+            <Plane className="h-7 w-7 text-[#e6b451]" />
             <h3 className="font-[family-name:var(--font-elaine)] mt-4 text-xl font-bold">
               Aéreo y terrestre
             </h3>
