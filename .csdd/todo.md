@@ -81,7 +81,7 @@ Retention: 12
   - Agent: Cursor Grok
   - Scope: released
   - Updated: 2026-07-21
-  - Landed: pending-merge
+  - Landed: `904db23` on `master`
   - Note: lint/typecheck/build OK; e2e 5/5; estático sin ScrollReveal oculto ni P0/P1. Pasada humana Valen sin hallazgos. Lighthouse/CWV diferidos a T-029. Cierra la ola visual T-021→T-028.
 
 - [x] T-028 — Ocultar CTAs del Navbar mientras el Hero está a la vista
