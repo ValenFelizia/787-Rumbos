@@ -14,15 +14,6 @@
 
 ### Visual, conversión y motion
 
-- [ ] T-026 — Cerrar la mejora visual con QA responsive, accesible y de rendimiento
-  - Owner: Valen
-  - Updated: 2026-07-18
-  - Depends on: T-021 a T-025.
-  - Note: verificar la home completa en desktop y mobile, navegación por teclado, focus visible, modales, `prefers-reduced-motion`, contenido sin JavaScript, hover/touch, estabilidad visual y ausencia de motion costoso. Ejecutar lint, typecheck, build y smokes relevantes sin ampliar la suite de forma desproporcionada. Incluye revisar el hide/reveal de CTAs del Navbar (T-028) en reduced-motion y teclado.
-  - Acceptance: no quedan bloqueos P0/P1 de la crítica, no hay contenido oculto por fallos del reveal y la experiencia reducida conserva toda la información y conversión.
-
-
-
 ### Contenido y operación
 
 - [ ] T-004 — Mantener el catálogo y las promociones vigentes
@@ -64,6 +55,14 @@
 
 ## Deferred
 
+- [ ] T-029 — Auditar Lighthouse / Core Web Vitals de la home
+  - Owner: Valen
+  - Updated: 2026-07-20
+  - Depends on: T-026.
+  - Reason: T-026 cierra QA funcional/a11y/motion sin ampliar a medición de performance; Lighthouse/CWV merecen una pasada dedicada.
+  - Resume when: Valen quiera una baseline de performance (LCP/CLS/INP u oportunamente post-T-026).
+  - Note: no bloquear el cierre de la ola visual; reporte + fixes solo si hay P0/P1 claros.
+
 - [ ] T-027 — Incorporar fotos nuevas del local/equipo y evaluar reemplazos
   - Owner: Valen
   - Updated: 2026-07-18
@@ -76,6 +75,14 @@
 ## Recently Completed
 
 Retention: 12
+
+- [x] T-026 — Cerrar la mejora visual con QA responsive, accesible y de rendimiento
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-07-21
+  - Landed: `904db23` on `master`
+  - Note: lint/typecheck/build OK; e2e 5/5; estático sin ScrollReveal oculto ni P0/P1. Pasada humana Valen sin hallazgos. Lighthouse/CWV diferidos a T-029. Cierra la ola visual T-021→T-028.
 
 - [x] T-028 — Ocultar CTAs del Navbar mientras el Hero está a la vista
   - Owner: Valen
