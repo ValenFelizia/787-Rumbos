@@ -30,7 +30,7 @@ export function PartnersMarquee() {
       className="w-full overflow-hidden border-y border-[#0b4058]/5 bg-white py-6 md:py-8"
     >
       <div className="mx-auto max-w-6xl px-6">
-        <p className="mb-6 text-center font-[family-name:var(--font-elaine)] text-xs font-semibold uppercase tracking-wider text-[#0b4058]/40">
+        <p className="mb-6 text-center font-[family-name:var(--font-elaine)] text-xs font-semibold uppercase tracking-wider text-[#0b4058]/80">
           Viajá con las mejores compañías
         </p>
 

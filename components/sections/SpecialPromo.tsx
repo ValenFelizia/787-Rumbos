@@ -101,7 +101,7 @@ function PromoPricingAndCtas({
     <div className="space-y-3 sm:space-y-4">
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
         <div className="space-y-0.5">
-          <span className="text-[9px] text-white/50 uppercase font-black tracking-wider block">
+          <span className="text-[9px] text-white/70 uppercase font-black tracking-wider block">
             Tarifa especial desde
           </span>
           <div className="flex flex-wrap items-baseline gap-x-1.5 gap-y-0.5">
@@ -111,7 +111,7 @@ function PromoPricingAndCtas({
             <span className="text-[10px] text-white/60">{PROMO_CONFIG.priceNote}</span>
           </div>
         </div>
-        <span className="text-[10px] text-white/50 font-medium">{PROMO_CONFIG.taxNote}</span>
+        <span className="text-[10px] text-white/70 font-medium">{PROMO_CONFIG.taxNote}</span>
       </div>
 
       <div className="flex flex-col gap-2.5 sm:flex-row sm:gap-3">
@@ -229,9 +229,9 @@ export function SpecialPromo() {
             setIsBannerVisible(false);
           }}
           aria-label="Ocultar anuncio de Fórmula 1"
-          className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full p-1 text-white/75 transition duration-200 hover:bg-white/10 hover:text-white"
+          className="absolute right-2 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full text-white/90 transition duration-200 hover:bg-white/10 hover:text-white"
         >
-          <X aria-hidden="true" className="h-3.5 w-3.5" />
+          <X aria-hidden="true" className="h-4 w-4" />
         </button>
       </div>
 

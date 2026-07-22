@@ -52,6 +52,10 @@ export const clustersData: ClusterPage[] = [
       "porto-de-galinhas",
       "camboriu",
       "f1-grand-premio-sao-paulo",
+      "salvador-de-bahia",
+      "imbassai",
+      "guarajuba",
+      "praia-do-forte",
     ],
   },
   {

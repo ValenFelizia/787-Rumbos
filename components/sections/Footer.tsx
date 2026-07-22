@@ -45,7 +45,7 @@ export function Footer() {
             <span>
               Av. La Voz del Interior 8500, Córdoba
               <br />
-              <span className="text-xs text-white/60">
+              <span className="text-xs text-white/70">
                 (Planta Baja, local de Vía Bariloche)
               </span>
             </span>
@@ -58,9 +58,9 @@ export function Footer() {
 
         {/* Columna 3: Enlaces de Interés */}
         <div className="space-y-3 text-sm">
-          <h4 className="font-[family-name:var(--font-elaine)] text-xs font-bold uppercase tracking-wider text-white/60">
+          <p className="font-[family-name:var(--font-elaine)] text-xs font-bold uppercase tracking-wider text-white/75">
             Enlaces de Interés
-          </h4>
+          </p>
           <ul className="space-y-2">
             <li>
               <a
@@ -115,9 +115,9 @@ export function Footer() {
 
         {/* Columna 4: Contacto */}
         <div className="space-y-3 text-sm">
-          <h4 className="font-[family-name:var(--font-elaine)] text-xs font-bold uppercase tracking-wider text-white/60">
+          <p className="font-[family-name:var(--font-elaine)] text-xs font-bold uppercase tracking-wider text-white/75">
             Contacto
-          </h4>
+          </p>
           <ul className="space-y-2">
             <li className="flex items-start gap-2 text-white/80">
               <Clock className="mt-0.5 h-4 w-4 shrink-0 text-[#dae553]" />
@@ -152,7 +152,7 @@ export function Footer() {
                 href="https://www.instagram.com/787rumbos/"
                 target="_blank"
                 rel="noreferrer"
-                aria-label="Ver Instagram de 787 Rumbos — @787rumbos"
+                aria-label="Instagram: @787rumbos"
                 className="flex items-center gap-2 text-white/90 transition hover:text-[#dae553]"
               >
                 <Instagram className="h-4 w-4" />
@@ -199,7 +199,7 @@ export function Footer() {
           </a>
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-center text-xs text-white/50">
+        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-center text-xs text-white/65">
           <span>MARIA FERNANDA RAMOS</span>
           <span className="hidden sm:inline">|</span>
           <span>CUIT: 27-26220871-6</span>
@@ -230,13 +230,13 @@ export function Footer() {
         </p>
       </div>
 
-      <p className="pb-5 text-center text-[11px] tracking-wide text-white/30">
+      <p className="pb-5 text-center text-[11px] tracking-wide text-white/65">
         Sitio creado por{" "}
         <a
           href="https://portfolio-vfelizia.pages.dev/"
           target="_blank"
           rel="noopener noreferrer"
-          className="transition-colors duration-200 hover:text-white/50 underline decoration-transparent hover:decoration-white/25"
+          className="transition-colors duration-200 hover:text-white underline decoration-transparent hover:decoration-white/40"
         >
           V. Felizia
         </a>

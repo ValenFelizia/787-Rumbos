@@ -6,6 +6,18 @@
 
 ## In Progress
 
+### Visual, conversión y motion
+
+- [ ] T-029 — Auditar Lighthouse / Core Web Vitals de la home
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: auditoría Lighthouse/CWV de la home (prod o build local representativo); fixes solo P0/P1 claros; `.csdd/todo.md` al cerrar
+  - Target: `development`
+  - Updated: 2026-07-21
+  - Depends on: T-026.
+  - Note: baseline mobile prod Perf 81 / A11y 86 / LCP 4.8s. Fixes locales: hero JPEG 3.4MB→382KB; Hero RSC + `HeroActions`; `fetchPriority=high` + `decoding=sync`; logo nav sin `priority`; SecondaryCta `#0B6B5F`; P2 contraste/headings/stars/touch/name. Verificación local post-fix: Perf ~80 / A11y **100** / LCP simulado ~5.3s (fases: load ~132ms + render delay ~146ms vs ~950ms antes). Re-medir en prod tras deploy.
+  - Acceptance: hay baseline documentada; P0/P1 de performance accionables están resueltos o explicitados con motivo; sin degradar conversión/a11y.
+
 ## Ready to Land
 
 ## Blocked
@@ -54,14 +66,6 @@
 
 
 ## Deferred
-
-- [ ] T-029 — Auditar Lighthouse / Core Web Vitals de la home
-  - Owner: Valen
-  - Updated: 2026-07-20
-  - Depends on: T-026.
-  - Reason: T-026 cierra QA funcional/a11y/motion sin ampliar a medición de performance; Lighthouse/CWV merecen una pasada dedicada.
-  - Resume when: Valen quiera una baseline de performance (LCP/CLS/INP u oportunamente post-T-026).
-  - Note: no bloquear el cierre de la ola visual; reporte + fixes solo si hay P0/P1 claros.
 
 - [ ] T-027 — Incorporar fotos nuevas del local/equipo y evaluar reemplazos
   - Owner: Valen

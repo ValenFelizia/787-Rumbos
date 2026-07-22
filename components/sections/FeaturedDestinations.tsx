@@ -64,28 +64,36 @@ export function FeaturedDestinations() {
               <Link
                 href={`/destinos/${dest.slug}`}
                 className="relative block h-56 w-full overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0b4058]"
-                aria-label={`Ver detalles de ${dest.name}`}
               >
                 <Image
                   src={dest.heroImage}
-                  alt={`${dest.name} — paquete de viaje con 787 Rumbos`}
+                  alt={`Ver detalles de ${dest.name}`}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="object-cover"
                 />
-                <div className="absolute inset-0 border border-black/5 rounded-t-2xl pointer-events-none" />
+                <div className="absolute inset-0 border border-black/5 rounded-t-2xl pointer-events-none" aria-hidden />
 
-                <div className="absolute top-3 left-3 bg-[#0b4058]/90 backdrop-blur-sm text-white px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">
+                <div
+                  aria-hidden
+                  className="absolute top-3 left-3 bg-[#0b4058]/90 backdrop-blur-sm text-white px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider"
+                >
                   {dest.region === "nacional" ? "Nacional" : "Internacional"}
                 </div>
 
                 {nextDep ? (
-                  <div className="absolute bottom-3 right-3 bg-[#dae553] text-[#0b4058] px-2.5 py-1 rounded-full text-[10px] font-black shadow-sm flex items-center gap-1">
+                  <div
+                    aria-hidden
+                    className="absolute bottom-3 right-3 bg-[#dae553] text-[#0b4058] px-2.5 py-1 rounded-full text-[10px] font-black shadow-sm flex items-center gap-1"
+                  >
                     <Calendar className="h-3 w-3 shrink-0" aria-hidden />
                     <span>Salida: {nextDep.displayDate}</span>
                   </div>
                 ) : (
-                  <div className="absolute bottom-3 right-3 bg-white/95 text-[#0b4058]/70 px-2.5 py-1 rounded-full text-[10px] font-bold shadow-sm border border-black/5">
+                  <div
+                    aria-hidden
+                    className="absolute bottom-3 right-3 bg-white/95 text-[#0b4058]/70 px-2.5 py-1 rounded-full text-[10px] font-bold shadow-sm border border-black/5"
+                  >
                     Consultar fechas
                   </div>
                 )}
@@ -120,7 +128,7 @@ export function FeaturedDestinations() {
 
                 <div className="space-y-3 pt-3 border-t border-[#0b4058]/5">
                   <div className="flex items-baseline justify-between gap-2">
-                    <span className="text-[10px] text-[#0b4058]/50 uppercase font-black tracking-wider">
+                    <span className="text-[10px] text-[#0b4058]/75 uppercase font-black tracking-wider">
                       Tarifa base
                     </span>
                     {dest.priceFrom ? (
@@ -133,7 +141,7 @@ export function FeaturedDestinations() {
                           </span>
                         </div>
                         {dest.priceNote && (
-                          <p className="text-[10px] text-[#0b4058]/60 mt-0.5">{dest.priceNote}</p>
+                          <p className="text-[10px] text-[#0b4058]/75 mt-0.5">{dest.priceNote}</p>
                         )}
                       </div>
                     ) : (
