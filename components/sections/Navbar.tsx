@@ -151,7 +151,6 @@ export function Navbar() {
               alt="Logo 787 Rumbos"
               width={280}
               height={56}
-              priority
               className="h-10 w-auto object-contain md:h-12"
             />
           </Link>
@@ -231,7 +230,6 @@ export function Navbar() {
               alt="Logo 787 Rumbos"
               width={280}
               height={56}
-              priority
               className="h-10 w-auto object-contain"
             />
           </Link>

@@ -33,6 +33,9 @@ next-env.d.ts
 /blob-report/
 /playwright/.cache/
 
+# lighthouse local reports
+/.lighthouse/
+
 # agent skills (install globally; do not version in this repo)
 .agents/
 skills-lock.json

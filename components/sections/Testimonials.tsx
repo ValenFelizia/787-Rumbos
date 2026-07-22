@@ -13,9 +13,9 @@ import { testimonials, type Testimonial } from "@/lib/testimonials-data";
 
 function Stars({ rating }: { rating: number }) {
   return (
-    <div className="flex gap-0.5" aria-label={`Calificación: ${rating} de 5 estrellas`}>
+    <div className="flex gap-0.5" role="img" aria-label={`Calificación: ${rating} de 5 estrellas`}>
       {Array.from({ length: rating }).map((_, i) => (
-        <Star key={i} className="h-4 w-4 fill-[#e6b451] text-[#e6b451]" />
+        <Star key={i} aria-hidden className="h-4 w-4 fill-[#e6b451] text-[#e6b451]" />
       ))}
     </div>
   );
@@ -28,7 +28,7 @@ function SourceLabel({ source }: { source?: Testimonial["source"] }) {
         href={GOOGLE_REVIEWS_LINK}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-[#0b4058]/55 transition-colors hover:text-[#006183]"
+        className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-[#0b4058]/80 transition-colors hover:text-[#006183]"
       >
         Reseña en Google
         <ExternalLink className="h-3 w-3 shrink-0 opacity-70" aria-hidden />
@@ -36,7 +36,7 @@ function SourceLabel({ source }: { source?: Testimonial["source"] }) {
     );
   }
   if (source === "instagram") {
-    return <p className="mt-1 text-xs text-[#0b4058]/55">Desde Instagram</p>;
+    return <p className="mt-1 text-xs text-[#0b4058]/80">Desde Instagram</p>;
   }
   return null;
 }
@@ -52,7 +52,7 @@ function TestimonialMeta({ t }: { t: Testimonial }) {
         {t.name}
       </p>
       {parts.length > 0 && (
-        <p className="mt-0.5 text-xs text-[#0b4058]/60">{parts.join(" · ")}</p>
+        <p className="mt-0.5 text-xs text-[#0b4058]/75">{parts.join(" · ")}</p>
       )}
       <SourceLabel source={t.source} />
     </div>

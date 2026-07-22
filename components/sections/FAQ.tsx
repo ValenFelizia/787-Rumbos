@@ -82,7 +82,6 @@ export function FAQ({
         className="font-semibold text-[#006183] underline decoration-[#006183]/30 underline-offset-2 transition-colors hover:text-[#0b4058] hover:decoration-[#0b4058]/40"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Consultar por WhatsApp con 787 Rumbos"
       >
         consultanos
       </a>

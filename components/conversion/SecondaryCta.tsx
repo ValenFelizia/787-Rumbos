@@ -36,7 +36,7 @@ export function SecondaryCta({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`font-[family-name:var(--font-elaine)] inline-flex items-center justify-center gap-2 bg-[#25D366] font-semibold text-white transition-colors hover:bg-[#1DA851] active:scale-[0.96] cursor-pointer ${SIZE_CLASSES[size]} ${className}`}
+      className={`font-[family-name:var(--font-elaine)] inline-flex items-center justify-center gap-2 bg-[#0B6B5F] font-semibold text-white transition-colors hover:bg-[#09574E] active:scale-[0.96] cursor-pointer ${SIZE_CLASSES[size]} ${className}`}
       {...props}
     >
       <WhatsAppIcon size={16} className="h-4 w-4 shrink-0" />

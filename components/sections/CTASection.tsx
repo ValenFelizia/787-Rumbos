@@ -49,7 +49,7 @@ export function CTASection() {
               className="font-bold"
             />
           </div>
-          <span className="text-sm text-white/50">{CTA_SLA_TEXT}</span>
+          <span className="text-sm text-white/75">{CTA_SLA_TEXT}</span>
         </div>
       </div>
     </section>

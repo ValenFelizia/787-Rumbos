@@ -1254,6 +1254,191 @@ export const destinationsData: DestinationPage[] = [
         ],
       },
     ],
+  },
+  {
+    slug: "salvador-de-bahia",
+    name: "Salvador de Bahía",
+    country: "Brasil",
+    region: "internacional",
+    metaTitle: "Paquetes a Salvador de Bahía desde Córdoba en Vuelo Directo | 787 Rumbos",
+    metaDescription: "Viajá a Salvador de Bahía directo desde Córdoba con SKY. 7 noches en Hotel Portobello Pituba Praia con desayuno, traslados y asistencia médica.",
+    heroImage: "/destinos/salvador-de-bahia.jpg",
+    description: "La cuna de la cultura afrobrasileña te espera con su arquitectura colonial en el Pelourinho, el ritmo del axé y hermosas playas urbanas. Disfrutá de una escapada tropical con vuelo directo desde Córdoba.",
+    highlights: [
+      "Pelourinho e historia colonial del centro histórico",
+      "Farol da Barra y atardecer en la Bahía de Todos los Santos",
+      "Gastronomía bahiana única: acarajé y moqueca",
+      "Vuelo directo Córdoba - Salvador con SKY (+1 valija)"
+    ],
+    typicalInclusions: [
+      "Vuelo directo ida y vuelta Córdoba - Salvador de Bahía con SKY (incluye 1 valija)",
+      "7 noches de alojamiento en Hotel Portobello Pituba Praia con desayuno",
+      "Traslados aeropuerto / hotel / aeropuerto",
+      "Asistencia médica Universal Assistance (aplica hasta 70 años)"
+    ],
+    priceFrom: 885,
+    currency: "USD",
+    priceNote: "por persona en base doble. Salidas de Septiembre",
+    departures: [
+      { date: "2026-09-02", displayDate: "2 de Septiembre", status: "confirmed", transport: "aereo", nights: 7, note: "Vuelo directo SKY" },
+      { date: "2026-09-06", displayDate: "6 de Septiembre", status: "confirmed", transport: "aereo", nights: 7, note: "Vuelo directo SKY" },
+      { date: "2026-09-27", displayDate: "27 de Septiembre", status: "confirmed", transport: "aereo", nights: 7, note: "Vuelo directo SKY" }
+    ],
+    faq: [
+      {
+        id: "salvador-incluye",
+        question: "¿Qué incluye el paquete a Salvador de Bahía?",
+        answer: [
+          {
+            type: "text",
+            value: "Vuelo directo desde Córdoba con SKY (1 valija), 7 noches en Hotel Portobello Pituba Praia con desayuno, traslados in/out y asistencia médica Universal Assistance."
+          }
+        ]
+      },
+      {
+        id: "salvador-cotizar",
+        question: "¿Cómo consulto disponibilidad para Salvador de Bahía?",
+        answer: [
+          { type: "text", value: "Escribinos por " },
+          {
+            type: "link",
+            label: "WhatsApp",
+            href: whatsappDestinoFaq("Salvador de Bahía"),
+            external: true
+          },
+          {
+            type: "text",
+            value: " indicando la fecha de salida que te interesa (2, 6 o 27 de Septiembre) y te enviamos la cotización."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    slug: "imbassai",
+    name: "Imbassaí",
+    country: "Brasil",
+    region: "internacional",
+    metaTitle: "Paquetes a Imbassaí desde Córdoba | 787 Rumbos",
+    metaDescription: "Disfrutá del relax y la naturaleza en Imbassaí. Vuelo directo desde Córdoba, 7 noches en Vilangelim Eco Pousada con desayuno, traslados y asistencia.",
+    heroImage: "/destinos/imbassai.jpg",
+    description: "Un oasis de tranquilidad rodeado de cocoteros, médanos y el encuentro mágico entre el río Imbassaí y el océano Atlántico. Ideal para reconectar con la naturaleza en un entorno protegido e íntimo.",
+    highlights: [
+      "Encuentro del río Imbassaí con el mar en la playa",
+      "Estadía en Vilangelim Eco Pousada rodeada de verde",
+      "Paseos en kayak y caminatas por médanos y cocoteros",
+      "Cercanía a la Reserva Ecológica Sapiranga"
+    ],
+    typicalInclusions: [
+      "Vuelo directo ida y vuelta Córdoba - Salvador de Bahía con SKY (1 valija)",
+      "7 noches de alojamiento en Vilangelim Eco Pousada con desayuno",
+      "Traslados in/out aeropuerto / posada / aeropuerto",
+      "Asistencia médica Universal Assistance (aplica hasta 70 años)"
+    ],
+    priceFrom: 1100,
+    currency: "USD",
+    priceNote: "por persona en base doble. Salidas de Septiembre",
+    departures: [
+      { date: "2026-09-02", displayDate: "2 de Septiembre", status: "confirmed", transport: "aereo", nights: 7, note: "Vuelo directo SKY" },
+      { date: "2026-09-06", displayDate: "6 de Septiembre", status: "confirmed", transport: "aereo", nights: 7, note: "Vuelo directo SKY" },
+      { date: "2026-09-27", displayDate: "27 de Septiembre", status: "confirmed", transport: "aereo", nights: 7, note: "Vuelo directo SKY" }
+    ],
+    faq: [
+      {
+        id: "imbassai-incluye",
+        question: "¿Qué incluye el viaje a Imbassaí?",
+        answer: [
+          {
+            type: "text",
+            value: "Aéreo directo Córdoba-Salvador con SKY, 7 noches en Vilangelim Eco Pousada con desayuno, traslados y asistencia médica Universal Assistance."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    slug: "guarajuba",
+    name: "Guarajuba",
+    country: "Brasil",
+    region: "internacional",
+    metaTitle: "Paquetes a Guarajuba All Inclusive desde Córdoba | 787 Rumbos",
+    metaDescription: "Vacaciones All Inclusive en Guarajuba. Resort Vila Galé Marés 7 noches, vuelo directo desde Córdoba con SKY, traslados y asistencia médica.",
+    heroImage: "/destinos/guarajuba.jpg",
+    description: "Disfrutá del lujoso Resort Vila Galé Marés frente a la hermosa playa de Guarajuba. Régimen All Inclusive de clase mundial con la comodidad de volar directo desde Córdoba.",
+    highlights: [
+      "Resort Vila Galé Marés 5 estrellas All Inclusive",
+      "Piscinas naturales formadas por arrecifes de coral",
+      "Playa de arena blanca con certificación Bandera Azul",
+      "Gastronomía variada, deportes y recreación para todas las edades"
+    ],
+    typicalInclusions: [
+      "Vuelo directo ida y vuelta Córdoba - Salvador de Bahía con SKY (1 valija)",
+      "7 noches de alojamiento en Resort Vila Galé Marés All Inclusive",
+      "Traslados aeropuerto / resort / aeropuerto",
+      "Asistencia médica Universal Assistance (aplica hasta 70 años)"
+    ],
+    priceFrom: 1705,
+    currency: "USD",
+    priceNote: "por persona en base doble. Salidas de Septiembre",
+    departures: [
+      { date: "2026-09-02", displayDate: "2 de Septiembre", status: "confirmed", transport: "aereo", nights: 7, note: "Vuelo directo SKY" },
+      { date: "2026-09-06", displayDate: "6 de Septiembre", status: "confirmed", transport: "aereo", nights: 7, note: "Vuelo directo SKY" },
+      { date: "2026-09-27", displayDate: "27 de Septiembre", status: "confirmed", transport: "aereo", nights: 7, note: "Vuelo directo SKY" }
+    ],
+    faq: [
+      {
+        id: "guarajuba-incluye",
+        question: "¿Qué incluye el paquete All Inclusive en Guarajuba?",
+        answer: [
+          {
+            type: "text",
+            value: "Vuelo directo desde Córdoba con SKY, 7 noches en Vila Galé Marés All Inclusive (comidas y bebidas ilimitadas), traslados in/out y asistencia médica Universal Assistance."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    slug: "praia-do-forte",
+    name: "Praia do Forte",
+    country: "Brasil",
+    region: "internacional",
+    metaTitle: "Paquetes All Inclusive a Praia do Forte desde Córdoba | 787 Rumbos",
+    metaDescription: "Viví una experiencia All Inclusive inolvidable en Iberostar Waves Bahia. Vuelo directo desde Córdoba, 7 noches, traslados y asistencia médica.",
+    heroImage: "/destinos/praia-do-forte.jpg",
+    description: "Conocida como la Polinesia Brasileña, Praia do Forte combina playas de aguas cristalinas, la aldea de pescadores, el reconocido Proyecto TAMAR y el resort Iberostar Waves Bahia.",
+    highlights: [
+      "Resort Iberostar Waves Bahia All Inclusive frente al mar",
+      "Proyecto TAMAR y centro de protección de tortugas marinas",
+      "Aldea peatonal con encanto gastronómico y artesanal",
+      "Piscinas naturales de Papa-Gente para snorkel"
+    ],
+    typicalInclusions: [
+      "Vuelo directo ida y vuelta Córdoba - Salvador de Bahía con SKY (1 valija)",
+      "7 noches de alojamiento en Iberostar Waves Bahia All Inclusive",
+      "Traslados aeropuerto / resort / aeropuerto",
+      "Asistencia médica Universal Assistance (aplica hasta 70 años)"
+    ],
+    priceFrom: 2015,
+    currency: "USD",
+    priceNote: "por persona en base doble. Salidas de Septiembre",
+    departures: [
+      { date: "2026-09-02", displayDate: "2 de Septiembre", status: "confirmed", transport: "aereo", nights: 7, note: "Vuelo directo SKY" },
+      { date: "2026-09-06", displayDate: "6 de Septiembre", status: "confirmed", transport: "aereo", nights: 7, note: "Vuelo directo SKY" },
+      { date: "2026-09-27", displayDate: "27 de Septiembre", status: "confirmed", transport: "aereo", nights: 7, note: "Vuelo directo SKY" }
+    ],
+    faq: [
+      {
+        id: "praia-do-forte-incluye",
+        question: "¿Qué incluye el paquete a Praia do Forte?",
+        answer: [
+          {
+            type: "text",
+            value: "Vuelo directo Córdoba-Salvador con SKY, 7 noches All Inclusive en Iberostar Waves Bahia, traslados en privado/regular y asistencia médica Universal Assistance."
+          }
+        ]
+      }
+    ]
   }
 ];
 
@@ -1296,6 +1481,7 @@ export function getRelatedDestinations(
   // Import lazy via inline to avoid circular deps: cluster mates from known lists
   const fixedClusters: string[][] = [
     ["rio-de-janeiro", "porto-de-galinhas", "camboriu", "f1-grand-premio-sao-paulo"],
+    ["salvador-de-bahia", "imbassai", "guarajuba", "praia-do-forte"],
     ["cancun", "playa-del-carmen", "riviera-maya"],
     ["termas-rio-hondo", "cataratas-del-iguazu", "salar-de-uyuni"],
   ];
