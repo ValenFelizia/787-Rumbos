@@ -8,6 +8,15 @@
 
 ### Visual, conversión y motion
 
+- [ ] T-030 — Fix hide de CTAs del Navbar en el primer paint del Hero
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: `components/sections/Navbar.tsx` (lógica T-028); sin tocar Hero copy/layout
+  - Target: `development`
+  - Updated: 2026-07-25
+  - Note: IntersectionObserver + fail-open si faltaba `#hero` dejaba CTAs visibles al cargar; solo se corregían al volver al Hero. Reemplazo por geometría sync + scroll/resize, fail-closed.
+  - Acceptance: en `/` al abrir la página los CTAs del nav no aparecen mientras el Hero está a la vista; al scrollear fuera reaparecen y al volver se ocultan.
+
 - [ ] T-029 — Auditar Lighthouse / Core Web Vitals de la home
   - Owner: Valen
   - Agent: Cursor Grok

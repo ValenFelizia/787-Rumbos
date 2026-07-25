@@ -2,8 +2,8 @@
 /**
  * components/sections/Navbar.tsx
  *
- * Barra sticky. En desktop, los CTAs se ocultan mientras #hero está a la vista
- * (T-028) para no duplicar el par del Hero; al scrollear fuera reaparecen.
+ * Barra sticky. En desktop, los CTAs se ocultan mientras #hero ocupa el viewport
+ * (T-028 / T-030) para no duplicar el par del Hero; al scrollear fuera reaparecen.
  */
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
@@ -19,6 +19,21 @@ const FOCUSABLE_SELECTOR = [
   '[tabindex]:not([tabindex="-1"])',
 ].join(",");
 
+/** Sticky nav clearance; hero still below this → CTAs del nav ocultos. */
+const NAV_CLEARANCE_PX = 80;
+
+/**
+ * ¿El Hero sigue ocupando viewport debajo del nav?
+ * Fail-closed: sin #hero asumimos que sí (CTAs ocultos en home).
+ * Evita el IntersectionObserver del primer paint, que a veces reportaba
+ * isIntersecting=false y dejaba los CTAs visibles hasta el próximo scroll.
+ */
+function isHeroOccupyingViewport(): boolean {
+  const hero = document.getElementById("hero");
+  if (!hero) return true;
+  return hero.getBoundingClientRect().bottom > NAV_CLEARANCE_PX;
+}
+
 export function Navbar() {
   const { openModal } = useModal();
   const pathname = usePathname();
@@ -31,34 +46,29 @@ export function Navbar() {
   const desktopCtasRef = useRef<HTMLDivElement>(null);
   const logoLinkRef = useRef<HTMLAnchorElement>(null);
 
-  // T-028: CTAs desktop siguen la visibilidad del Hero.
+  // T-028: CTAs desktop siguen la geometría del Hero (sync + scroll/resize).
   useEffect(() => {
     if (pathname !== "/") {
       setShowDesktopCtas(true);
       return;
     }
 
-    const hero = document.getElementById("hero");
-    if (!hero) {
-      setShowDesktopCtas(true);
-      return;
-    }
+    const syncCtaVisibility = () => {
+      setShowDesktopCtas(!isHeroOccupyingViewport());
+    };
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Intersecta → Hero a la vista → ocultar CTAs del nav.
-        // Sale → revelar; vuelve → ocultar de nuevo.
-        setShowDesktopCtas(!entry.isIntersecting);
-      },
-      {
-        // Debajo del sticky nav (~73–80px); un poco de histeresis abajo evita flicker.
-        rootMargin: "-80px 0px -15% 0px",
-        threshold: 0,
-      }
-    );
+    // Lectura síncrona ya en el primer frame — no esperar un callback async.
+    syncCtaVisibility();
+    const rafId = window.requestAnimationFrame(syncCtaVisibility);
 
-    observer.observe(hero);
-    return () => observer.disconnect();
+    window.addEventListener("scroll", syncCtaVisibility, { passive: true });
+    window.addEventListener("resize", syncCtaVisibility);
+
+    return () => {
+      window.cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", syncCtaVisibility);
+      window.removeEventListener("resize", syncCtaVisibility);
+    };
   }, [pathname]);
 
   // Si los CTAs se ocultan con foco dentro, devolverlo al logo.
