@@ -31,7 +31,7 @@ export function PrimaryCta({
   return (
     <button
       type={type}
-      className={`font-[family-name:var(--font-elaine)] inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#f7a92a] to-[#e6b451] font-semibold text-[#0b4058] shadow-md shadow-[#f7a92a]/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#f7a92a]/40 active:scale-[0.96] cursor-pointer ${SIZE_CLASSES[size]} ${className}`}
+      className={`font-[family-name:var(--font-elaine)] inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#f7a92a] to-[#e6b451] font-semibold text-[#0b4058] shadow-md shadow-[#f7a92a]/30 transition-[filter,box-shadow,transform] duration-300 hover:brightness-105 hover:shadow-lg hover:shadow-[#f7a92a]/40 active:scale-[0.96] cursor-pointer ${SIZE_CLASSES[size]} ${className}`}
       {...props}
     >
       {label}
