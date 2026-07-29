@@ -13,25 +13,21 @@ import { BedDouble, Bus, HeartPulse, Plane, Ticket } from "lucide-react";
 // ─── Teléfonos y WhatsApp ─────────────────────────────────────────────────────
 
 /**
- * Teléfono de agencia — canal público principal (CTAs, schema, NAP, GBP).
- * No etiquetar como “administración”.
+ * Teléfono de agencia — canal público único (CTAs, schema, NAP, GBP).
+ * Anteriormente figuraba como teléfono de urgencias.
+ * El número anterior (+54 9 351 344-8724) queda reservado para la futura expansión de pasajes aéreos.
  */
 export const AGENCY_PHONE = {
-  whatsapp: "5493513448724",
-  display: "+54 9 351 344-8724",
+  whatsapp: "5493516157398",
+  display: "+54 9 351 615-7398",
   /** E.164 para schema / tel: */
-  tel: "+543513448724",
+  tel: "+5493516157398",
 } as const;
 
 /**
- * Línea de urgencias (viaje en curso). Visible en footer/FAQ; no usar en CTAs
- * comerciales. Internamente es un celular personal del equipo.
+ * Alias de compatibilidad: teléfono único de atención.
  */
-export const URGENT_PHONE = {
-  whatsapp: "5493516157398",
-  display: "+54 9 351 615-7398",
-  tel: "+5493516157398",
-} as const;
+export const URGENT_PHONE = AGENCY_PHONE;
 
 /** Horario oficial del local en el aeropuerto (atención comercial). */
 export const OFFICE_HOURS = {
@@ -240,17 +236,17 @@ export const faqItems: FaqItem[] = [
       {
         type: "text",
         value:
-          "Sí. Te acompañamos antes, durante y después del viaje: te ayudamos a gestionar con aerolínea, hotel o asistencia al viajero lo vinculado a tu reserva. La resolución final depende de cada proveedor; no somos una guardia 24/7 ni reemplazamos a la asistencia médica. Si estás de viaje y surge un imprevisto, escribinos a la ",
+          "Sí. Te acompañamos antes, durante y después del viaje: te ayudamos a gestionar con aerolínea, hotel o asistencia al viajero lo vinculado a tu reserva. La resolución final depende de cada proveedor; no somos una guardia 24/7 ni reemplazamos a la asistencia médica. Si estás de viaje y surge un imprevisto, escribinos a nuestro ",
       },
       {
         type: "link",
-        label: "línea de urgencias",
-        href: WHATSAPP_URGENT_LINK,
+        label: "WhatsApp de atención",
+        href: WHATSAPP_LINK,
         external: true,
       },
       {
         type: "text",
-        value: `. Para cotizaciones y consultas generales, usá el WhatsApp de la agencia (${AGENCY_PHONE.display}).`,
+        value: `.`,
       },
     ],
   },

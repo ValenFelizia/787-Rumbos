@@ -16,9 +16,7 @@ import Image from "next/image";
 import { Instagram, MapPin, Send, ShieldCheck, Clock } from "lucide-react";
 import {
   AGENCY_PHONE,
-  URGENT_PHONE,
   WHATSAPP_LINK,
-  WHATSAPP_URGENT_LINK,
   OFFICE_HOURS,
 } from "@/lib/constants";
 
@@ -132,19 +130,7 @@ export function Footer() {
                 className="flex items-center gap-2 text-white/90 transition hover:text-[#dae553]"
               >
                 <Send className="h-4 w-4" />
-                Agencia: {AGENCY_PHONE.display}
-              </a>
-            </li>
-            <li>
-              <a
-                href={WHATSAPP_URGENT_LINK}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={`Línea de urgencias ${URGENT_PHONE.display} — viaje en curso`}
-                className="flex items-center gap-2 text-white/90 transition hover:text-[#dae553]"
-              >
-                <Send className="h-4 w-4" />
-                Urgencias: {URGENT_PHONE.display}
+                WhatsApp: {AGENCY_PHONE.display}
               </a>
             </li>
             <li>

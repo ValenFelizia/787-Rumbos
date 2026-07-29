@@ -149,6 +149,13 @@
 
 Retention: 12
 
+- [x] T-038 — Unificar número de contacto en el teléfono principal (+54 9 351 615-7398)
+  - Owner: Valen
+  - Agent: Antigravity
+  - Scope: released
+  - Updated: 2026-07-29
+  - Note: Se actualizó `AGENCY_PHONE` al número 351 615-7398 en `lib/constants.ts` afectando a todos los CTAs, schemas y enlaces de la web. En `Footer.tsx` se dejó un único ítem de contacto por WhatsApp. El número previo (351 344-8724) se resguarda para la futura sección de venta de pasajes aéreos.
+
 - [x] T-031 — Planificar expansión aéreos SEO (issue #11)
   - Owner: Valen
   - Agent: Cursor Grok
