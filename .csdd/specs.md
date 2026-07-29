@@ -1,9 +1,10 @@
 # 787 Rumbos — Especificaciones vigentes
 
-> **Última actualización:** 2026-07-18
+> **Última actualización:** 2026-07-28
 > **Estado:** la base del producto está implementada. Se priorizan la operación
-> comercial, la vigencia del contenido y el crecimiento local antes de nuevas
-> funcionalidades. El baseline de seguridad HTTP, higiene de dependencias y
+> comercial, la vigencia del contenido y el crecimiento local. En paralelo se
+> abre una ola de páginas indexables de **pasajes aéreos** (issue #11) sin
+> rediseñar la home. El baseline de seguridad HTTP, higiene de dependencias y
 > CI/smoke está implementado. Los E2E de producción usan artefactos aislados
 > para no colisionar con un servidor de desarrollo local.
 
@@ -17,6 +18,14 @@ conserva en [../docs/marketing-growth-audit.md](../docs/marketing-growth-audit.m
 por WhatsApp. La web debe captar consultas calificadas, reforzar confianza y
 guiar al usuario hacia ese canal; no reemplaza la atención comercial humana.
 
+- Mix comercial actual (orientativo, issue #11): ~80% facturación en **pasajes
+  aéreos**, ~20% en **asistencia al viajero**; **paquetes turísticos** siguen
+  ofreciéndose y son válidos en la web, pero no concentran la facturación. La
+  arquitectura indexable debe reflejar ese mix sin borrar el catálogo de
+  destinos.
+- Frase operativa hacia la que se apunta el cluster de aéreos: venta de pasajes
+  aéreos de múltiples aerolíneas, con atención humana y presencial en el
+  Aeropuerto de Córdoba.
 - La oficina se encuentra en el hall de arribos del Aeropuerto Internacional
   Ingeniero Aeronáutico Ambrosio Taravella, dentro del local oficial de Vía
   Bariloche.
@@ -107,6 +116,16 @@ CMS ni scraping solo para sostener esa sección.
   sitemap actualizado.
 - Los hubs de Brasil, Caribe, Argentina en bus y salidas grupales desde Córdoba
   están publicados y enlazados con el catálogo y las fichas de destino.
+- Cluster de pasajes aéreos (D-001 / D-002, issue #11): rutas indexables bajo
+  `/aereos` (hub) y `/aereos/{aerolinea}-cordoba` (landings). Primera landing:
+  `/aereos/latam-cordoba`. Cada landing de aerolínea debe dejar explícito que
+  787 Rumbos es **agencia independiente**, no oficina oficial de la marca,
+  salvo autorización comercial documentada. Contenido propio mínimo: H1/metadata
+  de compra/asesoramiento, qué gestiona la agencia, presencia en el aeropuerto,
+  horarios/ubicación, FAQ útil, CTA WhatsApp, breadcrumbs/schema válidos e
+  interlinking al hub (y a asistencia/contacto cuando existan). No doorway
+  pages ni copy corporativo de terceros. La home **no** se rediseña por esta
+  ola: solo enlaces y retoques menores de copy (ver D-001).
 - La home publica una sección de prueba social cerca del catálogo destacado.
   Los testimonios curados viven en `lib/testimonials-data.ts` (hoy: 3 reseñas
   Google autorizadas). Cada cita con `source: "google"` muestra atribución
@@ -219,7 +238,9 @@ la web. La postura de seguridad y testing debe ser proporcional a esa superficie
 - Catálogo, promociones y feed social se revisan manualmente una vez por mes;
   automatizar ese circuito solo se evalúa si la carga operativa deja de ser razonable.
 - El blog y la expansión de FAQs deben responder a demanda validada; evitar
-  contenido genérico sin intención de búsqueda.
+  contenido genérico sin intención de búsqueda. El cluster de aéreos (issue #11)
+  cuenta como demanda validada por mix de facturación e intención local
+  (LATAM Córdoba y similares); no contradice T-006.
 
 ## Forma de trabajo y ramas
 

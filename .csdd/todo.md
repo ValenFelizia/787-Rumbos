@@ -1,7 +1,8 @@
 # 787 Rumbos — Trabajo activo
 
 > Estado operativo del proyecto. Los requisitos y restricciones duraderas están en
-> [specs.md](./specs.md); el análisis de crecimiento ampliado permanece en
+> [specs.md](./specs.md); decisiones en [decisions.md](./decisions.md); el análisis
+> de crecimiento ampliado permanece en
 > [../docs/marketing-growth-audit.md](../docs/marketing-growth-audit.md).
 
 ## In Progress
@@ -35,6 +36,65 @@
 
 ### Visual, conversión y motion
 
+### Aéreos SEO — issue #11
+
+> Plan de acción (D-001 / D-002). Orden sugerido: patrón de datos → hub → LATAM →
+> interlinking ligero → SEO técnico/medición. Home: solo enlaces y copy menor.
+
+- [ ] T-032 — Modelo de datos y layout reutilizable para aéreos
+  - Owner: Valen
+  - Agent: —
+  - Scope: `lib/airlines-data.ts` (o equivalente), componente de landing/hub de aéreos; sin tocar ritmo de home
+  - Target: `development`
+  - Depends on: D-002.
+  - Note: Separar estructura/UI de datos por aerolínea (slug, nombre, meta, intro, qué gestionamos, FAQ, WA text). Criterio de “página justificada”: contenido propio útil, no solo renombrar la marca. Reusar patrones de `ClusterHub` donde sirvan, sin meter aéreos bajo `/destinos/`.
+  - Acceptance: se puede agregar una aerolínea nueva editando datos + assets mínimos, sin duplicar una page completa.
+
+- [ ] T-033 — Publicar hub `/aereos`
+  - Owner: Valen
+  - Agent: —
+  - Scope: `app/aereos/**`, datos del hub, sitemap
+  - Target: `development`
+  - Depends on: T-032.
+  - Note: Hub multi-aerolínea: propuesta (pasajes de varias compañías + atención en aeropuerto), listado de landings publicadas, CTA cotizar/WhatsApp, NAP/horarios, enlace a destinos/paquetes como cross-sell. Metadata/OG/canonical propios.
+  - Acceptance: `/aereos` indexable, en sitemap, con contenido útil y CTA; no es un thin redirect.
+
+- [ ] T-034 — Landing `/aereos/latam-cordoba`
+  - Owner: Valen
+  - Agent: —
+  - Scope: datos LATAM + ruta bajo `/aereos/`; schema FAQ/Breadcrumb si aplica
+  - Target: `development`
+  - Depends on: T-032.
+  - Note: H1/meta orientados a compra/asesoramiento LATAM en Córdoba. Disclaimer de agencia independiente. Presencia en aeropuerto, horarios, FAQ de pasaje, CTA WA, interlink a `/aereos` y (si existe) asistencia/contacto. Sin copiar copy corporativo LATAM ni fingir boletería oficial abandonada.
+  - Acceptance: página publicada, no huérfana, disclaimer claro, contenido propio suficiente.
+
+- [ ] T-035 — Interlinking ligero home / nav / footer (sin rediseño)
+  - Owner: Valen
+  - Agent: —
+  - Scope: `Navbar`, `Footer`, tile Pasajes Aéreos en `Services`/`constants`; copy menor hero/ValueProp solo si hace falta
+  - Target: `development`
+  - Depends on: T-033.
+  - Note: Techo D-001: link “Aéreos” o equivalente en nav; Servicios → `/aereos`; footer; opcional 1 línea de apoyo mencionando pasajes aéreos multi-aerolínea. No reordenar secciones ni cambiar motion/identidad. Paquetes siguen visibles.
+  - Acceptance: desde home/nav se llega al hub; el primer viewport sigue leyéndose como la home actual.
+
+- [ ] T-036 — SEO técnico del cluster + medición de CTAs
+  - Owner: Valen
+  - Agent: —
+  - Scope: `app/sitemap.ts`, metadata/OG/canonical, JSON-LD válido; eventos Analytics en CTAs de landings
+  - Target: `development`
+  - Depends on: T-033, T-034.
+  - Note: Incluir hub + landings en sitemap. Schema solo donde sea válido (`TravelAgency`/`LocalBusiness`, `BreadcrumbList`, `FAQPage`). Eventos Vercel Analytics (o el stack actual) para WA/cotizar desde hub y LATAM. Smoke de rutas nuevas en CI si el harness lo permite sin inflar alcance.
+  - Acceptance: URLs en sitemap; sin regresiones graves de a11y/perf/SEO; clics WA atribuibles a la landing.
+
+- [ ] T-037 — Priorizar próximas 2–3 aerolíneas con datos reales
+  - Owner: Valen
+  - Agent: —
+  - Scope: `.csdd/decisions.md` (open questions) + datos; sin publicar landings hasta priorizar
+  - Target: `development`
+  - Depends on: input comercial de Valen (ventas/consultas post-LATAM).
+  - Note: Cerrar preguntas abiertas de `decisions.md`. Solo entonces abrir tareas de implementación por aerolínea. Evitar páginas espejo.
+  - Acceptance: lista priorizada documentada; go/no-go por compañía según contenido propio disponible.
+
 ### Contenido y operación
 
 - [ ] T-004 — Mantener el catálogo y las promociones vigentes
@@ -56,12 +116,12 @@
 
 - [ ] T-006 — Extender el contenido SEO solo con demanda validada
   - Owner: Valen
-  - Note: alcance previsto en FAQs de destinos, blog mínimo e interlinking editorial. Ampliar FAQs cuando existan consultas reales; priorizar artículos breves con intención de búsqueda concreta.
+  - Note: alcance previsto en FAQs de destinos, blog mínimo e interlinking editorial. Ampliar FAQs cuando existan consultas reales; priorizar artículos breves con intención de búsqueda concreta. El cluster aéreos del issue #11 (T-032→T-036) es demanda validada aparte; no esperar blog genérico.
 
 - [ ] T-007 — Mejorar la medición de conversiones
   - Owner: Valen
   - Depends on: Google Business Profile activo y necesidad de embudos o campañas medibles.
-  - Note: alcance previsto en eventos de CTA de WhatsApp, UTMs y evaluación de GA4.
+  - Note: alcance previsto en eventos de CTA de WhatsApp, UTMs y evaluación de GA4. T-036 cubre eventos mínimos del cluster aéreos con el stack actual.
 
 - [ ] T-008 — Evaluar un CMS cuando el catálogo manual deje de escalar
   - Owner: Valen
@@ -88,6 +148,13 @@
 ## Recently Completed
 
 Retention: 12
+
+- [x] T-031 — Planificar expansión aéreos SEO (issue #11)
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-07-28
+  - Note: Decisiones D-001 (aditivo, home conservadora) y D-002 (URLs `/aereos` + `/aereos/{aerolinea}-cordoba`). Specs actualizadas con mix comercial y cluster. Tareas T-032→T-037 en Pending. Sin implementación de páginas aún.
 
 - [x] T-026 — Cerrar la mejora visual con QA responsive, accesible y de rendimiento
   - Owner: Valen
