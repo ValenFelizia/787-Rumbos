@@ -118,14 +118,18 @@ CMS ni scraping solo para sostener esa sección.
   están publicados y enlazados con el catálogo y las fichas de destino.
 - Cluster de pasajes aéreos (D-001 / D-002, issue #11): rutas indexables bajo
   `/aereos` (hub) y `/aereos/{aerolinea}-cordoba` (landings). Primera landing:
-  `/aereos/latam-cordoba`. Cada landing de aerolínea debe dejar explícito que
+  `/aereos/latam-cordoba`. Datos en `lib/airlines-data.ts`; layouts
+  `AereosHub` / `AirlineLanding`; solo aerolíneas con `published: true` se
+  generan en build. Cada landing de aerolínea debe dejar explícito que
   787 Rumbos es **agencia independiente**, no oficina oficial de la marca,
   salvo autorización comercial documentada. Contenido propio mínimo: H1/metadata
   de compra/asesoramiento, qué gestiona la agencia, presencia en el aeropuerto,
   horarios/ubicación, FAQ útil, CTA WhatsApp, breadcrumbs/schema válidos e
   interlinking al hub (y a asistencia/contacto cuando existan). No doorway
   pages ni copy corporativo de terceros. La home **no** se rediseña por esta
-  ola: solo enlaces y retoques menores de copy (ver D-001).
+  ola: solo enlaces y retoques menores de copy (ver D-001). Hub y landings
+  `published` están en el sitemap (`app/sitemap.ts`). Interlinking desde
+  nav, footer y tile de Pasajes Aéreos hacia `/aereos` (T-035).
 - La home publica una sección de prueba social cerca del catálogo destacado.
   Los testimonios curados viven en `lib/testimonials-data.ts` (hoy: 3 reseñas
   Google autorizadas). Cada cita con `source: "google"` muestra atribución

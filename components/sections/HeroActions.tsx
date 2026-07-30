@@ -13,9 +13,9 @@ export function HeroActions() {
         787 Rumbos: tu agencia en el Aeropuerto de Córdoba
       </h1>
       <p className="max-w-2xl text-base leading-relaxed text-white/90 md:text-[1.08rem]">
-        Paquetes aéreos y pasajes terrestres con Vía Bariloche y Vía Tac. Te asesoramos por
-        WhatsApp o en persona para que viajes con tranquilidad y con nuestro respaldo de
-        principio a fin.
+        Pasajes aéreos, paquetes y pasajes terrestres con Vía Bariloche y Vía Tac. Te
+        asesoramos por WhatsApp o en persona para que viajes con tranquilidad y con nuestro
+        respaldo de principio a fin.
       </p>
       <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">

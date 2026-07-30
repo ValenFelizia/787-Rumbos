@@ -1,4 +1,9 @@
 import type { MetadataRoute } from "next";
+import {
+  aereosHubCanonicalUrl,
+  airlineCanonicalUrl,
+  getPublishedAirlines,
+} from "@/lib/airlines-data";
 import { destinationsData } from "@/lib/destinations-data";
 import { clustersData } from "@/lib/clusters-data";
 
@@ -17,11 +22,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: aereosHubCanonicalUrl(),
+      changeFrequency: "weekly" as const,
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/legal`,
       changeFrequency: "yearly" as const,
       priority: 0.3,
     },
   ];
+
+  const airlinePages = getPublishedAirlines().map((airline) => ({
+    url: airlineCanonicalUrl(airline.slug),
+    changeFrequency: "weekly" as const,
+    priority: 0.85,
+  }));
 
   const clusterPages = clustersData.map((cluster) => ({
     url: `${baseUrl}/destinos/${cluster.slug}`,
@@ -35,5 +51,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...clusterPages, ...destinationPages];
+  return [
+    ...staticPages,
+    ...airlinePages,
+    ...clusterPages,
+    ...destinationPages,
+  ];
 }

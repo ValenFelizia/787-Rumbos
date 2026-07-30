@@ -138,8 +138,9 @@ export function Navbar() {
   const navLinks = [
     { label: "Inicio", href: "/#hero" },
     { label: "Destinos", href: "/destinos" },
+    { label: "Aéreos", href: "/aereos" },
     { label: "Servicios", href: "/#servicios" },
-    { label: "Preguntas frecuentes", href: "/#preguntas-frecuentes" },
+    { label: "Preguntas", href: "/#preguntas-frecuentes" },
     { label: "Nosotros", href: "/#nosotros" },
     { label: "Contacto", href: "/#contacto" },
   ];
@@ -165,12 +166,12 @@ export function Navbar() {
             />
           </Link>
 
-          <div className="hidden md:flex min-w-0 flex-1 items-center justify-center gap-8">
+          <div className="hidden md:flex min-w-0 flex-1 items-center justify-center gap-5 lg:gap-6">
             {navLinks.map((link) => (
               <a
-                key={link.label}
+                key={link.href}
                 href={link.href}
-                className="font-[family-name:var(--font-brand-heading)] text-sm font-semibold text-white/70 hover:text-white transition-colors duration-200"
+                className="font-[family-name:var(--font-brand-heading)] shrink-0 whitespace-nowrap text-sm font-semibold text-white/70 transition-colors duration-200 hover:text-white"
               >
                 {link.label}
               </a>
