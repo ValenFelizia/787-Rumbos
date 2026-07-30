@@ -62,6 +62,22 @@ export function Footer() {
           <ul className="space-y-2">
             <li>
               <a
+                href="/aereos"
+                className="text-white/80 transition hover:text-[#dae553]"
+              >
+                Pasajes aéreos
+              </a>
+            </li>
+            <li>
+              <a
+                href="/destinos"
+                className="text-white/80 transition hover:text-[#dae553]"
+              >
+                Destinos
+              </a>
+            </li>
+            <li>
+              <a
                 href="https://www.cordobaturismo.gov.ar/"
                 target="_blank"
                 rel="noopener noreferrer"

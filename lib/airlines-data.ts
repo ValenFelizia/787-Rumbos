@@ -72,7 +72,7 @@ export interface AereosHubContent {
 export const aereosHub: AereosHubContent = {
   metaTitle: "Pasajes aéreos desde Córdoba | 787 Rumbos",
   metaDescription:
-    "Comprá pasajes aéreos de múltiples aerolíneas con atención humana en el Aeropuerto de Córdoba. Cotizá por WhatsApp con 787 Rumbos.",
+    "Comprá pasajes aéreos de múltiples aerolíneas visitándonos en el Aeropuerto de Córdoba. ¡También podés cotizar por WhatsApp!",
   title: "Pasajes aéreos desde Córdoba",
   intro:
     "En 787 Rumbos emitimos pasajes de varias aerolíneas con asesoramiento humano: te cotizamos por WhatsApp o en persona. No somos un comparador anónimo: hablás con el mismo equipo de punta a punta.",

@@ -134,7 +134,7 @@ export function AereosHub() {
                           {airline.displayName} en Córdoba
                         </span>
                         <span className="mt-0.5 block text-sm text-[#0b4058]/70">
-                          Cotización y emisión con atención humana
+                          Cotización y emisión
                         </span>
                       </span>
                     </span>

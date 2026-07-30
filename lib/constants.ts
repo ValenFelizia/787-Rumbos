@@ -300,6 +300,8 @@ export interface Service {
   // El tipo ElementType permite guardar un componente de React (como un ícono de Lucide)
   // y renderizarlo dinámicamente con <Icon /> dentro de un .map().
   icon: React.ElementType;
+  /** Si está presente, el tile enlaza a esta ruta (interlinking T-035). */
+  href?: string;
 }
 
 export const services: Service[] = [
@@ -307,6 +309,7 @@ export const services: Service[] = [
     title: "Pasajes Aéreos",
     description: "Vuelos nacionales e internacionales con las mejores conexiones.",
     icon: Plane,
+    href: "/aereos",
   },
   {
     title: "Alojamiento",

@@ -129,7 +129,7 @@ CMS ni scraping solo para sostener esa sección.
   pages ni copy corporativo de terceros. La home **no** se rediseña por esta
   ola: solo enlaces y retoques menores de copy (ver D-001). Hub y landings
   `published` están en el sitemap (`app/sitemap.ts`). Interlinking desde
-  nav/home sigue en T-035.
+  nav, footer y tile de Pasajes Aéreos hacia `/aereos` (T-035).
 - La home publica una sección de prueba social cerca del catálogo destacado.
   Los testimonios curados viven en `lib/testimonials-data.ts` (hoy: 3 reseñas
   Google autorizadas). Cada cita con `source: "google"` muestra atribución

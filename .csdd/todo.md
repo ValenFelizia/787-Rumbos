@@ -29,35 +29,17 @@
 
 ### Aéreos SEO — issue #11
 
-> Plan de acción (D-001 / D-002). Hub + LATAM en sitemap. Siguiente: interlinking
-> (T-035), cerrar LATAM no-huérfana (T-034), medición (T-036).
-
-- [ ] T-034 — Cerrar landing `/aereos/latam-cordoba` (QA + no huérfana)
-  - Owner: Valen
-  - Agent: —
-  - Scope: QA copy LATAM en `lib/airlines-data.ts`; depende de T-035 para dejar de estar huérfana
-  - Target: `development`
-  - Depends on: T-032, T-035.
-  - Note: Datos + `AirlineLanding` + ruta dinámica ya publicados en T-032 (disclaimer, FAQ, CTA, breadcrumbs). Queda QA humano del wording operativo y enlace desde nav/home (T-035). Sitemap en T-036.
-  - Acceptance: disclaimer claro; contenido propio OK para Valen; enlazada desde sección relevante.
-
-- [ ] T-035 — Interlinking ligero home / nav / footer (sin rediseño)
-  - Owner: Valen
-  - Agent: —
-  - Scope: `Navbar`, `Footer`, tile Pasajes Aéreos en `Services`/`constants`; copy menor hero/ValueProp solo si hace falta
-  - Target: `development`
-  - Depends on: T-033.
-  - Note: Techo D-001: link “Aéreos” o equivalente en nav; Servicios → `/aereos`; footer; opcional 1 línea de apoyo mencionando pasajes aéreos multi-aerolínea. No reordenar secciones ni cambiar motion/identidad. Paquetes siguen visibles.
-  - Acceptance: desde home/nav se llega al hub; el primer viewport sigue leyéndose como la home actual.
+> Plan de acción (D-001 / D-002). Cluster aéreos publicado e interlinkeado.
+> Siguiente: medición CTAs (T-036) y priorizar más aerolíneas (T-037).
 
 - [ ] T-036 — SEO técnico del cluster + medición de CTAs
   - Owner: Valen
   - Agent: —
-  - Scope: `app/sitemap.ts`, metadata/OG/canonical, JSON-LD válido; eventos Analytics en CTAs de landings
+  - Scope: eventos Analytics en CTAs de landings; smoke de rutas `/aereos` si el harness lo permite
   - Target: `development`
   - Depends on: T-033, T-034.
-  - Note: Hub + landings published ya están en `app/sitemap.ts` (T-033). Schema BreadcrumbList ya en AirlineLanding; FAQPage vía componente FAQ. Eventos Vercel Analytics para WA desde hub y LATAM. Smoke de rutas nuevas en CI si el harness lo permite sin inflar alcance.
-  - Acceptance: URLs en sitemap; sin regresiones graves de a11y/perf/SEO; clics WA atribuibles a la landing.
+  - Note: Hub + landings ya en sitemap (T-033). Schema BreadcrumbList/FAQPage ya en layouts. Queda instrumentar eventos Vercel Analytics para WA desde hub y LATAM.
+  - Acceptance: clics WA atribuibles a la landing; sin regresiones graves de a11y/perf/SEO.
 
 - [ ] T-037 — Priorizar próximas 2–3 aerolíneas con datos reales
   - Owner: Valen
@@ -121,6 +103,20 @@
 ## Recently Completed
 
 Retention: 12
+
+- [x] T-035 — Interlinking ligero home / nav / footer (sin rediseño)
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-07-30
+  - Note: Nav “Aéreos”; footer Pasajes aéreos + Destinos; tile Servicios → `/aereos`; hero con aéreos primero. Nav desktop: label “Preguntas”, nowrap, gap ajustado. Revisión humana OK.
+
+- [x] T-034 — Cerrar landing `/aereos/latam-cordoba` (QA + no huérfana)
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-07-30
+  - Note: Landing enlazada desde hub, nav, footer y Servicios (T-035). Disclaimer + FAQ + copy pulidos en ola T-032. Ya no huérfana.
 
 - [x] T-033 — Cerrar publicación del hub `/aereos` (sitemap + QA copy)
   - Owner: Valen
