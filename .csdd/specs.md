@@ -127,8 +127,9 @@ CMS ni scraping solo para sostener esa sección.
   horarios/ubicación, FAQ útil, CTA WhatsApp, breadcrumbs/schema válidos e
   interlinking al hub (y a asistencia/contacto cuando existan). No doorway
   pages ni copy corporativo de terceros. La home **no** se rediseña por esta
-  ola: solo enlaces y retoques menores de copy (ver D-001). Sitemap e
-  interlinking desde nav/home siguen en T-033→T-036.
+  ola: solo enlaces y retoques menores de copy (ver D-001). Hub y landings
+  `published` están en el sitemap (`app/sitemap.ts`). Interlinking desde
+  nav/home sigue en T-035.
 - La home publica una sección de prueba social cerca del catálogo destacado.
   Los testimonios curados viven en `lib/testimonials-data.ts` (hoy: 3 reseñas
   Google autorizadas). Cada cita con `source: "google"` muestra atribución

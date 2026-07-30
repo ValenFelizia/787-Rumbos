@@ -29,18 +29,8 @@
 
 ### Aéreos SEO — issue #11
 
-> Plan de acción (D-001 / D-002). Tras T-032: hub + LATAM ya renderizan; falta
-> sitemap, interlinking home y medición.
-
-- [ ] T-033 — Cerrar publicación del hub `/aereos` (sitemap + QA copy)
-  - Owner: Valen
-  - Agent: —
-  - Scope: `app/sitemap.ts`; QA final de `aereosHub` en `lib/airlines-data.ts`
-  - Target: `development`
-  - Updated: 2026-07-30
-  - Depends on: T-032.
-  - Note: Sitemap — importar helpers de `lib/airlines-data.ts`; entrada `/aereos` priority 0.9 weekly (paridad `/destinos`); mapear `getPublishedAirlines()` a 0.85 weekly (sin hardcodear slugs). Copy/CTA hub a confirmar — H1 “Pasajes aéreos desde Córdoba”; CTA “Cotizar vuelo por WhatsApp”; WA prefill del hub. Nav/footer → T-035; Analytics → T-036.
-  - Acceptance: `/aereos` (y landings published) en sitemap; copy/CTA del hub confirmados; no thin redirect.
+> Plan de acción (D-001 / D-002). Hub + LATAM en sitemap. Siguiente: interlinking
+> (T-035), cerrar LATAM no-huérfana (T-034), medición (T-036).
 
 - [ ] T-034 — Cerrar landing `/aereos/latam-cordoba` (QA + no huérfana)
   - Owner: Valen
@@ -66,7 +56,7 @@
   - Scope: `app/sitemap.ts`, metadata/OG/canonical, JSON-LD válido; eventos Analytics en CTAs de landings
   - Target: `development`
   - Depends on: T-033, T-034.
-  - Note: Incluir hub + landings en sitemap si T-033 no los dejó (preferible: ya en T-033). Schema BreadcrumbList ya en AirlineLanding; FAQPage vía componente FAQ. Eventos Vercel Analytics para WA desde hub y LATAM. Smoke de rutas nuevas en CI si el harness lo permite sin inflar alcance.
+  - Note: Hub + landings published ya están en `app/sitemap.ts` (T-033). Schema BreadcrumbList ya en AirlineLanding; FAQPage vía componente FAQ. Eventos Vercel Analytics para WA desde hub y LATAM. Smoke de rutas nuevas en CI si el harness lo permite sin inflar alcance.
   - Acceptance: URLs en sitemap; sin regresiones graves de a11y/perf/SEO; clics WA atribuibles a la landing.
 
 - [ ] T-037 — Priorizar próximas 2–3 aerolíneas con datos reales
@@ -131,6 +121,13 @@
 ## Recently Completed
 
 Retention: 12
+
+- [x] T-033 — Cerrar publicación del hub `/aereos` (sitemap + QA copy)
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-07-30
+  - Note: `/aereos` (0.9) + landings `published` via `getPublishedAirlines()` (0.85) en `app/sitemap.ts`. Copy/CTA hub confirmados (H1 + “Cotizar vuelo por WhatsApp”).
 
 - [x] T-032 — Modelo de datos y layout reutilizable para aéreos
   - Owner: Valen
