@@ -29,35 +29,27 @@
 
 ### Aéreos SEO — issue #11
 
-> Plan de acción (D-001 / D-002). Orden sugerido: patrón de datos → hub → LATAM →
-> interlinking ligero → SEO técnico/medición. Home: solo enlaces y copy menor.
+> Plan de acción (D-001 / D-002). Tras T-032: hub + LATAM ya renderizan; falta
+> sitemap, interlinking home y medición.
 
-- [ ] T-032 — Modelo de datos y layout reutilizable para aéreos
+- [ ] T-033 — Cerrar publicación del hub `/aereos` (sitemap + QA copy)
   - Owner: Valen
   - Agent: —
-  - Scope: `lib/airlines-data.ts` (o equivalente), componente de landing/hub de aéreos; sin tocar ritmo de home
+  - Scope: `app/sitemap.ts`; QA final de `aereosHub` en `lib/airlines-data.ts`
   - Target: `development`
-  - Depends on: D-002.
-  - Note: Separar estructura/UI de datos por aerolínea (slug, nombre, meta, intro, qué gestionamos, FAQ, WA text). Criterio de “página justificada”: contenido propio útil, no solo renombrar la marca. Reusar patrones de `ClusterHub` donde sirvan, sin meter aéreos bajo `/destinos/`.
-  - Acceptance: se puede agregar una aerolínea nueva editando datos + assets mínimos, sin duplicar una page completa.
-
-- [ ] T-033 — Publicar hub `/aereos`
-  - Owner: Valen
-  - Agent: —
-  - Scope: `app/aereos/**`, datos del hub, sitemap
-  - Target: `development`
+  - Updated: 2026-07-30
   - Depends on: T-032.
-  - Note: Hub multi-aerolínea: propuesta (pasajes de varias compañías + atención en aeropuerto), listado de landings publicadas, CTA cotizar/WhatsApp, NAP/horarios, enlace a destinos/paquetes como cross-sell. Metadata/OG/canonical propios.
-  - Acceptance: `/aereos` indexable, en sitemap, con contenido útil y CTA; no es un thin redirect.
+  - Note: Sitemap — importar helpers de `lib/airlines-data.ts`; entrada `/aereos` priority 0.9 weekly (paridad `/destinos`); mapear `getPublishedAirlines()` a 0.85 weekly (sin hardcodear slugs). Copy/CTA hub a confirmar — H1 “Pasajes aéreos desde Córdoba”; CTA “Cotizar vuelo por WhatsApp”; WA prefill del hub. Nav/footer → T-035; Analytics → T-036.
+  - Acceptance: `/aereos` (y landings published) en sitemap; copy/CTA del hub confirmados; no thin redirect.
 
-- [ ] T-034 — Landing `/aereos/latam-cordoba`
+- [ ] T-034 — Cerrar landing `/aereos/latam-cordoba` (QA + no huérfana)
   - Owner: Valen
   - Agent: —
-  - Scope: datos LATAM + ruta bajo `/aereos/`; schema FAQ/Breadcrumb si aplica
+  - Scope: QA copy LATAM en `lib/airlines-data.ts`; depende de T-035 para dejar de estar huérfana
   - Target: `development`
-  - Depends on: T-032.
-  - Note: H1/meta orientados a compra/asesoramiento LATAM en Córdoba. Disclaimer de agencia independiente. Presencia en aeropuerto, horarios, FAQ de pasaje, CTA WA, interlink a `/aereos` y (si existe) asistencia/contacto. Sin copiar copy corporativo LATAM ni fingir boletería oficial abandonada.
-  - Acceptance: página publicada, no huérfana, disclaimer claro, contenido propio suficiente.
+  - Depends on: T-032, T-035.
+  - Note: Datos + `AirlineLanding` + ruta dinámica ya publicados en T-032 (disclaimer, FAQ, CTA, breadcrumbs). Queda QA humano del wording operativo y enlace desde nav/home (T-035). Sitemap en T-036.
+  - Acceptance: disclaimer claro; contenido propio OK para Valen; enlazada desde sección relevante.
 
 - [ ] T-035 — Interlinking ligero home / nav / footer (sin rediseño)
   - Owner: Valen
@@ -74,7 +66,7 @@
   - Scope: `app/sitemap.ts`, metadata/OG/canonical, JSON-LD válido; eventos Analytics en CTAs de landings
   - Target: `development`
   - Depends on: T-033, T-034.
-  - Note: Incluir hub + landings en sitemap. Schema solo donde sea válido (`TravelAgency`/`LocalBusiness`, `BreadcrumbList`, `FAQPage`). Eventos Vercel Analytics (o el stack actual) para WA/cotizar desde hub y LATAM. Smoke de rutas nuevas en CI si el harness lo permite sin inflar alcance.
+  - Note: Incluir hub + landings en sitemap si T-033 no los dejó (preferible: ya en T-033). Schema BreadcrumbList ya en AirlineLanding; FAQPage vía componente FAQ. Eventos Vercel Analytics para WA desde hub y LATAM. Smoke de rutas nuevas en CI si el harness lo permite sin inflar alcance.
   - Acceptance: URLs en sitemap; sin regresiones graves de a11y/perf/SEO; clics WA atribuibles a la landing.
 
 - [ ] T-037 — Priorizar próximas 2–3 aerolíneas con datos reales
@@ -83,7 +75,7 @@
   - Scope: `.csdd/decisions.md` (open questions) + datos; sin publicar landings hasta priorizar
   - Target: `development`
   - Depends on: input comercial de Valen (ventas/consultas post-LATAM).
-  - Note: Cerrar preguntas abiertas de `decisions.md`. Solo entonces abrir tareas de implementación por aerolínea. Evitar páginas espejo.
+  - Note: Cerrar preguntas abiertas de `decisions.md`. Solo entonces abrir tareas de implementación por aerolínea. Evitar páginas espejo. Patrón: agregar a `airlinesData` con `published: true`.
   - Acceptance: lista priorizada documentada; go/no-go por compañía según contenido propio disponible.
 
 ### Contenido y operación
@@ -140,6 +132,13 @@
 
 Retention: 12
 
+- [x] T-032 — Modelo de datos y layout reutilizable para aéreos
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-07-30
+  - Note: `lib/airlines-data.ts` (hub + LATAM `published`); `AereosHub` + `AirlineLanding`; rutas `/aereos` y `/aereos/[slug]`. Copy polish: título de listado, menos repetición de aeropuerto, sin em dash, logo hero alineado. Sitemap/nav → T-033→T-036.
+
 - [x] T-030 — Fix hide de CTAs del Navbar en el primer paint del Hero
   - Owner: Valen
   - Agent: Cursor Grok
@@ -159,7 +158,7 @@ Retention: 12
   - Agent: Cursor Grok
   - Scope: released
   - Updated: 2026-07-28
-  - Note: Decisiones D-001 (aditivo, home conservadora) y D-002 (URLs `/aereos` + `/aereos/{aerolinea}-cordoba`). Specs actualizadas con mix comercial y cluster. Tareas T-032→T-037 en Pending. Sin implementación de páginas aún.
+  - Note: Decisiones D-001 (aditivo, home conservadora) y D-002 (URLs `/aereos` + `/aereos/{aerolinea}-cordoba`). Specs actualizadas con mix comercial y cluster. Implementación del patrón en T-032.
 
 - [x] T-026 — Cerrar la mejora visual con QA responsive, accesible y de rendimiento
   - Owner: Valen
