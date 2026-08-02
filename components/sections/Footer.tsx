@@ -13,6 +13,7 @@
  * 2. El ?v= al final del src es un cache buster que ellos controlan.
  */
 import Image from "next/image";
+import Link from "next/link";
 import { Instagram, MapPin, Send, ShieldCheck, Clock } from "lucide-react";
 import {
   AGENCY_PHONE,
@@ -61,20 +62,20 @@ export function Footer() {
           </p>
           <ul className="space-y-2">
             <li>
-              <a
+              <Link
                 href="/aereos"
                 className="text-white/80 transition hover:text-[#dae553]"
               >
                 Pasajes aéreos
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="/destinos"
                 className="text-white/80 transition hover:text-[#dae553]"
               >
                 Destinos
-              </a>
+              </Link>
             </li>
             <li>
               <a
@@ -107,12 +108,12 @@ export function Footer() {
               </a>
             </li>
             <li>
-              <a
+              <Link
                 href="/legal"
                 className="text-white/80 transition hover:text-[#dae553]"
               >
                 Términos y Condiciones
-              </a>
+              </Link>
             </li>
             <li>
               <a
@@ -210,12 +211,12 @@ export function Footer() {
         </div>
 
         <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs text-white/70">
-          <a
+          <Link
             href="/legal"
             className="underline hover:text-[#dae553] transition-colors"
           >
             Términos y Condiciones
-          </a>
+          </Link>
           <span>·</span>
           <a
             href="https://autogestion.produccion.gob.ar/consumidores"
