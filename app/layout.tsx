@@ -39,10 +39,24 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/og-image.png',
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: '787 Rumbos — Agencia de Viajes en Córdoba',
+        alt: '787 Rumbos — Agencia de viajes en el Aeropuerto de Córdoba',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '787 Rumbos | Agencia de Viajes en Córdoba',
+    description:
+      'Viajá con el respaldo de 787 Rumbos. Atención personalizada, financiación disponible y paquetes a medida desde Córdoba.',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: '787 Rumbos — Agencia de viajes en el Aeropuerto de Córdoba',
       },
     ],
   },

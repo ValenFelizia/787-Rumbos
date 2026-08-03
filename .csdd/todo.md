@@ -7,18 +7,6 @@
 
 ## In Progress
 
-### Visual, conversión y motion
-
-- [ ] T-029 — Auditar Lighthouse / Core Web Vitals de la home
-  - Owner: Valen
-  - Agent: Cursor Grok
-  - Scope: auditoría Lighthouse/CWV de la home (prod o build local representativo); fixes solo P0/P1 claros; `.csdd/todo.md` al cerrar
-  - Target: `development`
-  - Updated: 2026-07-21
-  - Depends on: T-026.
-  - Note: baseline mobile prod Perf 81 / A11y 86 / LCP 4.8s. Fixes locales: hero JPEG 3.4MB→382KB; Hero RSC + `HeroActions`; `fetchPriority=high` + `decoding=sync`; logo nav sin `priority`; SecondaryCta `#0B6B5F`; P2 contraste/headings/stars/touch/name. Verificación local post-fix: Perf ~80 / A11y **100** / LCP simulado ~5.3s (fases: load ~132ms + render delay ~146ms vs ~950ms antes). Re-medir en prod tras deploy.
-  - Acceptance: hay baseline documentada; P0/P1 de performance accionables están resueltos o explicitados con motivo; sin degradar conversión/a11y.
-
 ## Ready to Land
 
 ## Blocked
@@ -26,6 +14,16 @@
 ## Pending
 
 ### Visual, conversión y motion
+
+- [ ] T-029 — Auditar Lighthouse / Core Web Vitals de la home
+  - Owner: Valen
+  - Agent: —
+  - Scope: re-medir Lighthouse/CWV en prod tras deploys recientes; fixes solo P0/P1 nuevos; `.csdd/todo.md` al cerrar
+  - Target: `development`
+  - Updated: 2026-08-03
+  - Depends on: T-026.
+  - Note: Agent liberado. Baseline previa mobile prod Perf 81 / A11y 86 / LCP 4.8s; fixes locales ya en `master`. Queda re-medir en prod. T-039 (#16) cerrado sin cambios de HTML.
+  - Acceptance: hay baseline documentada; P0/P1 de performance accionables están resueltos o explicitados con motivo; sin degradar conversión/a11y.
 
 ### Aéreos SEO — issue #11
 
@@ -103,6 +101,20 @@
 ## Recently Completed
 
 Retention: 12
+
+- [x] T-040 — Renovar y optimizar la imagen Open Graph (issue #14)
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-08-03
+  - Note: `og-image.jpg` 1200×630 / ~108 KB; logo + subtítulo aeropuerto + meta “Pasajes aéreos · Ómnibus · Paquetes a medida”; openGraph/twitter en layout; script `scripts/generate-og-image.mjs`. PNG legacy eliminado. Post-deploy: purgar caché LinkedIn/WhatsApp al validar preview.
+
+- [x] T-039 — Auditar y reducir el HTML inicial de la homepage (issue #16)
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-08-03
+  - Note: Baseline prod ~217 KB / ~25 KB br / ~32 KB gzip. Casi la mitad es payload RSC de Next. Decisión con Valen: no micro-opts ni recortes de contenido; umbral 200 KB de opengraph.to no justifica cambios. Issue #16 cerrado.
 
 - [x] T-035 — Interlinking ligero home / nav / footer (sin rediseño)
   - Owner: Valen

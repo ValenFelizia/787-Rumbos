@@ -1,12 +1,12 @@
 # 787 Rumbos — Especificaciones vigentes
 
-> **Última actualización:** 2026-07-28
-> **Estado:** la base del producto está implementada. Se priorizan la operación
-> comercial, la vigencia del contenido y el crecimiento local. En paralelo se
-> abre una ola de páginas indexables de **pasajes aéreos** (issue #11) sin
-> rediseñar la home. El baseline de seguridad HTTP, higiene de dependencias y
-> CI/smoke está implementado. Los E2E de producción usan artefactos aislados
-> para no colisionar con un servidor de desarrollo local.
+> **Última actualización:** 2026-08-03
+> **Estado:** la base del producto está implementada. El cluster indexable de
+> **pasajes aéreos** (issue #11) está publicado e interlinkeado; quedan medición
+> de CTAs (T-036) y priorización de más aerolíneas (T-037). En paralelo, la ola
+> de performance de la home sigue con auditoría de HTML inicial (issue #16 /
+> T-039) y re-medición Lighthouse/CWV (T-029). El baseline de seguridad HTTP,
+> higiene de dependencias y CI/smoke está implementado.
 
 El estado operativo vive en [todo.md](./todo.md). El análisis de mercado y
 crecimiento que sirve de contexto, pero no de lista de trabajo activa, se
@@ -75,8 +75,8 @@ mantenerse consistentes:
 | Dirección | Av. La Voz del Interior 8500, Córdoba, Argentina |
 | Referencia | Hall de arribos, dentro del local oficial de Vía Bariloche |
 | Código postal | X5147XAA |
-| Teléfono de agencia (principal) | 0351 344-8724 (`+54 9 351 344-8724`) — CTAs, schema, NAP, GBP |
-| Línea de urgencias (viaje en curso) | 0351 615-7398 (`+54 9 351 615-7398`) — footer y FAQ; no CTAs comerciales |
+| Teléfono de agencia (principal) | 0351 615-7398 (`+54 9 351 615-7398`) — CTAs, schema, NAP, GBP (`AGENCY_PHONE`) |
+| Línea de urgencias (viaje en curso) | Mismo número que agencia (`URGENT_PHONE` = `AGENCY_PHONE`, T-038). El número previo 0351 344-8724 queda reservado para la futura expansión de pasajes aéreos. |
 | Google Maps / GBP | [maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7](https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7) (place `787 Rumbos`) |
 | Coordenadas (schema) | `-31.3172806, -64.2131382` |
 | Place key (Maps) | `0x94329becff1264df:0xc85a96783374e09f` · feature `/g/11nr4bc4fc` |
@@ -84,11 +84,13 @@ mantenerse consistentes:
 | QR reseñas | `public/qr-resenas-787.png` (`GOOGLE_REVIEW_QR_SRC`) |
 
 Canal público principal: WhatsApp de agencia (`AGENCY_PHONE` en `lib/constants.ts`).
-La línea de urgencias (`URGENT_PHONE`) es un celular del equipo para imprevistos con
-viaje en curso; no debe monopolizar cotización ni presentarse como “administración”.
-Footer, schema, Google Business Profile y citaciones deben reflejar estos roles.
-El enlace de Maps del sitio (`GOOGLE_MAPS_LINK`) debe apuntar a la ficha de
-**787 Rumbos**, no a una búsqueda genérica del aeropuerto.
+Tras T-038, `URGENT_PHONE` apunta al mismo número; el contacto público queda unificado
+en +54 9 351 615-7398. El número previo (351 344-8724) queda reservado para la
+futura expansión de pasajes aéreos y no debe reaparecer en CTAs/NAP/schema sin
+decisión explícita. Footer, schema, Google Business Profile y citaciones deben
+reflejar el NAP canónico de la tabla. El enlace de Maps del sitio
+(`GOOGLE_MAPS_LINK`) debe apuntar a la ficha de **787 Rumbos**, no a una búsqueda
+genérica del aeropuerto.
 
 Precios, salidas, disponibilidad, promociones, fotos y testimonios deben ser
 reales, vigentes y verificables. Las promociones con fecha de finalización deben
@@ -203,6 +205,9 @@ CMS ni scraping solo para sostener esa sección.
 - Los metadatos, canonical, Open Graph, robots, sitemap y datos estructurados
   deben usar `https://www.787rumbos.com.ar` y seguir alineados con las páginas
   que se publiquen.
+- La imagen social canónica es `public/og-image.jpg` (1200×630, &lt;500 KB),
+  referenciada por `openGraph` y `twitter` en `app/layout.tsx`. Regenerar con
+  `node scripts/generate-og-image.mjs` si cambia marca o foto base.
 
 ## Calidad, seguridad y verificación
 
