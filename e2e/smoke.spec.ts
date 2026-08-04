@@ -67,6 +67,17 @@ test.describe("rutas críticas", () => {
       page.getByRole("link", { name: /cotizar latam por whatsapp/i }).first(),
     ).toBeVisible();
   });
+
+  test("landing GOL Córdoba responde", async ({ page }) => {
+    await page.goto("/aereos/gol-cordoba");
+    await expect(page).toHaveURL(/\/aereos\/gol-cordoba\/?$/);
+    await expect(
+      page.getByRole("heading", { name: /pasajes gol en córdoba/i }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: /cotizar gol por whatsapp/i }).first(),
+    ).toBeVisible();
+  });
 });
 
 test.describe("cotizador", () => {

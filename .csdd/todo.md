@@ -9,16 +9,6 @@
 
 ## Ready to Land
 
-- [ ] T-036 — SEO técnico del cluster + medición de CTAs
-  - Owner: Valen
-  - Agent: Cursor Grok
-  - Scope: `wa_click` via Vercel Analytics en hub `/aereos`, landings, nav y footer; smoke e2e `/aereos` + LATAM; `.csdd/*` + issue #11
-  - Target: `development`
-  - Updated: 2026-08-04
-  - Landing: merge a `master` + deploy; verificar Custom Events en Vercel Analytics tras un clic WA
-  - Verification: typecheck OK; smoke `/aereos` + LATAM; evento `wa_click` con `surface`/`airline`
-  - Note: Home CTAs fuera de nav/footer sin track en esta pasada. Ranking T-037 documentado (próxima GOL).
-
 ## Blocked
 
 ## Pending
@@ -35,18 +25,18 @@
   - Note: Agent liberado. Baseline previa mobile prod Perf 81 / A11y 86 / LCP 4.8s; fixes locales ya en `master`. Queda re-medir en prod. T-039 (#16) cerrado sin cambios de HTML.
   - Acceptance: hay baseline documentada; P0/P1 de performance accionables están resueltos o explicitados con motivo; sin degradar conversión/a11y.
 
-### Aéreos SEO — issue #11
+### Aéreos SEO — follow-ups post #11
 
-> Plan de acción (D-001 / D-002). Cluster publicado. Ranking T-037: Tier1 GOL+LATAM, Tier2 Avianca+JetSmart, Tier3 resto.
+> Issue #11 cerrado. Hub + LATAM + GOL + medición WA en master. Tier2: Avianca/JetSmart.
 
-- [ ] T-037 — Priorizar próximas 2–3 aerolíneas con datos reales
+- [ ] T-042 — Landings Tier 2 (Avianca + JetSmart) cuando haya go comercial
   - Owner: Valen
   - Agent: —
-  - Scope: `.csdd/decisions.md` + landing GOL (siguiente); sin publicar hasta contenido propio
+  - Scope: `airlinesData` + copy propio; no publicar espejos
   - Target: `development`
-  - Depends on: input comercial de Valen (trámites por compañía).
-  - Note: Ranking cerrado 2026-08-04. Próxima a publicar: **GOL**. Quedan trámites por compañía y wording de independencia. Patrón: `airlinesData` + `published: true`.
-  - Acceptance: lista priorizada documentada; go/no-go por compañía según contenido propio disponible.
+  - Depends on: confirmar matices de trámites vs baseline GOL/LATAM (decisions.md).
+  - Note: Ranking Tier2 definido. Baseline operativo ya documentado; solo falta go/no-go y matices.
+  - Acceptance: landings propias publicadas o diferidas con motivo; sin doorway.
 
 ### Contenido y operación
 
@@ -101,6 +91,21 @@
 ## Recently Completed
 
 Retention: 12
+
+- [x] T-037 — Publicar landing GOL Córdoba + cerrar priorización Tier 1 (issue #11)
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-08-04
+  - Note: `/aereos/gol-cordoba` published; LATAM alineada a trámites reales; independencia explícita. Issue #11 cerrado. Tier2 → T-042.
+
+- [x] T-036 — SEO técnico del cluster + medición de CTAs
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-08-04
+  - Landed: PR #19 on `master`
+  - Note: `wa_click` en nav/footer/hub/landings; smoke `/aereos` + LATAM.
 
 - [x] T-041 — Normalizar metadatos, URL canónica e identidad web (issue #15)
   - Owner: Valen
