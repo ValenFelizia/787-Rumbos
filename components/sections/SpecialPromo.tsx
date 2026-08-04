@@ -81,7 +81,6 @@ function PromoFlyer({
           alt={`Folleto Promocional ${PROMO_CONFIG.title} 787 Rumbos`}
           fill
           sizes="(max-width: 1024px) 200px, 260px"
-          priority
           className="object-cover object-center"
         />
       </div>

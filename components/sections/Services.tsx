@@ -36,7 +36,6 @@ export function Services() {
                   key={service.title}
                   href={service.href}
                   className={`${className} block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#006183]`}
-                  aria-label={`${service.title}: ver más`}
                 >
                   {body}
                 </Link>
