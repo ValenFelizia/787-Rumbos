@@ -150,14 +150,15 @@ export const airlinesData: AirlinePage[] = [
       "787 Rumbos es una agencia de viajes independiente. No somos una oficina oficial ni sucursal de LATAM Airlines.",
     whatWeHandle: [
       "Cotización y emisión de pasajes LATAM según disponibilidad y tarifa.",
+      "Cambios vinculados a tu reserva, según la tarifa y políticas de LATAM.",
+      "Orientación sobre equipaje y ayuda con el check-in cuando hace falta.",
       "Comparación con otras aerolíneas cuando otra opción te conviene más.",
-      "Orientación sobre fechas, conexiones y documentación habitual del viaje.",
-      "Acompañamiento comercial de punta a punta y gestión con proveedores de lo vinculado a tu reserva.",
+      "Comunicación y mediación con la aerolínea si surge un inconveniente con la reserva.",
       "Asistencia al viajero (p. ej. AssistCard / InterAssist) si la sumás a la propuesta.",
     ],
     whatWeRefer: [
-      "Check-in, embarque, estado de vuelo en tiempo real y beneficios del programa de millas de LATAM (LATAM Pass): se gestionan con la aerolínea.",
-      "Cambios, cancelaciones o reembolsos sujetos a la tarifa y políticas de LATAM: te orientamos y mediamos lo vinculado a la reserva; la resolución final depende del proveedor.",
+      "Embarque, estado de vuelo en tiempo real y beneficios del programa de millas (LATAM Pass): se gestionan con la aerolínea.",
+      "Reembolsos o resoluciones finales sujetas a la tarifa y políticas de LATAM: te orientamos y mediamos; la decisión final depende del proveedor.",
     ],
     faq: [
       {
@@ -220,7 +221,7 @@ export const airlinesData: AirlinePage[] = [
           {
             type: "text",
             value:
-              "Depende de la tarifa emitida y de las políticas de LATAM. Te orientamos y ayudamos a gestionar lo vinculado a tu reserva; la resolución final la define la aerolínea según las condiciones de tu ticket.",
+              "Depende de la tarifa emitida y de las políticas de LATAM. Te ayudamos a gestionar el cambio o la cancelación vinculada a tu reserva; la resolución final la define la aerolínea según las condiciones de tu ticket.",
           },
         ],
       },
@@ -233,6 +234,119 @@ export const airlinesData: AirlinePage[] = [
       width: 130,
       height: 40,
       alt: "LATAM Airlines",
+    },
+    published: true,
+  },
+  {
+    id: "gol",
+    slug: "gol-cordoba",
+    shortName: "GOL",
+    displayName: "GOL Linhas Aéreas",
+    metaTitle: "Pasajes GOL en Córdoba | 787 Rumbos",
+    metaDescription:
+      "Cotizá y comprá pasajes GOL en Córdoba con atención humana. Agencia de viajes independiente. 787 Rumbos.",
+    h1: "Pasajes GOL en Córdoba",
+    intro:
+      "Si buscás comprar o cotizar un vuelo GOL desde Córdoba, en 787 Rumbos te asesoramos en persona o por WhatsApp. Emitimos pasajes de GOL y de otras aerolíneas según tu itinerario.",
+    independenceNote:
+      "787 Rumbos es una agencia de viajes independiente. No somos una oficina oficial ni sucursal de GOL Linhas Aéreas.",
+    whatWeHandle: [
+      "Cotización y emisión de pasajes GOL según disponibilidad y tarifa.",
+      "Cambios vinculados a tu reserva, según la tarifa y políticas de GOL.",
+      "Orientación sobre equipaje y ayuda con el check-in cuando hace falta.",
+      "Comparación con otras aerolíneas cuando otra opción te conviene más.",
+      "Comunicación y mediación con la aerolínea si surge un inconveniente con la reserva.",
+      "Asistencia al viajero (p. ej. AssistCard / InterAssist) si la sumás a la propuesta.",
+    ],
+    whatWeRefer: [
+      "Embarque, estado de vuelo en tiempo real y beneficios del programa de millas de GOL: se gestionan con la aerolínea.",
+      "Reembolsos o resoluciones finales sujetas a la tarifa y políticas de GOL: te orientamos y mediamos; la decisión final depende del proveedor.",
+    ],
+    faq: [
+      {
+        id: "gol-oficial",
+        question: "¿787 Rumbos es una oficina oficial de GOL?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "No. Somos una agencia de viajes independiente. Vendemos pasajes de GOL y de otras aerolíneas, con atención humana; no representamos institucionalmente a GOL Linhas Aéreas.",
+          },
+        ],
+      },
+      {
+        id: "gol-comprar",
+        question: "¿Puedo comprar pasajes GOL en el aeropuerto de Córdoba?",
+        answer: [
+          {
+            type: "text",
+            value: `Sí. Podés venir a nuestra oficina o escribirnos por `,
+          },
+          {
+            type: "link",
+            label: "WhatsApp",
+            href: WHATSAPP_LINK,
+            external: true,
+          },
+          {
+            type: "text",
+            value: `. El detalle de ubicación y horarios está más arriba en esta página.`,
+          },
+        ],
+      },
+      {
+        id: "gol-otras",
+        question: "¿Solo trabajan con GOL?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "No. GOL es una de las compañías con las que emitimos; también cotizamos otras aerolíneas según la ruta. Si GOL no es la mejor opción para tus fechas, te lo decimos.",
+          },
+        ],
+      },
+      {
+        id: "gol-cotizar",
+        question: "¿Cómo cotizo un vuelo GOL?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Escribinos por WhatsApp con origen, destino, fechas y cantidad de pasajeros. Te respondemos con opciones concretas en horario de atención.",
+          },
+        ],
+      },
+      {
+        id: "gol-cambios",
+        question: "¿Qué pasa si necesito cambiar el pasaje o el equipaje?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Te ayudamos con cambios y consultas de equipaje vinculados a tu reserva, según la tarifa y las políticas de GOL. Si hay un inconveniente, también podemos mediar la comunicación con la aerolínea; la resolución final depende del proveedor.",
+          },
+        ],
+      },
+      {
+        id: "gol-checkin",
+        question: "¿Me ayudan con el check-in?",
+        answer: [
+          {
+            type: "text",
+            value:
+              "Sí. Podemos orientarte y ayudarte con el check-in cuando hace falta. El embarque y el estado del vuelo en tiempo real siguen dependiendo de GOL.",
+          },
+        ],
+      },
+    ],
+    ctaLabel: "Cotizar GOL por WhatsApp",
+    whatsappText:
+      "Hola 787 Rumbos! Quiero cotizar un pasaje GOL desde Córdoba. (Web - GOL Córdoba)",
+    logo: {
+      src: "/partners/gol.svg",
+      width: 100,
+      height: 40,
+      alt: "GOL Linhas Aéreas",
     },
     published: true,
   },
