@@ -208,6 +208,11 @@ CMS ni scraping solo para sostener esa sección.
 - La imagen social canónica es `public/og-image.jpg` (1200×630, &lt;500 KB),
   referenciada por `openGraph` y `twitter` en `app/layout.tsx`. Regenerar con
   `node scripts/generate-og-image.mjs` si cambia marca o foto base.
+- Identidad de head: `theme-color` `#0b4058`; favicons `favicon.svg` +
+  `favicon-32x32.png`; manifest `site.webmanifest` (display `browser`, sin PWA
+  offline). No publicar `twitter:site` sin handle oficial de X confirmado.
+- El apex `787rumbos.com.ar` debe redirigir de forma **permanente** (301/308)
+  a `www.787rumbos.com.ar` (configuración de dominio en Vercel).
 
 ## Calidad, seguridad y verificación
 

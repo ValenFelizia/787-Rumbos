@@ -9,6 +9,17 @@
 
 ## Ready to Land
 
+- [ ] T-041 — Normalizar metadatos, URL canónica e identidad web (issue #15)
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: `app/layout.tsx`, `app/legal/page.tsx`, `public/favicon*`, `public/icon-*.png`, `public/site.webmanifest`, `scripts/generate-favicons.mjs`, `.csdd/*`
+  - Target: `development`
+  - Updated: 2026-08-04
+  - Source: [GitHub #15](https://github.com/ValenFelizia/787-Rumbos/issues/15)
+  - Landing: merge a `master` + deploy
+  - Verification: description ~140 chars; theme-color `#0b4058`; `/favicon.svg`, `/favicon-32x32.png`, `/site.webmanifest` 200; sin `twitter:site`; apex→www **308** verificado 2026-08-04
+  - Note: P0 Vercel OK (308 Permanent Redirect). P1 código listo. Favicons: `node scripts/generate-favicons.mjs`.
+
 ## Blocked
 
 ## Pending

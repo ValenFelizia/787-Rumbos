@@ -24,11 +24,13 @@ import './globals.css'
 export const metadata: Metadata = {
   title: '787 Rumbos | Agencia de Viajes en Córdoba',
   description:
-    'Agencia de viajes en Córdoba, Argentina. Paquetes personalizados a Río de Janeiro, Bariloche, Cartagena, Ushuaia y más. Financiación disponible. Asesoramiento humano por WhatsApp.',
+    'Agencia de viajes en el Aeropuerto de Córdoba. Pasajes aéreos, ómnibus y paquetes a medida. Financiación disponible y consulta por WhatsApp.',
   metadataBase: new URL('https://www.787rumbos.com.ar'),
   alternates: {
     canonical: 'https://www.787rumbos.com.ar',
   },
+  themeColor: '#0b4058',
+  manifest: '/site.webmanifest',
   openGraph: {
     title: '787 Rumbos | Agencia de Viajes en Córdoba',
     description:
@@ -61,8 +63,11 @@ export const metadata: Metadata = {
     ],
   },
   icons: {
-    icon: [{ url: '/logo.png', type: 'image/png' }],
-    apple: '/logo.png',
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [{ url: '/icon-192.png', sizes: '192x192', type: 'image/png' }],
   },
 }
 
