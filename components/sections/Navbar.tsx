@@ -201,6 +201,7 @@ export function Navbar() {
                   />
                   <SecondaryCta
                     size="sm"
+                    surface="nav"
                     aria-label="Escribinos por WhatsApp — abre el chat directo"
                     className="whitespace-nowrap"
                   />
@@ -281,6 +282,7 @@ export function Navbar() {
             />
             <SecondaryCta
               size="full"
+              surface="nav"
               onClick={() => setIsOpen(false)}
               aria-label="Escribinos por WhatsApp — abre el chat directo"
               className="font-bold"

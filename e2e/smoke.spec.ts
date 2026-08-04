@@ -45,6 +45,28 @@ test.describe("rutas críticas", () => {
       page.getByRole("heading", { name: /información legal/i }),
     ).toBeVisible();
   });
+
+  test("hub de aéreos responde", async ({ page }) => {
+    await page.goto("/aereos");
+    await expect(page).toHaveURL(/\/aereos\/?$/);
+    await expect(
+      page.getByRole("heading", { name: /pasajes aéreos desde córdoba/i }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: /cotizar vuelo por whatsapp/i }).first(),
+    ).toBeVisible();
+  });
+
+  test("landing LATAM Córdoba responde", async ({ page }) => {
+    await page.goto("/aereos/latam-cordoba");
+    await expect(page).toHaveURL(/\/aereos\/latam-cordoba\/?$/);
+    await expect(
+      page.getByRole("heading", { name: /pasajes latam en córdoba/i }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: /cotizar latam por whatsapp/i }).first(),
+    ).toBeVisible();
+  });
 });
 
 test.describe("cotizador", () => {

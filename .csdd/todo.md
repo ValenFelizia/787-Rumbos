@@ -9,16 +9,15 @@
 
 ## Ready to Land
 
-- [ ] T-041 — Normalizar metadatos, URL canónica e identidad web (issue #15)
+- [ ] T-036 — SEO técnico del cluster + medición de CTAs
   - Owner: Valen
   - Agent: Cursor Grok
-  - Scope: `app/layout.tsx`, `app/legal/page.tsx`, `public/favicon*`, `public/icon-*.png`, `public/site.webmanifest`, `scripts/generate-favicons.mjs`, `.csdd/*`
+  - Scope: `wa_click` via Vercel Analytics en hub `/aereos`, landings, nav y footer; smoke e2e `/aereos` + LATAM; `.csdd/*` + issue #11
   - Target: `development`
   - Updated: 2026-08-04
-  - Source: [GitHub #15](https://github.com/ValenFelizia/787-Rumbos/issues/15)
-  - Landing: merge a `master` + deploy
-  - Verification: description ~140 chars; theme-color `#0b4058`; `/favicon.svg`, `/favicon-32x32.png`, `/site.webmanifest` 200; sin `twitter:site`; apex→www **308** verificado 2026-08-04
-  - Note: P0 Vercel OK (308 Permanent Redirect). P1 código listo. Favicons: `node scripts/generate-favicons.mjs`.
+  - Landing: merge a `master` + deploy; verificar Custom Events en Vercel Analytics tras un clic WA
+  - Verification: typecheck OK; smoke `/aereos` + LATAM; evento `wa_click` con `surface`/`airline`
+  - Note: Home CTAs fuera de nav/footer sin track en esta pasada. Ranking T-037 documentado (próxima GOL).
 
 ## Blocked
 
@@ -38,25 +37,15 @@
 
 ### Aéreos SEO — issue #11
 
-> Plan de acción (D-001 / D-002). Cluster aéreos publicado e interlinkeado.
-> Siguiente: medición CTAs (T-036) y priorizar más aerolíneas (T-037).
-
-- [ ] T-036 — SEO técnico del cluster + medición de CTAs
-  - Owner: Valen
-  - Agent: —
-  - Scope: eventos Analytics en CTAs de landings; smoke de rutas `/aereos` si el harness lo permite
-  - Target: `development`
-  - Depends on: T-033, T-034.
-  - Note: Hub + landings ya en sitemap (T-033). Schema BreadcrumbList/FAQPage ya en layouts. Queda instrumentar eventos Vercel Analytics para WA desde hub y LATAM.
-  - Acceptance: clics WA atribuibles a la landing; sin regresiones graves de a11y/perf/SEO.
+> Plan de acción (D-001 / D-002). Cluster publicado. Ranking T-037: Tier1 GOL+LATAM, Tier2 Avianca+JetSmart, Tier3 resto.
 
 - [ ] T-037 — Priorizar próximas 2–3 aerolíneas con datos reales
   - Owner: Valen
   - Agent: —
-  - Scope: `.csdd/decisions.md` (open questions) + datos; sin publicar landings hasta priorizar
+  - Scope: `.csdd/decisions.md` + landing GOL (siguiente); sin publicar hasta contenido propio
   - Target: `development`
-  - Depends on: input comercial de Valen (ventas/consultas post-LATAM).
-  - Note: Cerrar preguntas abiertas de `decisions.md`. Solo entonces abrir tareas de implementación por aerolínea. Evitar páginas espejo. Patrón: agregar a `airlinesData` con `published: true`.
+  - Depends on: input comercial de Valen (trámites por compañía).
+  - Note: Ranking cerrado 2026-08-04. Próxima a publicar: **GOL**. Quedan trámites por compañía y wording de independencia. Patrón: `airlinesData` + `published: true`.
   - Acceptance: lista priorizada documentada; go/no-go por compañía según contenido propio disponible.
 
 ### Contenido y operación
@@ -112,6 +101,14 @@
 ## Recently Completed
 
 Retention: 12
+
+- [x] T-041 — Normalizar metadatos, URL canónica e identidad web (issue #15)
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-08-04
+  - Landed: PR #18 on `master`
+  - Note: description ~140; theme-color; favicons SVG/32/192/512; manifest; canonical `/legal`; apex→www 308. Issue #15 cerrado vía merge.
 
 - [x] T-040 — Renovar y optimizar la imagen Open Graph (issue #14)
   - Owner: Valen

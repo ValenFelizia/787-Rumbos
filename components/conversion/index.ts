@@ -6,3 +6,4 @@ export {
 } from "./cta-copy";
 export { PrimaryCta } from "./PrimaryCta";
 export { SecondaryCta } from "./SecondaryCta";
+export { TrackedWhatsAppLink } from "./TrackedWhatsAppLink";
