@@ -15,6 +15,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Instagram, MapPin, Send, ShieldCheck, Clock } from "lucide-react";
+import { TrackedWhatsAppLink } from "@/components/conversion";
 import {
   AGENCY_PHONE,
   WHATSAPP_LINK,
@@ -139,8 +140,9 @@ export function Footer() {
               <span>{OFFICE_HOURS.short}</span>
             </li>
             <li>
-              <a
+              <TrackedWhatsAppLink
                 href={WHATSAPP_LINK}
+                surface="footer"
                 target="_blank"
                 rel="noreferrer"
                 aria-label={`WhatsApp de la agencia ${AGENCY_PHONE.display}`}
@@ -148,7 +150,7 @@ export function Footer() {
               >
                 <Send className="h-4 w-4" />
                 WhatsApp: {AGENCY_PHONE.display}
-              </a>
+              </TrackedWhatsAppLink>
             </li>
             <li>
               <a

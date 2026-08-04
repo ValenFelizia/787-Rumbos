@@ -46,8 +46,13 @@
 
 ## Open / needs human input
 
-Estas preguntas **no bloquean** hub + LATAM, pero sí bloquean la 2ª/3ª aerolínea y el copy operativo fino:
+Priorización comercial de aerolíneas (Valen, 2026-08-04) — alimenta T-037:
 
-1. ¿Qué aerolíneas concentran más ventas/consultas después de LATAM? (candidatas en marquee/cotizador: Copa, JetSmart, GOL, Avianca, Air Europa, Arajet — falta priorización comercial).
-2. ¿Qué trámites puede resolver 787 Rumbos por compañía (emisión, cambios, equipaje, check-in) y cuáles se derivan a la aerolínea?
-3. ¿Hay relación comercial autorizada con LATAM (u otra) que permita un wording más fuerte que “agencia independiente”? Por defecto: independiente.
+1. **Tier 1 (más ventas):** GOL y LATAM (LATAM ya publicada).
+2. **Tier 2:** Avianca y JetSmart.
+3. **Tier 3:** el resto (Copa, Air Europa, Arajet, etc.).
+
+Preguntas que **sí bloquean** copy fino / 2ª–3ª landing:
+
+1. ¿Qué trámites puede resolver 787 Rumbos por compañía (emisión, cambios, equipaje, check-in) y cuáles se derivan a la aerolínea? (empezar por GOL al ser la próxima a publicar).
+2. ¿Hay relación comercial autorizada con LATAM, GOL u otra que permita un wording más fuerte que “agencia independiente”? Por defecto: independiente.

@@ -9,6 +9,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { FAQ } from "@/components/sections/FAQ";
+import { TrackedWhatsAppLink } from "@/components/conversion";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import {
   AEREOS_BASE_PATH,
@@ -56,15 +57,16 @@ export function AereosHub() {
           <p className="max-w-2xl text-base leading-relaxed text-pretty text-white/85 md:text-lg">
             {aereosHub.intro}
           </p>
-          <a
+          <TrackedWhatsAppLink
             href={whatsappUrl}
+            surface="aereos_hub"
             target="_blank"
             rel="noopener noreferrer"
             className="font-[family-name:var(--font-elaine)] inline-flex items-center gap-2 rounded-xl bg-[#dae553] px-6 py-3 text-sm font-black text-[#0b4058] shadow-md transition-all hover:bg-[#c3cf3e] active:scale-[0.96]"
           >
             <WhatsAppIcon size={16} className="h-4 w-4" />
             {aereosHub.ctaLabel}
-          </a>
+          </TrackedWhatsAppLink>
         </div>
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent" />
       </section>
@@ -99,14 +101,15 @@ export function AereosHub() {
           {airlines.length === 0 ? (
             <p className="text-sm text-[#0b4058]/80">
               Pronto vamos a publicar landings por aerolínea. Mientras tanto,{" "}
-              <a
+              <TrackedWhatsAppLink
                 href={whatsappUrl}
+                surface="aereos_hub"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-semibold text-[#006183] underline decoration-[#006183]/30 underline-offset-2"
               >
                 cotizá por WhatsApp
-              </a>
+              </TrackedWhatsAppLink>
               .
             </p>
           ) : (
@@ -189,14 +192,15 @@ export function AereosHub() {
         description={
           <>
             ¿Otra duda?{" "}
-            <a
+            <TrackedWhatsAppLink
               href={whatsappUrl}
+              surface="aereos_hub"
               className="font-semibold text-[#006183] underline decoration-[#006183]/30 underline-offset-2 transition-colors hover:text-[#0b4058]"
               target="_blank"
               rel="noopener noreferrer"
             >
               Escribinos por WhatsApp
-            </a>
+            </TrackedWhatsAppLink>
             .
           </>
         }
@@ -211,15 +215,16 @@ export function AereosHub() {
             Contanos origen, destino, fechas y pasajeros. Te respondemos con
             opciones concretas en horario de atención.
           </p>
-          <a
+          <TrackedWhatsAppLink
             href={whatsappUrl}
+            surface="aereos_hub"
             target="_blank"
             rel="noopener noreferrer"
             className="font-[family-name:var(--font-elaine)] inline-flex items-center gap-2 rounded-xl bg-[#dae553] px-8 py-3.5 text-sm font-black text-[#0b4058] shadow-md transition-all hover:bg-[#c3cf3e] active:scale-[0.96]"
           >
             <WhatsAppIcon size={16} className="h-5 w-5" />
             {aereosHub.ctaLabel}
-          </a>
+          </TrackedWhatsAppLink>
         </div>
       </section>
 
