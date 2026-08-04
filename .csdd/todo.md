@@ -9,17 +9,6 @@
 
 ## Ready to Land
 
-- [ ] T-029 — Auditar Lighthouse / Core Web Vitals de la home
-  - Owner: Valen
-  - Agent: Cursor Grok
-  - Scope: re-medida prod + fixes P1 (sizes logos/AboutUs/partners, a11y labels Services/Footer, sin priority en flyer promo); `.csdd/todo.md`
-  - Target: `development`
-  - Updated: 2026-08-04
-  - Landing: merge + deploy; re-correr Lighthouse mobile en prod
-  - Verification: baseline 2026-08-04 mobile prod Perf **71** / A11y **100** / BP **100** / SEO **100**; LCP **4.5s** (TTFB 0.9s + load delay 1.4s + load 2.2s); CLS 0; TBT 460ms. Previos: Perf 81 / A11y 86 / LCP 4.8s.
-  - Note: P1 aplicados localmente. Residuales aceptados: LCP dominado por peso/descarga de `hero-bg` + TTFB (sin rediseño); main-thread ~2.5s (style/script); AFIP `<img>` sin Next Image (requisito AFIP). Variabilidad lab Perf 71 vs 81 histórica — no tratar como regresión dura.
-  - Acceptance: baseline documentada; P0/P1 accionables resueltos o explicitados; sin degradar conversión/a11y.
-
 ## Blocked
 
 ## Pending
@@ -90,6 +79,14 @@
 ## Recently Completed
 
 Retention: 12
+
+- [x] T-029 — Auditar Lighthouse / Core Web Vitals de la home
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: released
+  - Updated: 2026-08-04
+  - Landed: PR #21 on `master`
+  - Note: baseline mobile prod Perf 71 / A11y 100 / BP 100 / SEO 100; LCP 4.5s; CLS 0. P1: sizes logos/AboutUs/partners; a11y Services/Footer; sin priority en flyer promo. Residuales aceptados: LCP/TTFB hero; main-thread; AFIP raw img.
 
 - [x] T-037 — Publicar landing GOL Córdoba + cerrar priorización Tier 1 (issue #11)
   - Owner: Valen
