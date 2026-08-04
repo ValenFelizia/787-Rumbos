@@ -19,7 +19,7 @@ export function AboutUs() {
               alt="Local de 787 Rumbos y Vía Bariloche en el hall de arribos del Aeropuerto de Córdoba"
               width={800}
               height={600}
-              sizes="(max-width: 768px) 100vw, 42vw"
+              sizes="(max-width: 768px) 92vw, 380px"
               className="h-[260px] w-full object-cover object-[center_30%] md:h-[380px]"
             />
           </div>
@@ -29,7 +29,7 @@ export function AboutUs() {
               alt="Integrante del equipo 787 Rumbos en una feria de turismo"
               width={500}
               height={375}
-              sizes="(max-width: 768px) 55vw, 25vw"
+              sizes="(max-width: 768px) 50vw, 220px"
               className="h-[150px] w-full object-cover object-top md:h-[220px]"
             />
           </div>

@@ -51,6 +51,7 @@ export function PartnersMarquee() {
                 alt={logo.name}
                 width={logo.width}
                 height={logo.height}
+                sizes={`${logo.width}px`}
                 className="h-8 w-auto max-w-none object-contain md:h-9"
               />
             </div>

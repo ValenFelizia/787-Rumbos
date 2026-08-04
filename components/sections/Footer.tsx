@@ -33,6 +33,7 @@ export function Footer() {
             alt="Logo 787 Rumbos"
             width={300}
             height={64}
+            sizes="160px"
             className="h-12 w-auto object-contain brightness-0 invert md:h-14"
           />
           <p className="mt-4 text-sm text-white/80">Agencia habilitada - Legajo 20455.</p>
@@ -145,7 +146,7 @@ export function Footer() {
                 surface="footer"
                 target="_blank"
                 rel="noreferrer"
-                aria-label={`WhatsApp de la agencia ${AGENCY_PHONE.display}`}
+                aria-label={`WhatsApp: ${AGENCY_PHONE.display}`}
                 className="flex items-center gap-2 text-white/90 transition hover:text-[#dae553]"
               >
                 <Send className="h-4 w-4" />
