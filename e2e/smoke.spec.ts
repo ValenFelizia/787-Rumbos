@@ -106,3 +106,32 @@ test.describe("cotizador", () => {
     ).toBeVisible();
   });
 });
+
+test.describe("navbar en el hero", () => {
+  test("mantiene los CTAs desktop ocultos desde el HTML inicial y al volver arriba", async ({ page }) => {
+    const response = await page.goto("/", { waitUntil: "domcontentloaded" });
+
+    expect(response).not.toBeNull();
+    expect(await response?.text()).toContain('aria-hidden="true"');
+
+    const nav = page.getByRole("navigation", { name: "Navegación principal" });
+    const navCtaGroup = nav.locator("div[aria-hidden]").first();
+    const navCtaGrid = nav.locator("div.opacity-0").first();
+    const navCta = nav.locator('button[aria-label^="Armar viaje"]').first();
+
+    await expect(navCtaGroup).toHaveAttribute("aria-hidden", "true");
+    await expect(navCtaGroup).toHaveAttribute("inert", "");
+    await expect(navCtaGrid).toHaveCSS("opacity", "0");
+
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await expect(navCta).toBeVisible();
+    await expect(navCtaGroup).toHaveAttribute("aria-hidden", "false");
+
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await expect(navCtaGroup).toHaveAttribute("aria-hidden", "true");
+    await expect(navCtaGrid).toHaveCSS("opacity", "0");
+
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await expect(nav.locator("div.opacity-0").first()).toHaveCSS("opacity", "0");
+  });
+});

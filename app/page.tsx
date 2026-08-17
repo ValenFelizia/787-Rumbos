@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#f9f9f9] text-[#0b4058]">
       <SpecialPromo />
-      <Navbar />
+      <Navbar isHome />
       <Hero />
       <TrustBar />
       <AboutUs />
