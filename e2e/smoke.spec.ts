@@ -106,3 +106,55 @@ test.describe("cotizador", () => {
     ).toBeVisible();
   });
 });
+
+test.describe("navbar en el hero", () => {
+  test("mantiene los CTAs desktop ocultos desde el HTML inicial y al volver arriba", async ({ page }) => {
+    const response = await page.goto("/", { waitUntil: "domcontentloaded" });
+
+    expect(response).not.toBeNull();
+    const initialHtml = await response!.text();
+    const initialDesktopCtaMarkup = initialHtml.match(
+      /<div[^>]*data-testid="desktop-navbar-ctas"[^>]*>/
+    )?.[0];
+
+    expect(initialDesktopCtaMarkup).toContain('aria-hidden="true"');
+    expect(initialDesktopCtaMarkup).toContain('inert=""');
+
+    const nav = page.getByRole("navigation", { name: "Navegación principal" });
+    const navCtaGroup = nav.getByTestId("desktop-navbar-ctas");
+    const navCtaGrid = nav.locator("div.opacity-0").first();
+    const navCta = nav.locator('button[aria-label^="Armar viaje"]').first();
+
+    await expect(navCtaGroup).toHaveAttribute("aria-hidden", "true");
+    await expect(navCtaGroup).toHaveAttribute("inert", "");
+    await expect(navCtaGrid).toHaveCSS("opacity", "0");
+
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await expect(navCta).toBeVisible();
+    await expect(navCtaGroup).toHaveAttribute("aria-hidden", "false");
+
+    const glowGeometry = await navCta.evaluate((button) => {
+      const clipContainer = button.closest<HTMLElement>(".navbar-cta-clip");
+      if (!clipContainer) return null;
+
+      const clipStyles = window.getComputedStyle(clipContainer);
+      return {
+        boxShadow: window.getComputedStyle(button).boxShadow,
+        overflow: clipStyles.overflow,
+        overflowClipMargin: Number.parseFloat(clipStyles.overflowClipMargin),
+      };
+    });
+
+    expect(glowGeometry).not.toBeNull();
+    expect(glowGeometry?.boxShadow).not.toBe("none");
+    expect(glowGeometry?.overflow).toBe("clip");
+    expect(glowGeometry?.overflowClipMargin).toBeGreaterThanOrEqual(24);
+
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await expect(navCtaGroup).toHaveAttribute("aria-hidden", "true");
+    await expect(navCtaGrid).toHaveCSS("opacity", "0");
+
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await expect(nav.locator("div.opacity-0").first()).toHaveCSS("opacity", "0");
+  });
+});

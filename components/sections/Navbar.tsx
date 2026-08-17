@@ -3,12 +3,12 @@
  * components/sections/Navbar.tsx
  *
  * Barra sticky. En desktop, los CTAs se ocultan mientras #hero ocupa el viewport
- * (T-028 / T-030) para no duplicar el par del Hero; al scrollear fuera reaparecen.
+ * (T-028 / T-030 / T-043) para no duplicar el par del Hero; al scrollear fuera
+ * reaparecen.
  */
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { PrimaryCta, SecondaryCta } from "@/components/conversion";
 import { useModal } from "@/lib/context/ModalContext";
@@ -35,21 +35,26 @@ function isHeroOccupyingViewport(): boolean {
   return hero.getBoundingClientRect().bottom > NAV_CLEARANCE_PX;
 }
 
-export function Navbar() {
+type NavbarProps = {
+  /** The home route needs deterministic SSR markup before client hydration. */
+  isHome?: boolean;
+};
+
+export function Navbar({ isHome = false }: NavbarProps) {
   const { openModal } = useModal();
-  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   // Home: arrancar ocultos (Hero ya lleva el par). Otras rutas: siempre visibles.
-  const [showDesktopCtas, setShowDesktopCtas] = useState(pathname !== "/");
+  // Keep this route decision server-deterministic to avoid a hydration flash.
+  const [showDesktopCtas, setShowDesktopCtas] = useState(!isHome);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const menuDialogRef = useRef<HTMLDivElement>(null);
   const closeMenuButtonRef = useRef<HTMLButtonElement>(null);
   const desktopCtasRef = useRef<HTMLDivElement>(null);
   const logoLinkRef = useRef<HTMLAnchorElement>(null);
 
-  // T-028: CTAs desktop siguen la geometría del Hero (sync + scroll/resize).
+  // T-028/T-043: CTAs desktop siguen la geometría del Hero (sync + scroll/resize).
   useEffect(() => {
-    if (pathname !== "/") {
+    if (!isHome) {
       setShowDesktopCtas(true);
       return;
     }
@@ -70,7 +75,7 @@ export function Navbar() {
       window.removeEventListener("scroll", syncCtaVisibility);
       window.removeEventListener("resize", syncCtaVisibility);
     };
-  }, [pathname]);
+  }, [isHome]);
 
   // Si los CTAs se ocultan con foco dentro, devolverlo al logo.
   useEffect(() => {
@@ -188,9 +193,10 @@ export function Navbar() {
                   : "grid-cols-[0fr] opacity-0"
               }`}
             >
-              <div className="min-w-0 overflow-hidden">
+              <div className="navbar-cta-clip min-w-0">
                 <div
                   ref={desktopCtasRef}
+                  data-testid="desktop-navbar-ctas"
                   className="flex items-center gap-2 pr-0.5"
                   aria-hidden={!showDesktopCtas}
                   {...(!showDesktopCtas ? { inert: true } : {})}
