@@ -195,6 +195,7 @@ export function Navbar({ isHome = false }: NavbarProps) {
               <div className="min-w-0 overflow-hidden">
                 <div
                   ref={desktopCtasRef}
+                  data-testid="desktop-navbar-ctas"
                   className="flex items-center gap-2 pr-0.5"
                   aria-hidden={!showDesktopCtas}
                   {...(!showDesktopCtas ? { inert: true } : {})}

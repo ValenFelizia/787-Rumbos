@@ -112,10 +112,16 @@ test.describe("navbar en el hero", () => {
     const response = await page.goto("/", { waitUntil: "domcontentloaded" });
 
     expect(response).not.toBeNull();
-    expect(await response?.text()).toContain('aria-hidden="true"');
+    const initialHtml = await response!.text();
+    const initialDesktopCtaMarkup = initialHtml.match(
+      /<div[^>]*data-testid="desktop-navbar-ctas"[^>]*>/
+    )?.[0];
+
+    expect(initialDesktopCtaMarkup).toContain('aria-hidden="true"');
+    expect(initialDesktopCtaMarkup).toContain('inert=""');
 
     const nav = page.getByRole("navigation", { name: "Navegación principal" });
-    const navCtaGroup = nav.locator("div[aria-hidden]").first();
+    const navCtaGroup = nav.getByTestId("desktop-navbar-ctas");
     const navCtaGrid = nav.locator("div.opacity-0").first();
     const navCta = nav.locator('button[aria-label^="Armar viaje"]').first();
 
