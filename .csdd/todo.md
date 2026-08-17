@@ -9,6 +9,15 @@
 
 ## Ready to Land
 
+- [ ] T-044 — Corregir el glow incompleto del CTA “Armar viaje” en la navbar (issue #26)
+  - Owner: Valen
+  - Agent: Codex
+  - Scope: `components/sections/Navbar.tsx` + `app/globals.css`; halo local del Navbar, sin cambiar visibilidad/hidratación ni `PrimaryCta` compartido.
+  - Target: `development`
+  - Landing: draft PR hacia `master` desde `codex/issue-26-navbar-glow`.
+  - Verification: lint, typecheck y build OK; QA visual desktop/mobile OK; smoke E2E no ejecutado porque `127.0.0.1:3100` ya estaba ocupado.
+  - Note: sombra anterior desplazada (`0 1px 3px`) reemplazada por halo simétrico con offset `0 0`; hover y focus-visible conservan feedback.
+
 ## Blocked
 
 ## Pending

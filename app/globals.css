@@ -66,6 +66,19 @@
   }
 }
 
+/* Halo del CTA de la navbar: centrado y con la misma geometría redondeada. */
+.navbar-primary-cta {
+  box-shadow: 0 0 12px 2px rgb(247 169 42 / 0.4);
+}
+
+.navbar-primary-cta:hover {
+  box-shadow: 0 0 16px 3px rgb(247 169 42 / 0.55);
+}
+
+.navbar-primary-cta:focus-visible {
+  box-shadow: 0 0 0 3px rgb(247 169 42 / 0.65);
+}
+
 /* ─────────────────────────────────────────
    4. Motion mínimo (T-024)
    Solo transform/opacity. Contenido legible sin depender de JS.
