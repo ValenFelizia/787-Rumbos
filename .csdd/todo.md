@@ -9,6 +9,16 @@
 
 ## Ready to Land
 
+- [ ] T-044 — Corregir el glow incompleto del CTA “Armar viaje” en la navbar (issue #26)
+  - Owner: Valen
+  - Agent: Codex
+  - Scope: `components/sections/Navbar.tsx`, `app/globals.css`, `e2e/smoke.spec.ts` y `.csdd/todo.md`; halo local del Navbar y clipping del contenedor, sin cambiar `PrimaryCta` compartido.
+  - Target: `master`
+  - Depends on: T-043 / draft PR #28 debe integrarse primero.
+  - Landing: draft PR #27 hacia `master` desde `codex/issue-26-navbar-glow` — https://github.com/ValenFelizia/787-Rumbos/pull/27.
+  - Verification: lint, typecheck y build OK; smoke E2E 9/9 assertions OK; QA desktop/mobile, hover, focus-visible y primer render OK.
+  - Note: la sombra desplazada no era la única causa; `overflow-hidden` recortaba el halo. Se reemplaza por clipping con margen visual, manteniendo el colapso horizontal de los CTAs.
+
 - [ ] T-043 — Corregir el flash de CTAs del Navbar al cargar el Hero (issue #25)
   - Owner: Valen
   - Agent: Codex

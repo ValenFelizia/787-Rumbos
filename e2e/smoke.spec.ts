@@ -133,6 +133,23 @@ test.describe("navbar en el hero", () => {
     await expect(navCta).toBeVisible();
     await expect(navCtaGroup).toHaveAttribute("aria-hidden", "false");
 
+    const glowGeometry = await navCta.evaluate((button) => {
+      const clipContainer = button.closest<HTMLElement>(".navbar-cta-clip");
+      if (!clipContainer) return null;
+
+      const clipStyles = window.getComputedStyle(clipContainer);
+      return {
+        boxShadow: window.getComputedStyle(button).boxShadow,
+        overflow: clipStyles.overflow,
+        overflowClipMargin: Number.parseFloat(clipStyles.overflowClipMargin),
+      };
+    });
+
+    expect(glowGeometry).not.toBeNull();
+    expect(glowGeometry?.boxShadow).not.toBe("none");
+    expect(glowGeometry?.overflow).toBe("clip");
+    expect(glowGeometry?.overflowClipMargin).toBeGreaterThanOrEqual(24);
+
     await page.evaluate(() => window.scrollTo(0, 0));
     await expect(navCtaGroup).toHaveAttribute("aria-hidden", "true");
     await expect(navCtaGrid).toHaveCSS("opacity", "0");

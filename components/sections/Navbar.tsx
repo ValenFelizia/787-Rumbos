@@ -21,6 +21,7 @@ const FOCUSABLE_SELECTOR = [
 
 /** Sticky nav clearance; hero still below this → CTAs del nav ocultos. */
 const NAV_CLEARANCE_PX = 80;
+const NAVBAR_PRIMARY_CTA_GLOW_CLASS = "navbar-primary-cta";
 
 /**
  * ¿El Hero sigue ocupando viewport debajo del nav?
@@ -192,7 +193,7 @@ export function Navbar({ isHome = false }: NavbarProps) {
                   : "grid-cols-[0fr] opacity-0"
               }`}
             >
-              <div className="min-w-0 overflow-hidden">
+              <div className="navbar-cta-clip min-w-0">
                 <div
                   ref={desktopCtasRef}
                   data-testid="desktop-navbar-ctas"
@@ -204,7 +205,7 @@ export function Navbar({ isHome = false }: NavbarProps) {
                     size="sm"
                     onClick={() => openModal()}
                     aria-label="Armar viaje — abre el cotizador personalizado"
-                    className="shadow-sm shadow-[#f7a92a]/30 whitespace-nowrap"
+                    className={`${NAVBAR_PRIMARY_CTA_GLOW_CLASS} whitespace-nowrap`}
                   />
                   <SecondaryCta
                     size="sm"
@@ -286,7 +287,7 @@ export function Navbar({ isHome = false }: NavbarProps) {
                 openModal();
               }}
               aria-label="Armar viaje — abre el cotizador personalizado"
-              className="font-bold shadow-md"
+              className={`${NAVBAR_PRIMARY_CTA_GLOW_CLASS} font-bold`}
             />
             <SecondaryCta
               size="full"
