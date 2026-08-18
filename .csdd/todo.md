@@ -9,6 +9,16 @@
 
 ## Ready to Land
 
+- [ ] T-043 — Corregir el flash de CTAs del Navbar al cargar el Hero (issue #25)
+  - Owner: Valen
+  - Agent: Codex
+  - Scope: `components/sections/Navbar.tsx`, `app/page.tsx`, `e2e/smoke.spec.ts`, `.csdd/todo.md`; no tocar `PrimaryCta` ni el glow del issue #26
+  - Target: `master`
+  - Updated: 2026-08-17
+  - Landing: [draft PR #28](https://github.com/ValenFelizia/787-Rumbos/pull/28) hacia `master`; sin merge manual del issue
+  - Verification: lint OK (1 warning preexistente en `Footer.tsx`), typecheck OK, build OK, smoke E2E 9/9 OK; QA visual desktop/mobile OK
+  - Note: el estado inicial del home se hace determinista con `isHome`, evitando depender de `usePathname()` durante render/hidratación. Se preservan transición geométrica, `aria-hidden`, `inert`, foco y CTAs mobile.
+
 ## Blocked
 
 ## Pending
