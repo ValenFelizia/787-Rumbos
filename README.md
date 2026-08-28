@@ -71,7 +71,6 @@ e2e/                  # Smoke tests
 
 | Rol | Valor |
 | --- | --- |
-| Agencia (CTAs / cotización) | +54 9 351 344-8724 |
-| Urgencias (viaje en curso) | +54 9 351 615-7398 — footer/FAQ, no CTAs comerciales |
+| Agencia / urgencias (único) | +54 9 351 344-8724 — CTAs, footer, FAQ, schema |
 | Oficina | lun–vie 8:30–18:00 · sáb 8:30–13:00 |
 | Maps / GBP | [maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7](https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7) |

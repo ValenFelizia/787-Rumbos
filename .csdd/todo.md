@@ -7,6 +7,13 @@
 
 ## In Progress
 
+- [ ] T-045 — Publicar el WhatsApp oficial de agencia (+54 9 351 344-8724)
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: `lib/constants.ts` (`AGENCY_PHONE`), `.csdd/specs.md`, `.csdd/todo.md`, `README.md`; retirar el número personal de cualquier superficie pública.
+  - Target: `master`
+  - Note: el tráfico al número personal satura la línea familiar; el oficial es más disponible. Fuente única: `AGENCY_PHONE` (CTAs, schema, footer, wa.me/tel).
+
 ## Ready to Land
 
 - [ ] T-044 — Corregir el glow incompleto del CTA “Armar viaje” en la navbar (issue #26)
