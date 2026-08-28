@@ -9,6 +9,15 @@
 
 ## Ready to Land
 
+- [ ] T-045 — Publicar el WhatsApp oficial de agencia (+54 9 351 344-8724)
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: `lib/constants.ts` (`AGENCY_PHONE`), `.csdd/specs.md`, `.csdd/todo.md`, `README.md`; retirar el número personal de cualquier superficie pública.
+  - Target: `master`
+  - Landing: draft PR #30 hacia `master` desde `cursor/agency-whatsapp-number-2575`
+  - Verification: lint OK (1 warning preexistente Footer), typecheck OK, build OK; smoke E2E 9/9 OK; HTML/schema/footer usan `5493513448724` / `+54 9 351 344-8724`; número personal ausente del build.
+  - Note: el tráfico al número personal satura la línea familiar; el oficial es más disponible. Fuente única: `AGENCY_PHONE` (CTAs, schema, footer, wa.me/tel).
+
 - [ ] T-044 — Corregir el glow incompleto del CTA “Armar viaje” en la navbar (issue #26)
   - Owner: Valen
   - Agent: Codex

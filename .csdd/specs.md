@@ -75,8 +75,8 @@ mantenerse consistentes:
 | Dirección | Av. La Voz del Interior 8500, Córdoba, Argentina |
 | Referencia | Hall de arribos, dentro del local oficial de Vía Bariloche |
 | Código postal | X5147XAA |
-| Teléfono de agencia (principal) | 0351 615-7398 (`+54 9 351 615-7398`) — CTAs, schema, NAP, GBP (`AGENCY_PHONE`) |
-| Línea de urgencias (viaje en curso) | Mismo número que agencia (`URGENT_PHONE` = `AGENCY_PHONE`, T-038). El número previo 0351 344-8724 queda reservado para la futura expansión de pasajes aéreos. |
+| Teléfono de agencia (principal) | 0351 344-8724 (`+54 9 351 344-8724`) — CTAs, schema, NAP, GBP (`AGENCY_PHONE`) |
+| Línea de urgencias (viaje en curso) | Mismo número que agencia (`URGENT_PHONE` = `AGENCY_PHONE`). Canal único oficial; no publicar números personales. |
 | Google Maps / GBP | [maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7](https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7) (place `787 Rumbos`) |
 | Coordenadas (schema) | `-31.3172806, -64.2131382` |
 | Place key (Maps) | `0x94329becff1264df:0xc85a96783374e09f` · feature `/g/11nr4bc4fc` |
@@ -84,11 +84,10 @@ mantenerse consistentes:
 | QR reseñas | `public/qr-resenas-787.png` (`GOOGLE_REVIEW_QR_SRC`) |
 
 Canal público principal: WhatsApp de agencia (`AGENCY_PHONE` en `lib/constants.ts`).
-Tras T-038, `URGENT_PHONE` apunta al mismo número; el contacto público queda unificado
-en +54 9 351 615-7398. El número previo (351 344-8724) queda reservado para la
-futura expansión de pasajes aéreos y no debe reaparecer en CTAs/NAP/schema sin
-decisión explícita. Footer, schema, Google Business Profile y citaciones deben
-reflejar el NAP canónico de la tabla. El enlace de Maps del sitio
+`URGENT_PHONE` apunta al mismo número; el contacto público queda unificado en
++54 9 351 344-8724 (número oficial de la agencia). No publicar números personales
+en CTAs, NAP, schema ni citaciones. Footer, schema, Google Business Profile y
+citaciones deben reflejar el NAP canónico de la tabla. El enlace de Maps del sitio
 (`GOOGLE_MAPS_LINK`) debe apuntar a la ficha de **787 Rumbos**, no a una búsqueda
 genérica del aeropuerto.
 
