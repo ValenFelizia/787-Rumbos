@@ -28,7 +28,7 @@ type RumboMedia = {
 };
 
 const CARD_SHELL =
-  "group relative block w-full overflow-hidden rounded-[22px] text-left cursor-pointer md:rounded-[28px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e6b451] motion-safe:transition-transform motion-safe:duration-300 motion-safe:ease-out motion-safe:hover:-translate-y-0.5";
+  "group relative block w-full overflow-hidden rounded-[22px] bg-[#0b4058] text-left cursor-pointer md:rounded-[28px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e6b451] motion-safe:transition-transform motion-safe:duration-300 motion-safe:ease-out motion-safe:hover:-translate-y-0.5";
 
 function RumboCardFace({
   title,
@@ -47,6 +47,7 @@ function RumboCardFace({
         alt={alt}
         fill
         sizes={sizes}
+        loading="eager"
         className={`object-cover ${imagePosition} motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out motion-safe:group-hover:scale-[1.04]`}
       />
       {/* Gradiente localizado al texto: no oscurece la foto entera. */}
@@ -128,7 +129,7 @@ export function RumboSelector() {
                   <RumboCardFace
                     title="Quiero playa"
                     subtitle="Brasil y Caribe desde Córdoba."
-                    image="/destinos/portogalinhas.jpg"
+                    image="/rumbos/playa.jpg"
                     alt="Agua turquesa y velero en Porto de Galinhas, Brasil"
                     sizes="(max-width: 768px) 100vw, 42vw"
                     titleSize="tile"
@@ -141,7 +142,7 @@ export function RumboSelector() {
                   <RumboCardFace
                     title="Quiero recorrer Argentina"
                     subtitle="Salidas en bus desde Córdoba · Vía Bariloche"
-                    image="/destinos/cataratas.jpg"
+                    image="/rumbos/argentina.jpg"
                     alt="Cataratas del Iguazú, un clásico del turismo argentino"
                     sizes="(max-width: 768px) 100vw, 42vw"
                     titleSize="tile"
@@ -158,7 +159,7 @@ export function RumboSelector() {
                 <RumboCardFace
                   title="Quiero una salida grupal"
                   subtitle="Fechas confirmadas desde Córdoba."
-                  image="/destinos/bariloche.jpg"
+                    image="/rumbos/grupal.jpg"
                   alt="Centro Cívico de Bariloche junto al lago Nahuel Huapi"
                   sizes="(max-width: 640px) 100vw, 50vw"
                   titleSize="tile"
@@ -173,7 +174,7 @@ export function RumboSelector() {
                 <RumboCardFace
                   title="Lo armamos con vos"
                   subtitle="Cotizamos fechas y presupuesto por WhatsApp."
-                  image="/nosotros-local.jpg"
+                    image="/rumbos/medida.jpg"
                   alt="Local de 787 Rumbos en el hall de arribos del Aeropuerto de Córdoba"
                   imagePosition="object-[22%_center]"
                   sizes="(max-width: 640px) 100vw, 50vw"
@@ -185,7 +186,7 @@ export function RumboSelector() {
         </nav>
 
         <div className="mt-10 rounded-[24px] bg-[#0b4058] px-6 py-8 md:px-10 md:py-9">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between">
             <div className="max-w-xl">
               <p className="font-[family-name:var(--font-elaine)] text-2xl font-bold tracking-tight text-white md:text-[1.75rem] text-balance">
                 ¿Ya tenés fechas o destino?
@@ -194,15 +195,15 @@ export function RumboSelector() {
                 Contanos lo que ya sabés y lo armamos juntos. {CTA_SLA_TEXT}.
               </p>
             </div>
-            <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+            <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:self-start xl:shrink-0 xl:self-auto">
               <PrimaryCta
                 onClick={() => openModal()}
                 aria-label="Armar viaje — abre el cotizador personalizado"
-                className="font-bold"
+                className="font-bold whitespace-nowrap"
               />
               <SecondaryCta
                 aria-label="Escribinos por WhatsApp — abre el chat directo"
-                className="font-bold"
+                className="font-bold whitespace-nowrap"
               />
             </div>
           </div>
