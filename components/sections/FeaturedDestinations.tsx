@@ -28,10 +28,10 @@ export function FeaturedDestinations() {
       <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div className="space-y-3">
           <h2 className="font-[family-name:var(--font-brand-heading)] text-3xl font-extrabold tracking-tight md:text-4xl text-[#0b4058] text-balance">
-            ¿Cuál es tu próximo rumbo?
+            Próximas salidas desde Córdoba
           </h2>
           <p className="max-w-xl text-[#0b4058]/80 text-sm md:text-base leading-relaxed text-pretty">
-            Explorá nuestras próximas salidas grupales confirmadas desde Córdoba, o planificá tu próximo destino a medida.
+            Grupales confirmadas, con fecha. Si no está el destino que buscás, lo armamos a medida.
           </p>
         </div>
         <Link

@@ -9,6 +9,30 @@ import { expect, test } from "@playwright/test";
  */
 
 test.describe("rutas críticas", () => {
+  test("el selector de rumbo deriva vuelos al hub de aéreos", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await expect(
+      page.getByRole("heading", { name: /qué rumbo estás buscando/i }),
+    ).toBeVisible();
+    await page.getByRole("link", { name: /quiero un vuelo/i }).click();
+    await expect(page).toHaveURL(/\/aereos\/?$/);
+    await expect(
+      page.getByRole("heading", { name: /pasajes aéreos desde córdoba/i }),
+    ).toBeVisible();
+  });
+
+  test("la card a medida abre el cotizador", async ({ page }) => {
+    await page.goto("/");
+    await page
+      .getByRole("button", { name: /lo armamos con vos/i })
+      .click();
+    await expect(
+      page.getByRole("dialog", { name: /armá tu viaje a medida/i }),
+    ).toBeVisible();
+  });
+
   test("home carga con la marca y el CTA principal", async ({ page }) => {
     await page.goto("/");
     await expect(

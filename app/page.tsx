@@ -11,6 +11,7 @@ import { PartnersMarquee } from "@/components/sections/PartnersMarquee";
 import { ValueProposition } from "@/components/sections/ValueProposition";
 import { AboutUs } from "@/components/sections/AboutUs";
 import { InstagramFeed } from "@/components/sections/InstagramFeed";
+import { RumboSelector } from "@/components/sections/RumboSelector";
 import { FeaturedDestinations } from "@/components/sections/FeaturedDestinations";
 import { SpecialPromo } from "@/components/sections/SpecialPromo";
 import { Services } from "@/components/sections/Services";
@@ -29,6 +30,7 @@ export default function Home() {
       <AboutUs />
       <PartnersMarquee />
       <ValueProposition />
+      <RumboSelector />
       <FeaturedDestinations />
       <Testimonials />
       <Services />
