@@ -8,7 +8,6 @@
  */
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin } from "lucide-react";
 import {
   PrimaryCta,
   SecondaryCta,
@@ -82,10 +81,7 @@ export function RumboSelector() {
   const { openModal } = useModal();
 
   return (
-    <section
-      aria-labelledby="rumbo-selector-heading"
-      className="bg-[#f8f1e7]"
-    >
+    <section aria-labelledby="rumbo-selector-heading">
       <div className="mx-auto w-full max-w-6xl px-6 py-14 md:py-16">
         <header className="mb-8 max-w-2xl md:mb-10">
           <h2
@@ -94,13 +90,6 @@ export function RumboSelector() {
           >
             ¿Qué rumbo estás buscando?
           </h2>
-          <p className="mt-3 flex items-start gap-1.5 text-sm text-[#0b4058]/65">
-            <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden />
-            <span>Atendemos en el hall de arribos · Vía Bariloche</span>
-          </p>
-          <p className="mt-4 max-w-xl text-sm leading-relaxed text-[#0b4058]/80 md:text-base text-pretty">
-            Elegí cómo querés viajar. Te asesoramos acá, en el local.
-          </p>
         </header>
 
         <nav aria-label="Elegí tu rumbo">
