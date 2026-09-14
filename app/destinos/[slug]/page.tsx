@@ -294,7 +294,7 @@ export default async function DestinoDetailPage({ params }: Props) {
             </div>
 
             <h1 className="font-[family-name:var(--font-brand-heading)] text-3xl md:text-5xl font-extrabold text-white tracking-tight text-balance">
-              Paquetes a {dest.name}
+              {dest.h1 ?? `Paquetes a ${dest.name}`}
             </h1>
           </div>
         </div>
