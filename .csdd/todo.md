@@ -1,8 +1,8 @@
 # 787 Rumbos — Trabajo activo
 
 > Estado operativo del proyecto. Los requisitos y restricciones duraderas están en
-> [specs.md](./specs.md); decisiones en [decisions.md](./decisions.md); el análisis
-> de crecimiento ampliado permanece en
+> [specs.md](./specs.md); decisiones en [decisions.md](./decisions.md); el diagnóstico
+> SEO/producto de contexto permanece en
 > [../docs/marketing-growth-audit.md](../docs/marketing-growth-audit.md).
 
 ## In Progress
@@ -16,7 +16,7 @@
   - Target: `master`
   - Landing: draft PR #30 hacia `master` desde `cursor/agency-whatsapp-number-2575`
   - Verification: lint OK (1 warning preexistente Footer), typecheck OK, build OK; smoke E2E 9/9 OK; HTML/schema/footer usan `5493513448724` / `+54 9 351 344-8724`; número personal ausente del build.
-  - Note: el tráfico al número personal satura la línea familiar; el oficial es más disponible. Fuente única: `AGENCY_PHONE` (CTAs, schema, footer, wa.me/tel).
+  - Note: canal público único = número oficial de agencia. Fuente única: `AGENCY_PHONE` (CTAs, schema, footer, wa.me/tel). No publicar números personales.
 
 - [ ] T-044 — Corregir el glow incompleto del CTA “Armar viaje” en la navbar (issue #26)
   - Owner: Valen
@@ -44,15 +44,15 @@
 
 ### Aéreos SEO — follow-ups post #11
 
-> Issue #11 cerrado. Hub + LATAM + GOL + medición WA en master. Tier2: Avianca/JetSmart.
+> Issue #11 cerrado. Hub + LATAM + GOL + medición WA en master. Siguientes candidatas: Avianca/JetSmart.
 
-- [ ] T-042 — Landings Tier 2 (Avianca + JetSmart) cuando haya go comercial
+- [ ] T-042 — Landings Avianca + JetSmart cuando haya go comercial
   - Owner: Valen
   - Agent: —
   - Scope: `airlinesData` + copy propio; no publicar espejos
   - Target: `development`
   - Depends on: confirmar matices de trámites vs baseline GOL/LATAM (decisions.md).
-  - Note: Ranking Tier2 definido. Baseline operativo ya documentado; solo falta go/no-go y matices.
+  - Note: Candidatas definidas. Baseline operativo ya documentado; solo falta go/no-go y matices.
   - Acceptance: landings propias publicadas o diferidas con motivo; sin doorway.
 
 ### Contenido y operación
@@ -80,17 +80,17 @@
 
 - [ ] T-007 — Mejorar la medición de conversiones
   - Owner: Valen
-  - Depends on: Google Business Profile activo y necesidad de embudos o campañas medibles.
-  - Note: alcance previsto en eventos de CTA de WhatsApp, UTMs y evaluación de GA4. T-036 cubre eventos mínimos del cluster aéreos con el stack actual.
+  - Depends on: Google Business Profile activo y una necesidad real de embudos o campañas medibles.
+  - Note: alcance previsto en eventos de CTA de WhatsApp y, solo si hace falta, atribución más fina. T-036 cubre eventos mínimos del cluster aéreos con el stack actual (Vercel Analytics). No agregar GA4 ni un tracker de leads mientras no haya una necesidad operativa.
 
 - [ ] T-008 — Evaluar un CMS cuando el catálogo manual deje de escalar
   - Owner: Valen
   - Note: alcance previsto en el modelo y gestión de contenido de destinos. No introducir un CMS antes de que editar `destinations-data.ts` manualmente sea un problema real. Relacionada con T-014: si la automatización de salidas cubre el dolor, puede retrasar o evitar un CMS.
 
-- [ ] T-009 — Ejecutar pauta controlada
+- [ ] T-009 — Evaluar pauta controlada
   - Owner: Valen
-  - Depends on: GBP verificado y tracking de leads estable.
-  - Note: alcance previsto en Google Ads e Instagram/Meta Ads.
+  - Depends on: GBP verificado y una forma estable de medir el origen de las consultas.
+  - Note: solo si la presencia local y la medición básica ya están cubiertas. Preferir intención específica (local / destino) frente a keywords genéricas de comparadores.
 
 
 
@@ -117,12 +117,12 @@ Retention: 12
   - Landed: PR #21 on `master`
   - Note: baseline mobile prod Perf 71 / A11y 100 / BP 100 / SEO 100; LCP 4.5s; CLS 0. P1: sizes logos/AboutUs/partners; a11y Services/Footer; sin priority en flyer promo. Residuales aceptados: LCP/TTFB hero; main-thread; AFIP raw img.
 
-- [x] T-037 — Publicar landing GOL Córdoba + cerrar priorización Tier 1 (issue #11)
+- [x] T-037 — Publicar landing GOL Córdoba y cerrar la primera ola de aéreos (issue #11)
   - Owner: Valen
   - Agent: Cursor Grok
   - Scope: released
   - Updated: 2026-08-04
-  - Note: `/aereos/gol-cordoba` published; LATAM alineada a trámites reales; independencia explícita. Issue #11 cerrado. Tier2 → T-042.
+  - Note: `/aereos/gol-cordoba` published; LATAM alineada a trámites reales; independencia explícita. Issue #11 cerrado. Siguientes landings → T-042.
 
 - [x] T-036 — SEO técnico del cluster + medición de CTAs
   - Owner: Valen
@@ -189,19 +189,19 @@ Retention: 12
   - Updated: 2026-07-29
   - Note: Se reemplazó el `IntersectionObserver` por verificación geométrica sincrónica (fail-closed) para evitar el destello de los CTAs del nav durante el primer render del Hero.
 
-- [x] T-038 — Unificar número de contacto en el teléfono principal (+54 9 351 615-7398)
+- [x] T-038 — Unificar el contacto público en un único WhatsApp
   - Owner: Valen
   - Agent: Antigravity
   - Scope: released
   - Updated: 2026-07-29
-  - Note: Se actualizó `AGENCY_PHONE` al número 351 615-7398 en `lib/constants.ts` afectando a todos los CTAs, schemas y enlaces de la web. En `Footer.tsx` se dejó un único ítem de contacto por WhatsApp. El número previo (351 344-8724) se resguarda para la futura sección de venta de pasajes aéreos.
+  - Note: Se unificó `AGENCY_PHONE` como canal público único (CTAs, schema, footer). T-045 publicó después el número oficial de agencia y retiró el número personal de las superficies públicas.
 
 - [x] T-031 — Planificar expansión aéreos SEO (issue #11)
   - Owner: Valen
   - Agent: Cursor Grok
   - Scope: released
   - Updated: 2026-07-28
-  - Note: Decisiones D-001 (aditivo, home conservadora) y D-002 (URLs `/aereos` + `/aereos/{aerolinea}-cordoba`). Specs actualizadas con mix comercial y cluster. Implementación del patrón en T-032.
+  - Note: Decisiones D-001 (aditivo, home conservadora) y D-002 (URLs `/aereos` + `/aereos/{aerolinea}-cordoba`). Specs actualizadas con la prioridad de aéreos y el cluster. Implementación del patrón en T-032.
 
 - [x] T-026 — Cerrar la mejora visual con QA responsive, accesible y de rendimiento
   - Owner: Valen
