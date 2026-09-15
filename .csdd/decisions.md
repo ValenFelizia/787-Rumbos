@@ -11,7 +11,7 @@
 - **Date:** 2026-07-28
 - **Source:** [GitHub #11](https://github.com/ValenFelizia/787-Rumbos/issues/11) + dirección explícita de Valen
 - **Decision:** Reposicionar la web hacia el negocio real (los pasajes aéreos son la principal línea comercial) **añadiendo slugs indexables**, no rediseñando la home. Los paquetes siguen siendo una línea visible y válida; la home conserva ritmo, identidad y estructura actuales.
-- **Rationale:** La arquitectura indexable hoy está concentrada en destinos/paquetes. Google Search Console necesita URLs propias para intenções de compra aérea (p. ej. LATAM Córdoba). Tocar poco la home reduce riesgo de regresión visual/conversión y acelera el valor SEO.
+- **Rationale:** La arquitectura indexable hoy está concentrada en destinos/paquetes. Google Search Console necesita URLs propias para intenciones de compra aérea (p. ej. LATAM Córdoba). Tocar poco la home reduce riesgo de regresión visual/conversión y acelera el valor SEO.
 - **Home budget (techo duro):**
   - Sí: link en nav, footer y tile de Servicios hacia el hub de aéreos; interlinking; a lo sumo un ajuste menor de copy de apoyo en hero/propuesta de valor.
   - No: reordenar secciones, cambiar sistema visual/motion, convertir el primer viewport en “boletería aérea”, ni bajar el catálogo de paquetes a un rincón.
