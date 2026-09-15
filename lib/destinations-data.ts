@@ -42,6 +42,8 @@ export interface DestinationPage {
   region: "nacional" | "internacional";
   metaTitle: string;
   metaDescription: string;
+  /** Override del H1 del hero; por defecto `Paquetes a {name}`. */
+  h1?: string;
   heroImage: string;
   flyerImage?: string; // ponytail: added for rendering flyer promo image if available
   description: string;
@@ -837,9 +839,12 @@ export const destinationsData: DestinationPage[] = [
     country: "Brasil",
     region: "internacional",
     metaTitle: "Paquetes a Río de Janeiro desde Córdoba | 787 Rumbos",
-    metaDescription: "Viajá a Río de Janeiro. Salidas grupales o individuales desde Córdoba. Copacabana, Pan de Azúcar y Cristo Redentor.",
+    metaDescription:
+      "Paquetes a Río de Janeiro desde Córdoba: a medida o grupales con aéreos. Copacabana y Cristo Redentor. Cotizá por WhatsApp, atención humana.",
+    h1: "Paquetes a Río de Janeiro desde Córdoba",
     heroImage: "/destinos/rio.jpg",
-    description: "La 'Cidade Maravilhosa' enamora a todo viajero. Enmarcada por montañas selváticas y playas icónicas, Río combina la bossa nova de Ipanema, el ritmo del samba y hitos mundiales como el Cristo Redentor en el Cerro del Corcovado.",
+    description:
+      "Armamos paquetes a Río de Janeiro desde Córdoba: a medida o grupales, con aéreos y opciones claras. La Cidade Maravilhosa enamora con playas icónicas, bossa nova en Ipanema y hitos como el Cristo Redentor en el Cerro del Corcovado.",
     highlights: [
       "Subida al Cristo Redentor y vistas de la bahía",
       "Teleférico al morro Pan de Azúcar al atardecer",

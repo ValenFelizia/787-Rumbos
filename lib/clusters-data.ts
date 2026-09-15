@@ -32,12 +32,12 @@ export const clustersData: ClusterPage[] = [
   {
     id: "brasil",
     slug: "brasil-desde-cordoba",
-    title: "Brasil desde Córdoba",
+    title: "Paquetes a Brasil desde Córdoba",
     metaTitle: "Paquetes a Brasil desde Córdoba | 787 Rumbos",
     metaDescription:
-      "Río, Porto de Galinhas, Camboriú y salidas especiales a Brasil desde Córdoba. Paquetes a medida o grupales con atención humana por WhatsApp.",
+      "Río, Porto de Galinhas, Camboriú y Bahía desde Córdoba. Paquetes a medida o grupales. Cotizá tu viaje por WhatsApp con atención humana.",
     intro:
-      "Armamos viajes a Brasil saliendo desde Córdoba: playa, ciudad o eventos. Cotizás por WhatsApp con una persona real y te enviamos opciones claras según fechas y presupuesto.",
+      "Armamos paquetes a Brasil desde Córdoba: playa, ciudad o eventos. Cotizás por WhatsApp con una persona real y te enviamos opciones claras según fechas y presupuesto.",
     howWeWork: [
       "Salidas grupales cuando hay cupos, o paquete 100% a tu medida.",
       "Aéreos desde Córdoba, hoteles y asistencia internacional (AssistCard).",
