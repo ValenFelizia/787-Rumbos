@@ -1,6 +1,6 @@
 # 787 Rumbos — Especificaciones vigentes
 
-> **Última actualización:** 2026-08-03
+> **Última actualización:** 2026-09-15
 > **Estado:** la base del producto está implementada. El cluster indexable de
 > **pasajes aéreos** (issue #11) está publicado e interlinkeado; quedan medición
 > de CTAs (T-036) y priorización de más aerolíneas (T-037). En paralelo, la ola
@@ -8,8 +8,8 @@
 > T-039) y re-medición Lighthouse/CWV (T-029). El baseline de seguridad HTTP,
 > higiene de dependencias y CI/smoke está implementado.
 
-El estado operativo vive en [todo.md](./todo.md). El análisis de mercado y
-crecimiento que sirve de contexto, pero no de lista de trabajo activa, se
+El estado operativo vive en [todo.md](./todo.md). El diagnóstico SEO y de
+producto que sirve de contexto, pero no de lista de trabajo activa, se
 conserva en [../docs/marketing-growth-audit.md](../docs/marketing-growth-audit.md).
 
 ## Negocio y propuesta de valor
@@ -18,11 +18,10 @@ conserva en [../docs/marketing-growth-audit.md](../docs/marketing-growth-audit.m
 por WhatsApp. La web debe captar consultas calificadas, reforzar confianza y
 guiar al usuario hacia ese canal; no reemplaza la atención comercial humana.
 
-- Mix comercial actual (orientativo, issue #11): ~80% facturación en **pasajes
-  aéreos**, ~20% en **asistencia al viajero**; **paquetes turísticos** siguen
-  ofreciéndose y son válidos en la web, pero no concentran la facturación. La
-  arquitectura indexable debe reflejar ese mix sin borrar el catálogo de
-  destinos.
+- Mix comercial actual: los **pasajes aéreos** son la principal línea de la
+  agencia; también se ofrece **asistencia al viajero** y **paquetes turísticos**,
+  que siguen siendo una línea visible y válida en la web. La arquitectura
+  indexable debe reflejar esa prioridad sin borrar el catálogo de destinos.
 - Frase operativa hacia la que se apunta el cluster de aéreos: venta de pasajes
   aéreos de múltiples aerolíneas, con atención humana y presencial en el
   Aeropuerto de Córdoba.
@@ -244,15 +243,17 @@ la web. La postura de seguridad y testing debe ser proporcional a esa superficie
 ## Operación y evolución
 
 - Google Business Profile, fotos del local/equipo, reseñas reales, citaciones y
-  consistencia NAP son la prioridad antes de aumentar inversión publicitaria.
-- La pauta paga requiere GBP verificado y seguimiento estable de leads.
+  consistencia NAP son la prioridad antes de evaluar pauta paga.
+- Si se evalúa pauta, hace falta presencia local verificada y alguna forma
+  estable de medir de dónde vienen las consultas. No se agrega medición compleja
+  (GA4, embudos, CRM) mientras Vercel Analytics cubra lo necesario.
 - El CMS se evalúa únicamente cuando mantener `lib/destinations-data.ts` a mano
   resulte una limitación real.
 - Catálogo, promociones y feed social se revisan manualmente una vez por mes;
   automatizar ese circuito solo se evalúa si la carga operativa deja de ser razonable.
 - El blog y la expansión de FAQs deben responder a demanda validada; evitar
   contenido genérico sin intención de búsqueda. El cluster de aéreos (issue #11)
-  cuenta como demanda validada por mix de facturación e intención local
+  cuenta como demanda validada por la línea comercial principal e intención local
   (LATAM Córdoba y similares); no contradice T-006.
 
 ## Forma de trabajo y ramas

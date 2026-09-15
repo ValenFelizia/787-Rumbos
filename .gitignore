@@ -20,6 +20,11 @@ yarn-error.log*
 # env files
 .env*
 
+# credentials / keys (defense in depth; this app has no runtime secrets)
+*.pem
+*.p12
+*.pfx
+
 # vercel
 .vercel
 

@@ -10,7 +10,7 @@
 - **Status:** Accepted
 - **Date:** 2026-07-28
 - **Source:** [GitHub #11](https://github.com/ValenFelizia/787-Rumbos/issues/11) + dirección explícita de Valen
-- **Decision:** Reposicionar la web hacia el negocio real (pasajes aéreos ~80% de facturación) **añadiendo slugs indexables**, no rediseñando la home. Los paquetes siguen siendo una línea visible y válida; la home conserva ritmo, identidad y estructura actuales.
+- **Decision:** Reposicionar la web hacia el negocio real (los pasajes aéreos son la principal línea comercial) **añadiendo slugs indexables**, no rediseñando la home. Los paquetes siguen siendo una línea visible y válida; la home conserva ritmo, identidad y estructura actuales.
 - **Rationale:** La arquitectura indexable hoy está concentrada en destinos/paquetes. Google Search Console necesita URLs propias para intenções de compra aérea (p. ej. LATAM Córdoba). Tocar poco la home reduce riesgo de regresión visual/conversión y acelera el valor SEO.
 - **Home budget (techo duro):**
   - Sí: link en nav, footer y tile de Servicios hacia el hub de aéreos; interlinking; a lo sumo un ajuste menor de copy de apoyo en hero/propuesta de valor.
@@ -42,22 +42,22 @@
   - Cada landing debe declarar con claridad que **787 Rumbos es agencia independiente**, no oficina oficial de la aerolínea (salvo autorización comercial explícita).
   - No publicar rutas/políticas de la aerolínea que caduquen sin dueño de mantenimiento.
   - No crear página de aerolínea sin contenido propio útil (FAQ, qué gestionamos, CTA, ubicación).
-- **Revisit when:** Valen aporte el ranking real de aerolíneas post-LATAM, o si Search Console muestre canibalización hub ↔ landing.
+- **Revisit when:** haya go comercial para más landings, o si Search Console muestre canibalización hub ↔ landing.
 
 ## Open / needs human input
 
-Priorización comercial de aerolíneas (Valen, 2026-08-04) — alimenta T-037:
+Landings publicadas y siguientes candidatas (alimenta T-042):
 
-1. **Tier 1 (más ventas):** GOL y LATAM — ambas publicadas (`/aereos/latam-cordoba`, `/aereos/gol-cordoba`).
-2. **Tier 2:** Avianca y JetSmart.
-3. **Tier 3:** el resto (Copa, Air Europa, Arajet, etc.).
+1. **Publicadas:** LATAM y GOL (`/aereos/latam-cordoba`, `/aereos/gol-cordoba`).
+2. **Siguientes candidatas** (cuando haya go comercial y contenido propio): Avianca y JetSmart.
+3. Otras compañías del marquee (Copa, Air Europa, Arajet, etc.) quedan fuera de esta ola; no se publican landings sin contenido útil propio (D-002).
 
 Alcance operativo por compañía (Valen, 2026-08-04), aplicable a LATAM/GOL y baseline para las siguientes:
 
 - **Resolvemos / ayudamos:** emisión, cambios, equipaje, apoyo con check-in, y comunicación/mediación con la aerolínea ante inconvenientes vinculados a la reserva.
 - **Wording:** siempre agencia independiente (no oficina oficial), salvo autorización comercial explícita.
 
-Pendiente fino para Tier 2+:
+Pendiente fino para las siguientes landings:
 
 1. ¿Hay matices de trámites distintos para Avianca / JetSmart respecto del baseline de arriba?
 2. ¿Hay relación comercial autorizada con alguna aerolínea que permita un wording más fuerte que “agencia independiente”? Por defecto: independiente.

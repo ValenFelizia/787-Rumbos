@@ -1,8 +1,13 @@
-# 787 Rumbos — Auditoria Competitiva, Marketing y SEO
+# 787 Rumbos — Auditoría de crecimiento (SEO, producto y distribución)
 
-> Fecha: 2026-07-06  
-> Objetivo: pasar de una web funcional de agencia a un activo de captacion de demanda, confianza y trafico organico/local.  
-> Alcance: marketing, UI/UX, turismo, SEO, Google Business Profile, pauta inicial y contenido. No incluye cambios de codigo.
+> Fecha: 2026-07-06 (adenda 2026-07-13)
+> Alcance: diagnóstico de SEO, presencia local, contenido y conversión hacia
+> WhatsApp. No es un backlog: el trabajo vigente vive en
+> [`.csdd/todo.md`](../.csdd/todo.md).
+>
+> Esta es una versión pública. Se conservan el razonamiento técnico y de
+> producto; se omiten métricas comerciales internas, presupuestos, detalle de
+> pauta y cualquier registro de leads.
 
 ---
 
@@ -74,7 +79,7 @@ La web puede estar bien hecha, pero si Google no ve resenas, menciones, director
 Acciones:
 
 - Completar y verificar Google Business Profile.
-- Conseguir 20 resenas iniciales reales en 60 dias.
+- Pedir reseñas reales a clientes, sin incentivos ni texto dictado.
 - Generar citaciones NAP consistentes en directorios turisticos/locales.
 - Lograr enlaces desde aliados: Via Bariloche, Via Tac, Camara, blogs locales, notas de turismo, proveedores.
 
@@ -111,16 +116,19 @@ Acciones:
 - Pagina o bloque especifico: "Nuestra oficina en el Aeropuerto de Cordoba".
 - Reforzar busquedas "agencia de viajes aeropuerto cordoba" y "pasajes omnibus aeropuerto cordoba".
 
-### 5. Falta de Embudo Medible
+### 5. Falta de atribución básica en WhatsApp
 
-Si todo va a WhatsApp, hay que medir que origen trajo cada consulta.
+Si casi toda la conversión sale del sitio hacia WhatsApp, antes de pauta hace
+falta poder distinguir de dónde viene cada consulta. No hace falta un CRM ni
+un backend propio.
 
 Acciones:
 
-- UTMs por CTA: home, destino, promo, Instagram, GBP, Google Ads.
-- Mensajes pre-rellenados distintos por fuente/campana.
-- Registro simple de leads: fecha, origen, destino, estado, venta/no venta.
-- Eventos en analytics: click WhatsApp, click Maps, envio cotizador, destino consultado.
+- Identificadores simples por fuente (web, Maps, Instagram, pauta) cuando
+  haga falta atribuir una campaña.
+- Mensajes de WhatsApp que anticipen el contexto (destino, promo, Maps).
+- Eventos de analytics en CTAs relevantes (WhatsApp, Maps, cotizador), con el
+  stack actual (Vercel Analytics) mientras cubra la necesidad.
 
 ---
 
@@ -160,7 +168,7 @@ Acciones:
 
 ## Google Business Profile y Maps
 
-GBP es probablemente el canal de mayor ROI para 787 en el corto plazo. Para turismo local, Google Maps puede traer leads de mayor intencion que Instagram, especialmente si el usuario busca "agencia de viajes cordoba" o "agencia de viajes cerca del aeropuerto".
+GBP es probablemente el canal local de mayor intencion para 787 en el corto plazo. Para turismo local, Google Maps puede traer consultas mas calificadas que Instagram, especialmente si el usuario busca "agencia de viajes cordoba" o "agencia de viajes cerca del aeropuerto".
 
 Checklist de activacion:
 
@@ -170,7 +178,7 @@ Checklist de activacion:
 - Direccion consistente con web: Av. La Voz del Interior 8500, hall de arribos, local de Via Bariloche.
 - Telefono principal consistente.
 - Sitio web: URL canonica.
-- Link de reservas/contacto: WhatsApp con UTM o mensaje "Vengo desde Google Maps".
+- Link de reservas/contacto: WhatsApp con un mensaje del estilo "Vengo desde Google Maps".
 - Horarios reales.
 - Fotos: fachada/local, equipo, mostrador, aeropuerto, flyers de salidas, pasajeros autorizados.
 - Descripcion: reforzar aeropuerto + paquetes + omnibus + atencion humana.
@@ -179,54 +187,30 @@ Checklist de activacion:
 
 Objetivo inicial:
 
-- 20 resenas reales en 60 dias.
-- 2 publicaciones GBP por semana durante 8 semanas.
-- 20 fotos reales subidas en el primer mes.
-- Responder el 100% de resenas con palabras clave naturales.
+- Pedir reseñas reales de forma sostenida (clientes reales, sin incentivos).
+- Publicar en GBP con regularidad (ofertas, salidas, cómo llegar al local).
+- Subir fotos reales del local, el equipo y el hall.
+- Responder reseñas con un tono natural, sin forzar keywords.
 
 ---
 
-## Estrategia de Publicidad
+## Pauta (solo después de medición básica)
 
-### Google Ads
+La pauta no es el primer problema. Compite mal contra comparadores en búsquedas
+genéricas ("vuelos baratos", "paquetes turísticos") y gasta presupuesto antes
+de tener presencia local y una forma de saber de dónde vino la consulta.
 
-Google Ads puede servir, pero no deberia arrancar con keywords amplias tipo "vuelos baratos" o "paquetes turisticos", porque compite contra gigantes y comparadores.
+Si se evalúa más adelante:
 
-Campanas recomendadas:
+- Preferir intención local o por destino ("agencia de viajes aeropuerto
+  Córdoba", "paquetes a Brasil desde Córdoba") frente a keywords amplias.
+- Mandar tráfico a la página más específica disponible (hub, destino, landing
+  de aerolínea), no siempre a la home.
+- En redes, usar pauta para salidas concretas o remarketing, no para
+  "consultanos" genérico.
+- Medir origen de la consulta a WhatsApp antes de escalar gasto.
 
-- Search local: "agencia de viajes cordoba", "agencia de turismo cordoba", "agencia de viajes aeropuerto cordoba".
-- Search por destino: "paquetes a brasil desde cordoba", "rio de janeiro desde cordoba", "caribe desde cordoba".
-- Search por modalidad: "salidas grupales desde cordoba", "viajes en bus desde cordoba".
-- Campana de marca: "787 Rumbos", cuando empiece a haber busquedas de marca.
-- Performance Max solo cuando haya conversion tracking y suficientes assets.
-
-No recomendado al inicio:
-
-- "vuelos baratos".
-- "hoteles baratos".
-- "paquetes baratos" sin destino.
-- Audiencias demasiado amplias.
-- Mandar pauta a la home si existe una pagina de destino mas especifica.
-
-Presupuesto de test:
-
-- 30 dias.
-- Pocas keywords exactas/frase.
-- Landing especifica por cluster.
-- Medir costo por click a WhatsApp, costo por lead y venta cerrada.
-
-### Meta / Instagram Ads
-
-Instagram es mejor para generar deseo y remarketing, no siempre para demanda inmediata.
-
-Usos recomendados:
-
-- Promocionar salidas con fecha concreta.
-- Reimpactar visitantes de la web.
-- Promocionar contenido de comunidad/testimonios.
-- Campanas de mensajes a WhatsApp para paquetes visuales: Brasil, Caribe, F1, escapadas.
-
-Condicion: cada anuncio debe llevar a una consulta concreta, no a "consultanos" generico.
+No se documenta aquí un plan de campañas, presupuestos ni mix de canales.
 
 ---
 
@@ -272,9 +256,9 @@ La comunidad no deberia ser solo estetica: debe demostrar que la agencia existe,
 - Verificar Google Business Profile.
 - Subir fotos reales del local/equipo.
 - Crear rutina de publicaciones GBP.
-- Pedir primeras 10 resenas.
+- Pedir las primeras reseñas reales.
 - Revisar NAP en web, GBP, Instagram y directorios.
-- Crear documento interno de tracking de leads.
+- Definir, si se activa pauta, cómo se va a distinguir el origen de cada consulta.
 
 ### Fase 12 — Conversion y Confianza (30-60 dias)
 
@@ -294,28 +278,23 @@ La comunidad no deberia ser solo estetica: debe demostrar que la agencia existe,
 - Conseguir 5 backlinks/citaciones locales.
 - Actualizar precios y salidas mensualmente.
 
-### Fase 14 — Pauta Controlada (despues de medicion basica)
+### Fase 14 — Pauta controlada (despues de medicion basica)
 
-- Test de Google Ads Search con keywords locales y por destino.
-- Test de Instagram Ads para promos con fecha.
-- Remarketing a visitantes de destinos.
-- Reporte mensual: gasto, leads, costo por lead, ventas, destinos mas consultados.
+- Evaluar search local / por destino solo si ya se mide el origen de las consultas.
+- Evaluar redes para promos con fecha o remarketing, no para demanda genérica.
+- Revisar periódicamente gasto vs. consultas atribuibles, sin un tablero de KPIs comerciales en este repo.
 
 ---
 
-## KPIs
+## Señales a mirar (públicas / de producto)
 
-- Impresiones y clicks en Google Search Console.
-- Paginas indexadas.
-- Posicion promedio para keywords locales.
-- Clicks a WhatsApp por fuente.
-- Clicks a Google Maps.
-- Consultas desde GBP.
-- Cantidad y rating de resenas.
-- Costo por lead de pauta.
-- Ratio lead -> presupuesto enviado.
-- Ratio presupuesto -> venta.
-- Destinos mas consultados.
+- Impresiones, clics y páginas indexadas en Google Search Console.
+- Posición para búsquedas locales (aeropuerto, "desde Córdoba").
+- Clics a WhatsApp y a Maps desde el sitio.
+- Consultas y reseñas en Google Business Profile.
+- Destinos o landings que concentran consultas, cuando esa señal exista.
+
+No se versionan aquí ratios de cierre, costo por lead ni composición de ventas.
 
 ---
 
@@ -327,7 +306,7 @@ Si hay que elegir solo cinco acciones inmediatas:
 2. Subir fotos reales del local dentro del aeropuerto.
 3. Crear FAQ y prueba social visible.
 4. Armar clusters "desde Cordoba" por Brasil, Caribe, Argentina y grupales.
-5. Medir WhatsApp por fuente antes de invertir fuerte en anuncios.
+5. Medir el origen de las consultas a WhatsApp antes de invertir en anuncios.
 
 ---
 
@@ -362,10 +341,10 @@ recomendacion de subirlo y concretar la promesa de acompañamiento queda aceptad
   la operacion y evitar cualquier lectura de soporte 24/7.
 - El enlace de Maps apunta al aeropuerto en general, no a una ficha exacta de 787
   Rumbos. Debe cambiarse cuando el perfil verificado provea una URL estable.
-- La home dirige consultas comerciales al `+54 9 351 615-7398`, mientras el
-  schema `TravelAgency` usa `+54 351 344-8724`, que el footer identifica como
-  administracion/agencia. La coexistencia puede ser valida, pero falta definir
-  cual es el telefono publico principal y alinear cada superficie con ese rol.
+- La home y el schema no usaban el mismo teléfono público. La coexistencia
+  podía ser válida, pero faltaba definir cuál era el canal canónico y alinear
+  cada superficie (CTAs, footer, NAP, Google Business Profile) con ese rol.
+  Quedó resuelto después: un único número oficial de agencia.
 - Las seis tarjetas del feed enlazan al perfil general de Instagram. Enlazar cada
   imagen a su publicacion mejora la correspondencia entre promesa y destino.
 - La etiqueta de transporte puede mostrar `aereo` sin tilde y el render de moneda
