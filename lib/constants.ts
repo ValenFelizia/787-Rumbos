@@ -17,10 +17,10 @@ import { BedDouble, Bus, HeartPulse, Plane, Ticket } from "lucide-react";
  * Número oficial de la agencia (más disponible). No publicar números personales.
  */
 export const AGENCY_PHONE = {
-  whatsapp: "5493513448724",
-  display: "+54 9 351 344-8724",
+  whatsapp: "5493517688623",
+  display: "+54 9 351 768-8623",
   /** E.164 para schema / tel: */
-  tel: "+5493513448724",
+  tel: "+5493517688623",
 } as const;
 
 /**
