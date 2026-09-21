@@ -116,6 +116,10 @@ CMS ni scraping solo para sostener esa sección.
   sitemap actualizado.
 - Los hubs de Brasil, Caribe, Argentina en bus y salidas grupales desde Córdoba
   están publicados y enlazados con el catálogo y las fichas de destino.
+- En la home, “Próximas salidas desde Córdoba” muestra cuatro destinos con
+  salidas vigentes. El orden es cantidad de fechas consultables y, ante empate,
+  la salida más próxima. No hay una lista fija de slugs. Cada tarjeta muestra
+  la salida más cercana (D-004).
 - Cluster de pasajes aéreos (D-001 / D-002, issue #11): rutas indexables bajo
   `/aereos` (hub) y `/aereos/{aerolinea}-cordoba` (landings). Primera landing:
   `/aereos/latam-cordoba`. Datos en `lib/airlines-data.ts`; layouts

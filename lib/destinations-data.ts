@@ -1531,6 +1531,37 @@ export function getActiveUpcomingDepartures(dest: DestinationPage): Departure[] 
   return getUpcomingDepartures(dest).filter((dep) => dep.status !== "sold-out");
 }
 
+/** La salida consultable más cercana. */
+export function getNearestActiveDeparture(dest: DestinationPage): Departure | undefined {
+  return getActiveUpcomingDepartures(dest)
+    .slice()
+    .sort((a, b) => a.date.localeCompare(b.date))[0];
+}
+
+/**
+ * Destinos de “Próximas salidas” en la home.
+ * Más fechas vigentes primero; si empatan, gana la salida más próxima.
+ * Un empate restante conserva el orden del catálogo.
+ */
+export function getHomeFeaturedDestinations(limit = 4): DestinationPage[] {
+  return destinationsData
+    .map((dest) => {
+      const upcoming = getActiveUpcomingDepartures(dest);
+      const nearest = upcoming.reduce<string | null>(
+        (min, dep) => (min === null || dep.date < min ? dep.date : min),
+        null,
+      );
+      return { dest, count: upcoming.length, nearest };
+    })
+    .filter((item) => item.count > 0)
+    .sort((a, b) => {
+      if (b.count !== a.count) return b.count - a.count;
+      return (a.nearest ?? "").localeCompare(b.nearest ?? "");
+    })
+    .slice(0, limit)
+    .map((item) => item.dest);
+}
+
 export function getDestinationBySlug(slug: string): DestinationPage | undefined {
   return destinationsData.find(d => d.slug === slug);
 }
