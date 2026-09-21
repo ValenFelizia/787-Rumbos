@@ -7,6 +7,14 @@
 
 ## In Progress
 
+- [ ] T-047 — Destacar en la home los destinos con más salidas vigentes
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: `lib/destinations-data.ts`, `components/sections/FeaturedDestinations.tsx`, `e2e/smoke.spec.ts`, `.csdd/specs.md`, `.csdd/decisions.md`, `.csdd/todo.md`
+  - Target: `master`
+  - Updated: 2026-09-21
+  - Note: cuatro cards por cantidad de salidas consultables y, si empatan, por la fecha más próxima. Porto entra por tener 11 salidas.
+
 ## Ready to Land
 
 - [ ] T-045 — Publicar el WhatsApp oficial de agencia (+54 9 351 768-8623)

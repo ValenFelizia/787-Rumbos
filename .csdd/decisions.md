@@ -44,6 +44,18 @@
   - No crear página de aerolínea sin contenido propio útil (FAQ, qué gestionamos, CTA, ubicación).
 - **Revisit when:** haya go comercial para más landings, o si Search Console muestre canibalización hub ↔ landing.
 
+### D-004 — La home destaca salidas por vigencia, no por lista fija
+
+- **Status:** Accepted
+- **Date:** 2026-09-21
+- **Source:** Valen (publicar Porto de Galinhas en “Próximas salidas” y que la sección siga al catálogo)
+- **Decision:** Las cuatro cards de “Próximas salidas desde Córdoba” salen de `getHomeFeaturedDestinations`: destinos con salidas consultables, ordenados por cantidad de fechas y, si empatan, por la salida más próxima. El orden del catálogo desempata el resto.
+- **Rationale:** Una lista fija dejó a Bariloche sin fechas y dejó afuera a Porto, que concentra las salidas nuevas. Ordenar solo por la fecha más cercana escondería Porto detrás de salidas sueltas de septiembre y octubre.
+- **Rejected alternatives:**
+  - Seguir con Salta, Bariloche, Río y Cataratas hardcodeados.
+  - Ordenar únicamente por la salida más próxima.
+- **Consequences:** la grilla cambia cuando cambian las fechas del catálogo. Con el catálogo del 2026-09-21 entran Porto de Galinhas y Salta, y completan las dos salidas del 27 de septiembre que aparecen primero en el catálogo.
+
 ## Open / needs human input
 
 Landings publicadas y siguientes candidatas (alimenta T-042):

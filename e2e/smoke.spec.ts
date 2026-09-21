@@ -33,6 +33,18 @@ test.describe("rutas críticas", () => {
     ).toBeVisible();
   });
 
+  test("la home destaca las salidas con más fechas vigentes", async ({ page }) => {
+    await page.goto("/");
+    const section = page.locator("#destinos");
+    await expect(
+      section.getByRole("heading", { name: "Próximas salidas desde Córdoba" }),
+    ).toBeVisible();
+    await expect(
+      section.getByRole("heading", { name: "Porto de Galinhas", level: 3 }),
+    ).toBeVisible();
+    await expect(section.getByRole("link", { name: "Ver detalles y salidas" })).toHaveCount(4);
+  });
+
   test("home carga con la marca y el CTA principal", async ({ page }) => {
     await page.goto("/");
     await expect(

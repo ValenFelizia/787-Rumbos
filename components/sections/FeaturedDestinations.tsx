@@ -3,8 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  destinationsData,
-  DestinationPage,
+  getHomeFeaturedDestinations,
+  getNearestActiveDeparture,
   getTransportLabel,
 } from "@/lib/destinations-data";
 import { Plane, Bus, ArrowRight, Calendar } from "lucide-react";
@@ -17,11 +17,7 @@ import { useModal } from "@/lib/context/ModalContext";
 
 export function FeaturedDestinations() {
   const { openModal } = useModal();
-  const featuredSlugs = ["salta", "bariloche", "rio-de-janeiro", "cataratas-del-iguazu"];
-
-  const featured = featuredSlugs
-    .map((slug) => destinationsData.find((d) => d.slug === slug))
-    .filter((d): d is DestinationPage => !!d);
+  const featured = getHomeFeaturedDestinations();
 
   return (
     <section id="destinos" className="mx-auto w-full max-w-6xl px-6 py-14 md:py-16">
@@ -45,15 +41,8 @@ export function FeaturedDestinations() {
 
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {featured.map((dest) => {
-          const today = new Date();
-          today.setHours(0, 0, 0, 0);
-
-          const activeDeps = dest.departures.filter(
-            (dep) => new Date(dep.date + "T00:00:00") >= today && dep.status !== "sold-out"
-          );
-
-          const hasActiveDeps = activeDeps.length > 0;
-          const nextDep = hasActiveDeps ? activeDeps[0] : null;
+          const nextDep = getNearestActiveDeparture(dest) ?? null;
+          const hasActiveDeps = nextDep !== null;
           const transportType = nextDep?.transport ?? "mix";
 
           return (
