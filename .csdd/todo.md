@@ -7,15 +7,17 @@
 
 ## In Progress
 
+## Ready to Land
+
 - [ ] T-047 — Destacar en la home los destinos con más salidas vigentes
   - Owner: Valen
   - Agent: Cursor Grok
   - Scope: `lib/destinations-data.ts`, `components/sections/FeaturedDestinations.tsx`, `e2e/smoke.spec.ts`, `.csdd/specs.md`, `.csdd/decisions.md`, `.csdd/todo.md`
   - Target: `master`
   - Updated: 2026-09-21
+  - Landing: [PR #39](https://github.com/ValenFelizia/787-Rumbos/pull/39) hacia `master` desde `feat/home-proximas-salidas`
+  - Verification: eslint de los archivos tocados OK. En local (`:3001`): la home muestra Porto (8 de enero), Salta (10 de octubre), Salvador e Imbassaí (27 de septiembre); el detalle de Porto abre la ficha con esa salida.
   - Note: cuatro cards por cantidad de salidas consultables y, si empatan, por la fecha más próxima. Porto entra por tener 11 salidas.
-
-## Ready to Land
 
 - [ ] T-045 — Publicar el WhatsApp oficial de agencia (+54 9 351 768-8623)
   - Owner: Valen
