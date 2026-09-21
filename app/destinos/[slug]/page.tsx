@@ -474,7 +474,7 @@ export default async function DestinoDetailPage({ params }: Props) {
                           }`}
                       >
                         <div className="flex justify-between items-start gap-2">
-                          <div className="space-y-1">
+                          <div className="min-w-0 flex-1 space-y-1">
                             <span className="font-semibold text-sm text-[#0b4058] flex items-center gap-1.5">
                               <Calendar className="h-4 w-4 text-[#006183] shrink-0" />
                               {dep.displayDate}
@@ -506,7 +506,7 @@ export default async function DestinoDetailPage({ params }: Props) {
                             </div>
                           </div>
 
-                          <span className={`text-[10px] px-2.5 py-0.5 rounded-full border ${statusInfo.colorClass}`}>
+                          <span className={`shrink-0 whitespace-nowrap text-[10px] px-2.5 py-0.5 rounded-full border ${statusInfo.colorClass}`}>
                             {statusInfo.label}
                           </span>
                         </div>
