@@ -45,6 +45,23 @@ test.describe("rutas críticas", () => {
     await expect(section.getByRole("link", { name: "Ver detalles y salidas" })).toHaveCount(4);
   });
 
+  test("salvador publica enero, morro y el solo aéreo", async ({ page }) => {
+    await page.goto("/destinos/salvador-de-bahia");
+    await expect(page.getByText("Vila Galé Salvador").first()).toBeVisible();
+    await expect(page.getByText("Salvador y Morro de São Paulo").first()).toBeVisible();
+    await expect(page.getByText("Solo aéreo a Salvador").first()).toBeVisible();
+    await expect(page.getByText(/USD\s*850/).first()).toBeVisible();
+  });
+
+  test("punta cana y bayahibe publican octubre 2026", async ({ page }) => {
+    await page.goto("/destinos/punta-cana");
+    await expect(page.getByRole("heading", { name: "Paquetes a Punta Cana" })).toBeVisible();
+    await expect(page.getByText("Whala! Bávaro").first()).toBeVisible();
+    await expect(page.getByText("15 de Octubre").first()).toBeVisible();
+    await page.goto("/destinos/bayahibe");
+    await expect(page.getByText("Solo adultos").first()).toBeVisible();
+  });
+
   test("home carga con la marca y el CTA principal", async ({ page }) => {
     await page.goto("/");
     await expect(

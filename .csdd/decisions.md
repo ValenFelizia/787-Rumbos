@@ -54,7 +54,19 @@
 - **Rejected alternatives:**
   - Seguir con Salta, Bariloche, Río y Cataratas hardcodeados.
   - Ordenar únicamente por la salida más próxima.
-- **Consequences:** la grilla cambia cuando cambian las fechas del catálogo. Con el catálogo del 2026-09-21 entran Porto de Galinhas y Salta, y completan las dos salidas del 27 de septiembre que aparecen primero en el catálogo.
+- **Consequences:** la grilla cambia cuando cambian las fechas del catálogo. Varios programas el mismo día cuentan como una sola fecha, para que un destino no suba en la home por repetir la misma salida.
+
+### D-005 — No publicar el crucero de fin de año ni fijar la ciudad de salida
+
+- **Status:** Accepted
+- **Date:** 2026-09-21
+- **Source:** Valen, sobre los flyers de Brasil verano 2027, República Dominicana y fin de año
+- **Decision:** El crucero grupal Costa Serena (27/12, desde USD 2.725) no se publica. En los cupos nuevos de esos flyers la web no afirma que la salida sea desde Córdoba: puede ser Córdoba o Ezeiza y se confirma al consultar.
+- **Rationale:** El flyer del crucero no trae puertos, ciudad de embarque ni categoría de cabina. Fer tiene el resto, y la consigna es no publicar más de lo que está en el flyer. Un precio en la web se leería como un producto cerrado. La ciudad de salida tampoco está impresa y varía según el cupo.
+- **Rejected alternatives:**
+  - Publicar el crucero solo con el texto del flyer y un CTA a consultar el itinerario.
+  - Asumir Córdoba como origen porque el resto del sitio dice “desde Córdoba”.
+- **Consequences:** no hay ficha de crucero. Las fichas nuevas dicen que la ciudad de salida se confirma al consultar. Las salidas de septiembre que ya decían SKY desde Córdoba conservan ese origen.
 
 ## Open / needs human input
 

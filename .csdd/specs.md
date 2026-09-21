@@ -117,9 +117,14 @@ CMS ni scraping solo para sostener esa sección.
 - Los hubs de Brasil, Caribe, Argentina en bus y salidas grupales desde Córdoba
   están publicados y enlazados con el catálogo y las fichas de destino.
 - En la home, “Próximas salidas desde Córdoba” muestra cuatro destinos con
-  salidas vigentes. El orden es cantidad de fechas consultables y, ante empate,
-  la salida más próxima. No hay una lista fija de slugs. Cada tarjeta muestra
-  la salida más cercana (D-004).
+  salidas vigentes. El orden es cantidad de fechas distintas consultables y, ante empate,
+  la salida más próxima. Varios programas el mismo día cuentan como una fecha.
+  No hay una lista fija de slugs. Cada tarjeta muestra la salida más cercana (D-004).
+- Los cupos confirmados de enero 2027 (Salvador, Morro de São Paulo, Praia do Forte
+  e Imbassaí), fin de año 2026 (Salvador, Río y Punta Cana) y octubre 2026
+  (Punta Cana y Bayahibe) están en el catálogo. En esos cupos la ciudad de salida
+  puede ser Córdoba o Ezeiza y se confirma al consultar. El solo aéreo a Salvador
+  de enero es precio final USD 850. El crucero Costa Serena no se publica (D-005).
 - Cluster de pasajes aéreos (D-001 / D-002, issue #11): rutas indexables bajo
   `/aereos` (hub) y `/aereos/{aerolinea}-cordoba` (landings). Primera landing:
   `/aereos/latam-cordoba`. Datos en `lib/airlines-data.ts`; layouts

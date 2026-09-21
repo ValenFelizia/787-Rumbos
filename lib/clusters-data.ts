@@ -40,7 +40,7 @@ export const clustersData: ClusterPage[] = [
       "Armamos paquetes a Brasil desde Córdoba: playa, ciudad o eventos. Cotizás por WhatsApp con una persona real y te enviamos opciones claras según fechas y presupuesto.",
     howWeWork: [
       "Salidas grupales cuando hay cupos, o paquete 100% a tu medida.",
-      "Aéreos desde Córdoba, hoteles y asistencia internacional (AssistCard).",
+      "Aéreo, hotel y asistencia internacional. El plan y la ciudad de salida figuran en cada ficha.",
       "También salidas en bus a balnearios como Camboriú, por convenio terrestre.",
       "Oficina en el Aeropuerto de Córdoba y seguimiento durante el viaje.",
     ],
@@ -64,19 +64,19 @@ export const clustersData: ClusterPage[] = [
     title: "Caribe desde Córdoba",
     metaTitle: "Paquetes al Caribe desde Córdoba | 787 Rumbos",
     metaDescription:
-      "Cancún, Playa del Carmen y Riviera Maya desde Córdoba. All Inclusive, Family Plan, traslados y asistencia. Cotizá por WhatsApp.",
+      "Cancún, Riviera Maya, Punta Cana y Bayahibe. All Inclusive, traslados y asistencia. La ciudad de salida se confirma al consultar.",
     intro:
-      "El Caribe mexicano es uno de los pedidos más fuertes desde Córdoba: playa, All Inclusive y resorts familiares. Te armamos opciones claras con vuelos, hotel y asistencia.",
+      "El Caribe mexicano es uno de los pedidos más fuertes: playa, All Inclusive y resorts familiares. Cuando hay cupos, también publicamos República Dominicana. Te armamos opciones claras con vuelos, hotel y asistencia.",
     howWeWork: [
       "Paquetes a medida o salidas cuando hay cupos publicados.",
       "All Inclusive, Family Plan y hoteles según tu estilo de viaje.",
-      "Aéreos desde Córdoba, traslados y AssistCard incluidos en la propuesta.",
+      "Aéreo, traslados y asistencia incluidos en el cupo. La ciudad de salida se confirma al consultar.",
       "Oficina en el Aeropuerto de Córdoba para resolver dudas en persona.",
     ],
     ctaLabel: "Cotizar Caribe por WhatsApp",
     whatsappText:
       "Hola 787 Rumbos! Quiero consultar por un viaje al Caribe desde Córdoba. (Web - Cluster Caribe)",
-    destinationSlugs: ["cancun", "playa-del-carmen", "riviera-maya"],
+    destinationSlugs: ["cancun", "playa-del-carmen", "riviera-maya", "punta-cana", "bayahibe"],
   },
   {
     id: "argentina-bus",

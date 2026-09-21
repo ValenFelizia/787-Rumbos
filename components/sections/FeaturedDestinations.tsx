@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   getHomeFeaturedDestinations,
+  getListedPrice,
   getNearestActiveDeparture,
   getTransportLabel,
 } from "@/lib/destinations-data";
@@ -44,6 +45,7 @@ export function FeaturedDestinations() {
           const nextDep = getNearestActiveDeparture(dest) ?? null;
           const hasActiveDeps = nextDep !== null;
           const transportType = nextDep?.transport ?? "mix";
+          const listed = getListedPrice(dest);
 
           return (
             <article
@@ -120,13 +122,13 @@ export function FeaturedDestinations() {
                     <span className="text-[10px] text-[#0b4058]/75 uppercase font-black tracking-wider">
                       Tarifa base
                     </span>
-                    {dest.priceFrom ? (
+                    {listed ? (
                       <div className="text-right">
                         <div>
                           <span className="text-[10px] font-bold text-[#006183] mr-1">Desde</span>
                           <span className="text-lg font-extrabold text-[#0b4058] tabular-nums">
-                            {dest.currency === "USD" ? "USD" : "$"}
-                            {dest.priceFrom.toLocaleString("es-AR")}
+                            {listed.currency === "USD" ? "USD" : "$"}
+                            {listed.amount.toLocaleString("es-AR")}
                           </span>
                         </div>
                         {dest.priceNote && (

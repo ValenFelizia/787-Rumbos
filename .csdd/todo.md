@@ -9,6 +9,16 @@
 
 ## Ready to Land
 
+- [ ] T-048 — Publicar cupos de Brasil, fin de año y República Dominicana
+  - Owner: Valen
+  - Agent: Cursor Grok
+  - Scope: `lib/destinations-data.ts`, `lib/clusters-data.ts`, `app/destinos/[slug]/page.tsx`, `app/destinos/page.tsx`, `components/sections/FeaturedDestinations.tsx`, `public/destinos/punta-cana.jpg`, `public/destinos/bayahibe.jpg`, `e2e/smoke.spec.ts`, `.csdd/specs.md`, `.csdd/decisions.md`, `.csdd/todo.md`
+  - Target: `master`
+  - Updated: 2026-09-21
+  - Landing: [PR #39](https://github.com/ValenFelizia/787-Rumbos/pull/39) hacia `master` desde `feat/home-proximas-salidas`
+  - Verification: typecheck OK; eslint de archivos tocados OK. En local (`:3001`): Salvador lista 27/09 Portobello, 26/12 Vila Galé, enero Vila Galé / Morro / solo aéreo USD 850; Punta Cana y Bayahibe están en el hub Caribe; la home muestra Porto, Salvador, Imbassaí y Praia do Forte.
+  - Note: el crucero Costa Serena no se publica (D-005). La ciudad de salida de estos cupos se confirma al consultar. Punta Cana y Bayahibe usan una imagen de marca hasta que haya foto del destino. El WIP del chooser de playa quedó en stash sobre `development`.
+
 - [ ] T-047 — Destacar en la home los destinos con más salidas vigentes
   - Owner: Valen
   - Agent: Cursor Grok
@@ -16,8 +26,8 @@
   - Target: `master`
   - Updated: 2026-09-21
   - Landing: [PR #39](https://github.com/ValenFelizia/787-Rumbos/pull/39) hacia `master` desde `feat/home-proximas-salidas`
-  - Verification: eslint de los archivos tocados OK. En local (`:3001`): la home muestra Porto (8 de enero), Salta (10 de octubre), Salvador e Imbassaí (27 de septiembre); el detalle de Porto abre la ficha con esa salida.
-  - Note: cuatro cards por cantidad de salidas consultables y, si empatan, por la fecha más próxima. Porto entra por tener 11 salidas.
+  - Verification: eslint de los archivos tocados OK. Tras T-048, en local (`:3001`) la home muestra Porto (8 de enero), Salvador, Imbassaí y Praia do Forte (27 de septiembre).
+  - Note: cuatro cards por cantidad de fechas distintas y, si empatan, por la fecha más próxima. Varios programas el mismo día cuentan como una fecha.
 
 - [ ] T-045 — Publicar el WhatsApp oficial de agencia (+54 9 351 768-8623)
   - Owner: Valen

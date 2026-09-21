@@ -9,6 +9,7 @@ import {
   destinationsData,
   DestinationPage,
   getActiveUpcomingDepartures,
+  getListedPrice,
   getTransportLabel,
 } from "@/lib/destinations-data";
 import { clustersData } from "@/lib/clusters-data";
@@ -163,17 +164,20 @@ export default function DestinosIndex() {
                   <div className="space-y-4 pt-4 border-t border-[#0b4058]/5">
                     <div className="flex items-baseline justify-between">
                       <span className="text-xs text-[#0b4058]/60 font-semibold">Tarifa base</span>
-                      {dest.priceFrom ? (
-                        <div className="text-right">
-                          <span className="text-xs font-bold text-[#006183] mr-1">Desde</span>
-                          <span className="text-2xl font-extrabold text-[#0b4058]">
-                            {dest.currency === "USD" ? "USD" : "$"}{dest.priceFrom.toLocaleString("es-AR")}
-                          </span>
-                          <p className="text-[10px] text-[#0b4058]/60 mt-0.5">{dest.priceNote || "por persona en base doble"}</p>
-                        </div>
-                      ) : (
-                        <span className="text-sm font-bold text-[#0b4058]/70">Consultar tarifa</span>
-                      )}
+                      {(() => {
+                        const listed = getListedPrice(dest);
+                        return listed ? (
+                          <div className="text-right">
+                            <span className="text-xs font-bold text-[#006183] mr-1">Desde</span>
+                            <span className="text-2xl font-extrabold text-[#0b4058]">
+                              {listed.currency === "USD" ? "USD" : "$"}{listed.amount.toLocaleString("es-AR")}
+                            </span>
+                            <p className="text-[10px] text-[#0b4058]/60 mt-0.5">{dest.priceNote || "por persona en base doble"}</p>
+                          </div>
+                        ) : (
+                          <span className="text-sm font-bold text-[#0b4058]/70">Consultar tarifa</span>
+                        );
+                      })()}
                     </div>
 
                     <Link

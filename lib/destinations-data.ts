@@ -33,6 +33,12 @@ export interface Departure {
   transport: TransportType;
   nights: number;
   note?: string;
+  /** Nombre corto del programa, visible en la tarjeta de la salida. */
+  program?: string;
+  /** Si está, reemplaza el texto de noches (p. ej. un solo aéreo). */
+  stayLabel?: string;
+  /** El monto de esta salida es cerrado, no una tarifa “desde”. */
+  priceIsFinal?: boolean;
 }
 
 export interface DestinationPage {
@@ -65,6 +71,30 @@ function whatsappDestinoFaq(destino: string): string {
     AGENCY_PHONE.whatsapp,
     `Hola 787 Rumbos! Quiero consultar por un viaje a ${destino}. (Web - FAQ Destino)`,
   );
+}
+
+const CIUDAD_DE_SALIDA =
+  "La ciudad de salida puede ser Córdoba o Ezeiza. Se confirma al consultar.";
+
+const AEROLINEA_FIN_DE_ANO =
+  "Aerolínea a confirmar entre JetSMART, Arajet y Aerolíneas Argentinas.";
+
+const ENERO_SALVADOR_2027 = [
+  { date: "2027-01-02", displayDate: "2 de Enero" },
+  { date: "2027-01-09", displayDate: "9 de Enero" },
+  { date: "2027-01-16", displayDate: "16 de Enero" },
+];
+
+const OCTUBRE_DOMINICANA_2026 = [
+  { date: "2026-10-15", displayDate: "15 de Octubre" },
+  { date: "2026-10-22", displayDate: "22 de Octubre" },
+];
+
+function repetirSalidas(
+  fechas: { date: string; displayDate: string }[],
+  base: Omit<Departure, "date" | "displayDate">,
+): Departure[] {
+  return fechas.map((fecha) => ({ ...fecha, ...base }));
 }
 
 export const destinationsData: DestinationPage[] = [
@@ -877,6 +907,17 @@ export const destinationsData: DestinationPage[] = [
         status: "few-seats",
         transport: "aereo",
         nights: 7
+      },
+      {
+        date: "2026-12-30",
+        displayDate: "30 de Diciembre",
+        priceFrom: 1719,
+        currency: "USD",
+        status: "confirmed",
+        transport: "aereo",
+        nights: 7,
+        program: "Ibiza Barra Hotel",
+        note: `7 noches con desayuno y carry on. ${AEROLINEA_FIN_DE_ANO} Traslados y asistencia Universal Assistance (hasta 70 años). ${CIUDAD_DE_SALIDA}`
       }
     ],
     faq: [
@@ -1326,29 +1367,69 @@ export const destinationsData: DestinationPage[] = [
     name: "Salvador de Bahía",
     country: "Brasil",
     region: "internacional",
-    metaTitle: "Paquetes a Salvador de Bahía desde Córdoba en Vuelo Directo | 787 Rumbos",
-    metaDescription: "Viajá a Salvador de Bahía directo desde Córdoba con SKY. 7 noches en Hotel Portobello Pituba Praia con desayuno, traslados y asistencia médica.",
+    metaTitle: "Paquetes a Salvador de Bahía | 787 Rumbos",
+    metaDescription: "Salvador de Bahía con salidas confirmadas. Enero 2027 en vuelo directo con Aerolíneas Argentinas y Vila Galé. La ciudad de salida se confirma al consultar.",
     heroImage: "/destinos/salvador-de-bahia.jpg",
-    description: "La cuna de la cultura afrobrasileña te espera con su arquitectura colonial en el Pelourinho, el ritmo del axé y hermosas playas urbanas. Disfrutá de una escapada tropical con vuelo directo desde Córdoba.",
+    description: "La cuna de la cultura afrobrasileña te espera con su arquitectura colonial en el Pelourinho, el ritmo del axé y hermosas playas urbanas. En enero 2027 hay vuelo directo con Aerolíneas Argentinas. La ciudad de salida puede ser Córdoba o Ezeiza: la confirmamos cuando consultás.",
     highlights: [
       "Pelourinho e historia colonial del centro histórico",
       "Farol da Barra y atardecer en la Bahía de Todos los Santos",
       "Gastronomía bahiana única: acarajé y moqueca",
-      "Vuelo directo Córdoba - Salvador con SKY (+1 valija)"
+      "Enero 2027 con vuelo directo de Aerolíneas Argentinas y carry on"
     ],
     typicalInclusions: [
-      "Vuelo directo ida y vuelta Córdoba - Salvador de Bahía con SKY (incluye 1 valija)",
-      "7 noches de alojamiento en Hotel Portobello Pituba Praia con desayuno",
-      "Traslados aeropuerto / hotel / aeropuerto",
-      "Asistencia médica Universal Assistance (aplica hasta 70 años)"
+      "Aéreo de cupo. La ciudad de salida se confirma al consultar",
+      "Alojamiento y régimen según el programa de la salida",
+      "Traslados",
+      "Asistencia Universal Assistance (aplica hasta 70 años)"
     ],
     priceFrom: 885,
     currency: "USD",
-    priceNote: "por persona en base doble. Salidas de Septiembre",
+    priceNote: "por persona en habitación doble. Según programa. Hay solo aéreo.",
     departures: [
-      { date: "2026-09-02", displayDate: "2 de Septiembre", status: "confirmed", transport: "aereo", nights: 7, note: "Vuelo directo SKY" },
-      { date: "2026-09-06", displayDate: "6 de Septiembre", status: "confirmed", transport: "aereo", nights: 7, note: "Vuelo directo SKY" },
-      { date: "2026-09-27", displayDate: "27 de Septiembre", status: "confirmed", transport: "aereo", nights: 7, note: "Vuelo directo SKY" }
+      { date: "2026-09-02", displayDate: "2 de Septiembre", priceFrom: 885, currency: "USD", status: "confirmed", transport: "aereo", nights: 7, program: "Portobello Pituba", note: "7 noches con desayuno. Vuelo directo SKY desde Córdoba, con valija. Asistencia Universal Assistance (hasta 70 años)." },
+      { date: "2026-09-06", displayDate: "6 de Septiembre", priceFrom: 885, currency: "USD", status: "confirmed", transport: "aereo", nights: 7, program: "Portobello Pituba", note: "7 noches con desayuno. Vuelo directo SKY desde Córdoba, con valija. Asistencia Universal Assistance (hasta 70 años)." },
+      { date: "2026-09-27", displayDate: "27 de Septiembre", priceFrom: 885, currency: "USD", status: "confirmed", transport: "aereo", nights: 7, program: "Portobello Pituba", note: "7 noches con desayuno. Vuelo directo SKY desde Córdoba, con valija. Asistencia Universal Assistance (hasta 70 años)." },
+      {
+        date: "2026-12-26",
+        displayDate: "26 de Diciembre",
+        priceFrom: 1545,
+        currency: "USD",
+        status: "confirmed",
+        transport: "aereo",
+        nights: 8,
+        program: "Vila Galé Salvador",
+        note: `8 noches con desayuno y carry on. ${AEROLINEA_FIN_DE_ANO} Traslados y asistencia Universal Assistance (hasta 70 años). ${CIUDAD_DE_SALIDA}`
+      },
+      ...repetirSalidas(ENERO_SALVADOR_2027, {
+        priceFrom: 1284,
+        currency: "USD",
+        status: "confirmed",
+        transport: "aereo",
+        nights: 8,
+        program: "Vila Galé Salvador",
+        note: `8 noches con desayuno. Vuelo directo con Aerolíneas Argentinas y carry on. Traslados y asistencia Universal Assistance (hasta 70 años). ${CIUDAD_DE_SALIDA}`
+      }),
+      ...repetirSalidas(ENERO_SALVADOR_2027, {
+        priceFrom: 1402,
+        currency: "USD",
+        status: "confirmed",
+        transport: "aereo",
+        nights: 8,
+        program: "Salvador y Morro de São Paulo",
+        note: `2 noches en Vila Galé Salvador, 5 en Pousada Estevão (Morro de São Paulo) y 1 en Vila Galé Salvador, con desayuno. Vuelo directo con Aerolíneas Argentinas y carry on. Traslados y asistencia Universal Assistance (hasta 70 años). ${CIUDAD_DE_SALIDA}`
+      }),
+      ...repetirSalidas(ENERO_SALVADOR_2027, {
+        priceFrom: 850,
+        currency: "USD",
+        status: "confirmed",
+        transport: "aereo",
+        nights: 0,
+        program: "Solo aéreo a Salvador",
+        stayLabel: "Sin hotel",
+        priceIsFinal: true,
+        note: `Vuelo directo con Aerolíneas Argentinas y carry on. Asistencia incluida. Precio final USD 850: seña USD 100 y 3 cuotas de USD 250. ${CIUDAD_DE_SALIDA}`
+      })
     ],
     faq: [
       {
@@ -1357,7 +1438,7 @@ export const destinationsData: DestinationPage[] = [
         answer: [
           {
             type: "text",
-            value: "Vuelo directo desde Córdoba con SKY (1 valija), 7 noches en Hotel Portobello Pituba Praia con desayuno, traslados in/out y asistencia médica Universal Assistance."
+            value: "Según la salida: aéreo de cupo, alojamiento con el régimen indicado, traslados y asistencia Universal Assistance (hasta 70 años). En enero 2027 el vuelo directo es con Aerolíneas Argentinas y carry on. La ciudad de salida puede ser Córdoba o Ezeiza y se confirma al consultar. También hay solo aéreo a Salvador, con precio final USD 850."
           }
         ]
       },
@@ -1374,7 +1455,7 @@ export const destinationsData: DestinationPage[] = [
           },
           {
             type: "text",
-            value: " indicando la fecha de salida que te interesa (2, 6 o 27 de Septiembre) y te enviamos la cotización."
+            value: " indicando la fecha y el programa (Vila Galé, Morro de São Paulo o solo aéreo) y te enviamos la cotización."
           }
         ]
       }
@@ -1385,29 +1466,38 @@ export const destinationsData: DestinationPage[] = [
     name: "Imbassaí",
     country: "Brasil",
     region: "internacional",
-    metaTitle: "Paquetes a Imbassaí desde Córdoba | 787 Rumbos",
-    metaDescription: "Disfrutá del relax y la naturaleza en Imbassaí. Vuelo directo desde Córdoba, 7 noches en Vilangelim Eco Pousada con desayuno, traslados y asistencia.",
+    metaTitle: "Paquetes a Imbassaí All Inclusive | 787 Rumbos",
+    metaDescription: "Imbassaí All Inclusive en Grand Palladium, enero 2027, con vuelo directo de Aerolíneas Argentinas. Traslados y asistencia. Consultá la ciudad de salida.",
     heroImage: "/destinos/imbassai.jpg",
-    description: "Un oasis de tranquilidad rodeado de cocoteros, médanos y el encuentro mágico entre el río Imbassaí y el océano Atlántico. Ideal para reconectar con la naturaleza en un entorno protegido e íntimo.",
+    description: "Un oasis de tranquilidad rodeado de cocoteros, médanos y el encuentro entre el río Imbassaí y el océano Atlántico. En enero 2027 el cupo es All Inclusive en Grand Palladium Imbassaí, con vuelo directo de Aerolíneas Argentinas. La ciudad de salida puede ser Córdoba o Ezeiza: la confirmamos cuando consultás.",
     highlights: [
       "Encuentro del río Imbassaí con el mar en la playa",
-      "Estadía en Vilangelim Eco Pousada rodeada de verde",
+      "Grand Palladium Imbassaí All Inclusive en enero 2027",
       "Paseos en kayak y caminatas por médanos y cocoteros",
       "Cercanía a la Reserva Ecológica Sapiranga"
     ],
     typicalInclusions: [
-      "Vuelo directo ida y vuelta Córdoba - Salvador de Bahía con SKY (1 valija)",
-      "7 noches de alojamiento en Vilangelim Eco Pousada con desayuno",
-      "Traslados in/out aeropuerto / posada / aeropuerto",
-      "Asistencia médica Universal Assistance (aplica hasta 70 años)"
+      "Aéreo de cupo. La ciudad de salida se confirma al consultar",
+      "Alojamiento y régimen según el programa de la salida",
+      "Traslados",
+      "Asistencia Universal Assistance (aplica hasta 70 años)"
     ],
     priceFrom: 1100,
     currency: "USD",
-    priceNote: "por persona en base doble. Salidas de Septiembre",
+    priceNote: "por persona en habitación doble. Según programa.",
     departures: [
-      { date: "2026-09-02", displayDate: "2 de Septiembre", status: "confirmed", transport: "aereo", nights: 7, note: "Vuelo directo SKY" },
-      { date: "2026-09-06", displayDate: "6 de Septiembre", status: "confirmed", transport: "aereo", nights: 7, note: "Vuelo directo SKY" },
-      { date: "2026-09-27", displayDate: "27 de Septiembre", status: "confirmed", transport: "aereo", nights: 7, note: "Vuelo directo SKY" }
+      { date: "2026-09-02", displayDate: "2 de Septiembre", priceFrom: 1100, currency: "USD", status: "confirmed", transport: "aereo", nights: 7, program: "Vilangelim Eco Pousada", note: "7 noches con desayuno. Vuelo directo SKY desde Córdoba, con valija. Asistencia Universal Assistance (hasta 70 años)." },
+      { date: "2026-09-06", displayDate: "6 de Septiembre", priceFrom: 1100, currency: "USD", status: "confirmed", transport: "aereo", nights: 7, program: "Vilangelim Eco Pousada", note: "7 noches con desayuno. Vuelo directo SKY desde Córdoba, con valija. Asistencia Universal Assistance (hasta 70 años)." },
+      { date: "2026-09-27", displayDate: "27 de Septiembre", priceFrom: 1100, currency: "USD", status: "confirmed", transport: "aereo", nights: 7, program: "Vilangelim Eco Pousada", note: "7 noches con desayuno. Vuelo directo SKY desde Córdoba, con valija. Asistencia Universal Assistance (hasta 70 años)." },
+      ...repetirSalidas(ENERO_SALVADOR_2027, {
+        priceFrom: 3375,
+        currency: "USD",
+        status: "confirmed",
+        transport: "aereo",
+        nights: 8,
+        program: "Grand Palladium Imbassaí",
+        note: `8 noches All Inclusive. Vuelo directo con Aerolíneas Argentinas y carry on. Traslados y asistencia Universal Assistance (hasta 70 años). ${CIUDAD_DE_SALIDA}`
+      })
     ],
     faq: [
       {
@@ -1416,7 +1506,7 @@ export const destinationsData: DestinationPage[] = [
         answer: [
           {
             type: "text",
-            value: "Aéreo directo Córdoba-Salvador con SKY, 7 noches en Vilangelim Eco Pousada con desayuno, traslados y asistencia médica Universal Assistance."
+            value: "Según la salida: aéreo de cupo, alojamiento, traslados y asistencia Universal Assistance (hasta 70 años). En enero 2027 son 8 noches All Inclusive en Grand Palladium Imbassaí, con vuelo directo de Aerolíneas Argentinas y carry on. La ciudad de salida se confirma al consultar."
           }
         ]
       }
@@ -1469,10 +1559,10 @@ export const destinationsData: DestinationPage[] = [
     name: "Praia do Forte",
     country: "Brasil",
     region: "internacional",
-    metaTitle: "Paquetes All Inclusive a Praia do Forte desde Córdoba | 787 Rumbos",
-    metaDescription: "Viví una experiencia All Inclusive inolvidable en Iberostar Waves Bahia. Vuelo directo desde Córdoba, 7 noches, traslados y asistencia médica.",
+    metaTitle: "Paquetes All Inclusive a Praia do Forte | 787 Rumbos",
+    metaDescription: "Praia do Forte All Inclusive en Iberostar Waves Bahia. Enero 2027 con vuelo directo de Aerolíneas Argentinas. Consultá la ciudad de salida.",
     heroImage: "/destinos/praia-do-forte.jpg",
-    description: "Conocida como la Polinesia Brasileña, Praia do Forte combina playas de aguas cristalinas, la aldea de pescadores, el reconocido Proyecto TAMAR y el resort Iberostar Waves Bahia.",
+    description: "Conocida como la Polinesia Brasileña, Praia do Forte combina playas de aguas cristalinas, la aldea de pescadores, el Proyecto TAMAR y el resort Iberostar Waves Bahia. En enero 2027 el cupo es de 8 noches All Inclusive, con vuelo directo de Aerolíneas Argentinas. La ciudad de salida puede ser Córdoba o Ezeiza: la confirmamos cuando consultás.",
     highlights: [
       "Resort Iberostar Waves Bahia All Inclusive frente al mar",
       "Proyecto TAMAR y centro de protección de tortugas marinas",
@@ -1480,18 +1570,27 @@ export const destinationsData: DestinationPage[] = [
       "Piscinas naturales de Papa-Gente para snorkel"
     ],
     typicalInclusions: [
-      "Vuelo directo ida y vuelta Córdoba - Salvador de Bahía con SKY (1 valija)",
-      "7 noches de alojamiento en Iberostar Waves Bahia All Inclusive",
-      "Traslados aeropuerto / resort / aeropuerto",
-      "Asistencia médica Universal Assistance (aplica hasta 70 años)"
+      "Aéreo de cupo. La ciudad de salida se confirma al consultar",
+      "Alojamiento All Inclusive en Iberostar Waves Bahia",
+      "Traslados",
+      "Asistencia Universal Assistance (aplica hasta 70 años)"
     ],
     priceFrom: 2015,
     currency: "USD",
-    priceNote: "por persona en base doble. Salidas de Septiembre",
+    priceNote: "por persona en habitación doble. Según fecha.",
     departures: [
-      { date: "2026-09-02", displayDate: "2 de Septiembre", status: "confirmed", transport: "aereo", nights: 7, note: "Vuelo directo SKY" },
-      { date: "2026-09-06", displayDate: "6 de Septiembre", status: "confirmed", transport: "aereo", nights: 7, note: "Vuelo directo SKY" },
-      { date: "2026-09-27", displayDate: "27 de Septiembre", status: "confirmed", transport: "aereo", nights: 7, note: "Vuelo directo SKY" }
+      { date: "2026-09-02", displayDate: "2 de Septiembre", priceFrom: 2015, currency: "USD", status: "confirmed", transport: "aereo", nights: 7, program: "Iberostar Waves Bahia", note: "7 noches All Inclusive. Vuelo directo SKY desde Córdoba, con valija. Asistencia Universal Assistance (hasta 70 años)." },
+      { date: "2026-09-06", displayDate: "6 de Septiembre", priceFrom: 2015, currency: "USD", status: "confirmed", transport: "aereo", nights: 7, program: "Iberostar Waves Bahia", note: "7 noches All Inclusive. Vuelo directo SKY desde Córdoba, con valija. Asistencia Universal Assistance (hasta 70 años)." },
+      { date: "2026-09-27", displayDate: "27 de Septiembre", priceFrom: 2015, currency: "USD", status: "confirmed", transport: "aereo", nights: 7, program: "Iberostar Waves Bahia", note: "7 noches All Inclusive. Vuelo directo SKY desde Córdoba, con valija. Asistencia Universal Assistance (hasta 70 años)." },
+      ...repetirSalidas(ENERO_SALVADOR_2027, {
+        priceFrom: 2677,
+        currency: "USD",
+        status: "confirmed",
+        transport: "aereo",
+        nights: 8,
+        program: "Iberostar Waves Bahia",
+        note: `8 noches All Inclusive. Vuelo directo con Aerolíneas Argentinas y carry on. Traslados y asistencia Universal Assistance (hasta 70 años). ${CIUDAD_DE_SALIDA}`
+      })
     ],
     faq: [
       {
@@ -1500,7 +1599,134 @@ export const destinationsData: DestinationPage[] = [
         answer: [
           {
             type: "text",
-            value: "Vuelo directo Córdoba-Salvador con SKY, 7 noches All Inclusive en Iberostar Waves Bahia, traslados en privado/regular y asistencia médica Universal Assistance."
+            value: "Iberostar Waves Bahia All Inclusive, traslados y asistencia Universal Assistance (hasta 70 años). En enero 2027 son 8 noches con vuelo directo de Aerolíneas Argentinas y carry on. La ciudad de salida se confirma al consultar."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    slug: "punta-cana",
+    name: "Punta Cana",
+    country: "República Dominicana",
+    region: "internacional",
+    metaTitle: "Paquetes a Punta Cana All Inclusive | 787 Rumbos",
+    metaDescription: "Punta Cana All Inclusive en Whala Bávaro. Salidas de octubre y fin de año, con traslados y asistencia. La ciudad de salida se confirma al consultar.",
+    h1: "Paquetes a Punta Cana",
+    heroImage: "/destinos/punta-cana.jpg",
+    description: "Punta Cana es playa ancha, mar cálido y resorts sobre la arena. Publicamos los cupos confirmados en Whala Bávaro, All Inclusive, con traslados y asistencia. La ciudad de salida puede ser Córdoba o Ezeiza: la confirmamos cuando consultás.",
+    highlights: [
+      "Playa Bávaro y estadía All Inclusive",
+      "10 noches en Whala Bávaro",
+      "Traslados y asistencia Universal Assistance",
+      "Opción combinada con Bayahibe en octubre"
+    ],
+    typicalInclusions: [
+      "Aéreo de cupo. La ciudad de salida se confirma al consultar",
+      "10 noches All Inclusive",
+      "Traslados",
+      "Asistencia Universal Assistance (aplica hasta 70 años)"
+    ],
+    priceFrom: 1560,
+    currency: "USD",
+    priceNote: "por persona en habitación doble. Según fecha.",
+    departures: [
+      ...repetirSalidas(OCTUBRE_DOMINICANA_2026, {
+        priceFrom: 1560,
+        currency: "USD",
+        status: "confirmed",
+        transport: "aereo",
+        nights: 10,
+        program: "Whala! Bávaro",
+        note: `10 noches All Inclusive. Aéreo Avianca con equipaje. Traslados y asistencia Universal Assistance (hasta 70 años). ${CIUDAD_DE_SALIDA}`
+      }),
+      ...repetirSalidas(OCTUBRE_DOMINICANA_2026, {
+        priceFrom: 1685,
+        currency: "USD",
+        status: "confirmed",
+        transport: "aereo",
+        nights: 10,
+        program: "6 Bayahibe y 4 Punta Cana",
+        note: `6 noches en HM Alma Bayahibe (solo adultos) y 4 en Whala Bávaro, All Inclusive. Aéreo Avianca con equipaje. Traslados y asistencia Universal Assistance (hasta 70 años). ${CIUDAD_DE_SALIDA}`
+      }),
+      {
+        date: "2026-12-28",
+        displayDate: "28 de Diciembre",
+        priceFrom: 2690,
+        currency: "USD",
+        status: "confirmed",
+        transport: "aereo",
+        nights: 10,
+        program: "Whala Bávaro",
+        note: `10 noches All Inclusive, con equipaje. ${AEROLINEA_FIN_DE_ANO} Traslados y asistencia Universal Assistance (hasta 70 años). ${CIUDAD_DE_SALIDA}`
+      }
+    ],
+    faq: [
+      {
+        id: "punta-cana-incluye",
+        question: "¿Qué incluye el paquete a Punta Cana?",
+        answer: [
+          {
+            type: "text",
+            value: "Aéreo de cupo, 10 noches All Inclusive en Whala Bávaro, traslados y asistencia Universal Assistance (hasta 70 años). En octubre el aéreo es Avianca con equipaje. En fin de año la aerolínea se confirma entre JetSMART, Arajet y Aerolíneas Argentinas. La ciudad de salida puede ser Córdoba o Ezeiza."
+          }
+        ]
+      },
+      {
+        id: "punta-cana-combinado",
+        question: "¿Hay un combinado con Bayahibe?",
+        answer: [
+          {
+            type: "text",
+            value: "Sí, en las salidas del 15 y 22 de octubre: 6 noches en HM Alma Bayahibe (solo adultos) y 4 en Whala Bávaro, desde USD 1.685 por persona en habitación doble."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    slug: "bayahibe",
+    name: "Bayahibe",
+    country: "República Dominicana",
+    region: "internacional",
+    metaTitle: "Paquetes a Bayahibe solo adultos | 787 Rumbos",
+    metaDescription: "Bayahibe All Inclusive en HM Alma, solo adultos. Salidas de octubre con Avianca, traslados y asistencia. Consultá la ciudad de salida.",
+    h1: "Paquetes a Bayahibe",
+    heroImage: "/destinos/bayahibe.jpg",
+    description: "Bayahibe es una costa más tranquila, al oeste de Punta Cana. El cupo de octubre es All Inclusive en HM Alma Bayahibe y está pensado solo para adultos. El combinado de 6 noches ahí y 4 en Whala Bávaro está en la ficha de Punta Cana.",
+    highlights: [
+      "HM Alma Bayahibe, solo adultos",
+      "10 noches All Inclusive",
+      "Aéreo Avianca con equipaje en octubre",
+      "Traslados y asistencia Universal Assistance"
+    ],
+    typicalInclusions: [
+      "Aéreo Avianca con equipaje. La ciudad de salida se confirma al consultar",
+      "10 noches All Inclusive en HM Alma Bayahibe",
+      "Traslados",
+      "Asistencia Universal Assistance (aplica hasta 70 años)"
+    ],
+    travelTip: "HM Alma Bayahibe es solo adultos. Si viajás con menores, el programa de Whala Bávaro está en la ficha de Punta Cana.",
+    priceFrom: 1615,
+    currency: "USD",
+    priceNote: "por persona en habitación doble. Solo adultos.",
+    departures: repetirSalidas(OCTUBRE_DOMINICANA_2026, {
+      priceFrom: 1615,
+      currency: "USD",
+      status: "confirmed",
+      transport: "aereo",
+      nights: 10,
+      program: "HM Alma Bayahibe",
+      note: `10 noches All Inclusive. Solo adultos. Aéreo Avianca con equipaje. Traslados y asistencia Universal Assistance (hasta 70 años). ${CIUDAD_DE_SALIDA}`
+    }),
+    faq: [
+      {
+        id: "bayahibe-adultos",
+        question: "¿Bayahibe admite menores?",
+        answer: [
+          {
+            type: "text",
+            value: "No. HM Alma Bayahibe es solo adultos. Para viajar con menores, consultá Whala Bávaro en la ficha de Punta Cana."
           }
         ]
       }
@@ -1551,7 +1777,8 @@ export function getHomeFeaturedDestinations(limit = 4): DestinationPage[] {
         (min, dep) => (min === null || dep.date < min ? dep.date : min),
         null,
       );
-      return { dest, count: upcoming.length, nearest };
+      const dates = new Set(upcoming.map((dep) => dep.date));
+      return { dest, count: dates.size, nearest };
     })
     .filter((item) => item.count > 0)
     .sort((a, b) => {
@@ -1560,6 +1787,25 @@ export function getHomeFeaturedDestinations(limit = 4): DestinationPage[] {
     })
     .slice(0, limit)
     .map((item) => item.dest);
+}
+
+/** Tarifa “desde” de la ficha: el menor precio de hotel entre las salidas vigentes. */
+export function getListedPrice(
+  dest: DestinationPage,
+): { amount: number; currency: "ARS" | "USD" } | undefined {
+  const hotelTrips = getActiveUpcomingDepartures(dest).filter((dep) => !dep.stayLabel);
+  const amounts = hotelTrips
+    .map((dep) => dep.priceFrom ?? dest.priceFrom)
+    .filter((amount): amount is number => amount != null);
+  if (amounts.length === 0) {
+    if (dest.priceFrom == null) return undefined;
+    return { amount: dest.priceFrom, currency: dest.currency };
+  }
+  const priced = hotelTrips.find((dep) => dep.priceFrom != null);
+  return {
+    amount: Math.min(...amounts),
+    currency: priced?.currency ?? dest.currency,
+  };
 }
 
 export function getDestinationBySlug(slug: string): DestinationPage | undefined {
@@ -1579,7 +1825,7 @@ export function getRelatedDestinations(
   const fixedClusters: string[][] = [
     ["rio-de-janeiro", "porto-de-galinhas", "camboriu", "f1-grand-premio-sao-paulo"],
     ["salvador-de-bahia", "imbassai", "guarajuba", "praia-do-forte"],
-    ["cancun", "playa-del-carmen", "riviera-maya"],
+    ["cancun", "playa-del-carmen", "riviera-maya", "punta-cana", "bayahibe"],
     ["termas-rio-hondo", "cataratas-del-iguazu", "salar-de-uyuni"],
   ];
   for (const group of fixedClusters) {
@@ -1591,7 +1837,9 @@ export function getRelatedDestinations(
   }
 
   const others = destinationsData.filter((d) => d.slug !== slug);
-  const clusterMates = others.filter((d) => clusterMateSlugs.has(d.slug));
+  const clusterMates = others
+    .filter((d) => clusterMateSlugs.has(d.slug))
+    .sort((a, b) => Number(b.country === current.country) - Number(a.country === current.country));
   const sameCountry = others.filter(
     (d) => d.country === current.country && !clusterMateSlugs.has(d.slug)
   );
