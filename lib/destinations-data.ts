@@ -950,7 +950,7 @@ export const destinationsData: DestinationPage[] = [
     country: "Brasil",
     region: "internacional",
     metaTitle: "Viajes a Porto de Galinhas desde Córdoba | 787 Rumbos",
-    metaDescription: "Conocé las piscinas naturales del noreste de Brasil. Paquetes turísticos con aéreos desde Córdoba y traslados.",
+    metaDescription: "Porto de Galinhas desde USD 1.670. 7 noches, aéreos Andes desde Córdoba o Ezeiza, hoteles a elección y traslados. Salidas de enero a marzo.",
     heroImage: "/destinos/portogalinhas.jpg",
     description: "Famoso por sus piscinas naturales de aguas templadas y transparentes formadas entre arrecifes de coral. Porto de Galinhas es el refugio tropical ideal en el noreste de Brasil, combinando encanto de aldea de pescadores con hotelería de primer nivel.",
     highlights: [
@@ -960,17 +960,78 @@ export const destinationsData: DestinationPage[] = [
       "Centro peatonal repleto de gastronomía y artesanías"
     ],
     typicalInclusions: [
-      "Aéreo internacional desde Córdoba a Recife",
-      "7 noches de alojamiento con régimen seleccionado",
-      "Traslado Recife - Porto de Galinhas - Recife",
-      "Asistencia médica internacional (AssistCard)",
-      "Asistencia receptiva local"
+      "Aéreos desde Córdoba o Ezeiza con Andes Líneas Aéreas",
+      "7 noches en Pousada Amada Terra, Atlantic, Flor de Magnolia o Porto 2 Life",
+      "Régimen de comidas según el hotel elegido",
+      "Traslados de ingreso y egreso",
+      "Asistencia al viajero AC35"
     ],
     travelTip: "La visita a las piscinas naturales depende 100% de la tabla de mareas. Consultá el horario de marea baja cada día para ir en jangada.",
-    priceFrom: 1250,
+    priceFrom: 1670,
     currency: "USD",
-    priceNote: "por persona en base doble",
-    departures: []
+    priceNote: "por persona en base doble. Según hotel. Enero a marzo 2027",
+    departures: [
+      { date: "2027-01-08", displayDate: "8 de Enero", status: "confirmed", transport: "aereo", nights: 7, note: "Andes. Córdoba o Ezeiza" },
+      { date: "2027-01-15", displayDate: "15 de Enero", status: "confirmed", transport: "aereo", nights: 7, note: "Andes. Córdoba o Ezeiza" },
+      { date: "2027-01-22", displayDate: "22 de Enero", status: "confirmed", transport: "aereo", nights: 7, note: "Andes. Córdoba o Ezeiza" },
+      { date: "2027-01-29", displayDate: "29 de Enero", status: "confirmed", transport: "aereo", nights: 7, note: "Andes. Córdoba o Ezeiza" },
+      { date: "2027-02-05", displayDate: "5 de Febrero", status: "confirmed", transport: "aereo", nights: 7, note: "Andes. Córdoba o Ezeiza" },
+      { date: "2027-02-12", displayDate: "12 de Febrero", status: "confirmed", transport: "aereo", nights: 7, note: "Andes. Córdoba o Ezeiza" },
+      { date: "2027-02-19", displayDate: "19 de Febrero", status: "confirmed", transport: "aereo", nights: 7, note: "Andes. Córdoba o Ezeiza" },
+      { date: "2027-02-26", displayDate: "26 de Febrero", status: "confirmed", transport: "aereo", nights: 7, note: "Andes. Córdoba o Ezeiza" },
+      { date: "2027-03-05", displayDate: "5 de Marzo", status: "confirmed", transport: "aereo", nights: 7, note: "Andes. Córdoba o Ezeiza" },
+      { date: "2027-03-12", displayDate: "12 de Marzo", status: "confirmed", transport: "aereo", nights: 7, note: "Andes. Córdoba o Ezeiza" },
+      { date: "2027-03-19", displayDate: "19 de Marzo", status: "confirmed", transport: "aereo", nights: 7, note: "Andes. Córdoba o Ezeiza" }
+    ],
+    faq: [
+      {
+        id: "porto-incluye",
+        question: "¿Qué incluye el paquete a Porto de Galinhas?",
+        answer: [
+          {
+            type: "text",
+            value: "Aéreos desde Córdoba o Ezeiza con Andes Líneas Aéreas, 7 noches de alojamiento con régimen según hotel, traslados de ingreso y egreso, y asistencia al viajero AC35."
+          }
+        ]
+      },
+      {
+        id: "porto-hoteles",
+        question: "¿En qué hoteles se puede hospedar?",
+        answer: [
+          {
+            type: "text",
+            value: "Pousada Amada Terra, Atlantic, Flor de Magnolia o Porto 2 Life. El régimen de comidas depende del hotel. La tarifa publicada es desde USD 1.670 por persona en base doble."
+          }
+        ]
+      },
+      {
+        id: "porto-pago",
+        question: "¿Cómo se paga el viaje a Porto de Galinhas?",
+        answer: [
+          {
+            type: "text",
+            value: "Las tarifas están en dólares y se abonan en dólar transferido o en efectivo: 30% al momento de la confirmación, refuerzo de seña 45 días antes de la salida y el saldo hasta 15 días antes."
+          }
+        ]
+      },
+      {
+        id: "porto-cotizar",
+        question: "¿Cómo consulto una salida a Porto de Galinhas?",
+        answer: [
+          { type: "text", value: "Escribinos por " },
+          {
+            type: "link",
+            label: "WhatsApp",
+            href: whatsappDestinoFaq("Porto de Galinhas"),
+            external: true
+          },
+          {
+            type: "text",
+            value: " con la fecha, el hotel y la ciudad de embarque (Córdoba o Ezeiza). Te confirmamos cupo y tarifa."
+          }
+        ]
+      }
+    ]
   },
   {
     slug: "camboriu",
