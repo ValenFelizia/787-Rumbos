@@ -10,6 +10,7 @@ import {
   getDestinationBySlug,
   getRelatedDestinations,
   getActiveUpcomingDepartures,
+  getListedPrice,
   getUpcomingDepartures,
   getTransportLabel,
   type Departure,
@@ -132,11 +133,19 @@ function getDepartureStatus(dep: Departure): {
 }
 
 // 4. Generador de link de WhatsApp personalizado por salida
-function getWhatsAppDepartureLink(destinoName: string, displayDate: string): string {
+function getWhatsAppDepartureLink(destinoName: string, dep: Departure): string {
+  const programa = dep.program ? ` (${dep.program})` : "";
   return whatsappLink(
     AGENCY_PHONE.whatsapp,
-    `Hola, quiero consultar disponibilidad para la salida a ${destinoName} del ${displayDate}. (Web - Detalle Destino)`,
+    `Hola, quiero consultar disponibilidad para la salida a ${destinoName} del ${dep.displayDate}${programa}. (Web - Detalle Destino)`,
   );
+}
+
+function compareDepartures(a: Departure, b: Departure): number {
+  const byDate = a.date.localeCompare(b.date);
+  if (byDate !== 0) return byDate;
+  if (Boolean(a.stayLabel) !== Boolean(b.stayLabel)) return a.stayLabel ? 1 : -1;
+  return (a.priceFrom ?? 0) - (b.priceFrom ?? 0);
 }
 
 // 5. Generador de link de WhatsApp genérico para cotización a medida
@@ -156,14 +165,15 @@ export default async function DestinoDetailPage({ params }: Props) {
   }
 
   // Solo salidas futuras en el panel (pasadas se podan del catálogo / no se listan)
-  const upcomingDepartures = getUpcomingDepartures(dest);
+  const upcomingDepartures = getUpcomingDepartures(dest).slice().sort(compareDepartures);
   const activeUpcomingDepartures = getActiveUpcomingDepartures(dest);
+  const listedPrice = getListedPrice(dest);
 
   // JSON-LD estructurado
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "TouristTrip",
-    "name": `Paquete a ${dest.name} desde Córdoba`,
+    "name": `Paquete a ${dest.name}`,
     "description": dest.description,
     "touristType": "Leisure",
     "provider": {
@@ -172,11 +182,11 @@ export default async function DestinoDetailPage({ params }: Props) {
       "telephone": AGENCY_PHONE.tel,
       "url": "https://www.787rumbos.com.ar"
     },
-    ...(dest.priceFrom && {
+    ...(listedPrice && {
       "offers": {
         "@type": "Offer",
-        "price": dest.priceFrom.toString(),
-        "priceCurrency": dest.currency,
+        "price": listedPrice.amount.toString(),
+        "priceCurrency": listedPrice.currency,
         "availability": activeUpcomingDepartures.length > 0 ? "https://schema.org/InStock" : "https://schema.org/InquiryLimit",
         "priceValidUntil": "2026-12-31"
       }
@@ -457,7 +467,7 @@ export default async function DestinoDetailPage({ params }: Props) {
 
                     return (
                       <div
-                        key={idx}
+                        key={`${dep.date}-${dep.program ?? idx}`}
                         className={`rounded-xl border p-4 space-y-3 transition-all duration-200 ${statusInfo.isSelectable
                           ? "border-gray-200 hover:border-[#0b4058]/30 hover:shadow-md bg-white"
                           : "border-gray-100 bg-gray-50/50"
@@ -469,6 +479,9 @@ export default async function DestinoDetailPage({ params }: Props) {
                               <Calendar className="h-4 w-4 text-[#006183] shrink-0" />
                               {dep.displayDate}
                             </span>
+                            {dep.program && (
+                              <p className="text-xs font-semibold text-[#006183]">{dep.program}</p>
+                            )}
                             <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-[#0b4058]/70">
                               <span className="flex items-center gap-1">
                                 {dep.transport === "aereo" || dep.transport === "mix" ? (
@@ -479,7 +492,17 @@ export default async function DestinoDetailPage({ params }: Props) {
                                 <span>{getTransportLabel(dep.transport)}</span>
                               </span>
                               <span>·</span>
-                              <span>{dep.nights} {dep.nights === 1 ? "noche" : "noches"}</span>
+                              <span>{dep.stayLabel ?? `${dep.nights} ${dep.nights === 1 ? "noche" : "noches"}`}</span>
+                              {dep.priceFrom != null && (
+                                <>
+                                  <span>·</span>
+                                  <span className="font-bold text-[#0b4058] tabular-nums">
+                                    {dep.priceIsFinal ? "Final" : "Desde"}{" "}
+                                    {(dep.currency ?? dest.currency) === "USD" ? "USD" : "$"}
+                                    {dep.priceFrom.toLocaleString("es-AR")}
+                                  </span>
+                                </>
+                              )}
                             </div>
                           </div>
 
@@ -497,7 +520,7 @@ export default async function DestinoDetailPage({ params }: Props) {
                         {/* CTA Salida específica */}
                         {statusInfo.isSelectable && (
                           <a
-                            href={getWhatsAppDepartureLink(dest.name, dep.displayDate)}
+                            href={getWhatsAppDepartureLink(dest.name, dep)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="font-[family-name:var(--font-brand-heading)] flex w-full items-center justify-center gap-2 rounded-lg bg-[#25D366] hover:bg-[#1DA851] text-white py-2.5 text-xs font-bold transition-all duration-200 active:scale-[0.96] cursor-pointer"
@@ -577,7 +600,7 @@ export default async function DestinoDetailPage({ params }: Props) {
           compact
           description={
             <>
-              Dudas típicas de quienes viajan a {dest.name} desde Córdoba. Si tu consulta es otra,{" "}
+              Dudas típicas de quienes viajan a {dest.name}. Si tu consulta es otra,{" "}
               <a
                 href={getWhatsAppCustomLink(dest.name)}
                 className="font-semibold text-[#006183] underline decoration-[#006183]/30 underline-offset-2 transition-colors hover:text-[#0b4058] hover:decoration-[#0b4058]/40"
