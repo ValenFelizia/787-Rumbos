@@ -117,11 +117,17 @@ export interface UserAuthOperations {
   };
 }
 /**
+ * Solo un admin crea usuarios y cambia roles. Cada uno puede editar su nombre y su contraseña.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
   id: number;
+  name?: string | null;
+  /**
+   * Solo un admin puede cambiar el rol. Un agente no se lo cambia a sí mismo.
+   */
   role: 'admin' | 'encargado' | 'agente';
   updatedAt: string;
   createdAt: string;
@@ -166,6 +172,8 @@ export interface Media {
   focalY?: number | null;
 }
 /**
+ * Borrador: no se ve en el sitio. Publicado: se ve en la web. Un agente publica directo solo salidas, precios y vigencia; el resto queda en borrador para un encargado.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "destinations".
  */
@@ -177,10 +185,17 @@ export interface Destination {
    */
   sortOrder: number;
   /**
-   * Vacío hasta el flujo de revisión. No cambia el sitio.
+   * Se completa sola cada vez que alguien guarda. No se edita a mano.
    */
   lastReviewedAt?: string | null;
+  /**
+   * Quien guardó la ficha por última vez. Tampoco se edita a mano.
+   */
   reviewedBy?: (number | null) | User;
+  /**
+   * Se marca sola cuando un agente guarda un borrador. Un encargado o un admin la baja al publicar.
+   */
+  pendingApproval?: boolean | null;
   name: string;
   country: string;
   region: 'nacional' | 'internacional';
@@ -197,18 +212,24 @@ export interface Destination {
   currency: 'ARS' | 'USD';
   priceNote?: string | null;
   /**
-   * Si vence, la ficha ocultará el monto (fase siguiente). Vacío = sin efecto.
+   * Obligatorio al publicar si hay un precio. El día indicado sigue vigente. Si se pasa, el sitio no muestra el monto y dice «Consultá precio actualizado».
    */
   priceValidUntil?: string | null;
   departures?:
     | {
         /**
-         * Texto YYYY-MM-DD, sin zona horaria, para que el día no se corra.
+         * Fecha real en AAAA-MM-DD, por ejemplo 2026-07-08. Una salida nueva o que modifiques no puede ser de un día que ya pasó.
          */
         date: string;
+        /**
+         * Cómo la lee el pasajero, por ejemplo «8 de Julio».
+         */
         displayDate: string;
         priceFrom?: number | null;
         currency?: ('ARS' | 'USD') | null;
+        /**
+         * Confirmada: hay lugar. Últimos lugares: queda poco. Agotada: no se ofrece. Consultar: hay que chequear el cupo.
+         */
         status: 'confirmed' | 'few-seats' | 'sold-out' | 'inquire';
         transport: 'aereo' | 'bus' | 'bus-cama' | 'mix';
         nights: number;
@@ -220,7 +241,7 @@ export interface Destination {
          */
         priceIsFinal?: boolean | null;
         /**
-         * Vigencia propia de esta salida. Vacía = usa la del destino (fase siguiente).
+         * Vigencia propia de esta salida. Si la dejás vacía, usa la del destino. Si vence, esta salida no muestra el monto.
          */
         priceValidUntil?: string | null;
         id?: string | null;
@@ -369,6 +390,7 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  name?: T;
   role?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -415,6 +437,7 @@ export interface DestinationsSelect<T extends boolean = true> {
   sortOrder?: T;
   lastReviewedAt?: T;
   reviewedBy?: T;
+  pendingApproval?: T;
   name?: T;
   country?: T;
   region?: T;

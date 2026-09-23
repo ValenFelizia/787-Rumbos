@@ -21,6 +21,9 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    components: {
+      beforeDashboard: ["/payload/components/ReviewQueue#ReviewQueue"],
+    },
   },
   collections: [Users, Media, Destinations],
   editor: lexicalEditor(),

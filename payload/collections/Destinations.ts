@@ -1,4 +1,6 @@
 import type { CollectionConfig } from "payload";
+import { isAdmin, isAuthenticated } from "../access";
+import { enforceEditorialRules } from "../hooks/editorial";
 import {
   revalidateCatalogAfterChange,
   revalidateCatalogAfterDelete,
@@ -58,19 +60,24 @@ export const Destinations: CollectionConfig = {
   },
   admin: {
     useAsTitle: "name",
-    defaultColumns: ["name", "slug", "region", "country", "priceFrom"],
+    defaultColumns: ["name", "slug", "region", "pendingApproval", "priceFrom"],
+    description:
+      "Borrador: no se ve en el sitio. Publicado: se ve en la web. Un agente publica directo solo salidas, precios y vigencia; el resto queda en borrador para un encargado.",
   },
   defaultSort: "sortOrder",
   versions: {
-    drafts: true,
+    drafts: {
+      autosave: false,
+    },
   },
   access: {
     read: ({ req }) => (req.user ? true : { _status: { equals: "published" } }),
-    create: ({ req }) => Boolean(req.user),
-    update: ({ req }) => Boolean(req.user),
-    delete: ({ req }) => Boolean(req.user),
+    create: isAuthenticated,
+    update: isAuthenticated,
+    delete: isAdmin,
   },
   hooks: {
+    beforeChange: [enforceEditorialRules],
     afterChange: [revalidateCatalogAfterChange],
     afterDelete: [revalidateCatalogAfterDelete],
   },
@@ -101,8 +108,9 @@ export const Destinations: CollectionConfig = {
       type: "date",
       admin: {
         position: "sidebar",
-        date: { pickerAppearance: "dayOnly", displayFormat: "yyyy-MM-dd" },
-        description: "Vacío hasta el flujo de revisión. No cambia el sitio.",
+        readOnly: true,
+        date: { pickerAppearance: "dayAndTime", displayFormat: "yyyy-MM-dd HH:mm" },
+        description: "Se completa sola cada vez que alguien guarda. No se edita a mano.",
       },
     },
     {
@@ -110,7 +118,24 @@ export const Destinations: CollectionConfig = {
       label: "Revisado por",
       type: "relationship",
       relationTo: "users",
-      admin: { position: "sidebar" },
+      admin: {
+        position: "sidebar",
+        readOnly: true,
+        description: "Quien guardó la ficha por última vez. Tampoco se edita a mano.",
+      },
+    },
+    {
+      name: "pendingApproval",
+      label: "Pendiente de aprobación",
+      type: "checkbox",
+      defaultValue: false,
+      index: true,
+      admin: {
+        position: "sidebar",
+        readOnly: true,
+        description:
+          "Se marca sola cuando un agente guarda un borrador. Un encargado o un admin la baja al publicar.",
+      },
     },
     {
       type: "tabs",
@@ -188,7 +213,8 @@ export const Destinations: CollectionConfig = {
               type: "date",
               admin: {
                 date: { pickerAppearance: "dayOnly", displayFormat: "yyyy-MM-dd" },
-                description: "Si vence, la ficha ocultará el monto (fase siguiente). Vacío = sin efecto.",
+                description:
+                  "Obligatorio al publicar si hay un precio. El día indicado sigue vigente. Si se pasa, el sitio no muestra el monto y dice «Consultá precio actualizado».",
               },
             },
             {
@@ -209,10 +235,19 @@ export const Destinations: CollectionConfig = {
                     return true;
                   },
                   admin: {
-                    description: "Texto YYYY-MM-DD, sin zona horaria, para que el día no se corra.",
+                    description:
+                      "Fecha real en AAAA-MM-DD, por ejemplo 2026-07-08. Una salida nueva o que modifiques no puede ser de un día que ya pasó.",
                   },
                 },
-                { name: "displayDate", label: "Fecha visible", type: "text", required: true },
+                {
+                  name: "displayDate",
+                  label: "Fecha visible",
+                  type: "text",
+                  required: true,
+                  admin: {
+                    description: "Cómo la lee el pasajero, por ejemplo «8 de Julio».",
+                  },
+                },
                 { name: "priceFrom", label: "Precio desde", type: "number" },
                 {
                   name: "currency",
@@ -225,6 +260,10 @@ export const Destinations: CollectionConfig = {
                   label: "Estado",
                   type: "select",
                   required: true,
+                  admin: {
+                    description:
+                      "Confirmada: hay lugar. Últimos lugares: queda poco. Agotada: no se ofrece. Consultar: hay que chequear el cupo.",
+                  },
                   options: [
                     { label: "Confirmada", value: "confirmed" },
                     { label: "Últimos lugares", value: "few-seats" },
@@ -260,7 +299,8 @@ export const Destinations: CollectionConfig = {
                   type: "date",
                   admin: {
                     date: { pickerAppearance: "dayOnly", displayFormat: "yyyy-MM-dd" },
-                    description: "Vigencia propia de esta salida. Vacía = usa la del destino (fase siguiente).",
+                    description:
+                      "Vigencia propia de esta salida. Si la dejás vacía, usa la del destino. Si vence, esta salida no muestra el monto.",
                   },
                 },
               ],

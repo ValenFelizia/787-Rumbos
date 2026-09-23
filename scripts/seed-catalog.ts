@@ -5,6 +5,8 @@
  *
  * Uso: npm run cms:seed
  * Admin inicial si existen SEED_ADMIN_EMAIL y SEED_ADMIN_PASSWORD.
+ * Con SEED_DEMO_USERS=true también crea encargado y agente (SEED_DEMO_PASSWORD).
+ * Solo para local y CI: no lo actives en producción.
  */
 import { existsSync } from "node:fs";
 import path from "node:path";
@@ -15,7 +17,7 @@ import { whatsappDestinoFaq } from "../lib/catalog/logic";
 import type { Departure, DestinationPage } from "../lib/catalog/types";
 import { destinationsData } from "./seed-data/destinations";
 
-const seedContext = { disableRevalidate: true };
+const seedContext = { disableRevalidate: true, skipEditorialValidation: true };
 
 const payload = await getPayload({ config });
 
@@ -40,11 +42,44 @@ async function ensureAdmin(): Promise<void> {
 
   await payload.create({
     collection: "users",
-    data: { email, password, role: "admin" },
+    data: { email, password, role: "admin", name: "Admin" },
     overrideAccess: true,
     context: seedContext,
   });
   console.log(`seed: admin creado (${email})`);
+}
+
+async function ensureDemoUsers(): Promise<void> {
+  if (process.env.SEED_DEMO_USERS !== "true") return;
+  const password = process.env.SEED_DEMO_PASSWORD;
+  if (!password) {
+    console.log("seed: SEED_DEMO_USERS sin SEED_DEMO_PASSWORD, no se crean demos");
+    return;
+  }
+
+  const demos = [
+    { email: "encargado@787rumbos.test", role: "encargado" as const, name: "Encargado demo" },
+    { email: "agente@787rumbos.test", role: "agente" as const, name: "Agente demo" },
+  ];
+  for (const demo of demos) {
+    const existing = await payload.find({
+      collection: "users",
+      limit: 1,
+      overrideAccess: true,
+      where: { email: { equals: demo.email } },
+    });
+    if (existing.docs[0]) {
+      console.log(`seed: demo ya existe (${demo.email})`);
+      continue;
+    }
+    await payload.create({
+      collection: "users",
+      data: { ...demo, password },
+      overrideAccess: true,
+      context: seedContext,
+    });
+    console.log(`seed: demo creado (${demo.email})`);
+  }
 }
 
 async function ensureMedia(publicPath: string, alt: string): Promise<number> {
@@ -143,6 +178,7 @@ async function destinationData(dest: DestinationPage, sortOrder: number) {
     sortOrder,
     lastReviewedAt: null,
     reviewedBy: null,
+    pendingApproval: false,
     _status: "published" as const,
   };
 }
@@ -182,6 +218,7 @@ async function upsertDestination(dest: DestinationPage, sortOrder: number): Prom
 
 async function main(): Promise<void> {
   await ensureAdmin();
+  await ensureDemoUsers();
 
   let created = 0;
   let updated = 0;

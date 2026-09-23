@@ -1,6 +1,7 @@
 import path from "path";
 import { fileURLToPath } from "url";
 import type { CollectionConfig } from "payload";
+import { isAdminOrEncargado, isAuthenticated } from "../access";
 import {
   revalidateCatalogAfterChange,
   revalidateCatalogAfterDelete,
@@ -16,9 +17,9 @@ export const Media: CollectionConfig = {
   },
   access: {
     read: () => true,
-    create: ({ req }) => Boolean(req.user),
-    update: ({ req }) => Boolean(req.user),
-    delete: ({ req }) => Boolean(req.user),
+    create: isAuthenticated,
+    update: isAuthenticated,
+    delete: isAdminOrEncargado,
   },
   hooks: {
     afterChange: [revalidateCatalogAfterChange],
