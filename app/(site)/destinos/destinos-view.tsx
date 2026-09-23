@@ -6,21 +6,20 @@ import Link from "next/link";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import {
-  destinationsData,
-  DestinationPage,
   getActiveUpcomingDepartures,
   getListedPrice,
   getTransportLabel,
-} from "@/lib/destinations-data";
+} from "@/lib/catalog/logic";
+import type { DestinationPage } from "@/lib/catalog/types";
 import { clustersData } from "@/lib/clusters-data";
 import { AGENCY_PHONE, whatsappLink } from "@/lib/constants";
 import { MapPin, Calendar, ArrowRight } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 
-export default function DestinosIndex() {
+export function DestinosView({ destinations }: { destinations: DestinationPage[] }) {
   const [filter, setFilter] = useState<"todos" | "nacional" | "internacional">("todos");
 
-  const filteredDestinations = destinationsData.filter(d => {
+  const filteredDestinations = destinations.filter(d => {
     if (filter === "todos") return true;
     return d.region === filter;
   });

@@ -2,10 +2,11 @@
 #
 # Este archivo le dice a los robots de los buscadores (Googlebot, Bingbot, etc.)
 # qué partes del sitio pueden indexar y cuáles no.
-# Para una landing page sin áreas privadas, permitimos todo.
+# El sitio público se indexa. El panel del CMS no.
 
 User-agent: *
 Allow: /
+Disallow: /admin
 
 # Ubicación del sitemap para que los buscadores lo encuentren automáticamente
 Sitemap: https://www.787rumbos.com.ar/sitemap.xml

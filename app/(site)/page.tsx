@@ -19,8 +19,11 @@ import { Testimonials } from "@/components/sections/Testimonials";
 import { FAQ } from "@/components/sections/FAQ";
 import { CTASection } from "@/components/sections/CTASection";
 import { Footer } from "@/components/sections/Footer";
+import { getHomeFeaturedDestinations } from "@/lib/catalog/repository";
 
-export default function Home() {
+export default async function Home() {
+  const featured = await getHomeFeaturedDestinations();
+
   return (
     <main className="min-h-screen bg-[#f9f9f9] text-[#0b4058]">
       <SpecialPromo />
@@ -31,7 +34,7 @@ export default function Home() {
       <PartnersMarquee />
       <ValueProposition />
       <RumboSelector />
-      <FeaturedDestinations />
+      <FeaturedDestinations destinations={featured} />
       <Testimonials />
       <Services />
       <InstagramFeed />

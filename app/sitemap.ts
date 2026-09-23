@@ -4,10 +4,13 @@ import {
   airlineCanonicalUrl,
   getPublishedAirlines,
 } from "@/lib/airlines-data";
-import { destinationsData } from "@/lib/destinations-data";
+import { getAllDestinations } from "@/lib/catalog/repository";
 import { clustersData } from "@/lib/clusters-data";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const revalidate = 86_400;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const destinationsData = await getAllDestinations();
   const baseUrl = "https://www.787rumbos.com.ar";
 
   const staticPages = [

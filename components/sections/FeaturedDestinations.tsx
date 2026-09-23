@@ -3,11 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  getHomeFeaturedDestinations,
   getListedPrice,
   getNearestActiveDeparture,
   getTransportLabel,
-} from "@/lib/destinations-data";
+} from "@/lib/catalog/logic";
+import type { DestinationPage } from "@/lib/catalog/types";
 import { Plane, Bus, ArrowRight, Calendar } from "lucide-react";
 import {
   PrimaryCta,
@@ -16,9 +16,9 @@ import {
 } from "@/components/conversion";
 import { useModal } from "@/lib/context/ModalContext";
 
-export function FeaturedDestinations() {
+export function FeaturedDestinations({ destinations }: { destinations: DestinationPage[] }) {
   const { openModal } = useModal();
-  const featured = getHomeFeaturedDestinations();
+  const featured = destinations;
 
   return (
     <section id="destinos" className="mx-auto w-full max-w-6xl px-6 py-14 md:py-16">

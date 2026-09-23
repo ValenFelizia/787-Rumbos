@@ -11,7 +11,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { PROMO_CONFIG } from "@/components/sections/SpecialPromo";
-import { destinationsData } from "@/lib/destinations-data";
+import { destinationsData } from "@/scripts/seed-data/destinations";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const outPath = join(root, "e2e", "golden", "catalog.json");

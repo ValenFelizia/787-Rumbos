@@ -26,6 +26,7 @@ const eslintConfig = [
       "next-env.d.ts",
       "playwright-report/**",
       "test-results/**",
+      "payload/migrations/**",
     ],
   },
   ...compat.extends("next/core-web-vitals", "next/typescript"),
