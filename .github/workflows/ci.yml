@@ -3,16 +3,17 @@
 #
 # Qué hace este workflow (en orden):
 # 1. Instala dependencias
-# 2. Lint (ESLint) + typecheck (TypeScript) + build (Next.js)
-# 3. Smoke tests E2E (Playwright) contra el build de producción
+# 2. Levanta Postgres, aplica migraciones y carga el catálogo
+# 3. Lint (ESLint) + typecheck (TypeScript) + paridad del catálogo
+# 4. Build (Next.js) y smoke tests E2E (Playwright)
 
 name: CI
 
 on:
   push:
-    branches: [development, master, main]
+    branches: [master, main]
   pull_request:
-    branches: [development, master, main]
+    branches: [master, main]
 
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
@@ -23,6 +24,25 @@ jobs:
     name: Lint, types, build & smoke
     runs-on: ubuntu-latest
     timeout-minutes: 20
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: rumbos
+          POSTGRES_PASSWORD: rumbos
+          POSTGRES_DB: rumbos_cms
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U rumbos -d rumbos_cms"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DATABASE_URI: postgres://rumbos:rumbos@localhost:5432/rumbos_cms
+      PAYLOAD_SECRET: ci-payload-secret-not-for-production
 
     steps:
       - name: Checkout
@@ -37,11 +57,20 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Migrate database
+        run: npm run cms:migrate
+
+      - name: Seed catalog
+        run: npm run cms:seed
+
       - name: Lint
         run: npm run lint
 
       - name: Typecheck
         run: npm run typecheck
+
+      - name: Catalog parity
+        run: npm run test:parity
 
       - name: Build
         run: npm run build:e2e

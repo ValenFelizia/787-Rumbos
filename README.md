@@ -11,6 +11,7 @@ La web refuerza confianza y guía consultas calificadas a WhatsApp. No reemplaza
 | Capa | Tecnología |
 | --- | --- |
 | Framework | Next.js 15 (App Router), React 19, TypeScript |
+| Contenido | Payload CMS 3.75, Postgres, Vercel Blob en producción |
 | Estilos | Tailwind CSS 4, tipografías Elaine Sans + Zalando Sans |
 | Iconos | Lucide React |
 | Analytics | Vercel Analytics |
@@ -38,17 +39,31 @@ El repo documenta cómo se construye el sitio, no solo el resultado.
 
 ## Desarrollo local
 
+Hace falta Postgres. El catálogo público sale de ahí, no del array de seed.
+
 ```bash
+sudo apt-get install -y postgresql
+sudo service postgresql start   # o: sudo pg_ctlcluster 16 main start
+sudo -u postgres psql -c "CREATE ROLE rumbos LOGIN PASSWORD 'rumbos';"
+sudo -u postgres psql -c "CREATE DATABASE rumbos_cms OWNER rumbos;"
+cp .env.example .env            # completá PAYLOAD_SECRET
 npm install
+npm run cms:migrate
+npm run cms:seed
 npm run dev
 ```
 
-Abrí [http://localhost:3000](http://localhost:3000).
+Abrí [http://localhost:3000](http://localhost:3000). El panel está en [http://localhost:3000/admin](http://localhost:3000/admin) (`noindex`). Si definís `SEED_ADMIN_EMAIL` y `SEED_ADMIN_PASSWORD` en `.env` antes del seed, ese es el primer admin.
+
+Sin `BLOB_READ_WRITE_TOKEN` las imágenes nuevas quedan en `media/` (gitignored). Las del catálogo actual siguen en `public/destinos`.
 
 | Script | Uso |
 | --- | --- |
 | `npm run dev` | Servidor de desarrollo |
 | `npm run build` / `npm start` | Build y servidor de producción |
+| `npm run cms:migrate` | Aplica migraciones de Payload |
+| `npm run cms:seed` | Carga idempotente del catálogo |
+| `npm run test:parity` | Compara Postgres con el golden del catálogo |
 | `npm run lint` | ESLint |
 | `npm run typecheck` | TypeScript sin emitir |
 | `npm run audit:deps` | `npm audit` (nivel high) |
@@ -57,11 +72,13 @@ Abrí [http://localhost:3000](http://localhost:3000).
 ## Estructura útil
 
 ```
-app/                  # Rutas App Router (home, destinos, aéreos, hubs, legal)
+app/
+  (site)/             # Sitio público
+  (payload)/          # Panel /admin y API de Payload
 components/sections/  # Secciones de UI
 lib/
   constants.ts        # NAP, teléfonos, WhatsApp, horarios, CTAs
-  destinations-data.ts
+  catalog/            # Tipos, reglas y lectura del catálogo en Postgres
   airlines-data.ts
   testimonials-data.ts
   clusters-data.ts
@@ -72,7 +89,7 @@ e2e/                  # Smoke tests
 NOTICE.md             # Uso y derechos del repositorio
 ```
 
-**Contenido comercial:** precios, salidas, promociones y testimonios viven en `lib/*-data.ts` y `lib/constants.ts`. Deben ser reales y vigentes. Datos NAP (dirección, teléfonos, Maps) deben coincidir con Google Business Profile.
+**Contenido comercial:** el catálogo de destinos vive en Postgres y se edita en `/admin`. La promo destacada sigue en `components/sections/SpecialPromo.tsx`. Testimonios, hubs y aéreos siguen en `lib/*-data.ts`. Deben ser reales y vigentes. Datos NAP (dirección, teléfonos, Maps) deben coincidir con Google Business Profile.
 
 ## Ramas y forma de trabajo
 
