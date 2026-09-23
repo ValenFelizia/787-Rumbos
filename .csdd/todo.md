@@ -17,7 +17,7 @@
   - Landing: draft PR #40 hacia master desde cursor/payload-cms-catalog-76cb — https://github.com/ValenFelizia/787-Rumbos/pull/40
   - Updated: 2026-09-23
   - Verification: lint ok (warning previo en Footer). Typecheck ok. Unit 15/15. Paridad 0 (23 destinos, promo). Snapshot 30 páginas, 0 diferencias. Smoke 15/15. QA editorial 10/10 (precio 200, descripción publicada 400 / borrador 200, encargado 200, sin vigencia 400, vigencia vencida oculta el monto, alta a borrador 201, delete 403, promo agente 403, promo con vigencia 200, promo vencida oculta el monto).
-  - Note: Antes de mergear, Valen tiene que provisionar Neon y un store de Vercel Blob, setear `DATABASE_URI`, `PAYLOAD_SECRET` y `BLOB_READ_WRITE_TOKEN`, dejar que el primer deploy corra las migraciones (`vercel-build`), correr el seed una vez con `SEED_ADMIN_EMAIL` / `SEED_ADMIN_PASSWORD`, y crear los usuarios de la agencia en `/admin`.
+  - Note: Antes de mergear, Valen tiene que provisionar Neon y un store de Vercel Blob, setear `DATABASE_URI`, `PAYLOAD_SECRET` y `BLOB_READ_WRITE_TOKEN`, dejar que el primer deploy corra las migraciones (`vercel-build`), correr el seed una vez con `SEED_ADMIN_EMAIL` / `SEED_ADMIN_PASSWORD`, y crear los usuarios de la agencia en `/admin`. El preview de Vercel del PR falla hoy por falta de `PAYLOAD_SECRET`/`DATABASE_URI` (esperado). Como `vercel-build` migra en cada deploy, los previews deben usar una base separada (branch de Neon por preview vía la integración de Vercel), no la de producción. El seed se sincronizó con `a2a4fef` (Cataratas actualizado en `master`); cambios de contenido posteriores en `master` deben portarse a `scripts/seed-data/` antes del merge, y después del merge se editan solo en `/admin`.
 
 ## Blocked
 
