@@ -15,6 +15,7 @@
   - Updated: 2026-09-23
   - Note: fases 0 golden snapshot → 1 Payload+seed+repositorio con paridad → 2 roles/flujo mixto/vigencia → 3 promo global. Branch `cursor/payload-cms-catalog-76cb`.
   - Checkpoint 2026-09-23 — Fase 1 hecha (Payload 3.75.0, Postgres, seed, `lib/catalog`). Paridad de catálogo 0 diferencias (23 destinos). Snapshot HTML 30 páginas, 0 diferencias. Lint y typecheck ok. Smoke Playwright 14/14. `/admin` 200 con `X-Robots-Tag: noindex`. Revalidar `priceNote` se ve en `/destinos` al toque; la ficha no pinta esa nota (el template ya no la mostraba) y sí refleja un cambio de descripción. Promo sigue en `SpecialPromo.tsx`. Pendiente fase 2: roles, validaciones, vigencia y «Para revisar».
+  - Checkpoint 2026-09-23 — Fase 2 hecha: roles, flujo mixto (agente publica solo campos operativos; el resto se rechaza y va a borrador con `pendingApproval`), vigencia al publicar, fail-safe «Consultá precio actualizado» y vista «Para revisar». Lint ok (warning previo en Footer). Typecheck ok. Unit 10/10. Paridad 0 (23 destinos). Snapshot 30 páginas, 0 diferencias. Smoke 14/14. QA editorial 7/7 (precio operativo 200, descripción publicada 400 / borrador 200, encargado 200, sin vigencia 400, vigencia vencida oculta el monto, alta forzada a borrador 201, delete 403). Promo sigue en `SpecialPromo.tsx` (fase 3).
 
 ## Ready to Land
 

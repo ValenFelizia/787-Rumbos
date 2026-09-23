@@ -201,24 +201,31 @@ CMS ni scraping solo para sostener esa sección.
 
 ## Gestión de contenido (CMS)
 
-Estado objetivo en implementación (T-008, D-006). Hasta que cierre, el sitio
-público sigue leyendo `lib/destinations-data.ts` y `PROMO_CONFIG`. La migración
-inicial copia los datos actuales con los campos de vigencia vacíos, de modo que
-el render quede idéntico al de hoy.
+El catálogo de destinos se lee de Payload (T-008, D-006). La promo destacada
+sigue en código hasta la fase 3. El seed deja `priceValidUntil` vacío: sin
+vigencia el monto sigue visible y el render coincide con el catálogo anterior.
 
-- Roles del panel: `admin`, `encargado` y `agente`.
-- Flujo mixto: `agente` publica directo solo los campos operativos de un destino
-  ya publicado (salidas, estados, precios, nota de precio y vigencia de precio).
-  Cualquier otro campo, o un destino nuevo, queda en borrador hasta que lo
-  apruebe `encargado` o `admin`.
-- Validaciones al guardar: un precio exige `priceValidUntil`; no se aceptan
-  fechas de salida en el pasado; el slug es único y en kebab-case; la imagen
-  exige texto alternativo.
-- Si `priceValidUntil` venció —en el destino, o en la salida cuando tiene
-  vigencia propia—, la UI no muestra el monto y dice «Consultá precio actualizado».
-- La vista de admin «Para revisar» lista precios vencidos o que vencen en 7 días,
-  destinos sin salidas activas y fichas sin revisión hace 30 días o más
-  (`lastReviewedAt`, `reviewedBy`).
+- Roles: `admin`, `encargado` y `agente`. Solo `admin` crea, edita y borra
+  usuarios y cambia roles. Cada usuario edita su perfil (nombre y contraseña)
+  y no se cambia el rol a sí mismo. Borrar destinos: `admin`. Borrar imágenes:
+  `admin` o `encargado`. El panel lo abre cualquier usuario con rol.
+- Flujo mixto, sin autosave. Un `agente` que crea un destino no lo publica: queda
+  en borrador. Sobre un destino ya publicado, publica directo solo campos
+  operativos (salidas, precio, moneda, nota, vigencia y la marca de revisión).
+  Si al publicar cambió otra cosa, se rechaza el guardado: tiene que usar
+  borrador y avisarle a un encargado. Ese borrador marca `pendingApproval`.
+  `encargado` y `admin` publican cualquier cambio.
+- Al publicar, si hay precio en el destino o en una salida no agotada, hace
+  falta `priceValidUntil` de hoy o posterior. Una salida nueva o modificada no
+  puede estar en el pasado; las que ya estaban y no se tocan siguen. El slug es
+  único y kebab-case; cambiar el de un publicado lo hace un encargado o admin.
+  La imagen exige texto alternativo. Cada guardado humano estampa
+  `lastReviewedAt` y `reviewedBy`. El seed no corre estas validaciones.
+- Si la vigencia venció (la de la salida, si tiene; si no, la del destino), la
+  UI no muestra el monto y dice «Consultá precio actualizado».
+- «Para revisar» lista precios vencidos o que vencen en 7 días, publicados con
+  precio y sin vigencia, sin salidas activas, sin revisión hace 30 días o más,
+  y borradores pendientes de aprobación.
 - Publicar revalida al instante con `revalidateTag`. El ISR de 24 horas se
   mantiene para el resto del contenido que depende de la fecha.
 
