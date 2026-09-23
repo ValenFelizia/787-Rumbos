@@ -39,7 +39,8 @@ export default buildConfig({
   },
   db: postgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URI || "",
+      // La integración de Neon en Vercel inyecta `DATABASE_URL`, distinta por preview.
+      connectionString: process.env.DATABASE_URI || process.env.DATABASE_URL || "",
     },
     // El esquema entra por migraciones. `PAYLOAD_DB_PUSH=true` solo para un experimento local.
     push: process.env.PAYLOAD_DB_PUSH === "true",

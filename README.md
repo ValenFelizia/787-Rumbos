@@ -98,7 +98,7 @@ npm run snapshot:compare     # HTML de 30 páginas contra e2e/golden/pages
 
 Producción (Vercel):
 
-- `DATABASE_URI`: Postgres de Neon, desde el Vercel Marketplace.
+- `DATABASE_URL`: la inyecta la integración de Neon (Vercel Marketplace), con una base por preview. No cargues `DATABASE_URI` en Vercel: tiene prioridad y haría que los previews usen la base de producción.
 - `PAYLOAD_SECRET`: secreto largo.
 - `BLOB_READ_WRITE_TOKEN`: store de Vercel Blob.
 - Build command: `npm run vercel-build` (`payload migrate && next build`), así el deploy aplica las migraciones.
