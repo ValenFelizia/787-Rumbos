@@ -89,8 +89,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    featuredPromo: FeaturedPromo;
+  };
+  globalsSelect: {
+    featuredPromo: FeaturedPromoSelect<false> | FeaturedPromoSelect<true>;
+  };
   locale: null;
   user: User;
   jobs: {
@@ -564,6 +568,88 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * La barra de la home. La publican un encargado o un admin. Si el precio vence, la barra sigue hasta la fecha de fin y el monto pasa a «Consultá precio actualizado».
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "featuredPromo".
+ */
+export interface FeaturedPromo {
+  id: number;
+  /**
+   * Si la desmarcás, la barra no se muestra aunque la promo esté publicada.
+   */
+  enabled?: boolean | null;
+  /**
+   * El enlace de la promo va a la ficha de este destino.
+   */
+  destination: number | Destination;
+  /**
+   * AAAA-MM-DD. El día indicado la barra sigue visible. Al día siguiente desaparece.
+   */
+  endsAt: string;
+  topBarText: string;
+  badgeText: string;
+  charterText: string;
+  title: string;
+  description: string;
+  /**
+   * Texto tal como se publica, por ejemplo USD 2.770. Si lo cargás, al publicar hace falta «Precio vigente hasta».
+   */
+  price?: string | null;
+  priceNote?: string | null;
+  taxNote?: string | null;
+  /**
+   * Obligatorio al publicar si hay un precio. El día indicado sigue vigente. Si se pasa, el sitio no muestra el monto y dice «Consultá precio actualizado».
+   */
+  priceValidUntil?: string | null;
+  image: number | Media;
+  /**
+   * Texto que se abre en el chat. El teléfono de la agencia se agrega solo.
+   */
+  whatsappMsg: string;
+  inclusions?:
+    | {
+        label: string;
+        icon: 'plane' | 'calendar' | 'ticket' | 'map-pin';
+        id?: string | null;
+      }[]
+    | null;
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "featuredPromo_select".
+ */
+export interface FeaturedPromoSelect<T extends boolean = true> {
+  enabled?: T;
+  destination?: T;
+  endsAt?: T;
+  topBarText?: T;
+  badgeText?: T;
+  charterText?: T;
+  title?: T;
+  description?: T;
+  price?: T;
+  priceNote?: T;
+  taxNote?: T;
+  priceValidUntil?: T;
+  image?: T;
+  whatsappMsg?: T;
+  inclusions?:
+    | T
+    | {
+        label?: T;
+        icon?: T;
+        id?: T;
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

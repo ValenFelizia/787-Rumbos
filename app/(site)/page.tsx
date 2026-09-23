@@ -19,14 +19,18 @@ import { Testimonials } from "@/components/sections/Testimonials";
 import { FAQ } from "@/components/sections/FAQ";
 import { CTASection } from "@/components/sections/CTASection";
 import { Footer } from "@/components/sections/Footer";
+import { getFeaturedPromo } from "@/lib/catalog/promo";
 import { getHomeFeaturedDestinations } from "@/lib/catalog/repository";
 
 export default async function Home() {
-  const featured = await getHomeFeaturedDestinations();
+  const [featured, promo] = await Promise.all([
+    getHomeFeaturedDestinations(),
+    getFeaturedPromo(),
+  ]);
 
   return (
     <main className="min-h-screen bg-[#f9f9f9] text-[#0b4058]">
-      <SpecialPromo />
+      <SpecialPromo promo={promo} />
       <Navbar isHome />
       <Hero />
       <TrustBar />

@@ -10,15 +10,15 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { PROMO_CONFIG } from "@/components/sections/SpecialPromo";
 import { destinationsData } from "@/scripts/seed-data/destinations";
+import { promoSeed } from "@/scripts/seed-data/promo";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const outPath = join(root, "e2e", "golden", "catalog.json");
 
 const snapshot = {
   destinations: destinationsData,
-  promo: PROMO_CONFIG,
+  promo: promoSeed,
 };
 
 mkdirSync(dirname(outPath), { recursive: true });

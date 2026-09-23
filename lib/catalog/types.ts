@@ -6,6 +6,25 @@ import type { FaqItem } from "../constants";
 
 export type TransportType = "aereo" | "bus" | "bus-cama" | "mix";
 
+export type PromoIcon = "plane" | "calendar" | "ticket" | "map-pin";
+
+/** Forma que renderiza SpecialPromo. Igual al objeto que antes vivía en el componente. */
+export interface FeaturedPromo {
+  slug: string;
+  endsAt: string;
+  topBarText: string;
+  badgeText: string;
+  charterText: string;
+  title: string;
+  description: string;
+  price: string;
+  priceNote: string;
+  taxNote: string;
+  imageSrc: string;
+  whatsappMsg: string;
+  inclusions: { label: string; icon: PromoIcon }[];
+}
+
 export interface Departure {
   date: string; // Formato ISO "YYYY-MM-DD"
   displayDate: string; // Ej: "8 de Julio"

@@ -1,4 +1,8 @@
-import type { CollectionAfterChangeHook, CollectionAfterDeleteHook } from "payload";
+import type {
+  CollectionAfterChangeHook,
+  CollectionAfterDeleteHook,
+  GlobalAfterChangeHook,
+} from "payload";
 
 type RevalidateContext = {
   disableRevalidate?: boolean;
@@ -25,4 +29,24 @@ export const revalidateCatalogAfterChange: CollectionAfterChangeHook = ({ contex
 
 export const revalidateCatalogAfterDelete: CollectionAfterDeleteHook = ({ context }) => {
   return revalidateCatalog(context);
+};
+
+/**
+ * La home arma la promo con el tag `promo` y el resto con `catalog`.
+ * Invalidar los dos saca la barra nueva en el próximo request.
+ */
+export async function revalidatePromo(context?: RevalidateContext | null): Promise<void> {
+  if (context?.disableRevalidate) return;
+  try {
+    const { revalidateTag } = await import("next/cache");
+    revalidateTag("promo");
+    revalidateTag("catalog");
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.warn(`revalidateTag(promo) omitido: ${message}`);
+  }
+}
+
+export const revalidatePromoAfterChange: GlobalAfterChangeHook = ({ context }) => {
+  return revalidatePromo(context);
 };

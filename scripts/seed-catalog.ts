@@ -16,6 +16,7 @@ import type { FaqItem } from "../lib/constants";
 import { whatsappDestinoFaq } from "../lib/catalog/logic";
 import type { Departure, DestinationPage } from "../lib/catalog/types";
 import { destinationsData } from "./seed-data/destinations";
+import { promoSeed } from "./seed-data/promo";
 
 const seedContext = { disableRevalidate: true, skipEditorialValidation: true };
 
@@ -216,6 +217,52 @@ async function upsertDestination(dest: DestinationPage, sortOrder: number): Prom
   return "created";
 }
 
+async function upsertPromo(): Promise<void> {
+  const destination = await payload.find({
+    collection: "destinations",
+    depth: 0,
+    draft: false,
+    limit: 1,
+    overrideAccess: true,
+    where: { slug: { equals: promoSeed.slug } },
+  });
+  const destinationId = destination.docs[0]?.id;
+  if (destinationId == null) {
+    throw new Error(`seed: no está publicado el destino ${promoSeed.slug}`);
+  }
+
+  const image = await ensureMedia(
+    promoSeed.imageSrc,
+    `Folleto Promocional ${promoSeed.title} 787 Rumbos`,
+  );
+
+  await payload.updateGlobal({
+    slug: "featuredPromo",
+    draft: false,
+    overrideAccess: true,
+    context: seedContext,
+    data: {
+      enabled: true,
+      destination: destinationId,
+      endsAt: promoSeed.endsAt,
+      topBarText: promoSeed.topBarText,
+      badgeText: promoSeed.badgeText,
+      charterText: promoSeed.charterText,
+      title: promoSeed.title,
+      description: promoSeed.description,
+      price: promoSeed.price,
+      priceNote: promoSeed.priceNote,
+      taxNote: promoSeed.taxNote,
+      priceValidUntil: null,
+      image,
+      whatsappMsg: promoSeed.whatsappMsg,
+      inclusions: promoSeed.inclusions.map((item) => ({ label: item.label, icon: item.icon })),
+      _status: "published",
+    },
+  });
+  console.log("seed: promo destacada publicada");
+}
+
 async function main(): Promise<void> {
   await ensureAdmin();
   await ensureDemoUsers();
@@ -230,6 +277,7 @@ async function main(): Promise<void> {
   }
 
   console.log(`seed: ${created} creados, ${updated} actualizados, ${destinationsData.length} destinos`);
+  await upsertPromo();
 }
 
 await main();

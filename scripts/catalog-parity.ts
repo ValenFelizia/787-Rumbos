@@ -11,7 +11,8 @@ import { getPayload } from "payload";
 import config from "../payload.config";
 import { whatsappDestinoFaq } from "../lib/catalog/logic";
 import { mapDestination, type DestinationDoc } from "../lib/catalog/map";
-import type { DestinationPage } from "../lib/catalog/types";
+import { mapFeaturedPromo, type FeaturedPromoDoc } from "../lib/catalog/promo";
+import type { DestinationPage, FeaturedPromo } from "../lib/catalog/types";
 
 const goldenPath = path.join(process.cwd(), "e2e/golden/catalog.json");
 
@@ -84,15 +85,26 @@ const result = await payload.find({
 });
 
 const actual = result.docs.map((doc) => expandWhatsapp(mapDestination(doc as DestinationDoc)));
-const golden = JSON.parse(readFileSync(goldenPath, "utf8")) as { destinations: DestinationPage[] };
+const golden = JSON.parse(readFileSync(goldenPath, "utf8")) as {
+  destinations: DestinationPage[];
+  promo: FeaturedPromo;
+};
 const expected = golden.destinations.map((dest) => expandWhatsapp(JSON.parse(JSON.stringify(dest))));
 const normalizedActual = JSON.parse(JSON.stringify(actual)) as DestinationPage[];
 
+const promoDoc = await payload.findGlobal({
+  slug: "featuredPromo",
+  depth: 1,
+  overrideAccess: true,
+});
+const promo = mapFeaturedPromo(promoDoc as FeaturedPromoDoc);
+
 const differences: string[] = [];
 diffAt("destinations", expected, normalizedActual, differences);
+diffAt("promo", golden.promo, promo, differences);
 
 if (differences.length === 0) {
-  console.log(`parity: 0 differences (${actual.length} destinos)`);
+  console.log(`parity: 0 differences (${actual.length} destinos, promo)`);
 } else {
   console.error(`parity: ${differences.length} differences`);
   for (const line of differences.slice(0, 40)) console.error(line);

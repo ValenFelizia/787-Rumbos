@@ -9,6 +9,7 @@ import sharp from "sharp";
 import { Destinations } from "./payload/collections/Destinations";
 import { Media } from "./payload/collections/Media";
 import { Users } from "./payload/collections/Users";
+import { FeaturedPromo } from "./payload/globals/FeaturedPromo";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -26,6 +27,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Destinations],
+  globals: [FeaturedPromo],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

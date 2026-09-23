@@ -71,7 +71,7 @@ export const metadata: Metadata = {
   },
 }
 
-// ISR de 24 h para lo que depende de la fecha. Publicar en el CMS invalida el tag `catalog` al instante.
+// ISR de 24 h para lo que depende de la fecha. Publicar en el CMS invalida `catalog` y `promo`.
 export const revalidate = 86_400;
 
 /**
