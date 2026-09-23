@@ -7,7 +7,7 @@
 > de performance de la home sigue con auditoría de HTML inicial (issue #16 /
 > T-039) y re-medición Lighthouse/CWV (T-029). El baseline de seguridad HTTP,
 > higiene de dependencias y CI/smoke está implementado. El catálogo y la promo
-> destacada están en migración a Payload CMS (T-008, D-006).
+> destacada viven en Payload CMS (T-008, D-006).
 
 El estado operativo vive en [todo.md](./todo.md). El diagnóstico SEO y de
 producto que sirve de contexto, pero no de lista de trabajo activa, se
@@ -201,9 +201,9 @@ CMS ni scraping solo para sostener esa sección.
 
 ## Gestión de contenido (CMS)
 
-El catálogo de destinos se lee de Payload (T-008, D-006). La promo destacada
-sigue en código hasta la fase 3. El seed deja `priceValidUntil` vacío: sin
-vigencia el monto sigue visible y el render coincide con el catálogo anterior.
+El catálogo de destinos y la promo destacada se leen de Payload (T-008, D-006).
+El seed deja `priceValidUntil` vacío: sin vigencia el monto sigue visible y el
+render coincide con el catálogo anterior.
 
 - Roles: `admin`, `encargado` y `agente`. Solo `admin` crea, edita y borra
   usuarios y cambia roles. Cada usuario edita su perfil (nombre y contraseña)
@@ -215,10 +215,16 @@ vigencia el monto sigue visible y el render coincide con el catálogo anterior.
   Si al publicar cambió otra cosa, se rechaza el guardado: tiene que usar
   borrador y avisarle a un encargado. Ese borrador marca `pendingApproval`.
   `encargado` y `admin` publican cualquier cambio.
-- Al publicar, si hay precio en el destino o en una salida no agotada, hace
-  falta `priceValidUntil` de hoy o posterior. Una salida nueva o modificada no
-  puede estar en el pasado; las que ya estaban y no se tocan siguen. El slug es
-  único y kebab-case; cambiar el de un publicado lo hace un encargado o admin.
+- La promo destacada es un global con borradores. La leen todos los roles; la
+  publican `encargado` y `admin`. `endsAt` es AAAA-MM-DD: la barra se ve ese día
+  y se oculta al siguiente. Si hay precio, al publicar hace falta
+  `priceValidUntil` de hoy o posterior (el seed no corre esta validación). Si
+  esa fecha vence, la barra sigue hasta `endsAt` pero el monto pasa a
+  «Consultá precio actualizado» y se ocultan la nota y los impuestos.
+- Al publicar un destino, si hay precio en la ficha o en una salida no agotada,
+  hace falta `priceValidUntil` de hoy o posterior. Una salida nueva o modificada
+  no puede estar en el pasado; las que ya estaban y no se tocan siguen. El slug
+  es único y kebab-case; cambiar el de un publicado lo hace un encargado o admin.
   La imagen exige texto alternativo. Cada guardado humano estampa
   `lastReviewedAt` y `reviewedBy`. El seed no corre estas validaciones.
 - Si la vigencia venció (la de la salida, si tiene; si no, la del destino), la
@@ -226,8 +232,11 @@ vigencia el monto sigue visible y el render coincide con el catálogo anterior.
 - «Para revisar» lista precios vencidos o que vencen en 7 días, publicados con
   precio y sin vigencia, sin salidas activas, sin revisión hace 30 días o más,
   y borradores pendientes de aprobación.
-- Publicar revalida al instante con `revalidateTag`. El ISR de 24 horas se
-  mantiene para el resto del contenido que depende de la fecha.
+- Publicar revalida al instante con `revalidateTag` (`catalog` y `promo`). El
+  ISR de 24 horas se mantiene para el resto del contenido que depende de la fecha.
+- En Vercel hacen falta `DATABASE_URI` (Neon), `PAYLOAD_SECRET` y
+  `BLOB_READ_WRITE_TOKEN` (Vercel Blob). El build de producción corre
+  `payload migrate` antes de `next build`. El seed de producción se corre una vez.
 
 ## Restricciones técnicas
 
@@ -255,11 +264,10 @@ vigencia el monto sigue visible y el render coincide con el catálogo anterior.
 ## Calidad, seguridad y verificación
 
 El producto es un sitio de captación (contenido + CTAs a WhatsApp). No hay pagos
-en la web. El estado objetivo en implementación (T-008) introduce Payload con
-autenticación (usuarios con roles), Postgres y secretos de aplicación; `/admin`
-es `noindex`. Hasta cerrar esa migración el sitio público sigue leyendo el
-catálogo estático. La postura de seguridad y testing debe ser proporcional a
-esa superficie.
+en la web. Payload autentica a los agencieros (usuarios con roles), con Postgres
+y secretos de aplicación; `/admin` es `noindex`. El sitio público lee el catálogo
+y la promo desde Postgres. La postura de seguridad y testing debe ser proporcional
+a esa superficie.
 
 - **Seguridad en alcance:** headers HTTP de endurecimiento en el deploy
   (Next/Vercel), CSP compatible con Analytics y assets propios, políticas de
@@ -270,9 +278,8 @@ esa superficie.
   repo) y el `noindex` de `/admin`.
 - **Seguridad fuera de alcance:** WAF dedicado, pentests formales y controles
   pensados para formularios públicos server-side o UGC.
-- **JSON-LD:** el `dangerouslySetInnerHTML` solo es aceptable con datos
-  validados del CMS (estado objetivo de T-008). Mientras el catálogo siga en el
-  repo, el JSON proviene de datos controlados en el código.
+- **JSON-LD:** el `dangerouslySetInnerHTML` usa datos validados del CMS
+  (catálogo) o constantes controladas en el repo (hubs, aéreos, FAQ general).
 - **Testing en alcance:** CI que ejecute lint, typecheck y build; smoke tests de
   rutas y CTAs críticos. Tests unitarios solo para utilidades puras con riesgo
   de regresión real. Los smokes de producción deben construir en `.next-e2e`,
@@ -289,11 +296,9 @@ esa superficie.
 - Si se evalúa pauta, hace falta presencia local verificada y alguna forma
   estable de medir de dónde vienen las consultas. No se agrega medición compleja
   (GA4, embudos, CRM) mientras Vercel Analytics cubra lo necesario.
-- Mantener `lib/destinations-data.ts` a mano se volvió una limitación real
-  (precios y fichas que siguen publicados después de vencer; caso Cataratas del
-  Iguazú). El catálogo y la promo destacada pasan a Payload CMS (D-006).
-- El CMS controla la vigencia del precio. La revisión manual mensual sigue para
-  el contenido que todavía no está en el CMS.
+- El catálogo y la promo destacada están en Payload (D-006). La vigencia del
+  precio la controla el CMS. La revisión manual mensual sigue para testimonios,
+  hubs, aéreos e Instagram, que todavía no están en el panel.
 - El blog y la expansión de FAQs deben responder a demanda validada; evitar
   contenido genérico sin intención de búsqueda. El cluster de aéreos (issue #11)
   cuenta como demanda validada por la línea comercial principal e intención local

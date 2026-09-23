@@ -7,17 +7,17 @@
 
 ## In Progress
 
+## Ready to Land
+
 - [ ] T-008 — Migrar catálogo y promo destacada a Payload CMS (D-006)
   - Owner: Valen
   - Agent: Cursor (Opus orchestrating, Grok subagents)
-  - Scope: `app/**` (route groups), `lib/catalog/**`, `lib/destinations-data.ts`, `payload.config.ts`, `payload/**` (collections), `components/sections/SpecialPromo.tsx`, `scripts/**`, `e2e/**`, `.github/workflows/ci.yml`, `next.config.mjs`, `package.json`, `.csdd/`
+  - Scope: `app/**` (route groups), `lib/catalog/**`, `payload.config.ts`, `payload/**`, `components/sections/SpecialPromo.tsx`, `scripts/**`, `e2e/**`, `.github/workflows/ci.yml`, `next.config.mjs`, `package.json`, `.csdd/`, `docs/guia-cms-agencieros.md`
   - Target: `master`
+  - Landing: draft PR #40 hacia master desde cursor/payload-cms-catalog-76cb — https://github.com/ValenFelizia/787-Rumbos/pull/40
   - Updated: 2026-09-23
-  - Note: fases 0 golden snapshot → 1 Payload+seed+repositorio con paridad → 2 roles/flujo mixto/vigencia → 3 promo global. Branch `cursor/payload-cms-catalog-76cb`.
-  - Checkpoint 2026-09-23 — Fase 1 hecha (Payload 3.75.0, Postgres, seed, `lib/catalog`). Paridad de catálogo 0 diferencias (23 destinos). Snapshot HTML 30 páginas, 0 diferencias. Lint y typecheck ok. Smoke Playwright 14/14. `/admin` 200 con `X-Robots-Tag: noindex`. Revalidar `priceNote` se ve en `/destinos` al toque; la ficha no pinta esa nota (el template ya no la mostraba) y sí refleja un cambio de descripción. Promo sigue en `SpecialPromo.tsx`. Pendiente fase 2: roles, validaciones, vigencia y «Para revisar».
-  - Checkpoint 2026-09-23 — Fase 2 hecha: roles, flujo mixto (agente publica solo campos operativos; el resto se rechaza y va a borrador con `pendingApproval`), vigencia al publicar, fail-safe «Consultá precio actualizado» y vista «Para revisar». Lint ok (warning previo en Footer). Typecheck ok. Unit 10/10. Paridad 0 (23 destinos). Snapshot 30 páginas, 0 diferencias. Smoke 14/14. QA editorial 7/7 (precio operativo 200, descripción publicada 400 / borrador 200, encargado 200, sin vigencia 400, vigencia vencida oculta el monto, alta forzada a borrador 201, delete 403). Promo sigue en `SpecialPromo.tsx` (fase 3).
-
-## Ready to Land
+  - Verification: lint ok (warning previo en Footer). Typecheck ok. Unit 15/15. Paridad 0 (23 destinos, promo). Snapshot 30 páginas, 0 diferencias. Smoke 15/15. QA editorial 10/10 (precio 200, descripción publicada 400 / borrador 200, encargado 200, sin vigencia 400, vigencia vencida oculta el monto, alta a borrador 201, delete 403, promo agente 403, promo con vigencia 200, promo vencida oculta el monto).
+  - Note: Antes de mergear, Valen tiene que provisionar Neon y un store de Vercel Blob, setear `DATABASE_URI`, `PAYLOAD_SECRET` y `BLOB_READ_WRITE_TOKEN`, dejar que el primer deploy corra las migraciones (`vercel-build`), correr el seed una vez con `SEED_ADMIN_EMAIL` / `SEED_ADMIN_PASSWORD`, y crear los usuarios de la agencia en `/admin`.
 
 ## Blocked
 
@@ -41,7 +41,7 @@
 - [ ] T-004 — Mantener el catálogo y las promociones vigentes
   - Owner: Valen
   - Depends on: T-008
-  - Note: alcance previsto en `lib/destinations-data.ts`, `lib/instagram-posts.ts`, promociones y contenido comercial relacionado. Revisión manual mensual de precios, salidas, campañas y feed social mientras el catálogo no esté en el CMS. Después de T-008, la revisión de catálogo y promo se hace en el admin, en la vista «Para revisar». Priorizar captions evergreen en la home; retirar o corregir piezas vencidas. La revalidación diaria de Next evita que las páginas estáticas dependientes de fechas queden congeladas hasta el siguiente deploy, pero no reemplaza el control comercial humano.
+  - Note: catálogo y promo se revisan en `/admin`, en «Para revisar». Instagram sigue en `lib/instagram-posts.ts` (revisión manual mensual; captions evergreen). Hubs, aéreos y testimonios siguen en `lib/`. La revalidación diaria de Next no reemplaza el control comercial.
 
 
 
@@ -90,7 +90,11 @@
 
 - [ ] T-053 — Live preview de borradores y guía corta para agencieros
   - Owner: Valen
-  - Note: previsualizar un borrador en el sitio y dejar una guía breve de uso del panel en el celular.
+  - Note: la guía corta está en `docs/guia-cms-agencieros.md`. Sigue pendiente previsualizar un borrador en el sitio.
+
+- [ ] T-054 — Avisar en el admin si un texto libre menciona un precio vencido
+  - Owner: Valen
+  - Note: el fail-safe tapa el precio estructurado, no las menciones en la descripción, la meta description o las FAQ. Un aviso al guardar, si el texto tiene `$` o `USD` y la vigencia está vencida o vacía, alcanza para la primera versión.
 
 ## Deferred
 
