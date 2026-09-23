@@ -31,8 +31,8 @@ La web refuerza confianza y guía consultas calificadas a WhatsApp. No reemplaza
 El repo documenta cómo se construye el sitio, no solo el resultado.
 
 - Las decisiones relevantes viven en [`.csdd/decisions.md`](./.csdd/decisions.md): incluyen el racional, alternativas rechazadas y consecuencias. D-001 (páginas aditivas, home conservadora) y D-002 (URLs `/aereos`) son el ejemplo más claro.
-- Se prioriza resolver el problema de negocio antes que agregar complejidad. El cluster de aéreos se resolvió con slugs indexables y datos en `lib/`, no con un CMS, un backend ni un rediseño de la home.
-- No hay autenticación, base de datos, pagos ni APIs propias que persistan datos. El cotizador arma un enlace de WhatsApp en el cliente.
+- Se prioriza resolver el problema de negocio antes que agregar complejidad. El cluster de aéreos se resolvió con slugs indexables y datos en `lib/`. El catálogo y la promo destacada están en migración a Payload CMS (D-006).
+- No hay pagos en la web. El cotizador arma un enlace de WhatsApp en el cliente. Autenticación de agencieros, Postgres y el panel `/admin` están en migración con Payload (D-006).
 - CI ([`.github/workflows/ci.yml`](./.github/workflows/ci.yml)) corre lint, TypeScript, build y smoke tests Playwright de rutas y CTAs críticos.
 - La postura de seguridad y testing es proporcional a esa superficie: headers HTTP, higiene de dependencias y smokes. El detalle está en [`.csdd/specs.md`](./.csdd/specs.md).
 
@@ -76,8 +76,8 @@ NOTICE.md             # Uso y derechos del repositorio
 
 ## Ramas y forma de trabajo
 
-- `development` — rama de trabajo diaria
-- `master` — producción / integración tras validar
+- El trabajo se hace en ramas de feature, con pull requests hacia `master`. Valen revisa y mergea los PRs.
+- `master` — producción
 - Specs: [`.csdd/specs.md`](./.csdd/specs.md)
 - Decisiones: [`.csdd/decisions.md`](./.csdd/decisions.md)
 - Estado operativo: [`.csdd/todo.md`](./.csdd/todo.md)

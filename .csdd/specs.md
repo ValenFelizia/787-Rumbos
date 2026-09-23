@@ -1,12 +1,13 @@
 # 787 Rumbos — Especificaciones vigentes
 
-> **Última actualización:** 2026-09-15
+> **Última actualización:** 2026-09-23
 > **Estado:** la base del producto está implementada. El cluster indexable de
 > **pasajes aéreos** (issue #11) está publicado e interlinkeado; quedan medición
 > de CTAs (T-036) y priorización de más aerolíneas (T-037). En paralelo, la ola
 > de performance de la home sigue con auditoría de HTML inicial (issue #16 /
 > T-039) y re-medición Lighthouse/CWV (T-029). El baseline de seguridad HTTP,
-> higiene de dependencias y CI/smoke está implementado.
+> higiene de dependencias y CI/smoke está implementado. El catálogo y la promo
+> destacada están en migración a Payload CMS (T-008, D-006).
 
 El estado operativo vive en [todo.md](./todo.md). El diagnóstico SEO y de
 producto que sirve de contexto, pero no de lista de trabajo activa, se
@@ -198,6 +199,29 @@ CMS ni scraping solo para sostener esa sección.
   detallados de WhatsApp solo se incorporan si existe una necesidad operativa de
   embudos, campañas o atribución más fina.
 
+## Gestión de contenido (CMS)
+
+Estado objetivo en implementación (T-008, D-006). Hasta que cierre, el sitio
+público sigue leyendo `lib/destinations-data.ts` y `PROMO_CONFIG`. La migración
+inicial copia los datos actuales con los campos de vigencia vacíos, de modo que
+el render quede idéntico al de hoy.
+
+- Roles del panel: `admin`, `encargado` y `agente`.
+- Flujo mixto: `agente` publica directo solo los campos operativos de un destino
+  ya publicado (salidas, estados, precios, nota de precio y vigencia de precio).
+  Cualquier otro campo, o un destino nuevo, queda en borrador hasta que lo
+  apruebe `encargado` o `admin`.
+- Validaciones al guardar: un precio exige `priceValidUntil`; no se aceptan
+  fechas de salida en el pasado; el slug es único y en kebab-case; la imagen
+  exige texto alternativo.
+- Si `priceValidUntil` venció —en el destino, o en la salida cuando tiene
+  vigencia propia—, la UI no muestra el monto y dice «Consultá precio actualizado».
+- La vista de admin «Para revisar» lista precios vencidos o que vencen en 7 días,
+  destinos sin salidas activas y fichas sin revisión hace 30 días o más
+  (`lastReviewedAt`, `reviewedBy`).
+- Publicar revalida al instante con `revalidateTag`. El ISR de 24 horas se
+  mantiene para el resto del contenido que depende de la fecha.
+
 ## Restricciones técnicas
 
 - Usar Next.js, React, Tailwind y APIs web nativas antes de añadir dependencias.
@@ -223,23 +247,25 @@ CMS ni scraping solo para sostener esa sección.
 
 ## Calidad, seguridad y verificación
 
-El producto es un sitio de captación (contenido estático + CTAs a WhatsApp). No
-hay autenticación, base de datos, APIs propias que persistan datos ni pagos en
-la web. La postura de seguridad y testing debe ser proporcional a esa superficie.
+El producto es un sitio de captación (contenido + CTAs a WhatsApp). No hay pagos
+en la web. El estado objetivo en implementación (T-008) introduce Payload con
+autenticación (usuarios con roles), Postgres y secretos de aplicación; `/admin`
+es `noindex`. Hasta cerrar esa migración el sitio público sigue leyendo el
+catálogo estático. La postura de seguridad y testing debe ser proporcional a
+esa superficie.
 
 - **Seguridad en alcance:** headers HTTP de endurecimiento en el deploy
   (Next/Vercel), CSP compatible con Analytics y assets propios, políticas de
   framing/referrer/permisos, e higiene de dependencias (auditorías y parches,
   especialmente Next.js). El cotizador no envía datos a un backend propio: arma
-  un enlace WhatsApp en el cliente.
-- **Seguridad fuera de alcance (salvo que cambie la arquitectura):** WAF
-  dedicado, hardening de auth/sesiones, rate limiting de APIs propias, pentests
-  formales, secret scanning de app (hoy no hay secretos de aplicación), y
-  controles pensados para formularios server-side o UGC.
-- **Si en el futuro aparece CMS, formularios con backend o datos de usuarios:**
-  reabrir el alcance (validación/sanitización server-side, secretos, privacidad
-  operativa y tests de esos contratos). El `dangerouslySetInnerHTML` de JSON-LD
-  solo es aceptable mientras el JSON provenga de datos controlados en el repo.
+  un enlace WhatsApp en el cliente. Con el CMS entran la auth de Payload, los
+  secretos `DATABASE_URI`, `PAYLOAD_SECRET` y `BLOB_READ_WRITE_TOKEN` (fuera del
+  repo) y el `noindex` de `/admin`.
+- **Seguridad fuera de alcance:** WAF dedicado, pentests formales y controles
+  pensados para formularios públicos server-side o UGC.
+- **JSON-LD:** el `dangerouslySetInnerHTML` solo es aceptable con datos
+  validados del CMS (estado objetivo de T-008). Mientras el catálogo siga en el
+  repo, el JSON proviene de datos controlados en el código.
 - **Testing en alcance:** CI que ejecute lint, typecheck y build; smoke tests de
   rutas y CTAs críticos. Tests unitarios solo para utilidades puras con riesgo
   de regresión real. Los smokes de producción deben construir en `.next-e2e`,
@@ -256,10 +282,11 @@ la web. La postura de seguridad y testing debe ser proporcional a esa superficie
 - Si se evalúa pauta, hace falta presencia local verificada y alguna forma
   estable de medir de dónde vienen las consultas. No se agrega medición compleja
   (GA4, embudos, CRM) mientras Vercel Analytics cubra lo necesario.
-- El CMS se evalúa únicamente cuando mantener `lib/destinations-data.ts` a mano
-  resulte una limitación real.
-- Catálogo, promociones y feed social se revisan manualmente una vez por mes;
-  automatizar ese circuito solo se evalúa si la carga operativa deja de ser razonable.
+- Mantener `lib/destinations-data.ts` a mano se volvió una limitación real
+  (precios y fichas que siguen publicados después de vencer; caso Cataratas del
+  Iguazú). El catálogo y la promo destacada pasan a Payload CMS (D-006).
+- El CMS controla la vigencia del precio. La revisión manual mensual sigue para
+  el contenido que todavía no está en el CMS.
 - El blog y la expansión de FAQs deben responder a demanda validada; evitar
   contenido genérico sin intención de búsqueda. El cluster de aéreos (issue #11)
   cuenta como demanda validada por la línea comercial principal e intención local
@@ -269,7 +296,7 @@ la web. La postura de seguridad y testing debe ser proporcional a esa superficie
 
 - `.csdd/` es la fuente de verdad versionada para estado operativo y
   especificaciones; cada verdad debe vivir en el documento que corresponda.
-- `development` es la rama de trabajo. Las integraciones hacia `master` las
-  realiza manualmente el usuario después de validar los cambios.
+- El trabajo se hace en ramas de feature, con pull requests hacia `master`.
+  Valen revisa y mergea los PRs.
 - El historial de implementación no se mantiene en el estado activo: Git es la
   fuente para el detalle histórico y el análisis extenso permanece en `docs/`.

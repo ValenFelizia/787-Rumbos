@@ -68,6 +68,20 @@
   - Asumir Córdoba como origen porque el resto del sitio dice “desde Córdoba”.
 - **Consequences:** no hay ficha de crucero. Las fichas nuevas dicen que la ciudad de salida se confirma al consultar. Las salidas de septiembre que ya decían SKY desde Córdoba conservan ese origen.
 
+### D-006 — CMS embebido: Payload 3 + Postgres para catálogo y promo
+
+- **Status:** Accepted
+- **Date:** 2026-09-23
+- **Source:** Valen — fricción de mantener precios/destinos a mano; caso Cataratas del Iguazú vencido
+- **Decision:** El catálogo de destinos y la promo destacada salen del TypeScript estático y pasan a **Payload CMS 3** embebido en la misma app Next.js, con Postgres (Neon en producción) y Vercel Blob para media. El flujo editorial es mixto: el rol `agente` publica directo solo los campos operativos (salidas, estados, precios, nota de precio y vigencia) de un destino ya publicado; cualquier otro cambio, o un destino nuevo, queda en borrador hasta que lo apruebe `encargado` o `admin`. Si `priceValidUntil` venció, la ficha no muestra el monto y dice «Consultá precio actualizado».
+- **Rationale:** Los datos quedan en un Postgres propio. El panel vive en el mismo Next, con tipos TypeScript, borradores, versiones e historial, y permisos por campo. El panel es responsive y en español, para que lo usen 2–4 agencieros desde el celular. Neon y Vercel Blob entran en sus free tiers.
+- **Rejected alternatives:**
+  - Sanity (SaaS): los datos quedan en una nube ajena y el flujo mixto de publicación es menos directo.
+  - Supabase + panel a medida: auth, validación y auditoría quedan a cargo propio.
+  - CMS basado en Git (Decap, Keystatic): no hay base de datos y cada edición es un deploy.
+  - Google Sheets: la validación es débil para precios, slugs y vigencias.
+- **Consequences:** la app se parte en los route groups `app/(site)` y `app/(payload)`. La dependencia es grande y está justificada por el flujo editorial. Se reabre el alcance de seguridad: autenticación, secretos `DATABASE_URI`, `PAYLOAD_SECRET` y `BLOB_READ_WRITE_TOKEN`, y CI con Postgres. El comportamiento queda en [specs.md](./specs.md) (T-008).
+
 ## Open / needs human input
 
 Landings publicadas y siguientes candidatas (alimenta T-042):
