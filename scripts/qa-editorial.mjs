@@ -263,6 +263,40 @@ async function main() {
     return `POST ${created.status}; _status=draft (forzado a borrador, no rechazado)`;
   });
 
+  async function getPromo(token) {
+    const response = await fetch(`${base}/api/globals/featuredPromo?depth=0`, {
+      headers: authHeaders(token, false),
+      cache: "no-store",
+    });
+    const body = await response.json().catch(() => ({}));
+    if (!response.ok) fail(`GET promo → ${response.status} ${JSON.stringify(body).slice(0, 300)}`);
+    return body;
+  }
+
+  function editablePromo(doc) {
+    const copy = { ...doc };
+    for (const key of ["id", "createdAt", "updatedAt", "globalType"]) delete copy[key];
+    return copy;
+  }
+
+  async function postPromo(token, data, { draft = false } = {}) {
+    const params = new URLSearchParams({ depth: "0" });
+    if (draft) params.set("draft", "true");
+    const response = await fetch(`${base}/api/globals/featuredPromo?${params}`, {
+      method: "POST",
+      headers: authHeaders(token),
+      body: JSON.stringify(data),
+    });
+    const text = await response.text();
+    let body;
+    try {
+      body = JSON.parse(text);
+    } catch {
+      body = { raw: text.slice(0, 500) };
+    }
+    return { status: response.status, body, text };
+  }
+
   await scenario("7 agente no borra destinos", async () => {
     const cataratas = await findBySlug(agente, "cataratas-del-iguazu");
     const removed = await fetch(`${base}/api/destinations/${cataratas.id}`, {
@@ -272,6 +306,66 @@ async function main() {
     const text = await removed.text();
     if (removed.status !== 403) fail(`DELETE ${removed.status} ${text.slice(0, 200)}`);
     return `DELETE ${removed.status}`;
+  });
+
+  await scenario("8 agente no actualiza la promo", async () => {
+    const current = await getPromo(agente);
+    const saved = await postPromo(agente, {
+      ...editablePromo(current),
+      price: "USD 1",
+      _status: "published",
+    });
+    if (saved.status !== 403) fail(`POST ${saved.status} ${saved.text.slice(0, 300)}`);
+    return `POST ${saved.status}`;
+  });
+
+  await scenario("9 encargado publica precio de promo con vigencia", async () => {
+    const current = await getPromo(encargado);
+    const saved = await postPromo(encargado, {
+      ...editablePromo(current),
+      price: "USD 2.771",
+      priceValidUntil: "2026-12-31",
+      _status: "published",
+    });
+    if (saved.status < 200 || saved.status >= 300) {
+      fail(`POST ${saved.status} ${saved.text.slice(0, 400)}`);
+    }
+    return waitFor(async () => {
+      const page = await pageText("/");
+      const shown = page.html.includes("USD 2.771");
+      return {
+        ok: page.status === 200 && shown,
+        detail: `POST ${saved.status}; home ${page.status}; USD 2.771=${shown}`,
+      };
+    });
+  });
+
+  await scenario("10 vigencia vencida de la promo oculta el monto", async () => {
+    if (!databaseUri) fail("falta DATABASE_URI");
+    execFileSync("psql", [
+      databaseUri,
+      "-v",
+      "ON_ERROR_STOP=1",
+      "-c",
+      "UPDATE featured_promo SET price_valid_until = '2026-09-22T00:00:00.000Z';",
+    ], { stdio: "pipe" });
+    const current = await getPromo(encargado);
+    const revalidate = await postPromo(encargado, {
+      ...editablePromo(current),
+      _status: "draft",
+    }, { draft: true });
+    if (revalidate.status < 200 || revalidate.status >= 300) {
+      fail(`revalidate ${revalidate.status} ${revalidate.text.slice(0, 300)}`);
+    }
+    return waitFor(async () => {
+      const page = await pageText("/");
+      const hasText = page.html.includes("Consultá precio actualizado");
+      const hasAmount = page.html.includes("USD 2.771") || page.html.includes("2.770");
+      return {
+        ok: page.status === 200 && hasText && !hasAmount,
+        detail: `revalidate ${revalidate.status}; HTTP ${page.status}; texto=${hasText}; monto=${hasAmount}`,
+      };
+    });
   });
 
   const passed = results.filter(Boolean).length;
