@@ -312,31 +312,37 @@
         "Hito de las Tres Fronteras (Argentina, Brasil, Paraguay)"
       ],
       "typicalInclusions": [
-        "Pasaje en Bus Coche Cama o Aéreo desde Córdoba",
-        "4 noches de alojamiento con desayuno",
+        "Pasaje en Bus Coche Cama",
+        "3 noches de alojamiento con desayuno. Es posible incluir noches adicionales.",
         "Traslados a los parques nacionales",
         "Coordinador permanente y guías locales",
         "Asistencia médica nacional (InterAssist)"
       ],
       "travelTip": "Llevá siempre una muda de ropa extra y protector para el celular en la excursión del lado argentino, ¡la bruma de la Garganta del Diablo te va a mojar por completo!",
-      "priceFrom": 410000,
+      "priceFrom": 620000,
       "currency": "ARS",
       "priceNote": "por persona en base doble",
       "departures": [
         {
-          "date": "2026-08-14",
-          "displayDate": "14 de Agosto",
-          "status": "confirmed",
+          "date": "2026-11-18",
+          "displayDate": "18 de Noviembre",
+          "status": "inquire",
           "transport": "bus-cama",
-          "nights": 4,
-          "note": "Salida grupal en bus"
+          "nights": 3
         },
         {
-          "date": "2026-10-09",
-          "displayDate": "9 de Octubre",
+          "date": "2026-11-25",
+          "displayDate": "25 de Noviembre",
           "status": "inquire",
-          "transport": "aereo",
-          "nights": 4
+          "transport": "bus-cama",
+          "nights": 3
+        },
+        {
+          "date": "2026-11-26",
+          "displayDate": "26 de Noviembre",
+          "status": "inquire",
+          "transport": "bus-cama",
+          "nights": 3
         }
       ],
       "faq": [
