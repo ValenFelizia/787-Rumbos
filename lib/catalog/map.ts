@@ -41,6 +41,7 @@ type DepartureRow = {
   program?: string | null;
   stayLabel?: string | null;
   priceIsFinal?: boolean | null;
+  priceValidUntil?: string | null;
 };
 
 export type DestinationDoc = {
@@ -61,6 +62,7 @@ export type DestinationDoc = {
   priceFrom?: number | string | null;
   currency?: "ARS" | "USD" | null;
   priceNote?: string | null;
+  priceValidUntil?: string | null;
   departures?: DepartureRow[] | null;
   faq?: FaqRow[] | null;
 };
@@ -82,6 +84,13 @@ function asNumber(value: number | string | null | undefined): number | undefined
 
 function texts(rows: TextRow[] | null | undefined): string[] {
   return (rows ?? []).map((row) => row.text ?? "").filter((value) => value !== "");
+}
+
+/** Payload guarda el día como timestamp. El picker es dayOnly: alcanza el prefijo. */
+function isoDay(value: string | null | undefined): string | undefined {
+  if (!value) return undefined;
+  const match = /^(\d{4}-\d{2}-\d{2})/.exec(value);
+  return match?.[1];
 }
 
 function mediaUrl(media: DestinationDoc["heroImage"]): string | undefined {
@@ -133,6 +142,8 @@ function mapDeparture(row: DepartureRow): Departure {
   const stayLabel = text(row.stayLabel);
   if (stayLabel) departure.stayLabel = stayLabel;
   if (row.priceIsFinal) departure.priceIsFinal = true;
+  const priceValidUntil = isoDay(row.priceValidUntil);
+  if (priceValidUntil) departure.priceValidUntil = priceValidUntil;
   return departure;
 }
 
@@ -170,6 +181,8 @@ export function mapDestination(doc: DestinationDoc): DestinationPage {
   if (priceFrom != null) destination.priceFrom = priceFrom;
   const priceNote = text(doc.priceNote);
   if (priceNote) destination.priceNote = priceNote;
+  const priceValidUntil = isoDay(doc.priceValidUntil);
+  if (priceValidUntil) destination.priceValidUntil = priceValidUntil;
 
   const faq = (doc.faq ?? [])
     .filter((item) => item.question && item.faqId)

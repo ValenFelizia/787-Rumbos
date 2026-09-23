@@ -21,6 +21,8 @@ export interface Departure {
   stayLabel?: string;
   /** El monto de esta salida es cerrado, no una tarifa “desde”. */
   priceIsFinal?: boolean;
+  /** Vigencia propia de esta salida, YYYY-MM-DD. Si no está, usa la del destino. */
+  priceValidUntil?: string;
 }
 
 export interface DestinationPage {
@@ -42,6 +44,8 @@ export interface DestinationPage {
   priceFrom?: number; // Precio base orientativo
   currency: "ARS" | "USD";
   priceNote?: string; // "por persona en base doble"
+  /** Vigencia del precio base, YYYY-MM-DD. Vacío = el monto sigue visible. */
+  priceValidUntil?: string;
   departures: Departure[];
   /** FAQ específicas del destino. Opcional: solo destinos prioritarios. */
   faq?: FaqItem[];

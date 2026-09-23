@@ -9,6 +9,7 @@ import {
   getActiveUpcomingDepartures,
   getListedPrice,
   getTransportLabel,
+  hasExpiredListedPrice,
 } from "@/lib/catalog/logic";
 import type { DestinationPage } from "@/lib/catalog/types";
 import { clustersData } from "@/lib/clusters-data";
@@ -173,6 +174,8 @@ export function DestinosView({ destinations }: { destinations: DestinationPage[]
                             </span>
                             <p className="text-[10px] text-[#0b4058]/60 mt-0.5">{dest.priceNote || "por persona en base doble"}</p>
                           </div>
+                        ) : hasExpiredListedPrice(dest) ? (
+                          <span className="text-sm font-bold text-[#0b4058]/70">Consultá precio actualizado</span>
                         ) : (
                           <span className="text-sm font-bold text-[#0b4058]/70">Consultar tarifa</span>
                         );

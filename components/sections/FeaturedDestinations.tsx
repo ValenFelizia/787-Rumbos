@@ -6,6 +6,7 @@ import {
   getListedPrice,
   getNearestActiveDeparture,
   getTransportLabel,
+  hasExpiredListedPrice,
 } from "@/lib/catalog/logic";
 import type { DestinationPage } from "@/lib/catalog/types";
 import { Plane, Bus, ArrowRight, Calendar } from "lucide-react";
@@ -135,6 +136,8 @@ export function FeaturedDestinations({ destinations }: { destinations: Destinati
                           <p className="text-[10px] text-[#0b4058]/75 mt-0.5">{dest.priceNote}</p>
                         )}
                       </div>
+                    ) : hasExpiredListedPrice(dest) ? (
+                      <span className="text-xs font-bold text-[#0b4058]/80">Consultá precio actualizado</span>
                     ) : (
                       <span className="text-xs font-bold text-[#0b4058]/80">Consultar precio</span>
                     )}

@@ -39,15 +39,25 @@ export function isDepartureUpcoming(dep: Departure, today = getTodayLocal()): bo
   return new Date(dep.date + "T00:00:00") >= today;
 }
 
+/**
+ * Vencido solo si hay fecha y es anterior a hoy. El día indicado sigue vigente.
+ * Sin fecha no hay vencimiento (el seed no carga vigencia).
+ */
+export function isPriceExpired(validUntil?: string | null, today = getTodayLocal()): boolean {
+  if (!validUntil) return false;
+  const day = /^(\d{4}-\d{2}-\d{2})/.exec(validUntil)?.[1];
+  if (!day) return false;
+  return new Date(`${day}T00:00:00`) < today;
+}
+
 /** Salidas futuras (cualquier status). */
-export function getUpcomingDepartures(dest: DestinationPage): Departure[] {
-  const today = getTodayLocal();
+export function getUpcomingDepartures(dest: DestinationPage, today = getTodayLocal()): Departure[] {
   return dest.departures.filter((dep) => isDepartureUpcoming(dep, today));
 }
 
 /** Salidas futuras consultables (no sold-out). */
-export function getActiveUpcomingDepartures(dest: DestinationPage): Departure[] {
-  return getUpcomingDepartures(dest).filter((dep) => dep.status !== "sold-out");
+export function getActiveUpcomingDepartures(dest: DestinationPage, today = getTodayLocal()): Departure[] {
+  return getUpcomingDepartures(dest, today).filter((dep) => dep.status !== "sold-out");
 }
 
 /** La salida consultable más cercana. */
@@ -85,23 +95,70 @@ export function getHomeFeaturedDestinations(
     .map((item) => item.dest);
 }
 
-/** Tarifa “desde” de la ficha: el menor precio de hotel entre las salidas vigentes. */
-export function getListedPrice(
+function applicableValidity(dep: Departure, dest: DestinationPage): string | undefined {
+  return dep.priceValidUntil ?? dest.priceValidUntil;
+}
+
+/** Precio propio de la salida, si no está vencido. Sin monto propio, undefined. */
+export function isDeparturePriceExpired(
   dest: DestinationPage,
+  dep: Departure,
+  today = getTodayLocal(),
+): boolean {
+  return dep.priceFrom != null && isPriceExpired(applicableValidity(dep, dest), today);
+}
+
+function contribution(
+  dest: DestinationPage,
+  dep: Departure,
+  today: Date,
+  respectExpiry: boolean,
+): number | undefined {
+  if (dep.priceFrom != null) {
+    if (respectExpiry && isPriceExpired(applicableValidity(dep, dest), today)) return undefined;
+    return dep.priceFrom;
+  }
+  if (dest.priceFrom == null) return undefined;
+  if (respectExpiry && isPriceExpired(dest.priceValidUntil, today)) return undefined;
+  return dest.priceFrom;
+}
+
+function listedPrice(
+  dest: DestinationPage,
+  today: Date,
+  respectExpiry: boolean,
 ): { amount: number; currency: "ARS" | "USD" } | undefined {
-  const hotelTrips = getActiveUpcomingDepartures(dest).filter((dep) => !dep.stayLabel);
+  const hotelTrips = getActiveUpcomingDepartures(dest, today).filter((dep) => !dep.stayLabel);
   const amounts = hotelTrips
-    .map((dep) => dep.priceFrom ?? dest.priceFrom)
+    .map((dep) => contribution(dest, dep, today, respectExpiry))
     .filter((amount): amount is number => amount != null);
   if (amounts.length === 0) {
+    if (hotelTrips.length > 0) return undefined;
     if (dest.priceFrom == null) return undefined;
+    if (respectExpiry && isPriceExpired(dest.priceValidUntil, today)) return undefined;
     return { amount: dest.priceFrom, currency: dest.currency };
   }
-  const priced = hotelTrips.find((dep) => dep.priceFrom != null);
+  const priced = hotelTrips.find((dep) => {
+    if (dep.priceFrom == null) return false;
+    return !respectExpiry || !isPriceExpired(applicableValidity(dep, dest), today);
+  });
   return {
     amount: Math.min(...amounts),
     currency: priced?.currency ?? dest.currency,
   };
+}
+
+/** Tarifa “desde” de la ficha: el menor precio de hotel entre las salidas vigentes. */
+export function getListedPrice(
+  dest: DestinationPage,
+  today = getTodayLocal(),
+): { amount: number; currency: "ARS" | "USD" } | undefined {
+  return listedPrice(dest, today, true);
+}
+
+/** Había un monto para mostrar, pero todas las vigencias que lo cubren ya vencieron. */
+export function hasExpiredListedPrice(dest: DestinationPage, today = getTodayLocal()): boolean {
+  return listedPrice(dest, today, false) != null && listedPrice(dest, today, true) == null;
 }
 
 export function getDestinationBySlug(

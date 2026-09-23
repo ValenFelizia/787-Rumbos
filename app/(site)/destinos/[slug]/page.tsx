@@ -10,6 +10,8 @@ import {
   getListedPrice,
   getUpcomingDepartures,
   getTransportLabel,
+  hasExpiredListedPrice,
+  isDeparturePriceExpired,
 } from "@/lib/catalog/logic";
 import {
   getAllDestinationSlugs,
@@ -463,6 +465,9 @@ export default async function DestinoDetailPage({ params }: Props) {
                   <p className="text-xs text-[#0b4058]/60 mt-1">
                     Hacé clic en una salida para consultar disponibilidad en WhatsApp.
                   </p>
+                  {hasExpiredListedPrice(dest) && !upcomingDepartures.some((dep) => dep.priceFrom != null) && (
+                    <p className="text-sm font-bold text-[#0b4058] mt-2">Consultá precio actualizado</p>
+                  )}
                 </div>
 
                 <div className="space-y-4">
@@ -500,11 +505,15 @@ export default async function DestinoDetailPage({ params }: Props) {
                               {dep.priceFrom != null && (
                                 <>
                                   <span>·</span>
-                                  <span className="font-bold text-[#0b4058] tabular-nums">
-                                    {dep.priceIsFinal ? "Final" : "Desde"}{" "}
-                                    {(dep.currency ?? dest.currency) === "USD" ? "USD" : "$"}
-                                    {dep.priceFrom.toLocaleString("es-AR")}
-                                  </span>
+                                  {isDeparturePriceExpired(dest, dep) ? (
+                                    <span className="font-bold text-[#0b4058]">Consultá precio actualizado</span>
+                                  ) : (
+                                    <span className="font-bold text-[#0b4058] tabular-nums">
+                                      {dep.priceIsFinal ? "Final" : "Desde"}{" "}
+                                      {(dep.currency ?? dest.currency) === "USD" ? "USD" : "$"}
+                                      {dep.priceFrom.toLocaleString("es-AR")}
+                                    </span>
+                                  )}
                                 </>
                               )}
                             </div>
