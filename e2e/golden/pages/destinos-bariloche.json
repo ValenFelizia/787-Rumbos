@@ -1,0 +1,249 @@
+{
+  "capturedAt": "2026-09-23",
+  "path": "/destinos/bariloche",
+  "title": "Paquetes a Bariloche desde Córdoba | 787 Rumbos",
+  "metaDescription": "Conocé Bariloche y la Patagonia. Paquetes con aéreos o bus, hoteles seleccionados y excursiones clásicas como Circuito Chico.",
+  "canonical": "https://www.787rumbos.com.ar/destinos/bariloche",
+  "og": {
+    "title": "Paquetes a Bariloche desde Córdoba | 787 Rumbos",
+    "description": "Conocé Bariloche y la Patagonia. Paquetes con aéreos o bus, hoteles seleccionados y excursiones clásicas como Circuito Chico.",
+    "url": "https://www.787rumbos.com.ar/destinos/bariloche",
+    "image": "https://www.787rumbos.com.ar/destinos/bariloche.jpg",
+    "image:width": "800",
+    "image:height": "600",
+    "image:alt": "Viajar a Bariloche con 787 Rumbos"
+  },
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "TouristTrip",
+      "name": "Paquete a Bariloche",
+      "description": "Ubicada a orillas del Lago Nahuel Huapi, Bariloche te deslumbra con sus bosques, cerros nevados y la mayor tradición chocolatera del país. Perfecta tanto en invierno para disfrutar de la nieve como en verano para realizar senderismo y navegación lacustre.",
+      "touristType": "Leisure",
+      "provider": {
+        "@type": "TravelAgency",
+        "name": "787 Rumbos",
+        "telephone": "+5493517688623",
+        "url": "https://www.787rumbos.com.ar"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "597000",
+        "priceCurrency": "ARS",
+        "availability": "https://schema.org/InquiryLimit",
+        "priceValidUntil": "2026-12-31"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://www.787rumbos.com.ar"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Destinos",
+          "item": "https://www.787rumbos.com.ar/destinos"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Bariloche",
+          "item": "https://www.787rumbos.com.ar/destinos/bariloche"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué incluyen los paquetes a Bariloche?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En general: aéreo Córdoba–Bariloche, noches de hotel con desayuno, traslados aeropuerto–hotel, Circuito Chico e asistencia al viajero. Podemos sumar o sacar servicios según lo que busques."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Conviene ir en invierno o en verano?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depende de lo que quieras vivir. En invierno: nieve y Cerro Catedral. En verano: lagos, senderismo y navegación. Ambos son excelentes; te ayudamos a elegir según fechas y presupuesto."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo ir en bus o solo en avión?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cotizamos ambas opciones. El aéreo es más rápido; el bus suele ser más económico. Contanos tu prioridad y armamos la mejor combinación."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Incluye asistencia al viajero?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, en los paquetes estándar incluimos asistencia nacional (InterAssist). Si viajás con menores o querés mayor cobertura, te asesoramos sobre el plan adecuado."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo armo mi viaje a Bariloche?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Escribinos por WhatsApp con fechas aproximadas y cantidad de pasajeros. Te armamos una propuesta a medida desde Córdoba."
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": [
+        "TravelAgency",
+        "LocalBusiness"
+      ],
+      "name": "787 Rumbos",
+      "description": "Agencia de viajes en Córdoba. Paquetes personalizados, atención humana y financiación disponible.",
+      "url": "https://www.787rumbos.com.ar",
+      "telephone": "+5493517688623",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. La Voz del Interior 8500, En el Aeropuerto Internacional Ingeniero Aeronáutico Ambrosio Taravella",
+        "addressLocality": "Córdoba",
+        "addressRegion": "Córdoba",
+        "postalCode": "X5147XAA",
+        "addressCountry": "AR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -31.3172806,
+        "longitude": -64.2131382
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "08:30",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:30",
+          "closes": "13:00"
+        }
+      ],
+      "hasMap": "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7",
+      "sameAs": [
+        "https://www.instagram.com/787rumbos/",
+        "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7"
+      ],
+      "priceRange": "$$"
+    }
+  ],
+  "headings": [
+    "Paquetes a Bariloche",
+    "Sobre el Destino",
+    "Lo imperdible",
+    "Qué incluyen nuestros viajes estándar",
+    "¿Viajamos a tu medida?",
+    "También te puede interesar",
+    "Preguntas frecuentes sobre Bariloche"
+  ],
+  "links": [
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/",
+    "/destinos",
+    "/destinos",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20para%20armar%20un%20viaje%20a%20medida%20a%20Bariloche.%20(Web%20-%20Detalle%20Destino)",
+    "/destinos/salta",
+    "/destinos/mendoza",
+    "/destinos/termas-rio-hondo",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20para%20armar%20un%20viaje%20a%20medida%20a%20Bariloche.%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quiero%20consultar%20por%20un%20viaje%20a%20Bariloche.%20(Web%20-%20FAQ%20Destino)",
+    "/aereos",
+    "/destinos",
+    "https://www.cordobaturismo.gov.ar/",
+    "https://camaracbaturismo.org.ar/",
+    "https://www.aa2000.com.ar/cordoba",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "https://www.instagram.com/787rumbos/",
+    "http://qr.afip.gob.ar/?qr=Huvxa1kUae-1lE_yjNzL2w,,",
+    "https://camaracbaturismo.org.ar/",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://portfolio-vfelizia.pages.dev/"
+  ],
+  "images": [
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Viajar a Bariloche con 787 Rumbos",
+      "src": "/destinos/bariloche.jpg"
+    },
+    {
+      "alt": "Paquetes a Salta",
+      "src": "/destinos/salta.png"
+    },
+    {
+      "alt": "Paquetes a Mendoza",
+      "src": "/destinos/mendoza.jpg"
+    },
+    {
+      "alt": "Paquetes a Termas de Río Hondo",
+      "src": "/destinos/termas.jpg"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Data Fiscal ARCA",
+      "src": "/afip.jpg?v=20260503"
+    },
+    {
+      "alt": "Miembro Cámara de Turismo de la Provincia de Córdoba",
+      "src": "/camara-turismo.png"
+    }
+  ],
+  "text": "Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp Inicio / Destinos / Bariloche Volver al catálogo Argentina Paquetes a Bariloche Sobre el Destino Ubicada a orillas del Lago Nahuel Huapi, Bariloche te deslumbra con sus bosques, cerros nevados y la mayor tradición chocolatera del país. Perfecta tanto en invierno para disfrutar de la nieve como en verano para realizar senderismo y navegación lacustre. Lo imperdible Circuito Chico y Cerro Campanario Cerro Catedral, el centro de esquí más grande de Sudamérica Visita a chocolaterías artesanales del centro cívico Paseo en barco a Isla Victoria y Bosque de Arrayanes Qué incluyen nuestros viajes estándar Aéreo directo Córdoba - Bariloche - Córdoba 5 noches de alojamiento c/desayuno Traslados in/out aeropuerto-hotel Excursión clásica Circuito Chico incluida Asistencia al viajero nacional (InterAssist) 💡 Tip del Viajero No dejes de subir al Cerro Campanario: National Geographic la calificó como una de las 8 vistas panorámicas más bellas del mundo. Nota aclaratoria: Las tarifas publicadas, itinerarios y excursiones son de carácter referencial y corresponden a nuestros paquetes estándar, aunque están sujetos a cambios. En 787 Rumbos nos destacamos por nuestra flexibilidad y paquetes a medida, así que nos adaptamos a tus necesidades. Las tarifas definitivas se confirman al momento de realizar la consulta directa y reserva con el asesor. 📅 ¿Viajamos a tu medida? Actualmente no hay salidas grupales activas programadas en el catálogo. Sin embargo, armamos presupuestos 100% personalizados para las fechas que vos elijas con tarifas competitivas. Armar viaje a medida También te puede interesar Argentina Salta Argentina Mendoza Argentina Termas de Río Hondo Preguntas frecuentes sobre Bariloche Dudas típicas de quienes viajan a Bariloche. Si tu consulta es otra, escribinos por WhatsApp . ¿Qué incluyen los paquetes a Bariloche? En general: aéreo Córdoba–Bariloche, noches de hotel con desayuno, traslados aeropuerto–hotel, Circuito Chico e asistencia al viajero. Podemos sumar o sacar servicios según lo que busques. ¿Conviene ir en invierno o en verano? Depende de lo que quieras vivir. En invierno: nieve y Cerro Catedral. En verano: lagos, senderismo y navegación. Ambos son excelentes; te ayudamos a elegir según fechas y presupuesto. ¿Puedo ir en bus o solo en avión? Cotizamos ambas opciones. El aéreo es más rápido; el bus suele ser más económico. Contanos tu prioridad y armamos la mejor combinación. ¿Incluye asistencia al viajero? Sí, en los paquetes estándar incluimos asistencia nacional (InterAssist). Si viajás con menores o querés mayor cobertura, te asesoramos sobre el plan adecuado. ¿Cómo armo mi viaje a Bariloche? Escribinos por WhatsApp con fechas aproximadas y cantidad de pasajeros. Te armamos una propuesta a medida desde Córdoba. Agencia habilitada - Legajo 20455. Av. La Voz del Interior 8500, Córdoba (Planta Baja, local de Vía Bariloche) Asesoramiento profesional y cobertura integral Enlaces de Interés Pasajes aéreos Destinos Agencia Córdoba Turismo Cámara de Turismo Estado de Vuelos Términos y Condiciones Defensa del Consumidor Contacto lun–vie 8:30–18:00 · sáb 8:30–13:00 WhatsApp: +54 9 351 768-8623 Instagram: @787rumbos MARIA FERNANDA RAMOS | CUIT: 27-26220871-6 | Legajo Habilitación N° 20455 Términos y Condiciones · Defensa del Consumidor ©787 Rumbos® - Todos los derechos reservados. Sitio creado por V. Felizia"
+}

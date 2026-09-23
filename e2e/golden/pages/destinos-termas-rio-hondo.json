@@ -1,0 +1,251 @@
+{
+  "capturedAt": "2026-09-23",
+  "path": "/destinos/termas-rio-hondo",
+  "title": "Viajes a Termas de Río Hondo en Bus desde Córdoba | 787 Rumbos",
+  "metaDescription": "Salidas grupales en bus a Termas de Río Hondo. Pensión completa en Hotel Principado, traslados y coordinador permanente.",
+  "canonical": "https://www.787rumbos.com.ar/destinos/termas-rio-hondo",
+  "og": {
+    "title": "Viajes a Termas de Río Hondo en Bus desde Córdoba | 787 Rumbos",
+    "description": "Salidas grupales en bus a Termas de Río Hondo. Pensión completa en Hotel Principado, traslados y coordinador permanente.",
+    "url": "https://www.787rumbos.com.ar/destinos/termas-rio-hondo",
+    "image": "https://www.787rumbos.com.ar/destinos/termas.jpg",
+    "image:width": "800",
+    "image:height": "600",
+    "image:alt": "Viajar a Termas de Río Hondo con 787 Rumbos"
+  },
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "TouristTrip",
+      "name": "Paquete a Termas de Río Hondo",
+      "description": "El centro termal más importante de Argentina te espera para vivir unos días de relajación absoluta. Disfrutá de aguas termales con propiedades medicinales, paseos costaneros y una gastronomía regional inigualable, en un ambiente diseñado para el descanso.",
+      "touristType": "Leisure",
+      "provider": {
+        "@type": "TravelAgency",
+        "name": "787 Rumbos",
+        "telephone": "+5493517688623",
+        "url": "https://www.787rumbos.com.ar"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "329000",
+        "priceCurrency": "ARS",
+        "availability": "https://schema.org/InquiryLimit",
+        "priceValidUntil": "2026-12-31"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://www.787rumbos.com.ar"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Destinos",
+          "item": "https://www.787rumbos.com.ar/destinos"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Termas de Río Hondo",
+          "item": "https://www.787rumbos.com.ar/destinos/termas-rio-hondo"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué incluye el viaje a Termas de Río Hondo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nuestras salidas grupales típicas incluyen traslado en bus desde Córdoba, alojamiento en Hotel Principado con pensión completa (bebida en almuerzo y cena), coordinador permanente e asistencia médica nacional. El detalle exacto se confirma al cotizar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuántos días dura la salida?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Las salidas publicadas suelen ser de 8 noches. Si preferís otras fechas o menos días, armamos un paquete a medida."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Salgo en bus desde Córdoba?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Las salidas grupales a Termas parten en bus desde Córdoba, ida y vuelta. También podemos cotizar otras combinaciones si lo necesitás."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la mejor época para ir a las Termas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Se puede disfrutar todo el año. El invierno es muy pedido para el relax termal; en vacaciones de julio conviene reservar con anticipación porque los cupos se agotan rápido."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo consulto disponibilidad?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Escribinos por WhatsApp con la fecha que te interesa y te confirmamos cupos y precio actualizado."
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": [
+        "TravelAgency",
+        "LocalBusiness"
+      ],
+      "name": "787 Rumbos",
+      "description": "Agencia de viajes en Córdoba. Paquetes personalizados, atención humana y financiación disponible.",
+      "url": "https://www.787rumbos.com.ar",
+      "telephone": "+5493517688623",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. La Voz del Interior 8500, En el Aeropuerto Internacional Ingeniero Aeronáutico Ambrosio Taravella",
+        "addressLocality": "Córdoba",
+        "addressRegion": "Córdoba",
+        "postalCode": "X5147XAA",
+        "addressCountry": "AR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -31.3172806,
+        "longitude": -64.2131382
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "08:30",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:30",
+          "closes": "13:00"
+        }
+      ],
+      "hasMap": "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7",
+      "sameAs": [
+        "https://www.instagram.com/787rumbos/",
+        "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7"
+      ],
+      "priceRange": "$$"
+    }
+  ],
+  "headings": [
+    "Paquetes a Termas de Río Hondo",
+    "Sobre el Destino",
+    "Lo imperdible",
+    "Qué incluyen nuestros viajes estándar",
+    "¿Viajamos a tu medida?",
+    "También te puede interesar",
+    "Preguntas frecuentes sobre Termas de Río Hondo"
+  ],
+  "links": [
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/",
+    "/destinos",
+    "/destinos/argentina-en-bus-desde-cordoba",
+    "/destinos",
+    "/destinos/argentina-en-bus-desde-cordoba",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20para%20armar%20un%20viaje%20a%20medida%20a%20Termas%20de%20R%C3%ADo%20Hondo.%20(Web%20-%20Detalle%20Destino)",
+    "/destinos/cataratas-del-iguazu",
+    "/destinos/salar-de-uyuni",
+    "/destinos/salta",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20para%20armar%20un%20viaje%20a%20medida%20a%20Termas%20de%20R%C3%ADo%20Hondo.%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quiero%20consultar%20por%20un%20viaje%20a%20Termas%20de%20R%C3%ADo%20Hondo.%20(Web%20-%20FAQ%20Destino)",
+    "/aereos",
+    "/destinos",
+    "https://www.cordobaturismo.gov.ar/",
+    "https://camaracbaturismo.org.ar/",
+    "https://www.aa2000.com.ar/cordoba",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "https://www.instagram.com/787rumbos/",
+    "http://qr.afip.gob.ar/?qr=Huvxa1kUae-1lE_yjNzL2w,,",
+    "https://camaracbaturismo.org.ar/",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://portfolio-vfelizia.pages.dev/"
+  ],
+  "images": [
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Viajar a Termas de Río Hondo con 787 Rumbos",
+      "src": "/destinos/termas.jpg"
+    },
+    {
+      "alt": "Paquetes a Cataratas del Iguazú",
+      "src": "/destinos/cataratas.jpg"
+    },
+    {
+      "alt": "Paquetes a Salar de Uyuni y Norte Grande",
+      "src": "/destinos/salar-de-uyuni.jpg"
+    },
+    {
+      "alt": "Paquetes a Salta",
+      "src": "/destinos/salta.png"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Data Fiscal ARCA",
+      "src": "/afip.jpg?v=20260503"
+    },
+    {
+      "alt": "Miembro Cámara de Turismo de la Provincia de Córdoba",
+      "src": "/camara-turismo.png"
+    }
+  ],
+  "text": "Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp Inicio / Destinos / Argentina en bus desde Córdoba / Termas de Río Hondo Volver al catálogo Argentina Ver más: Argentina en bus desde Córdoba Paquetes a Termas de Río Hondo Sobre el Destino El centro termal más importante de Argentina te espera para vivir unos días de relajación absoluta. Disfrutá de aguas termales con propiedades medicinales, paseos costaneros y una gastronomía regional inigualable, en un ambiente diseñado para el descanso. Lo imperdible Baños termales terapéuticos Nueva Costanera y el Dique Frontal Isla del Sol y Reserva Natural Gastronomía típica: chivito santiagueño Qué incluyen nuestros viajes estándar Traslado en Bus Mix ida y vuelta desde Córdoba 8 noches de alojamiento en Hotel Principado Régimen de Pensión Completa (bebida incluida en almuerzo y cena) Coordinador permanente en viaje Asistencia médica nacional (InterAssist) 💡 Tip del Viajero Las aguas de Río Hondo son ricas en sales minerales y sodio. Se recomienda tomar baños de inmersión cortos (15-20 min) para un efecto óptimo de relajación. Nota aclaratoria: Las tarifas publicadas, itinerarios y excursiones son de carácter referencial y corresponden a nuestros paquetes estándar, aunque están sujetos a cambios. En 787 Rumbos nos destacamos por nuestra flexibilidad y paquetes a medida, así que nos adaptamos a tus necesidades. Las tarifas definitivas se confirman al momento de realizar la consulta directa y reserva con el asesor. 📅 ¿Viajamos a tu medida? Actualmente no hay salidas grupales activas programadas en el catálogo. Sin embargo, armamos presupuestos 100% personalizados para las fechas que vos elijas con tarifas competitivas. Armar viaje a medida También te puede interesar Argentina Cataratas del Iguazú Bolivia y Argentina Salar de Uyuni y Norte Grande Argentina Salta Preguntas frecuentes sobre Termas de Río Hondo Dudas típicas de quienes viajan a Termas de Río Hondo. Si tu consulta es otra, escribinos por WhatsApp . ¿Qué incluye el viaje a Termas de Río Hondo? Nuestras salidas grupales típicas incluyen traslado en bus desde Córdoba, alojamiento en Hotel Principado con pensión completa (bebida en almuerzo y cena), coordinador permanente e asistencia médica nacional. El detalle exacto se confirma al cotizar. ¿Cuántos días dura la salida? Las salidas publicadas suelen ser de 8 noches. Si preferís otras fechas o menos días, armamos un paquete a medida. ¿Salgo en bus desde Córdoba? Sí. Las salidas grupales a Termas parten en bus desde Córdoba, ida y vuelta. También podemos cotizar otras combinaciones si lo necesitás. ¿Cuál es la mejor época para ir a las Termas? Se puede disfrutar todo el año. El invierno es muy pedido para el relax termal; en vacaciones de julio conviene reservar con anticipación porque los cupos se agotan rápido. ¿Cómo consulto disponibilidad? Escribinos por WhatsApp con la fecha que te interesa y te confirmamos cupos y precio actualizado. Agencia habilitada - Legajo 20455. Av. La Voz del Interior 8500, Córdoba (Planta Baja, local de Vía Bariloche) Asesoramiento profesional y cobertura integral Enlaces de Interés Pasajes aéreos Destinos Agencia Córdoba Turismo Cámara de Turismo Estado de Vuelos Términos y Condiciones Defensa del Consumidor Contacto lun–vie 8:30–18:00 · sáb 8:30–13:00 WhatsApp: +54 9 351 768-8623 Instagram: @787rumbos MARIA FERNANDA RAMOS | CUIT: 27-26220871-6 | Legajo Habilitación N° 20455 Términos y Condiciones · Defensa del Consumidor ©787 Rumbos® - Todos los derechos reservados. Sitio creado por V. Felizia"
+}

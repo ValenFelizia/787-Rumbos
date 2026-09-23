@@ -1,0 +1,231 @@
+{
+  "capturedAt": "2026-09-23",
+  "path": "/destinos/punta-cana",
+  "title": "Paquetes a Punta Cana All Inclusive | 787 Rumbos",
+  "metaDescription": "Punta Cana All Inclusive en Whala Bávaro. Salidas de octubre y fin de año, con traslados y asistencia. La ciudad de salida se confirma al consultar.",
+  "canonical": "https://www.787rumbos.com.ar/destinos/punta-cana",
+  "og": {
+    "title": "Paquetes a Punta Cana All Inclusive | 787 Rumbos",
+    "description": "Punta Cana All Inclusive en Whala Bávaro. Salidas de octubre y fin de año, con traslados y asistencia. La ciudad de salida se confirma al consultar.",
+    "url": "https://www.787rumbos.com.ar/destinos/punta-cana",
+    "image": "https://www.787rumbos.com.ar/destinos/punta-cana.jpg",
+    "image:width": "800",
+    "image:height": "600",
+    "image:alt": "Viajar a Punta Cana con 787 Rumbos"
+  },
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "TouristTrip",
+      "name": "Paquete a Punta Cana",
+      "description": "Punta Cana es playa ancha, mar cálido y resorts sobre la arena. Publicamos los cupos confirmados en Whala Bávaro, All Inclusive, con traslados y asistencia. La ciudad de salida puede ser Córdoba o Ezeiza: la confirmamos cuando consultás.",
+      "touristType": "Leisure",
+      "provider": {
+        "@type": "TravelAgency",
+        "name": "787 Rumbos",
+        "telephone": "+5493517688623",
+        "url": "https://www.787rumbos.com.ar"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "1560",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-12-31"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://www.787rumbos.com.ar"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Destinos",
+          "item": "https://www.787rumbos.com.ar/destinos"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Punta Cana",
+          "item": "https://www.787rumbos.com.ar/destinos/punta-cana"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué incluye el paquete a Punta Cana?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Aéreo de cupo, 10 noches All Inclusive en Whala Bávaro, traslados y asistencia Universal Assistance (hasta 70 años). En octubre el aéreo es Avianca con equipaje. En fin de año la aerolínea se confirma entre JetSMART, Arajet y Aerolíneas Argentinas. La ciudad de salida puede ser Córdoba o Ezeiza."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Hay un combinado con Bayahibe?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, en las salidas del 15 y 22 de octubre: 6 noches en HM Alma Bayahibe (solo adultos) y 4 en Whala Bávaro, desde USD 1.685 por persona en habitación doble."
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": [
+        "TravelAgency",
+        "LocalBusiness"
+      ],
+      "name": "787 Rumbos",
+      "description": "Agencia de viajes en Córdoba. Paquetes personalizados, atención humana y financiación disponible.",
+      "url": "https://www.787rumbos.com.ar",
+      "telephone": "+5493517688623",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. La Voz del Interior 8500, En el Aeropuerto Internacional Ingeniero Aeronáutico Ambrosio Taravella",
+        "addressLocality": "Córdoba",
+        "addressRegion": "Córdoba",
+        "postalCode": "X5147XAA",
+        "addressCountry": "AR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -31.3172806,
+        "longitude": -64.2131382
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "08:30",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:30",
+          "closes": "13:00"
+        }
+      ],
+      "hasMap": "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7",
+      "sameAs": [
+        "https://www.instagram.com/787rumbos/",
+        "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7"
+      ],
+      "priceRange": "$$"
+    }
+  ],
+  "headings": [
+    "Paquetes a Punta Cana",
+    "Sobre el Destino",
+    "Lo imperdible",
+    "Qué incluyen nuestros viajes estándar",
+    "Próximas Salidas Programadas",
+    "También te puede interesar",
+    "Preguntas frecuentes sobre Punta Cana"
+  ],
+  "links": [
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/",
+    "/destinos",
+    "/destinos/caribe-desde-cordoba",
+    "/destinos",
+    "/destinos/caribe-desde-cordoba",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20disponibilidad%20para%20la%20salida%20a%20Punta%20Cana%20del%2015%20de%20Octubre%20(Whala!%20B%C3%A1varo).%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20disponibilidad%20para%20la%20salida%20a%20Punta%20Cana%20del%2015%20de%20Octubre%20(6%20Bayahibe%20y%204%20Punta%20Cana).%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20disponibilidad%20para%20la%20salida%20a%20Punta%20Cana%20del%2022%20de%20Octubre%20(Whala!%20B%C3%A1varo).%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20disponibilidad%20para%20la%20salida%20a%20Punta%20Cana%20del%2022%20de%20Octubre%20(6%20Bayahibe%20y%204%20Punta%20Cana).%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20disponibilidad%20para%20la%20salida%20a%20Punta%20Cana%20del%2028%20de%20Diciembre%20(Whala%20B%C3%A1varo).%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20para%20armar%20un%20viaje%20a%20medida%20a%20Punta%20Cana.%20(Web%20-%20Detalle%20Destino)",
+    "/destinos/bayahibe",
+    "/destinos/cancun",
+    "/destinos/playa-del-carmen",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20para%20armar%20un%20viaje%20a%20medida%20a%20Punta%20Cana.%20(Web%20-%20Detalle%20Destino)",
+    "/aereos",
+    "/destinos",
+    "https://www.cordobaturismo.gov.ar/",
+    "https://camaracbaturismo.org.ar/",
+    "https://www.aa2000.com.ar/cordoba",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "https://www.instagram.com/787rumbos/",
+    "http://qr.afip.gob.ar/?qr=Huvxa1kUae-1lE_yjNzL2w,,",
+    "https://camaracbaturismo.org.ar/",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://portfolio-vfelizia.pages.dev/"
+  ],
+  "images": [
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Viajar a Punta Cana con 787 Rumbos",
+      "src": "/destinos/punta-cana.jpg"
+    },
+    {
+      "alt": "Paquetes a Bayahibe",
+      "src": "/destinos/bayahibe.jpg"
+    },
+    {
+      "alt": "Paquetes a Cancún",
+      "src": "/destinos/cancun.jpg"
+    },
+    {
+      "alt": "Paquetes a Playa del Carmen",
+      "src": "/destinos/playadelcarmen.jpg"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Data Fiscal ARCA",
+      "src": "/afip.jpg?v=20260503"
+    },
+    {
+      "alt": "Miembro Cámara de Turismo de la Provincia de Córdoba",
+      "src": "/camara-turismo.png"
+    }
+  ],
+  "text": "Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp Inicio / Destinos / Caribe desde Córdoba / Punta Cana Volver al catálogo República Dominicana Ver más: Caribe desde Córdoba Paquetes a Punta Cana Sobre el Destino Punta Cana es playa ancha, mar cálido y resorts sobre la arena. Publicamos los cupos confirmados en Whala Bávaro, All Inclusive, con traslados y asistencia. La ciudad de salida puede ser Córdoba o Ezeiza: la confirmamos cuando consultás. Lo imperdible Playa Bávaro y estadía All Inclusive 10 noches en Whala Bávaro Traslados y asistencia Universal Assistance Opción combinada con Bayahibe en octubre Qué incluyen nuestros viajes estándar Aéreo de cupo. La ciudad de salida se confirma al consultar 10 noches All Inclusive Traslados Asistencia Universal Assistance (aplica hasta 70 años) Nota aclaratoria: Las tarifas publicadas, itinerarios y excursiones son de carácter referencial y corresponden a nuestros paquetes estándar, aunque están sujetos a cambios. En 787 Rumbos nos destacamos por nuestra flexibilidad y paquetes a medida, así que nos adaptamos a tus necesidades. Las tarifas definitivas se confirman al momento de realizar la consulta directa y reserva con el asesor. Próximas Salidas Programadas Hacé clic en una salida para consultar disponibilidad en WhatsApp. 15 de Octubre Whala! Bávaro Aéreo · 10 noches · Desde USD1.560 Salida Confirmada 💡 10 noches All Inclusive. Aéreo Avianca con equipaje. Traslados y asistencia Universal Assistance (hasta 70 años). La ciudad de salida puede ser Córdoba o Ezeiza. Se confirma al consultar. Consultar esta fecha 15 de Octubre 6 Bayahibe y 4 Punta Cana Aéreo · 10 noches · Desde USD1.685 Salida Confirmada 💡 6 noches en HM Alma Bayahibe (solo adultos) y 4 en Whala Bávaro, All Inclusive. Aéreo Avianca con equipaje. Traslados y asistencia Universal Assistance (hasta 70 años). La ciudad de salida puede ser Córdoba o Ezeiza. Se confirma al consultar. Consultar esta fecha 22 de Octubre Whala! Bávaro Aéreo · 10 noches · Desde USD1.560 Salida Confirmada 💡 10 noches All Inclusive. Aéreo Avianca con equipaje. Traslados y asistencia Universal Assistance (hasta 70 años). La ciudad de salida puede ser Córdoba o Ezeiza. Se confirma al consultar. Consultar esta fecha 22 de Octubre 6 Bayahibe y 4 Punta Cana Aéreo · 10 noches · Desde USD1.685 Salida Confirmada 💡 6 noches en HM Alma Bayahibe (solo adultos) y 4 en Whala Bávaro, All Inclusive. Aéreo Avianca con equipaje. Traslados y asistencia Universal Assistance (hasta 70 años). La ciudad de salida puede ser Córdoba o Ezeiza. Se confirma al consultar. Consultar esta fecha 28 de Diciembre Whala Bávaro Aéreo · 10 noches · Desde USD2.690 Salida Confirmada 💡 10 noches All Inclusive, con equipaje. Aerolínea a confirmar entre JetSMART, Arajet y Aerolíneas Argentinas. Traslados y asistencia Universal Assistance (hasta 70 años). La ciudad de salida puede ser Córdoba o Ezeiza. Se confirma al consultar. Consultar esta fecha ¿Buscás otras fechas? Cotizá a medida También te puede interesar República Dominicana Bayahibe México Cancún México Playa del Carmen Preguntas frecuentes sobre Punta Cana Dudas típicas de quienes viajan a Punta Cana. Si tu consulta es otra, escribinos por WhatsApp . ¿Qué incluye el paquete a Punta Cana? Aéreo de cupo, 10 noches All Inclusive en Whala Bávaro, traslados y asistencia Universal Assistance (hasta 70 años). En octubre el aéreo es Avianca con equipaje. En fin de año la aerolínea se confirma entre JetSMART, Arajet y Aerolíneas Argentinas. La ciudad de salida puede ser Córdoba o Ezeiza. ¿Hay un combinado con Bayahibe? Sí, en las salidas del 15 y 22 de octubre: 6 noches en HM Alma Bayahibe (solo adultos) y 4 en Whala Bávaro, desde USD 1.685 por persona en habitación doble. Agencia habilitada - Legajo 20455. Av. La Voz del Interior 8500, Córdoba (Planta Baja, local de Vía Bariloche) Asesoramiento profesional y cobertura integral Enlaces de Interés Pasajes aéreos Destinos Agencia Córdoba Turismo Cámara de Turismo Estado de Vuelos Términos y Condiciones Defensa del Consumidor Contacto lun–vie 8:30–18:00 · sáb 8:30–13:00 WhatsApp: +54 9 351 768-8623 Instagram: @787rumbos MARIA FERNANDA RAMOS | CUIT: 27-26220871-6 | Legajo Habilitación N° 20455 Términos y Condiciones · Defensa del Consumidor ©787 Rumbos® - Todos los derechos reservados. Sitio creado por V. Felizia"
+}

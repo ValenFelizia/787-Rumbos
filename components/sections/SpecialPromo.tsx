@@ -10,7 +10,7 @@ import { AGENCY_PHONE, whatsappLink } from "@/lib/constants";
 // ─── CONFIGURACIÓN DE LA PROMOCIÓN DESTACADA ────────────────────────────────
 // Para cambiar el evento destacado en el futuro (ej: Disney, Copa América, etc.),
 // simplemente editá este objeto. Los íconos soportados son: 'plane', 'calendar', 'ticket', 'map-pin'.
-const PROMO_CONFIG = {
+export const PROMO_CONFIG = {
   slug: "f1-grand-premio-sao-paulo",
   /** ISO date: el banner se oculta automáticamente el día siguiente a la salida. */
   endsAt: "2026-11-05",

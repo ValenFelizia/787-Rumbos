@@ -12,6 +12,9 @@
     "test:e2e": "npm run build:e2e && npm run test:e2e:ci",
     "test:e2e:ci": "node --env-file=e2e.env node_modules/@playwright/test/cli.js test",
     "test:e2e:ui": "npm run build:e2e && node --env-file=e2e.env node_modules/@playwright/test/cli.js test --ui",
+    "snapshot:catalog": "npx --yes tsx scripts/catalog-snapshot.ts",
+    "snapshot:html": "node scripts/html-snapshot.mjs",
+    "snapshot:compare": "node scripts/html-snapshot.mjs --compare",
     "start": "next start"
   },
   "dependencies": {

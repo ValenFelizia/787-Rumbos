@@ -1,0 +1,203 @@
+{
+  "capturedAt": "2026-09-23",
+  "path": "/destinos/salta",
+  "title": "Paquetes a Salta desde Córdoba en Aéreo | 787 Rumbos",
+  "metaDescription": "Viajá a Salta con salida desde Córdoba. Incluye aéreos, alojamiento con desayuno, traslados y city tour. Salidas confirmadas y financiación.",
+  "canonical": "https://www.787rumbos.com.ar/destinos/salta",
+  "og": {
+    "title": "Paquetes a Salta desde Córdoba en Aéreo | 787 Rumbos",
+    "description": "Viajá a Salta con salida desde Córdoba. Incluye aéreos, alojamiento con desayuno, traslados y city tour. Salidas confirmadas y financiación.",
+    "url": "https://www.787rumbos.com.ar/destinos/salta",
+    "image": "https://www.787rumbos.com.ar/destinos/salta.png",
+    "image:width": "800",
+    "image:height": "600",
+    "image:alt": "Viajar a Salta con 787 Rumbos"
+  },
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "TouristTrip",
+      "name": "Paquete a Salta",
+      "description": "Conocida como 'La Linda', Salta ofrece una mezcla única de historia colonial, peñas folclóricas y paisajes andinos de ensueño. Podrás recorrer sus iglesias coloniales, subir al Cerro San Bernardo en teleférico y saborear las mejores empanadas del país en sus históricas peñas.",
+      "touristType": "Leisure",
+      "provider": {
+        "@type": "TravelAgency",
+        "name": "787 Rumbos",
+        "telephone": "+5493517688623",
+        "url": "https://www.787rumbos.com.ar"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "587000",
+        "priceCurrency": "ARS",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-12-31"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://www.787rumbos.com.ar"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Destinos",
+          "item": "https://www.787rumbos.com.ar/destinos"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Salta",
+          "item": "https://www.787rumbos.com.ar/destinos/salta"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": [
+        "TravelAgency",
+        "LocalBusiness"
+      ],
+      "name": "787 Rumbos",
+      "description": "Agencia de viajes en Córdoba. Paquetes personalizados, atención humana y financiación disponible.",
+      "url": "https://www.787rumbos.com.ar",
+      "telephone": "+5493517688623",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. La Voz del Interior 8500, En el Aeropuerto Internacional Ingeniero Aeronáutico Ambrosio Taravella",
+        "addressLocality": "Córdoba",
+        "addressRegion": "Córdoba",
+        "postalCode": "X5147XAA",
+        "addressCountry": "AR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -31.3172806,
+        "longitude": -64.2131382
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "08:30",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:30",
+          "closes": "13:00"
+        }
+      ],
+      "hasMap": "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7",
+      "sameAs": [
+        "https://www.instagram.com/787rumbos/",
+        "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7"
+      ],
+      "priceRange": "$$"
+    }
+  ],
+  "headings": [
+    "Paquetes a Salta",
+    "Sobre el Destino",
+    "Lo imperdible",
+    "Qué incluyen nuestros viajes estándar",
+    "Excursiones sugeridas y opcionales",
+    "Próximas Salidas Programadas",
+    "También te puede interesar"
+  ],
+  "links": [
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/",
+    "/destinos",
+    "/destinos",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20disponibilidad%20para%20la%20salida%20a%20Salta%20del%2010%20de%20Octubre.%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20disponibilidad%20para%20la%20salida%20a%20Salta%20del%2021%20de%20Noviembre.%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20para%20armar%20un%20viaje%20a%20medida%20a%20Salta.%20(Web%20-%20Detalle%20Destino)",
+    "/destinos/mendoza",
+    "/destinos/termas-rio-hondo",
+    "/destinos/bariloche",
+    "/aereos",
+    "/destinos",
+    "https://www.cordobaturismo.gov.ar/",
+    "https://camaracbaturismo.org.ar/",
+    "https://www.aa2000.com.ar/cordoba",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "https://www.instagram.com/787rumbos/",
+    "http://qr.afip.gob.ar/?qr=Huvxa1kUae-1lE_yjNzL2w,,",
+    "https://camaracbaturismo.org.ar/",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://portfolio-vfelizia.pages.dev/"
+  ],
+  "images": [
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Viajar a Salta con 787 Rumbos",
+      "src": "/destinos/salta.png"
+    },
+    {
+      "alt": "Paquetes a Mendoza",
+      "src": "/destinos/mendoza.jpg"
+    },
+    {
+      "alt": "Paquetes a Termas de Río Hondo",
+      "src": "/destinos/termas.jpg"
+    },
+    {
+      "alt": "Paquetes a Bariloche",
+      "src": "/destinos/bariloche.jpg"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Data Fiscal ARCA",
+      "src": "/afip.jpg?v=20260503"
+    },
+    {
+      "alt": "Miembro Cámara de Turismo de la Provincia de Córdoba",
+      "src": "/camara-turismo.png"
+    }
+  ],
+  "text": "Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp Inicio / Destinos / Salta Volver al catálogo Argentina Paquetes a Salta Sobre el Destino Conocida como 'La Linda', Salta ofrece una mezcla única de historia colonial, peñas folclóricas y paisajes andinos de ensueño. Podrás recorrer sus iglesias coloniales, subir al Cerro San Bernardo en teleférico y saborear las mejores empanadas del país en sus históricas peñas. Lo imperdible Plaza 9 de Julio y Cabildo Histórico Teleférico San Bernardo y vistas de la ciudad Peñas folclóricas de la calle Balcarce Quebrada de las Conchas camino a Cafayate Qué incluyen nuestros viajes estándar Aéreo directo desde Córdoba (equipaje incluido) 3 o 4 noches de alojamiento con desayuno Traslados aeropuerto / hotel / aeropuerto City Tour pedestre por la ciudad Asistencia al viajero nacional (InterAssist) Excursiones sugeridas y opcionales Excursión de día completo a Cafayate con degustación en bodega Cachi y el Parque Nacional Los Cardones Salinas Grandes y Purmamarca Tren a las Nubes (San Antonio de los Cobres) Quebrada de Humahuaca (Jujuy) 💡 Tip del Viajero Las empanadas salteñas tradicionales son más pequeñas y se comen calientes acompañadas con una copa de vino Torrontés local en Cafayate. Nota aclaratoria: Las tarifas publicadas, itinerarios y excursiones son de carácter referencial y corresponden a nuestros paquetes estándar, aunque están sujetos a cambios. En 787 Rumbos nos destacamos por nuestra flexibilidad y paquetes a medida, así que nos adaptamos a tus necesidades. Las tarifas definitivas se confirman al momento de realizar la consulta directa y reserva con el asesor. Próximas Salidas Programadas Hacé clic en una salida para consultar disponibilidad en WhatsApp. 10 de Octubre Aéreo · 4 noches Últimos Cupos 💡 Cupos limitados Consultar esta fecha 21 de Noviembre Aéreo · 3 noches Salida Confirmada Consultar esta fecha ¿Buscás otras fechas? Cotizá a medida También te puede interesar Argentina Mendoza Argentina Termas de Río Hondo Argentina Bariloche Agencia habilitada - Legajo 20455. Av. La Voz del Interior 8500, Córdoba (Planta Baja, local de Vía Bariloche) Asesoramiento profesional y cobertura integral Enlaces de Interés Pasajes aéreos Destinos Agencia Córdoba Turismo Cámara de Turismo Estado de Vuelos Términos y Condiciones Defensa del Consumidor Contacto lun–vie 8:30–18:00 · sáb 8:30–13:00 WhatsApp: +54 9 351 768-8623 Instagram: @787rumbos MARIA FERNANDA RAMOS | CUIT: 27-26220871-6 | Legajo Habilitación N° 20455 Términos y Condiciones · Defensa del Consumidor ©787 Rumbos® - Todos los derechos reservados. Sitio creado por V. Felizia"
+}

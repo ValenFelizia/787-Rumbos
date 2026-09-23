@@ -1,0 +1,203 @@
+{
+  "capturedAt": "2026-09-23",
+  "path": "/destinos/salidas-grupales-desde-cordoba",
+  "title": "Salidas grupales confirmadas desde Córdoba | 787 Rumbos",
+  "metaDescription": "Próximas salidas grupales de 787 Rumbos desde Córdoba: fechas, cupos y destinos. Cotizá por WhatsApp con atención humana.",
+  "canonical": "https://www.787rumbos.com.ar/destinos/salidas-grupales-desde-cordoba",
+  "og": {
+    "title": "Salidas grupales confirmadas desde Córdoba | 787 Rumbos",
+    "description": "Próximas salidas grupales de 787 Rumbos desde Córdoba: fechas, cupos y destinos. Cotizá por WhatsApp con atención humana.",
+    "url": "https://www.787rumbos.com.ar/destinos/salidas-grupales-desde-cordoba"
+  },
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": [
+        "TravelAgency",
+        "LocalBusiness"
+      ],
+      "name": "787 Rumbos",
+      "description": "Agencia de viajes en Córdoba. Paquetes personalizados, atención humana y financiación disponible.",
+      "url": "https://www.787rumbos.com.ar",
+      "telephone": "+5493517688623",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. La Voz del Interior 8500, En el Aeropuerto Internacional Ingeniero Aeronáutico Ambrosio Taravella",
+        "addressLocality": "Córdoba",
+        "addressRegion": "Córdoba",
+        "postalCode": "X5147XAA",
+        "addressCountry": "AR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -31.3172806,
+        "longitude": -64.2131382
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "08:30",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:30",
+          "closes": "13:00"
+        }
+      ],
+      "hasMap": "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7",
+      "sameAs": [
+        "https://www.instagram.com/787rumbos/",
+        "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7"
+      ],
+      "priceRange": "$$"
+    }
+  ],
+  "headings": [
+    "Salidas grupales desde Córdoba",
+    "Cómo lo armamos en 787 Rumbos",
+    "Destinos en este catálogo",
+    "Salta",
+    "Cataratas del Iguazú",
+    "Cancún",
+    "Río de Janeiro",
+    "Porto de Galinhas",
+    "F1 Grand Premio de São Paulo",
+    "Salvador de Bahía",
+    "Imbassaí",
+    "Guarajuba",
+    "Praia do Forte",
+    "Punta Cana",
+    "Bayahibe",
+    "¿Arrancamos tu cotización?"
+  ],
+  "links": [
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/",
+    "/destinos",
+    "/destinos",
+    "/destinos/salta",
+    "/destinos/cataratas-del-iguazu",
+    "/destinos/cancun",
+    "/destinos/rio-de-janeiro",
+    "/destinos/porto-de-galinhas",
+    "/destinos/f1-grand-premio-sao-paulo",
+    "/destinos/salvador-de-bahia",
+    "/destinos/imbassai",
+    "/destinos/guarajuba",
+    "/destinos/praia-do-forte",
+    "/destinos/punta-cana",
+    "/destinos/bayahibe",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quiero%20ver%20las%20pr%C3%B3ximas%20salidas%20grupales%20desde%20C%C3%B3rdoba.%20(Web%20-%20Cluster%20Salidas%20Grupales)",
+    "/aereos",
+    "/destinos",
+    "https://www.cordobaturismo.gov.ar/",
+    "https://camaracbaturismo.org.ar/",
+    "https://www.aa2000.com.ar/cordoba",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "https://www.instagram.com/787rumbos/",
+    "http://qr.afip.gob.ar/?qr=Huvxa1kUae-1lE_yjNzL2w,,",
+    "https://camaracbaturismo.org.ar/",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://portfolio-vfelizia.pages.dev/"
+  ],
+  "images": [
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Salta — paquete con 787 Rumbos",
+      "src": "/destinos/salta.png"
+    },
+    {
+      "alt": "Cataratas del Iguazú — paquete con 787 Rumbos",
+      "src": "/destinos/cataratas.jpg"
+    },
+    {
+      "alt": "Cancún — paquete con 787 Rumbos",
+      "src": "/destinos/cancun.jpg"
+    },
+    {
+      "alt": "Río de Janeiro — paquete con 787 Rumbos",
+      "src": "/destinos/rio.jpg"
+    },
+    {
+      "alt": "Porto de Galinhas — paquete con 787 Rumbos",
+      "src": "/destinos/portogalinhas.jpg"
+    },
+    {
+      "alt": "F1 Grand Premio de São Paulo — paquete con 787 Rumbos",
+      "src": "/destinos/gp-sao-paulo-hero.jpg"
+    },
+    {
+      "alt": "Salvador de Bahía — paquete con 787 Rumbos",
+      "src": "/destinos/salvador-de-bahia.jpg"
+    },
+    {
+      "alt": "Imbassaí — paquete con 787 Rumbos",
+      "src": "/destinos/imbassai.jpg"
+    },
+    {
+      "alt": "Guarajuba — paquete con 787 Rumbos",
+      "src": "/destinos/guarajuba.jpg"
+    },
+    {
+      "alt": "Praia do Forte — paquete con 787 Rumbos",
+      "src": "/destinos/praia-do-forte.jpg"
+    },
+    {
+      "alt": "Punta Cana — paquete con 787 Rumbos",
+      "src": "/destinos/punta-cana.jpg"
+    },
+    {
+      "alt": "Bayahibe — paquete con 787 Rumbos",
+      "src": "/destinos/bayahibe.jpg"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Data Fiscal ARCA",
+      "src": "/afip.jpg?v=20260503"
+    },
+    {
+      "alt": "Miembro Cámara de Turismo de la Provincia de Córdoba",
+      "src": "/camara-turismo.png"
+    }
+  ],
+  "text": "Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp Inicio / Destinos / Salidas grupales desde Córdoba Volver al catálogo Salidas grupales desde Córdoba Acá reunimos las salidas con fecha y cupos publicados. Si no ves la tuya, igual armamos un viaje a medida para las fechas que elijas. Cómo lo armamos en 787 Rumbos Fecha, noches y transporte ya definidos: viajás con el grupo. Cupos limitados: te confirmamos disponibilidad al instante por WhatsApp. Si la salida se agotó, te proponemos la siguiente o un paquete a medida. Destinos en este catálogo Argentina 2 salidas Salta Conocida como 'La Linda', Salta ofrece una mezcla única de historia colonial, peñas folclóricas y paisajes andinos de ensueño. Podrás recorrer sus iglesias coloniales, subir al Cerro San Bernardo en teleférico y saborear las mejores empanadas del país en sus históricas peñas. Ver detalles Argentina 1 salida Cataratas del Iguazú Una de las 7 Maravillas Naturales del Mundo. Dejate ensordecer por la majestuosa Garganta del Diablo y recorre las pasarelas que te sumergen directo en la selva misionera, apreciando la caída de agua más espectacular del planeta. Ver detalles México 1 salida Cancún El paraíso del Caribe te espera con sus playas de arena blanca que no se calienta con el sol y su mar de infinitos tonos de azul. Cancún combina a la perfección el relax All Inclusive de sus resorts con excursiones arqueológicas y parques de aventura. Ver detalles Brasil 2 salidas Río de Janeiro Armamos paquetes a Río de Janeiro desde Córdoba: a medida o grupales, con aéreos y opciones claras. La Cidade Maravilhosa enamora con playas icónicas, bossa nova en Ipanema y hitos como el Cristo Redentor en el Cerro del Corcovado. Ver detalles Brasil 11 salidas Porto de Galinhas Famoso por sus piscinas naturales de aguas templadas y transparentes formadas entre arrecifes de coral. Porto de Galinhas es el refugio tropical ideal en el noreste de Brasil, combinando encanto de aldea de pescadores con hotelería de primer nivel. Ver detalles Brasil 1 salida F1 Grand Premio de São Paulo Viví la máxima adrenalina del automovilismo mundial con nuestro paquete exclusivo para el Grand Premio de São Paulo de Fórmula 1 en el histórico Autódromo de Interlagos. Te ofrecemos una solución llave en mano con vuelo charter directo, alojamiento seleccionado, traslados especiales al autódromo y tus entradas ya aseguradas para disfrutar del rugido de los motores sin preocuparte por nada. Ver detalles Brasil 11 salidas Salvador de Bahía La cuna de la cultura afrobrasileña te espera con su arquitectura colonial en el Pelourinho, el ritmo del axé y hermosas playas urbanas. En enero 2027 hay vuelo directo con Aerolíneas Argentinas. La ciudad de salida puede ser Córdoba o Ezeiza: la confirmamos cuando consultás. Ver detalles Brasil 4 salidas Imbassaí Un oasis de tranquilidad rodeado de cocoteros, médanos y el encuentro entre el río Imbassaí y el océano Atlántico. En enero 2027 el cupo es All Inclusive en Grand Palladium Imbassaí, con vuelo directo de Aerolíneas Argentinas. La ciudad de salida puede ser Córdoba o Ezeiza: la confirmamos cuando consultás. Ver detalles Brasil 1 salida Guarajuba Disfrutá del lujoso Resort Vila Galé Marés frente a la hermosa playa de Guarajuba. Régimen All Inclusive de clase mundial con la comodidad de volar directo desde Córdoba. Ver detalles Brasil 4 salidas Praia do Forte Conocida como la Polinesia Brasileña, Praia do Forte combina playas de aguas cristalinas, la aldea de pescadores, el Proyecto TAMAR y el resort Iberostar Waves Bahia. En enero 2027 el cupo es de 8 noches All Inclusive, con vuelo directo de Aerolíneas Argentinas. La ciudad de salida puede ser Córdoba o Ezeiza: la confirmamos cuando consultás. Ver detalles República Dominicana 5 salidas Punta Cana Punta Cana es playa ancha, mar cálido y resorts sobre la arena. Publicamos los cupos confirmados en Whala Bávaro, All Inclusive, con traslados y asistencia. La ciudad de salida puede ser Córdoba o Ezeiza: la confirmamos cuando consultás. Ver detalles República Dominicana 2 salidas Bayahibe Bayahibe es una costa más tranquila, al oeste de Punta Cana. El cupo de octubre es All Inclusive en HM Alma Bayahibe y está pensado solo para adultos. El combinado de 6 noches ahí y 4 en Whala Bávaro está en la ficha de Punta Cana. Ver detalles ¿Arrancamos tu cotización? Contanos fechas y cantidad de pasajeros. Te respondemos con opciones concretas. Consultar salidas grupales Agencia habilitada - Legajo 20455. Av. La Voz del Interior 8500, Córdoba (Planta Baja, local de Vía Bariloche) Asesoramiento profesional y cobertura integral Enlaces de Interés Pasajes aéreos Destinos Agencia Córdoba Turismo Cámara de Turismo Estado de Vuelos Términos y Condiciones Defensa del Consumidor Contacto lun–vie 8:30–18:00 · sáb 8:30–13:00 WhatsApp: +54 9 351 768-8623 Instagram: @787rumbos MARIA FERNANDA RAMOS | CUIT: 27-26220871-6 | Legajo Habilitación N° 20455 Términos y Condiciones · Defensa del Consumidor ©787 Rumbos® - Todos los derechos reservados. Sitio creado por V. Felizia"
+}

@@ -1,0 +1,355 @@
+{
+  "capturedAt": "2026-09-23",
+  "path": "/",
+  "title": "787 Rumbos | Agencia de Viajes en Córdoba",
+  "metaDescription": "Agencia de viajes en el Aeropuerto de Córdoba. Pasajes aéreos, ómnibus y paquetes a medida. Financiación disponible y consulta por WhatsApp.",
+  "canonical": "https://www.787rumbos.com.ar",
+  "og": {
+    "title": "787 Rumbos | Agencia de Viajes en Córdoba",
+    "description": "Viajá con el respaldo de 787 Rumbos. Atención personalizada, financiación disponible y paquetes a medida desde Córdoba.",
+    "url": "https://www.787rumbos.com.ar",
+    "site_name": "787 Rumbos",
+    "locale": "es_AR",
+    "image": "https://www.787rumbos.com.ar/og-image.jpg",
+    "image:width": "1200",
+    "image:height": "630",
+    "image:alt": "787 Rumbos — Agencia de viajes en el Aeropuerto de Córdoba",
+    "type": "website"
+  },
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Tienen un local físico?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Contamos con oficina en el Hall de arribos del Aeropuerto Internacional de Córdoba, dentro del local oficial de Vía Bariloche (Av. La Voz del Interior 8500). Podés visitarnos lunes a viernes 8:30–18:00 y sábados 8:30–13:00. Cómo llegar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo puedo reservar un viaje?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Escribinos por WhatsApp, contanos a dónde querés viajar y nosotros nos encargamos de armarte la mejor propuesta. También podés acercarte a nuestra oficina en el aeropuerto o usar el cotizador de la web."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué incluyen los paquetes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cada paquete es distinto y lo armamos según lo que buscás. Por lo general incluyen como mínimo traslados, alojamiento y asistencia al viajero. Otros suman vuelos, excursiones, pensión completa o servicios adicionales. Siempre te enviamos el detalle completo antes de confirmar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Los paquetes son sí o sí desde Córdoba?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, para nada. Si bien estamos en Córdoba y muchas de nuestras salidas grupales parten desde acá, armamos viajes desde cualquier ciudad de Argentina e incluso desde el exterior."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la diferencia entre un paquete a medida y una salida grupal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Una salida grupal tiene fecha, cupos e itinerario ya definidos: viajás con otros pasajeros en las mismas condiciones. Un paquete a medida lo diseñamos para vos: elegís fechas, hotel, noches y servicios según tu pedido. En ambos casos te asesora una persona real."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué medios de pago y financiación ofrecen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Aceptamos distintos medios de pago según el paquete y contamos con opciones de financiación vigentes. Las alternativas pueden variar según el destino y la fecha de salida. Consultá las opciones disponibles con un asesor por WhatsApp."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es la asistencia al viajero?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es una cobertura médica para imprevistos durante tu viaje: consultas, medicación, traslados por emergencia y otros servicios según el plan. Trabajamos con las principales coberturas del mercado como AssistCard e InterAssist para garantizarte la mejor asistencia médica nacional e internacional. En muchos destinos internacionales es un requisito de ingreso. Te indicamos la cobertura adecuada según tu destino y duración del viaje."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿También venden pasajes de ómnibus?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Somos boletería oficial de Vía Bariloche, Vía Tac y El Valle en el Aeropuerto de Córdoba. Podés comprar pasajes de ómnibus nacionales además de consultar por vuelos y paquetes turísticos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Me acompañan si surge un problema durante el viaje?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Te acompañamos antes, durante y después del viaje: te ayudamos a gestionar con aerolínea, hotel o asistencia al viajero lo vinculado a tu reserva. La resolución final depende de cada proveedor; no somos una guardia 24/7 ni reemplazamos a la asistencia médica. Si estás de viaje y surge un imprevisto, escribinos a nuestro WhatsApp de atención."
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": [
+        "TravelAgency",
+        "LocalBusiness"
+      ],
+      "name": "787 Rumbos",
+      "description": "Agencia de viajes en Córdoba. Paquetes personalizados, atención humana y financiación disponible.",
+      "url": "https://www.787rumbos.com.ar",
+      "telephone": "+5493517688623",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. La Voz del Interior 8500, En el Aeropuerto Internacional Ingeniero Aeronáutico Ambrosio Taravella",
+        "addressLocality": "Córdoba",
+        "addressRegion": "Córdoba",
+        "postalCode": "X5147XAA",
+        "addressCountry": "AR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -31.3172806,
+        "longitude": -64.2131382
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "08:30",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:30",
+          "closes": "13:00"
+        }
+      ],
+      "hasMap": "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7",
+      "sameAs": [
+        "https://www.instagram.com/787rumbos/",
+        "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7"
+      ],
+      "priceRange": "$$"
+    }
+  ],
+  "headings": [
+    "787 Rumbos: tu agencia en el Aeropuerto de Córdoba",
+    "De la terminal al mundo",
+    "Por qué viajar con 787 Rumbos",
+    "Oficina en el aeropuerto",
+    "Experiencia en transporte",
+    "Aéreo y terrestre",
+    "¿Qué rumbo estás buscando?",
+    "Quiero un vuelo",
+    "Quiero playa",
+    "Quiero recorrer Argentina",
+    "Quiero una salida grupal",
+    "Lo armamos con vos",
+    "Próximas salidas desde Córdoba",
+    "Porto de Galinhas",
+    "Salvador de Bahía",
+    "Imbassaí",
+    "Praia do Forte",
+    "¿Buscás otro destino?",
+    "Lo que cuentan quienes ya viajaron",
+    "Servicios que resolvemos por vos",
+    "Pasajes Aéreos",
+    "Alojamiento",
+    "Traslados",
+    "Asistencia Médica",
+    "Pasajes de Ómnibus",
+    "Comunidad 787 Rumbos",
+    "Preguntas frecuentes",
+    "¿Ya sabés a dónde querés ir?"
+  ],
+  "links": [
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7",
+    "https://camaracbaturismo.org.ar/",
+    "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7",
+    "/aereos",
+    "/destinos/brasil-desde-cordoba",
+    "/destinos/argentina-en-bus-desde-cordoba",
+    "/destinos/salidas-grupales-desde-cordoba",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/destinos",
+    "/destinos/porto-de-galinhas",
+    "/destinos/porto-de-galinhas",
+    "/destinos/porto-de-galinhas",
+    "/destinos/salvador-de-bahia",
+    "/destinos/salvador-de-bahia",
+    "/destinos/salvador-de-bahia",
+    "/destinos/imbassai",
+    "/destinos/imbassai",
+    "/destinos/imbassai",
+    "/destinos/praia-do-forte",
+    "/destinos/praia-do-forte",
+    "/destinos/praia-do-forte",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/destinos",
+    "https://g.page/r/CZ_gdDN4llrIEBI/review",
+    "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7",
+    "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7",
+    "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7",
+    "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7",
+    "/aereos",
+    "https://www.instagram.com/p/DXNbJLojSyi/",
+    "https://www.instagram.com/p/DYVkVO9DTf9/",
+    "https://www.instagram.com/787rumbos/",
+    "https://www.instagram.com/p/DXIXc_yjbu2/",
+    "https://www.instagram.com/p/DUvVM4HEcR-/",
+    "https://www.instagram.com/p/DUOAUP2jT_q/",
+    "https://www.instagram.com/787rumbos/",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20consultar%20por%20una%20duda%20del%20FAQ...%20(Web%20-%20FAQ)",
+    "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/aereos",
+    "/destinos",
+    "https://www.cordobaturismo.gov.ar/",
+    "https://camaracbaturismo.org.ar/",
+    "https://www.aa2000.com.ar/cordoba",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "https://www.instagram.com/787rumbos/",
+    "http://qr.afip.gob.ar/?qr=Huvxa1kUae-1lE_yjNzL2w,,",
+    "https://camaracbaturismo.org.ar/",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://portfolio-vfelizia.pages.dev/"
+  ],
+  "images": [
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Paisaje de viaje — 787 Rumbos agencia de viajes en Córdoba",
+      "src": "/hero-bg.jpg"
+    },
+    {
+      "alt": "",
+      "src": "/nosotros-local.jpg"
+    },
+    {
+      "alt": "Local de 787 Rumbos y Vía Bariloche en el hall de arribos del Aeropuerto de Córdoba",
+      "src": "/nosotros-local.jpg"
+    },
+    {
+      "alt": "Integrante del equipo 787 Rumbos en una feria de turismo",
+      "src": "/nosotros.jpg"
+    },
+    {
+      "alt": "Ala de un avión sobre las nubes al atardecer",
+      "src": "/rumbos/vuelos.jpg"
+    },
+    {
+      "alt": "Agua turquesa y velero en Porto de Galinhas, Brasil",
+      "src": "/rumbos/playa.jpg"
+    },
+    {
+      "alt": "Cataratas del Iguazú, un clásico del turismo argentino",
+      "src": "/rumbos/argentina.jpg"
+    },
+    {
+      "alt": "Centro Cívico de Bariloche junto al lago Nahuel Huapi",
+      "src": "/rumbos/grupal.jpg"
+    },
+    {
+      "alt": "Local de 787 Rumbos en el hall de arribos del Aeropuerto de Córdoba",
+      "src": "/rumbos/medida.jpg"
+    },
+    {
+      "alt": "Ver detalles de Porto de Galinhas",
+      "src": "/destinos/portogalinhas.jpg"
+    },
+    {
+      "alt": "Ver detalles de Salvador de Bahía",
+      "src": "/destinos/salvador-de-bahia.jpg"
+    },
+    {
+      "alt": "Ver detalles de Imbassaí",
+      "src": "/destinos/imbassai.jpg"
+    },
+    {
+      "alt": "Ver detalles de Praia do Forte",
+      "src": "/destinos/praia-do-forte.jpg"
+    },
+    {
+      "alt": "Flyer informativo con 3 tips para viajes por 787 Rumbos",
+      "src": "/instagram/post1.jpg"
+    },
+    {
+      "alt": "Vista aérea desde la ventana de un avión con nubes",
+      "src": "/instagram/post2.png"
+    },
+    {
+      "alt": "Playa paradisíaca en el Caribe con reposeras y palmeras",
+      "src": "/instagram/post3.png"
+    },
+    {
+      "alt": "Vista panorámica de playas de Brasil con aguas cristalinas y arena blanca",
+      "src": "/instagram/post4.png"
+    },
+    {
+      "alt": "Grupo de personas haciendo trekking en un sendero montañoso",
+      "src": "/instagram/post5.png"
+    },
+    {
+      "alt": "Playa paradisíaca en el Caribe con reposeras y palmeras",
+      "src": "/instagram/post6.png"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Data Fiscal ARCA",
+      "src": "/afip.jpg?v=20260503"
+    },
+    {
+      "alt": "Miembro Cámara de Turismo de la Provincia de Córdoba",
+      "src": "/camara-turismo.png"
+    }
+  ],
+  "text": "🏎️ Salida Especial Charter: F1 GP de São Paulo (5 de Nov). ¡Últimos cupos! Ver Detalles → Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp 787 Rumbos: tu agencia en el Aeropuerto de Córdoba Pasajes aéreos, paquetes y pasajes terrestres con Vía Bariloche y Vía Tac. Te asesoramos por WhatsApp o en persona para que viajes con tranquilidad y con nuestro respaldo de principio a fin. Armar viaje Escribinos por WhatsApp En horario de atención, respondemos en menos de 2 horas Hall de arribos · Aeropuerto de Córdoba Local oficial de Vía Bariloche — Cómo llegar Agencia habilitada Legajo 20455 Cámara de Turismo Provincia de Córdoba Financiación Consultá opciones De la terminal al mundo Llevamos años dedicados al rubro del transporte y el turismo. Conocemos lo que significa viajar porque lo vivimos todos los días desde nuestro local en el aeropuerto, junto a las boleterías oficiales de Vía Bariloche en el hall de arribos. Decidimos abrir 787 Rumbos para ir un paso más allá y ofrecer a nuestros pasajeros el acompañamiento cercano que siempre quisimos darles. ¿Dónde encontrarnos? Buscá nuestra oficina oficial en la boletería de Vía Bariloche directamente en la zona de Arribos del Aeropuerto Internacional de Córdoba. Servicios integrales: Presupuestamos tus paquetes turísticos a medida, pasajes aéreos y también emitimos pasajes terrestres de ómnibus nacionales en el acto. Cómo llegar a nuestra oficina Viajá con las mejores compañías Por qué viajar con 787 Rumbos Trabajamos desde el hall de arribos del Aeropuerto de Córdoba, dentro del local oficial de Vía Bariloche. Combinamos años en transporte turístico con una oferta clara: vuelos, paquetes y pasajes de ómnibus nacionales, con el mismo equipo de punta a punta. Oficina en el aeropuerto Encontranos en el hall de arribos, en el local oficial de Vía Bariloche. Presencia física real, no solo un número de WhatsApp. Experiencia en transporte Años en el rubro del transporte junto a Vía Bariloche nos dan criterio para recomendarte la mejor opción de viaje desde Córdoba. Aéreo y terrestre Paquetes con vuelos, salidas grupales y pasajes de ómnibus nacionales emitidos en el acto, según lo que más te convenga. ¿Qué rumbo estás buscando? Aéreos Quiero un vuelo Pasajes de múltiples aerolíneas, saliendo de Córdoba. Quiero playa Brasil y Caribe desde Córdoba. Quiero recorrer Argentina Salidas en bus desde Córdoba · Vía Bariloche Quiero una salida grupal Fechas confirmadas desde Córdoba. Lo armamos con vos Cotizamos fechas y presupuesto por WhatsApp. ¿Ya tenés fechas o destino? Contanos lo que ya sabés y lo armamos juntos. En horario de atención, respondemos en menos de 2 horas. Armar viaje Escribinos por WhatsApp Próximas salidas desde Córdoba Grupales confirmadas, con fecha. Si no está el destino que buscás, lo armamos a medida. Explorar todos Internacional Salida: 8 de Enero Porto de Galinhas Aéreo · 7 noches Tarifa base Desde USD1.670 por persona en base doble. Según hotel. Enero a marzo 2027 Ver detalles y salidas Armar viaje Internacional Salida: 27 de Septiembre Salvador de Bahía Aéreo · 7 noches Tarifa base Desde USD885 por persona en habitación doble. Según programa. Hay solo aéreo. Ver detalles y salidas Armar viaje Internacional Salida: 27 de Septiembre Imbassaí Aéreo · 7 noches Tarifa base Desde USD1.100 por persona en habitación doble. Según programa. Ver detalles y salidas Armar viaje Internacional Salida: 27 de Septiembre Praia do Forte Aéreo · 7 noches Tarifa base Desde USD2.015 por persona en habitación doble. Según fecha. Ver detalles y salidas Armar viaje ¿Buscás otro destino? Tenemos salidas confirmadas adicionales y armamos itinerarios a medida nacionales e internacionales con la financiación que necesitás. También podés consultarnos por cualquier otro destino. Armar viaje Escribinos por WhatsApp Explorar todos los destinos Lo que cuentan quienes ya viajaron Reseñas reales publicadas en Google. Si viajaste con nosotros, sumá la tuya. Dejar reseña en Google Ver en Maps “Nos atendieron super bien, muy amables y nos solucionaron todos nuestros problemas a pesar de haber perdido el vuelo. Lo super recomiendo” Matias Manzanelli Reseña en Google “Excelente atención. Fernanda nos asesoró y ayudo en todo momento” Magalí Flores Reseña en Google “Muy bien trato , pensado para que el pasajero se sienta totalmente cuidado . Lo recomiendo 100, %” Denisse Reseña en Google Servicios que resolvemos por vos Pasajes Aéreos Vuelos nacionales e internacionales con las mejores conexiones. Alojamiento Hoteles y hospedajes seleccionados según tu estilo de viaje. Traslados Movilidad segura aeropuerto-hotel-aeropuerto en destino. Asistencia Médica Cobertura para que viajes tranquilo en cada tramo del recorrido. Pasajes de Ómnibus Boletería oficial de Vía Bariloche, Vía Tac y El Valle para todo el país. Comunidad 787 Rumbos Compartimos consejos, novedades de aerolíneas, fotos reales de viajes y las próximas salidas en nuestra cuenta. 3 TIPS para tus viajes: 1. Recuerdos: dejá un espacio en la valija. 2. Viví el momento sin cámara. 3. Conectá, sonreí y agradecé. ¡Guardá este post para tu próxima aventura! 🎒✨ Ver publicación → ¿Planeando tu próximo viaje? Recordá que podés financiar tus pasajes en cuotas. Consultá las opciones de financiación vigentes con nuestros asesores. ✈️💳 Ver publicación → ¡Un descanso bien merecido!🌴🍹 Ver en Instagram → 🌴 Brasil te espera ✈️. Playas increíbles, calor todo el año y opciones para todos los gustos. Ver publicación → Viajar se disfruta el doble cuando se comparte. Una playa, un brindis, una escapada juntos… 💛🌊🥂 Ver publicación → El Caribe te está esperando 🌴☀️. Playas de agua turquesa, all inclusive, vuelos desde Córdoba y todo resuelto para que vos solo disfrutes. Ver publicación → Seguinos en @787rumbos Preguntas frecuentes Si necesitás resolver una duda más específica, consultanos . ¿Tienen un local físico? Sí. Contamos con oficina en el Hall de arribos del Aeropuerto Internacional de Córdoba, dentro del local oficial de Vía Bariloche (Av. La Voz del Interior 8500). Podés visitarnos lunes a viernes 8:30–18:00 y sábados 8:30–13:00. Cómo llegar . ¿Cómo puedo reservar un viaje? Escribinos por WhatsApp , contanos a dónde querés viajar y nosotros nos encargamos de armarte la mejor propuesta. También podés acercarte a nuestra oficina en el aeropuerto o usar el cotizador de la web. ¿Qué incluyen los paquetes? Cada paquete es distinto y lo armamos según lo que buscás. Por lo general incluyen como mínimo traslados, alojamiento y asistencia al viajero. Otros suman vuelos, excursiones, pensión completa o servicios adicionales. Siempre te enviamos el detalle completo antes de confirmar. ¿Los paquetes son sí o sí desde Córdoba? No, para nada. Si bien estamos en Córdoba y muchas de nuestras salidas grupales parten desde acá, armamos viajes desde cualquier ciudad de Argentina e incluso desde el exterior. ¿Cuál es la diferencia entre un paquete a medida y una salida grupal? Una salida grupal tiene fecha, cupos e itinerario ya definidos: viajás con otros pasajeros en las mismas condiciones. Un paquete a medida lo diseñamos para vos: elegís fechas, hotel, noches y servicios según tu pedido. En ambos casos te asesora una persona real. ¿Qué medios de pago y financiación ofrecen? Aceptamos distintos medios de pago según el paquete y contamos con opciones de financiación vigentes. Las alternativas pueden variar según el destino y la fecha de salida. Consultá las opciones disponibles con un asesor por WhatsApp . ¿Qué es la asistencia al viajero? Es una cobertura médica para imprevistos durante tu viaje: consultas, medicación, traslados por emergencia y otros servicios según el plan. Trabajamos con las principales coberturas del mercado como AssistCard e InterAssist para garantizarte la mejor asistencia médica nacional e internacional. En muchos destinos internacionales es un requisito de ingreso. Te indicamos la cobertura adecuada según tu destino y duración del viaje. ¿También venden pasajes de ómnibus? Sí. Somos boletería oficial de Vía Bariloche, Vía Tac y El Valle en el Aeropuerto de Córdoba. Podés comprar pasajes de ómnibus nacionales además de consultar por vuelos y paquetes turísticos. ¿Me acompañan si surge un problema durante el viaje? Sí. Te acompañamos antes, durante y después del viaje: te ayudamos a gestionar con aerolínea, hotel o asistencia al viajero lo vinculado a tu reserva. La resolución final depende de cada proveedor; no somos una guardia 24/7 ni reemplazamos a la asistencia médica. Si estás de viaje y surge un imprevisto, escribinos a nuestro WhatsApp de atención . ¿Ya sabés a dónde querés ir? Personalizá tu consulta en el cotizador o hablá directo con un asesor por WhatsApp. Lo organizamos juntos. Armar viaje Escribinos por WhatsApp En horario de atención, respondemos en menos de 2 horas Agencia habilitada - Legajo 20455. Av. La Voz del Interior 8500, Córdoba (Planta Baja, local de Vía Bariloche) Asesoramiento profesional y cobertura integral Enlaces de Interés Pasajes aéreos Destinos Agencia Córdoba Turismo Cámara de Turismo Estado de Vuelos Términos y Condiciones Defensa del Consumidor Contacto lun–vie 8:30–18:00 · sáb 8:30–13:00 WhatsApp: +54 9 351 768-8623 Instagram: @787rumbos MARIA FERNANDA RAMOS | CUIT: 27-26220871-6 | Legajo Habilitación N° 20455 Términos y Condiciones · Defensa del Consumidor ©787 Rumbos® - Todos los derechos reservados. Sitio creado por V. Felizia"
+}
