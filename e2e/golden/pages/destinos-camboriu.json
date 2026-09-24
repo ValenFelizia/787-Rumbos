@@ -1,0 +1,244 @@
+{
+  "capturedAt": "2026-09-23",
+  "path": "/destinos/camboriu",
+  "title": "Viajes a Camboriú en bus desde Córdoba | 787 Rumbos",
+  "metaDescription": "Paquete a Camboriú en bus semicama desde Córdoba. 7 noches en Hotel Sagres con desayuno y cena, asistencia al viajero. Desde USD 599.",
+  "canonical": "https://www.787rumbos.com.ar/destinos/camboriu",
+  "og": {
+    "title": "Viajes a Camboriú en bus desde Córdoba | 787 Rumbos",
+    "description": "Paquete a Camboriú en bus semicama desde Córdoba. 7 noches en Hotel Sagres con desayuno y cena, asistencia al viajero. Desde USD 599.",
+    "url": "https://www.787rumbos.com.ar/destinos/camboriu",
+    "image": "https://www.787rumbos.com.ar/destinos/camboriu.jpg",
+    "image:width": "800",
+    "image:height": "600",
+    "image:alt": "Viajar a Camboriú con 787 Rumbos"
+  },
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "TouristTrip",
+      "name": "Paquete a Camboriú",
+      "description": "Balneario de Santa Catarina famoso por su playa urbana, el teleférico Unipraias y la vida nocturna. Camboriú es una de nuestras salidas clásicas en bus desde Córdoba, con convenio terrestre y hotelería céntrica para disfrutar playa y ciudad sin complicaciones.",
+      "touristType": "Leisure",
+      "provider": {
+        "@type": "TravelAgency",
+        "name": "787 Rumbos",
+        "telephone": "+5493517688623",
+        "url": "https://www.787rumbos.com.ar"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "599",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InquiryLimit",
+        "priceValidUntil": "2026-12-31"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://www.787rumbos.com.ar"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Destinos",
+          "item": "https://www.787rumbos.com.ar/destinos"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Camboriú",
+          "item": "https://www.787rumbos.com.ar/destinos/camboriu"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo es el viaje en bus a Camboriú?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Salís desde Córdoba en bus semicama. Es una de nuestras salidas estándar por convenio con el transportista terrestre: cómoda, con precio competitivo y sin depender de aéreos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué incluye el paquete a Camboriú?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bus semicama ida y vuelta, 7 noches en Hotel Sagres, desayuno y cena, y asistencia al viajero. Excursiones opcionales se cotizan aparte."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué documentos necesito para Brasil?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Los argentinos suelen ingresar con DNI vigente en buen estado (o pasaporte). Te confirmamos requisitos actualizados al cotizar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo consulto por Camboriú?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Escribinos por WhatsApp y te confirmamos próximas salidas, cupos y el total del paquete."
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": [
+        "TravelAgency",
+        "LocalBusiness"
+      ],
+      "name": "787 Rumbos",
+      "description": "Agencia de viajes en Córdoba. Paquetes personalizados, atención humana y financiación disponible.",
+      "url": "https://www.787rumbos.com.ar",
+      "telephone": "+5493517688623",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. La Voz del Interior 8500, En el Aeropuerto Internacional Ingeniero Aeronáutico Ambrosio Taravella",
+        "addressLocality": "Córdoba",
+        "addressRegion": "Córdoba",
+        "postalCode": "X5147XAA",
+        "addressCountry": "AR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -31.3172806,
+        "longitude": -64.2131382
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "08:30",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:30",
+          "closes": "13:00"
+        }
+      ],
+      "hasMap": "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7",
+      "sameAs": [
+        "https://www.instagram.com/787rumbos/",
+        "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7"
+      ],
+      "priceRange": "$$"
+    }
+  ],
+  "headings": [
+    "Paquetes a Camboriú",
+    "Sobre el Destino",
+    "Lo imperdible",
+    "Qué incluyen nuestros viajes estándar",
+    "Excursiones sugeridas y opcionales",
+    "¿Viajamos a tu medida?",
+    "También te puede interesar",
+    "Preguntas frecuentes sobre Camboriú"
+  ],
+  "links": [
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/",
+    "/destinos",
+    "/destinos/brasil-desde-cordoba",
+    "/destinos",
+    "/destinos/brasil-desde-cordoba",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20para%20armar%20un%20viaje%20a%20medida%20a%20Cambori%C3%BA.%20(Web%20-%20Detalle%20Destino)",
+    "/destinos/rio-de-janeiro",
+    "/destinos/porto-de-galinhas",
+    "/destinos/f1-grand-premio-sao-paulo",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20para%20armar%20un%20viaje%20a%20medida%20a%20Cambori%C3%BA.%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quiero%20consultar%20por%20un%20viaje%20a%20Cambori%C3%BA.%20(Web%20-%20FAQ%20Destino)",
+    "/aereos",
+    "/destinos",
+    "https://www.cordobaturismo.gov.ar/",
+    "https://camaracbaturismo.org.ar/",
+    "https://www.aa2000.com.ar/cordoba",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "https://www.instagram.com/787rumbos/",
+    "http://qr.afip.gob.ar/?qr=Huvxa1kUae-1lE_yjNzL2w,,",
+    "https://camaracbaturismo.org.ar/",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://portfolio-vfelizia.pages.dev/"
+  ],
+  "images": [
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Viajar a Camboriú con 787 Rumbos",
+      "src": "/destinos/camboriu.jpg"
+    },
+    {
+      "alt": "Paquetes a Río de Janeiro",
+      "src": "/destinos/rio.jpg"
+    },
+    {
+      "alt": "Paquetes a Porto de Galinhas",
+      "src": "/destinos/portogalinhas.jpg"
+    },
+    {
+      "alt": "Paquetes a F1 Grand Premio de São Paulo",
+      "src": "/destinos/gp-sao-paulo-hero.jpg"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Data Fiscal ARCA",
+      "src": "/afip.jpg?v=20260503"
+    },
+    {
+      "alt": "Miembro Cámara de Turismo de la Provincia de Córdoba",
+      "src": "/camara-turismo.png"
+    }
+  ],
+  "text": "Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp Inicio / Destinos / Paquetes a Brasil desde Córdoba / Camboriú Volver al catálogo Brasil Ver más: Paquetes a Brasil desde Córdoba Paquetes a Camboriú Sobre el Destino Balneario de Santa Catarina famoso por su playa urbana, el teleférico Unipraias y la vida nocturna. Camboriú es una de nuestras salidas clásicas en bus desde Córdoba, con convenio terrestre y hotelería céntrica para disfrutar playa y ciudad sin complicaciones. Lo imperdible Playa central y paseo peatonal frente al mar Teleférico Unipraias y vistas panorámicas Vida nocturna y gastronomía de balneario Salida en bus semicama desde Córdoba Qué incluyen nuestros viajes estándar Traslado en bus semicama ida y vuelta desde Córdoba 7 noches de alojamiento en Hotel Sagres Régimen con desayuno y cena incluidos Asistencia al viajero Coordinación del viaje Excursiones sugeridas y opcionales Balneario Camboriú y miradores Betos World / parques temáticos Paseo a Florianópolis (día completo) Compras en Itajaí / Brás 💡 Tip del Viajero El bus semicama es una opción cómoda y económica para llegar a la playa brasileña. Llevá abrigo liviano para el viaje nocturno y documento de viaje vigente (DNI o pasaporte). Nota aclaratoria: Las tarifas publicadas, itinerarios y excursiones son de carácter referencial y corresponden a nuestros paquetes estándar, aunque están sujetos a cambios. En 787 Rumbos nos destacamos por nuestra flexibilidad y paquetes a medida, así que nos adaptamos a tus necesidades. Las tarifas definitivas se confirman al momento de realizar la consulta directa y reserva con el asesor. 📅 ¿Viajamos a tu medida? Actualmente no hay salidas grupales activas programadas en el catálogo. Sin embargo, armamos presupuestos 100% personalizados para las fechas que vos elijas con tarifas competitivas. Armar viaje a medida También te puede interesar Brasil Río de Janeiro Brasil Porto de Galinhas Brasil F1 Grand Premio de São Paulo Preguntas frecuentes sobre Camboriú Dudas típicas de quienes viajan a Camboriú. Si tu consulta es otra, escribinos por WhatsApp . ¿Cómo es el viaje en bus a Camboriú? Salís desde Córdoba en bus semicama. Es una de nuestras salidas estándar por convenio con el transportista terrestre: cómoda, con precio competitivo y sin depender de aéreos. ¿Qué incluye el paquete a Camboriú? Bus semicama ida y vuelta, 7 noches en Hotel Sagres, desayuno y cena, y asistencia al viajero. Excursiones opcionales se cotizan aparte. ¿Qué documentos necesito para Brasil? Los argentinos suelen ingresar con DNI vigente en buen estado (o pasaporte). Te confirmamos requisitos actualizados al cotizar. ¿Cómo consulto por Camboriú? Escribinos por WhatsApp y te confirmamos próximas salidas, cupos y el total del paquete. Agencia habilitada - Legajo 20455. Av. La Voz del Interior 8500, Córdoba (Planta Baja, local de Vía Bariloche) Asesoramiento profesional y cobertura integral Enlaces de Interés Pasajes aéreos Destinos Agencia Córdoba Turismo Cámara de Turismo Estado de Vuelos Términos y Condiciones Defensa del Consumidor Contacto lun–vie 8:30–18:00 · sáb 8:30–13:00 WhatsApp: +54 9 351 768-8623 Instagram: @787rumbos MARIA FERNANDA RAMOS | CUIT: 27-26220871-6 | Legajo Habilitación N° 20455 Términos y Condiciones · Defensa del Consumidor ©787 Rumbos® - Todos los derechos reservados. Sitio creado por V. Felizia"
+}

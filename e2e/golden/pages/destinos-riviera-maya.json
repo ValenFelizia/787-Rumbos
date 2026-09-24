@@ -1,0 +1,252 @@
+{
+  "capturedAt": "2026-09-23",
+  "path": "/destinos/riviera-maya",
+  "title": "Paquetes a Riviera Maya All Inclusive desde Córdoba | 787 Rumbos",
+  "metaDescription": "Riviera Maya con hotel 5 estrellas All Inclusive. Ocean Coral & Turquesa, 8 noches, traslados y asistencia. Family Plan desde Córdoba.",
+  "canonical": "https://www.787rumbos.com.ar/destinos/riviera-maya",
+  "og": {
+    "title": "Paquetes a Riviera Maya All Inclusive desde Córdoba | 787 Rumbos",
+    "description": "Riviera Maya con hotel 5 estrellas All Inclusive. Ocean Coral & Turquesa, 8 noches, traslados y asistencia. Family Plan desde Córdoba.",
+    "url": "https://www.787rumbos.com.ar/destinos/riviera-maya",
+    "image": "https://www.787rumbos.com.ar/destinos/riviera-maya.jpg",
+    "image:width": "800",
+    "image:height": "600",
+    "image:alt": "Viajar a Riviera Maya con 787 Rumbos"
+  },
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "TouristTrip",
+      "name": "Paquete a Riviera Maya",
+      "description": "La Riviera Maya concentra playas de arena blanca, cenotes y ruinas mayas a pocos kilómetros. Ideal para familias y parejas que buscan un resort All Inclusive de categoría frente al Caribe, con excursiones a Tulum, Cozumel y parques ecológicos a un paso.",
+      "touristType": "Leisure",
+      "provider": {
+        "@type": "TravelAgency",
+        "name": "787 Rumbos",
+        "telephone": "+5493517688623",
+        "url": "https://www.787rumbos.com.ar"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "1795",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InquiryLimit",
+        "priceValidUntil": "2026-12-31"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://www.787rumbos.com.ar"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Destinos",
+          "item": "https://www.787rumbos.com.ar/destinos"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Riviera Maya",
+          "item": "https://www.787rumbos.com.ar/destinos/riviera-maya"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿En qué hotel se hospedan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El paquete de referencia es en Ocean Coral & Turquesa, resort 5 estrellas All Inclusive en la Riviera Maya. Si preferís otra categoría o ubicación, te armamos alternativas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es el Family Plan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es una tarifa pensada para familias (adultos + menores) con condiciones especiales según edades. El precio publicado es orientativo desde USD 1795 + impuestos; te cotizamos el total exacto según composición del grupo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué incluye el paquete a Riviera Maya?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Aéreo desde Córdoba, 8 noches All Inclusive, traslados y asistencia al viajero. Las excursiones (Tulum, parques, Cozumel) se pueden sumar según lo que quieras vivir."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Riviera Maya, Cancún o Playa del Carmen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cancún concentra la zona hotelera clásica; Playa del Carmen tiene más vida peatonal; Riviera Maya suele referirse a resorts All Inclusive un poco más al sur, ideales para relax en familia. Te orientamos según tu estilo de viaje."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo cotizo Riviera Maya desde Córdoba?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Escribinos por WhatsApp con fechas, cantidad de adultos y menores. Te enviamos el Family Plan y otras opciones."
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": [
+        "TravelAgency",
+        "LocalBusiness"
+      ],
+      "name": "787 Rumbos",
+      "description": "Agencia de viajes en Córdoba. Paquetes personalizados, atención humana y financiación disponible.",
+      "url": "https://www.787rumbos.com.ar",
+      "telephone": "+5493517688623",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. La Voz del Interior 8500, En el Aeropuerto Internacional Ingeniero Aeronáutico Ambrosio Taravella",
+        "addressLocality": "Córdoba",
+        "addressRegion": "Córdoba",
+        "postalCode": "X5147XAA",
+        "addressCountry": "AR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -31.3172806,
+        "longitude": -64.2131382
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "08:30",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:30",
+          "closes": "13:00"
+        }
+      ],
+      "hasMap": "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7",
+      "sameAs": [
+        "https://www.instagram.com/787rumbos/",
+        "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7"
+      ],
+      "priceRange": "$$"
+    }
+  ],
+  "headings": [
+    "Paquetes a Riviera Maya",
+    "Sobre el Destino",
+    "Lo imperdible",
+    "Qué incluyen nuestros viajes estándar",
+    "Excursiones sugeridas y opcionales",
+    "¿Viajamos a tu medida?",
+    "También te puede interesar",
+    "Preguntas frecuentes sobre Riviera Maya"
+  ],
+  "links": [
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/",
+    "/destinos",
+    "/destinos/caribe-desde-cordoba",
+    "/destinos",
+    "/destinos/caribe-desde-cordoba",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20para%20armar%20un%20viaje%20a%20medida%20a%20Riviera%20Maya.%20(Web%20-%20Detalle%20Destino)",
+    "/destinos/cancun",
+    "/destinos/playa-del-carmen",
+    "/destinos/punta-cana",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20para%20armar%20un%20viaje%20a%20medida%20a%20Riviera%20Maya.%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quiero%20consultar%20por%20un%20viaje%20a%20Riviera%20Maya.%20(Web%20-%20FAQ%20Destino)",
+    "/aereos",
+    "/destinos",
+    "https://www.cordobaturismo.gov.ar/",
+    "https://camaracbaturismo.org.ar/",
+    "https://www.aa2000.com.ar/cordoba",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "https://www.instagram.com/787rumbos/",
+    "http://qr.afip.gob.ar/?qr=Huvxa1kUae-1lE_yjNzL2w,,",
+    "https://camaracbaturismo.org.ar/",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://portfolio-vfelizia.pages.dev/"
+  ],
+  "images": [
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Viajar a Riviera Maya con 787 Rumbos",
+      "src": "/destinos/riviera-maya.jpg"
+    },
+    {
+      "alt": "Paquetes a Cancún",
+      "src": "/destinos/cancun.jpg"
+    },
+    {
+      "alt": "Paquetes a Playa del Carmen",
+      "src": "/destinos/playadelcarmen.jpg"
+    },
+    {
+      "alt": "Paquetes a Punta Cana",
+      "src": "/destinos/punta-cana.jpg"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Data Fiscal ARCA",
+      "src": "/afip.jpg?v=20260503"
+    },
+    {
+      "alt": "Miembro Cámara de Turismo de la Provincia de Córdoba",
+      "src": "/camara-turismo.png"
+    }
+  ],
+  "text": "Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp Inicio / Destinos / Caribe desde Córdoba / Riviera Maya Volver al catálogo México Ver más: Caribe desde Córdoba Paquetes a Riviera Maya Sobre el Destino La Riviera Maya concentra playas de arena blanca, cenotes y ruinas mayas a pocos kilómetros. Ideal para familias y parejas que buscan un resort All Inclusive de categoría frente al Caribe, con excursiones a Tulum, Cozumel y parques ecológicos a un paso. Lo imperdible Resort Ocean Coral & Turquesa 5 estrellas All Inclusive Playas del Caribe mexicano y aguas turquesa Base perfecta para Tulum, cenotes y Cozumel Family Plan pensado para viajar en familia Qué incluyen nuestros viajes estándar Aéreo internacional desde Córdoba 8 noches en Ocean Coral & Turquesa (5★) All Inclusive Traslados aeropuerto / hotel / aeropuerto Asistencia al viajero internacional (AssistCard) Asesoramiento para excursiones en destino Excursiones sugeridas y opcionales Ruinas de Tulum frente al mar Parques Xcaret / Xel-Há Ferry a Isla Cozumel Cenotes y Chichén Itzá 💡 Tip del Viajero El Family Plan suele ser la opción más conveniente si viajan adultos con menores. Confirmá edades de los chicos al cotizar: impactan en tarifa e impuestos. Nota aclaratoria: Las tarifas publicadas, itinerarios y excursiones son de carácter referencial y corresponden a nuestros paquetes estándar, aunque están sujetos a cambios. En 787 Rumbos nos destacamos por nuestra flexibilidad y paquetes a medida, así que nos adaptamos a tus necesidades. Las tarifas definitivas se confirman al momento de realizar la consulta directa y reserva con el asesor. 📅 ¿Viajamos a tu medida? Actualmente no hay salidas grupales activas programadas en el catálogo. Sin embargo, armamos presupuestos 100% personalizados para las fechas que vos elijas con tarifas competitivas. Armar viaje a medida También te puede interesar México Cancún México Playa del Carmen República Dominicana Punta Cana Preguntas frecuentes sobre Riviera Maya Dudas típicas de quienes viajan a Riviera Maya. Si tu consulta es otra, escribinos por WhatsApp . ¿En qué hotel se hospedan? El paquete de referencia es en Ocean Coral & Turquesa, resort 5 estrellas All Inclusive en la Riviera Maya. Si preferís otra categoría o ubicación, te armamos alternativas. ¿Qué es el Family Plan? Es una tarifa pensada para familias (adultos + menores) con condiciones especiales según edades. El precio publicado es orientativo desde USD 1795 + impuestos; te cotizamos el total exacto según composición del grupo. ¿Qué incluye el paquete a Riviera Maya? Aéreo desde Córdoba, 8 noches All Inclusive, traslados y asistencia al viajero. Las excursiones (Tulum, parques, Cozumel) se pueden sumar según lo que quieras vivir. ¿Riviera Maya, Cancún o Playa del Carmen? Cancún concentra la zona hotelera clásica; Playa del Carmen tiene más vida peatonal; Riviera Maya suele referirse a resorts All Inclusive un poco más al sur, ideales para relax en familia. Te orientamos según tu estilo de viaje. ¿Cómo cotizo Riviera Maya desde Córdoba? Escribinos por WhatsApp con fechas, cantidad de adultos y menores. Te enviamos el Family Plan y otras opciones. Agencia habilitada - Legajo 20455. Av. La Voz del Interior 8500, Córdoba (Planta Baja, local de Vía Bariloche) Asesoramiento profesional y cobertura integral Enlaces de Interés Pasajes aéreos Destinos Agencia Córdoba Turismo Cámara de Turismo Estado de Vuelos Términos y Condiciones Defensa del Consumidor Contacto lun–vie 8:30–18:00 · sáb 8:30–13:00 WhatsApp: +54 9 351 768-8623 Instagram: @787rumbos MARIA FERNANDA RAMOS | CUIT: 27-26220871-6 | Legajo Habilitación N° 20455 Términos y Condiciones · Defensa del Consumidor ©787 Rumbos® - Todos los derechos reservados. Sitio creado por V. Felizia"
+}

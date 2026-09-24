@@ -3,11 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  getHomeFeaturedDestinations,
   getListedPrice,
   getNearestActiveDeparture,
   getTransportLabel,
-} from "@/lib/destinations-data";
+  hasExpiredListedPrice,
+} from "@/lib/catalog/logic";
+import type { DestinationPage } from "@/lib/catalog/types";
 import { Plane, Bus, ArrowRight, Calendar } from "lucide-react";
 import {
   PrimaryCta,
@@ -16,9 +17,9 @@ import {
 } from "@/components/conversion";
 import { useModal } from "@/lib/context/ModalContext";
 
-export function FeaturedDestinations() {
+export function FeaturedDestinations({ destinations }: { destinations: DestinationPage[] }) {
   const { openModal } = useModal();
-  const featured = getHomeFeaturedDestinations();
+  const featured = destinations;
 
   return (
     <section id="destinos" className="mx-auto w-full max-w-6xl px-6 py-14 md:py-16">
@@ -135,6 +136,8 @@ export function FeaturedDestinations() {
                           <p className="text-[10px] text-[#0b4058]/75 mt-0.5">{dest.priceNote}</p>
                         )}
                       </div>
+                    ) : hasExpiredListedPrice(dest) ? (
+                      <span className="text-xs font-bold text-[#0b4058]/80">Consultá precio actualizado</span>
                     ) : (
                       <span className="text-xs font-bold text-[#0b4058]/80">Consultar precio</span>
                     )}

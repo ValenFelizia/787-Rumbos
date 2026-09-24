@@ -6,15 +6,20 @@ import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { FAQ } from "@/components/sections/FAQ";
 import {
-  destinationsData,
-  getDestinationBySlug,
-  getRelatedDestinations,
   getActiveUpcomingDepartures,
   getListedPrice,
   getUpcomingDepartures,
   getTransportLabel,
-  type Departure,
-} from "@/lib/destinations-data";
+  hasExpiredListedPrice,
+  isDeparturePriceExpired,
+} from "@/lib/catalog/logic";
+import {
+  getAllDestinationSlugs,
+  getAllDestinations,
+  getDestinationBySlug,
+  getRelatedDestinations,
+} from "@/lib/catalog/repository";
+import type { Departure } from "@/lib/catalog/types";
 import { getPrimaryClusterForDestination } from "@/lib/clusters-data";
 import { AGENCY_PHONE, whatsappLink } from "@/lib/constants";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
@@ -36,7 +41,7 @@ interface Props {
 // 1. Generar metadatos dinámicos por destino
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const destination = getDestinationBySlug(slug);
+  const destination = await getDestinationBySlug(slug);
   if (!destination) return {};
 
   return {
@@ -63,8 +68,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 // 2. Generar parámetros estáticos para SSG en build time
 export async function generateStaticParams() {
-  return destinationsData.map((dest) => ({
-    slug: dest.slug,
+  const slugs = await getAllDestinationSlugs();
+  return slugs.map((slug) => ({
+    slug,
   }));
 }
 
@@ -158,7 +164,7 @@ function getWhatsAppCustomLink(destinoName: string): string {
 
 export default async function DestinoDetailPage({ params }: Props) {
   const { slug } = await params;
-  const dest = getDestinationBySlug(slug);
+  const dest = await getDestinationBySlug(slug);
 
   if (!dest) {
     notFound();
@@ -218,8 +224,8 @@ export default async function DestinoDetailPage({ params }: Props) {
     ],
   };
 
-  const related = getRelatedDestinations(slug, 3);
-  const primaryCluster = getPrimaryClusterForDestination(slug);
+  const related = await getRelatedDestinations(slug, 3);
+  const primaryCluster = getPrimaryClusterForDestination(slug, await getAllDestinations());
 
   return (
     <main className="min-h-screen bg-[#f9f9f9] text-[#0b4058]">
@@ -459,6 +465,9 @@ export default async function DestinoDetailPage({ params }: Props) {
                   <p className="text-xs text-[#0b4058]/60 mt-1">
                     Hacé clic en una salida para consultar disponibilidad en WhatsApp.
                   </p>
+                  {hasExpiredListedPrice(dest) && !upcomingDepartures.some((dep) => dep.priceFrom != null) && (
+                    <p className="text-sm font-bold text-[#0b4058] mt-2">Consultá precio actualizado</p>
+                  )}
                 </div>
 
                 <div className="space-y-4">
@@ -496,11 +505,15 @@ export default async function DestinoDetailPage({ params }: Props) {
                               {dep.priceFrom != null && (
                                 <>
                                   <span>·</span>
-                                  <span className="font-bold text-[#0b4058] tabular-nums">
-                                    {dep.priceIsFinal ? "Final" : "Desde"}{" "}
-                                    {(dep.currency ?? dest.currency) === "USD" ? "USD" : "$"}
-                                    {dep.priceFrom.toLocaleString("es-AR")}
-                                  </span>
+                                  {isDeparturePriceExpired(dest, dep) ? (
+                                    <span className="font-bold text-[#0b4058]">Consultá precio actualizado</span>
+                                  ) : (
+                                    <span className="font-bold text-[#0b4058] tabular-nums">
+                                      {dep.priceIsFinal ? "Final" : "Desde"}{" "}
+                                      {(dep.currency ?? dest.currency) === "USD" ? "USD" : "$"}
+                                      {dep.priceFrom.toLocaleString("es-AR")}
+                                    </span>
+                                  )}
                                 </>
                               )}
                             </div>

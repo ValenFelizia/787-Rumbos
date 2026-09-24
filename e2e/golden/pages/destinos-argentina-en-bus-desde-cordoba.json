@@ -1,0 +1,149 @@
+{
+  "capturedAt": "2026-09-23",
+  "path": "/destinos/argentina-en-bus-desde-cordoba",
+  "title": "Viajes en bus por Argentina desde Córdoba | 787 Rumbos",
+  "metaDescription": "Salidas en bus y bus cama desde Córdoba: Termas, Cataratas, Salar y más. También boletería oficial de Vía Bariloche en el aeropuerto.",
+  "canonical": "https://www.787rumbos.com.ar/destinos/argentina-en-bus-desde-cordoba",
+  "og": {
+    "title": "Viajes en bus por Argentina desde Córdoba | 787 Rumbos",
+    "description": "Salidas en bus y bus cama desde Córdoba: Termas, Cataratas, Salar y más. También boletería oficial de Vía Bariloche en el aeropuerto.",
+    "url": "https://www.787rumbos.com.ar/destinos/argentina-en-bus-desde-cordoba"
+  },
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": [
+        "TravelAgency",
+        "LocalBusiness"
+      ],
+      "name": "787 Rumbos",
+      "description": "Agencia de viajes en Córdoba. Paquetes personalizados, atención humana y financiación disponible.",
+      "url": "https://www.787rumbos.com.ar",
+      "telephone": "+5493517688623",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. La Voz del Interior 8500, En el Aeropuerto Internacional Ingeniero Aeronáutico Ambrosio Taravella",
+        "addressLocality": "Córdoba",
+        "addressRegion": "Córdoba",
+        "postalCode": "X5147XAA",
+        "addressCountry": "AR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -31.3172806,
+        "longitude": -64.2131382
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "08:30",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:30",
+          "closes": "13:00"
+        }
+      ],
+      "hasMap": "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7",
+      "sameAs": [
+        "https://www.instagram.com/787rumbos/",
+        "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7"
+      ],
+      "priceRange": "$$"
+    }
+  ],
+  "headings": [
+    "Argentina en bus desde Córdoba",
+    "Cómo lo armamos en 787 Rumbos",
+    "Destinos en este catálogo",
+    "Termas de Río Hondo",
+    "Cataratas del Iguazú",
+    "Salar de Uyuni y Norte Grande",
+    "¿Arrancamos tu cotización?"
+  ],
+  "links": [
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/",
+    "/destinos",
+    "/destinos",
+    "/destinos/termas-rio-hondo",
+    "/destinos/cataratas-del-iguazu",
+    "/destinos/salar-de-uyuni",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quiero%20consultar%20por%20un%20viaje%20en%20bus%20desde%20C%C3%B3rdoba.%20(Web%20-%20Cluster%20Argentina%20Bus)",
+    "/aereos",
+    "/destinos",
+    "https://www.cordobaturismo.gov.ar/",
+    "https://camaracbaturismo.org.ar/",
+    "https://www.aa2000.com.ar/cordoba",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "https://www.instagram.com/787rumbos/",
+    "http://qr.afip.gob.ar/?qr=Huvxa1kUae-1lE_yjNzL2w,,",
+    "https://camaracbaturismo.org.ar/",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://portfolio-vfelizia.pages.dev/"
+  ],
+  "images": [
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Termas de Río Hondo — paquete con 787 Rumbos",
+      "src": "/destinos/termas.jpg"
+    },
+    {
+      "alt": "Cataratas del Iguazú — paquete con 787 Rumbos",
+      "src": "/destinos/cataratas.jpg"
+    },
+    {
+      "alt": "Salar de Uyuni y Norte Grande — paquete con 787 Rumbos",
+      "src": "/destinos/salar-de-uyuni.jpg"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Data Fiscal ARCA",
+      "src": "/afip.jpg?v=20260503"
+    },
+    {
+      "alt": "Miembro Cámara de Turismo de la Provincia de Córdoba",
+      "src": "/camara-turismo.png"
+    }
+  ],
+  "text": "Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp Inicio / Destinos / Argentina en bus desde Córdoba Volver al catálogo Argentina en bus desde Córdoba Si preferís tierra, armamos salidas bus desde Córdoba. Además, en el hall de arribos del aeropuerto somos boletería oficial de Vía Bariloche, Vía Tac y El Valle. Cómo lo armamos en 787 Rumbos Salidas grupales o paquetes 100% a tu medida, coordinadas con hotel y asistencia nacional. Opción de pasaje de ómnibus suelto si solo necesitás el traslado. Asesoramiento humano para elegir fechas y régimen (pensión, desayuno, etc.). Destinos en este catálogo Argentina A medida Termas de Río Hondo El centro termal más importante de Argentina te espera para vivir unos días de relajación absoluta. Disfrutá de aguas termales con propiedades medicinales, paseos costaneros y una gastronomía regional inigualable, en un ambiente diseñado para el descanso. Ver detalles Argentina 3 salidas Cataratas del Iguazú Una de las 7 Maravillas Naturales del Mundo. Dejate ensordecer por la majestuosa Garganta del Diablo y recorre las pasarelas que te sumergen directo en la selva misionera, apreciando la caída de agua más espectacular del planeta. Ver detalles Bolivia y Argentina A medida Salar de Uyuni y Norte Grande Una travesía andina inolvidable por los desiertos de sal más grandes del mundo. El itinerario conecta el norte argentino (Salta y Tilcara) con el altiplano boliviano, ofreciendo el espectáculo natural de Uyuni en una experiencia grupal completamente coordinada. Ver detalles ¿Arrancamos tu cotización? Contanos fechas y cantidad de pasajeros. Te respondemos con opciones concretas. Consultar viaje en bus Agencia habilitada - Legajo 20455. Av. La Voz del Interior 8500, Córdoba (Planta Baja, local de Vía Bariloche) Asesoramiento profesional y cobertura integral Enlaces de Interés Pasajes aéreos Destinos Agencia Córdoba Turismo Cámara de Turismo Estado de Vuelos Términos y Condiciones Defensa del Consumidor Contacto lun–vie 8:30–18:00 · sáb 8:30–13:00 WhatsApp: +54 9 351 768-8623 Instagram: @787rumbos MARIA FERNANDA RAMOS | CUIT: 27-26220871-6 | Legajo Habilitación N° 20455 Términos y Condiciones · Defensa del Consumidor ©787 Rumbos® - Todos los derechos reservados. Sitio creado por V. Felizia"
+}

@@ -1,3 +1,5 @@
+import { withPayload } from "@payloadcms/next/withPayload";
+
 /**
  * next.config.mjs — configuración de Next.js.
  *
@@ -69,22 +71,46 @@ const securityHeaders = [
     : []),
 ];
 
+const adminRobotsHeaders = [{ key: "X-Robots-Tag", value: "noindex" }];
+
 const nextConfig = {
   distDir,
   images: {
     // Formatos modernos: Next.js + Vercel sirven WebP/AVIF automáticamente
     // según lo que soporte el navegador del visitante.
     formats: ["image/avif", "image/webp"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "*.public.blob.vercel-storage.com",
+      },
+    ],
+  },
+  webpack: (webpackConfig) => {
+    webpackConfig.resolve.extensionAlias = {
+      ".cjs": [".cts", ".cjs"],
+      ".js": [".ts", ".tsx", ".js", ".jsx"],
+      ".mjs": [".mts", ".mjs"],
+    };
+    return webpackConfig;
   },
   async headers() {
     return [
       {
-        // Aplica a todas las rutas del sitio.
+        // Aplica a todas las rutas del sitio, igual que antes del CMS.
         source: "/:path*",
         headers: securityHeaders,
+      },
+      {
+        source: "/admin",
+        headers: adminRobotsHeaders,
+      },
+      {
+        source: "/admin/:path*",
+        headers: adminRobotsHeaders,
       },
     ];
   },
 };
 
-export default nextConfig;
+export default withPayload(nextConfig, { devBundleServerPackages: false });

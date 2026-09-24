@@ -6,31 +6,7 @@ import Link from "next/link";
 import { Plane, Calendar, Ticket, MapPin, X, ArrowRight } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { AGENCY_PHONE, whatsappLink } from "@/lib/constants";
-
-// ─── CONFIGURACIÓN DE LA PROMOCIÓN DESTACADA ────────────────────────────────
-// Para cambiar el evento destacado en el futuro (ej: Disney, Copa América, etc.),
-// simplemente editá este objeto. Los íconos soportados son: 'plane', 'calendar', 'ticket', 'map-pin'.
-const PROMO_CONFIG = {
-  slug: "f1-grand-premio-sao-paulo",
-  /** ISO date: el banner se oculta automáticamente el día siguiente a la salida. */
-  endsAt: "2026-11-05",
-  topBarText: "🏎️ Salida Especial Charter: F1 GP de São Paulo (5 de Nov). ¡Últimos cupos! Ver Detalles →",
-  badgeText: "🏎️ EVENTO DESTACADO F1",
-  charterText: "✈️ VUELO CHARTER DIRECTO",
-  title: "Grand Premio de São Paulo",
-  description: "Viví la adrenalina de la Fórmula 1 en el histórico circuito de Interlagos con todo incluido. Salida directa especial el 5 de Noviembre desde Córdoba y Rosario. ¡Cupos limitados!",
-  price: "USD 2.770",
-  priceNote: "por persona en base doble",
-  taxNote: "+ USD 260 de gastos e impuestos",
-  imageSrc: "/destinos/gp-sao-paulo.png",
-  whatsappMsg: "Hola 787 Rumbos! Quiero consultar disponibilidad y detalles del paquete para el Vuelo Charter F1 Grand Premio de Sao Paulo del 5 de Noviembre. (Web - Promo F1)",
-  inclusions: [
-    { label: "Aéreo Charter COR-ROS / GRU", icon: "plane" },
-    { label: "4 Noches de hotel con desayuno", icon: "calendar" },
-    { label: "Entrada Sector G-A-HEINEKEN", icon: "ticket" },
-    { label: "Traslados Autódromo + Kit F1", icon: "map-pin" }
-  ]
-};
+import type { FeaturedPromo } from "@/lib/catalog/types";
 
 const FOCUSABLE_SELECTOR = [
   "a[href]",
@@ -63,22 +39,24 @@ function InclusionIcon({ name, className }: { name: string; className?: string }
 }
 
 function PromoFlyer({
+  promo,
   onNavigate,
   className,
 }: {
+  promo: FeaturedPromo;
   onNavigate: () => void;
   className?: string;
 }) {
   return (
     <Link
-      href={`/destinos/${PROMO_CONFIG.slug}`}
+      href={`/destinos/${promo.slug}`}
       onClick={onNavigate}
       className={`group relative block overflow-hidden rounded-2xl border border-white/10 bg-[#072a3b] p-2 shadow-xl cursor-pointer transition-colors duration-200 md:hover:border-white/25 ${className ?? ""}`}
     >
       <div className="relative h-full w-full overflow-hidden rounded-xl bg-[#0b4058]">
         <Image
-          src={PROMO_CONFIG.imageSrc}
-          alt={`Folleto Promocional ${PROMO_CONFIG.title} 787 Rumbos`}
+          src={promo.imageSrc}
+          alt={`Folleto Promocional ${promo.title} 787 Rumbos`}
           fill
           sizes="(max-width: 1024px) 200px, 260px"
           className="object-cover object-center"
@@ -90,9 +68,11 @@ function PromoFlyer({
 }
 
 function PromoPricingAndCtas({
+  promo,
   whatsappUrl,
   onNavigate,
 }: {
+  promo: FeaturedPromo;
   whatsappUrl: string;
   onNavigate: () => void;
 }) {
@@ -105,17 +85,21 @@ function PromoPricingAndCtas({
           </span>
           <div className="flex flex-wrap items-baseline gap-x-1.5 gap-y-0.5">
             <span className="text-2xl md:text-3xl font-extrabold text-[#dae553]">
-              {PROMO_CONFIG.price}
+              {promo.price}
             </span>
-            <span className="text-[10px] text-white/60">{PROMO_CONFIG.priceNote}</span>
+            {promo.priceNote ? (
+              <span className="text-[10px] text-white/60">{promo.priceNote}</span>
+            ) : null}
           </div>
         </div>
-        <span className="text-[10px] text-white/70 font-medium">{PROMO_CONFIG.taxNote}</span>
+        {promo.taxNote ? (
+          <span className="text-[10px] text-white/70 font-medium">{promo.taxNote}</span>
+        ) : null}
       </div>
 
       <div className="flex flex-col gap-2.5 sm:flex-row sm:gap-3">
         <Link
-          href={`/destinos/${PROMO_CONFIG.slug}`}
+          href={`/destinos/${promo.slug}`}
           onClick={onNavigate}
           className="font-[family-name:var(--font-brand-heading)] inline-flex items-center justify-center gap-2 rounded-xl bg-white hover:bg-white/95 text-[#0b4058] px-5 py-3 text-xs font-black shadow-md transition-all duration-200 active:scale-[0.97] cursor-pointer text-center"
         >
@@ -136,7 +120,7 @@ function PromoPricingAndCtas({
   );
 }
 
-export function SpecialPromo() {
+export function SpecialPromo({ promo }: { promo: FeaturedPromo | null }) {
   const [isBannerVisible, setIsBannerVisible] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const promoTriggerRef = useRef<HTMLButtonElement>(null);
@@ -199,9 +183,9 @@ export function SpecialPromo() {
     };
   }, [isModalOpen]);
 
-  if (!isPromoActive(PROMO_CONFIG.endsAt) || !isBannerVisible) return null;
+  if (!promo || !isPromoActive(promo.endsAt) || !isBannerVisible) return null;
 
-  const whatsappUrl = whatsappLink(AGENCY_PHONE.whatsapp, PROMO_CONFIG.whatsappMsg);
+  const whatsappUrl = whatsappLink(AGENCY_PHONE.whatsapp, promo.whatsappMsg);
   const closeModal = () => setIsModalOpen(false);
 
   return (
@@ -217,7 +201,7 @@ export function SpecialPromo() {
           className="flex w-full select-none items-center justify-center py-2.5 pl-10 pr-10 transition duration-300 hover:brightness-110 active:scale-[0.99]"
         >
           <span className="font-[family-name:var(--font-brand-heading)] tracking-wider">
-            {PROMO_CONFIG.topBarText}
+            {promo.topBarText}
           </span>
         </button>
 
@@ -257,10 +241,10 @@ export function SpecialPromo() {
             <div className="relative z-10 flex shrink-0 items-start justify-between gap-3 border-b border-white/10 px-5 pt-5 pb-3 sm:px-8 sm:pt-8 sm:pb-4">
               <div className="flex flex-wrap items-center gap-2 pr-2">
                 <span className="inline-flex items-center gap-1 rounded-full bg-red-600/90 border border-red-500/20 px-3 py-1 text-[9px] font-black uppercase tracking-wider text-white">
-                  {PROMO_CONFIG.badgeText}
+                  {promo.badgeText}
                 </span>
                 <span className="inline-flex items-center gap-1 rounded-full bg-white/10 border border-white/15 px-3 py-1 text-[9px] font-black uppercase tracking-wider text-[#dae553]">
-                  {PROMO_CONFIG.charterText}
+                  {promo.charterText}
                 </span>
               </div>
               <button
@@ -280,6 +264,7 @@ export function SpecialPromo() {
                 {/* Folleto compacto — solo mobile (antes del copy) */}
                 <div className="mb-4 flex justify-center lg:hidden">
                   <PromoFlyer
+                    promo={promo}
                     onNavigate={closeModal}
                     className="aspect-[4/5] w-full max-w-[160px]"
                   />
@@ -291,15 +276,15 @@ export function SpecialPromo() {
                       id="special-promo-title"
                       className="font-[family-name:var(--font-brand-heading)] text-2xl md:text-4xl font-extrabold tracking-tight leading-tight text-white text-balance"
                     >
-                      {PROMO_CONFIG.title}
+                      {promo.title}
                     </h3>
                     <p className="text-white/80 text-xs md:text-sm leading-relaxed text-pretty">
-                      {PROMO_CONFIG.description}
+                      {promo.description}
                     </p>
                   </div>
 
                   <div className="grid gap-3 sm:grid-cols-2 pt-1">
-                    {PROMO_CONFIG.inclusions.map((inc, i) => (
+                    {promo.inclusions.map((inc, i) => (
                       <div
                         key={i}
                         className="flex items-center gap-2.5 bg-white/5 border border-white/5 rounded-xl p-2.5"
@@ -315,13 +300,14 @@ export function SpecialPromo() {
 
                 {/* Precio + CTAs — solo desktop (en mobile van al footer sticky) */}
                 <div className="mt-5 hidden border-t border-white/10 pt-4 lg:block">
-                  <PromoPricingAndCtas whatsappUrl={whatsappUrl} onNavigate={closeModal} />
+                  <PromoPricingAndCtas promo={promo} whatsappUrl={whatsappUrl} onNavigate={closeModal} />
                 </div>
               </div>
 
               {/* Folleto — solo desktop */}
               <div className="relative z-10 hidden shrink-0 items-center justify-center px-8 py-8 lg:flex lg:w-[40%]">
                 <PromoFlyer
+                  promo={promo}
                   onNavigate={closeModal}
                   className="aspect-[4/5] w-full max-w-[280px]"
                 />
@@ -330,7 +316,7 @@ export function SpecialPromo() {
 
             {/* Footer sticky — solo mobile: precio + CTAs siempre visibles */}
             <div className="relative z-10 shrink-0 border-t border-white/10 bg-[#0b4058]/95 px-5 py-4 backdrop-blur-sm sm:px-8 lg:hidden">
-              <PromoPricingAndCtas whatsappUrl={whatsappUrl} onNavigate={closeModal} />
+              <PromoPricingAndCtas promo={promo} whatsappUrl={whatsappUrl} onNavigate={closeModal} />
             </div>
           </div>
         </div>

@@ -14,7 +14,7 @@ import { elaineSans, zalandoSans } from '@/lib/fonts'
 import { ModalProvider } from '@/lib/context/ModalContext'
 import { QuoteModal } from '@/components/sections/QuoteModal'
 import { GOOGLE_MAPS_LINK, AGENCY_PHONE, OFFICE_GEO } from '@/lib/constants'
-import './globals.css'
+import '../globals.css'
 
 /** Metadatos del sitio leídos por Next.js para SEO, pestaña del navegador y previews sociales.
  *  El objeto Metadata de Next.js genera automáticamente las etiquetas <meta> correspondientes
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
   },
 }
 
-// Mantiene frescas las páginas estáticas que dependen de fechas sin sumar un CMS ni un cron.
+// ISR de 24 h para lo que depende de la fecha. Publicar en el CMS invalida `catalog` y `promo`.
 export const revalidate = 86_400;
 
 /**

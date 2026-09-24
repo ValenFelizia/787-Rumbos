@@ -6,21 +6,21 @@ import Link from "next/link";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import {
-  destinationsData,
-  DestinationPage,
   getActiveUpcomingDepartures,
   getListedPrice,
   getTransportLabel,
-} from "@/lib/destinations-data";
+  hasExpiredListedPrice,
+} from "@/lib/catalog/logic";
+import type { DestinationPage } from "@/lib/catalog/types";
 import { clustersData } from "@/lib/clusters-data";
 import { AGENCY_PHONE, whatsappLink } from "@/lib/constants";
 import { MapPin, Calendar, ArrowRight } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 
-export default function DestinosIndex() {
+export function DestinosView({ destinations }: { destinations: DestinationPage[] }) {
   const [filter, setFilter] = useState<"todos" | "nacional" | "internacional">("todos");
 
-  const filteredDestinations = destinationsData.filter(d => {
+  const filteredDestinations = destinations.filter(d => {
     if (filter === "todos") return true;
     return d.region === filter;
   });
@@ -174,6 +174,8 @@ export default function DestinosIndex() {
                             </span>
                             <p className="text-[10px] text-[#0b4058]/60 mt-0.5">{dest.priceNote || "por persona en base doble"}</p>
                           </div>
+                        ) : hasExpiredListedPrice(dest) ? (
+                          <span className="text-sm font-bold text-[#0b4058]/70">Consultá precio actualizado</span>
                         ) : (
                           <span className="text-sm font-bold text-[#0b4058]/70">Consultar tarifa</span>
                         );

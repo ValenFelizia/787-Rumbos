@@ -1,0 +1,161 @@
+{
+  "capturedAt": "2026-09-23",
+  "path": "/destinos/caribe-desde-cordoba",
+  "title": "Paquetes al Caribe desde Córdoba | 787 Rumbos",
+  "metaDescription": "Cancún, Riviera Maya, Punta Cana y Bayahibe. All Inclusive, traslados y asistencia. La ciudad de salida se confirma al consultar.",
+  "canonical": "https://www.787rumbos.com.ar/destinos/caribe-desde-cordoba",
+  "og": {
+    "title": "Paquetes al Caribe desde Córdoba | 787 Rumbos",
+    "description": "Cancún, Riviera Maya, Punta Cana y Bayahibe. All Inclusive, traslados y asistencia. La ciudad de salida se confirma al consultar.",
+    "url": "https://www.787rumbos.com.ar/destinos/caribe-desde-cordoba"
+  },
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": [
+        "TravelAgency",
+        "LocalBusiness"
+      ],
+      "name": "787 Rumbos",
+      "description": "Agencia de viajes en Córdoba. Paquetes personalizados, atención humana y financiación disponible.",
+      "url": "https://www.787rumbos.com.ar",
+      "telephone": "+5493517688623",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. La Voz del Interior 8500, En el Aeropuerto Internacional Ingeniero Aeronáutico Ambrosio Taravella",
+        "addressLocality": "Córdoba",
+        "addressRegion": "Córdoba",
+        "postalCode": "X5147XAA",
+        "addressCountry": "AR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -31.3172806,
+        "longitude": -64.2131382
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "08:30",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:30",
+          "closes": "13:00"
+        }
+      ],
+      "hasMap": "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7",
+      "sameAs": [
+        "https://www.instagram.com/787rumbos/",
+        "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7"
+      ],
+      "priceRange": "$$"
+    }
+  ],
+  "headings": [
+    "Caribe desde Córdoba",
+    "Cómo lo armamos en 787 Rumbos",
+    "Destinos en este catálogo",
+    "Cancún",
+    "Playa del Carmen",
+    "Riviera Maya",
+    "Punta Cana",
+    "Bayahibe",
+    "¿Arrancamos tu cotización?"
+  ],
+  "links": [
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/",
+    "/destinos",
+    "/destinos",
+    "/destinos/cancun",
+    "/destinos/playa-del-carmen",
+    "/destinos/riviera-maya",
+    "/destinos/punta-cana",
+    "/destinos/bayahibe",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quiero%20consultar%20por%20un%20viaje%20al%20Caribe%20desde%20C%C3%B3rdoba.%20(Web%20-%20Cluster%20Caribe)",
+    "/aereos",
+    "/destinos",
+    "https://www.cordobaturismo.gov.ar/",
+    "https://camaracbaturismo.org.ar/",
+    "https://www.aa2000.com.ar/cordoba",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "https://www.instagram.com/787rumbos/",
+    "http://qr.afip.gob.ar/?qr=Huvxa1kUae-1lE_yjNzL2w,,",
+    "https://camaracbaturismo.org.ar/",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://portfolio-vfelizia.pages.dev/"
+  ],
+  "images": [
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Cancún — paquete con 787 Rumbos",
+      "src": "/destinos/cancun.jpg"
+    },
+    {
+      "alt": "Playa del Carmen — paquete con 787 Rumbos",
+      "src": "/destinos/playadelcarmen.jpg"
+    },
+    {
+      "alt": "Riviera Maya — paquete con 787 Rumbos",
+      "src": "/destinos/riviera-maya.jpg"
+    },
+    {
+      "alt": "Punta Cana — paquete con 787 Rumbos",
+      "src": "/destinos/punta-cana.jpg"
+    },
+    {
+      "alt": "Bayahibe — paquete con 787 Rumbos",
+      "src": "/destinos/bayahibe.jpg"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Data Fiscal ARCA",
+      "src": "/afip.jpg?v=20260503"
+    },
+    {
+      "alt": "Miembro Cámara de Turismo de la Provincia de Córdoba",
+      "src": "/camara-turismo.png"
+    }
+  ],
+  "text": "Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp Inicio / Destinos / Caribe desde Córdoba Volver al catálogo Caribe desde Córdoba El Caribe mexicano es uno de los pedidos más fuertes: playa, All Inclusive y resorts familiares. Cuando hay cupos, también publicamos República Dominicana. Te armamos opciones claras con vuelos, hotel y asistencia. Cómo lo armamos en 787 Rumbos Paquetes a medida o salidas cuando hay cupos publicados. All Inclusive, Family Plan y hoteles según tu estilo de viaje. Aéreo, traslados y asistencia incluidos en el cupo. La ciudad de salida se confirma al consultar. Oficina en el Aeropuerto de Córdoba para resolver dudas en persona. Destinos en este catálogo México 1 salida Cancún El paraíso del Caribe te espera con sus playas de arena blanca que no se calienta con el sol y su mar de infinitos tonos de azul. Cancún combina a la perfección el relax All Inclusive de sus resorts con excursiones arqueológicas y parques de aventura. Ver detalles México A medida Playa del Carmen Playa del Carmen ofrece una atmósfera más bohemia e integrada que Cancún. Con su famosa Quinta Avenida repleta de gastronomía y tiendas, es la base perfecta para explorar parques ecológicos, playas paradisíacas e islas como Cozumel. Ver detalles México A medida Riviera Maya La Riviera Maya concentra playas de arena blanca, cenotes y ruinas mayas a pocos kilómetros. Ideal para familias y parejas que buscan un resort All Inclusive de categoría frente al Caribe, con excursiones a Tulum, Cozumel y parques ecológicos a un paso. Ver detalles República Dominicana 5 salidas Punta Cana Punta Cana es playa ancha, mar cálido y resorts sobre la arena. Publicamos los cupos confirmados en Whala Bávaro, All Inclusive, con traslados y asistencia. La ciudad de salida puede ser Córdoba o Ezeiza: la confirmamos cuando consultás. Ver detalles República Dominicana 2 salidas Bayahibe Bayahibe es una costa más tranquila, al oeste de Punta Cana. El cupo de octubre es All Inclusive en HM Alma Bayahibe y está pensado solo para adultos. El combinado de 6 noches ahí y 4 en Whala Bávaro está en la ficha de Punta Cana. Ver detalles ¿Arrancamos tu cotización? Contanos fechas y cantidad de pasajeros. Te respondemos con opciones concretas. Cotizar Caribe por WhatsApp Agencia habilitada - Legajo 20455. Av. La Voz del Interior 8500, Córdoba (Planta Baja, local de Vía Bariloche) Asesoramiento profesional y cobertura integral Enlaces de Interés Pasajes aéreos Destinos Agencia Córdoba Turismo Cámara de Turismo Estado de Vuelos Términos y Condiciones Defensa del Consumidor Contacto lun–vie 8:30–18:00 · sáb 8:30–13:00 WhatsApp: +54 9 351 768-8623 Instagram: @787rumbos MARIA FERNANDA RAMOS | CUIT: 27-26220871-6 | Legajo Habilitación N° 20455 Términos y Condiciones · Defensa del Consumidor ©787 Rumbos® - Todos los derechos reservados. Sitio creado por V. Felizia"
+}

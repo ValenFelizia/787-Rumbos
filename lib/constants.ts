@@ -1,12 +1,8 @@
 /**
- * lib/constants.ts — Datos y configuración central de la aplicación.
+ * lib/constants.ts — NAP, teléfonos, horarios y listas que siguen en código.
  *
- * Centralizar los datos aquí tiene dos ventajas:
- * 1. Un solo lugar para editar cuando cambia un destino, servicio o número de teléfono.
- * 2. Los componentes importan lo que necesitan sin duplicar datos entre archivos.
- *
- * En el futuro, si se integra un CMS (Sanity, Strapi, etc.), estos arrays
- * se reemplazarían por fetches a la API y los componentes no tendrían que cambiar.
+ * El catálogo de destinos y la promo destacada se leen de Payload.
+ * Acá quedan el cotizador, los servicios, la FAQ general y los datos de contacto.
  */
 import { BedDouble, Bus, HeartPulse, Plane, Ticket } from "lucide-react";
 

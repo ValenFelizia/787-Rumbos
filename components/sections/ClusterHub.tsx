@@ -9,16 +9,17 @@ import Link from "next/link";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { getAllDestinations } from "@/lib/catalog/repository";
+import { getActiveUpcomingDepartures } from "@/lib/catalog/logic";
 import {
   getClusterDestinations,
   type ClusterPage,
 } from "@/lib/clusters-data";
-import { getActiveUpcomingDepartures } from "@/lib/destinations-data";
 import { AGENCY_PHONE, whatsappLink } from "@/lib/constants";
 import { ArrowLeft, ArrowRight, Calendar, Check, MapPin } from "lucide-react";
 
-export function ClusterHub({ cluster }: { cluster: ClusterPage }) {
-  const destinations = getClusterDestinations(cluster);
+export async function ClusterHub({ cluster }: { cluster: ClusterPage }) {
+  const destinations = getClusterDestinations(cluster, await getAllDestinations());
   const whatsappUrl = whatsappLink(AGENCY_PHONE.whatsapp, cluster.whatsappText);
 
   return (

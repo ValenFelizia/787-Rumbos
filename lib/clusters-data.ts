@@ -4,12 +4,8 @@
  * Hubs SEO de categoría ("desde Córdoba"). Listan solo destinos reales
  * del catálogo — sin copy genérico de guía turística.
  */
-import {
-  destinationsData,
-  getActiveUpcomingDepartures,
-  getDestinationBySlug,
-  type DestinationPage,
-} from "@/lib/destinations-data";
+import { getActiveUpcomingDepartures } from "@/lib/catalog/logic";
+import type { DestinationPage } from "@/lib/catalog/types";
 
 export type ClusterId = "brasil" | "caribe" | "argentina-bus" | "salidas-grupales";
 
@@ -131,24 +127,28 @@ export function getClusterById(id: ClusterId): ClusterPage | undefined {
 }
 
 /** Destinos del hub: slugs fijos o, en salidas grupales, los que tienen cupos activos. */
-export function getClusterDestinations(cluster: ClusterPage): DestinationPage[] {
+export function getClusterDestinations(
+  cluster: ClusterPage,
+  destinations: DestinationPage[],
+): DestinationPage[] {
   if (cluster.id === "salidas-grupales") {
-    return destinationsData.filter(
+    return destinations.filter(
       (d) => getActiveUpcomingDepartures(d).length > 0
     );
   }
 
   const slugs = cluster.destinationSlugs ?? [];
   return slugs
-    .map((slug) => getDestinationBySlug(slug))
+    .map((slug) => destinations.find((d) => d.slug === slug))
     .filter((d): d is DestinationPage => Boolean(d));
 }
 
 /** Primer cluster al que pertenece un destino (para breadcrumb / link de vuelta). */
 export function getPrimaryClusterForDestination(
-  slug: string
+  slug: string,
+  destinations: DestinationPage[],
 ): ClusterPage | undefined {
-  const dest = getDestinationBySlug(slug);
+  const dest = destinations.find((d) => d.slug === slug);
   if (!dest) return undefined;
 
   for (const cluster of clustersData) {

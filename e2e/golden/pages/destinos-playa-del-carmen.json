@@ -1,0 +1,251 @@
+{
+  "capturedAt": "2026-09-23",
+  "path": "/destinos/playa-del-carmen",
+  "title": "Vacaciones en Playa del Carmen desde Córdoba | 787 Rumbos",
+  "metaDescription": "Disfrutá del corazón de la Riviera Maya. Hoteles sobre la Quinta Avenida o All Inclusive frente al mar con vuelos desde Córdoba.",
+  "canonical": "https://www.787rumbos.com.ar/destinos/playa-del-carmen",
+  "og": {
+    "title": "Vacaciones en Playa del Carmen desde Córdoba | 787 Rumbos",
+    "description": "Disfrutá del corazón de la Riviera Maya. Hoteles sobre la Quinta Avenida o All Inclusive frente al mar con vuelos desde Córdoba.",
+    "url": "https://www.787rumbos.com.ar/destinos/playa-del-carmen",
+    "image": "https://www.787rumbos.com.ar/destinos/playadelcarmen.jpg",
+    "image:width": "800",
+    "image:height": "600",
+    "image:alt": "Viajar a Playa del Carmen con 787 Rumbos"
+  },
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "TouristTrip",
+      "name": "Paquete a Playa del Carmen",
+      "description": "Playa del Carmen ofrece una atmósfera más bohemia e integrada que Cancún. Con su famosa Quinta Avenida repleta de gastronomía y tiendas, es la base perfecta para explorar parques ecológicos, playas paradisíacas e islas como Cozumel.",
+      "touristType": "Leisure",
+      "provider": {
+        "@type": "TravelAgency",
+        "name": "787 Rumbos",
+        "telephone": "+5493517688623",
+        "url": "https://www.787rumbos.com.ar"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "1720",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InquiryLimit",
+        "priceValidUntil": "2026-12-31"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://www.787rumbos.com.ar"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Destinos",
+          "item": "https://www.787rumbos.com.ar/destinos"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Playa del Carmen",
+          "item": "https://www.787rumbos.com.ar/destinos/playa-del-carmen"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Playa del Carmen o Cancún?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cancún concentra resorts All Inclusive en la zona hotelera. Playa del Carmen tiene más vida peatonal (Quinta Avenida) y queda más cerca de Tulum, Xcaret y Cozumel. Te ayudamos a elegir según si buscás relax de resort o más movimiento."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué incluye un paquete a Playa del Carmen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Aéreo desde Córdoba, hotel (All Inclusive o con desayuno), traslados y asistencia internacional. Parques y ferry a Cozumel se pueden sumar según tu presupuesto."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué requisitos hay para México?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pasaporte vigente y los requisitos migratorios vigentes para tu nacionalidad. Te confirmamos todo al cotizar para que viajes sin sorpresas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo visitar Tulum y Xcaret?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Desde Playa del Carmen son excursiones muy pedidas. Las cotizamos aparte o las integramos al paquete según lo que quieras vivir."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo consulto por Playa del Carmen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Escribinos por WhatsApp y te armamos opciones desde Córdoba."
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": [
+        "TravelAgency",
+        "LocalBusiness"
+      ],
+      "name": "787 Rumbos",
+      "description": "Agencia de viajes en Córdoba. Paquetes personalizados, atención humana y financiación disponible.",
+      "url": "https://www.787rumbos.com.ar",
+      "telephone": "+5493517688623",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. La Voz del Interior 8500, En el Aeropuerto Internacional Ingeniero Aeronáutico Ambrosio Taravella",
+        "addressLocality": "Córdoba",
+        "addressRegion": "Córdoba",
+        "postalCode": "X5147XAA",
+        "addressCountry": "AR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -31.3172806,
+        "longitude": -64.2131382
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "08:30",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:30",
+          "closes": "13:00"
+        }
+      ],
+      "hasMap": "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7",
+      "sameAs": [
+        "https://www.instagram.com/787rumbos/",
+        "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7"
+      ],
+      "priceRange": "$$"
+    }
+  ],
+  "headings": [
+    "Paquetes a Playa del Carmen",
+    "Sobre el Destino",
+    "Lo imperdible",
+    "Qué incluyen nuestros viajes estándar",
+    "¿Viajamos a tu medida?",
+    "También te puede interesar",
+    "Preguntas frecuentes sobre Playa del Carmen"
+  ],
+  "links": [
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/",
+    "/destinos",
+    "/destinos/caribe-desde-cordoba",
+    "/destinos",
+    "/destinos/caribe-desde-cordoba",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20para%20armar%20un%20viaje%20a%20medida%20a%20Playa%20del%20Carmen.%20(Web%20-%20Detalle%20Destino)",
+    "/destinos/cancun",
+    "/destinos/riviera-maya",
+    "/destinos/punta-cana",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20para%20armar%20un%20viaje%20a%20medida%20a%20Playa%20del%20Carmen.%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quiero%20consultar%20por%20un%20viaje%20a%20Playa%20del%20Carmen.%20(Web%20-%20FAQ%20Destino)",
+    "/aereos",
+    "/destinos",
+    "https://www.cordobaturismo.gov.ar/",
+    "https://camaracbaturismo.org.ar/",
+    "https://www.aa2000.com.ar/cordoba",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "https://www.instagram.com/787rumbos/",
+    "http://qr.afip.gob.ar/?qr=Huvxa1kUae-1lE_yjNzL2w,,",
+    "https://camaracbaturismo.org.ar/",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://portfolio-vfelizia.pages.dev/"
+  ],
+  "images": [
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Viajar a Playa del Carmen con 787 Rumbos",
+      "src": "/destinos/playadelcarmen.jpg"
+    },
+    {
+      "alt": "Paquetes a Cancún",
+      "src": "/destinos/cancun.jpg"
+    },
+    {
+      "alt": "Paquetes a Riviera Maya",
+      "src": "/destinos/riviera-maya.jpg"
+    },
+    {
+      "alt": "Paquetes a Punta Cana",
+      "src": "/destinos/punta-cana.jpg"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Data Fiscal ARCA",
+      "src": "/afip.jpg?v=20260503"
+    },
+    {
+      "alt": "Miembro Cámara de Turismo de la Provincia de Córdoba",
+      "src": "/camara-turismo.png"
+    }
+  ],
+  "text": "Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp Inicio / Destinos / Caribe desde Córdoba / Playa del Carmen Volver al catálogo México Ver más: Caribe desde Córdoba Paquetes a Playa del Carmen Sobre el Destino Playa del Carmen ofrece una atmósfera más bohemia e integrada que Cancún. Con su famosa Quinta Avenida repleta de gastronomía y tiendas, es la base perfecta para explorar parques ecológicos, playas paradisíacas e islas como Cozumel. Lo imperdible Quinta Avenida y su vida nocturna y comercial Parques ecológicos Xcaret y Xel-Há Ruinas arqueológicas de Tulum frente al mar Caribe Cruce en ferry a la Isla de Cozumel Qué incluyen nuestros viajes estándar Aéreo internacional saliendo de Córdoba 7 noches en hotel seleccionado (All Inclusive o c/desayuno) Traslados in/out aeropuerto-hotel Asistencia médica internacional (AssistCard) Coordinación local 💡 Tip del Viajero Para comprar artesanías y comer comida local a precios más accesibles, camina dos o tres cuadras en paralelo alejándote de la Quinta Avenida. Nota aclaratoria: Las tarifas publicadas, itinerarios y excursiones son de carácter referencial y corresponden a nuestros paquetes estándar, aunque están sujetos a cambios. En 787 Rumbos nos destacamos por nuestra flexibilidad y paquetes a medida, así que nos adaptamos a tus necesidades. Las tarifas definitivas se confirman al momento de realizar la consulta directa y reserva con el asesor. 📅 ¿Viajamos a tu medida? Actualmente no hay salidas grupales activas programadas en el catálogo. Sin embargo, armamos presupuestos 100% personalizados para las fechas que vos elijas con tarifas competitivas. Armar viaje a medida También te puede interesar México Cancún México Riviera Maya República Dominicana Punta Cana Preguntas frecuentes sobre Playa del Carmen Dudas típicas de quienes viajan a Playa del Carmen. Si tu consulta es otra, escribinos por WhatsApp . ¿Playa del Carmen o Cancún? Cancún concentra resorts All Inclusive en la zona hotelera. Playa del Carmen tiene más vida peatonal (Quinta Avenida) y queda más cerca de Tulum, Xcaret y Cozumel. Te ayudamos a elegir según si buscás relax de resort o más movimiento. ¿Qué incluye un paquete a Playa del Carmen? Aéreo desde Córdoba, hotel (All Inclusive o con desayuno), traslados y asistencia internacional. Parques y ferry a Cozumel se pueden sumar según tu presupuesto. ¿Qué requisitos hay para México? Pasaporte vigente y los requisitos migratorios vigentes para tu nacionalidad. Te confirmamos todo al cotizar para que viajes sin sorpresas. ¿Puedo visitar Tulum y Xcaret? Sí. Desde Playa del Carmen son excursiones muy pedidas. Las cotizamos aparte o las integramos al paquete según lo que quieras vivir. ¿Cómo consulto por Playa del Carmen? Escribinos por WhatsApp y te armamos opciones desde Córdoba. Agencia habilitada - Legajo 20455. Av. La Voz del Interior 8500, Córdoba (Planta Baja, local de Vía Bariloche) Asesoramiento profesional y cobertura integral Enlaces de Interés Pasajes aéreos Destinos Agencia Córdoba Turismo Cámara de Turismo Estado de Vuelos Términos y Condiciones Defensa del Consumidor Contacto lun–vie 8:30–18:00 · sáb 8:30–13:00 WhatsApp: +54 9 351 768-8623 Instagram: @787rumbos MARIA FERNANDA RAMOS | CUIT: 27-26220871-6 | Legajo Habilitación N° 20455 Términos y Condiciones · Defensa del Consumidor ©787 Rumbos® - Todos los derechos reservados. Sitio creado por V. Felizia"
+}

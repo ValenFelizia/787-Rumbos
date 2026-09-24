@@ -1,0 +1,219 @@
+{
+  "capturedAt": "2026-09-23",
+  "path": "/destinos/guarajuba",
+  "title": "Paquetes a Guarajuba All Inclusive desde Córdoba | 787 Rumbos",
+  "metaDescription": "Vacaciones All Inclusive en Guarajuba. Resort Vila Galé Marés 7 noches, vuelo directo desde Córdoba con SKY, traslados y asistencia médica.",
+  "canonical": "https://www.787rumbos.com.ar/destinos/guarajuba",
+  "og": {
+    "title": "Paquetes a Guarajuba All Inclusive desde Córdoba | 787 Rumbos",
+    "description": "Vacaciones All Inclusive en Guarajuba. Resort Vila Galé Marés 7 noches, vuelo directo desde Córdoba con SKY, traslados y asistencia médica.",
+    "url": "https://www.787rumbos.com.ar/destinos/guarajuba",
+    "image": "https://www.787rumbos.com.ar/destinos/guarajuba.jpg",
+    "image:width": "800",
+    "image:height": "600",
+    "image:alt": "Viajar a Guarajuba con 787 Rumbos"
+  },
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "TouristTrip",
+      "name": "Paquete a Guarajuba",
+      "description": "Disfrutá del lujoso Resort Vila Galé Marés frente a la hermosa playa de Guarajuba. Régimen All Inclusive de clase mundial con la comodidad de volar directo desde Córdoba.",
+      "touristType": "Leisure",
+      "provider": {
+        "@type": "TravelAgency",
+        "name": "787 Rumbos",
+        "telephone": "+5493517688623",
+        "url": "https://www.787rumbos.com.ar"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "1705",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-12-31"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://www.787rumbos.com.ar"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Destinos",
+          "item": "https://www.787rumbos.com.ar/destinos"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Guarajuba",
+          "item": "https://www.787rumbos.com.ar/destinos/guarajuba"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué incluye el paquete All Inclusive en Guarajuba?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vuelo directo desde Córdoba con SKY, 7 noches en Vila Galé Marés All Inclusive (comidas y bebidas ilimitadas), traslados in/out y asistencia médica Universal Assistance."
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": [
+        "TravelAgency",
+        "LocalBusiness"
+      ],
+      "name": "787 Rumbos",
+      "description": "Agencia de viajes en Córdoba. Paquetes personalizados, atención humana y financiación disponible.",
+      "url": "https://www.787rumbos.com.ar",
+      "telephone": "+5493517688623",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. La Voz del Interior 8500, En el Aeropuerto Internacional Ingeniero Aeronáutico Ambrosio Taravella",
+        "addressLocality": "Córdoba",
+        "addressRegion": "Córdoba",
+        "postalCode": "X5147XAA",
+        "addressCountry": "AR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -31.3172806,
+        "longitude": -64.2131382
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "08:30",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:30",
+          "closes": "13:00"
+        }
+      ],
+      "hasMap": "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7",
+      "sameAs": [
+        "https://www.instagram.com/787rumbos/",
+        "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7"
+      ],
+      "priceRange": "$$"
+    }
+  ],
+  "headings": [
+    "Paquetes a Guarajuba",
+    "Sobre el Destino",
+    "Lo imperdible",
+    "Qué incluyen nuestros viajes estándar",
+    "Próximas Salidas Programadas",
+    "También te puede interesar",
+    "Preguntas frecuentes sobre Guarajuba"
+  ],
+  "links": [
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/",
+    "/destinos",
+    "/destinos/brasil-desde-cordoba",
+    "/destinos",
+    "/destinos/brasil-desde-cordoba",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20disponibilidad%20para%20la%20salida%20a%20Guarajuba%20del%2027%20de%20Septiembre.%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20para%20armar%20un%20viaje%20a%20medida%20a%20Guarajuba.%20(Web%20-%20Detalle%20Destino)",
+    "/destinos/salvador-de-bahia",
+    "/destinos/imbassai",
+    "/destinos/praia-do-forte",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20para%20armar%20un%20viaje%20a%20medida%20a%20Guarajuba.%20(Web%20-%20Detalle%20Destino)",
+    "/aereos",
+    "/destinos",
+    "https://www.cordobaturismo.gov.ar/",
+    "https://camaracbaturismo.org.ar/",
+    "https://www.aa2000.com.ar/cordoba",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "https://www.instagram.com/787rumbos/",
+    "http://qr.afip.gob.ar/?qr=Huvxa1kUae-1lE_yjNzL2w,,",
+    "https://camaracbaturismo.org.ar/",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://portfolio-vfelizia.pages.dev/"
+  ],
+  "images": [
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Viajar a Guarajuba con 787 Rumbos",
+      "src": "/destinos/guarajuba.jpg"
+    },
+    {
+      "alt": "Paquetes a Salvador de Bahía",
+      "src": "/destinos/salvador-de-bahia.jpg"
+    },
+    {
+      "alt": "Paquetes a Imbassaí",
+      "src": "/destinos/imbassai.jpg"
+    },
+    {
+      "alt": "Paquetes a Praia do Forte",
+      "src": "/destinos/praia-do-forte.jpg"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Data Fiscal ARCA",
+      "src": "/afip.jpg?v=20260503"
+    },
+    {
+      "alt": "Miembro Cámara de Turismo de la Provincia de Córdoba",
+      "src": "/camara-turismo.png"
+    }
+  ],
+  "text": "Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp Inicio / Destinos / Paquetes a Brasil desde Córdoba / Guarajuba Volver al catálogo Brasil Ver más: Paquetes a Brasil desde Córdoba Paquetes a Guarajuba Sobre el Destino Disfrutá del lujoso Resort Vila Galé Marés frente a la hermosa playa de Guarajuba. Régimen All Inclusive de clase mundial con la comodidad de volar directo desde Córdoba. Lo imperdible Resort Vila Galé Marés 5 estrellas All Inclusive Piscinas naturales formadas por arrecifes de coral Playa de arena blanca con certificación Bandera Azul Gastronomía variada, deportes y recreación para todas las edades Qué incluyen nuestros viajes estándar Vuelo directo ida y vuelta Córdoba - Salvador de Bahía con SKY (1 valija) 7 noches de alojamiento en Resort Vila Galé Marés All Inclusive Traslados aeropuerto / resort / aeropuerto Asistencia médica Universal Assistance (aplica hasta 70 años) Nota aclaratoria: Las tarifas publicadas, itinerarios y excursiones son de carácter referencial y corresponden a nuestros paquetes estándar, aunque están sujetos a cambios. En 787 Rumbos nos destacamos por nuestra flexibilidad y paquetes a medida, así que nos adaptamos a tus necesidades. Las tarifas definitivas se confirman al momento de realizar la consulta directa y reserva con el asesor. Próximas Salidas Programadas Hacé clic en una salida para consultar disponibilidad en WhatsApp. 27 de Septiembre Aéreo · 7 noches Salida Confirmada 💡 Vuelo directo SKY Consultar esta fecha ¿Buscás otras fechas? Cotizá a medida También te puede interesar Brasil Salvador de Bahía Brasil Imbassaí Brasil Praia do Forte Preguntas frecuentes sobre Guarajuba Dudas típicas de quienes viajan a Guarajuba. Si tu consulta es otra, escribinos por WhatsApp . ¿Qué incluye el paquete All Inclusive en Guarajuba? Vuelo directo desde Córdoba con SKY, 7 noches en Vila Galé Marés All Inclusive (comidas y bebidas ilimitadas), traslados in/out y asistencia médica Universal Assistance. Agencia habilitada - Legajo 20455. Av. La Voz del Interior 8500, Córdoba (Planta Baja, local de Vía Bariloche) Asesoramiento profesional y cobertura integral Enlaces de Interés Pasajes aéreos Destinos Agencia Córdoba Turismo Cámara de Turismo Estado de Vuelos Términos y Condiciones Defensa del Consumidor Contacto lun–vie 8:30–18:00 · sáb 8:30–13:00 WhatsApp: +54 9 351 768-8623 Instagram: @787rumbos MARIA FERNANDA RAMOS | CUIT: 27-26220871-6 | Legajo Habilitación N° 20455 Términos y Condiciones · Defensa del Consumidor ©787 Rumbos® - Todos los derechos reservados. Sitio creado por V. Felizia"
+}

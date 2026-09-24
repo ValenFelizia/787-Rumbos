@@ -1,0 +1,254 @@
+{
+  "capturedAt": "2026-09-23",
+  "path": "/destinos/cataratas-del-iguazu",
+  "title": "Viajes a Cataratas del Iguazú desde Córdoba | 787 Rumbos",
+  "metaDescription": "Paquetes turísticos a Cataratas del Iguazú con salidas en bus o aéreo desde Córdoba. Visitá lado argentino y brasileño.",
+  "canonical": "https://www.787rumbos.com.ar/destinos/cataratas-del-iguazu",
+  "og": {
+    "title": "Viajes a Cataratas del Iguazú desde Córdoba | 787 Rumbos",
+    "description": "Paquetes turísticos a Cataratas del Iguazú con salidas en bus o aéreo desde Córdoba. Visitá lado argentino y brasileño.",
+    "url": "https://www.787rumbos.com.ar/destinos/cataratas-del-iguazu",
+    "image": "https://www.787rumbos.com.ar/destinos/cataratas.jpg",
+    "image:width": "800",
+    "image:height": "600",
+    "image:alt": "Viajar a Cataratas del Iguazú con 787 Rumbos"
+  },
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "TouristTrip",
+      "name": "Paquete a Cataratas del Iguazú",
+      "description": "Una de las 7 Maravillas Naturales del Mundo. Dejate ensordecer por la majestuosa Garganta del Diablo y recorre las pasarelas que te sumergen directo en la selva misionera, apreciando la caída de agua más espectacular del planeta.",
+      "touristType": "Leisure",
+      "provider": {
+        "@type": "TravelAgency",
+        "name": "787 Rumbos",
+        "telephone": "+5493517688623",
+        "url": "https://www.787rumbos.com.ar"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "620000",
+        "priceCurrency": "ARS",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-12-31"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://www.787rumbos.com.ar"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Destinos",
+          "item": "https://www.787rumbos.com.ar/destinos"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Cataratas del Iguazú",
+          "item": "https://www.787rumbos.com.ar/destinos/cataratas-del-iguazu"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué incluye el paquete a Cataratas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Según la salida: pasaje en bus coche cama o aéreo desde Córdoba, noches de hotel con desayuno, traslados a los parques, coordinación e asistencia al viajero. Entradas a los parques y excursiones náuticas pueden cotizarse aparte."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Se visita el lado argentino y el brasileño?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, en los itinerarios estándar se contempla ambos parques. El lado argentino tiene más pasarelas; el brasileño ofrece una vista panorámica espectacular. Te detallamos el programa al cotizar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Conviene ir en bus o en avión?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El bus coche cama suele ser más económico; el aéreo ahorra tiempo de viaje. Tenemos salidas en ambas modalidades: elegí según presupuesto y días disponibles."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Necesito pasaporte para el lado brasileño?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Los argentinos pueden ingresar a Brasil con DNI vigente en buen estado. Igual te confirmamos requisitos vigentes al armar el viaje, porque pueden actualizarse."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo reservo una salida a Iguazú?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Escribinos por WhatsApp indicando la fecha de la lista o si preferís fechas a medida."
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": [
+        "TravelAgency",
+        "LocalBusiness"
+      ],
+      "name": "787 Rumbos",
+      "description": "Agencia de viajes en Córdoba. Paquetes personalizados, atención humana y financiación disponible.",
+      "url": "https://www.787rumbos.com.ar",
+      "telephone": "+5493517688623",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. La Voz del Interior 8500, En el Aeropuerto Internacional Ingeniero Aeronáutico Ambrosio Taravella",
+        "addressLocality": "Córdoba",
+        "addressRegion": "Córdoba",
+        "postalCode": "X5147XAA",
+        "addressCountry": "AR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -31.3172806,
+        "longitude": -64.2131382
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "08:30",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:30",
+          "closes": "13:00"
+        }
+      ],
+      "hasMap": "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7",
+      "sameAs": [
+        "https://www.instagram.com/787rumbos/",
+        "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7"
+      ],
+      "priceRange": "$$"
+    }
+  ],
+  "headings": [
+    "Paquetes a Cataratas del Iguazú",
+    "Sobre el Destino",
+    "Lo imperdible",
+    "Qué incluyen nuestros viajes estándar",
+    "Próximas Salidas Programadas",
+    "También te puede interesar",
+    "Preguntas frecuentes sobre Cataratas del Iguazú"
+  ],
+  "links": [
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/",
+    "/destinos",
+    "/destinos/argentina-en-bus-desde-cordoba",
+    "/destinos",
+    "/destinos/argentina-en-bus-desde-cordoba",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20disponibilidad%20para%20la%20salida%20a%20Cataratas%20del%20Iguaz%C3%BA%20del%2018%20de%20Noviembre.%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20disponibilidad%20para%20la%20salida%20a%20Cataratas%20del%20Iguaz%C3%BA%20del%2025%20de%20Noviembre.%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20disponibilidad%20para%20la%20salida%20a%20Cataratas%20del%20Iguaz%C3%BA%20del%2026%20de%20Noviembre.%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20para%20armar%20un%20viaje%20a%20medida%20a%20Cataratas%20del%20Iguaz%C3%BA.%20(Web%20-%20Detalle%20Destino)",
+    "/destinos/termas-rio-hondo",
+    "/destinos/salar-de-uyuni",
+    "/destinos/salta",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20para%20armar%20un%20viaje%20a%20medida%20a%20Cataratas%20del%20Iguaz%C3%BA.%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quiero%20consultar%20por%20un%20viaje%20a%20Cataratas%20del%20Iguaz%C3%BA.%20(Web%20-%20FAQ%20Destino)",
+    "/aereos",
+    "/destinos",
+    "https://www.cordobaturismo.gov.ar/",
+    "https://camaracbaturismo.org.ar/",
+    "https://www.aa2000.com.ar/cordoba",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "https://www.instagram.com/787rumbos/",
+    "http://qr.afip.gob.ar/?qr=Huvxa1kUae-1lE_yjNzL2w,,",
+    "https://camaracbaturismo.org.ar/",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://portfolio-vfelizia.pages.dev/"
+  ],
+  "images": [
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Viajar a Cataratas del Iguazú con 787 Rumbos",
+      "src": "/destinos/cataratas.jpg"
+    },
+    {
+      "alt": "Paquetes a Termas de Río Hondo",
+      "src": "/destinos/termas.jpg"
+    },
+    {
+      "alt": "Paquetes a Salar de Uyuni y Norte Grande",
+      "src": "/destinos/salar-de-uyuni.jpg"
+    },
+    {
+      "alt": "Paquetes a Salta",
+      "src": "/destinos/salta.png"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Data Fiscal ARCA",
+      "src": "/afip.jpg?v=20260503"
+    },
+    {
+      "alt": "Miembro Cámara de Turismo de la Provincia de Córdoba",
+      "src": "/camara-turismo.png"
+    }
+  ],
+  "text": "Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp Inicio / Destinos / Argentina en bus desde Córdoba / Cataratas del Iguazú Volver al catálogo Argentina Ver más: Argentina en bus desde Córdoba Paquetes a Cataratas del Iguazú Sobre el Destino Una de las 7 Maravillas Naturales del Mundo. Dejate ensordecer por la majestuosa Garganta del Diablo y recorre las pasarelas que te sumergen directo en la selva misionera, apreciando la caída de agua más espectacular del planeta. Lo imperdible Garganta del Diablo en el Parque Nacional Iguazú Paseo náutico 'Gran Aventura' bajo los saltos Parque Nacional do Iguaçu (Lado brasileño) Hito de las Tres Fronteras (Argentina, Brasil, Paraguay) Qué incluyen nuestros viajes estándar Pasaje en Bus Coche Cama 3 noches de alojamiento con desayuno. Es posible incluir noches adicionales. Traslados a los parques nacionales Coordinador permanente y guías locales Asistencia médica nacional (InterAssist) 💡 Tip del Viajero Llevá siempre una muda de ropa extra y protector para el celular en la excursión del lado argentino, ¡la bruma de la Garganta del Diablo te va a mojar por completo! Nota aclaratoria: Las tarifas publicadas, itinerarios y excursiones son de carácter referencial y corresponden a nuestros paquetes estándar, aunque están sujetos a cambios. En 787 Rumbos nos destacamos por nuestra flexibilidad y paquetes a medida, así que nos adaptamos a tus necesidades. Las tarifas definitivas se confirman al momento de realizar la consulta directa y reserva con el asesor. Próximas Salidas Programadas Hacé clic en una salida para consultar disponibilidad en WhatsApp. 18 de Noviembre Bus Coche Cama · 3 noches Salida Confirmada Consultar esta fecha 25 de Noviembre Bus Coche Cama · 3 noches Salida Confirmada Consultar esta fecha 26 de Noviembre Bus Coche Cama · 3 noches Salida Confirmada Consultar esta fecha ¿Buscás otras fechas? Cotizá a medida También te puede interesar Argentina Termas de Río Hondo Bolivia y Argentina Salar de Uyuni y Norte Grande Argentina Salta Preguntas frecuentes sobre Cataratas del Iguazú Dudas típicas de quienes viajan a Cataratas del Iguazú. Si tu consulta es otra, escribinos por WhatsApp . ¿Qué incluye el paquete a Cataratas? Según la salida: pasaje en bus coche cama o aéreo desde Córdoba, noches de hotel con desayuno, traslados a los parques, coordinación e asistencia al viajero. Entradas a los parques y excursiones náuticas pueden cotizarse aparte. ¿Se visita el lado argentino y el brasileño? Sí, en los itinerarios estándar se contempla ambos parques. El lado argentino tiene más pasarelas; el brasileño ofrece una vista panorámica espectacular. Te detallamos el programa al cotizar. ¿Conviene ir en bus o en avión? El bus coche cama suele ser más económico; el aéreo ahorra tiempo de viaje. Tenemos salidas en ambas modalidades: elegí según presupuesto y días disponibles. ¿Necesito pasaporte para el lado brasileño? Los argentinos pueden ingresar a Brasil con DNI vigente en buen estado. Igual te confirmamos requisitos vigentes al armar el viaje, porque pueden actualizarse. ¿Cómo reservo una salida a Iguazú? Escribinos por WhatsApp indicando la fecha de la lista o si preferís fechas a medida. Agencia habilitada - Legajo 20455. Av. La Voz del Interior 8500, Córdoba (Planta Baja, local de Vía Bariloche) Asesoramiento profesional y cobertura integral Enlaces de Interés Pasajes aéreos Destinos Agencia Córdoba Turismo Cámara de Turismo Estado de Vuelos Términos y Condiciones Defensa del Consumidor Contacto lun–vie 8:30–18:00 · sáb 8:30–13:00 WhatsApp: +54 9 351 768-8623 Instagram: @787rumbos MARIA FERNANDA RAMOS | CUIT: 27-26220871-6 | Legajo Habilitación N° 20455 Términos y Condiciones · Defensa del Consumidor ©787 Rumbos® - Todos los derechos reservados. Sitio creado por V. Felizia"
+}

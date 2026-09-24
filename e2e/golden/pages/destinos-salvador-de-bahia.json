@@ -1,0 +1,238 @@
+{
+  "capturedAt": "2026-09-23",
+  "path": "/destinos/salvador-de-bahia",
+  "title": "Paquetes a Salvador de Bahía | 787 Rumbos",
+  "metaDescription": "Salvador de Bahía con salidas confirmadas. Enero 2027 en vuelo directo con Aerolíneas Argentinas y Vila Galé. La ciudad de salida se confirma al consultar.",
+  "canonical": "https://www.787rumbos.com.ar/destinos/salvador-de-bahia",
+  "og": {
+    "title": "Paquetes a Salvador de Bahía | 787 Rumbos",
+    "description": "Salvador de Bahía con salidas confirmadas. Enero 2027 en vuelo directo con Aerolíneas Argentinas y Vila Galé. La ciudad de salida se confirma al consultar.",
+    "url": "https://www.787rumbos.com.ar/destinos/salvador-de-bahia",
+    "image": "https://www.787rumbos.com.ar/destinos/salvador-de-bahia.jpg",
+    "image:width": "800",
+    "image:height": "600",
+    "image:alt": "Viajar a Salvador de Bahía con 787 Rumbos"
+  },
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "TouristTrip",
+      "name": "Paquete a Salvador de Bahía",
+      "description": "La cuna de la cultura afrobrasileña te espera con su arquitectura colonial en el Pelourinho, el ritmo del axé y hermosas playas urbanas. En enero 2027 hay vuelo directo con Aerolíneas Argentinas. La ciudad de salida puede ser Córdoba o Ezeiza: la confirmamos cuando consultás.",
+      "touristType": "Leisure",
+      "provider": {
+        "@type": "TravelAgency",
+        "name": "787 Rumbos",
+        "telephone": "+5493517688623",
+        "url": "https://www.787rumbos.com.ar"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "885",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-12-31"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://www.787rumbos.com.ar"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Destinos",
+          "item": "https://www.787rumbos.com.ar/destinos"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Salvador de Bahía",
+          "item": "https://www.787rumbos.com.ar/destinos/salvador-de-bahia"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué incluye el paquete a Salvador de Bahía?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Según la salida: aéreo de cupo, alojamiento con el régimen indicado, traslados y asistencia Universal Assistance (hasta 70 años). En enero 2027 el vuelo directo es con Aerolíneas Argentinas y carry on. La ciudad de salida puede ser Córdoba o Ezeiza y se confirma al consultar. También hay solo aéreo a Salvador, con precio final USD 850."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo consulto disponibilidad para Salvador de Bahía?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Escribinos por WhatsApp indicando la fecha y el programa (Vila Galé, Morro de São Paulo o solo aéreo) y te enviamos la cotización."
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": [
+        "TravelAgency",
+        "LocalBusiness"
+      ],
+      "name": "787 Rumbos",
+      "description": "Agencia de viajes en Córdoba. Paquetes personalizados, atención humana y financiación disponible.",
+      "url": "https://www.787rumbos.com.ar",
+      "telephone": "+5493517688623",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. La Voz del Interior 8500, En el Aeropuerto Internacional Ingeniero Aeronáutico Ambrosio Taravella",
+        "addressLocality": "Córdoba",
+        "addressRegion": "Córdoba",
+        "postalCode": "X5147XAA",
+        "addressCountry": "AR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -31.3172806,
+        "longitude": -64.2131382
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "08:30",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:30",
+          "closes": "13:00"
+        }
+      ],
+      "hasMap": "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7",
+      "sameAs": [
+        "https://www.instagram.com/787rumbos/",
+        "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7"
+      ],
+      "priceRange": "$$"
+    }
+  ],
+  "headings": [
+    "Paquetes a Salvador de Bahía",
+    "Sobre el Destino",
+    "Lo imperdible",
+    "Qué incluyen nuestros viajes estándar",
+    "Próximas Salidas Programadas",
+    "También te puede interesar",
+    "Preguntas frecuentes sobre Salvador de Bahía"
+  ],
+  "links": [
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/",
+    "/#hero",
+    "/destinos",
+    "/aereos",
+    "/#servicios",
+    "/#preguntas-frecuentes",
+    "/#nosotros",
+    "/#contacto",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "/",
+    "/destinos",
+    "/destinos/brasil-desde-cordoba",
+    "/destinos",
+    "/destinos/brasil-desde-cordoba",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20disponibilidad%20para%20la%20salida%20a%20Salvador%20de%20Bah%C3%ADa%20del%2027%20de%20Septiembre%20(Portobello%20Pituba).%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20disponibilidad%20para%20la%20salida%20a%20Salvador%20de%20Bah%C3%ADa%20del%2026%20de%20Diciembre%20(Vila%20Gal%C3%A9%20Salvador).%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20disponibilidad%20para%20la%20salida%20a%20Salvador%20de%20Bah%C3%ADa%20del%202%20de%20Enero%20(Vila%20Gal%C3%A9%20Salvador).%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20disponibilidad%20para%20la%20salida%20a%20Salvador%20de%20Bah%C3%ADa%20del%202%20de%20Enero%20(Salvador%20y%20Morro%20de%20S%C3%A3o%20Paulo).%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20disponibilidad%20para%20la%20salida%20a%20Salvador%20de%20Bah%C3%ADa%20del%202%20de%20Enero%20(Solo%20a%C3%A9reo%20a%20Salvador).%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20disponibilidad%20para%20la%20salida%20a%20Salvador%20de%20Bah%C3%ADa%20del%209%20de%20Enero%20(Vila%20Gal%C3%A9%20Salvador).%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20disponibilidad%20para%20la%20salida%20a%20Salvador%20de%20Bah%C3%ADa%20del%209%20de%20Enero%20(Salvador%20y%20Morro%20de%20S%C3%A3o%20Paulo).%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20disponibilidad%20para%20la%20salida%20a%20Salvador%20de%20Bah%C3%ADa%20del%209%20de%20Enero%20(Solo%20a%C3%A9reo%20a%20Salvador).%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20disponibilidad%20para%20la%20salida%20a%20Salvador%20de%20Bah%C3%ADa%20del%2016%20de%20Enero%20(Vila%20Gal%C3%A9%20Salvador).%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20disponibilidad%20para%20la%20salida%20a%20Salvador%20de%20Bah%C3%ADa%20del%2016%20de%20Enero%20(Salvador%20y%20Morro%20de%20S%C3%A3o%20Paulo).%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20disponibilidad%20para%20la%20salida%20a%20Salvador%20de%20Bah%C3%ADa%20del%2016%20de%20Enero%20(Solo%20a%C3%A9reo%20a%20Salvador).%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20para%20armar%20un%20viaje%20a%20medida%20a%20Salvador%20de%20Bah%C3%ADa.%20(Web%20-%20Detalle%20Destino)",
+    "/destinos/imbassai",
+    "/destinos/guarajuba",
+    "/destinos/praia-do-forte",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%2C%20quiero%20consultar%20para%20armar%20un%20viaje%20a%20medida%20a%20Salvador%20de%20Bah%C3%ADa.%20(Web%20-%20Detalle%20Destino)",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quiero%20consultar%20por%20un%20viaje%20a%20Salvador%20de%20Bah%C3%ADa.%20(Web%20-%20FAQ%20Destino)",
+    "/aereos",
+    "/destinos",
+    "https://www.cordobaturismo.gov.ar/",
+    "https://camaracbaturismo.org.ar/",
+    "https://www.aa2000.com.ar/cordoba",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://api.whatsapp.com/send?phone=5493517688623&text=Hola%20787%20Rumbos!%20Quer%C3%ADa%20hacer%20una%20consulta%20general...%20(Web%20-%20Contacto%20Directo)",
+    "https://www.instagram.com/787rumbos/",
+    "http://qr.afip.gob.ar/?qr=Huvxa1kUae-1lE_yjNzL2w,,",
+    "https://camaracbaturismo.org.ar/",
+    "/legal",
+    "https://autogestion.produccion.gob.ar/consumidores",
+    "https://portfolio-vfelizia.pages.dev/"
+  ],
+  "images": [
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Viajar a Salvador de Bahía con 787 Rumbos",
+      "src": "/destinos/salvador-de-bahia.jpg"
+    },
+    {
+      "alt": "Paquetes a Imbassaí",
+      "src": "/destinos/imbassai.jpg"
+    },
+    {
+      "alt": "Paquetes a Guarajuba",
+      "src": "/destinos/guarajuba.jpg"
+    },
+    {
+      "alt": "Paquetes a Praia do Forte",
+      "src": "/destinos/praia-do-forte.jpg"
+    },
+    {
+      "alt": "Logo 787 Rumbos",
+      "src": "/logo.png"
+    },
+    {
+      "alt": "Data Fiscal ARCA",
+      "src": "/afip.jpg?v=20260503"
+    },
+    {
+      "alt": "Miembro Cámara de Turismo de la Provincia de Córdoba",
+      "src": "/camara-turismo.png"
+    }
+  ],
+  "text": "Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp Inicio Destinos Aéreos Servicios Preguntas Nosotros Contacto Armar viaje Escribinos por WhatsApp Inicio / Destinos / Paquetes a Brasil desde Córdoba / Salvador de Bahía Volver al catálogo Brasil Ver más: Paquetes a Brasil desde Córdoba Paquetes a Salvador de Bahía Sobre el Destino La cuna de la cultura afrobrasileña te espera con su arquitectura colonial en el Pelourinho, el ritmo del axé y hermosas playas urbanas. En enero 2027 hay vuelo directo con Aerolíneas Argentinas. La ciudad de salida puede ser Córdoba o Ezeiza: la confirmamos cuando consultás. Lo imperdible Pelourinho e historia colonial del centro histórico Farol da Barra y atardecer en la Bahía de Todos los Santos Gastronomía bahiana única: acarajé y moqueca Enero 2027 con vuelo directo de Aerolíneas Argentinas y carry on Qué incluyen nuestros viajes estándar Aéreo de cupo. La ciudad de salida se confirma al consultar Alojamiento y régimen según el programa de la salida Traslados Asistencia Universal Assistance (aplica hasta 70 años) Nota aclaratoria: Las tarifas publicadas, itinerarios y excursiones son de carácter referencial y corresponden a nuestros paquetes estándar, aunque están sujetos a cambios. En 787 Rumbos nos destacamos por nuestra flexibilidad y paquetes a medida, así que nos adaptamos a tus necesidades. Las tarifas definitivas se confirman al momento de realizar la consulta directa y reserva con el asesor. Próximas Salidas Programadas Hacé clic en una salida para consultar disponibilidad en WhatsApp. 27 de Septiembre Portobello Pituba Aéreo · 7 noches · Desde USD885 Salida Confirmada 💡 7 noches con desayuno. Vuelo directo SKY desde Córdoba, con valija. Asistencia Universal Assistance (hasta 70 años). Consultar esta fecha 26 de Diciembre Vila Galé Salvador Aéreo · 8 noches · Desde USD1.545 Salida Confirmada 💡 8 noches con desayuno y carry on. Aerolínea a confirmar entre JetSMART, Arajet y Aerolíneas Argentinas. Traslados y asistencia Universal Assistance (hasta 70 años). La ciudad de salida puede ser Córdoba o Ezeiza. Se confirma al consultar. Consultar esta fecha 2 de Enero Vila Galé Salvador Aéreo · 8 noches · Desde USD1.284 Salida Confirmada 💡 8 noches con desayuno. Vuelo directo con Aerolíneas Argentinas y carry on. Traslados y asistencia Universal Assistance (hasta 70 años). La ciudad de salida puede ser Córdoba o Ezeiza. Se confirma al consultar. Consultar esta fecha 2 de Enero Salvador y Morro de São Paulo Aéreo · 8 noches · Desde USD1.402 Salida Confirmada 💡 2 noches en Vila Galé Salvador, 5 en Pousada Estevão (Morro de São Paulo) y 1 en Vila Galé Salvador, con desayuno. Vuelo directo con Aerolíneas Argentinas y carry on. Traslados y asistencia Universal Assistance (hasta 70 años). La ciudad de salida puede ser Córdoba o Ezeiza. Se confirma al consultar. Consultar esta fecha 2 de Enero Solo aéreo a Salvador Aéreo · Sin hotel · Final USD850 Salida Confirmada 💡 Vuelo directo con Aerolíneas Argentinas y carry on. Asistencia incluida. Precio final USD 850: seña USD 100 y 3 cuotas de USD 250. La ciudad de salida puede ser Córdoba o Ezeiza. Se confirma al consultar. Consultar esta fecha 9 de Enero Vila Galé Salvador Aéreo · 8 noches · Desde USD1.284 Salida Confirmada 💡 8 noches con desayuno. Vuelo directo con Aerolíneas Argentinas y carry on. Traslados y asistencia Universal Assistance (hasta 70 años). La ciudad de salida puede ser Córdoba o Ezeiza. Se confirma al consultar. Consultar esta fecha 9 de Enero Salvador y Morro de São Paulo Aéreo · 8 noches · Desde USD1.402 Salida Confirmada 💡 2 noches en Vila Galé Salvador, 5 en Pousada Estevão (Morro de São Paulo) y 1 en Vila Galé Salvador, con desayuno. Vuelo directo con Aerolíneas Argentinas y carry on. Traslados y asistencia Universal Assistance (hasta 70 años). La ciudad de salida puede ser Córdoba o Ezeiza. Se confirma al consultar. Consultar esta fecha 9 de Enero Solo aéreo a Salvador Aéreo · Sin hotel · Final USD850 Salida Confirmada 💡 Vuelo directo con Aerolíneas Argentinas y carry on. Asistencia incluida. Precio final USD 850: seña USD 100 y 3 cuotas de USD 250. La ciudad de salida puede ser Córdoba o Ezeiza. Se confirma al consultar. Consultar esta fecha 16 de Enero Vila Galé Salvador Aéreo · 8 noches · Desde USD1.284 Salida Confirmada 💡 8 noches con desayuno. Vuelo directo con Aerolíneas Argentinas y carry on. Traslados y asistencia Universal Assistance (hasta 70 años). La ciudad de salida puede ser Córdoba o Ezeiza. Se confirma al consultar. Consultar esta fecha 16 de Enero Salvador y Morro de São Paulo Aéreo · 8 noches · Desde USD1.402 Salida Confirmada 💡 2 noches en Vila Galé Salvador, 5 en Pousada Estevão (Morro de São Paulo) y 1 en Vila Galé Salvador, con desayuno. Vuelo directo con Aerolíneas Argentinas y carry on. Traslados y asistencia Universal Assistance (hasta 70 años). La ciudad de salida puede ser Córdoba o Ezeiza. Se confirma al consultar. Consultar esta fecha 16 de Enero Solo aéreo a Salvador Aéreo · Sin hotel · Final USD850 Salida Confirmada 💡 Vuelo directo con Aerolíneas Argentinas y carry on. Asistencia incluida. Precio final USD 850: seña USD 100 y 3 cuotas de USD 250. La ciudad de salida puede ser Córdoba o Ezeiza. Se confirma al consultar. Consultar esta fecha ¿Buscás otras fechas? Cotizá a medida También te puede interesar Brasil Imbassaí Brasil Guarajuba Brasil Praia do Forte Preguntas frecuentes sobre Salvador de Bahía Dudas típicas de quienes viajan a Salvador de Bahía. Si tu consulta es otra, escribinos por WhatsApp . ¿Qué incluye el paquete a Salvador de Bahía? Según la salida: aéreo de cupo, alojamiento con el régimen indicado, traslados y asistencia Universal Assistance (hasta 70 años). En enero 2027 el vuelo directo es con Aerolíneas Argentinas y carry on. La ciudad de salida puede ser Córdoba o Ezeiza y se confirma al consultar. También hay solo aéreo a Salvador, con precio final USD 850. ¿Cómo consulto disponibilidad para Salvador de Bahía? Escribinos por WhatsApp indicando la fecha y el programa (Vila Galé, Morro de São Paulo o solo aéreo) y te enviamos la cotización. Agencia habilitada - Legajo 20455. Av. La Voz del Interior 8500, Córdoba (Planta Baja, local de Vía Bariloche) Asesoramiento profesional y cobertura integral Enlaces de Interés Pasajes aéreos Destinos Agencia Córdoba Turismo Cámara de Turismo Estado de Vuelos Términos y Condiciones Defensa del Consumidor Contacto lun–vie 8:30–18:00 · sáb 8:30–13:00 WhatsApp: +54 9 351 768-8623 Instagram: @787rumbos MARIA FERNANDA RAMOS | CUIT: 27-26220871-6 | Legajo Habilitación N° 20455 Términos y Condiciones · Defensa del Consumidor ©787 Rumbos® - Todos los derechos reservados. Sitio creado por V. Felizia"
+}

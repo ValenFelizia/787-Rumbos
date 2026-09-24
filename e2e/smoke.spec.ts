@@ -62,8 +62,11 @@ test.describe("rutas críticas", () => {
     await expect(page.getByText("Solo adultos").first()).toBeVisible();
   });
 
-  test("home carga con la marca y el CTA principal", async ({ page }) => {
+  test("home carga con la marca, la promo y el CTA principal", async ({ page }) => {
     await page.goto("/");
+    await expect(
+      page.getByRole("button", { name: /Salida Especial Charter: F1 GP de São Paulo/i }),
+    ).toBeVisible();
     await expect(
       page.getByRole("heading", {
         name: /787 Rumbos: tu agencia en el Aeropuerto de Córdoba/i,
@@ -130,6 +133,17 @@ test.describe("rutas críticas", () => {
     await expect(
       page.getByRole("link", { name: /cotizar gol por whatsapp/i }).first(),
     ).toBeVisible();
+  });
+});
+
+test.describe("admin", () => {
+  test("el login de /admin responde", async ({ page }) => {
+    const response = await page.goto("/admin");
+    expect(response).not.toBeNull();
+    expect(response?.status()).toBe(200);
+    await expect(page.locator("form")).toBeVisible();
+    // Sin usuarios en la base, Payload muestra "crear primer usuario" con dos campos de contraseña.
+    await expect(page.locator('input[type="password"]').first()).toBeVisible();
   });
 });
 
