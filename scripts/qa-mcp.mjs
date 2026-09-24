@@ -92,6 +92,24 @@ function cleanRow(row) {
   return next;
 }
 
+async function alignPublicCache() {
+  const token = await login(adminEmail, adminPassword);
+  const media = await fetch(`${base}/api/media?limit=1&depth=0`, {
+    headers: authHeaders(token, false),
+  });
+  const body = await media.json();
+  const doc = body.docs?.[0];
+  if (!doc?.id) fail("no hay media para revalidar el catálogo");
+  const patched = await fetch(`${base}/api/media/${doc.id}`, {
+    method: "PATCH",
+    headers: authHeaders(token),
+    body: JSON.stringify({ alt: doc.alt }),
+  });
+  if (patched.status < 200 || patched.status >= 300) {
+    fail(`revalidar media → ${patched.status}`);
+  }
+}
+
 async function pageText(path) {
   const response = await fetch(`${base}${path}`, { cache: "no-store" });
   return { status: response.status, html: await response.text(), headers: response.headers };
@@ -163,14 +181,20 @@ async function main() {
     await scenario("e no hay delete", async () => {
       const deleteNames = [...names].filter((name) => /delete/i.test(name));
       if (deleteNames.length > 0) fail(`herramientas de borrado: ${deleteNames.join(", ")}`);
+      let detail = "no está en la lista";
       try {
-        await client.callTool({ name: "deleteDestinations", arguments: { id: 1 } });
-        fail("deleteDestinations respondió");
+        const result = await client.callTool({ name: "deleteDestinations", arguments: { id: 1 } });
+        const text = toolText(result);
+        if (!result?.isError && !/not found|unknown tool|403|forbidden/i.test(text)) {
+          fail(`deleteDestinations respondió: ${text.slice(0, 200)}`);
+        }
+        detail = `no está en la lista; la llamada devolvió error (${text.slice(0, 160)})`;
       } catch (error) {
         if (error && typeof error === "object" && "qa" in error) throw error;
         const message = error instanceof Error ? error.message : String(error);
-        return `no está en la lista; la llamada falló (${message.slice(0, 160)})`;
+        detail = `no está en la lista; la llamada falló (${message.slice(0, 160)})`;
       }
+      return detail;
     });
 
     await scenario("f no expone usuarios ni la promo", async () => {
@@ -202,6 +226,9 @@ async function main() {
     const marker = "5 de Diciembre";
     await scenario("c guarda el flyer como borrador y el sitio no cambia", async () => {
       if (!destination) fail("sin destino");
+      await alignPublicCache();
+      const before = await pageText("/destinos/cataratas-del-iguazu");
+      if (before.html.includes(marker)) fail("la página pública ya tenía la salida, antes del borrador");
       const departures = (destination.departures ?? []).map(cleanRow);
       departures.push({
         date: "2026-12-05",
@@ -243,9 +270,15 @@ async function main() {
       if (userId == null || draftBody.reviewedBy !== userId) {
         fail(`reviewedBy=${draftBody.reviewedBy} asistente=${userId}`);
       }
-      const page = await pageText("/destinos/cataratas-del-iguazu");
-      if (page.html.includes(marker)) fail("la página pública muestra el borrador");
-      return `borrador pendingApproval reviewedBy=${userId}; público sin «${marker}»`;
+      const hidden = await waitFor(async () => {
+        const page = await pageText("/destinos/cataratas-del-iguazu");
+        const shown = page.html.includes(marker);
+        return {
+          ok: page.status === 200 && !shown,
+          detail: `HTTP ${page.status}; público con «${marker}»=${shown}`,
+        };
+      });
+      return `borrador pendingApproval reviewedBy=${userId}; ${hidden}`;
     });
 
     await scenario("d publicar se rechaza", async () => {
@@ -263,9 +296,12 @@ async function main() {
       if (!text.includes("Los asistentes de IA solo guardan borradores. Un encargado revisa y publica.")) {
         fail(text.slice(0, 700));
       }
-      const page = await pageText("/destinos/cataratas-del-iguazu");
-      if (page.html.includes(marker)) fail("publicar rechazado pero el sitio cambió");
-      return "rechazado con el mensaje en español; el sitio sigue igual";
+      const hidden = await waitFor(async () => {
+        const page = await pageText("/destinos/cataratas-del-iguazu");
+        const shown = page.html.includes(marker);
+        return { ok: page.status === 200 && !shown, detail: `público con «${marker}»=${shown}` };
+      });
+      return `rechazado con el mensaje en español; ${hidden}`;
     });
 
     await scenario("h el encargado publica y el sitio muestra la salida", async () => {
@@ -311,6 +347,11 @@ try {
       stdio: "inherit",
       env: { ...process.env, SEED_DEMO_USERS: "true" },
     });
+    await alignPublicCache();
+    const restored = await pageText("/destinos/cataratas-del-iguazu");
+    if (restored.html.includes("5 de Diciembre")) {
+      throw new Error("tras el seed la página pública sigue mostrando 5 de Diciembre");
+    }
     log("restore: seed ok");
   } catch (error) {
     log(`restore falló: ${error instanceof Error ? error.message : String(error)}`);
