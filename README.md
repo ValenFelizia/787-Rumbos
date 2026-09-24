@@ -34,7 +34,7 @@ El repo documenta cómo se construye el sitio, no solo el resultado.
 - Las decisiones relevantes viven en [`.csdd/decisions.md`](./.csdd/decisions.md): incluyen el racional, alternativas rechazadas y consecuencias. D-001 (páginas aditivas, home conservadora) y D-002 (URLs `/aereos`) son el ejemplo más claro.
 - Se prioriza resolver el problema de negocio antes que agregar complejidad. El cluster de aéreos se resolvió con slugs indexables y datos en `lib/`. El catálogo y la promo destacada viven en Payload CMS (D-006).
 - No hay pagos en la web. El cotizador arma un enlace de WhatsApp en el cliente. Los agencieros entran por `/admin` (Payload, Postgres).
-- CI ([`.github/workflows/ci.yml`](./.github/workflows/ci.yml)) corre lint, TypeScript, build y smoke tests Playwright de rutas y CTAs críticos.
+- CI ([`.github/workflows/ci.yml`](./.github/workflows/ci.yml)) levanta Postgres, migra y carga el seed, y corre lint, TypeScript, tests unitarios, paridad del catálogo, build y smoke tests Playwright de rutas, CTAs críticos y `/admin`.
 - La postura de seguridad y testing es proporcional a esa superficie: headers HTTP, higiene de dependencias y smokes. El detalle está en [`.csdd/specs.md`](./.csdd/specs.md).
 
 ## Desarrollo local
@@ -79,15 +79,7 @@ En `/admin` se editan los destinos (ficha, salidas, precios, vigencia) y la prom
 - `agente` publica directo solo salidas, precios, nota y vigencia de un destino ya publicado. El resto, o un destino nuevo, queda en borrador con «Pendiente de aprobación». No edita la promo.
 - No hay autoguardado. Publicar un precio exige «Precio vigente hasta» de hoy o posterior. Si esa fecha pasa, el sitio no muestra el monto y dice «Consultá precio actualizado». La barra de la promo se oculta el día después de «Se oculta después del».
 
-Arranque local (Postgres ya creado, `.env` copiado de `.env.example`):
-
-```bash
-npm run cms:migrate
-npm run cms:seed
-npm run dev
-```
-
-Panel: [http://localhost:3000/admin](http://localhost:3000/admin). El primer admin sale de `SEED_ADMIN_EMAIL` y `SEED_ADMIN_PASSWORD` en el seed. Payload queda en 3.75: 3.76 pide Next 16 y el sitio está en Next 15.5.
+Payload queda en 3.75: 3.76 pide Next 16 y el sitio está en Next 15.5.
 
 Paridad, con el golden del mismo día calendario:
 
@@ -96,14 +88,14 @@ npm run test:parity          # Postgres vs e2e/golden/catalog.json (destinos y p
 npm run snapshot:compare     # HTML de 30 páginas contra e2e/golden/pages
 ```
 
-Producción (Vercel):
+Producción (Vercel, ya configurada):
 
-- `DATABASE_URL`: la inyecta la integración de Neon (Vercel Marketplace), con una base por preview. No cargues `DATABASE_URI` en Vercel: tiene prioridad y haría que los previews usen la base de producción.
-- `PAYLOAD_SECRET`: secreto largo.
-- `BLOB_READ_WRITE_TOKEN`: store de Vercel Blob.
-- Build command: `npm run vercel-build` (`payload migrate && next build`), así el deploy aplica las migraciones.
-- Una sola vez, contra la base de producción: `npm run cms:seed` con `SEED_ADMIN_EMAIL` y `SEED_ADMIN_PASSWORD`. No actives `SEED_DEMO_USERS`.
-- El resto de los usuarios se crean en `/admin`.
+- **Base:** Neon (AWS US East 1) vía la integración de Vercel. Inyecta `DATABASE_URL` y crea un branch de base por cada preview, así los PRs no tocan producción. No cargues `DATABASE_URI` en Vercel: tiene prioridad y haría que los previews usen la base de producción.
+- **Imágenes:** store de Vercel Blob con acceso **público** (`BLOB_READ_WRITE_TOKEN`). El adapter de Payload 3.75 no sube a stores privados.
+- **Secreto:** `PAYLOAD_SECRET` en Production y Preview. Si cambia, se cierran todas las sesiones.
+- **Deploy:** Vercel corre `npm run vercel-build` (`payload migrate && next build`), así cada deploy aplica las migraciones pendientes.
+- **Contenido:** el seed ya se corrió una vez y no se repite. Desde ahí, destinos y promo se editan solo en `/admin`; `scripts/seed-data/` queda como datos de CI y desarrollo. Los usuarios nuevos los crea un `admin` en `/admin`.
+- Si hace falta correr algo contra producción desde una PC (por ejemplo una migración manual), cargá las variables en la sesión de la terminal, no en `.env`, y cerrala al terminar.
 
 ## Estructura útil
 

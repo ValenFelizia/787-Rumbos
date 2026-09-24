@@ -80,7 +80,7 @@
   - Supabase + panel a medida: auth, validación y auditoría quedan a cargo propio.
   - CMS basado en Git (Decap, Keystatic): no hay base de datos y cada edición es un deploy.
   - Google Sheets: la validación es débil para precios, slugs y vigencias.
-- **Consequences:** la app se parte en los route groups `app/(site)` y `app/(payload)`. La dependencia es grande y está justificada por el flujo editorial. Se reabre el alcance de seguridad: autenticación, secretos `DATABASE_URI`, `PAYLOAD_SECRET` y `BLOB_READ_WRITE_TOKEN`, y CI con Postgres. El comportamiento queda en [specs.md](./specs.md) (T-008).
+- **Consequences:** la app se parte en los route groups `app/(site)` y `app/(payload)`. La dependencia es grande y está justificada por el flujo editorial. Se reabre el alcance de seguridad: autenticación, secretos de base (`DATABASE_URL` de la integración de Neon), `PAYLOAD_SECRET` y `BLOB_READ_WRITE_TOKEN`, y CI con Postgres. Payload queda fijado en 3.75.0 mientras el sitio siga en Next 15.5 (3.76+ exige Next 16). El comportamiento queda en [specs.md](./specs.md) (T-008).
 
 ## Open / needs human input
 
