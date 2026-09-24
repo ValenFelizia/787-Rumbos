@@ -9,6 +9,15 @@
 
 ## Ready to Land
 
+- [ ] T-056 — Dejar que un asistente de IA edite el catálogo por MCP, solo en borrador
+  - Owner: Valen
+  - Agent: Cursor (Opus orchestrating, Grok subagent)
+  - Scope: rol `asistente`; guard de borrador en el hook editorial; `@payloadcms/plugin-mcp@3.75.0` (destinos find/create/update, imágenes find, prompt `cargar-flyer`); migración `mcp_bot`; usuario demo y clave local; smoke 401; `scripts/qa-mcp.mjs`; D-007
+  - Target: `master`
+  - Updated: 2026-09-24
+  - Landing: draft PR hacia master desde `cursor/payload-mcp-bot-76cb`
+  - Verification: lint 0 errores (1 warning previo en `Footer.tsx`); typecheck ok; unit 19/19; parity 0 diferencias (23 destinos y promo); smoke 16/16; qa-editorial 10/10; qa-mcp 8/8 (a–h). Golden HTML del 2026-09-23, no se comparó: el script vale para el mismo día calendario.
+
 ## Blocked
 
 ## Pending
@@ -39,7 +48,7 @@
 
 - [ ] T-014 — Analizar automatización ligera de salidas grupales desde Instagram
   - Owner: Valen
-  - Note: alcance previsto en el flujo editorial de salidas grupales y posibles integraciones Instagram/Meta. Investigar si se puede reducir la carga de cargar salidas a mano cuando ya se publican en Instagram. Se reevalúa después de T-008: la automatización podría alimentar el CMS. Evaluar opciones, costos, límites de Meta, mantenimiento y riesgo; entregar recomendación go/no-go antes de implementar.
+  - Note: alcance previsto en el flujo editorial de salidas grupales y posibles integraciones Instagram/Meta. Investigar si se puede reducir la carga de cargar salidas a mano cuando ya se publican en Instagram. Se reevalúa después de T-008: la automatización podría alimentar el CMS. Evaluar opciones, costos, límites de Meta, mantenimiento y riesgo; entregar recomendación go/no-go antes de implementar. Un canal WhatsApp para los agencieros se analiza en T-058.
 
 - [ ] T-005 — Crear el hub de escapadas de fin de semana largo
   - Owner: Valen
@@ -89,6 +98,14 @@
 - [ ] T-054 — Avisar en el admin si un texto libre menciona un precio vencido
   - Owner: Valen
   - Note: el fail-safe tapa el precio estructurado, no las menciones en la descripción, la meta description o las FAQ. Un aviso al guardar, si el texto tiene `$` o `USD` y la vigencia está vencida o vacía, alcanza para la primera versión.
+
+- [ ] T-057 — Conectar Grok Bot al MCP del catálogo
+  - Owner: Valen
+  - Note: xAI soporta herramientas MCP remotas con bearer auth en su API. Definir dónde corre el bot y quién puede hablarle. Crear su propia clave de API, distinta de la de QA.
+
+- [ ] T-058 — Analizar un agente por WhatsApp para los agencieros
+  - Owner: Valen
+  - Note: el objetivo es cero fricción para los padres de Valen: mandan un flyer o un texto a un número de WhatsApp y el agente carga borradores por MCP, respondiendo con un resumen y el enlace para aprobar. Evaluar WhatsApp Business Cloud API vs Twilio vs alternativas, costo, número (no puede ser el número público de la agencia, o evaluarlo), identidad y allowlist de remitentes, políticas de Meta (ventana de 24 h y templates) y hosting. Entregar go/no-go antes de implementar. Se relaciona con T-014.
 
 ## Deferred
 

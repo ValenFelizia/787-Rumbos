@@ -77,7 +77,31 @@ En `/admin` se editan los destinos (ficha, salidas, precios, vigencia) y la prom
 - `admin` crea usuarios, cambia roles y borra destinos. Publica cualquier cambio.
 - `encargado` publica cualquier cambio de un destino y edita la promo. Puede borrar imágenes.
 - `agente` publica directo solo salidas, precios, nota y vigencia de un destino ya publicado. El resto, o un destino nuevo, queda en borrador con «Pendiente de aprobación». No edita la promo.
+- `asistente` es para un bot. Lee destinos (también borradores), crea y actualiza solo como borrador, y puede subir imágenes. No publica, no borra, no toca usuarios ni la promo. El borrador queda pendiente y un encargado publica.
 - No hay autoguardado. Publicar un precio exige «Precio vigente hasta» de hoy o posterior. Si esa fecha pasa, el sitio no muestra el monto y dice «Consultá precio actualizado». La barra de la promo se oculta el día después de «Se oculta después del».
+
+### Agentes de IA (MCP)
+
+El catálogo se puede editar por MCP en `https://www.787rumbos.com.ar/api/mcp` (en local, `http://127.0.0.1:3100/api/mcp`). Sin clave responde 401. Las reglas son las mismas que en el panel: el servidor las aplica, el bot no las puede saltear.
+
+Un admin crea el usuario en `/admin` con rol **Asistente (IA)** y, en **MCP → Claves de API**, una clave asociada a ese usuario. Habilita la clave, y en Destinos: buscar, crear y actualizar. En Imágenes: buscar. No habilita borrar. La clave se copia una vez y no se commitea. Revocarla es borrar o desactivar esa clave.
+
+Cursor se conecta con un `.cursor/mcp.json` local (no va al repo). La clave sale de una variable de entorno:
+
+```json
+{
+  "mcpServers": {
+    "787-rumbos": {
+      "url": "https://www.787rumbos.com.ar/api/mcp",
+      "headers": {
+        "Authorization": "Bearer ${env:MCP_API_KEY}"
+      }
+    }
+  }
+}
+```
+
+El bot puede buscar destinos e imágenes, y crear o actualizar destinos solo como borrador (`draft: true`, `_status: "draft"`). No publica, no borra, y no ve usuarios ni la promo destacada. Un encargado o un admin publica. Cualquier cliente MCP que hable Streamable HTTP remoto y mande `Authorization: Bearer` sirve para lo mismo (por ejemplo las herramientas MCP remotas de la API de xAI). La indicación `cargar-flyer` resume las reglas editoriales: no inventar datos que no estén en el flyer y no asumir que la salida es desde Córdoba.
 
 Payload queda en 3.75: 3.76 pide Next 16 y el sitio está en Next 15.5.
 

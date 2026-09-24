@@ -203,10 +203,24 @@ El catálogo de destinos y la promo destacada se leen de Payload (T-008, D-006).
 El seed deja `priceValidUntil` vacío: sin vigencia el monto sigue visible y el
 render coincide con el catálogo anterior.
 
-- Roles: `admin`, `encargado` y `agente`. Solo `admin` crea, edita y borra
-  usuarios y cambia roles. Cada usuario edita su perfil (nombre y contraseña)
-  y no se cambia el rol a sí mismo. Borrar destinos: `admin`. Borrar imágenes:
-  `admin` o `encargado`. El panel lo abre cualquier usuario con rol.
+- Roles: `admin`, `encargado`, `agente` y `asistente` (etiqueta «Asistente (IA)»).
+  Solo `admin` crea, edita y borra usuarios y cambia roles, y solo `admin` crea
+  las claves de API del MCP. Cada usuario edita su perfil (nombre y contraseña)
+  y no se cambia el rol a sí mismo; el asistente alcanza a leerse a sí mismo
+  para la auth. Borrar destinos: `admin`. Borrar imágenes: `admin` o `encargado`.
+  El asistente puede crear imágenes y no borrarlas. El panel lo abre cualquier
+  usuario con rol.
+- `asistente` lee destinos, incluidos borradores. Crea y actualiza destinos solo
+  con `draft: true` y sin `_status: published`. Si intenta publicar, el servidor
+  rechaza: «Los asistentes de IA solo guardan borradores. Un encargado revisa y
+  publica.» No borra. No actualiza la promo destacada. El borrador marca
+  `pendingApproval` y estampa `reviewedBy` / `lastReviewedAt`. Siguen valiendo
+  las reglas de fechas, slug y vigencia. Actualizar un publicado con borrador
+  no cambia lo que ve el sitio.
+- MCP en `/api/mcp` (D-007): find, create y update de destinos, y find de
+  imágenes. No hay delete, ni usuarios, ni la promo. La indicación `cargar-flyer`
+  pide no inventar datos del flyer y no asumir Córdoba como ciudad de salida.
+  La clave Bearer es de un usuario; sin clave, 401.
 - Flujo mixto, sin autosave. Un `agente` que crea un destino no lo publica: queda
   en borrador. Sobre un destino ya publicado, publica directo solo campos
   operativos (salidas, precio, moneda, nota, vigencia y la marca de revisión).
@@ -223,8 +237,9 @@ render coincide con el catálogo anterior.
   hace falta `priceValidUntil` de hoy o posterior. Una salida nueva o modificada
   no puede estar en el pasado; las que ya estaban y no se tocan siguen. El slug
   es único y kebab-case; cambiar el de un publicado lo hace un encargado o admin.
-  La imagen exige texto alternativo. Cada guardado humano estampa
-  `lastReviewedAt` y `reviewedBy`. El seed no corre estas validaciones.
+  La imagen exige texto alternativo. Cada guardado de un usuario, incluido el
+  asistente, estampa `lastReviewedAt` y `reviewedBy`. El seed no corre estas
+  validaciones.
 - Si la vigencia venció (la de la salida, si tiene; si no, la del destino), la
   UI no muestra el monto y dice «Consultá precio actualizado».
 - «Para revisar» lista precios vencidos o que vencen en 7 días, publicados con
@@ -279,7 +294,10 @@ a esa superficie.
   especialmente Next.js). El cotizador no envía datos a un backend propio: arma
   un enlace WhatsApp en el cliente. Con el CMS entran la auth de Payload, los
   secretos `DATABASE_URL`, `PAYLOAD_SECRET` y `BLOB_READ_WRITE_TOKEN` (fuera del
-  repo) y el `noindex` de `/admin`.
+  repo), el `noindex` de `/admin` y de `/api` (incluido `/api/mcp`), y las claves
+  de API del MCP. La clave no se commitea. El endpoint exige Bearer; sin clave
+  responde 401. Las operaciones del MCP corren con el usuario de la clave y sin
+  saltear el access control.
 - **Seguridad fuera de alcance:** WAF dedicado, pentests formales y controles
   pensados para formularios públicos server-side o UGC.
 - **JSON-LD:** el `dangerouslySetInnerHTML` usa datos validados del CMS
