@@ -109,6 +109,11 @@ const nextConfig = {
         source: "/admin/:path*",
         headers: adminRobotsHeaders,
       },
+      {
+        // El panel y la API (incluido /api/mcp) no se indexan.
+        source: "/api/:path*",
+        headers: adminRobotsHeaders,
+      },
     ];
   },
 };

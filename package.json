@@ -19,7 +19,7 @@
     "cms:seed": "payload run scripts/seed-catalog.ts",
     "generate:types": "payload generate:types",
     "generate:importmap": "payload generate:importmap",
-    "test:unit": "node --import tsx --test lib/catalog/logic.test.ts lib/catalog/promo.test.ts payload/editorial/diff.test.ts payload/editorial/asistente.test.ts",
+    "test:unit": "node --import tsx --test lib/catalog/logic.test.ts lib/catalog/promo.test.ts payload/editorial/diff.test.ts payload/editorial/asistente.test.ts payload/mcp/overrideAccess.test.mjs",
     "vercel-build": "payload migrate && next build",
     "test:parity": "payload run scripts/catalog-parity.ts",
     "snapshot:html": "node scripts/html-snapshot.mjs",
@@ -44,7 +44,8 @@
     "react-dom": "^19",
     "react-fast-marquee": "^1.6.5",
     "server-only": "0.0.1",
-    "sharp": "0.34.2"
+    "sharp": "0.34.2",
+    "zod": "3.25.76"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

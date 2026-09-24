@@ -10,6 +10,7 @@ import { Destinations } from "./payload/collections/Destinations";
 import { Media } from "./payload/collections/Media";
 import { Users } from "./payload/collections/Users";
 import { FeaturedPromo } from "./payload/globals/FeaturedPromo";
+import { mcp } from "./payload/mcp/plugin";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -51,6 +52,7 @@ export default buildConfig({
     disable: true,
   },
   plugins: [
+    mcp,
     vercelBlobStorage({
       // Sin token (dev y CI) los archivos quedan en disco (`media/`).
       // alwaysInsertFields deja el esquema igual cuando en prod el plugin se enciende.
