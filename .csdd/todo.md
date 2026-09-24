@@ -9,16 +9,6 @@
 
 ## Ready to Land
 
-- [ ] T-008 — Migrar catálogo y promo destacada a Payload CMS (D-006)
-  - Owner: Valen
-  - Agent: Cursor (Opus orchestrating, Grok subagents)
-  - Scope: `app/**` (route groups), `lib/catalog/**`, `payload.config.ts`, `payload/**`, `components/sections/SpecialPromo.tsx`, `scripts/**`, `e2e/**`, `.github/workflows/ci.yml`, `next.config.mjs`, `package.json`, `.csdd/`, `docs/guia-cms-agencieros.md`
-  - Target: `master`
-  - Landing: draft PR #40 hacia master desde cursor/payload-cms-catalog-76cb — https://github.com/ValenFelizia/787-Rumbos/pull/40
-  - Updated: 2026-09-23
-  - Verification: lint ok (warning previo en Footer). Typecheck ok. Unit 15/15. Paridad 0 (23 destinos, promo). Snapshot 30 páginas, 0 diferencias. Smoke 15/15. QA editorial 10/10 (precio 200, descripción publicada 400 / borrador 200, encargado 200, sin vigencia 400, vigencia vencida oculta el monto, alta a borrador 201, delete 403, promo agente 403, promo con vigencia 200, promo vencida oculta el monto).
-  - Note: Antes de mergear, Valen tiene que provisionar Neon y un store de Vercel Blob, setear `DATABASE_URI`, `PAYLOAD_SECRET` y `BLOB_READ_WRITE_TOKEN`, dejar que el primer deploy corra las migraciones (`vercel-build`), correr el seed una vez con `SEED_ADMIN_EMAIL` / `SEED_ADMIN_PASSWORD`, y crear los usuarios de la agencia en `/admin`. El preview de Vercel del PR falla hoy por falta de `PAYLOAD_SECRET`/`DATABASE_URI` (esperado). Como `vercel-build` migra en cada deploy, los previews deben usar una base separada (branch de Neon por preview vía la integración de Vercel), no la de producción. El seed se sincronizó con `a2a4fef` (Cataratas actualizado en `master`); cambios de contenido posteriores en `master` deben portarse a `scripts/seed-data/` antes del merge, y después del merge se editan solo en `/admin`.
-
 ## Blocked
 
 ## Pending
@@ -72,6 +62,10 @@
 
 ### CMS — backlog post T-008
 
+- [ ] T-055 — Dar de alta a los agencieros y completar la primera carga de vigencias
+  - Owner: Valen
+  - Note: crear en `/admin` un `encargado` y los `agente`, y pasarles `docs/guia-cms-agencieros.md`. Hoy «Para revisar» lista los 23 destinos sin «Precio vigente hasta»: la tarea queda cumplida cuando esa lista esté vacía o con motivo. El seed no se vuelve a correr en producción.
+
 - [ ] T-049 — Hacer editables en el CMS los hubs y las landings de aerolíneas
   - Owner: Valen
   - Note: hoy viven en `lib/clusters-data.ts` y `lib/airlines-data.ts`; pasarlos al CMS cuando el catálogo de T-008 esté estable.
@@ -110,6 +104,14 @@
 ## Recently Completed
 
 Retention: 12
+
+- [x] T-008 — Migrar catálogo y promo destacada a Payload CMS (D-006)
+  - Owner: Valen
+  - Agent: Cursor (Opus orchestrating, Grok subagents)
+  - Scope: released
+  - Updated: 2026-09-24
+  - Landed: PR #40 on `master` (`7cd9db3`)
+  - Note: Payload 3.75 + Neon (US East 1) + Vercel Blob público en producción. Seed corrido una vez; paridad 0 contra el sitio anterior. Previews con branch de Neon propio. Alta de usuarios y primera carga de vigencias → T-055.
 
 - [x] T-048 — Publicar cupos de Brasil, fin de año y República Dominicana
   - Owner: Valen
@@ -196,9 +198,3 @@ Retention: 12
   - Updated: 2026-08-03
   - Note: Baseline prod ~217 KB / ~25 KB br / ~32 KB gzip. Casi la mitad es payload RSC de Next. Decisión con Valen: no micro-opts ni recortes de contenido; umbral 200 KB de opengraph.to no justifica cambios. Issue #16 cerrado.
 
-- [x] T-035 — Interlinking ligero home / nav / footer (sin rediseño)
-  - Owner: Valen
-  - Agent: Cursor Grok
-  - Scope: released
-  - Updated: 2026-07-30
-  - Note: Nav “Aéreos”; footer Pasajes aéreos + Destinos; tile Servicios → `/aereos`; hero con aéreos primero. Nav desktop: label “Preguntas”, nowrap, gap ajustado. Revisión humana OK.

@@ -1,13 +1,11 @@
 # 787 Rumbos — Especificaciones vigentes
 
-> **Última actualización:** 2026-09-23
-> **Estado:** la base del producto está implementada. El cluster indexable de
-> **pasajes aéreos** (issue #11) está publicado e interlinkeado; quedan medición
-> de CTAs (T-036) y priorización de más aerolíneas (T-037). En paralelo, la ola
-> de performance de la home sigue con auditoría de HTML inicial (issue #16 /
-> T-039) y re-medición Lighthouse/CWV (T-029). El baseline de seguridad HTTP,
-> higiene de dependencias y CI/smoke está implementado. El catálogo y la promo
-> destacada viven en Payload CMS (T-008, D-006).
+> **Última actualización:** 2026-09-24
+> **Estado:** la base del producto está implementada, incluido el cluster de
+> **pasajes aéreos** (hub + LATAM + GOL). El catálogo de destinos y la promo
+> destacada viven en Payload CMS en producción (T-008, D-006) y los editan los
+> agencieros en `/admin`. Lo siguiente es el alta de usuarios y la primera
+> carga de vigencias (T-055), y el backlog del CMS (T-049 a T-054).
 
 El estado operativo vive en [todo.md](./todo.md). El diagnóstico SEO y de
 producto que sirve de contexto, pero no de lista de trabajo activa, se
@@ -234,9 +232,15 @@ render coincide con el catálogo anterior.
   y borradores pendientes de aprobación.
 - Publicar revalida al instante con `revalidateTag` (`catalog` y `promo`). El
   ISR de 24 horas se mantiene para el resto del contenido que depende de la fecha.
-- En Vercel hacen falta `DATABASE_URI` (Neon), `PAYLOAD_SECRET` y
-  `BLOB_READ_WRITE_TOKEN` (Vercel Blob). El build de producción corre
-  `payload migrate` antes de `next build`. El seed de producción se corre una vez.
+- Producción (en uso desde 2026-09-24): Neon en AWS US East 1, conectado por la
+  integración de Vercel, que inyecta `DATABASE_URL` y crea un branch de base por
+  preview. En Vercel no se carga `DATABASE_URI`: tiene prioridad sobre
+  `DATABASE_URL` y haría que los previews usen la base de producción. El store
+  de Vercel Blob tiene acceso **público** (el adapter de Payload 3.75 no sube a
+  stores privados). `PAYLOAD_SECRET` está en Production y Preview.
+- Cada deploy corre `payload migrate` antes de `next build` (`vercel-build`). El
+  seed ya se corrió en producción y no se repite: desde ahí el contenido se edita
+  solo en `/admin`, y `scripts/seed-data/` queda como fixture de CI y desarrollo.
 
 ## Restricciones técnicas
 
@@ -274,7 +278,7 @@ a esa superficie.
   framing/referrer/permisos, e higiene de dependencias (auditorías y parches,
   especialmente Next.js). El cotizador no envía datos a un backend propio: arma
   un enlace WhatsApp en el cliente. Con el CMS entran la auth de Payload, los
-  secretos `DATABASE_URI`, `PAYLOAD_SECRET` y `BLOB_READ_WRITE_TOKEN` (fuera del
+  secretos `DATABASE_URL`, `PAYLOAD_SECRET` y `BLOB_READ_WRITE_TOKEN` (fuera del
   repo) y el `noindex` de `/admin`.
 - **Seguridad fuera de alcance:** WAF dedicado, pentests formales y controles
   pensados para formularios públicos server-side o UGC.
