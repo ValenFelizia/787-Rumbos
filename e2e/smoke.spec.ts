@@ -142,7 +142,8 @@ test.describe("admin", () => {
     expect(response).not.toBeNull();
     expect(response?.status()).toBe(200);
     await expect(page.locator("form")).toBeVisible();
-    await expect(page.locator('input[type="password"]')).toBeVisible();
+    // Sin usuarios en la base, Payload muestra "crear primer usuario" con dos campos de contraseña.
+    await expect(page.locator('input[type="password"]').first()).toBeVisible();
   });
 });
 
