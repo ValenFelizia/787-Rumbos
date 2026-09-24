@@ -190,6 +190,13 @@ test.describe("cotizador", () => {
     await expect(
       page.getByLabel(/a dónde querés viajar/i),
     ).toBeVisible();
+
+    // Chips = subset del catálogo Payload (no lista estática de constants).
+    await expect(dialog.getByText(/destinos populares/i)).toBeVisible();
+    const suggestionChips = dialog.locator('button[aria-pressed]');
+    await expect(suggestionChips.first()).toBeVisible();
+    expect(await suggestionChips.count()).toBeGreaterThan(0);
+    expect(await suggestionChips.count()).toBeLessThanOrEqual(6);
   });
 });
 

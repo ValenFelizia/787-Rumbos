@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
   getListedPrice,
+  getQuoteSuggestionNames,
   hasExpiredListedPrice,
   isPriceExpired,
 } from "./logic";
@@ -98,5 +99,35 @@ describe("getListedPrice", () => {
     });
     assert.equal(getListedPrice(expired, today), undefined);
     assert.equal(hasExpiredListedPrice(expired, today), true);
+  });
+});
+
+describe("getQuoteSuggestionNames", () => {
+  it("keeps catalog order, skips sold-out-only, and respects the limit", () => {
+    const catalog = [
+      destination({ slug: "a", name: "Alpha", departures: [departure({ status: "sold-out" })] }),
+      destination({ slug: "b", name: "Bravo", departures: [departure()] }),
+      destination({ slug: "c", name: "Charlie", departures: [] }),
+      destination({
+        slug: "d",
+        name: "Delta",
+        departures: [departure({ date: "2026-11-01", status: "few-seats" })],
+      }),
+      destination({ slug: "e", name: "Echo", departures: [departure({ date: "2026-12-01" })] }),
+    ];
+
+    assert.deepEqual(getQuoteSuggestionNames(catalog, 2, today), ["Bravo", "Delta"]);
+    assert.deepEqual(getQuoteSuggestionNames(catalog, 10, today), ["Bravo", "Delta", "Echo"]);
+  });
+
+  it("returns an empty list when nothing is bookable", () => {
+    assert.deepEqual(
+      getQuoteSuggestionNames(
+        [destination({ departures: [departure({ status: "sold-out" })] })],
+        6,
+        today,
+      ),
+      [],
+    );
   });
 });

@@ -13,6 +13,7 @@ import { Analytics } from '@vercel/analytics/next'
 import { elaineSans, zalandoSans } from '@/lib/fonts'
 import { ModalProvider } from '@/lib/context/ModalContext'
 import { QuoteModal } from '@/components/sections/QuoteModal'
+import { getQuoteSuggestionNames } from '@/lib/catalog/repository'
 import { GOOGLE_MAPS_LINK, AGENCY_PHONE, OFFICE_GEO } from '@/lib/constants'
 import '../globals.css'
 
@@ -82,7 +83,7 @@ export const revalidate = 86_400;
  * Así se anidan layouts y páginas: este componente no importa la página directamente;
  * el framework pasa el contenido ya resuelto como `children`.
  */
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
@@ -98,6 +99,8 @@ export default function RootLayout({
    * Schema.org es el vocabulario estándar que usan Google, Bing y Yahoo.
    * TravelAgency hereda de LocalBusiness que hereda de Organization.
    */
+  const suggestionDestinations = await getQuoteSuggestionNames();
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": ["TravelAgency", "LocalBusiness"],
@@ -144,7 +147,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`${elaineSans.variable} ${zalandoSans.variable} antialiased`}>
-        <ModalProvider>
+        <ModalProvider suggestionDestinations={suggestionDestinations}>
           {children}
           {/* Analytics solo en producción para no contaminar datos en desarrollo */}
           {process.env.NODE_ENV === 'production' && <Analytics />}

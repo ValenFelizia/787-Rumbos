@@ -7,7 +7,9 @@ import {
   getAllDestinationSlugs as slugsOf,
   getDestinationBySlug as findBySlug,
   getHomeFeaturedDestinations as featuredOf,
+  getQuoteSuggestionNames as quoteSuggestionsOf,
   getRelatedDestinations as relatedOf,
+  QUOTE_SUGGESTION_LIMIT,
 } from "@/lib/catalog/logic";
 import { mapDestination, type DestinationDoc } from "@/lib/catalog/map";
 import type { DestinationPage } from "@/lib/catalog/types";
@@ -42,6 +44,12 @@ export async function getDestinationBySlug(slug: string): Promise<DestinationPag
 
 export async function getHomeFeaturedDestinations(limit = 4): Promise<DestinationPage[]> {
   return featuredOf(await getAllDestinations(), limit);
+}
+
+export async function getQuoteSuggestionNames(
+  limit = QUOTE_SUGGESTION_LIMIT,
+): Promise<string[]> {
+  return quoteSuggestionsOf(await getAllDestinations(), limit);
 }
 
 export async function getRelatedDestinations(slug: string, limit = 3): Promise<DestinationPage[]> {
