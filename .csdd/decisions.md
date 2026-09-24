@@ -82,6 +82,19 @@
   - Google Sheets: la validación es débil para precios, slugs y vigencias.
 - **Consequences:** la app se parte en los route groups `app/(site)` y `app/(payload)`. La dependencia es grande y está justificada por el flujo editorial. Se reabre el alcance de seguridad: autenticación, secretos de base (`DATABASE_URL` de la integración de Neon), `PAYLOAD_SECRET` y `BLOB_READ_WRITE_TOKEN`, y CI con Postgres. Payload queda fijado en 3.75.0 mientras el sitio siga en Next 15.5 (3.76+ exige Next 16). El comportamiento queda en [specs.md](./specs.md) (T-008).
 
+### D-007 — Agentes de IA editan el catálogo por MCP con rol asistente (solo borradores)
+
+- **Status:** Accepted
+- **Date:** 2026-09-24
+- **Source:** Valen
+- **Decision:** Los agentes de IA editan el catálogo por el plugin oficial de MCP de Payload (`/api/mcp`), autenticados con una clave de API que actúa como un usuario de rol `asistente`. Ese rol solo crea y actualiza destinos en borrador. Publicar lo sigue haciendo un encargado o un admin. Las reglas editoriales corren en el servidor, así que el MCP hereda los mismos controles que el panel.
+- **Rationale:** Un modelo puede leer mal un flyer. Al principio el bot no publica. La clave es por bot, así se revoca y queda en el historial quién guardó (`reviewedBy`).
+- **Rejected alternatives:**
+  - Entrar a la base por el MCP de Neon: se saltea roles, validación, historial y revalidación.
+  - Darle al bot el rol `agente` desde el primer día.
+  - Compartir la contraseña de una persona.
+- **Consequences:** `/api/mcp` es un endpoint público protegido por clave. `/api` queda `noindex`. Se vuelve a mirar si el bot puede publicar campos operativos cuando haya un historial de aciertos. El detalle está en [specs.md](./specs.md).
+
 ## Open / needs human input
 
 Landings publicadas y siguientes candidatas (alimenta T-042):

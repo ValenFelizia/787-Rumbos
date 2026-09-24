@@ -19,7 +19,7 @@
     "cms:seed": "payload run scripts/seed-catalog.ts",
     "generate:types": "payload generate:types",
     "generate:importmap": "payload generate:importmap",
-    "test:unit": "node --import tsx --test lib/catalog/logic.test.ts lib/catalog/promo.test.ts payload/editorial/diff.test.ts",
+    "test:unit": "node --import tsx --test lib/catalog/logic.test.ts lib/catalog/promo.test.ts payload/editorial/diff.test.ts payload/editorial/asistente.test.ts payload/mcp/overrideAccess.test.mjs",
     "vercel-build": "payload migrate && next build",
     "test:parity": "payload run scripts/catalog-parity.ts",
     "snapshot:html": "node scripts/html-snapshot.mjs",
@@ -29,6 +29,7 @@
   "dependencies": {
     "@payloadcms/db-postgres": "3.75.0",
     "@payloadcms/next": "3.75.0",
+    "@payloadcms/plugin-mcp": "3.75.0",
     "@payloadcms/richtext-lexical": "3.75.0",
     "@payloadcms/storage-vercel-blob": "3.75.0",
     "@payloadcms/translations": "3.75.0",
@@ -43,10 +44,12 @@
     "react-dom": "^19",
     "react-fast-marquee": "^1.6.5",
     "server-only": "0.0.1",
-    "sharp": "0.34.2"
+    "sharp": "0.34.2",
+    "zod": "3.25.76"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@modelcontextprotocol/sdk": "1.26.0",
     "@playwright/test": "^1.62.1",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^22",

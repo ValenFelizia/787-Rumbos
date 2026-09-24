@@ -18,6 +18,8 @@ En la salida, **Estado** → **Agotada**. Se publica igual que un cambio de prec
 
 Si sos agente, podés publicar directo las salidas, el precio, la nota y la vigencia de un destino que ya está en la web. Si cambiás el texto, las fotos o el SEO, o si el destino es nuevo, no se publica: tocá **Guardar borrador** y avisale a un encargado. Ese borrador no se ve en el sitio. Encargado y admin publican cualquier cambio.
 
+Un asistente de IA también puede dejar borradores. No publica. Esos borradores aparecen en **Para revisar** y los publica un encargado o un admin.
+
 La barra de arriba de la home (promo destacada) la editan solo un encargado o un admin.
 
 ## Para revisar

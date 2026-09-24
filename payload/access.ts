@@ -1,11 +1,11 @@
 import type { Access, FieldAccess, PayloadRequest } from "payload";
 
-export type Role = "admin" | "encargado" | "agente";
+export type Role = "admin" | "encargado" | "agente" | "asistente";
 
 export function roleOf(user: PayloadRequest["user"] | null | undefined): Role | null {
   if (!user || typeof user !== "object" || !("role" in user)) return null;
   const role = user.role;
-  if (role === "admin" || role === "encargado" || role === "agente") return role;
+  if (role === "admin" || role === "encargado" || role === "agente" || role === "asistente") return role;
   return null;
 }
 

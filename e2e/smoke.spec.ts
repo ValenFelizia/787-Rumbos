@@ -136,6 +136,25 @@ test.describe("rutas críticas", () => {
   });
 });
 
+test.describe("mcp", () => {
+  test("sin clave, /api/mcp responde 401 y noindex", async ({ request }) => {
+    const response = await request.post("/api/mcp", {
+      headers: {
+        accept: "application/json, text/event-stream",
+        "content-type": "application/json",
+      },
+      data: {
+        jsonrpc: "2.0",
+        id: "1",
+        method: "tools/list",
+        params: {},
+      },
+    });
+    expect(response.status()).toBe(401);
+    expect(response.headers()["x-robots-tag"] ?? "").toContain("noindex");
+  });
+});
+
 test.describe("admin", () => {
   test("el login de /admin responde", async ({ page }) => {
     const response = await page.goto("/admin");

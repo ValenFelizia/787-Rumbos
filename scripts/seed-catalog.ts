@@ -5,8 +5,9 @@
  *
  * Uso: npm run cms:seed
  * Admin inicial si existen SEED_ADMIN_EMAIL y SEED_ADMIN_PASSWORD.
- * Con SEED_DEMO_USERS=true también crea encargado y agente (SEED_DEMO_PASSWORD).
+ * Con SEED_DEMO_USERS=true también crea encargado, agente y asistente (SEED_DEMO_PASSWORD).
  * Solo para local y CI: no lo actives en producción.
+ * No crea claves de API. En local: npx payload run scripts/ensure-mcp-qa-key.ts
  */
 import { existsSync } from "node:fs";
 import path from "node:path";
@@ -61,6 +62,7 @@ async function ensureDemoUsers(): Promise<void> {
   const demos = [
     { email: "encargado@787rumbos.test", role: "encargado" as const, name: "Encargado demo" },
     { email: "agente@787rumbos.test", role: "agente" as const, name: "Agente demo" },
+    { email: "asistente@787rumbos.test", role: "asistente" as const, name: "Asistente IA" },
   ];
   for (const demo of demos) {
     const existing = await payload.find({
@@ -81,6 +83,9 @@ async function ensureDemoUsers(): Promise<void> {
     });
     console.log(`seed: demo creado (${demo.email})`);
   }
+  console.log(
+    "seed: clave MCP — en /admin, como admin, MCP → Claves de API. Usuario asistente@787rumbos.test (rol Asistente (IA)). Habilitá la clave, Destinos (buscar, crear, actualizar) e Imágenes (buscar). No habilites borrar. No la commitees. En local: npx payload run scripts/ensure-mcp-qa-key.ts escribe MCP_QA_API_KEY en .env.",
+  );
 }
 
 async function ensureMedia(publicPath: string, alt: string): Promise<number> {
