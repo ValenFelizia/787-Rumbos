@@ -1,6 +1,12 @@
-import { ValidationError, type CollectionBeforeChangeHook, type PayloadRequest } from "payload";
-import { FIELD_LABELS, nonOperationalChanges, normalizeEditorialValue } from "../editorial/diff";
+import {
+  ValidationError,
+  type CollectionBeforeChangeHook,
+  type CollectionBeforeOperationHook,
+  type PayloadRequest,
+} from "payload";
 import { roleOf } from "../access";
+import { ASISTENTE_DRAFT_ONLY_MESSAGE, decideAsistenteSave } from "../editorial/asistente";
+import { FIELD_LABELS, nonOperationalChanges, normalizeEditorialValue } from "../editorial/diff";
 
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
@@ -14,12 +20,38 @@ type DepartureRow = {
 };
 
 function invalid(message: string, path: string, req: PayloadRequest): never {
-  throw new ValidationError({
+  const error = new ValidationError({
     collection: "destinations",
     errors: [{ message, path }],
     req,
   });
+  // El mensaje de ValidationError nombra el campo. MCP solo reenvía `error.message`,
+  // así que la frase en español tiene que estar ahí también.
+  if (!error.message.includes(message)) {
+    error.message = `${error.message} ${message}`;
+  }
+  throw error;
 }
+
+/**
+ * Payload arma `isSavingDraft` antes de beforeChange. Si `draft` no es true,
+ * el update escribe la fila publicada aunque después se fuerce `_status: draft`.
+ * El rechazo del asistente va acá, con el flag todavía intacto.
+ */
+export const guardAsistenteWrites: CollectionBeforeOperationHook = ({ args, operation, req }) => {
+  if (req.context?.skipEditorialValidation) return args;
+  if (operation !== "create" && operation !== "update") return args;
+  const incoming = args as { data?: { _status?: unknown }; draft?: unknown };
+  const decision = decideAsistenteSave({
+    role: roleOf(req.user),
+    status: incoming.data?._status,
+    draft: incoming.draft,
+  });
+  if (decision?.allowed === false) {
+    invalid(decision.message, "_status", req);
+  }
+  return args;
+};
 
 function localISODate(date = new Date()): string {
   const year = date.getFullYear();
@@ -171,6 +203,10 @@ export const enforceEditorialRules: CollectionBeforeChangeHook = async ({
     invalid("Cambiar el slug de un destino publicado lo hace un encargado o un admin.", "slug", req);
   }
 
+  if (role === "asistente" && data._status === "published") {
+    invalid(ASISTENTE_DRAFT_ONLY_MESSAGE, "_status", req);
+  }
+
   if (role === "agente" && data._status === "published") {
     if (operation === "create" || !published) {
       if (operation === "create") {
@@ -200,7 +236,7 @@ export const enforceEditorialRules: CollectionBeforeChangeHook = async ({
     assertPriceValidity({ ...base, ...data }, req);
   }
 
-  if (data._status === "draft" && role === "agente") {
+  if (role === "asistente" || (data._status === "draft" && role === "agente")) {
     data.pendingApproval = true;
   } else if (data._status === "published" && (role === "admin" || role === "encargado" || role === "agente")) {
     data.pendingApproval = false;

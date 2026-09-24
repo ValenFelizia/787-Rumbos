@@ -11,7 +11,8 @@ export const Users: CollectionConfig = {
   admin: {
     useAsTitle: "email",
     defaultColumns: ["name", "email", "role"],
-    description: "Solo un admin crea usuarios y cambia roles. Cada uno puede editar su nombre y su contraseña.",
+    description:
+      "Solo un admin crea usuarios y cambia roles. Asistente (IA) es para un bot: solo guarda borradores. Cada uno edita su nombre y su contraseña.",
   },
   access: {
     admin: canAccessAdmin,
@@ -36,12 +37,13 @@ export const Users: CollectionConfig = {
         update: updateRole,
       },
       admin: {
-        description: "Solo un admin puede cambiar el rol. Un agente no se lo cambia a sí mismo.",
+        description: "Solo un admin puede cambiar el rol. Nadie se lo cambia a sí mismo.",
       },
       options: [
         { label: "Admin", value: "admin" },
         { label: "Encargado", value: "encargado" },
         { label: "Agente", value: "agente" },
+        { label: "Asistente (IA)", value: "asistente" },
       ],
     },
   ],

@@ -1,6 +1,6 @@
 import type { CollectionConfig } from "payload";
 import { isAdmin, isAuthenticated } from "../access";
-import { enforceEditorialRules } from "../hooks/editorial";
+import { enforceEditorialRules, guardAsistenteWrites } from "../hooks/editorial";
 import {
   revalidateCatalogAfterChange,
   revalidateCatalogAfterDelete,
@@ -62,7 +62,7 @@ export const Destinations: CollectionConfig = {
     useAsTitle: "name",
     defaultColumns: ["name", "slug", "region", "pendingApproval", "priceFrom"],
     description:
-      "Borrador: no se ve en el sitio. Publicado: se ve en la web. Un agente publica directo solo salidas, precios y vigencia; el resto queda en borrador para un encargado.",
+      "Borrador: no se ve en el sitio. Publicado: se ve en la web. Un agente publica directo solo salidas, precios y vigencia; el resto queda en borrador para un encargado. Un asistente de IA solo guarda borradores.",
   },
   defaultSort: "sortOrder",
   versions: {
@@ -77,6 +77,7 @@ export const Destinations: CollectionConfig = {
     delete: isAdmin,
   },
   hooks: {
+    beforeOperation: [guardAsistenteWrites],
     beforeChange: [enforceEditorialRules],
     afterChange: [revalidateCatalogAfterChange],
     afterDelete: [revalidateCatalogAfterDelete],
@@ -134,7 +135,7 @@ export const Destinations: CollectionConfig = {
         position: "sidebar",
         readOnly: true,
         description:
-          "Se marca sola cuando un agente guarda un borrador. Un encargado o un admin la baja al publicar.",
+          "Se marca sola cuando un agente o un asistente de IA guarda un borrador. Un encargado o un admin la baja al publicar.",
       },
     },
     {
