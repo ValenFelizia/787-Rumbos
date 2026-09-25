@@ -89,6 +89,17 @@ test.describe("rutas críticas", () => {
     ).toBeVisible();
   });
 
+  test("cards de cluster en destinos abren el hub SEO", async ({ page }) => {
+    await page.goto("/destinos");
+    const hubs = page.getByRole("navigation", { name: /catálogos desde córdoba/i });
+    await expect(hubs.getByRole("link", { name: /brasil desde córdoba/i })).toBeVisible();
+    await hubs.getByRole("link", { name: /brasil desde córdoba/i }).click();
+    await expect(page).toHaveURL(/\/destinos\/brasil-desde-cordoba\/?$/);
+    await expect(
+      page.getByRole("heading", { name: /paquetes a brasil desde córdoba/i }),
+    ).toBeVisible();
+  });
+
   test("ficha de destino (salta) responde", async ({ page }) => {
     await page.goto("/destinos/salta");
     await expect(page).toHaveURL(/\/destinos\/salta\/?$/);
