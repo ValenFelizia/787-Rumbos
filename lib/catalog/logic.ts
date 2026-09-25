@@ -241,6 +241,36 @@ export const DESTINOS_SORT_OPTIONS: { value: DestinosSortMode; label: string }[]
   { value: "next-departure", label: "Próxima salida" },
 ];
 
+/** Chip auxiliar “Moneda” al ordenar por precio (QOL-02). Default: Todas. */
+export type DestinosCurrencyFilter = "all" | "ARS" | "USD";
+
+export const DESTINOS_CURRENCY_FILTER_OPTIONS: {
+  value: DestinosCurrencyFilter;
+  label: string;
+}[] = [
+  { value: "all", label: "Todas" },
+  { value: "ARS", label: "ARS" },
+  { value: "USD", label: "USD" },
+];
+
+export function isPriceSortMode(mode: DestinosSortMode): boolean {
+  return mode === "price-asc" || mode === "price-desc";
+}
+
+/**
+ * Refina el listado al ordenar por precio: ARS/USD dejan solo destinos con
+ * `getListedPrice` en esa moneda. “Todas” no filtra (conserva bloques QOL-01).
+ * Sin precio / vencido no matchean ARS ni USD (solo aparecen con Todas).
+ */
+export function filterDestinationsByCurrency(
+  destinations: DestinationPage[],
+  currencyFilter: DestinosCurrencyFilter,
+  today = getTodayLocal(),
+): DestinationPage[] {
+  if (currencyFilter === "all") return destinations;
+  return destinations.filter((dest) => getListedPrice(dest, today)?.currency === currencyFilter);
+}
+
 /** Bloque del listado: con encabezado de moneda solo cuando el sort por precio mezcla ARS y USD. */
 export type DestinationSortGroup = {
   heading?: "En pesos" | "En dólares";
