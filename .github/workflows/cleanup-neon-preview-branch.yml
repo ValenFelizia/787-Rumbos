@@ -1,0 +1,105 @@
+# Deletes the Neon preview DB branch as soon as a PR is closed (merged or not).
+#
+# Why: with the Vercel-managed Neon integration, Neon only deletes the branch when
+# the Vercel deployment is deleted (default retention up to ~180 days). Stale
+# preview/* branches fill the free-plan 10-branch cap and block new previews.
+#
+# Trigger: pull_request_target + closed (not pull_request) so Dependabot PR
+# closures also receive NEON_API_KEY from repo secrets. Safe here because this
+# job never checks out or runs PR code — it only calls the Neon API with a
+# branch name derived from the event payload.
+#
+# Docs: https://neon.com/docs/guides/vercel-branch-cleanup
+
+name: Cleanup Neon preview branch
+
+on:
+  pull_request_target:
+    types: [closed]
+
+permissions: {}
+
+jobs:
+  delete-neon-preview-branch:
+    name: Delete Neon preview branch
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Delete preview/${{ github.event.pull_request.head.ref }}
+        env:
+          NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
+          NEON_PROJECT_ID: ${{ vars.NEON_PROJECT_ID || 'round-poetry-46013678' }}
+          PR_HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${NEON_API_KEY:-}" ]; then
+            echo "NEON_API_KEY secret is not set. Add it under Settings → Secrets and variables → Actions."
+            exit 1
+          fi
+
+          BRANCH="preview/${PR_HEAD_REF}"
+          echo "Resolved Neon branch name: ${BRANCH}"
+
+          # Guard: only preview/* may be deleted. This can never match the
+          # default/primary branch (main / production).
+          case "${BRANCH}" in
+            preview/*) ;;
+            *)
+              echo "Refusing to delete '${BRANCH}' — name must start with preview/"
+              exit 1
+              ;;
+          esac
+
+          API="https://console.neon.tech/api/v2"
+          AUTH_HEADER="Authorization: Bearer ${NEON_API_KEY}"
+
+          list_response="$(curl -sS -w '\n%{http_code}' \
+            -H "${AUTH_HEADER}" \
+            -H 'Accept: application/json' \
+            "${API}/projects/${NEON_PROJECT_ID}/branches")"
+          list_code="$(printf '%s\n' "${list_response}" | tail -n1)"
+          list_body="$(printf '%s\n' "${list_response}" | sed '$d')"
+
+          if [ "${list_code}" != "200" ]; then
+            echo "Failed to list Neon branches (HTTP ${list_code}): ${list_body}"
+            exit 1
+          fi
+
+          branch_id="$(printf '%s\n' "${list_body}" | jq -r --arg name "${BRANCH}" '
+            .branches[]? | select(.name == $name) | .id
+          ' | head -n1)"
+
+          if [ -z "${branch_id}" ] || [ "${branch_id}" = "null" ]; then
+            echo "Neon branch '${BRANCH}' not found; nothing to delete (already gone or preview never created)."
+            exit 0
+          fi
+
+          is_default="$(printf '%s\n' "${list_body}" | jq -r --arg id "${branch_id}" '
+            .branches[]? | select(.id == $id) | (.default // false) | tostring
+          ' | head -n1)"
+          if [ "${is_default}" = "true" ]; then
+            echo "Refusing to delete default/primary Neon branch id=${branch_id} name=${BRANCH}"
+            exit 1
+          fi
+
+          echo "Deleting Neon branch '${BRANCH}' (id=${branch_id})…"
+          del_response="$(curl -sS -w '\n%{http_code}' -X DELETE \
+            -H "${AUTH_HEADER}" \
+            -H 'Accept: application/json' \
+            "${API}/projects/${NEON_PROJECT_ID}/branches/${branch_id}")"
+          del_code="$(printf '%s\n' "${del_response}" | tail -n1)"
+          del_body="$(printf '%s\n' "${del_response}" | sed '$d')"
+
+          if [ "${del_code}" = "200" ] || [ "${del_code}" = "204" ]; then
+            echo "Deleted Neon branch '${BRANCH}' (id=${branch_id})."
+            exit 0
+          fi
+
+          if [ "${del_code}" = "404" ]; then
+            echo "Neon branch '${BRANCH}' already deleted (HTTP 404); treating as success."
+            exit 0
+          fi
+
+          echo "Failed to delete Neon branch '${BRANCH}' (HTTP ${del_code}): ${del_body}"
+          exit 1
