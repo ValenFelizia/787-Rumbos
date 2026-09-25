@@ -6,12 +6,16 @@ import Link from "next/link";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import {
+  DESTINOS_CURRENCY_FILTER_OPTIONS,
   DESTINOS_SORT_OPTIONS,
+  filterDestinationsByCurrency,
   getActiveUpcomingDepartures,
   getListedPrice,
   getTransportLabel,
   groupDestinationsForSort,
   hasExpiredListedPrice,
+  isPriceSortMode,
+  type DestinosCurrencyFilter,
   type DestinosSortMode,
 } from "@/lib/catalog/logic";
 import type { DestinationPage } from "@/lib/catalog/types";
@@ -19,6 +23,30 @@ import { clustersData } from "@/lib/clusters-data";
 import { AGENCY_PHONE, whatsappLink } from "@/lib/constants";
 import { MapPin, Calendar, ArrowRight } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+
+function CardListedPrice({ dest }: { dest: DestinationPage }) {
+  const listed = getListedPrice(dest);
+  if (listed) {
+    return (
+      <div>
+        <p className="leading-none">
+          <span className="text-xs font-bold text-[#006183] mr-1">Desde</span>
+          <span className="text-xl font-extrabold text-[#0b4058] tabular-nums">
+            {listed.currency === "USD" ? "USD" : "$"}
+            {listed.amount.toLocaleString("es-AR")}
+          </span>
+        </p>
+        <p className="text-[10px] text-[#0b4058]/60 mt-0.5">
+          {dest.priceNote || "por persona en base doble"}
+        </p>
+      </div>
+    );
+  }
+  if (hasExpiredListedPrice(dest)) {
+    return <p className="text-sm font-bold text-[#0b4058]/70">Consultá precio actualizado</p>;
+  }
+  return <p className="text-sm font-bold text-[#0b4058]/70">Consultar tarifa</p>;
+}
 
 function DestinationCard({ dest }: { dest: DestinationPage }) {
   const activeDepartures = getActiveUpcomingDepartures(dest);
@@ -92,35 +120,14 @@ function DestinationCard({ dest }: { dest: DestinationPage }) {
           <h2 className="font-[family-name:var(--font-brand-heading)] text-2xl font-bold tracking-tight text-[#0b4058] group-hover:text-[#006183] transition-colors duration-200">
             {dest.name}
           </h2>
+          {/* Precio alto en la card (QOL-02): visible junto al título, sin depender del bloque inferior */}
+          <CardListedPrice dest={dest} />
           <p className="text-sm text-[#0b4058]/80 line-clamp-3 leading-relaxed text-pretty">
             {dest.description}
           </p>
         </div>
 
-        <div className="space-y-4 pt-4 border-t border-[#0b4058]/5">
-          <div className="flex items-baseline justify-between">
-            <span className="text-xs text-[#0b4058]/60 font-semibold">Tarifa base</span>
-            {(() => {
-              const listed = getListedPrice(dest);
-              return listed ? (
-                <div className="text-right">
-                  <span className="text-xs font-bold text-[#006183] mr-1">Desde</span>
-                  <span className="text-2xl font-extrabold text-[#0b4058]">
-                    {listed.currency === "USD" ? "USD" : "$"}
-                    {listed.amount.toLocaleString("es-AR")}
-                  </span>
-                  <p className="text-[10px] text-[#0b4058]/60 mt-0.5">
-                    {dest.priceNote || "por persona en base doble"}
-                  </p>
-                </div>
-              ) : hasExpiredListedPrice(dest) ? (
-                <span className="text-sm font-bold text-[#0b4058]/70">Consultá precio actualizado</span>
-              ) : (
-                <span className="text-sm font-bold text-[#0b4058]/70">Consultar tarifa</span>
-              );
-            })()}
-          </div>
-
+        <div className="pt-4 border-t border-[#0b4058]/5">
           <Link
             href={`/destinos/${dest.slug}`}
             className="font-[family-name:var(--font-brand-heading)] flex w-full items-center justify-center gap-2 rounded-xl bg-[#0b4058] hover:bg-[#006183] text-white py-3 text-sm font-bold transition-all duration-200 active:scale-[0.96]"
@@ -137,13 +144,20 @@ function DestinationCard({ dest }: { dest: DestinationPage }) {
 export function DestinosView({ destinations }: { destinations: DestinationPage[] }) {
   const [filter, setFilter] = useState<"todos" | "nacional" | "internacional">("todos");
   const [sortMode, setSortMode] = useState<DestinosSortMode>("featured");
+  const [currencyFilter, setCurrencyFilter] = useState<DestinosCurrencyFilter>("all");
+
+  const showCurrencyChip = isPriceSortMode(sortMode);
 
   const filteredDestinations = destinations.filter((d) => {
     if (filter === "todos") return true;
     return d.region === filter;
   });
 
-  const destinationGroups = groupDestinationsForSort(filteredDestinations, sortMode, {
+  const currencyScoped = showCurrencyChip
+    ? filterDestinationsByCurrency(filteredDestinations, currencyFilter)
+    : filteredDestinations;
+
+  const destinationGroups = groupDestinationsForSort(currencyScoped, sortMode, {
     catalogOrder: destinations,
   });
 
@@ -179,7 +193,7 @@ export function DestinosView({ destinations }: { destinations: DestinationPage[]
           ))}
         </div>
 
-        {/* Region filter + Ordenar (toolbar ligera, no sidebar) */}
+        {/* Region filter + Ordenar (+ Moneda al ordenar por precio; QOL-04 month chips irán junto a esto) */}
         <div className="mb-12 flex flex-col items-center gap-4 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-6 sm:gap-y-3">
           <div
             className="bg-white p-1.5 rounded-full border border-[#0b4058]/10 shadow-sm flex gap-1"
@@ -207,7 +221,11 @@ export function DestinosView({ destinations }: { destinations: DestinationPage[]
             <span className="font-semibold tracking-wide">Ordenar</span>
             <select
               value={sortMode}
-              onChange={(e) => setSortMode(e.target.value as DestinosSortMode)}
+              onChange={(e) => {
+                const next = e.target.value as DestinosSortMode;
+                setSortMode(next);
+                if (!isPriceSortMode(next)) setCurrencyFilter("all");
+              }}
               aria-label="Ordenar destinos"
               className="min-w-[12.5rem] appearance-none rounded-full border border-[#0b4058]/15 bg-white bg-[length:0.85rem] bg-[right_0.85rem_center] bg-no-repeat py-2 pl-4 pr-9 text-sm font-semibold text-[#0b4058] shadow-sm transition-colors hover:border-[#0b4058]/30 focus:border-[#0b4058]/40 focus:outline-none focus:ring-2 focus:ring-[#0b4058]/15 cursor-pointer"
               style={{
@@ -221,6 +239,33 @@ export function DestinosView({ destinations }: { destinations: DestinationPage[]
               ))}
             </select>
           </label>
+
+          {showCurrencyChip ? (
+            <div
+              className="inline-flex flex-wrap items-center gap-2 text-sm text-[#0b4058]/75"
+              role="group"
+              aria-label="Filtrar por moneda"
+            >
+              <span className="font-semibold tracking-wide">Moneda:</span>
+              <div className="bg-white p-1 rounded-full border border-[#0b4058]/10 shadow-sm flex gap-0.5">
+                {DESTINOS_CURRENCY_FILTER_OPTIONS.map((option) => (
+                  <button
+                    key={option.value}
+                    type="button"
+                    onClick={() => setCurrencyFilter(option.value)}
+                    aria-pressed={currencyFilter === option.value}
+                    className={`px-3.5 py-1.5 rounded-full text-sm font-semibold transition-all duration-200 cursor-pointer active:scale-95 ${
+                      currencyFilter === option.value
+                        ? "bg-[#0b4058] text-white shadow-sm"
+                        : "text-[#0b4058]/70 hover:text-[#0b4058] hover:bg-[#0b4058]/5"
+                    }`}
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ) : null}
         </div>
 
         {/* Grid of Destinations (bloques de moneda solo al ordenar por precio con mix) */}

@@ -1,11 +1,13 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
+  filterDestinationsByCurrency,
   getListedPrice,
   getQuoteSuggestionNames,
   groupDestinationsForSort,
   hasExpiredListedPrice,
   isPriceExpired,
+  isPriceSortMode,
 } from "./logic";
 import type { Departure, DestinationPage } from "./types";
 
@@ -100,6 +102,88 @@ describe("getListedPrice", () => {
     });
     assert.equal(getListedPrice(expired, today), undefined);
     assert.equal(hasExpiredListedPrice(expired, today), true);
+  });
+});
+
+describe("filterDestinationsByCurrency", () => {
+  const arsDest = destination({
+    slug: "mendoza",
+    name: "Mendoza",
+    currency: "ARS",
+    priceFrom: 420000,
+    departures: [departure({ priceFrom: 420000 })],
+  });
+  const usdDest = destination({
+    slug: "rio-de-janeiro",
+    name: "Río de Janeiro",
+    country: "Brasil",
+    region: "internacional",
+    currency: "USD",
+    priceFrom: 1850,
+    departures: [departure({ priceFrom: 1850, currency: "USD" })],
+  });
+  const unpriced = destination({
+    slug: "a-medida",
+    name: "Viaje a medida",
+    currency: "ARS",
+    priceFrom: undefined,
+    departures: [],
+  });
+  const expired = destination({
+    slug: "precio-vencido",
+    name: "Precio vencido",
+    currency: "USD",
+    priceFrom: 900,
+    priceValidUntil: "2026-09-01",
+    departures: [],
+  });
+  const catalog = [arsDest, usdDest, unpriced, expired];
+
+  it("keeps the full list for Todas", () => {
+    assert.deepEqual(
+      filterDestinationsByCurrency(catalog, "all", today).map((d) => d.slug),
+      ["mendoza", "rio-de-janeiro", "a-medida", "precio-vencido"],
+    );
+  });
+
+  it("keeps only ARS listed prices (excludes unpriced/expired)", () => {
+    assert.deepEqual(
+      filterDestinationsByCurrency(catalog, "ARS", today).map((d) => d.slug),
+      ["mendoza"],
+    );
+  });
+
+  it("keeps only USD listed prices (excludes unpriced/expired)", () => {
+    assert.deepEqual(
+      filterDestinationsByCurrency(catalog, "USD", today).map((d) => d.slug),
+      ["rio-de-janeiro"],
+    );
+  });
+
+  it("uses getListedPrice currency, not the raw destination.currency field", () => {
+    // Destination declares ARS but the only hotel amount is USD via departure.
+    const mixed = destination({
+      slug: "mixto",
+      name: "Mixto",
+      currency: "ARS",
+      priceFrom: 100,
+      departures: [departure({ priceFrom: 500, currency: "USD" })],
+    });
+    assert.deepEqual(getListedPrice(mixed, today), { amount: 500, currency: "USD" });
+    assert.deepEqual(
+      filterDestinationsByCurrency([mixed], "USD", today).map((d) => d.slug),
+      ["mixto"],
+    );
+    assert.deepEqual(filterDestinationsByCurrency([mixed], "ARS", today), []);
+  });
+});
+
+describe("isPriceSortMode", () => {
+  it("is true only for Precio ↑/↓", () => {
+    assert.equal(isPriceSortMode("price-asc"), true);
+    assert.equal(isPriceSortMode("price-desc"), true);
+    assert.equal(isPriceSortMode("featured"), false);
+    assert.equal(isPriceSortMode("next-departure"), false);
   });
 });
 
