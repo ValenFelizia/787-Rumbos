@@ -13,6 +13,13 @@ export interface ClusterPage {
   id: ClusterId;
   slug: string;
   title: string;
+  /** Título corto para cards en `/destinos` (QOL-03). */
+  shortTitle: string;
+  /** Una línea de apoyo bajo el título corto. */
+  cardLine: string;
+  /** Imagen de la card en el listado (assets locales; no Payload aún — D8). */
+  cardImage: string;
+  cardImageAlt: string;
   metaTitle: string;
   metaDescription: string;
   /** Intro corta (~150–200 palabras máx. en total con bullets). */
@@ -29,6 +36,10 @@ export const clustersData: ClusterPage[] = [
     id: "brasil",
     slug: "brasil-desde-cordoba",
     title: "Paquetes a Brasil desde Córdoba",
+    shortTitle: "Brasil desde Córdoba",
+    cardLine: "Río, playa y eventos · a medida o grupales",
+    cardImage: "/destinos/rio.jpg",
+    cardImageAlt: "Río de Janeiro — paquetes a Brasil desde Córdoba",
     metaTitle: "Paquetes a Brasil desde Córdoba | 787 Rumbos",
     metaDescription:
       "Río, Porto de Galinhas, Camboriú y Bahía desde Córdoba. Paquetes a medida o grupales. Cotizá tu viaje por WhatsApp con atención humana.",
@@ -58,6 +69,10 @@ export const clustersData: ClusterPage[] = [
     id: "caribe",
     slug: "caribe-desde-cordoba",
     title: "Caribe desde Córdoba",
+    shortTitle: "Caribe desde Córdoba",
+    cardLine: "All Inclusive · Cancún, Riviera Maya y RD",
+    cardImage: "/destinos/cancun.jpg",
+    cardImageAlt: "Cancún — paquetes al Caribe desde Córdoba",
     metaTitle: "Paquetes al Caribe desde Córdoba | 787 Rumbos",
     metaDescription:
       "Cancún, Riviera Maya, Punta Cana y Bayahibe. All Inclusive, traslados y asistencia. La ciudad de salida se confirma al consultar.",
@@ -78,6 +93,10 @@ export const clustersData: ClusterPage[] = [
     id: "argentina-bus",
     slug: "argentina-en-bus-desde-cordoba",
     title: "Argentina en bus desde Córdoba",
+    shortTitle: "Argentina en bus",
+    cardLine: "Bus y bus cama · Termas, Cataratas y más",
+    cardImage: "/destinos/cataratas.jpg",
+    cardImageAlt: "Cataratas del Iguazú — salidas en bus desde Córdoba",
     metaTitle: "Viajes en bus por Argentina desde Córdoba | 787 Rumbos",
     metaDescription:
       "Salidas en bus y bus cama desde Córdoba: Termas, Cataratas, Salar y más. También boletería oficial de Vía Bariloche en el aeropuerto.",
@@ -101,6 +120,10 @@ export const clustersData: ClusterPage[] = [
     id: "salidas-grupales",
     slug: "salidas-grupales-desde-cordoba",
     title: "Salidas grupales desde Córdoba",
+    shortTitle: "Salidas grupales",
+    cardLine: "Fechas confirmadas · cupos publicados",
+    cardImage: "/rumbos/grupal.jpg",
+    cardImageAlt: "Salidas grupales confirmadas desde Córdoba",
     metaTitle: "Salidas grupales confirmadas desde Córdoba | 787 Rumbos",
     metaDescription:
       "Próximas salidas grupales de 787 Rumbos desde Córdoba: fechas, cupos y destinos. Cotizá por WhatsApp con atención humana.",
@@ -141,6 +164,19 @@ export function getClusterDestinations(
   return slugs
     .map((slug) => destinations.find((d) => d.slug === slug))
     .filter((d): d is DestinationPage => Boolean(d));
+}
+
+/** Contadores para cards de cluster en `/destinos` (QOL-03). */
+export function getClusterCardStats(
+  cluster: ClusterPage,
+  destinations: DestinationPage[],
+): { destinationCount: number; departureCount: number } {
+  const items = getClusterDestinations(cluster, destinations);
+  const departureCount = items.reduce(
+    (sum, dest) => sum + getActiveUpcomingDepartures(dest).length,
+    0,
+  );
+  return { destinationCount: items.length, departureCount };
 }
 
 /** Primer cluster al que pertenece un destino (para breadcrumb / link de vuelta). */

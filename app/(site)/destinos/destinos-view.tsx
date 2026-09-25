@@ -15,10 +15,11 @@ import {
   type DestinosSortMode,
 } from "@/lib/catalog/logic";
 import type { DestinationPage } from "@/lib/catalog/types";
-import { clustersData } from "@/lib/clusters-data";
+import { clustersData, getClusterCardStats } from "@/lib/clusters-data";
 import { AGENCY_PHONE, whatsappLink } from "@/lib/constants";
 import { MapPin, Calendar, ArrowRight } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { ClusterCard } from "@/components/sections/ClusterCard";
 
 function DestinationCard({ dest }: { dest: DestinationPage }) {
   const activeDepartures = getActiveUpcomingDepartures(dest);
@@ -151,13 +152,13 @@ export function DestinosView({ destinations }: { destinations: DestinationPage[]
     <main className="min-h-screen bg-[#f9f9f9] text-[#0b4058]">
       <Navbar />
 
-      {/* Header Section */}
-      <section className="bg-gradient-to-b from-[#0b4058] to-[#006183] text-white py-20 px-6 text-center relative overflow-hidden">
-        <div className="relative z-10 max-w-4xl mx-auto space-y-4">
-          <h1 className="font-[family-name:var(--font-brand-heading)] text-4xl md:text-6xl font-extrabold tracking-tight text-balance">
+      {/* Header Section — lower on mobile so cluster cards + grid start fit (D4) */}
+      <section className="bg-gradient-to-b from-[#0b4058] to-[#006183] text-white py-10 md:py-16 px-6 text-center relative overflow-hidden">
+        <div className="relative z-10 max-w-4xl mx-auto space-y-3 md:space-y-4">
+          <h1 className="font-[family-name:var(--font-brand-heading)] text-3xl md:text-6xl font-extrabold tracking-tight text-balance">
             Elegí tu próximo rumbo
           </h1>
-          <p className="max-w-2xl mx-auto text-white/80 text-base md:text-lg text-pretty">
+          <p className="max-w-2xl mx-auto text-white/80 text-sm md:text-lg text-pretty">
             Explorá nuestras salidas grupales confirmadas y paquetes a medida. Asesoramiento 100% humano desde Córdoba.
           </p>
         </div>
@@ -165,19 +166,28 @@ export function DestinosView({ destinations }: { destinations: DestinationPage[]
       </section>
 
       {/* Main Catalog Section */}
-      <section className="mx-auto w-full max-w-6xl px-6 py-12">
-        {/* Hubs SEO */}
-        <div className="mb-10 flex flex-wrap justify-center gap-2">
-          {clustersData.map((cluster) => (
-            <Link
-              key={cluster.id}
-              href={`/destinos/${cluster.slug}`}
-              className="rounded-full border border-[#0b4058]/15 bg-white px-4 py-2 text-xs md:text-sm font-semibold text-[#0b4058]/80 shadow-sm transition-all hover:border-[#0b4058]/35 hover:text-[#0b4058] hover:shadow-md"
-            >
-              {cluster.title}
-            </Link>
-          ))}
-        </div>
+      <section className="mx-auto w-full max-w-6xl px-6 py-8 md:py-12">
+        {/* Hubs SEO — visual cluster cards (QOL-03 / IA alt. B); horizontal scroll on mobile */}
+        <nav aria-label="Catálogos desde Córdoba" className="mb-8 md:mb-10">
+          <div className="-mx-6 flex snap-x snap-mandatory gap-3 overflow-x-auto px-6 pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:grid md:grid-cols-4 md:gap-4 md:overflow-visible md:px-0 md:pb-0">
+            {clustersData.map((cluster) => {
+              const stats = getClusterCardStats(cluster, destinations);
+              return (
+                <ClusterCard
+                  key={cluster.id}
+                  href={`/destinos/${cluster.slug}`}
+                  title={cluster.shortTitle}
+                  line={cluster.cardLine}
+                  image={cluster.cardImage}
+                  imageAlt={cluster.cardImageAlt}
+                  destinationCount={stats.destinationCount}
+                  departureCount={stats.departureCount}
+                  className="w-[min(72vw,17.5rem)] shrink-0 snap-start md:w-auto"
+                />
+              );
+            })}
+          </div>
+        </nav>
 
         {/* Region filter + Ordenar (toolbar ligera, no sidebar) */}
         <div className="mb-12 flex flex-col items-center gap-4 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-6 sm:gap-y-3">
