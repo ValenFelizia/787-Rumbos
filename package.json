@@ -49,8 +49,8 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@modelcontextprotocol/sdk": "1.26.0",
-    "@playwright/test": "^1.62.1",
+    "@modelcontextprotocol/sdk": "1.30.0",
+    "@playwright/test": "^1.63.0",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^22",
     "@types/react": "^19",
@@ -59,7 +59,7 @@
     "eslint-config-next": "^15.5.25",
     "postcss": "^8.5",
     "tailwindcss": "^4.1.9",
-    "tsx": "4.21.0",
+    "tsx": "4.23.15",
     "typescript": "^5"
   }
 }
