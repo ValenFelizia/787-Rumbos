@@ -9,12 +9,16 @@ import {
   DESTINOS_CURRENCY_FILTER_OPTIONS,
   DESTINOS_SORT_OPTIONS,
   filterDestinationsByCurrency,
+  filterDestinationsByDepartureMonth,
+  formatDepartureMonthLabel,
   getActiveUpcomingDepartures,
   getListedPrice,
   getTransportLabel,
   groupDestinationsForSort,
   hasExpiredListedPrice,
   isPriceSortMode,
+  listAvailableDepartureMonths,
+  type DepartureMonthKey,
   type DestinosCurrencyFilter,
   type DestinosSortMode,
 } from "@/lib/catalog/logic";
@@ -142,25 +146,42 @@ function DestinationCard({ dest }: { dest: DestinationPage }) {
   );
 }
 
+function monthFilterEmptyWhatsApp(monthLabel: string): string {
+  return whatsappLink(
+    AGENCY_PHONE.whatsapp,
+    `Hola 787 Rumbos! Estuve mirando salidas de ${monthLabel} en la web y no encontré lo que buscaba. ¿Me ayudan a armar algo para ese mes? (Web - Destinos filtro mes)`,
+  );
+}
+
 export function DestinosView({ destinations }: { destinations: DestinationPage[] }) {
   const [filter, setFilter] = useState<"todos" | "nacional" | "internacional">("todos");
   const [sortMode, setSortMode] = useState<DestinosSortMode>("featured");
   const [currencyFilter, setCurrencyFilter] = useState<DestinosCurrencyFilter>("all");
+  const [monthKey, setMonthKey] = useState<DepartureMonthKey | null>(null);
 
   const showCurrencyChip = isPriceSortMode(sortMode);
 
-  const filteredDestinations = destinations.filter((d) => {
+  const monthOptions = listAvailableDepartureMonths(destinations);
+
+  const filteredByRegion = destinations.filter((d) => {
     if (filter === "todos") return true;
     return d.region === filter;
   });
 
+  // Pipeline: region → month → currency (when sorting by price) → sort/grouping
+  const filteredByMonth = filterDestinationsByDepartureMonth(filteredByRegion, monthKey);
+
   const currencyScoped = showCurrencyChip
-    ? filterDestinationsByCurrency(filteredDestinations, currencyFilter)
-    : filteredDestinations;
+    ? filterDestinationsByCurrency(filteredByMonth, currencyFilter)
+    : filteredByMonth;
 
   const destinationGroups = groupDestinationsForSort(currencyScoped, sortMode, {
     catalogOrder: destinations,
   });
+
+  const resultCount = destinationGroups.reduce((sum, group) => sum + group.items.length, 0);
+  const selectedMonthLabel = monthKey ? formatDepartureMonthLabel(monthKey) : null;
+  const showMonthEmpty = Boolean(monthKey && resultCount === 0);
 
   return (
     <main className="min-h-screen bg-[#f9f9f9] text-[#0b4058]">
@@ -203,8 +224,8 @@ export function DestinosView({ destinations }: { destinations: DestinationPage[]
           </div>
         </nav>
 
-        {/* Region filter + Ordenar (+ Moneda al ordenar por precio; QOL-04 month chips irán junto a esto) */}
-        <div className="mb-12 flex flex-col items-center gap-4 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-6 sm:gap-y-3">
+        {/* Region filter + Ordenar + Moneda (QOL-02); month chips in their own row below */}
+        <div className="mb-5 flex flex-col items-center gap-4 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-6 sm:gap-y-3">
           <div
             className="bg-white p-1.5 rounded-full border border-[#0b4058]/10 shadow-sm flex gap-1"
             role="group"
@@ -278,23 +299,92 @@ export function DestinosView({ destinations }: { destinations: DestinationPage[]
           ) : null}
         </div>
 
-        {/* Grid of Destinations (bloques de moneda solo al ordenar por precio con mix) */}
-        <div className="space-y-12">
-          {destinationGroups.map((group, groupIndex) => (
-            <div key={group.heading ?? `group-${groupIndex}`} className="space-y-5">
-              {group.heading ? (
-                <h3 className="font-[family-name:var(--font-brand-heading)] text-sm font-bold uppercase tracking-[0.18em] text-[#0b4058]/45">
-                  {group.heading}
-                </h3>
-              ) : null}
-              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                {group.items.map((dest) => (
-                  <DestinationCard key={dest.slug} dest={dest} />
-                ))}
-              </div>
+        {/* Month-of-departure chips (own row under region/sort/currency) */}
+        {monthOptions.length > 0 ? (
+          <div
+            className="mb-12 flex flex-col items-center gap-3"
+            role="group"
+            aria-label="Filtrar por mes de salida"
+          >
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#0b4058]/45">
+              Mes de salida
+            </p>
+            <div className="flex max-w-full flex-wrap justify-center gap-2">
+              {monthOptions.map((option) => {
+                const selected = monthKey === option.key;
+                return (
+                  <button
+                    key={option.key}
+                    type="button"
+                    onClick={() => setMonthKey(selected ? null : option.key)}
+                    aria-pressed={selected}
+                    className={`rounded-full border px-3.5 py-1.5 text-sm font-semibold transition-all duration-200 cursor-pointer active:scale-95 ${
+                      selected
+                        ? "border-[#0b4058] bg-[#0b4058] text-white shadow-sm"
+                        : "border-[#0b4058]/15 bg-white text-[#0b4058]/75 shadow-sm hover:border-[#0b4058]/30 hover:text-[#0b4058]"
+                    }`}
+                  >
+                    {option.label}
+                  </button>
+                );
+              })}
             </div>
-          ))}
-        </div>
+          </div>
+        ) : (
+          <div className="mb-12" />
+        )}
+
+        {/* Grid of Destinations (bloques de moneda solo al ordenar por precio con mix) */}
+        {showMonthEmpty && selectedMonthLabel ? (
+          <div
+            className="rounded-3xl border border-[#0b4058]/10 bg-white px-6 py-12 text-center shadow-sm"
+            role="status"
+            aria-live="polite"
+          >
+            <h2 className="font-[family-name:var(--font-brand-heading)] text-2xl font-extrabold tracking-tight text-[#0b4058]">
+              No hay salidas en {selectedMonthLabel}
+            </h2>
+            <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-[#0b4058]/70 text-pretty">
+              Con el filtro actual no encontramos destinos con salida activa ese mes. Escribinos y te
+              armamos opciones a medida.
+            </p>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+              <button
+                type="button"
+                onClick={() => setMonthKey(null)}
+                className="rounded-xl border border-[#0b4058]/20 bg-white px-5 py-3 text-sm font-bold text-[#0b4058] transition-colors hover:border-[#0b4058]/35 hover:bg-[#0b4058]/5 cursor-pointer"
+              >
+                Ver todos los meses
+              </button>
+              <a
+                href={monthFilterEmptyWhatsApp(selectedMonthLabel)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-[family-name:var(--font-brand-heading)] inline-flex items-center gap-2 rounded-xl bg-[#dae553] px-5 py-3 text-sm font-black text-[#0b4058] shadow-md transition-all duration-200 hover:bg-[#c3cf3e] active:scale-[0.96]"
+              >
+                <WhatsAppIcon size={14} className="h-5 w-5 shrink-0" />
+                <span>Consultar salidas de {selectedMonthLabel}</span>
+              </a>
+            </div>
+          </div>
+        ) : (
+          <div className="space-y-12">
+            {destinationGroups.map((group, groupIndex) => (
+              <div key={group.heading ?? `group-${groupIndex}`} className="space-y-5">
+                {group.heading ? (
+                  <h3 className="font-[family-name:var(--font-brand-heading)] text-sm font-bold uppercase tracking-[0.18em] text-[#0b4058]/45">
+                    {group.heading}
+                  </h3>
+                ) : null}
+                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                  {group.items.map((dest) => (
+                    <DestinationCard key={dest.slug} dest={dest} />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Banner Editorial Final */}
         <div className="bg-gradient-to-br from-[#0b4058] to-[#00516e] text-white p-8 md:p-12 rounded-3xl mt-16 shadow-xl shadow-[#0b4058]/10 text-center relative overflow-hidden flex flex-col items-center justify-center gap-6 border border-white/5">

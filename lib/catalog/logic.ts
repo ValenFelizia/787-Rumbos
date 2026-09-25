@@ -60,6 +60,123 @@ export function getActiveUpcomingDepartures(dest: DestinationPage, today = getTo
   return getUpcomingDepartures(dest, today).filter((dep) => dep.status !== "sold-out");
 }
 
+/** Clave de mes de salida (`YYYY-MM`) desde una fecha ISO local. */
+export type DepartureMonthKey = string;
+
+/** Chip de mes en `/destinos`: clave estable + etiqueta es-AR corta. */
+export type DepartureMonthOption = {
+  key: DepartureMonthKey;
+  label: string;
+};
+
+const MONTH_SHORT_ES = [
+  "Ene",
+  "Feb",
+  "Mar",
+  "Abr",
+  "May",
+  "Jun",
+  "Jul",
+  "Ago",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dic",
+] as const;
+
+/** Ventana por defecto de chips de mes (mes actual inclusive). */
+export const DEPARTURE_MONTH_WINDOW = 6;
+
+/**
+ * Clave `YYYY-MM` de una fecha ISO `YYYY-MM-DD` (parseo local, sin UTC).
+ * Misma convención que `isDepartureUpcoming`.
+ */
+export function getDepartureMonthKey(isoDate: string): DepartureMonthKey {
+  const day = /^(\d{4})-(\d{2})-(\d{2})$/.exec(isoDate);
+  if (!day) {
+    // Fallback: mismo parseo local que las salidas.
+    const local = new Date(`${isoDate}T00:00:00`);
+    const y = local.getFullYear();
+    const m = String(local.getMonth() + 1).padStart(2, "0");
+    return `${y}-${m}`;
+  }
+  return `${day[1]}-${day[2]}`;
+}
+
+/** Etiqueta de chip: "Oct 2026" (abreviatura es-AR, capitalizada). */
+export function formatDepartureMonthLabel(monthKey: DepartureMonthKey): string {
+  const match = /^(\d{4})-(\d{2})$/.exec(monthKey);
+  if (!match) return monthKey;
+  const year = Number(match[1]);
+  const monthIndex = Number(match[2]) - 1;
+  if (monthIndex < 0 || monthIndex > 11) return monthKey;
+  return `${MONTH_SHORT_ES[monthIndex]} ${year}`;
+}
+
+function monthKeysInWindow(today: Date, monthsAhead: number): DepartureMonthKey[] {
+  const keys: DepartureMonthKey[] = [];
+  const cursor = new Date(today.getFullYear(), today.getMonth(), 1);
+  for (let i = 0; i < monthsAhead; i++) {
+    const y = cursor.getFullYear();
+    const m = String(cursor.getMonth() + 1).padStart(2, "0");
+    keys.push(`${y}-${m}`);
+    cursor.setMonth(cursor.getMonth() + 1);
+  }
+  return keys;
+}
+
+/**
+ * Meses (próximos `monthsAhead`, default 6) con ≥1 salida activa futura.
+ * Sold-out y fechas pasadas no cuentan. Orden cronológico determinista.
+ */
+export function listAvailableDepartureMonths(
+  destinations: DestinationPage[],
+  options?: { today?: Date; monthsAhead?: number },
+): DepartureMonthOption[] {
+  const today = options?.today ?? getTodayLocal();
+  const monthsAhead = options?.monthsAhead ?? DEPARTURE_MONTH_WINDOW;
+  const windowKeys = monthKeysInWindow(today, monthsAhead);
+  const allowed = new Set(windowKeys);
+  const withDepartures = new Set<DepartureMonthKey>();
+
+  for (const dest of destinations) {
+    for (const dep of getActiveUpcomingDepartures(dest, today)) {
+      const key = getDepartureMonthKey(dep.date);
+      if (allowed.has(key)) withDepartures.add(key);
+    }
+  }
+
+  return windowKeys
+    .filter((key) => withDepartures.has(key))
+    .map((key) => ({ key, label: formatDepartureMonthLabel(key) }));
+}
+
+/** True si el destino tiene ≥1 salida activa en el mes `YYYY-MM`. */
+export function destinationHasActiveDepartureInMonth(
+  dest: DestinationPage,
+  monthKey: DepartureMonthKey,
+  today = getTodayLocal(),
+): boolean {
+  return getActiveUpcomingDepartures(dest, today).some(
+    (dep) => getDepartureMonthKey(dep.date) === monthKey,
+  );
+}
+
+/**
+ * Filtra destinos con al menos una salida activa en el mes.
+ * `monthKey` null/undefined = sin filtro de mes.
+ */
+export function filterDestinationsByDepartureMonth(
+  destinations: DestinationPage[],
+  monthKey: DepartureMonthKey | null | undefined,
+  today = getTodayLocal(),
+): DestinationPage[] {
+  if (!monthKey) return destinations;
+  return destinations.filter((dest) =>
+    destinationHasActiveDepartureInMonth(dest, monthKey, today),
+  );
+}
+
 /** La salida consultable más cercana. */
 export function getNearestActiveDeparture(dest: DestinationPage): Departure | undefined {
   return getActiveUpcomingDepartures(dest)
