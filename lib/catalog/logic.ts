@@ -230,3 +230,131 @@ export function getRelatedDestinations(
 export function getAllDestinationSlugs(destinations: DestinationPage[]): string[] {
   return destinations.map((d) => d.slug);
 }
+
+/** Modos del select “Ordenar” en `/destinos`. */
+export type DestinosSortMode = "featured" | "price-asc" | "price-desc" | "next-departure";
+
+export const DESTINOS_SORT_OPTIONS: { value: DestinosSortMode; label: string }[] = [
+  { value: "featured", label: "Destacados" },
+  { value: "price-asc", label: "Precio menor a mayor" },
+  { value: "price-desc", label: "Precio mayor a menor" },
+  { value: "next-departure", label: "Próxima salida" },
+];
+
+/** Bloque del listado: con encabezado de moneda solo cuando el sort por precio mezcla ARS y USD. */
+export type DestinationSortGroup = {
+  heading?: "En pesos" | "En dólares";
+  items: DestinationPage[];
+};
+
+function catalogOrderIndex(
+  destinations: DestinationPage[],
+  catalogOrder: DestinationPage[],
+): Map<string, number> {
+  const index = new Map<string, number>();
+  catalogOrder.forEach((dest, i) => {
+    if (!index.has(dest.slug)) index.set(dest.slug, i);
+  });
+  // Destinos que no estén en el catálogo de referencia quedan al final.
+  destinations.forEach((dest, i) => {
+    if (!index.has(dest.slug)) index.set(dest.slug, catalogOrder.length + i);
+  });
+  return index;
+}
+
+function compareCatalogTies(
+  a: DestinationPage,
+  b: DestinationPage,
+  orderIndex: Map<string, number>,
+): number {
+  const ia = orderIndex.get(a.slug) ?? 0;
+  const ib = orderIndex.get(b.slug) ?? 0;
+  if (ia !== ib) return ia - ib;
+  return a.name.localeCompare(b.name, "es");
+}
+
+function compareListedPriceAmount(
+  a: DestinationPage,
+  b: DestinationPage,
+  direction: "asc" | "desc",
+  orderIndex: Map<string, number>,
+  today: Date,
+): number {
+  const pa = getListedPrice(a, today);
+  const pb = getListedPrice(b, today);
+  if (pa == null && pb == null) return compareCatalogTies(a, b, orderIndex);
+  if (pa == null) return 1;
+  if (pb == null) return -1;
+  const diff = direction === "asc" ? pa.amount - pb.amount : pb.amount - pa.amount;
+  if (diff !== 0) return diff;
+  return compareCatalogTies(a, b, orderIndex);
+}
+
+/**
+ * Ordena el listado de `/destinos` para el select Ordenar.
+ * - `featured`: conserva el orden de entrada (Payload `sortOrder`).
+ * - `price-*`: clave = `getListedPrice`; nunca mezcla ARS/USD en la misma escala;
+ *   sin precio / vencido / “Consultar” al final; monedas mixtas → bloques “En pesos” / “En dólares”.
+ * - `next-departure`: por la salida activa más próxima; sin salida al final.
+ * Empates: orden de catálogo (`sortOrder`), luego nombre.
+ */
+export function groupDestinationsForSort(
+  destinations: DestinationPage[],
+  mode: DestinosSortMode,
+  options?: { today?: Date; catalogOrder?: DestinationPage[] },
+): DestinationSortGroup[] {
+  const today = options?.today ?? getTodayLocal();
+  const catalogOrder = options?.catalogOrder ?? destinations;
+  const orderIndex = catalogOrderIndex(destinations, catalogOrder);
+
+  if (mode === "featured") {
+    return [{ items: destinations.slice() }];
+  }
+
+  if (mode === "next-departure") {
+    const items = destinations.slice().sort((a, b) => {
+      const da = getNearestActiveDeparture(a)?.date;
+      const db = getNearestActiveDeparture(b)?.date;
+      if (!da && !db) return compareCatalogTies(a, b, orderIndex);
+      if (!da) return 1;
+      if (!db) return -1;
+      const byDate = da.localeCompare(db);
+      if (byDate !== 0) return byDate;
+      return compareCatalogTies(a, b, orderIndex);
+    });
+    return [{ items }];
+  }
+
+  const direction = mode === "price-asc" ? "asc" : "desc";
+  const ars: DestinationPage[] = [];
+  const usd: DestinationPage[] = [];
+  const unpriced: DestinationPage[] = [];
+
+  for (const dest of destinations) {
+    const listed = getListedPrice(dest, today);
+    if (listed == null) unpriced.push(dest);
+    else if (listed.currency === "USD") usd.push(dest);
+    else ars.push(dest);
+  }
+
+  const byPrice = (a: DestinationPage, b: DestinationPage) =>
+    compareListedPriceAmount(a, b, direction, orderIndex, today);
+
+  ars.sort(byPrice);
+  usd.sort(byPrice);
+  unpriced.sort((a, b) => compareCatalogTies(a, b, orderIndex));
+
+  const mixedCurrencies = ars.length > 0 && usd.length > 0;
+  if (!mixedCurrencies) {
+    return [{ items: [...ars, ...usd, ...unpriced] }];
+  }
+
+  const groups: DestinationSortGroup[] = [
+    { heading: "En pesos", items: ars },
+    { heading: "En dólares", items: usd },
+  ];
+  if (unpriced.length > 0) {
+    groups.push({ items: unpriced });
+  }
+  return groups;
+}

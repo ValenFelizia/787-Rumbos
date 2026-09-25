@@ -10,7 +10,13 @@ import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { getAllDestinations } from "@/lib/catalog/repository";
-import { getActiveUpcomingDepartures } from "@/lib/catalog/logic";
+import {
+  getActiveUpcomingDepartures,
+  getListedPrice,
+  getNearestActiveDeparture,
+  getTransportLabel,
+  hasExpiredListedPrice,
+} from "@/lib/catalog/logic";
 import {
   getClusterDestinations,
   type ClusterPage,
@@ -107,6 +113,9 @@ export async function ClusterHub({ cluster }: { cluster: ClusterPage }) {
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {destinations.map((dest) => {
                 const activeDepartures = getActiveUpcomingDepartures(dest);
+                const nextDeparture = getNearestActiveDeparture(dest);
+                const listed = getListedPrice(dest);
+
                 return (
                   <article
                     key={dest.slug}
@@ -120,19 +129,39 @@ export async function ClusterHub({ cluster }: { cluster: ClusterPage }) {
                         sizes="(max-width: 768px) 100vw, 33vw"
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                       />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0b4058]/55 via-transparent to-transparent pointer-events-none" />
                       <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm text-[#0b4058] px-3 py-1.5 rounded-full text-xs font-bold shadow-sm flex items-center gap-1.5 border border-black/5">
                         <MapPin className="h-3.5 w-3.5 text-[#e6b451]" />
                         {dest.country}
                       </div>
-                      {activeDepartures.length > 0 ? (
-                        <div className="absolute top-4 right-4 bg-[#dae553] text-[#0b4058] px-3 py-1.5 rounded-full text-xs font-bold shadow-sm flex items-center gap-1">
-                          <Calendar className="h-3.5 w-3.5" />
-                          {activeDepartures.length}{" "}
-                          {activeDepartures.length === 1 ? "salida" : "salidas"}
+                      {nextDeparture ? (
+                        <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-4">
+                          <div className="min-w-0 flex items-center gap-2 rounded-lg bg-[#dae553] px-3 py-2 text-[#0b4058] shadow-sm">
+                            <Calendar className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                            <div className="min-w-0 leading-tight">
+                              <p className="text-[9px] font-bold uppercase tracking-wider text-[#0b4058]/70">
+                                Próxima salida
+                              </p>
+                              <p className="text-xs font-extrabold truncate">
+                                {nextDeparture.displayDate}
+                                <span className="font-semibold text-[#0b4058]/70">
+                                  {" "}
+                                  · {getTransportLabel(nextDeparture.transport)}
+                                </span>
+                              </p>
+                            </div>
+                          </div>
+                          {activeDepartures.length > 1 && (
+                            <span className="shrink-0 rounded-lg bg-white/95 px-2.5 py-2 text-[10px] font-bold text-[#0b4058] border border-black/5 tabular-nums">
+                              +{activeDepartures.length - 1} más
+                            </span>
+                          )}
                         </div>
                       ) : (
-                        <div className="absolute top-4 right-4 bg-white/95 text-[#0b4058]/80 px-3 py-1.5 rounded-full text-xs font-bold shadow-sm border border-black/5">
-                          A medida
+                        <div className="absolute bottom-4 left-4 right-4">
+                          <span className="inline-flex rounded-lg bg-white/95 px-3 py-2 text-xs font-bold text-[#0b4058]/80 border border-black/5">
+                            A medida
+                          </span>
                         </div>
                       )}
                     </div>
@@ -146,13 +175,38 @@ export async function ClusterHub({ cluster }: { cluster: ClusterPage }) {
                           {dest.description}
                         </p>
                       </div>
-                      <Link
-                        href={`/destinos/${dest.slug}`}
-                        className="font-[family-name:var(--font-brand-heading)] flex w-full items-center justify-center gap-2 rounded-xl bg-[#0b4058] hover:bg-[#006183] text-white py-3 text-sm font-bold transition-all active:scale-[0.96]"
-                      >
-                        Ver detalles
-                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                      </Link>
+
+                      <div className="space-y-4 pt-4 border-t border-[#0b4058]/5">
+                        <div className="flex items-baseline justify-between gap-2">
+                          <span className="text-xs text-[#0b4058]/60 font-semibold">Tarifa base</span>
+                          {listed ? (
+                            <div className="text-right">
+                              <span className="text-xs font-bold text-[#006183] mr-1">Desde</span>
+                              <span className="text-2xl font-extrabold text-[#0b4058] tabular-nums">
+                                {listed.currency === "USD" ? "USD" : "$"}
+                                {listed.amount.toLocaleString("es-AR")}
+                              </span>
+                              <p className="text-[10px] text-[#0b4058]/60 mt-0.5">
+                                {dest.priceNote || "por persona en base doble"}
+                              </p>
+                            </div>
+                          ) : hasExpiredListedPrice(dest) ? (
+                            <span className="text-sm font-bold text-[#0b4058]/70">
+                              Consultá precio actualizado
+                            </span>
+                          ) : (
+                            <span className="text-sm font-bold text-[#0b4058]/70">Consultar tarifa</span>
+                          )}
+                        </div>
+
+                        <Link
+                          href={`/destinos/${dest.slug}`}
+                          className="font-[family-name:var(--font-brand-heading)] flex w-full items-center justify-center gap-2 rounded-xl bg-[#0b4058] hover:bg-[#006183] text-white py-3 text-sm font-bold transition-all active:scale-[0.96]"
+                        >
+                          Ver detalles
+                          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                        </Link>
+                      </div>
                     </div>
                   </article>
                 );

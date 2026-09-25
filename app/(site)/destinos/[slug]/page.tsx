@@ -8,6 +8,7 @@ import { FAQ } from "@/components/sections/FAQ";
 import {
   getActiveUpcomingDepartures,
   getListedPrice,
+  getNearestActiveDeparture,
   getUpcomingDepartures,
   getTransportLabel,
   hasExpiredListedPrice,
@@ -23,8 +24,10 @@ import type { Departure } from "@/lib/catalog/types";
 import { getPrimaryClusterForDestination } from "@/lib/clusters-data";
 import { AGENCY_PHONE, whatsappLink } from "@/lib/constants";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { DestinationMobileStickyBar } from "@/components/conversion/DestinationMobileStickyBar";
 import {
   Calendar,
+  CalendarDays,
   Check,
   AlertCircle,
   Compass,
@@ -173,6 +176,7 @@ export default async function DestinoDetailPage({ params }: Props) {
   // Solo salidas futuras en el panel (pasadas se podan del catálogo / no se listan)
   const upcomingDepartures = getUpcomingDepartures(dest).slice().sort(compareDepartures);
   const activeUpcomingDepartures = getActiveUpcomingDepartures(dest);
+  const nearestActiveDeparture = getNearestActiveDeparture(dest);
   const listedPrice = getListedPrice(dest);
 
   // JSON-LD estructurado
@@ -228,7 +232,7 @@ export default async function DestinoDetailPage({ params }: Props) {
   const primaryCluster = getPrimaryClusterForDestination(slug, await getAllDestinations());
 
   return (
-    <main className="min-h-screen bg-[#f9f9f9] text-[#0b4058]">
+    <main className="min-h-screen bg-[#f9f9f9] text-[#0b4058] pb-[calc(4.75rem+env(safe-area-inset-bottom,0px))] lg:pb-0">
       <Navbar />
 
       <script
@@ -315,6 +319,19 @@ export default async function DestinoDetailPage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      {/* Mobile: atajo a salidas (desktop usa el panel sticky lateral) */}
+      <div className="lg:hidden border-b border-[#0b4058]/10 bg-white">
+        <div className="mx-auto w-full max-w-6xl px-6 py-3">
+          <a
+            href="#salidas"
+            className="font-[family-name:var(--font-brand-heading)] inline-flex w-full items-center justify-center gap-2 rounded-xl border border-[#0b4058]/15 bg-[#0b4058] px-4 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#006183] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0b4058]"
+          >
+            <CalendarDays className="h-4 w-4 shrink-0" aria-hidden />
+            Ver fechas y consultar
+          </a>
+        </div>
+      </div>
 
       {/* Main Content Layout */}
       <section className="mx-auto w-full max-w-6xl px-6 py-12">
@@ -429,7 +446,10 @@ export default async function DestinoDetailPage({ params }: Props) {
           </div>
 
           {/* Columna Derecha: Salidas Programadas (Panel Lateral Sticky) */}
-          <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-6">
+          <div
+            id="salidas"
+            className="lg:col-span-5 lg:sticky lg:top-28 space-y-6 scroll-mt-24"
+          >
 
             {/* Si no hay salidas activas */}
             {activeUpcomingDepartures.length === 0 ? (
@@ -630,6 +650,11 @@ export default async function DestinoDetailPage({ params }: Props) {
       )}
 
       <Footer />
+
+      <DestinationMobileStickyBar
+        destinationName={dest.name}
+        nextDepartureDisplayDate={nearestActiveDeparture?.displayDate}
+      />
     </main>
   );
 }

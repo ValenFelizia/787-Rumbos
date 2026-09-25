@@ -3,6 +3,7 @@ import { describe, it } from "node:test";
 import {
   getListedPrice,
   getQuoteSuggestionNames,
+  groupDestinationsForSort,
   hasExpiredListedPrice,
   isPriceExpired,
 } from "./logic";
@@ -99,6 +100,170 @@ describe("getListedPrice", () => {
     });
     assert.equal(getListedPrice(expired, today), undefined);
     assert.equal(hasExpiredListedPrice(expired, today), true);
+  });
+});
+
+describe("groupDestinationsForSort", () => {
+  const bariloche = destination({
+    slug: "bariloche",
+    name: "Bariloche",
+    currency: "ARS",
+    priceFrom: 587000,
+    departures: [departure({ date: "2026-11-10", priceFrom: 587000 })],
+  });
+  const mendoza = destination({
+    slug: "mendoza",
+    name: "Mendoza",
+    currency: "ARS",
+    priceFrom: 420000,
+    departures: [departure({ date: "2026-10-05", priceFrom: 420000 })],
+  });
+  const rio = destination({
+    slug: "rio-de-janeiro",
+    name: "Río de Janeiro",
+    country: "Brasil",
+    region: "internacional",
+    currency: "USD",
+    priceFrom: 1850,
+    departures: [departure({ date: "2026-10-20", priceFrom: 1850, currency: "USD" })],
+  });
+  const cancún = destination({
+    slug: "cancun",
+    name: "Cancún",
+    country: "México",
+    region: "internacional",
+    currency: "USD",
+    priceFrom: 2100,
+    departures: [departure({ date: "2026-12-01", priceFrom: 2100, currency: "USD" })],
+  });
+  const consultar = destination({
+    slug: "a-medida",
+    name: "Viaje a medida",
+    currency: "ARS",
+    priceFrom: undefined,
+    departures: [],
+  });
+  const expired = destination({
+    slug: "precio-vencido",
+    name: "Precio vencido",
+    currency: "ARS",
+    priceFrom: 100000,
+    priceValidUntil: "2026-09-01",
+    departures: [],
+  });
+
+  it("keeps catalog order for Destacados", () => {
+    const catalog = [rio, mendoza, bariloche];
+    const groups = groupDestinationsForSort(catalog, "featured", { today });
+    assert.equal(groups.length, 1);
+    assert.deepEqual(
+      groups[0].items.map((d) => d.slug),
+      ["rio-de-janeiro", "mendoza", "bariloche"],
+    );
+    assert.equal(groups[0].heading, undefined);
+  });
+
+  it("splits mixed ARS/USD into En pesos / En dólares blocks (price asc)", () => {
+    const catalog = [rio, mendoza, cancún, bariloche, consultar];
+    const groups = groupDestinationsForSort(catalog, "price-asc", { today });
+    assert.equal(groups.length, 3);
+    assert.equal(groups[0].heading, "En pesos");
+    assert.deepEqual(
+      groups[0].items.map((d) => d.slug),
+      ["mendoza", "bariloche"],
+    );
+    assert.equal(groups[1].heading, "En dólares");
+    assert.deepEqual(
+      groups[1].items.map((d) => d.slug),
+      ["rio-de-janeiro", "cancun"],
+    );
+    assert.equal(groups[2].heading, undefined);
+    assert.deepEqual(
+      groups[2].items.map((d) => d.slug),
+      ["a-medida"],
+    );
+  });
+
+  it("never compares ARS vs USD numerically on price desc", () => {
+    // 1850 USD must not sort above 587000 ARS just because 1850 < 587000.
+    const catalog = [bariloche, rio];
+    const groups = groupDestinationsForSort(catalog, "price-desc", { today });
+    assert.equal(groups.length, 2);
+    assert.equal(groups[0].heading, "En pesos");
+    assert.equal(groups[0].items[0].slug, "bariloche");
+    assert.equal(groups[1].heading, "En dólares");
+    assert.equal(groups[1].items[0].slug, "rio-de-janeiro");
+  });
+
+  it("puts missing and expired prices last in both directions", () => {
+    const catalog = [consultar, mendoza, expired, bariloche];
+    const asc = groupDestinationsForSort(catalog, "price-asc", { today });
+    assert.deepEqual(
+      asc[0].items.map((d) => d.slug),
+      ["mendoza", "bariloche", "a-medida", "precio-vencido"],
+    );
+
+    const desc = groupDestinationsForSort(catalog, "price-desc", { today });
+    assert.deepEqual(
+      desc[0].items.map((d) => d.slug),
+      ["bariloche", "mendoza", "a-medida", "precio-vencido"],
+    );
+  });
+
+  it("breaks price ties with catalog sortOrder, then name", () => {
+    const sameA = destination({
+      slug: "zeta",
+      name: "Zeta",
+      currency: "ARS",
+      priceFrom: 400000,
+      departures: [departure({ priceFrom: 400000 })],
+    });
+    const sameB = destination({
+      slug: "alfa",
+      name: "Alfa",
+      currency: "ARS",
+      priceFrom: 400000,
+      departures: [departure({ priceFrom: 400000 })],
+    });
+    // sameA appears first in catalog (lower sortOrder) despite name Z vs A.
+    const catalog = [sameA, sameB];
+    const groups = groupDestinationsForSort(catalog, "price-asc", { today });
+    assert.deepEqual(
+      groups[0].items.map((d) => d.slug),
+      ["zeta", "alfa"],
+    );
+
+    const sameNameFirst = destination({
+      slug: "bravo",
+      name: "Mismo",
+      currency: "ARS",
+      priceFrom: 400000,
+      departures: [departure({ priceFrom: 400000 })],
+    });
+    const sameNameSecond = destination({
+      slug: "charlie",
+      name: "Mismo",
+      currency: "ARS",
+      priceFrom: 400000,
+      departures: [departure({ priceFrom: 400000 })],
+    });
+    const byName = groupDestinationsForSort([sameNameSecond, sameNameFirst], "price-asc", {
+      today,
+      catalogOrder: [sameNameFirst, sameNameSecond],
+    });
+    assert.deepEqual(
+      byName[0].items.map((d) => d.slug),
+      ["bravo", "charlie"],
+    );
+  });
+
+  it("sorts by next active departure and leaves inquire-only last", () => {
+    const catalog = [cancún, consultar, mendoza, rio];
+    const groups = groupDestinationsForSort(catalog, "next-departure", { today });
+    assert.deepEqual(
+      groups[0].items.map((d) => d.slug),
+      ["mendoza", "rio-de-janeiro", "cancun", "a-medida"],
+    );
   });
 });
 
