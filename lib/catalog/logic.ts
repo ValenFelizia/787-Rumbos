@@ -177,6 +177,18 @@ export function filterDestinationsByDepartureMonth(
   );
 }
 
+/**
+ * Effective month for the current chip list: keep selection if still available,
+ * otherwise clear (no useEffect — derive during render to avoid hydration loops).
+ */
+export function resolveSelectedDepartureMonth(
+  selected: DepartureMonthKey | null | undefined,
+  monthOptions: DepartureMonthOption[],
+): DepartureMonthKey | null {
+  if (!selected) return null;
+  return monthOptions.some((option) => option.key === selected) ? selected : null;
+}
+
 /** La salida consultable más cercana. */
 export function getNearestActiveDeparture(dest: DestinationPage): Departure | undefined {
   return getActiveUpcomingDepartures(dest)

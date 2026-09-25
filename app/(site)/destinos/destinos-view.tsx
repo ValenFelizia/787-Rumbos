@@ -18,6 +18,7 @@ import {
   hasExpiredListedPrice,
   isPriceSortMode,
   listAvailableDepartureMonths,
+  resolveSelectedDepartureMonth,
   type DepartureMonthKey,
   type DestinosCurrencyFilter,
   type DestinosSortMode,
@@ -161,15 +162,20 @@ export function DestinosView({ destinations }: { destinations: DestinationPage[]
 
   const showCurrencyChip = isPriceSortMode(sortMode);
 
-  const monthOptions = listAvailableDepartureMonths(destinations);
-
   const filteredByRegion = destinations.filter((d) => {
     if (filter === "todos") return true;
     return d.region === filter;
   });
 
+  // Chips scoped to the active region so a visible month never yields 0 for that region.
+  const monthOptions = listAvailableDepartureMonths(filteredByRegion);
+  const effectiveMonth = resolveSelectedDepartureMonth(monthKey, monthOptions);
+
   // Pipeline: region → month → currency (when sorting by price) → sort/grouping
-  const filteredByMonth = filterDestinationsByDepartureMonth(filteredByRegion, monthKey);
+  const filteredByMonth = filterDestinationsByDepartureMonth(
+    filteredByRegion,
+    effectiveMonth,
+  );
 
   const currencyScoped = showCurrencyChip
     ? filterDestinationsByCurrency(filteredByMonth, currencyFilter)
@@ -180,8 +186,11 @@ export function DestinosView({ destinations }: { destinations: DestinationPage[]
   });
 
   const resultCount = destinationGroups.reduce((sum, group) => sum + group.items.length, 0);
-  const selectedMonthLabel = monthKey ? formatDepartureMonthLabel(monthKey) : null;
-  const showMonthEmpty = Boolean(monthKey && resultCount === 0);
+  const selectedMonthLabel = effectiveMonth
+    ? formatDepartureMonthLabel(effectiveMonth)
+    : null;
+  // Fallback empty state (kept for future filters); region-scoped chips avoid the common case.
+  const showMonthEmpty = Boolean(effectiveMonth && resultCount === 0);
 
   return (
     <main className="min-h-screen bg-[#f9f9f9] text-[#0b4058]">
@@ -311,7 +320,7 @@ export function DestinosView({ destinations }: { destinations: DestinationPage[]
             </p>
             <div className="flex max-w-full flex-wrap justify-center gap-2">
               {monthOptions.map((option) => {
-                const selected = monthKey === option.key;
+                const selected = effectiveMonth === option.key;
                 return (
                   <button
                     key={option.key}

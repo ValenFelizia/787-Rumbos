@@ -13,6 +13,7 @@ import {
   isPriceExpired,
   isPriceSortMode,
   listAvailableDepartureMonths,
+  resolveSelectedDepartureMonth,
 } from "./logic";
 import type { Departure, DestinationPage } from "./types";
 
@@ -443,6 +444,39 @@ describe("departure month helpers", () => {
       { key: "2026-09", label: "Sep 2026" },
       { key: "2027-02", label: "Feb 2027" },
     ]);
+  });
+
+  it("scopes available months to the region-filtered list and clears an unavailable selection", () => {
+    const nacionalOct = destination({
+      slug: "salta",
+      region: "nacional",
+      departures: [departure({ date: "2026-10-10", status: "confirmed" })],
+    });
+    const internacionalSep = destination({
+      slug: "rio-de-janeiro",
+      region: "internacional",
+      country: "Brasil",
+      departures: [departure({ date: "2026-09-27", status: "confirmed" })],
+    });
+    const catalog = [nacionalOct, internacionalSep];
+
+    const allMonths = listAvailableDepartureMonths(catalog, { today });
+    const nacionales = catalog.filter((d) => d.region === "nacional");
+    const nacionalMonths = listAvailableDepartureMonths(nacionales, { today });
+
+    assert.deepEqual(
+      allMonths.map((m) => m.key),
+      ["2026-09", "2026-10"],
+    );
+    assert.deepEqual(
+      nacionalMonths.map((m) => m.key),
+      ["2026-10"],
+    );
+
+    // Sep was selected under Todos; after switching to Nacionales it is no longer available.
+    assert.equal(resolveSelectedDepartureMonth("2026-09", nacionalMonths), null);
+    assert.equal(resolveSelectedDepartureMonth("2026-10", nacionalMonths), "2026-10");
+    assert.equal(resolveSelectedDepartureMonth(null, nacionalMonths), null);
   });
 });
 
