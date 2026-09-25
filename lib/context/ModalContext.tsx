@@ -4,13 +4,21 @@ import React, { createContext, useContext, useState } from "react";
 interface ModalContextType {
   isOpen: boolean;
   destination: string;
+  /** Nombres de destinos CMS para chips del cotizador (SSR → client). */
+  suggestionDestinations: string[];
   openModal: (dest?: string) => void;
   closeModal: () => void;
 }
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
-export function ModalProvider({ children }: { children: React.ReactNode }) {
+export function ModalProvider({
+  children,
+  suggestionDestinations = [],
+}: {
+  children: React.ReactNode;
+  suggestionDestinations?: string[];
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [destination, setDestination] = useState("");
 
@@ -25,7 +33,9 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <ModalContext.Provider value={{ isOpen, destination, openModal, closeModal }}>
+    <ModalContext.Provider
+      value={{ isOpen, destination, suggestionDestinations, openModal, closeModal }}
+    >
       {children}
     </ModalContext.Provider>
   );

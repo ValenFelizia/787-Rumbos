@@ -95,6 +95,24 @@ export function getHomeFeaturedDestinations(
     .map((item) => item.dest);
 }
 
+/** Tope de chips de sugerencia en el cotizador (paso 1). */
+export const QUOTE_SUGGESTION_LIMIT = 6;
+
+/**
+ * Nombres para chips del cotizador: publicados con salidas activas,
+ * en el orden del catálogo (`sortOrder` CMS) y acotados a un tope chico.
+ */
+export function getQuoteSuggestionNames(
+  destinations: DestinationPage[],
+  limit = QUOTE_SUGGESTION_LIMIT,
+  today = getTodayLocal(),
+): string[] {
+  return destinations
+    .filter((dest) => getActiveUpcomingDepartures(dest, today).length > 0)
+    .slice(0, limit)
+    .map((dest) => dest.name);
+}
+
 function applicableValidity(dep: Departure, dest: DestinationPage): string | undefined {
   return dep.priceValidUntil ?? dest.priceValidUntil;
 }

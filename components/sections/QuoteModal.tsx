@@ -2,19 +2,12 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { X, ChevronRight, ChevronLeft, Calendar, Users, Plane, Info, Clock } from "lucide-react";
 import { useModal } from "@/lib/context/ModalContext";
-import { featuredDestinations, WHATSAPP_QUOTE_BYPASS, whatsappLink, AGENCY_PHONE } from "@/lib/constants";
+import { WHATSAPP_QUOTE_BYPASS, whatsappLink, AGENCY_PHONE } from "@/lib/constants";
+import { buildQuoteWhatsAppMessage } from "@/lib/quote-message";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { CTA_MODAL_SUBMIT_LABEL, CTA_SECONDARY_LABEL } from "@/components/conversion";
 
 // ponytail: keep code simple and self-contained, using React state and native CSS.
-
-// Destinos reales del catálogo (featured + demanda alta del FAQ prioritario)
-const SUGGESTIONS = [
-  ...featuredDestinations.map((d) => d.name),
-  "Cancún",
-  "Playa del Carmen",
-  "Ushuaia",
-].filter((name, i, arr) => arr.indexOf(name) === i);
 
 const DURATION_OPTIONS = [
   "A definir",
@@ -51,7 +44,7 @@ const getNext12Months = () => {
 };
 
 export function QuoteModal() {
-  const { isOpen, destination, closeModal } = useModal();
+  const { isOpen, destination, suggestionDestinations, closeModal } = useModal();
   const [step, setStep] = useState(1);
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -155,9 +148,14 @@ export function QuoteModal() {
       handleNext();
       return;
     }
-    const passengerText = `${adultos} ${adultos === 1 ? "adulto" : "adultos"}${menores > 0 ? ` y ${menores} ${menores === 1 ? "menor" : "menores"}` : ""
-      }`;
-    const text = `Hola 787 Rumbos! Quiero cotizar un viaje personalizado.\n\n📍 *Destino:* ${destino}\n📅 *Fecha estimada:* ${fecha}\n🗓️ *Duración estimada:* ${duracion}\n👥 *Pasajeros:* ${passengerText}\n✈️ *Aerolínea:* ${aerolinea}\n\n(Web - Asistente de Cotización)`;
+    const text = buildQuoteWhatsAppMessage({
+      destino,
+      fecha,
+      duracion,
+      adultos,
+      menores,
+      aerolinea,
+    });
     window.open(whatsappLink(AGENCY_PHONE.whatsapp, text), "_blank");
     closeModal();
   };
@@ -236,26 +234,28 @@ export function QuoteModal() {
                 className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm focus:border-[#f7a92a] focus:outline-none focus:ring-1 focus:ring-[#f7a92a]"
               />
 
-              {/* Optional Suggestions */}
-              <div className="pt-2">
-                <span className="text-xs text-gray-400">Destinos populares:</span>
-                <div className="mt-2 flex flex-wrap gap-2">
-                  {SUGGESTIONS.map((sug) => (
-                    <button
-                      key={sug}
-                      type="button"
-                      aria-pressed={destino.toLowerCase() === sug.toLowerCase()}
-                      onClick={() => setDestino(sug)}
-                      className={`rounded-full px-3 py-1.5 text-xs transition duration-250 ${destino.toLowerCase() === sug.toLowerCase()
-                        ? "bg-[#0b4058] text-white font-medium"
-                        : "bg-gray-100 text-[#0b4058] hover:bg-gray-200"
-                        }`}
-                    >
-                      {sug}
-                    </button>
-                  ))}
+              {/* Optional Suggestions — nombres desde Payload (SSR → ModalContext) */}
+              {suggestionDestinations.length > 0 && (
+                <div className="pt-2">
+                  <span className="text-xs text-gray-400">Destinos populares:</span>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {suggestionDestinations.map((sug) => (
+                      <button
+                        key={sug}
+                        type="button"
+                        aria-pressed={destino.toLowerCase() === sug.toLowerCase()}
+                        onClick={() => setDestino(sug)}
+                        className={`rounded-full px-3 py-1.5 text-xs transition duration-250 ${destino.toLowerCase() === sug.toLowerCase()
+                          ? "bg-[#0b4058] text-white font-medium"
+                          : "bg-gray-100 text-[#0b4058] hover:bg-gray-200"
+                          }`}
+                      >
+                        {sug}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           )}
 

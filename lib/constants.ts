@@ -2,7 +2,8 @@
  * lib/constants.ts — NAP, teléfonos, horarios y listas que siguen en código.
  *
  * El catálogo de destinos y la promo destacada se leen de Payload.
- * Acá quedan el cotizador, los servicios, la FAQ general y los datos de contacto.
+ * Acá quedan NAP, teléfonos, servicios, FAQ general y datos de contacto.
+ * Los chips del cotizador salen del catálogo CMS (ver lib/catalog).
  */
 import { BedDouble, Bus, HeartPulse, Plane, Ticket } from "lucide-react";
 
@@ -244,46 +245,6 @@ export const faqItems: FaqItem[] = [
         value: `.`,
       },
     ],
-  },
-];
-
-// ─── Destinos ─────────────────────────────────────────────────────────────────
-
-export interface Destination {
-  slug: string;
-  name: string;
-  duration: string;
-  imageSrc: string;
-}
-
-/**
- * Destinos destacados para la landing page.
- * Vinculados directamente a las páginas de destino individuales mediante el slug.
- */
-export const featuredDestinations: Destination[] = [
-  {
-    slug: "salta",
-    name: "Salta",
-    duration: "3 noches / 4 días",
-    imageSrc: "/destinos/salta.png",
-  },
-  {
-    slug: "bariloche",
-    name: "Bariloche",
-    duration: "5 noches / 6 días",
-    imageSrc: "/destinos/bariloche.jpg",
-  },
-  {
-    slug: "rio-de-janeiro",
-    name: "Río de Janeiro",
-    duration: "7 noches / 8 días",
-    imageSrc: "/destinos/rio.jpg",
-  },
-  {
-    slug: "cataratas-del-iguazu",
-    name: "Cataratas del Iguazú",
-    duration: "4 noches / 5 días",
-    imageSrc: "/destinos/cataratas.jpg",
   },
 ];
 
