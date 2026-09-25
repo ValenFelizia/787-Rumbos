@@ -1,13 +1,19 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
+  destinationHasActiveDepartureInMonth,
   filterDestinationsByCurrency,
+  filterDestinationsByDepartureMonth,
+  formatDepartureMonthLabel,
+  getDepartureMonthKey,
   getListedPrice,
   getQuoteSuggestionNames,
   groupDestinationsForSort,
   hasExpiredListedPrice,
   isPriceExpired,
   isPriceSortMode,
+  listAvailableDepartureMonths,
+  resolveSelectedDepartureMonth,
 } from "./logic";
 import type { Departure, DestinationPage } from "./types";
 
@@ -348,6 +354,129 @@ describe("groupDestinationsForSort", () => {
       groups[0].items.map((d) => d.slug),
       ["mendoza", "rio-de-janeiro", "cancun", "a-medida"],
     );
+  });
+});
+
+describe("departure month helpers", () => {
+  it("formats month keys with es-AR short labels", () => {
+    assert.equal(getDepartureMonthKey("2026-10-09"), "2026-10");
+    assert.equal(formatDepartureMonthLabel("2026-10"), "Oct 2026");
+    assert.equal(formatDepartureMonthLabel("2027-01"), "Ene 2027");
+  });
+
+  it("lists only months in the window with active upcoming departures", () => {
+    const catalog = [
+      destination({
+        slug: "oct-active",
+        departures: [departure({ date: "2026-10-15", status: "confirmed" })],
+      }),
+      destination({
+        slug: "nov-sold-out",
+        departures: [departure({ date: "2026-11-10", status: "sold-out" })],
+      }),
+      destination({
+        slug: "past-only",
+        departures: [departure({ date: "2026-08-01", status: "confirmed" })],
+      }),
+      destination({
+        slug: "dec-few",
+        departures: [departure({ date: "2026-12-05", status: "few-seats" })],
+      }),
+      destination({
+        slug: "far-future",
+        departures: [departure({ date: "2027-05-01", status: "confirmed" })],
+      }),
+    ];
+
+    // today = 2026-09-23 → window Sep–Feb; Sep empty, Nov only sold-out, May out of window.
+    assert.deepEqual(listAvailableDepartureMonths(catalog, { today, monthsAhead: 6 }), [
+      { key: "2026-10", label: "Oct 2026" },
+      { key: "2026-12", label: "Dic 2026" },
+    ]);
+  });
+
+  it("excludes sold-out and past when filtering by month", () => {
+    const octLive = destination({
+      slug: "oct-live",
+      departures: [departure({ date: "2026-10-09", status: "confirmed" })],
+    });
+    const octSoldOut = destination({
+      slug: "oct-sold",
+      departures: [departure({ date: "2026-10-20", status: "sold-out" })],
+    });
+    const novOnly = destination({
+      slug: "nov-only",
+      departures: [departure({ date: "2026-11-01", status: "confirmed" })],
+    });
+
+    assert.equal(destinationHasActiveDepartureInMonth(octLive, "2026-10", today), true);
+    assert.equal(destinationHasActiveDepartureInMonth(octSoldOut, "2026-10", today), false);
+    assert.deepEqual(
+      filterDestinationsByDepartureMonth([octLive, octSoldOut, novOnly], "2026-10", today).map(
+        (d) => d.slug,
+      ),
+      ["oct-live"],
+    );
+    assert.deepEqual(
+      filterDestinationsByDepartureMonth([octLive, novOnly], null, today).map((d) => d.slug),
+      ["oct-live", "nov-only"],
+    );
+  });
+
+  it("is deterministic for a fixed today across month boundaries", () => {
+    const catalog = [
+      destination({
+        slug: "sep-edge",
+        // Same calendar day as `today` still counts as upcoming.
+        departures: [departure({ date: "2026-09-23", status: "confirmed" })],
+      }),
+      destination({
+        slug: "feb-edge",
+        departures: [departure({ date: "2027-02-28", status: "confirmed" })],
+      }),
+      destination({
+        slug: "mar-out",
+        departures: [departure({ date: "2027-03-01", status: "confirmed" })],
+      }),
+    ];
+
+    assert.deepEqual(listAvailableDepartureMonths(catalog, { today, monthsAhead: 6 }), [
+      { key: "2026-09", label: "Sep 2026" },
+      { key: "2027-02", label: "Feb 2027" },
+    ]);
+  });
+
+  it("scopes available months to the region-filtered list and clears an unavailable selection", () => {
+    const nacionalOct = destination({
+      slug: "salta",
+      region: "nacional",
+      departures: [departure({ date: "2026-10-10", status: "confirmed" })],
+    });
+    const internacionalSep = destination({
+      slug: "rio-de-janeiro",
+      region: "internacional",
+      country: "Brasil",
+      departures: [departure({ date: "2026-09-27", status: "confirmed" })],
+    });
+    const catalog = [nacionalOct, internacionalSep];
+
+    const allMonths = listAvailableDepartureMonths(catalog, { today });
+    const nacionales = catalog.filter((d) => d.region === "nacional");
+    const nacionalMonths = listAvailableDepartureMonths(nacionales, { today });
+
+    assert.deepEqual(
+      allMonths.map((m) => m.key),
+      ["2026-09", "2026-10"],
+    );
+    assert.deepEqual(
+      nacionalMonths.map((m) => m.key),
+      ["2026-10"],
+    );
+
+    // Sep was selected under Todos; after switching to Nacionales it is no longer available.
+    assert.equal(resolveSelectedDepartureMonth("2026-09", nacionalMonths), null);
+    assert.equal(resolveSelectedDepartureMonth("2026-10", nacionalMonths), "2026-10");
+    assert.equal(resolveSelectedDepartureMonth(null, nacionalMonths), null);
   });
 });
 
