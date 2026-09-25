@@ -121,6 +121,20 @@ Producción (Vercel, ya configurada):
 - **Contenido:** el seed ya se corrió una vez y no se repite. Desde ahí, destinos y promo se editan solo en `/admin`; `scripts/seed-data/` queda como datos de CI y desarrollo. Los usuarios nuevos los crea un `admin` en `/admin`.
 - Si hace falta correr algo contra producción desde una PC (por ejemplo una migración manual), cargá las variables en la sesión de la terminal, no en `.env`, y cerrala al terminar.
 
+### Limpieza de branches Neon de preview
+
+Con la integración Vercel-managed, Neon solo borra el branch de preview cuando Vercel borra el deployment (retención por defecto ~180 días). En el plan free eso llena el tope de 10 branches y bloquea previews nuevos. El workflow [`.github/workflows/cleanup-neon-preview-branch.yml`](./.github/workflows/cleanup-neon-preview-branch.yml) borra `preview/<git-head>` en cuanto se cierra el PR (mergeado o no). No hace checkout ni ejecuta código del PR. Usa `pull_request_target` para que también corra en PRs de Dependabot (con `pull_request`, Actions no expone secrets a Dependabot).
+
+**Setup una vez (Valentín):**
+
+1. En la [Neon Console](https://console.neon.tech/) → Account Settings → [API Keys](https://neon.com/docs/manage/api-keys#create-an-api-key): crear una API key.
+2. En GitHub → Settings → Secrets and variables → Actions:
+   - Secret `NEON_API_KEY` = la key de Neon.
+   - Variable `NEON_PROJECT_ID` = `round-poetry-46013678` (el workflow ya usa ese valor como fallback si la variable no está).
+3. No hace falta secret de Dependabot: el trigger es `pull_request_target`.
+
+**Limpieza manual** (si el tope ya está lleno o un branch quedó huérfano): en Neon Console → Branches, borrar los `preview/…` de PRs cerrados; o con la [Neon CLI](https://neon.com/docs/reference/cli): `neon branches list --project-id round-poetry-46013678` y `neon branches delete <nombre-o-id> --project-id round-poetry-46013678`. Detalle: [Managing Vercel preview branch cleanup](https://neon.com/docs/guides/vercel-branch-cleanup).
+
 ## Estructura útil
 
 ```
