@@ -29,6 +29,8 @@ import { AGENCY_PHONE, whatsappLink } from "@/lib/constants";
 import { MapPin, Calendar, ArrowRight } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { ClusterCard } from "@/components/sections/ClusterCard";
+import { CTA_PRIMARY_LABEL } from "@/components/conversion";
+import { useModal } from "@/lib/context/ModalContext";
 
 function CardListedPrice({ dest }: { dest: DestinationPage }) {
   const listed = getListedPrice(dest);
@@ -55,6 +57,7 @@ function CardListedPrice({ dest }: { dest: DestinationPage }) {
 }
 
 function DestinationCard({ dest }: { dest: DestinationPage }) {
+  const { openModal } = useModal();
   const activeDepartures = getActiveUpcomingDepartures(dest);
   const isF1 = dest.slug === "f1-grand-premio-sao-paulo";
 
@@ -133,7 +136,7 @@ function DestinationCard({ dest }: { dest: DestinationPage }) {
           </p>
         </div>
 
-        <div className="pt-4 border-t border-[#0b4058]/5">
+        <div className="space-y-3 pt-4 border-t border-[#0b4058]/5">
           <Link
             href={`/destinos/${dest.slug}`}
             className="font-[family-name:var(--font-brand-heading)] flex w-full items-center justify-center gap-2 rounded-xl bg-[#0b4058] hover:bg-[#006183] text-white py-3 text-sm font-bold transition-all duration-200 active:scale-[0.96]"
@@ -141,6 +144,15 @@ function DestinationCard({ dest }: { dest: DestinationPage }) {
             <span>Ver salidas y detalles</span>
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
+          {/* QOL-05: secundario abre cotizador prefilled (paridad con FeaturedDestinations / D5) */}
+          <button
+            type="button"
+            onClick={() => openModal(dest.name)}
+            aria-label={`Armar viaje: ${dest.name} — abre el cotizador`}
+            className="font-[family-name:var(--font-elaine)] flex w-full items-center justify-center rounded-xl border-2 border-[#f7a92a] bg-transparent px-3 py-3 text-sm font-bold text-[#0b4058] transition-all duration-200 hover:bg-gradient-to-r hover:from-[#f7a92a] hover:to-[#e6b451] active:scale-[0.96] cursor-pointer"
+          >
+            {CTA_PRIMARY_LABEL}
+          </button>
         </div>
       </div>
     </article>

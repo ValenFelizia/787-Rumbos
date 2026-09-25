@@ -89,6 +89,37 @@ test.describe("rutas críticas", () => {
     ).toBeVisible();
   });
 
+  test("Armar viaje en card de destinos abre el cotizador en paso 2 prefilled", async ({
+    page,
+  }) => {
+    await page.goto("/destinos");
+
+    const armarViaje = page
+      .getByRole("button", { name: /Armar viaje: .+ — abre el cotizador/ })
+      .first();
+    await expect(armarViaje).toBeVisible();
+
+    const ariaLabel = await armarViaje.getAttribute("aria-label");
+    const destName = ariaLabel?.match(/^Armar viaje: (.+) — abre el cotizador$/)?.[1];
+    expect(destName).toBeTruthy();
+
+    await armarViaje.click();
+
+    const dialog = page.getByRole("dialog", { name: /armá tu viaje a medida/i });
+    await expect(dialog).toBeVisible();
+    await expect(
+      dialog.getByRole("progressbar", { name: /progreso de la cotización/i }),
+    ).toHaveAttribute("aria-valuetext", "Paso 2 de 3");
+    await expect(
+      dialog.getByLabel(/cuándo tenés pensado viajar/i),
+    ).toBeVisible();
+
+    await dialog.getByRole("button", { name: /atrás/i }).click();
+    await expect(dialog.getByLabel(/a dónde querés viajar/i)).toHaveValue(
+      destName!,
+    );
+  });
+
   test("cards de cluster en destinos abren el hub SEO", async ({ page }) => {
     await page.goto("/destinos");
     const hubs = page.getByRole("navigation", { name: /catálogos desde córdoba/i });
