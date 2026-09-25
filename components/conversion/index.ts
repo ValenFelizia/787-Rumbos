@@ -7,3 +7,4 @@ export {
 export { PrimaryCta } from "./PrimaryCta";
 export { SecondaryCta } from "./SecondaryCta";
 export { TrackedWhatsAppLink } from "./TrackedWhatsAppLink";
+export { DestinationMobileStickyBar } from "./DestinationMobileStickyBar";
