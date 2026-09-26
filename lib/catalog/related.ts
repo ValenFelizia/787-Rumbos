@@ -14,17 +14,6 @@ function catalogIndex(destinations: DestinationPage[]): Map<string, number> {
   return index;
 }
 
-function byCatalogOrder(
-  a: DestinationPage,
-  b: DestinationPage,
-  orderIndex: Map<string, number>,
-): number {
-  const ia = orderIndex.get(a.slug) ?? Number.MAX_SAFE_INTEGER;
-  const ib = orderIndex.get(b.slug) ?? Number.MAX_SAFE_INTEGER;
-  if (ia !== ib) return ia - ib;
-  return a.name.localeCompare(b.name, "es");
-}
-
 function byNearestCatalogOrder(
   a: DestinationPage,
   b: DestinationPage,
@@ -36,14 +25,16 @@ function byNearestCatalogOrder(
   const da = Math.abs(ia - currentIndex);
   const db = Math.abs(ib - currentIndex);
   if (da !== db) return da - db;
-  if (ia !== ib) return ia - ib;
+  // Empate de distancia: el de mayor índice (sortOrder más alto) primero.
+  // Así salvador@17 elige imbassai@18 antes que f1@16 (ambos a distancia 1).
+  if (ia !== ib) return ib - ia;
   return a.name.localeCompare(b.name, "es");
 }
 
 /**
- * Relacionados: pares del mismo cluster fijo primero (orden de catálogo /
- * `sortOrder`, priorizando mismo país), luego misma región por cercanía de
- * `sortOrder`. Sin peers de cluster → solo el fallback de región.
+ * Relacionados: pares del mismo cluster fijo primero (por cercanía de
+ * `sortOrder` / índice de catálogo al destino actual), luego misma región
+ * con el mismo criterio. Sin peers de cluster → solo el fallback de región.
  */
 export function getRelatedDestinations(
   destinations: DestinationPage[],
@@ -72,12 +63,7 @@ export function getRelatedDestinations(
 
   const clusterMates = others
     .filter((d) => mateSlugs.has(d.slug))
-    .sort((a, b) => {
-      const countryDiff =
-        Number(b.country === current.country) - Number(a.country === current.country);
-      if (countryDiff !== 0) return countryDiff;
-      return byCatalogOrder(a, b, orderIndex);
-    });
+    .sort((a, b) => byNearestCatalogOrder(a, b, currentIndex, orderIndex));
   take(clusterMates);
 
   if (result.length < limit) {
