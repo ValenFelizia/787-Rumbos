@@ -117,7 +117,7 @@ export function RumboSelector() {
                 >
                   <RumboCardFace
                     title="Quiero playa"
-                    subtitle="Brasil y Caribe desde Córdoba."
+                    subtitle="Brasil desde Córdoba."
                     image="/rumbos/playa.jpg"
                     alt="Agua turquesa y velero en Porto de Galinhas, Brasil"
                     sizes="(max-width: 768px) 100vw, 42vw"
@@ -148,9 +148,22 @@ export function RumboSelector() {
                 <RumboCardFace
                   title="Quiero una salida grupal"
                   subtitle="Fechas confirmadas desde Córdoba."
-                    image="/rumbos/grupal.jpg"
+                  image="/rumbos/grupal.jpg"
                   alt="Centro Cívico de Bariloche junto al lago Nahuel Huapi"
-                  sizes="(max-width: 640px) 100vw, 50vw"
+                  sizes="(max-width: 640px) 100vw, 33vw"
+                  titleSize="tile"
+                />
+              </Link>
+              <Link
+                href="/destinos/caribe-desde-cordoba"
+                className={`${CARD_SHELL} min-h-[200px] sm:flex-1 md:min-h-[248px]`}
+              >
+                <RumboCardFace
+                  title="Quiero el Caribe"
+                  subtitle="All Inclusive · Cancún y Riviera Maya."
+                  image="/destinos/cancun.jpg"
+                  alt="Cancún — paquetes al Caribe desde Córdoba"
+                  sizes="(max-width: 640px) 100vw, 33vw"
                   titleSize="tile"
                 />
               </Link>
@@ -163,10 +176,10 @@ export function RumboSelector() {
                 <RumboCardFace
                   title="Lo armamos con vos"
                   subtitle="Cotizamos fechas y presupuesto por WhatsApp."
-                    image="/rumbos/medida.jpg"
+                  image="/rumbos/medida.jpg"
                   alt="Local de 787 Rumbos en el hall de arribos del Aeropuerto de Córdoba"
                   imagePosition="object-[22%_center]"
-                  sizes="(max-width: 640px) 100vw, 50vw"
+                  sizes="(max-width: 640px) 100vw, 33vw"
                   titleSize="tile"
                 />
               </button>
