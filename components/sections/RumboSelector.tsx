@@ -160,7 +160,7 @@ export function RumboSelector() {
               >
                 <RumboCardFace
                   title="Quiero el Caribe"
-                  subtitle="All Inclusive · Cancún y Riviera Maya."
+                  subtitle="All Inclusive en México y Punta Cana."
                   image="/destinos/cancun.jpg"
                   alt="Cancún — paquetes al Caribe desde Córdoba"
                   sizes="(max-width: 640px) 100vw, 33vw"
