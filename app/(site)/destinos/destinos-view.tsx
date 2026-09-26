@@ -56,19 +56,30 @@ function CardListedPrice({ dest }: { dest: DestinationPage }) {
   return <p className="text-sm font-bold text-[#0b4058]/70">Consultar tarifa</p>;
 }
 
-function DestinationCard({ dest }: { dest: DestinationPage }) {
+/** Badge de card desde el global Featured Promo (CMS), nunca desde un slug hardcodeado. */
+export type ListingPromoBadge = {
+  slug: string;
+  badgeText: string;
+};
+
+function DestinationCard({
+  dest,
+  promoBadge,
+}: {
+  dest: DestinationPage;
+  promoBadge?: ListingPromoBadge | null;
+}) {
   const { openModal } = useModal();
   const activeDepartures = getActiveUpcomingDepartures(dest);
-  const isF1 = dest.slug === "f1-grand-premio-sao-paulo";
+  const cardBadge =
+    promoBadge &&
+    promoBadge.slug === dest.slug &&
+    promoBadge.badgeText.trim() !== ""
+      ? promoBadge.badgeText.trim()
+      : null;
 
   return (
-    <article
-      className={`group flex flex-col overflow-hidden rounded-2xl border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl ${
-        isF1
-          ? "border-red-600/30 shadow-red-600/5 hover:border-red-600/40 hover:shadow-red-600/10"
-          : "border-[#0b4058]/10 shadow-[#0b4058]/5 hover:border-[#0b4058]/20 hover:shadow-[#0b4058]/15"
-      }`}
-    >
+    <article className="group flex flex-col overflow-hidden rounded-2xl border border-[#0b4058]/10 bg-white shadow-sm shadow-[#0b4058]/5 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#0b4058]/20 hover:shadow-xl hover:shadow-[#0b4058]/15">
       <div className="relative h-60 w-full overflow-hidden">
         <Image
           src={dest.heroImage}
@@ -120,11 +131,11 @@ function DestinationCard({ dest }: { dest: DestinationPage }) {
             <span className="text-[10px] uppercase font-extrabold tracking-widest text-[#006183] bg-[#006183]/5 px-2 py-0.5 rounded">
               {dest.region === "nacional" ? "Nacional" : "Internacional"}
             </span>
-            {isF1 && (
-              <span className="text-[10px] uppercase font-extrabold tracking-widest text-white bg-red-600 px-2 py-0.5 rounded">
-                🏎️ Salida Especial
+            {cardBadge ? (
+              <span className="text-[10px] uppercase font-extrabold tracking-widest text-white bg-[#0b4058] px-2 py-0.5 rounded">
+                {cardBadge}
               </span>
-            )}
+            ) : null}
           </div>
           <h2 className="font-[family-name:var(--font-brand-heading)] text-2xl font-bold tracking-tight text-[#0b4058] group-hover:text-[#006183] transition-colors duration-200">
             {dest.name}
@@ -166,7 +177,14 @@ function monthFilterEmptyWhatsApp(monthLabel: string): string {
   );
 }
 
-export function DestinosView({ destinations }: { destinations: DestinationPage[] }) {
+export function DestinosView({
+  destinations,
+  promoBadge = null,
+}: {
+  destinations: DestinationPage[];
+  /** Badge CMS del Featured Promo activo; null si no hay promo publicada. */
+  promoBadge?: ListingPromoBadge | null;
+}) {
   const [filter, setFilter] = useState<"todos" | "nacional" | "internacional">("todos");
   const [sortMode, setSortMode] = useState<DestinosSortMode>("featured");
   const [currencyFilter, setCurrencyFilter] = useState<DestinosCurrencyFilter>("all");
@@ -399,7 +417,7 @@ export function DestinosView({ destinations }: { destinations: DestinationPage[]
                 ) : null}
                 <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                   {group.items.map((dest) => (
-                    <DestinationCard key={dest.slug} dest={dest} />
+                    <DestinationCard key={dest.slug} dest={dest} promoBadge={promoBadge} />
                   ))}
                 </div>
               </div>

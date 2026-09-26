@@ -8,9 +8,9 @@ import {
   getDestinationBySlug as findBySlug,
   getHomeFeaturedDestinations as featuredOf,
   getQuoteSuggestionNames as quoteSuggestionsOf,
-  getRelatedDestinations as relatedOf,
   QUOTE_SUGGESTION_LIMIT,
 } from "@/lib/catalog/logic";
+import { getRelatedDestinations as relatedOf } from "@/lib/catalog/related";
 import { mapDestination, type DestinationDoc } from "@/lib/catalog/map";
 import type { DestinationPage } from "@/lib/catalog/types";
 

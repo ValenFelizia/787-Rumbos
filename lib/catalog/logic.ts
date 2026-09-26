@@ -315,47 +315,6 @@ export function getDestinationBySlug(
   return destinations.find((d) => d.slug === slug);
 }
 
-/** Relacionados: mismo cluster fijo primero, luego mismo país, luego región. */
-export function getRelatedDestinations(
-  destinations: DestinationPage[],
-  slug: string,
-  limit = 3,
-): DestinationPage[] {
-  const current = getDestinationBySlug(destinations, slug);
-  if (!current) return [];
-
-  const clusterMateSlugs = new Set<string>();
-  const fixedClusters: string[][] = [
-    ["rio-de-janeiro", "porto-de-galinhas", "camboriu", "f1-grand-premio-sao-paulo"],
-    ["salvador-de-bahia", "imbassai", "guarajuba", "praia-do-forte"],
-    ["cancun", "playa-del-carmen", "riviera-maya", "punta-cana", "bayahibe"],
-    ["termas-rio-hondo", "cataratas-del-iguazu", "salar-de-uyuni"],
-  ];
-  for (const group of fixedClusters) {
-    if (group.includes(slug)) {
-      group.forEach((s) => {
-        if (s !== slug) clusterMateSlugs.add(s);
-      });
-    }
-  }
-
-  const others = destinations.filter((d) => d.slug !== slug);
-  const clusterMates = others
-    .filter((d) => clusterMateSlugs.has(d.slug))
-    .sort((a, b) => Number(b.country === current.country) - Number(a.country === current.country));
-  const sameCountry = others.filter(
-    (d) => d.country === current.country && !clusterMateSlugs.has(d.slug),
-  );
-  const sameRegion = others.filter(
-    (d) =>
-      d.region === current.region &&
-      d.country !== current.country &&
-      !clusterMateSlugs.has(d.slug),
-  );
-
-  return [...clusterMates, ...sameCountry, ...sameRegion].slice(0, limit);
-}
-
 export function getAllDestinationSlugs(destinations: DestinationPage[]): string[] {
   return destinations.map((d) => d.slug);
 }
