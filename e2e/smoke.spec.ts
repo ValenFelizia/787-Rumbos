@@ -23,6 +23,19 @@ test.describe("rutas críticas", () => {
     ).toBeVisible();
   });
 
+  test("el selector de rumbo deriva Caribe al hub SEO", async ({ page }) => {
+    await page.goto("/");
+    const rumbo = page.getByRole("navigation", { name: /elegí tu rumbo/i });
+    await expect(
+      rumbo.getByRole("link", { name: /quiero el caribe/i }),
+    ).toBeVisible();
+    await rumbo.getByRole("link", { name: /quiero el caribe/i }).click();
+    await expect(page).toHaveURL(/\/destinos\/caribe-desde-cordoba\/?$/);
+    await expect(
+      page.getByRole("heading", { name: /caribe desde córdoba/i }),
+    ).toBeVisible();
+  });
+
   test("la card a medida abre el cotizador", async ({ page }) => {
     await page.goto("/");
     await page
