@@ -87,6 +87,24 @@ describe("getRelatedDestinations (cluster membership)", () => {
     region: "internacional",
     country: "Bolivia",
   });
+  const cancún = destination({
+    slug: "cancun",
+    name: "Cancún",
+    region: "internacional",
+    country: "México",
+  });
+
+  // Prod-like Brasil block (sortOrder ≈ catalog index):
+  // rio 10, porto 11, camboriu 12, …, f1 16, salvador 17, imbassai 18,
+  // guarajuba 19, praia-do-forte 20. Gaps = non-Brasil destinations.
+  const brasilPad = Array.from({ length: 10 }, (_, i) =>
+    destination({
+      slug: `pad-${i}`,
+      name: `Pad ${i}`,
+      region: "nacional",
+      country: "Argentina",
+    }),
+  );
   const rio = destination({
     slug: "rio-de-janeiro",
     name: "Río de Janeiro",
@@ -105,32 +123,90 @@ describe("getRelatedDestinations (cluster membership)", () => {
     region: "internacional",
     country: "Brasil",
   });
-  const cancún = destination({
-    slug: "cancun",
-    name: "Cancún",
+  const gap13 = destination({
+    slug: "peru",
+    name: "Perú",
     region: "internacional",
-    country: "México",
+    country: "Perú",
+  });
+  const gap14 = destination({
+    slug: "sudeste-asiatico",
+    name: "Sudeste Asiático",
+    region: "internacional",
+    country: "Asia",
+  });
+  const gap15 = destination({
+    slug: "salar-gap",
+    name: "Salar gap",
+    region: "internacional",
+    country: "Bolivia",
+  });
+  const f1 = destination({
+    slug: "f1-grand-premio-sao-paulo",
+    name: "F1 Grand Premio de São Paulo",
+    region: "internacional",
+    country: "Brasil",
+  });
+  const salvador = destination({
+    slug: "salvador-de-bahia",
+    name: "Salvador de Bahía",
+    region: "internacional",
+    country: "Brasil",
+  });
+  const imbassai = destination({
+    slug: "imbassai",
+    name: "Imbassaí",
+    region: "internacional",
+    country: "Brasil",
+  });
+  const guarajuba = destination({
+    slug: "guarajuba",
+    name: "Guarajuba",
+    region: "internacional",
+    country: "Brasil",
+  });
+  const praiaDoForte = destination({
+    slug: "praia-do-forte",
+    name: "Praia do Forte",
+    region: "internacional",
+    country: "Brasil",
   });
 
-  // Catalog order ≈ Payload sortOrder (Salta first, F1 would be later — not pinned).
-  const catalog = [
-    salta,
-    mendoza,
-    termas,
-    cataratas,
-    salar,
-    rio,
-    porto,
-    camboriu,
-    cancún,
+  const brasilCatalog = [
+    ...brasilPad,
+    rio, // 10
+    porto, // 11
+    camboriu, // 12
+    gap13, // 13
+    gap14, // 14
+    gap15, // 15
+    f1, // 16
+    salvador, // 17
+    imbassai, // 18
+    guarajuba, // 19
+    praiaDoForte, // 20
   ];
 
-  it("prefers cluster mates over same-region strangers", () => {
-    const related = getRelatedDestinations(catalog, "rio-de-janeiro", 3);
-    // Mates in catalog order: porto, camboriu; then fill from same region (nearest).
+  const catalog = [salta, mendoza, termas, cataratas, salar, cancún];
+
+  it("ranks Brasil mates by nearest sortOrder: rio → porto, camboriu, f1", () => {
+    const related = getRelatedDestinations(brasilCatalog, "rio-de-janeiro", 3);
+    // Distances from rio@10: porto 1, camboriu 2, f1 6 (next mate).
     assert.deepEqual(
       related.map((d) => d.slug),
-      ["porto-de-galinhas", "camboriu", "salar-de-uyuni"],
+      ["porto-de-galinhas", "camboriu", "f1-grand-premio-sao-paulo"],
+    );
+  });
+
+  it("ranks Brasil mates by nearest sortOrder: salvador → local peers not rio/porto", () => {
+    const related = getRelatedDestinations(brasilCatalog, "salvador-de-bahia", 3);
+    // Distances from salvador@17: f1 1, imbassai 1, guarajuba 2, praia 3, camboriu 5…
+    // Distance-1 tie → higher catalog index (imbassai@18 over f1@16).
+    // Documented order: imbassai, f1, guarajuba (praia@20 loses to closer f1).
+    // Regression: must NOT be rio / porto / camboriu (far south/southeast).
+    assert.deepEqual(
+      related.map((d) => d.slug),
+      ["imbassai", "f1-grand-premio-sao-paulo", "guarajuba"],
     );
   });
 
@@ -144,25 +220,11 @@ describe("getRelatedDestinations (cluster membership)", () => {
 
   it("falls back to same region by nearest catalog order without cluster peers", () => {
     // Mendoza is not in any fixed cluster destinationSlugs.
+    // salta@0 and termas@2 are both distance 1; higher index wins → termas first.
     const related = getRelatedDestinations(catalog, "mendoza", 2);
     assert.deepEqual(
       related.map((d) => d.slug),
-      ["salta", "termas-rio-hondo"],
-    );
-  });
-
-  it("orders Brasil cluster mates by catalog sortOrder (not a duplicate mate array)", () => {
-    const bahia = destination({
-      slug: "salvador-de-bahia",
-      name: "Salvador",
-      region: "internacional",
-      country: "Brasil",
-    });
-    const withBahia = [...catalog, bahia];
-    const related = getRelatedDestinations(withBahia, "salvador-de-bahia", 3);
-    assert.deepEqual(
-      related.map((d) => d.slug),
-      ["rio-de-janeiro", "porto-de-galinhas", "camboriu"],
+      ["termas-rio-hondo", "salta"],
     );
   });
 });
