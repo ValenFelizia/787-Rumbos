@@ -19,7 +19,7 @@
     "cms:seed": "payload run scripts/seed-catalog.ts",
     "generate:types": "payload generate:types",
     "generate:importmap": "payload generate:importmap",
-    "test:unit": "node --import tsx --test lib/catalog/logic.test.ts lib/catalog/promo.test.ts lib/quote-message.test.ts lib/whatsapp-inquiry.test.ts payload/editorial/diff.test.ts payload/editorial/asistente.test.ts payload/mcp/overrideAccess.test.mjs",
+    "test:unit": "node --import tsx --test lib/catalog/logic.test.ts lib/catalog/promo.test.ts lib/catalog/destinos-filter-empty.test.ts lib/quote-message.test.ts lib/whatsapp-inquiry.test.ts payload/editorial/diff.test.ts payload/editorial/asistente.test.ts payload/mcp/overrideAccess.test.mjs",
     "vercel-build": "payload migrate && next build",
     "test:parity": "payload run scripts/catalog-parity.ts",
     "snapshot:html": "node scripts/html-snapshot.mjs",
