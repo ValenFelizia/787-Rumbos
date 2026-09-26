@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/sections/Navbar";
@@ -31,6 +31,14 @@ import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { ClusterCard } from "@/components/sections/ClusterCard";
 import { CTA_PRIMARY_LABEL } from "@/components/conversion";
 import { useModal } from "@/lib/context/ModalContext";
+import {
+  DestinosFilterEmpty,
+  formatDestinosResultCount,
+} from "./destinos-filter-empty";
+
+/** Halo de teclado compartido por chips de filtro (QOL-10). */
+const FILTER_CHIP_FOCUS =
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f7a92a]";
 
 function CardListedPrice({ dest }: { dest: DestinationPage }) {
   const listed = getListedPrice(dest);
@@ -159,18 +167,13 @@ function DestinationCard({ dest }: { dest: DestinationPage }) {
   );
 }
 
-function monthFilterEmptyWhatsApp(monthLabel: string): string {
-  return whatsappLink(
-    AGENCY_PHONE.whatsapp,
-    `Hola 787 Rumbos! Estuve mirando salidas de ${monthLabel} en la web y no encontré lo que buscaba. ¿Me ayudan a armar algo para ese mes? (Web - Destinos filtro mes)`,
-  );
-}
-
 export function DestinosView({ destinations }: { destinations: DestinationPage[] }) {
   const [filter, setFilter] = useState<"todos" | "nacional" | "internacional">("todos");
   const [sortMode, setSortMode] = useState<DestinosSortMode>("featured");
   const [currencyFilter, setCurrencyFilter] = useState<DestinosCurrencyFilter>("all");
   const [monthKey, setMonthKey] = useState<DepartureMonthKey | null>(null);
+  const [liveCountText, setLiveCountText] = useState("");
+  const skipFirstLiveAnnounce = useRef(true);
 
   const showCurrencyChip = isPriceSortMode(sortMode);
 
@@ -179,7 +182,7 @@ export function DestinosView({ destinations }: { destinations: DestinationPage[]
     return d.region === filter;
   });
 
-  // Chips scoped to the active region so a visible month never yields 0 for that region.
+  // Chips scoped to the active region so a visible month never yields 0 for that region alone.
   const monthOptions = listAvailableDepartureMonths(filteredByRegion);
   const effectiveMonth = resolveSelectedDepartureMonth(monthKey, monthOptions);
 
@@ -201,12 +204,36 @@ export function DestinosView({ destinations }: { destinations: DestinationPage[]
   const selectedMonthLabel = effectiveMonth
     ? formatDepartureMonthLabel(effectiveMonth)
     : null;
-  // Fallback empty state (kept for future filters); region-scoped chips avoid the common case.
-  const showMonthEmpty = Boolean(effectiveMonth && resultCount === 0);
+  // QOL-10: empty for ANY filter combo (region + month + currency), not only month.
+  const showFilterEmpty = resultCount === 0;
+
+  const resetFilters = () => {
+    setFilter("todos");
+    setSortMode("featured");
+    setCurrencyFilter("all");
+    setMonthKey(null);
+  };
+
+  // Announce result count when filters/sort change — never on first paint (QOL-10).
+  useEffect(() => {
+    if (skipFirstLiveAnnounce.current) {
+      skipFirstLiveAnnounce.current = false;
+      return;
+    }
+    setLiveCountText(formatDestinosResultCount(resultCount));
+  }, [resultCount, filter, sortMode, currencyFilter, effectiveMonth]);
 
   return (
     <main className="min-h-screen bg-[#f9f9f9] text-[#0b4058]">
       <Navbar />
+      <p
+        className="sr-only"
+        aria-live="polite"
+        aria-atomic="true"
+        data-testid="destinos-result-live"
+      >
+        {liveCountText}
+      </p>
 
       {/* Header Section — lower on mobile so cluster cards + grid start fit (D4) */}
       <section className="bg-gradient-to-b from-[#0b4058] to-[#006183] text-white py-10 md:py-16 px-6 text-center relative overflow-hidden">
@@ -258,7 +285,7 @@ export function DestinosView({ destinations }: { destinations: DestinationPage[]
                 type="button"
                 onClick={() => setFilter(type)}
                 aria-pressed={filter === type}
-                className={`px-5 sm:px-6 py-2 rounded-full text-sm font-semibold transition-all duration-200 capitalize cursor-pointer active:scale-95 ${
+                className={`px-5 sm:px-6 py-2 rounded-full text-sm font-semibold transition-all duration-200 capitalize cursor-pointer active:scale-95 ${FILTER_CHIP_FOCUS} ${
                   filter === type
                     ? "bg-[#0b4058] text-white shadow-sm"
                     : "text-[#0b4058]/70 hover:text-[#0b4058] hover:bg-[#0b4058]/5"
@@ -270,7 +297,9 @@ export function DestinosView({ destinations }: { destinations: DestinationPage[]
           </div>
 
           <label className="inline-flex items-center gap-2.5 text-sm text-[#0b4058]/75">
-            <span className="font-semibold tracking-wide">Ordenar</span>
+            <span className="font-semibold tracking-wide" id="destinos-sort-label">
+              Ordenar
+            </span>
             <select
               value={sortMode}
               onChange={(e) => {
@@ -278,8 +307,8 @@ export function DestinosView({ destinations }: { destinations: DestinationPage[]
                 setSortMode(next);
                 if (!isPriceSortMode(next)) setCurrencyFilter("all");
               }}
-              aria-label="Ordenar destinos"
-              className="min-w-[12.5rem] appearance-none rounded-full border border-[#0b4058]/15 bg-white bg-[length:0.85rem] bg-[right_0.85rem_center] bg-no-repeat py-2 pl-4 pr-9 text-sm font-semibold text-[#0b4058] shadow-sm transition-colors hover:border-[#0b4058]/30 focus:border-[#0b4058]/40 focus:outline-none focus:ring-2 focus:ring-[#0b4058]/15 cursor-pointer"
+              aria-labelledby="destinos-sort-label"
+              className="min-w-[12.5rem] appearance-none rounded-full border border-[#0b4058]/15 bg-white bg-[length:0.85rem] bg-[right_0.85rem_center] bg-no-repeat py-2 pl-4 pr-9 text-sm font-semibold text-[#0b4058] shadow-sm transition-colors hover:border-[#0b4058]/30 focus:border-[#0b4058]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f7a92a]/70 focus-visible:ring-offset-2 cursor-pointer"
               style={{
                 backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%230b4058' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`,
               }}
@@ -306,7 +335,7 @@ export function DestinosView({ destinations }: { destinations: DestinationPage[]
                     type="button"
                     onClick={() => setCurrencyFilter(option.value)}
                     aria-pressed={currencyFilter === option.value}
-                    className={`px-3.5 py-1.5 rounded-full text-sm font-semibold transition-all duration-200 cursor-pointer active:scale-95 ${
+                    className={`px-3.5 py-1.5 rounded-full text-sm font-semibold transition-all duration-200 cursor-pointer active:scale-95 ${FILTER_CHIP_FOCUS} ${
                       currencyFilter === option.value
                         ? "bg-[#0b4058] text-white shadow-sm"
                         : "text-[#0b4058]/70 hover:text-[#0b4058] hover:bg-[#0b4058]/5"
@@ -339,7 +368,7 @@ export function DestinosView({ destinations }: { destinations: DestinationPage[]
                     type="button"
                     onClick={() => setMonthKey(selected ? null : option.key)}
                     aria-pressed={selected}
-                    className={`rounded-full border px-3.5 py-1.5 text-sm font-semibold transition-all duration-200 cursor-pointer active:scale-95 ${
+                    className={`rounded-full border px-3.5 py-1.5 text-sm font-semibold transition-all duration-200 cursor-pointer active:scale-95 ${FILTER_CHIP_FOCUS} ${
                       selected
                         ? "border-[#0b4058] bg-[#0b4058] text-white shadow-sm"
                         : "border-[#0b4058]/15 bg-white text-[#0b4058]/75 shadow-sm hover:border-[#0b4058]/30 hover:text-[#0b4058]"
@@ -356,38 +385,11 @@ export function DestinosView({ destinations }: { destinations: DestinationPage[]
         )}
 
         {/* Grid of Destinations (bloques de moneda solo al ordenar por precio con mix) */}
-        {showMonthEmpty && selectedMonthLabel ? (
-          <div
-            className="rounded-3xl border border-[#0b4058]/10 bg-white px-6 py-12 text-center shadow-sm"
-            role="status"
-            aria-live="polite"
-          >
-            <h2 className="font-[family-name:var(--font-brand-heading)] text-2xl font-extrabold tracking-tight text-[#0b4058]">
-              No hay salidas en {selectedMonthLabel}
-            </h2>
-            <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-[#0b4058]/70 text-pretty">
-              Con el filtro actual no encontramos destinos con salida activa ese mes. Escribinos y te
-              armamos opciones a medida.
-            </p>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-              <button
-                type="button"
-                onClick={() => setMonthKey(null)}
-                className="rounded-xl border border-[#0b4058]/20 bg-white px-5 py-3 text-sm font-bold text-[#0b4058] transition-colors hover:border-[#0b4058]/35 hover:bg-[#0b4058]/5 cursor-pointer"
-              >
-                Ver todos los meses
-              </button>
-              <a
-                href={monthFilterEmptyWhatsApp(selectedMonthLabel)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-[family-name:var(--font-brand-heading)] inline-flex items-center gap-2 rounded-xl bg-[#dae553] px-5 py-3 text-sm font-black text-[#0b4058] shadow-md transition-all duration-200 hover:bg-[#c3cf3e] active:scale-[0.96]"
-              >
-                <WhatsAppIcon size={14} className="h-5 w-5 shrink-0" />
-                <span>Consultar salidas de {selectedMonthLabel}</span>
-              </a>
-            </div>
-          </div>
+        {showFilterEmpty ? (
+          <DestinosFilterEmpty
+            monthLabel={selectedMonthLabel}
+            onReset={resetFilters}
+          />
         ) : (
           <div className="space-y-12">
             {destinationGroups.map((group, groupIndex) => (

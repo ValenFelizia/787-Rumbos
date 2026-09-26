@@ -89,6 +89,53 @@ test.describe("rutas críticas", () => {
     ).toBeVisible();
   });
 
+  test("filtros de destinos: aria-pressed, live region y empty state (QOL-10)", async ({
+    page,
+  }) => {
+    await page.goto("/destinos");
+
+    const regionGroup = page.getByRole("group", { name: /filtrar por región/i });
+    const todos = regionGroup.getByRole("button", { name: /^todos$/i });
+    const nacionales = regionGroup.getByRole("button", { name: /^nacionales$/i });
+
+    await expect(todos).toHaveAttribute("aria-pressed", "true");
+    await expect(nacionales).toHaveAttribute("aria-pressed", "false");
+
+    const live = page.getByTestId("destinos-result-live");
+    await expect(live).toHaveAttribute("aria-live", "polite");
+    await expect(live).toHaveText("");
+
+    await nacionales.click();
+    await expect(nacionales).toHaveAttribute("aria-pressed", "true");
+    await expect(todos).toHaveAttribute("aria-pressed", "false");
+    await expect(live).toHaveText(/\d+ destinos?/);
+
+    // Fuerza 0 resultados: nacionales (ARS) + sort precio + moneda USD
+    await page.getByLabel(/ordenar/i).selectOption("price-asc");
+    const currencyGroup = page.getByRole("group", { name: /filtrar por moneda/i });
+    await currencyGroup.getByRole("button", { name: /^usd$/i }).click();
+    await expect(currencyGroup.getByRole("button", { name: /^usd$/i })).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+    await expect(live).toHaveText("0 destinos");
+
+    const empty = page.getByTestId("destinos-filter-empty");
+    await expect(empty).toBeVisible();
+    await expect(
+      empty.getByRole("heading", { name: /no hay destinos con estos filtros/i }),
+    ).toBeVisible();
+    await expect(empty.getByRole("link", { name: /whatsapp/i })).toHaveAttribute(
+      "href",
+      /api\.whatsapp\.com/,
+    );
+
+    await empty.getByRole("button", { name: /ver todos/i }).click();
+    await expect(empty).toHaveCount(0);
+    await expect(todos).toHaveAttribute("aria-pressed", "true");
+    await expect(live).not.toHaveText("0 destinos");
+  });
+
   test("Armar viaje en card de destinos abre el cotizador en paso 2 prefilled", async ({
     page,
   }) => {
