@@ -179,6 +179,24 @@ export function getClusterCardStats(
   return { destinationCount: items.length, departureCount };
 }
 
+/**
+ * Pares de cluster fijo (QOL-09): slugs que comparten hub con `slug`.
+ * Omite `salidas-grupales` (membership dinámica por cupos, no lista fija).
+ * Fuente única: `destinationSlugs` en `clustersData` — sin arrays mágicos duplicados.
+ */
+export function getClusterMateSlugs(slug: string): string[] {
+  const mates = new Set<string>();
+  for (const cluster of clustersData) {
+    if (cluster.id === "salidas-grupales") continue;
+    const slugs = cluster.destinationSlugs ?? [];
+    if (!slugs.includes(slug)) continue;
+    for (const peer of slugs) {
+      if (peer !== slug) mates.add(peer);
+    }
+  }
+  return [...mates];
+}
+
 /** Primer cluster al que pertenece un destino (para breadcrumb / link de vuelta). */
 export function getPrimaryClusterForDestination(
   slug: string,
