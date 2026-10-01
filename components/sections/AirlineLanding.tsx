@@ -21,6 +21,7 @@ import {
   OFFICE_HOURS,
   whatsappLink,
 } from "@/lib/constants";
+import { siteUrl } from "@/lib/site-url";
 import { ArrowLeft, Check, MapPin } from "lucide-react";
 
 export function AirlineLanding({ airline }: { airline: AirlinePage }) {
@@ -37,19 +38,19 @@ export function AirlineLanding({ airline }: { airline: AirlinePage }) {
         "@type": "ListItem",
         position: 1,
         name: "Inicio",
-        item: "https://www.787rumbos.com.ar/",
+        item: `${siteUrl("/")}/`,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Aéreos",
-        item: `https://www.787rumbos.com.ar${AEREOS_BASE_PATH}`,
+        item: siteUrl(AEREOS_BASE_PATH),
       },
       {
         "@type": "ListItem",
         position: 3,
         name: airline.h1,
-        item: `https://www.787rumbos.com.ar${AEREOS_BASE_PATH}/${airline.slug}`,
+        item: siteUrl(`${AEREOS_BASE_PATH}/${airline.slug}`),
       },
     ],
   };

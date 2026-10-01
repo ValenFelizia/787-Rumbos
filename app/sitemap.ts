@@ -6,21 +6,21 @@ import {
 } from "@/lib/airlines-data";
 import { getAllDestinations } from "@/lib/catalog/repository";
 import { clustersData } from "@/lib/clusters-data";
+import { siteUrl } from "@/lib/site-url";
 
 export const revalidate = 86_400;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const destinationsData = await getAllDestinations();
-  const baseUrl = "https://www.787rumbos.com.ar";
 
   const staticPages = [
     {
-      url: baseUrl,
+      url: siteUrl("/"),
       changeFrequency: "monthly" as const,
       priority: 1.0,
     },
     {
-      url: `${baseUrl}/destinos`,
+      url: siteUrl("/destinos"),
       changeFrequency: "weekly" as const,
       priority: 0.9,
     },
@@ -30,7 +30,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/legal`,
+      url: siteUrl("/legal"),
       changeFrequency: "yearly" as const,
       priority: 0.3,
     },
@@ -43,13 +43,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const clusterPages = clustersData.map((cluster) => ({
-    url: `${baseUrl}/destinos/${cluster.slug}`,
+    url: siteUrl(`/destinos/${cluster.slug}`),
     changeFrequency: "weekly" as const,
     priority: 0.85,
   }));
 
   const destinationPages = destinationsData.map((dest) => ({
-    url: `${baseUrl}/destinos/${dest.slug}`,
+    url: siteUrl(`/destinos/${dest.slug}`),
     changeFrequency: "weekly" as const,
     priority: 0.8,
   }));

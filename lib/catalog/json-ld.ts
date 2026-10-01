@@ -3,6 +3,7 @@
  * (`getListedOffer` / `getDeparturePublishedPrice`).
  */
 import { AGENCY_PHONE } from "../constants";
+import { siteUrl } from "../site-url";
 import {
   getActiveUpcomingDepartures,
   getListedOffer,
@@ -52,7 +53,7 @@ export function buildDestinationTouristTripJsonLd(
       "@type": "TravelAgency",
       name: "787 Rumbos",
       telephone: AGENCY_PHONE.tel,
-      url: "https://www.787rumbos.com.ar",
+      url: siteUrl("/"),
     },
   };
 

@@ -15,53 +15,50 @@ import { ModalProvider } from '@/lib/context/ModalContext'
 import { QuoteModal } from '@/components/sections/QuoteModal'
 import { getQuoteSuggestionNames } from '@/lib/catalog/repository'
 import { GOOGLE_MAPS_LINK, AGENCY_PHONE, OFFICE_GEO } from '@/lib/constants'
+import { getMetadataBase, siteUrl } from '@/lib/site-url'
 import '../globals.css'
+
+const siteTitle = '787 Rumbos | Agencia de Viajes en Córdoba'
+const siteDescription =
+  'Agencia de viajes en el Aeropuerto de Córdoba. Pasajes aéreos, ómnibus y paquetes a medida. Financiación disponible y consulta por WhatsApp.'
+const socialDescription =
+  'Viajá con el respaldo de 787 Rumbos. Atención personalizada, financiación disponible y paquetes a medida desde Córdoba.'
+const ogImage = {
+  url: '/og-image.jpg',
+  width: 1200,
+  height: 630,
+  alt: '787 Rumbos — Agencia de viajes en el Aeropuerto de Córdoba',
+}
 
 /** Metadatos del sitio leídos por Next.js para SEO, pestaña del navegador y previews sociales.
  *  El objeto Metadata de Next.js genera automáticamente las etiquetas <meta> correspondientes
  *  en el <head> del HTML. El campo `openGraph` genera las etiquetas og: que WhatsApp e
  *  Instagram usan para mostrar el preview enriquecido cuando alguien comparte el link.
+ *  `metadataBase` (vía `getMetadataBase`) fija el host canónico www para URLs relativas.
  */
 export const metadata: Metadata = {
-  title: '787 Rumbos | Agencia de Viajes en Córdoba',
-  description:
-    'Agencia de viajes en el Aeropuerto de Córdoba. Pasajes aéreos, ómnibus y paquetes a medida. Financiación disponible y consulta por WhatsApp.',
-  metadataBase: new URL('https://www.787rumbos.com.ar'),
+  title: siteTitle,
+  description: siteDescription,
+  metadataBase: getMetadataBase(),
   alternates: {
-    canonical: 'https://www.787rumbos.com.ar',
+    canonical: siteUrl('/'),
   },
   themeColor: '#0b4058',
   manifest: '/site.webmanifest',
   openGraph: {
-    title: '787 Rumbos | Agencia de Viajes en Córdoba',
-    description:
-      'Viajá con el respaldo de 787 Rumbos. Atención personalizada, financiación disponible y paquetes a medida desde Córdoba.',
-    url: 'https://www.787rumbos.com.ar',
+    title: siteTitle,
+    description: socialDescription,
+    url: siteUrl('/'),
     siteName: '787 Rumbos',
     locale: 'es_AR',
     type: 'website',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: '787 Rumbos — Agencia de viajes en el Aeropuerto de Córdoba',
-      },
-    ],
+    images: [ogImage],
   },
   twitter: {
     card: 'summary_large_image',
-    title: '787 Rumbos | Agencia de Viajes en Córdoba',
-    description:
-      'Viajá con el respaldo de 787 Rumbos. Atención personalizada, financiación disponible y paquetes a medida desde Córdoba.',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: '787 Rumbos — Agencia de viajes en el Aeropuerto de Córdoba',
-      },
-    ],
+    title: siteTitle,
+    description: socialDescription,
+    images: [ogImage],
   },
   icons: {
     icon: [
@@ -107,7 +104,7 @@ export default async function RootLayout({
     name: "787 Rumbos",
     description:
       "Agencia de viajes en Córdoba. Paquetes personalizados, atención humana y financiación disponible.",
-    url: "https://www.787rumbos.com.ar",
+    url: siteUrl("/"),
     telephone: AGENCY_PHONE.tel,
     address: {
       "@type": "PostalAddress",

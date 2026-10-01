@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { AirlineLanding } from "@/components/sections/AirlineLanding";
 import {
-  airlineCanonicalUrl,
   getAirlineBySlug,
   getPublishedAirlineSlugs,
 } from "@/lib/airlines-data";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -20,17 +20,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const airline = getAirlineBySlug(slug);
   if (!airline || !airline.published) return {};
 
-  const canonical = airlineCanonicalUrl(slug);
-  return {
+  return buildPageMetadata({
     title: airline.metaTitle,
     description: airline.metaDescription,
-    alternates: { canonical },
-    openGraph: {
-      title: airline.metaTitle,
-      description: airline.metaDescription,
-      url: canonical,
-    },
-  };
+    path: `/aereos/${slug}`,
+  });
 }
 
 export default async function AirlinePage({ params }: Props) {

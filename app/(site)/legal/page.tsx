@@ -1,21 +1,14 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Términos y Condiciones y Políticas de Privacidad | 787 Rumbos",
   description:
     "Información legal de 787 Rumbos. Términos y condiciones de contratación de servicios turísticos y políticas de privacidad.",
-  alternates: {
-    canonical: "https://www.787rumbos.com.ar/legal",
-  },
-  openGraph: {
-    title: "Términos y Condiciones y Políticas de Privacidad | 787 Rumbos",
-    description:
-      "Información legal de 787 Rumbos. Términos y condiciones de contratación de servicios turísticos y políticas de privacidad.",
-    url: "https://www.787rumbos.com.ar/legal",
-  },
-};
+  path: "/legal",
+});
 
 export default function LegalPage() {
   return (

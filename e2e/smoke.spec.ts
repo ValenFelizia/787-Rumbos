@@ -238,6 +238,54 @@ test.describe("rutas críticas", () => {
   });
 });
 
+test.describe("seo metadata", () => {
+  const www = "https://www.787rumbos.com.ar";
+
+  test("home, /destinos y ficha usan canonical www", async ({ page }) => {
+    for (const path of ["/", "/destinos", "/destinos/bariloche"]) {
+      await page.goto(path);
+      const canonical = page.locator('link[rel="canonical"]');
+      await expect(canonical).toHaveAttribute("href", new RegExp(`^${www}`));
+      if (path === "/") {
+        await expect(canonical).toHaveAttribute("href", www);
+      } else {
+        await expect(canonical).toHaveAttribute("href", `${www}${path}`);
+      }
+    }
+  });
+
+  test("ficha de destino overridea twitter:title y twitter:description", async ({
+    page,
+  }) => {
+    await page.goto("/destinos/bariloche");
+
+    const title = await page.locator('meta[property="og:title"]').getAttribute("content");
+    const description = await page
+      .locator('meta[property="og:description"]')
+      .getAttribute("content");
+    expect(title).toBeTruthy();
+    expect(description).toBeTruthy();
+
+    await expect(page.locator('meta[name="twitter:title"]')).toHaveAttribute(
+      "content",
+      title!,
+    );
+    await expect(page.locator('meta[name="twitter:description"]')).toHaveAttribute(
+      "content",
+      description!,
+    );
+    await expect(page.locator('meta[name="twitter:title"]')).not.toHaveAttribute(
+      "content",
+      "787 Rumbos | Agencia de Viajes en Córdoba",
+    );
+
+    const twitterImage = await page
+      .locator('meta[name="twitter:image"]')
+      .getAttribute("content");
+    expect(twitterImage).toMatch(/bariloche/i);
+  });
+});
+
 test.describe("mcp", () => {
   test("sin clave, /api/mcp responde 401 y noindex", async ({ request }) => {
     const response = await request.post("/api/mcp", {
