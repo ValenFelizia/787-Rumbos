@@ -109,6 +109,36 @@ describe("getListedPrice", () => {
     assert.equal(getListedPrice(expired, today), undefined);
     assert.equal(hasExpiredListedPrice(expired, today), true);
   });
+
+  it("inherits destination base when no departure publishes its own price", () => {
+    const dest = destination({
+      priceFrom: 410000,
+      departures: [departure(), departure({ date: "2026-11-01" })],
+    });
+    assert.deepEqual(getListedPrice(dest, today), { amount: 410000, currency: "ARS" });
+  });
+
+  it("uses explicit departure prices only (Río: 1719, not stale base 980)", () => {
+    const rio = destination({
+      slug: "rio-de-janeiro",
+      name: "Río de Janeiro",
+      country: "Brasil",
+      region: "internacional",
+      currency: "USD",
+      priceFrom: 980,
+      priceValidUntil: "2026-12-31",
+      departures: [
+        departure({ date: "2026-10-12", status: "few-seats" }),
+        departure({
+          date: "2026-12-30",
+          displayDate: "30 de Diciembre",
+          priceFrom: 1719,
+          currency: "USD",
+        }),
+      ],
+    });
+    assert.deepEqual(getListedPrice(rio, today), { amount: 1719, currency: "USD" });
+  });
 });
 
 describe("filterDestinationsByCurrency", () => {

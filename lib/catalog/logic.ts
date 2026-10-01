@@ -246,6 +246,12 @@ function applicableValidity(dep: Departure, dest: DestinationPage): string | und
   return dep.priceValidUntil ?? dest.priceValidUntil;
 }
 
+/** YYYY-MM-DD para JSON-LD / UI; ignora horas si vienen del CMS. */
+function validityDay(value?: string | null): string | undefined {
+  if (!value) return undefined;
+  return /^(\d{4}-\d{2}-\d{2})/.exec(value)?.[1];
+}
+
 /** Precio propio de la salida, si no está vencido. Sin monto propio, undefined. */
 export function isDeparturePriceExpired(
   dest: DestinationPage,
@@ -255,44 +261,88 @@ export function isDeparturePriceExpired(
   return dep.priceFrom != null && isPriceExpired(applicableValidity(dep, dest), today);
 }
 
-function contribution(
+/** Oferta “desde” publicada (monto + vigencia) para ficha, listado y JSON-LD. */
+export type ListedOffer = {
+  amount: number;
+  currency: "ARS" | "USD";
+  /** Vigencia aplicable YYYY-MM-DD; ausente = sin vencimiento cargado. */
+  priceValidUntil?: string;
+};
+
+/**
+ * Precio publicado de una salida en la ficha (mismo criterio que el Offer JSON-LD).
+ * Solo montos propios de la salida; sin heredar el base del destino.
+ */
+export function getDeparturePublishedPrice(
   dest: DestinationPage,
   dep: Departure,
-  today: Date,
-  respectExpiry: boolean,
-): number | undefined {
-  if (dep.priceFrom != null) {
-    if (respectExpiry && isPriceExpired(applicableValidity(dep, dest), today)) return undefined;
-    return dep.priceFrom;
-  }
-  if (dest.priceFrom == null) return undefined;
-  if (respectExpiry && isPriceExpired(dest.priceValidUntil, today)) return undefined;
-  return dest.priceFrom;
+  today = getTodayLocal(),
+): ListedOffer | undefined {
+  if (dep.priceFrom == null) return undefined;
+  if (isDeparturePriceExpired(dest, dep, today)) return undefined;
+  const priceValidUntil = validityDay(applicableValidity(dep, dest));
+  return {
+    amount: dep.priceFrom,
+    currency: dep.currency ?? dest.currency,
+    ...(priceValidUntil ? { priceValidUntil } : {}),
+  };
 }
 
-function listedPrice(
+function destinationBaseOffer(
   dest: DestinationPage,
   today: Date,
   respectExpiry: boolean,
-): { amount: number; currency: "ARS" | "USD" } | undefined {
-  const hotelTrips = getActiveUpcomingDepartures(dest, today).filter((dep) => !dep.stayLabel);
-  const amounts = hotelTrips
-    .map((dep) => contribution(dest, dep, today, respectExpiry))
-    .filter((amount): amount is number => amount != null);
-  if (amounts.length === 0) {
-    if (hotelTrips.length > 0) return undefined;
-    if (dest.priceFrom == null) return undefined;
-    if (respectExpiry && isPriceExpired(dest.priceValidUntil, today)) return undefined;
-    return { amount: dest.priceFrom, currency: dest.currency };
-  }
-  const priced = hotelTrips.find((dep) => {
-    if (dep.priceFrom == null) return false;
-    return !respectExpiry || !isPriceExpired(applicableValidity(dep, dest), today);
-  });
+): ListedOffer | undefined {
+  if (dest.priceFrom == null) return undefined;
+  if (respectExpiry && isPriceExpired(dest.priceValidUntil, today)) return undefined;
+  const priceValidUntil = validityDay(dest.priceValidUntil);
   return {
-    amount: Math.min(...amounts),
-    currency: priced?.currency ?? dest.currency,
+    amount: dest.priceFrom,
+    currency: dest.currency,
+    ...(priceValidUntil ? { priceValidUntil } : {}),
   };
+}
+
+/**
+ * Tarifa “desde” publicada.
+ * Si hay salidas hotel con precio propio, usa solo esos montos vigentes (no diluye
+ * con el base del destino en hermanas sin precio — evita el 980 vs 1719 de Río).
+ * Si ninguna salida trae precio propio, hereda el base del destino.
+ */
+function listedOffer(
+  dest: DestinationPage,
+  today: Date,
+  respectExpiry: boolean,
+): ListedOffer | undefined {
+  const hotelTrips = getActiveUpcomingDepartures(dest, today).filter((dep) => !dep.stayLabel);
+  const anyPricedDeparture = hotelTrips.some((dep) => dep.priceFrom != null);
+
+  if (anyPricedDeparture) {
+    const explicit: ListedOffer[] = [];
+    for (const dep of hotelTrips) {
+      if (dep.priceFrom == null) continue;
+      const validity = applicableValidity(dep, dest);
+      if (respectExpiry && isPriceExpired(validity, today)) continue;
+      const priceValidUntil = validityDay(validity);
+      explicit.push({
+        amount: dep.priceFrom,
+        currency: dep.currency ?? dest.currency,
+        ...(priceValidUntil ? { priceValidUntil } : {}),
+      });
+    }
+    if (explicit.length === 0) return undefined;
+    return explicit.reduce((best, offer) => (offer.amount < best.amount ? offer : best));
+  }
+
+  return destinationBaseOffer(dest, today, respectExpiry);
+}
+
+/** Oferta “desde” vigente (monto + currency + vigencia) para UI y JSON-LD. */
+export function getListedOffer(
+  dest: DestinationPage,
+  today = getTodayLocal(),
+): ListedOffer | undefined {
+  return listedOffer(dest, today, true);
 }
 
 /** Tarifa “desde” de la ficha: el menor precio de hotel entre las salidas vigentes. */
@@ -300,12 +350,14 @@ export function getListedPrice(
   dest: DestinationPage,
   today = getTodayLocal(),
 ): { amount: number; currency: "ARS" | "USD" } | undefined {
-  return listedPrice(dest, today, true);
+  const offer = listedOffer(dest, today, true);
+  if (!offer) return undefined;
+  return { amount: offer.amount, currency: offer.currency };
 }
 
 /** Había un monto para mostrar, pero todas las vigencias que lo cubren ya vencieron. */
 export function hasExpiredListedPrice(dest: DestinationPage, today = getTodayLocal()): boolean {
-  return listedPrice(dest, today, false) != null && listedPrice(dest, today, true) == null;
+  return listedOffer(dest, today, false) != null && listedOffer(dest, today, true) == null;
 }
 
 export function getDestinationBySlug(

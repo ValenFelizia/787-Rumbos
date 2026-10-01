@@ -7,13 +7,13 @@ import { Footer } from "@/components/sections/Footer";
 import { FAQ } from "@/components/sections/FAQ";
 import {
   getActiveUpcomingDepartures,
-  getListedPrice,
+  getDeparturePublishedPrice,
   getNearestActiveDeparture,
   getUpcomingDepartures,
   getTransportLabel,
   hasExpiredListedPrice,
-  isDeparturePriceExpired,
 } from "@/lib/catalog/logic";
+import { buildDestinationTouristTripJsonLd } from "@/lib/catalog/json-ld";
 import {
   getAllDestinationSlugs,
   getAllDestinations,
@@ -177,31 +177,8 @@ export default async function DestinoDetailPage({ params }: Props) {
   const upcomingDepartures = getUpcomingDepartures(dest).slice().sort(compareDepartures);
   const activeUpcomingDepartures = getActiveUpcomingDepartures(dest);
   const nearestActiveDeparture = getNearestActiveDeparture(dest);
-  const listedPrice = getListedPrice(dest);
-
-  // JSON-LD estructurado
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "TouristTrip",
-    "name": `Paquete a ${dest.name}`,
-    "description": dest.description,
-    "touristType": "Leisure",
-    "provider": {
-      "@type": "TravelAgency",
-      "name": "787 Rumbos",
-      "telephone": AGENCY_PHONE.tel,
-      "url": "https://www.787rumbos.com.ar"
-    },
-    ...(listedPrice && {
-      "offers": {
-        "@type": "Offer",
-        "price": listedPrice.amount.toString(),
-        "priceCurrency": listedPrice.currency,
-        "availability": activeUpcomingDepartures.length > 0 ? "https://schema.org/InStock" : "https://schema.org/InquiryLimit",
-        "priceValidUntil": "2026-12-31"
-      }
-    })
-  };
+  // Offer JSON-LD = misma oferta publicada que listado / salidas (`getListedOffer`)
+  const jsonLd = buildDestinationTouristTripJsonLd(dest);
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -493,6 +470,9 @@ export default async function DestinoDetailPage({ params }: Props) {
                 <div className="space-y-4">
                   {upcomingDepartures.map((dep, idx) => {
                     const statusInfo = getDepartureStatus(dep);
+                    const publishedPrice =
+                      dep.priceFrom != null ? getDeparturePublishedPrice(dest, dep) : undefined;
+                    const showPriceSlot = dep.priceFrom != null;
 
                     return (
                       <div
@@ -522,16 +502,18 @@ export default async function DestinoDetailPage({ params }: Props) {
                               </span>
                               <span>·</span>
                               <span>{dep.stayLabel ?? `${dep.nights} ${dep.nights === 1 ? "noche" : "noches"}`}</span>
-                              {dep.priceFrom != null && (
+                              {showPriceSlot && (
                                 <>
                                   <span>·</span>
-                                  {isDeparturePriceExpired(dest, dep) ? (
-                                    <span className="font-bold text-[#0b4058]">Consultá precio actualizado</span>
-                                  ) : (
+                                  {publishedPrice ? (
                                     <span className="font-bold text-[#0b4058] tabular-nums">
                                       {dep.priceIsFinal ? "Final" : "Desde"}{" "}
-                                      {(dep.currency ?? dest.currency) === "USD" ? "USD" : "$"}
-                                      {dep.priceFrom.toLocaleString("es-AR")}
+                                      {publishedPrice.currency === "USD" ? "USD" : "$"}
+                                      {publishedPrice.amount.toLocaleString("es-AR")}
+                                    </span>
+                                  ) : (
+                                    <span className="font-bold text-[#0b4058]">
+                                      Consultá precio actualizado
                                     </span>
                                   )}
                                 </>
