@@ -23,6 +23,8 @@ import {
 import type { Departure } from "@/lib/catalog/types";
 import { getPrimaryClusterForDestination } from "@/lib/clusters-data";
 import { AGENCY_PHONE, whatsappLink } from "@/lib/constants";
+import { buildPageMetadata } from "@/lib/seo-metadata";
+import { siteUrl } from "@/lib/site-url";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { DestinationMobileStickyBar } from "@/components/conversion/DestinationMobileStickyBar";
 import {
@@ -47,26 +49,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const destination = await getDestinationBySlug(slug);
   if (!destination) return {};
 
-  return {
+  return buildPageMetadata({
     title: destination.metaTitle,
     description: destination.metaDescription,
-    alternates: {
-      canonical: `https://www.787rumbos.com.ar/destinos/${slug}`,
-    },
-    openGraph: {
-      title: destination.metaTitle,
-      description: destination.metaDescription,
-      url: `https://www.787rumbos.com.ar/destinos/${slug}`,
-      images: [
-        {
-          url: destination.heroImage,
-          width: 800,
-          height: 600,
-          alt: `Viajar a ${destination.name} con 787 Rumbos`,
-        },
-      ],
-    },
-  };
+    path: `/destinos/${slug}`,
+    images: [
+      {
+        url: destination.heroImage,
+        width: 800,
+        height: 600,
+        alt: `Viajar a ${destination.name} con 787 Rumbos`,
+      },
+    ],
+  });
 }
 
 // 2. Generar parámetros estáticos para SSG en build time
@@ -188,19 +183,19 @@ export default async function DestinoDetailPage({ params }: Props) {
         "@type": "ListItem",
         position: 1,
         name: "Inicio",
-        item: "https://www.787rumbos.com.ar",
+        item: siteUrl("/"),
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Destinos",
-        item: "https://www.787rumbos.com.ar/destinos",
+        item: siteUrl("/destinos"),
       },
       {
         "@type": "ListItem",
         position: 3,
         name: dest.name,
-        item: `https://www.787rumbos.com.ar/destinos/${slug}`,
+        item: siteUrl(`/destinos/${slug}`),
       },
     ],
   };

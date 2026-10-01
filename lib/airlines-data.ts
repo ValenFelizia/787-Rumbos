@@ -13,9 +13,11 @@ import {
   WHATSAPP_LINK,
   type FaqItem,
 } from "@/lib/constants";
+import { SITE_ORIGIN } from "@/lib/site-url";
 
 export const AEREOS_BASE_PATH = "/aereos" as const;
-export const AEREOS_CANONICAL_ORIGIN = "https://www.787rumbos.com.ar" as const;
+/** @deprecated Prefer `SITE_ORIGIN` / `siteUrl()` from `@/lib/site-url`. */
+export const AEREOS_CANONICAL_ORIGIN = SITE_ORIGIN;
 
 export interface AirlineLogo {
   src: string;
@@ -369,9 +371,9 @@ export function airlineCanonicalPath(slug: string): string {
 }
 
 export function airlineCanonicalUrl(slug: string): string {
-  return `${AEREOS_CANONICAL_ORIGIN}${airlineCanonicalPath(slug)}`;
+  return `${SITE_ORIGIN}${airlineCanonicalPath(slug)}`;
 }
 
 export function aereosHubCanonicalUrl(): string {
-  return `${AEREOS_CANONICAL_ORIGIN}${AEREOS_BASE_PATH}`;
+  return `${SITE_ORIGIN}${AEREOS_BASE_PATH}`;
 }

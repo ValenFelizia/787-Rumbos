@@ -1,22 +1,13 @@
 import type { Metadata } from "next";
 import { AereosHub } from "@/components/sections/AereosHub";
-import {
-  aereosHub,
-  aereosHubCanonicalUrl,
-} from "@/lib/airlines-data";
+import { aereosHub } from "@/lib/airlines-data";
+import { buildPageMetadata } from "@/lib/seo-metadata";
 
-const canonical = aereosHubCanonicalUrl();
-
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: aereosHub.metaTitle,
   description: aereosHub.metaDescription,
-  alternates: { canonical },
-  openGraph: {
-    title: aereosHub.metaTitle,
-    description: aereosHub.metaDescription,
-    url: canonical,
-  },
-};
+  path: "/aereos",
+});
 
 export default function AereosPage() {
   return <AereosHub />;
