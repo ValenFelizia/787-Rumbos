@@ -23,8 +23,7 @@ import {
   type DestinosCurrencyFilter,
   type DestinosSortMode,
 } from "@/lib/catalog/logic";
-import type { DestinationPage } from "@/lib/catalog/types";
-import { clustersData, getClusterCardStats } from "@/lib/clusters-data";
+import type { ClusterCardProps, DestinationListing } from "@/lib/catalog/listing";
 import { AGENCY_PHONE, whatsappLink } from "@/lib/constants";
 import { MapPin, Calendar, ArrowRight } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
@@ -40,7 +39,7 @@ import {
 const FILTER_CHIP_FOCUS =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f7a92a]";
 
-function CardListedPrice({ dest }: { dest: DestinationPage }) {
+function CardListedPrice({ dest }: { dest: DestinationListing }) {
   const listed = getListedPrice(dest);
   if (listed) {
     return (
@@ -74,7 +73,7 @@ function DestinationCard({
   dest,
   promoBadge,
 }: {
-  dest: DestinationPage;
+  dest: DestinationListing;
   promoBadge?: ListingPromoBadge | null;
 }) {
   const { openModal } = useModal();
@@ -150,9 +149,11 @@ function DestinationCard({
           </h2>
           {/* Precio alto en la card (QOL-02): visible junto al título, sin depender del bloque inferior */}
           <CardListedPrice dest={dest} />
-          <p className="text-sm text-[#0b4058]/80 line-clamp-3 leading-relaxed text-pretty">
-            {dest.description}
-          </p>
+          {dest.description ? (
+            <p className="text-sm text-[#0b4058]/80 line-clamp-3 leading-relaxed text-pretty">
+              {dest.description}
+            </p>
+          ) : null}
         </div>
 
         <div className="space-y-3 pt-4 border-t border-[#0b4058]/5">
@@ -180,9 +181,12 @@ function DestinationCard({
 
 export function DestinosView({
   destinations,
+  clusterCards,
   promoBadge = null,
 }: {
-  destinations: DestinationPage[];
+  destinations: DestinationListing[];
+  /** Cards de hub precomputadas en el server (sin clustersData completo en el client). */
+  clusterCards: ClusterCardProps[];
   /** Badge CMS del Featured Promo activo; null si no hay promo publicada. */
   promoBadge?: ListingPromoBadge | null;
 }) {
@@ -271,22 +275,19 @@ export function DestinosView({
         {/* Hubs SEO — visual cluster cards (QOL-03 / IA alt. B); horizontal scroll on mobile */}
         <nav aria-label="Catálogos desde Córdoba" className="mb-8 md:mb-10">
           <div className="-mx-6 flex snap-x snap-mandatory gap-3 overflow-x-auto px-6 pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:grid md:grid-cols-4 md:gap-4 md:overflow-visible md:px-0 md:pb-0">
-            {clustersData.map((cluster) => {
-              const stats = getClusterCardStats(cluster, destinations);
-              return (
-                <ClusterCard
-                  key={cluster.id}
-                  href={`/destinos/${cluster.slug}`}
-                  title={cluster.shortTitle}
-                  line={cluster.cardLine}
-                  image={cluster.cardImage}
-                  imageAlt={cluster.cardImageAlt}
-                  destinationCount={stats.destinationCount}
-                  departureCount={stats.departureCount}
-                  className="w-[min(72vw,17.5rem)] shrink-0 snap-start md:w-auto"
-                />
-              );
-            })}
+            {clusterCards.map((card) => (
+              <ClusterCard
+                key={card.href}
+                href={card.href}
+                title={card.title}
+                line={card.line}
+                image={card.image}
+                imageAlt={card.imageAlt}
+                destinationCount={card.destinationCount}
+                departureCount={card.departureCount}
+                className="w-[min(72vw,17.5rem)] shrink-0 snap-start md:w-auto"
+              />
+            ))}
           </div>
         </nav>
 

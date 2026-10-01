@@ -19,6 +19,7 @@ import { Testimonials } from "@/components/sections/Testimonials";
 import { FAQ } from "@/components/sections/FAQ";
 import { CTASection } from "@/components/sections/CTASection";
 import { Footer } from "@/components/sections/Footer";
+import { toDestinationListings } from "@/lib/catalog/listing";
 import { getFeaturedPromo } from "@/lib/catalog/promo";
 import { getHomeFeaturedDestinations } from "@/lib/catalog/repository";
 
@@ -27,6 +28,10 @@ export default async function Home() {
     getHomeFeaturedDestinations(),
     getFeaturedPromo(),
   ]);
+  // Slim DTO before client boundary (no description / detail-only fields).
+  const featuredListings = toDestinationListings(featured, {
+    includeDescription: false,
+  });
 
   return (
     <main className="min-h-screen bg-[#f9f9f9] text-[#0b4058]">
@@ -38,7 +43,7 @@ export default async function Home() {
       <PartnersMarquee />
       <ValueProposition />
       <RumboSelector />
-      <FeaturedDestinations destinations={featured} />
+      <FeaturedDestinations destinations={featuredListings} />
       <Testimonials />
       <Services />
       <InstagramFeed />

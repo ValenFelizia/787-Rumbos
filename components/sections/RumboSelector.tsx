@@ -46,7 +46,6 @@ function RumboCardFace({
         alt={alt}
         fill
         sizes={sizes}
-        loading="eager"
         className={`object-cover ${imagePosition} motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out motion-safe:group-hover:scale-[1.04]`}
       />
       {/* Gradiente localizado al texto: no oscurece la foto entera. */}
