@@ -13,7 +13,20 @@ export const SITE_ORIGIN = "https://www.787rumbos.com.ar" as const;
 
 const OWN_HOSTS = new Set(["www.787rumbos.com.ar", "787rumbos.com.ar"]);
 
-function readConfiguredUrl(env: NodeJS.ProcessEnv): string | undefined {
+/** Subset of process.env keys we care about (tests pass plain objects). */
+export type SiteUrlEnv = {
+  NEXT_PUBLIC_SITE_URL?: string;
+  NEXT_PUBLIC_SERVER_URL?: string;
+};
+
+function envFromProcess(): SiteUrlEnv {
+  return {
+    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
+    NEXT_PUBLIC_SERVER_URL: process.env.NEXT_PUBLIC_SERVER_URL,
+  };
+}
+
+function readConfiguredUrl(env: SiteUrlEnv): string | undefined {
   const raw =
     env.NEXT_PUBLIC_SITE_URL?.trim() || env.NEXT_PUBLIC_SERVER_URL?.trim();
   return raw || undefined;
@@ -23,7 +36,7 @@ function readConfiguredUrl(env: NodeJS.ProcessEnv): string | undefined {
  * Origen absoluto usado en metadatos y sitemap.
  * Ignora valores de entorno no canónicos; default seguro = `SITE_ORIGIN`.
  */
-export function getSiteOrigin(env: NodeJS.ProcessEnv = process.env): string {
+export function getSiteOrigin(env: SiteUrlEnv = envFromProcess()): string {
   const raw = readConfiguredUrl(env);
   if (!raw) return SITE_ORIGIN;
 
@@ -43,18 +56,13 @@ export function getSiteOrigin(env: NodeJS.ProcessEnv = process.env): string {
 }
 
 /** URL absoluta canónica. `path` puede ser `""`, `"/"` o `"/destinos/bariloche"`. */
-export function siteUrl(
-  path: string = "/",
-  env: NodeJS.ProcessEnv = process.env,
-): string {
+export function siteUrl(path: string = "/", env: SiteUrlEnv = envFromProcess()): string {
   const origin = getSiteOrigin(env);
   if (!path || path === "/") return origin;
   const withSlash = path.startsWith("/") ? path : `/${path}`;
   return `${origin}${withSlash.replace(/\/+$/, "")}`;
 }
 
-export function getMetadataBase(
-  env: NodeJS.ProcessEnv = process.env,
-): URL {
+export function getMetadataBase(env: SiteUrlEnv = envFromProcess()): URL {
   return new URL(`${getSiteOrigin(env)}/`);
 }
