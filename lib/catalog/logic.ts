@@ -1,9 +1,13 @@
 /**
  * Reglas puras del catálogo. Reciben los destinos ya cargados para que el
  * mismo código corra en el servidor, en componentes cliente y en el seed.
+ *
+ * Los helpers de listado/precio aceptan `DestinationListing` (DTO liviano);
+ * `DestinationPage` sigue siendo asignable (superset estructural).
  */
 import { AGENCY_PHONE, whatsappLink } from "../constants";
-import type { Departure, DestinationPage, TransportType } from "./types";
+import type { DepartureListing, DestinationListing } from "./listing";
+import type { DestinationPage, TransportType } from "./types";
 
 /** Etiqueta legible para UI; el valor canónico en datos sigue sin tilde (`aereo`). */
 export function getTransportLabel(transport: TransportType): string {
@@ -35,7 +39,10 @@ export function getTodayLocal(): Date {
 }
 
 /** True si la salida aún no pasó (incluye el día de hoy). */
-export function isDepartureUpcoming(dep: Departure, today = getTodayLocal()): boolean {
+export function isDepartureUpcoming(
+  dep: Pick<DepartureListing, "date">,
+  today = getTodayLocal(),
+): boolean {
   return new Date(dep.date + "T00:00:00") >= today;
 }
 
@@ -50,14 +57,24 @@ export function isPriceExpired(validUntil?: string | null, today = getTodayLocal
   return new Date(`${day}T00:00:00`) < today;
 }
 
-/** Salidas futuras (cualquier status). */
-export function getUpcomingDepartures(dest: DestinationPage, today = getTodayLocal()): Departure[] {
-  return dest.departures.filter((dep) => isDepartureUpcoming(dep, today));
+/** Salidas futuras (cualquier status). Conserva el tipo de `departures` del input. */
+export function getUpcomingDepartures<T extends DestinationListing>(
+  dest: T,
+  today = getTodayLocal(),
+): T["departures"] {
+  return dest.departures.filter((dep) =>
+    isDepartureUpcoming(dep, today),
+  ) as T["departures"];
 }
 
 /** Salidas futuras consultables (no sold-out). */
-export function getActiveUpcomingDepartures(dest: DestinationPage, today = getTodayLocal()): Departure[] {
-  return getUpcomingDepartures(dest, today).filter((dep) => dep.status !== "sold-out");
+export function getActiveUpcomingDepartures<T extends DestinationListing>(
+  dest: T,
+  today = getTodayLocal(),
+): T["departures"] {
+  return getUpcomingDepartures(dest, today).filter(
+    (dep) => dep.status !== "sold-out",
+  ) as T["departures"];
 }
 
 /** Clave de mes de salida (`YYYY-MM`) desde una fecha ISO local. */
@@ -130,7 +147,7 @@ function monthKeysInWindow(today: Date, monthsAhead: number): DepartureMonthKey[
  * Sold-out y fechas pasadas no cuentan. Orden cronológico determinista.
  */
 export function listAvailableDepartureMonths(
-  destinations: DestinationPage[],
+  destinations: DestinationListing[],
   options?: { today?: Date; monthsAhead?: number },
 ): DepartureMonthOption[] {
   const today = options?.today ?? getTodayLocal();
@@ -153,7 +170,7 @@ export function listAvailableDepartureMonths(
 
 /** True si el destino tiene ≥1 salida activa en el mes `YYYY-MM`. */
 export function destinationHasActiveDepartureInMonth(
-  dest: DestinationPage,
+  dest: DestinationListing,
   monthKey: DepartureMonthKey,
   today = getTodayLocal(),
 ): boolean {
@@ -166,11 +183,11 @@ export function destinationHasActiveDepartureInMonth(
  * Filtra destinos con al menos una salida activa en el mes.
  * `monthKey` null/undefined = sin filtro de mes.
  */
-export function filterDestinationsByDepartureMonth(
-  destinations: DestinationPage[],
+export function filterDestinationsByDepartureMonth<T extends DestinationListing>(
+  destinations: T[],
   monthKey: DepartureMonthKey | null | undefined,
   today = getTodayLocal(),
-): DestinationPage[] {
+): T[] {
   if (!monthKey) return destinations;
   return destinations.filter((dest) =>
     destinationHasActiveDepartureInMonth(dest, monthKey, today),
@@ -190,7 +207,9 @@ export function resolveSelectedDepartureMonth(
 }
 
 /** La salida consultable más cercana. */
-export function getNearestActiveDeparture(dest: DestinationPage): Departure | undefined {
+export function getNearestActiveDeparture<T extends DestinationListing>(
+  dest: T,
+): T["departures"][number] | undefined {
   return getActiveUpcomingDepartures(dest)
     .slice()
     .sort((a, b) => a.date.localeCompare(b.date))[0];
@@ -242,7 +261,7 @@ export function getQuoteSuggestionNames(
     .map((dest) => dest.name);
 }
 
-function applicableValidity(dep: Departure, dest: DestinationPage): string | undefined {
+function applicableValidity(dep: DepartureListing, dest: DestinationListing): string | undefined {
   return dep.priceValidUntil ?? dest.priceValidUntil;
 }
 
@@ -254,8 +273,8 @@ function validityDay(value?: string | null): string | undefined {
 
 /** Precio propio de la salida, si no está vencido. Sin monto propio, undefined. */
 export function isDeparturePriceExpired(
-  dest: DestinationPage,
-  dep: Departure,
+  dest: DestinationListing,
+  dep: DepartureListing,
   today = getTodayLocal(),
 ): boolean {
   return dep.priceFrom != null && isPriceExpired(applicableValidity(dep, dest), today);
@@ -274,8 +293,8 @@ export type ListedOffer = {
  * Solo montos propios de la salida; sin heredar el base del destino.
  */
 export function getDeparturePublishedPrice(
-  dest: DestinationPage,
-  dep: Departure,
+  dest: DestinationListing,
+  dep: DepartureListing,
   today = getTodayLocal(),
 ): ListedOffer | undefined {
   if (dep.priceFrom == null) return undefined;
@@ -289,7 +308,7 @@ export function getDeparturePublishedPrice(
 }
 
 function destinationBaseOffer(
-  dest: DestinationPage,
+  dest: DestinationListing,
   today: Date,
   respectExpiry: boolean,
 ): ListedOffer | undefined {
@@ -310,7 +329,7 @@ function destinationBaseOffer(
  * Si ninguna salida trae precio propio, hereda el base del destino.
  */
 function listedOffer(
-  dest: DestinationPage,
+  dest: DestinationListing,
   today: Date,
   respectExpiry: boolean,
 ): ListedOffer | undefined {
@@ -339,7 +358,7 @@ function listedOffer(
 
 /** Oferta “desde” vigente (monto + currency + vigencia) para UI y JSON-LD. */
 export function getListedOffer(
-  dest: DestinationPage,
+  dest: DestinationListing,
   today = getTodayLocal(),
 ): ListedOffer | undefined {
   return listedOffer(dest, today, true);
@@ -347,7 +366,7 @@ export function getListedOffer(
 
 /** Tarifa “desde” de la ficha: el menor precio de hotel entre las salidas vigentes. */
 export function getListedPrice(
-  dest: DestinationPage,
+  dest: DestinationListing,
   today = getTodayLocal(),
 ): { amount: number; currency: "ARS" | "USD" } | undefined {
   const offer = listedOffer(dest, today, true);
@@ -356,7 +375,7 @@ export function getListedPrice(
 }
 
 /** Había un monto para mostrar, pero todas las vigencias que lo cubren ya vencieron. */
-export function hasExpiredListedPrice(dest: DestinationPage, today = getTodayLocal()): boolean {
+export function hasExpiredListedPrice(dest: DestinationListing, today = getTodayLocal()): boolean {
   return listedOffer(dest, today, false) != null && listedOffer(dest, today, true) == null;
 }
 
@@ -402,24 +421,24 @@ export function isPriceSortMode(mode: DestinosSortMode): boolean {
  * `getListedPrice` en esa moneda. “Todas” no filtra (conserva bloques QOL-01).
  * Sin precio / vencido no matchean ARS ni USD (solo aparecen con Todas).
  */
-export function filterDestinationsByCurrency(
-  destinations: DestinationPage[],
+export function filterDestinationsByCurrency<T extends DestinationListing>(
+  destinations: T[],
   currencyFilter: DestinosCurrencyFilter,
   today = getTodayLocal(),
-): DestinationPage[] {
+): T[] {
   if (currencyFilter === "all") return destinations;
   return destinations.filter((dest) => getListedPrice(dest, today)?.currency === currencyFilter);
 }
 
 /** Bloque del listado: con encabezado de moneda solo cuando el sort por precio mezcla ARS y USD. */
-export type DestinationSortGroup = {
+export type DestinationSortGroup<T extends DestinationListing = DestinationListing> = {
   heading?: "En pesos" | "En dólares";
-  items: DestinationPage[];
+  items: T[];
 };
 
 function catalogOrderIndex(
-  destinations: DestinationPage[],
-  catalogOrder: DestinationPage[],
+  destinations: DestinationListing[],
+  catalogOrder: DestinationListing[],
 ): Map<string, number> {
   const index = new Map<string, number>();
   catalogOrder.forEach((dest, i) => {
@@ -433,8 +452,8 @@ function catalogOrderIndex(
 }
 
 function compareCatalogTies(
-  a: DestinationPage,
-  b: DestinationPage,
+  a: DestinationListing,
+  b: DestinationListing,
   orderIndex: Map<string, number>,
 ): number {
   const ia = orderIndex.get(a.slug) ?? 0;
@@ -444,8 +463,8 @@ function compareCatalogTies(
 }
 
 function compareListedPriceAmount(
-  a: DestinationPage,
-  b: DestinationPage,
+  a: DestinationListing,
+  b: DestinationListing,
   direction: "asc" | "desc",
   orderIndex: Map<string, number>,
   today: Date,
@@ -468,11 +487,11 @@ function compareListedPriceAmount(
  * - `next-departure`: por la salida activa más próxima; sin salida al final.
  * Empates: orden de catálogo (`sortOrder`), luego nombre.
  */
-export function groupDestinationsForSort(
-  destinations: DestinationPage[],
+export function groupDestinationsForSort<T extends DestinationListing>(
+  destinations: T[],
   mode: DestinosSortMode,
-  options?: { today?: Date; catalogOrder?: DestinationPage[] },
-): DestinationSortGroup[] {
+  options?: { today?: Date; catalogOrder?: DestinationListing[] },
+): DestinationSortGroup<T>[] {
   const today = options?.today ?? getTodayLocal();
   const catalogOrder = options?.catalogOrder ?? destinations;
   const orderIndex = catalogOrderIndex(destinations, catalogOrder);
@@ -496,9 +515,9 @@ export function groupDestinationsForSort(
   }
 
   const direction = mode === "price-asc" ? "asc" : "desc";
-  const ars: DestinationPage[] = [];
-  const usd: DestinationPage[] = [];
-  const unpriced: DestinationPage[] = [];
+  const ars: T[] = [];
+  const usd: T[] = [];
+  const unpriced: T[] = [];
 
   for (const dest of destinations) {
     const listed = getListedPrice(dest, today);
@@ -507,7 +526,7 @@ export function groupDestinationsForSort(
     else ars.push(dest);
   }
 
-  const byPrice = (a: DestinationPage, b: DestinationPage) =>
+  const byPrice = (a: T, b: T) =>
     compareListedPriceAmount(a, b, direction, orderIndex, today);
 
   ars.sort(byPrice);
@@ -519,7 +538,7 @@ export function groupDestinationsForSort(
     return [{ items: [...ars, ...usd, ...unpriced] }];
   }
 
-  const groups: DestinationSortGroup[] = [
+  const groups: DestinationSortGroup<T>[] = [
     { heading: "En pesos", items: ars },
     { heading: "En dólares", items: usd },
   ];

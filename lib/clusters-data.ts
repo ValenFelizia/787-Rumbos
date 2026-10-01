@@ -5,6 +5,7 @@
  * del catálogo — sin copy genérico de guía turística.
  */
 import { getActiveUpcomingDepartures } from "@/lib/catalog/logic";
+import type { DestinationListing } from "@/lib/catalog/listing";
 import type { DestinationPage } from "@/lib/catalog/types";
 
 export type ClusterId = "brasil" | "caribe" | "argentina-bus" | "salidas-grupales";
@@ -150,10 +151,10 @@ export function getClusterById(id: ClusterId): ClusterPage | undefined {
 }
 
 /** Destinos del hub: slugs fijos o, en salidas grupales, los que tienen cupos activos. */
-export function getClusterDestinations(
+export function getClusterDestinations<T extends DestinationListing>(
   cluster: ClusterPage,
-  destinations: DestinationPage[],
-): DestinationPage[] {
+  destinations: T[],
+): T[] {
   if (cluster.id === "salidas-grupales") {
     return destinations.filter(
       (d) => getActiveUpcomingDepartures(d).length > 0
@@ -163,13 +164,13 @@ export function getClusterDestinations(
   const slugs = cluster.destinationSlugs ?? [];
   return slugs
     .map((slug) => destinations.find((d) => d.slug === slug))
-    .filter((d): d is DestinationPage => Boolean(d));
+    .filter((d): d is T => Boolean(d));
 }
 
 /** Contadores para cards de cluster en `/destinos` (QOL-03). */
 export function getClusterCardStats(
   cluster: ClusterPage,
-  destinations: DestinationPage[],
+  destinations: DestinationListing[],
 ): { destinationCount: number; departureCount: number } {
   const items = getClusterDestinations(cluster, destinations);
   const departureCount = items.reduce(

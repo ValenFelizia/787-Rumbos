@@ -8,7 +8,7 @@ import {
   getTransportLabel,
   hasExpiredListedPrice,
 } from "@/lib/catalog/logic";
-import type { DestinationPage } from "@/lib/catalog/types";
+import type { DestinationListing } from "@/lib/catalog/listing";
 import { Plane, Bus, ArrowRight, Calendar } from "lucide-react";
 import {
   PrimaryCta,
@@ -17,7 +17,11 @@ import {
 } from "@/components/conversion";
 import { useModal } from "@/lib/context/ModalContext";
 
-export function FeaturedDestinations({ destinations }: { destinations: DestinationPage[] }) {
+export function FeaturedDestinations({
+  destinations,
+}: {
+  destinations: DestinationListing[];
+}) {
   const { openModal } = useModal();
   const featured = destinations;
 
