@@ -48,10 +48,9 @@ export function TrustBar() {
           </div>
           <div className="min-w-0 text-left">
             <p className="font-[family-name:var(--font-elaine)] text-sm font-semibold text-white md:text-base">
-              Hall de arribos · Aeropuerto de Córdoba
+              hall de arribos · Aeropuerto de Córdoba
             </p>
             <p className="mt-0.5 text-xs text-white/65 md:text-sm">
-              Local oficial de Vía Bariloche —{" "}
               <span className="text-[#dae553] underline-offset-2 group-hover:underline">
                 Cómo llegar
               </span>

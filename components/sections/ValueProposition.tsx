@@ -14,9 +14,9 @@ export function ValueProposition() {
           Por qué viajar con 787 Rumbos
         </h2>
         <p className="mt-5 max-w-4xl text-[1.02rem] leading-relaxed text-[#0b4058]/80 text-pretty">
-          Trabajamos desde el hall de arribos del Aeropuerto de Córdoba, dentro del local oficial
-          de Vía Bariloche. Combinamos años en transporte turístico con una oferta clara: vuelos,
-          paquetes y pasajes de ómnibus nacionales, con el mismo equipo de punta a punta.
+          Trabajamos desde el hall de arribos del Aeropuerto de Córdoba. Combinamos años en
+          transporte turístico con una oferta clara: vuelos, paquetes y pasajes de ómnibus
+          nacionales, con el mismo equipo de punta a punta.
         </p>
         <div className="mt-10 grid gap-5 md:grid-cols-3 md:gap-6">
           <article className="rounded-2xl border border-[#0b4058]/10 bg-[#f9f9f9] p-6 md:p-7">
@@ -25,8 +25,8 @@ export function ValueProposition() {
               Oficina en el aeropuerto
             </h3>
             <p className="mt-2 text-sm text-[#0b4058]/80 text-pretty">
-              Encontranos en el hall de arribos, en el local oficial de Vía Bariloche. Presencia
-              física real, no solo un número de WhatsApp.
+              Encontranos en el hall de arribos del Aeropuerto Internacional de Córdoba.
+              Presencia física real, no solo un número de WhatsApp.
             </p>
           </article>
           <article className="rounded-2xl border border-[#0b4058]/10 bg-[#f9f9f9] p-6 md:p-7">
@@ -35,7 +35,7 @@ export function ValueProposition() {
               Experiencia en transporte
             </h3>
             <p className="mt-2 text-sm text-[#0b4058]/80 text-pretty">
-              Años en el rubro del transporte junto a Vía Bariloche nos dan criterio para recomendarte
+              Años en el rubro del transporte turístico nos dan criterio para recomendarte
               la mejor opción de viaje desde Córdoba.
             </p>
           </article>

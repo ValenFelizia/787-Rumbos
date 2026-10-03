@@ -25,13 +25,12 @@ guiar al usuario hacia ese canal; no reemplaza la atención comercial humana.
   aéreos de múltiples aerolíneas, con atención humana y presencial en el
   Aeropuerto de Córdoba.
 - La oficina se encuentra en el hall de arribos del Aeropuerto Internacional
-  Ingeniero Aeronáutico Ambrosio Taravella, dentro del local oficial de Vía
-  Bariloche.
-- El servicio combina viajes emisivos, vuelos, paquetes y pasajes de ómnibus del
-  Grupo Vía Bariloche, que incluye, entre otras empresas, Vía Tac y El Valle.
-  En superficies de alta jerarquía como el hero se pueden mencionar solo Vía
-  Bariloche y Vía Tac por reconocimiento de marca y claridad; FAQ y Servicios
-  pueden detallar también El Valle.
+  Ingeniero Aeronáutico Ambrosio Taravella (Planta Baja, hall de arribos).
+- No presentar 787 Rumbos como oficina/boletería oficial de Vía Bariloche ni
+  Vía Tac en copy público (hero, FAQ, footer, about, metadata, JSON-LD). Sí
+  se mantiene el logo de Vía Bariloche en el carrusel de marcas/proveedores y
+  menciones cuando Vía Bariloche es explícitamente el operador del viaje
+  (p. ej. salidas en bus).
 - La jerarquía del mensaje debe partir de diferenciales verificables: presencia
   física en el aeropuerto, experiencia en transporte y oferta aérea + terrestre.
 - La atención humana y el acompañamiento deben explicarse con evidencia y un
@@ -71,7 +70,7 @@ mantenerse consistentes:
 | Nombre comercial | 787 Rumbos |
 | URL pública preferida | `https://www.787rumbos.com.ar/` (`www` es el host canónico) |
 | Dirección | Av. La Voz del Interior 8500, Córdoba, Argentina |
-| Referencia | Hall de arribos, dentro del local oficial de Vía Bariloche |
+| Referencia | hall de arribos, Planta Baja |
 | Código postal | X5147XAA |
 | Teléfono de agencia (principal) | 0351 768-8623 (`+54 9 351 768-8623`) — CTAs, schema, NAP, GBP (`AGENCY_PHONE`) |
 | Línea de urgencias (viaje en curso) | Mismo número que agencia (`URGENT_PHONE` = `AGENCY_PHONE`). Canal único oficial; no publicar números personales. |

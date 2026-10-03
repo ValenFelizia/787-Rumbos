@@ -47,7 +47,7 @@ export function Footer() {
               Av. La Voz del Interior 8500, Córdoba
               <br />
               <span className="text-xs text-white/70">
-                (Planta Baja, local de Vía Bariloche)
+                (Aeropuerto de Córdoba · Planta Baja, hall de arribos)
               </span>
             </span>
           </p>

@@ -81,7 +81,7 @@ export const aereosHub: AereosHubContent = {
   howWeWork: [
     "Cotizamos vuelos nacionales e internacionales según tus fechas y presupuesto.",
     "Trabajamos con múltiples aerolíneas; te mostramos opciones claras, no un listado infinito.",
-    "Atención presencial en nuestra oficina del aeropuerto, dentro del local de Vía Bariloche.",
+    "Atención presencial en nuestra oficina del aeropuerto, en el hall de arribos.",
     "Podés sumar asistencia al viajero y, si querés, un paquete o pasaje terrestre.",
   ],
   crossSellNote:

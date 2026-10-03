@@ -16,7 +16,7 @@ export function AboutUs() {
           <div className="overflow-hidden rounded-3xl border border-[#0b4058]/10 shadow-lg shadow-[#0b4058]/5">
             <Image
               src="/nosotros-local.jpg"
-              alt="Local de 787 Rumbos y Vía Bariloche en el hall de arribos del Aeropuerto de Córdoba"
+              alt="Local de 787 Rumbos en el hall de arribos del Aeropuerto de Córdoba"
               width={800}
               height={600}
               sizes="(max-width: 768px) 92vw, 380px"
@@ -40,7 +40,7 @@ export function AboutUs() {
             De la terminal al mundo
           </h2>
           <p className="mt-5 max-w-2xl text-[1.03rem] leading-relaxed text-[#0b4058]/80 text-pretty">
-            Llevamos años dedicados al rubro del transporte y el turismo. Conocemos lo que significa viajar porque lo vivimos todos los días desde nuestro local en el aeropuerto, junto a las boleterías oficiales de Vía Bariloche en el hall de arribos. Decidimos abrir 787 Rumbos para ir un paso más allá y ofrecer a nuestros pasajeros el acompañamiento cercano que siempre quisimos darles.
+            Llevamos años dedicados al rubro del transporte y el turismo. Conocemos lo que significa viajar porque lo vivimos todos los días desde nuestro local en el hall de arribos del aeropuerto. Decidimos abrir 787 Rumbos para ir un paso más allá y ofrecer a nuestros pasajeros el acompañamiento cercano que siempre quisimos darles.
           </p>
 
           <div className="mt-6 border-l-4 border-[#e6b451] pl-4 py-1 space-y-2 max-w-2xl">
@@ -48,8 +48,7 @@ export function AboutUs() {
               ¿Dónde encontrarnos?
             </p>
             <p className="text-xs text-[#0b4058]/80 leading-relaxed text-pretty">
-              Buscá nuestra oficina oficial en la boletería de <strong>Vía Bariloche</strong>{" "}
-              directamente en la zona de <strong>Arribos</strong> del Aeropuerto Internacional de
+              Nos encontrás en el hall de arribos (Planta Baja) del Aeropuerto Internacional de
               Córdoba.
             </p>
             <p className="text-xs text-[#0b4058]/80 leading-relaxed text-pretty">

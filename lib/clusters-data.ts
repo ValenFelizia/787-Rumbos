@@ -100,9 +100,9 @@ export const clustersData: ClusterPage[] = [
     cardImageAlt: "Cataratas del Iguazú — salidas en bus desde Córdoba",
     metaTitle: "Viajes en bus por Argentina desde Córdoba | 787 Rumbos",
     metaDescription:
-      "Salidas en bus y bus cama desde Córdoba: Termas, Cataratas, Salar y más. También boletería oficial de Vía Bariloche en el aeropuerto.",
+      "Salidas en bus y bus cama desde Córdoba: Termas, Cataratas, Salar y más. Oficina en el hall de arribos del Aeropuerto de Córdoba.",
     intro:
-      "Si preferís tierra, armamos salidas bus desde Córdoba. Además, en el hall de arribos del aeropuerto somos boletería oficial de Vía Bariloche, Vía Tac y El Valle.",
+      "Si preferís viajar por tierra, armamos salidas en bus desde Córdoba. También emitimos pasajes de ómnibus nacionales en nuestra oficina del hall de arribos del Aeropuerto de Córdoba.",
     howWeWork: [
       "Salidas grupales o paquetes 100% a tu medida, coordinadas con hotel y asistencia nacional.",
       "Opción de pasaje de ómnibus suelto si solo necesitás el traslado.",
