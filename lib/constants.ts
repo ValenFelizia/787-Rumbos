@@ -78,7 +78,7 @@ export function whatsappDestino(destino: string): string {
 
 /**
  * Ficha de Google Maps / Google Business Profile de 787 Rumbos
- * (Hall de arribos, Aeropuerto de Córdoba — no usar búsqueda genérica del aeropuerto).
+ * (hall de arribos, Aeropuerto de Córdoba — no usar búsqueda genérica del aeropuerto).
  */
 export const GOOGLE_MAPS_LINK = "https://maps.app.goo.gl/ZnVX6SQ7UtDXgbpm7";
 
@@ -128,7 +128,7 @@ export const faqItems: FaqItem[] = [
     answer: [
       {
         type: "text",
-        value: `Sí. Contamos con oficina en el Hall de arribos del Aeropuerto Internacional de Córdoba (Av. La Voz del Interior 8500, Planta Baja). Podés visitarnos ${OFFICE_HOURS.weekdays.toLowerCase()} y ${OFFICE_HOURS.saturday.toLowerCase()}. `,
+        value: `Sí. Contamos con oficina en el hall de arribos del Aeropuerto Internacional de Córdoba (Av. La Voz del Interior 8500, Planta Baja). Podés visitarnos ${OFFICE_HOURS.weekdays.toLowerCase()} y ${OFFICE_HOURS.saturday.toLowerCase()}. `,
       },
       { type: "link", label: "Cómo llegar", href: GOOGLE_MAPS_LINK, external: true },
       { type: "text", value: "." },
@@ -221,7 +221,7 @@ export const faqItems: FaqItem[] = [
       {
         type: "text",
         value:
-          "Sí. En nuestra oficina del Aeropuerto de Córdoba también emitimos pasajes de ómnibus nacionales, además de consultar por vuelos y paquetes turísticos.",
+          "Sí. En nuestra oficina del Aeropuerto de Córdoba podés comprar pasajes de ómnibus nacionales y también consultar por vuelos y paquetes turísticos.",
       },
     ],
   },
@@ -284,7 +284,7 @@ export const services: Service[] = [
   },
   {
     title: "Pasajes de Ómnibus",
-    description: "Pasajes de ómnibus nacionales emitidos en nuestra oficina del aeropuerto.",
+    description: "Pasajes de ómnibus a todo el país, emitidos en nuestra oficina del aeropuerto.",
     icon: Ticket,
   },
 ];

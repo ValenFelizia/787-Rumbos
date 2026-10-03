@@ -48,8 +48,8 @@ export function AboutUs() {
               ¿Dónde encontrarnos?
             </p>
             <p className="text-xs text-[#0b4058]/80 leading-relaxed text-pretty">
-              Nos encontrás en la zona de <strong>Arribos</strong> del Aeropuerto Internacional
-              de Córdoba.
+              Nos encontrás en el hall de arribos (Planta Baja) del Aeropuerto Internacional de
+              Córdoba.
             </p>
             <p className="text-xs text-[#0b4058]/80 leading-relaxed text-pretty">
               <strong>Servicios integrales:</strong> Presupuestamos tus paquetes turísticos a

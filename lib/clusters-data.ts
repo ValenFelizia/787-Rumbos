@@ -102,7 +102,7 @@ export const clustersData: ClusterPage[] = [
     metaDescription:
       "Salidas en bus y bus cama desde Córdoba: Termas, Cataratas, Salar y más. Oficina en el hall de arribos del Aeropuerto de Córdoba.",
     intro:
-      "Si preferís tierra, armamos salidas bus desde Córdoba. Nos encontrás en la zona de Arribos del Aeropuerto Internacional de Córdoba.",
+      "Si preferís viajar por tierra, armamos salidas en bus desde Córdoba. También emitimos pasajes de ómnibus nacionales en nuestra oficina del hall de arribos del Aeropuerto de Córdoba.",
     howWeWork: [
       "Salidas grupales o paquetes 100% a tu medida, coordinadas con hotel y asistencia nacional.",
       "Opción de pasaje de ómnibus suelto si solo necesitás el traslado.",

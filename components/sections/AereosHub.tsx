@@ -155,8 +155,8 @@ export function AereosHub() {
             Oficina en el aeropuerto
           </h2>
           <p className="text-sm leading-relaxed text-[#0b4058]/85 text-pretty md:text-base">
-            Nos encontrás en la zona de Arribos del Aeropuerto Internacional de Córdoba.{" "}
-            {OFFICE_HOURS.weekdays}. {OFFICE_HOURS.saturday}. {OFFICE_HOURS.sunday}.
+            Nos encontrás en el hall de arribos (Planta Baja) del Aeropuerto Internacional de
+            Córdoba. {OFFICE_HOURS.weekdays}. {OFFICE_HOURS.saturday}. {OFFICE_HOURS.sunday}.
           </p>
           <a
             href={GOOGLE_MAPS_LINK}

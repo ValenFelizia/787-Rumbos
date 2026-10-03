@@ -179,8 +179,8 @@ export function AirlineLanding({ airline }: { airline: AirlinePage }) {
             Atención en el Aeropuerto de Córdoba
           </h2>
           <p className="text-sm leading-relaxed text-[#0b4058]/85 text-pretty md:text-base">
-            Nos encontrás en la zona de Arribos del Aeropuerto Internacional de Córdoba.{" "}
-            {OFFICE_HOURS.weekdays}. {OFFICE_HOURS.saturday}. {OFFICE_HOURS.sunday}.
+            Nos encontrás en el hall de arribos (Planta Baja) del Aeropuerto Internacional de
+            Córdoba. {OFFICE_HOURS.weekdays}. {OFFICE_HOURS.saturday}. {OFFICE_HOURS.sunday}.
           </p>
           <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
             <a
