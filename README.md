@@ -1,6 +1,6 @@
 # 787 Rumbos
 
-Sitio de captación para **787 Rumbos**, agencia de viajes en Córdoba (Argentina), con oficina en el hall de arribos del Aeropuerto Internacional Ingeniero Aeronáutico Ambrosio Taravella (local Vía Bariloche).
+Sitio de captación para **787 Rumbos**, agencia de viajes en Córdoba (Argentina), con oficina en el hall de arribos del Aeropuerto Internacional Ingeniero Aeronáutico Ambrosio Taravella.
 
 La web refuerza confianza y guía consultas calificadas a WhatsApp. No reemplaza la atención comercial humana.
 

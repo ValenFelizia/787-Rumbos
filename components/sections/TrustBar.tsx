@@ -51,7 +51,6 @@ export function TrustBar() {
               Hall de arribos · Aeropuerto de Córdoba
             </p>
             <p className="mt-0.5 text-xs text-white/65 md:text-sm">
-              Local oficial de Vía Bariloche —{" "}
               <span className="text-[#dae553] underline-offset-2 group-hover:underline">
                 Cómo llegar
               </span>

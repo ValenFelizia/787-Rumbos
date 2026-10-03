@@ -47,7 +47,7 @@ export function Footer() {
               Av. La Voz del Interior 8500, Córdoba
               <br />
               <span className="text-xs text-white/70">
-                (Planta Baja, local de Vía Bariloche)
+                (Planta Baja, zona de Arribos)
               </span>
             </span>
           </p>
