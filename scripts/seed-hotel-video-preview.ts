@@ -19,7 +19,9 @@ import config from "../payload.config";
 
 const SEED_DIR = path.join(process.cwd(), "scripts/seed-data/hotel-video");
 const VIDEO_FILE = path.join(SEED_DIR, "porto-2-life-sample.mp4");
-const POSTER_FILE = path.join(SEED_DIR, "porto-2-life-poster.jpg");
+/** Served from `public/` so next/image works without relying on Blob/API static. */
+const POSTER_PUBLIC_PATH = "/destinos/porto-2-life-poster.jpg";
+const POSTER_FILE = path.join(process.cwd(), "public", POSTER_PUBLIC_PATH);
 const DEST_SLUG = "porto-de-galinhas";
 const HOTEL_NAME = "Porto 2 Life";
 const VIDEO_ALT = "Muestra sintética — hotel Porto 2 Life en Porto de Galinhas";
@@ -64,7 +66,7 @@ async function main(): Promise<void> {
     return;
   }
 
-  // Idempotent: reuse existing sample docs by alt text when present.
+  // Idempotent: reuse existing sample docs by alt / legacyPath when present.
   let videoId: number;
   const existingVideo = await payload.find({
     collection: "videos",
@@ -92,15 +94,32 @@ async function main(): Promise<void> {
     collection: "media",
     limit: 1,
     overrideAccess: true,
-    where: { alt: { equals: POSTER_ALT } },
+    where: {
+      or: [
+        { legacyPath: { equals: POSTER_PUBLIC_PATH } },
+        { alt: { equals: POSTER_ALT } },
+      ],
+    },
   });
   if (existingPoster.docs[0]) {
     posterId = existingPoster.docs[0].id;
-    console.log(`seed-hotel-video-preview: poster ya existe (#${posterId})`);
+    // Ensure legacyPath points at the public asset (next/image + SSG).
+    if (existingPoster.docs[0].legacyPath !== POSTER_PUBLIC_PATH) {
+      await payload.update({
+        collection: "media",
+        id: posterId,
+        data: { legacyPath: POSTER_PUBLIC_PATH, alt: POSTER_ALT },
+        overrideAccess: true,
+        context: seedContext,
+      });
+      console.log(`seed-hotel-video-preview: poster #${posterId} → legacyPath ${POSTER_PUBLIC_PATH}`);
+    } else {
+      console.log(`seed-hotel-video-preview: poster ya existe (#${posterId})`);
+    }
   } else {
     const created = await payload.create({
       collection: "media",
-      data: { alt: POSTER_ALT },
+      data: { alt: POSTER_ALT, legacyPath: POSTER_PUBLIC_PATH },
       filePath: POSTER_FILE,
       overrideAccess: true,
       context: seedContext,
