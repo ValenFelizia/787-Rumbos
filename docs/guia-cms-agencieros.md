@@ -29,3 +29,20 @@ Al entrar al panel hay listas: precios vencidos o por vencer, publicados sin vig
 ## Si el precio se vence
 
 La ficha sigue publicada, pero el sitio deja de mostrar el monto y dice «Consultá precio actualizado». Pasa igual en la promo. Para volver a mostrar el precio, cargá el monto nuevo y una vigencia de hoy o de después, y publicá.
+
+## Video del hotel (piloto)
+
+En la pestaña **General** hay un grupo opcional **Video del hotel**: archivo de video (colección Videos: MP4 o WebM, máximo 15 MB), imagen de portada (obligatoria si hay video), nombre del hotel y un epígrafe corto. Si no hay video, la ficha no muestra nada. El visitante ve la portada y recién al tocar play se descarga el clip.
+
+Antes de subir un clip del celular, comprimilo a 720p y pocos megas:
+
+```bash
+ffmpeg -i entrada.mov -vf "scale=-2:720" -c:v libx264 -preset fast -crf 28 \
+  -movflags +faststart -c:a aac -b:a 128k -t 45 hotel-clip.mp4
+```
+
+Sacá una portada (un frame) si hace falta:
+
+```bash
+ffmpeg -i hotel-clip.mp4 -ss 00:00:01 -frames:v 1 portada.jpg
+```

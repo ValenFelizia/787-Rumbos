@@ -175,6 +175,57 @@ export const Destinations: CollectionConfig = {
               type: "textarea",
               required: true,
             },
+            {
+              name: "hotelVideo",
+              label: "Video del hotel",
+              type: "group",
+              admin: {
+                description:
+                  "Opcional. Piloto de clip corto en la ficha. Si hay video, la imagen de portada es obligatoria. Sin video, el sitio no muestra nada.",
+              },
+              fields: [
+                {
+                  name: "file",
+                  label: "Archivo de video",
+                  type: "upload",
+                  relationTo: "videos",
+                  admin: {
+                    description: "MP4 o WebM, máximo 15 MB. Preferí 720p y ≤45 s.",
+                  },
+                },
+                {
+                  name: "poster",
+                  label: "Imagen de portada",
+                  type: "upload",
+                  relationTo: "media",
+                  admin: {
+                    description: "Obligatoria si hay video. Se muestra hasta que el visitante toca play.",
+                  },
+                  validate: (value: unknown, { siblingData }: { siblingData?: { file?: unknown } }) => {
+                    if (siblingData?.file && (value == null || value === "")) {
+                      return "La imagen de portada es obligatoria si hay un video.";
+                    }
+                    return true;
+                  },
+                },
+                {
+                  name: "hotelName",
+                  label: "Nombre del hotel",
+                  type: "text",
+                  admin: {
+                    description: "Si está, el WhatsApp de la ficha menciona el hotel.",
+                  },
+                },
+                {
+                  name: "caption",
+                  label: "Epígrafe",
+                  type: "text",
+                  admin: {
+                    description: "Opcional. Texto corto bajo el video.",
+                  },
+                },
+              ],
+            },
           ],
         },
         {

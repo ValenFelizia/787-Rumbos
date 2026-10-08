@@ -70,6 +70,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    videos: Video;
     destinations: Destination;
     'payload-mcp-api-keys': PayloadMcpApiKey;
     'payload-kv': PayloadKv;
@@ -81,6 +82,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    videos: VideosSelect<false> | VideosSelect<true>;
     destinations: DestinationsSelect<false> | DestinationsSelect<true>;
     'payload-mcp-api-keys': PayloadMcpApiKeysSelect<false> | PayloadMcpApiKeysSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -197,6 +199,28 @@ export interface Media {
   focalY?: number | null;
 }
 /**
+ * Clips cortos de hotel (MP4 o WebM, máximo 15 MB). Pensado para el piloto de video en fichas de destino.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos".
+ */
+export interface Video {
+  id: number;
+  /**
+   * Descripción corta del clip, p. ej. «Hotel Porto 2 Life — pileta».
+   */
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+}
+/**
  * Borrador: no se ve en el sitio. Publicado: se ve en la web. Un agente publica directo solo salidas, precios y vigencia; el resto queda en borrador para un encargado. Un asistente de IA solo guarda borradores.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -227,6 +251,27 @@ export interface Destination {
   heroImage: number | Media;
   flyerImage?: (number | null) | Media;
   description: string;
+  /**
+   * Opcional. Piloto de clip corto en la ficha. Si hay video, la imagen de portada es obligatoria. Sin video, el sitio no muestra nada.
+   */
+  hotelVideo?: {
+    /**
+     * MP4 o WebM, máximo 15 MB. Preferí 720p y ≤45 s.
+     */
+    file?: (number | null) | Video;
+    /**
+     * Obligatoria si hay video. Se muestra hasta que el visitante toca play.
+     */
+    poster?: (number | null) | Media;
+    /**
+     * Si está, el WhatsApp de la ficha menciona el hotel.
+     */
+    hotelName?: string | null;
+    /**
+     * Opcional. Texto corto bajo el video.
+     */
+    caption?: string | null;
+  };
   metaTitle: string;
   metaDescription: string;
   /**
@@ -418,6 +463,10 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
+        relationTo: 'videos';
+        value: number | Video;
+      } | null)
+    | ({
         relationTo: 'destinations';
         value: number | Destination;
       } | null)
@@ -522,6 +571,22 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos_select".
+ */
+export interface VideosSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "destinations_select".
  */
 export interface DestinationsSelect<T extends boolean = true> {
@@ -536,6 +601,14 @@ export interface DestinationsSelect<T extends boolean = true> {
   heroImage?: T;
   flyerImage?: T;
   description?: T;
+  hotelVideo?:
+    | T
+    | {
+        file?: T;
+        poster?: T;
+        hotelName?: T;
+        caption?: T;
+      };
   metaTitle?: T;
   metaDescription?: T;
   h1?: T;

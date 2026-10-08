@@ -44,6 +44,14 @@ export interface Departure {
   priceValidUntil?: string;
 }
 
+/** Clip corto opcional en la ficha (piloto Video del hotel). Solo si hay `fileUrl`. */
+export interface HotelVideoContent {
+  fileUrl: string;
+  posterUrl: string;
+  hotelName?: string;
+  caption?: string;
+}
+
 export interface DestinationPage {
   slug: string;
   name: string;
@@ -56,6 +64,8 @@ export interface DestinationPage {
   heroImage: string;
   flyerImage?: string;
   description: string;
+  /** Presente solo cuando el CMS tiene un archivo de video cargado. */
+  hotelVideo?: HotelVideoContent;
   highlights: string[];
   typicalInclusions: string[];
   optionalExcursions?: string[];

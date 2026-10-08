@@ -2,6 +2,7 @@ import * as migration_20260923_213626_initial_catalog from './20260923_213626_in
 import * as migration_20260923_220514_editorial_phase2 from './20260923_220514_editorial_phase2';
 import * as migration_20260923_223234_featured_promo from './20260923_223234_featured_promo';
 import * as migration_20260924_021123_mcp_bot from './20260924_021123_mcp_bot';
+import * as migration_20261008_230829_hotel_video from './20261008_230829_hotel_video';
 
 export const migrations = [
   {
@@ -22,6 +23,11 @@ export const migrations = [
   {
     up: migration_20260924_021123_mcp_bot.up,
     down: migration_20260924_021123_mcp_bot.down,
-    name: '20260924_021123_mcp_bot'
+    name: '20260924_021123_mcp_bot',
+  },
+  {
+    up: migration_20261008_230829_hotel_video.up,
+    down: migration_20261008_230829_hotel_video.down,
+    name: '20261008_230829_hotel_video'
   },
 ];

@@ -9,6 +9,7 @@ import sharp from "sharp";
 import { Destinations } from "./payload/collections/Destinations";
 import { Media } from "./payload/collections/Media";
 import { Users } from "./payload/collections/Users";
+import { Videos } from "./payload/collections/Videos";
 import { FeaturedPromo } from "./payload/globals/FeaturedPromo";
 import { mcp } from "./payload/mcp/plugin";
 
@@ -27,7 +28,7 @@ export default buildConfig({
       beforeDashboard: ["/payload/components/ReviewQueue#ReviewQueue"],
     },
   },
-  collections: [Users, Media, Destinations],
+  collections: [Users, Media, Videos, Destinations],
   globals: [FeaturedPromo],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
@@ -58,8 +59,11 @@ export default buildConfig({
       // alwaysInsertFields deja el esquema igual cuando en prod el plugin se enciende.
       enabled: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
       alwaysInsertFields: true,
+      // Subida directa a Blob: evita el tope de body de las funciones de Vercel (~4.5 MB).
+      clientUploads: true,
       collections: {
         media: true,
+        videos: true,
       },
       token: process.env.BLOB_READ_WRITE_TOKEN,
     }),

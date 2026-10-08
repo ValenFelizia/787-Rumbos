@@ -5,6 +5,8 @@ type DestinationMobileStickyBarProps = {
   destinationName: string;
   /** `displayDate` of the nearest active upcoming departure, if any. */
   nextDepartureDisplayDate?: string | null;
+  /** Hotel name from CMS "Video del hotel", when filled. */
+  hotelName?: string | null;
 };
 
 /**
@@ -14,10 +16,12 @@ type DestinationMobileStickyBarProps = {
 export function DestinationMobileStickyBar({
   destinationName,
   nextDepartureDisplayDate,
+  hotelName,
 }: DestinationMobileStickyBarProps) {
   const href = destinationInquiryWhatsAppLink({
     destinationName,
     departureDisplayDate: nextDepartureDisplayDate,
+    hotelName,
     source: "detail",
   });
 
