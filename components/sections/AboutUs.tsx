@@ -26,11 +26,11 @@ export function AboutUs() {
           <div className="absolute bottom-0 right-0 w-[55%] md:w-[60%] overflow-hidden rounded-2xl border-4 md:border-[6px] border-white shadow-2xl">
             <Image
               src="/nosotros.jpg"
-              alt="Integrante del equipo 787 Rumbos en una feria de turismo"
-              width={500}
-              height={375}
+              alt="Fer, agenciera de 787 Rumbos, en la FIT América Latina"
+              width={640}
+              height={615}
               sizes="(max-width: 768px) 50vw, 220px"
-              className="h-[150px] w-full object-cover object-top md:h-[220px]"
+              className="h-[150px] w-full object-cover object-[center_top] md:h-[220px]"
             />
           </div>
         </div>
