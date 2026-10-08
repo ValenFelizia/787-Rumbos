@@ -6,7 +6,7 @@
  */
 import type { FaqAnswerSegment } from "../constants";
 import { whatsappDestinoFaq } from "./logic";
-import type { Departure, DestinationPage, TransportType } from "./types";
+import type { Departure, DestinationPage, HotelVideoContent, TransportType } from "./types";
 
 type MediaLike = {
   legacyPath?: string | null;
@@ -44,6 +44,13 @@ type DepartureRow = {
   priceValidUntil?: string | null;
 };
 
+type HotelVideoDoc = {
+  file?: MediaLike | string | number;
+  poster?: MediaLike | string | number;
+  hotelName?: string | null;
+  caption?: string | null;
+} | null;
+
 export type DestinationDoc = {
   slug?: string | null;
   name?: string | null;
@@ -55,6 +62,7 @@ export type DestinationDoc = {
   heroImage?: MediaLike | string | number;
   flyerImage?: MediaLike | string | number;
   description?: string | null;
+  hotelVideo?: HotelVideoDoc;
   highlights?: TextRow[] | null;
   typicalInclusions?: TextRow[] | null;
   optionalExcursions?: TextRow[] | null;
@@ -173,6 +181,22 @@ export function mapDestination(doc: DestinationDoc): DestinationPage {
   if (h1) destination.h1 = h1;
   const flyerImage = mediaUrl(doc.flyerImage);
   if (flyerImage) destination.flyerImage = flyerImage;
+
+  const hotelVideoFileUrl = mediaUrl(doc.hotelVideo?.file);
+  const hotelVideoPosterUrl = mediaUrl(doc.hotelVideo?.poster);
+  // Sin archivo de video no se expone el bloque (tampoco poster suelto).
+  if (hotelVideoFileUrl && hotelVideoPosterUrl) {
+    const hotelVideo: HotelVideoContent = {
+      fileUrl: hotelVideoFileUrl,
+      posterUrl: hotelVideoPosterUrl,
+    };
+    const hotelName = text(doc.hotelVideo?.hotelName);
+    if (hotelName) hotelVideo.hotelName = hotelName;
+    const caption = text(doc.hotelVideo?.caption);
+    if (caption) hotelVideo.caption = caption;
+    destination.hotelVideo = hotelVideo;
+  }
+
   const excursions = texts(doc.optionalExcursions);
   if (excursions.length > 0) destination.optionalExcursions = excursions;
   const travelTip = text(doc.travelTip);

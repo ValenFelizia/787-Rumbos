@@ -34,4 +34,18 @@ describe("buildQuoteWhatsAppMessage", () => {
 
     assert.match(text, /\*Pasajeros:\* 1 adulto$/m);
   });
+
+  it("always names the destination in the prefill (qualified WhatsApp CTA)", () => {
+    const text = buildQuoteWhatsAppMessage({
+      destino: "Porto de Galinhas",
+      fecha: "Enero 2027",
+      duracion: "7-10 días",
+      adultos: 2,
+      menores: 0,
+      aerolinea: "Sin preferencia",
+    });
+
+    assert.match(text, /\*Destino:\* Porto de Galinhas/);
+    assert.match(text, /cotizador de la web/);
+  });
 });

@@ -32,6 +32,7 @@ const CONTENT_FIELDS = [
   "heroImage",
   "flyerImage",
   "description",
+  "hotelVideo",
   "metaTitle",
   "metaDescription",
   "h1",
@@ -52,6 +53,7 @@ export const FIELD_LABELS: Record<string, string> = {
   heroImage: "imagen principal",
   flyerImage: "folleto",
   description: "descripción",
+  hotelVideo: "video del hotel",
   metaTitle: "title",
   metaDescription: "meta description",
   h1: "h1",
@@ -78,7 +80,8 @@ function isRelation(value: Record<string, unknown>): boolean {
     "filename" in value ||
     "legacyPath" in value ||
     value.collection === "users" ||
-    value.collection === "media"
+    value.collection === "media" ||
+    value.collection === "videos"
   );
 }
 

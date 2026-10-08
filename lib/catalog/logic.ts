@@ -209,8 +209,9 @@ export function resolveSelectedDepartureMonth(
 /** La salida consultable más cercana. */
 export function getNearestActiveDeparture<T extends DestinationListing>(
   dest: T,
+  today = getTodayLocal(),
 ): T["departures"][number] | undefined {
-  return getActiveUpcomingDepartures(dest)
+  return getActiveUpcomingDepartures(dest, today)
     .slice()
     .sort((a, b) => a.date.localeCompare(b.date))[0];
 }
@@ -502,8 +503,8 @@ export function groupDestinationsForSort<T extends DestinationListing>(
 
   if (mode === "next-departure") {
     const items = destinations.slice().sort((a, b) => {
-      const da = getNearestActiveDeparture(a)?.date;
-      const db = getNearestActiveDeparture(b)?.date;
+      const da = getNearestActiveDeparture(a, today)?.date;
+      const db = getNearestActiveDeparture(b, today)?.date;
       if (!da && !db) return compareCatalogTies(a, b, orderIndex);
       if (!da) return 1;
       if (!db) return -1;

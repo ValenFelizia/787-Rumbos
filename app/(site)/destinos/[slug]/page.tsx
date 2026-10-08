@@ -27,6 +27,7 @@ import { buildPageMetadata } from "@/lib/seo-metadata";
 import { siteUrl } from "@/lib/site-url";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { DestinationMobileStickyBar } from "@/components/conversion/DestinationMobileStickyBar";
+import { HotelVideo } from "@/components/destinations/HotelVideo";
 import {
   Calendar,
   CalendarDays,
@@ -320,6 +321,17 @@ export default async function DestinoDetailPage({ params }: Props) {
                 {dest.description}
               </p>
             </div>
+
+            {/* Video del hotel (solo si hay archivo en CMS) */}
+            {dest.hotelVideo ? (
+              <HotelVideo
+                videoUrl={dest.hotelVideo.fileUrl}
+                posterUrl={dest.hotelVideo.posterUrl}
+                hotelName={dest.hotelVideo.hotelName}
+                caption={dest.hotelVideo.caption}
+                destinationName={dest.name}
+              />
+            ) : null}
 
             {/* Highlights */}
             {dest.highlights.length > 0 && (
@@ -631,6 +643,7 @@ export default async function DestinoDetailPage({ params }: Props) {
       <DestinationMobileStickyBar
         destinationName={dest.name}
         nextDepartureDisplayDate={nearestActiveDeparture?.displayDate}
+        hotelName={dest.hotelVideo?.hotelName}
       />
     </main>
   );
