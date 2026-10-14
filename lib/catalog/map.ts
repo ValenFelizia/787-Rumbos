@@ -2,16 +2,12 @@
  * Documento de Payload → DestinationPage.
  * Las partes `whatsapp` vuelven a ser links con la URL que arma
  * `whatsappDestinoFaq` en el momento del render, igual que el catálogo estático.
- * `legacyPath` conserva `/destinos/...` para que `/_next/image?url=` no cambie.
+ * Las imágenes pasan por `resolveMediaUrl` (URL de Payload/Blob; `legacyPath` solo si vive en `/public`).
  */
 import type { FaqAnswerSegment } from "../constants";
 import { whatsappDestinoFaq } from "./logic";
+import { resolveMediaUrl, type MediaLike } from "./media-url";
 import type { Departure, DestinationPage, TransportType } from "./types";
-
-type MediaLike = {
-  legacyPath?: string | null;
-  url?: string | null;
-} | null;
 
 type TextRow = { text?: string | null };
 
@@ -93,13 +89,6 @@ function isoDay(value: string | null | undefined): string | undefined {
   return match?.[1];
 }
 
-function mediaUrl(media: DestinationDoc["heroImage"]): string | undefined {
-  if (!media || typeof media === "string" || typeof media === "number") return undefined;
-  if (media.legacyPath) return media.legacyPath;
-  if (media.url) return media.url;
-  return undefined;
-}
-
 function mapAnswer(part: AnswerPart, destino: string): FaqAnswerSegment | undefined {
   if (part.blockType === "text") {
     return { type: "text", value: part.value ?? "" };
@@ -149,7 +138,7 @@ function mapDeparture(row: DepartureRow): Departure {
 
 export function mapDestination(doc: DestinationDoc): DestinationPage {
   const name = doc.name ?? "";
-  const heroImage = mediaUrl(doc.heroImage);
+  const heroImage = resolveMediaUrl(doc.heroImage);
   if (!heroImage) {
     throw new Error(`El destino ${doc.slug ?? name} no tiene heroImage resoluble`);
   }
@@ -171,7 +160,7 @@ export function mapDestination(doc: DestinationDoc): DestinationPage {
 
   const h1 = text(doc.h1);
   if (h1) destination.h1 = h1;
-  const flyerImage = mediaUrl(doc.flyerImage);
+  const flyerImage = resolveMediaUrl(doc.flyerImage);
   if (flyerImage) destination.flyerImage = flyerImage;
   const excursions = texts(doc.optionalExcursions);
   if (excursions.length > 0) destination.optionalExcursions = excursions;

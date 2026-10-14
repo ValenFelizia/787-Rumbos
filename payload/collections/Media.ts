@@ -42,7 +42,8 @@ export const Media: CollectionConfig = {
       type: "text",
       index: true,
       admin: {
-        description: "Si viene del sitio estático, p. ej. /destinos/salta.png. El render la prefiere sobre la URL del archivo.",
+        description:
+          "Solo para imágenes del seed que siguen en /public (p. ej. /destinos/salta.png). Dejá vacío en cargas nuevas: el sitio usa la URL del archivo (Blob o /api/media/file/...).",
         position: "sidebar",
       },
     },

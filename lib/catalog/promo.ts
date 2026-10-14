@@ -2,16 +2,12 @@ import { unstable_cache } from "next/cache";
 import { getPayload } from "payload";
 import config from "@payload-config";
 import { isPriceExpired, getTodayLocal } from "@/lib/catalog/logic";
+import { resolveMediaUrl, type MediaLike } from "@/lib/catalog/media-url";
 import type { FeaturedPromo, PromoIcon } from "@/lib/catalog/types";
 
 const CONSULT_PRICE = "Consultá precio actualizado";
 
 const PROMO_ICONS: readonly PromoIcon[] = ["plane", "calendar", "ticket", "map-pin"];
-
-type MediaLike = {
-  legacyPath?: string | null;
-  url?: string | null;
-} | null;
 
 type DestinationRel = {
   slug?: string | null;
@@ -41,13 +37,6 @@ function isoDay(value: string | null | undefined): string | undefined {
   return match?.[1];
 }
 
-function mediaUrl(media: FeaturedPromoDoc["image"]): string | undefined {
-  if (!media || typeof media === "string" || typeof media === "number") return undefined;
-  if (media.legacyPath) return media.legacyPath;
-  if (media.url) return media.url;
-  return undefined;
-}
-
 function destinationSlug(value: FeaturedPromoDoc["destination"]): string | undefined {
   if (!value || typeof value === "string" || typeof value === "number") return undefined;
   if (typeof value.slug === "string" && value.slug !== "") return value.slug;
@@ -71,7 +60,7 @@ export function mapFeaturedPromo(
   if (!doc || doc.enabled === false) return null;
 
   const slug = destinationSlug(doc.destination);
-  const imageSrc = mediaUrl(doc.image);
+  const imageSrc = resolveMediaUrl(doc.image);
   const endsAt = isoDay(doc.endsAt);
   if (!slug || !imageSrc || !endsAt) return null;
 

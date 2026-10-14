@@ -18,10 +18,16 @@ type BuildPageMetadataInput = {
   images?: SeoImage[];
 };
 
+function absoluteImageUrl(url: string): string {
+  if (/^https?:\/\//i.test(url)) return url;
+  return siteUrl(url);
+}
+
 /**
  * Metadata de página con canonical + Open Graph + Twitter alineados.
  * Las páginas que overridean title/description deben pasar por acá (o
  * declarar `twitter` a mano) para no heredar el card genérico del layout.
+ * Las imágenes OG/Twitter se publican como URL absolutas.
  */
 export function buildPageMetadata({
   title,
@@ -32,6 +38,10 @@ export function buildPageMetadata({
 }: BuildPageMetadataInput): Metadata {
   const url = siteUrl(path);
   const social = socialDescription ?? description;
+  const absoluteImages = images?.map((image) => ({
+    ...image,
+    url: absoluteImageUrl(image.url),
+  }));
 
   return {
     title,
@@ -41,13 +51,13 @@ export function buildPageMetadata({
       title,
       description: social,
       url,
-      ...(images ? { images } : {}),
+      ...(absoluteImages ? { images: absoluteImages } : {}),
     },
     twitter: {
       card: "summary_large_image",
       title,
       description: social,
-      ...(images ? { images } : {}),
+      ...(absoluteImages ? { images: absoluteImages } : {}),
     },
   };
 }

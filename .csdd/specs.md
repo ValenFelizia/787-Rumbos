@@ -263,6 +263,10 @@ render coincide con el catálogo anterior.
   implementación liviana.
 - Usar `next/image` y assets reales, optimizados y con texto alternativo
   descriptivo. No usar placeholders en contenido publicado.
+- Las imágenes de Payload se resuelven con `resolveMediaUrl` (`lib/catalog/media-url.ts`):
+  URL absoluta de Blob o `/api/media/file/...` primero; `legacyPath` solo si ese
+  archivo sigue existiendo bajo `public/` (seed). Las cargas nuevas en `/admin`
+  no deben rellenar `legacyPath`. `og:image` se publica como URL absoluta.
 - Mantener Elaine Sans para títulos, CTAs y texto destacado; Zalando Sans para
   cuerpo y etiquetas.
 - Conservar la identidad visual premium: azul petróleo, acentos dorados y verde
