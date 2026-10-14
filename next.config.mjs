@@ -85,7 +85,6 @@ const nextConfig = {
         hostname: "*.public.blob.vercel-storage.com",
         pathname: "/**",
       },
-      // Absolute same-origin media URLs in OG / next/image when needed.
       {
         protocol: "https",
         hostname: "www.787rumbos.com.ar",

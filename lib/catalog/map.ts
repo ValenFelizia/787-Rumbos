@@ -2,7 +2,6 @@
  * Documento de Payload → DestinationPage.
  * Las partes `whatsapp` vuelven a ser links con la URL que arma
  * `whatsappDestinoFaq` en el momento del render, igual que el catálogo estático.
- * Las imágenes pasan por `resolveMediaUrl` (URL de Payload/Blob; `legacyPath` solo si vive en `/public`).
  */
 import type { FaqAnswerSegment } from "../constants";
 import { whatsappDestinoFaq } from "./logic";

@@ -7,7 +7,6 @@ export type MediaLike = {
 } | null;
 
 export type ResolveMediaUrlOptions = {
-  /** Tests inject a stub. Production checks files under `public/`. */
   isPublicAsset?: (legacyPath: string) => boolean;
 };
 

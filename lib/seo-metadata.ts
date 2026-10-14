@@ -27,7 +27,6 @@ function absoluteImageUrl(url: string): string {
  * Metadata de página con canonical + Open Graph + Twitter alineados.
  * Las páginas que overridean title/description deben pasar por acá (o
  * declarar `twitter` a mano) para no heredar el card genérico del layout.
- * Las imágenes OG/Twitter se publican como URL absolutas.
  */
 export function buildPageMetadata({
   title,
