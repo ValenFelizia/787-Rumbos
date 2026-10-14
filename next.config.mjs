@@ -83,6 +83,17 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "*.public.blob.vercel-storage.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "www.787rumbos.com.ar",
+        pathname: "/api/media/**",
+      },
+      {
+        protocol: "https",
+        hostname: "787rumbos.com.ar",
+        pathname: "/api/media/**",
       },
     ],
   },

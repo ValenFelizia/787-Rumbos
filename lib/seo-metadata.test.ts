@@ -52,7 +52,14 @@ describe("buildPageMetadata", () => {
     assert.equal(og.title, title);
     assert.equal(og.description, description);
     assert.equal(og.url, `${SITE_ORIGIN}/destinos/bariloche`);
-    assert.ok(og.images);
+    assert.deepEqual(og.images, [
+      {
+        url: `${SITE_ORIGIN}/destinos/bariloche.jpg`,
+        width: 800,
+        height: 600,
+        alt: "Viajar a Bariloche con 787 Rumbos",
+      },
+    ]);
 
     const twitter = meta.twitter as {
       title?: string;
@@ -63,7 +70,27 @@ describe("buildPageMetadata", () => {
     assert.equal(twitter.card, "summary_large_image");
     assert.equal(twitter.title, title);
     assert.equal(twitter.description, description);
-    assert.ok(twitter.images);
+    assert.deepEqual(twitter.images, [
+      {
+        url: `${SITE_ORIGIN}/destinos/bariloche.jpg`,
+        width: 800,
+        height: 600,
+        alt: "Viajar a Bariloche con 787 Rumbos",
+      },
+    ]);
+  });
+
+  it("deja intacta una og:image que ya es absoluta", () => {
+    const blob =
+      "https://abc123.public.blob.vercel-storage.com/hero.png";
+    const meta = buildPageMetadata({
+      title: "Puerto Madryn",
+      description: "Paquete.",
+      path: "/destinos/puerto-madryn",
+      images: [{ url: blob, width: 800, height: 600, alt: "Puerto Madryn" }],
+    });
+    const og = meta.openGraph as { images?: { url: string }[] };
+    assert.equal(og.images?.[0]?.url, blob);
   });
 
   it("home canonical usa el origen www", () => {
