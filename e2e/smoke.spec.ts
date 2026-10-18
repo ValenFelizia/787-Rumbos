@@ -1,4 +1,18 @@
 import { expect, test } from "@playwright/test";
+import { getActiveUpcomingDepartures } from "@/lib/catalog/logic";
+import { destinationsData } from "@/scripts/seed-data/destinations";
+
+function firstActiveUpcomingDeparture(slug: string) {
+  const dest = destinationsData.find((item) => item.slug === slug);
+  if (!dest) {
+    throw new Error(`Seed has no destination "${slug}".`);
+  }
+  const [departure] = getActiveUpcomingDepartures(dest);
+  if (!departure) {
+    throw new Error(`Seed has no upcoming departures for "${slug}".`);
+  }
+  return departure;
+}
 
 /**
  * Smoke tests — si algo fundamental se rompe (404 en home, cotizador muerto),
@@ -66,11 +80,17 @@ test.describe("rutas críticas", () => {
     await expect(page.getByText(/USD\s*850/).first()).toBeVisible();
   });
 
-  test("punta cana y bayahibe publican octubre 2026", async ({ page }) => {
+  test("punta cana publica la próxima salida del seed y bayahibe solo adultos", async ({
+    page,
+  }) => {
+    const departure = firstActiveUpcomingDeparture("punta-cana");
     await page.goto("/destinos/punta-cana");
     await expect(page.getByRole("heading", { name: "Paquetes a Punta Cana" })).toBeVisible();
-    await expect(page.getByText("Whala! Bávaro").first()).toBeVisible();
-    await expect(page.getByText("15 de Octubre").first()).toBeVisible();
+    const salidas = page.locator("#salidas");
+    await expect(salidas.getByText(departure.displayDate, { exact: true }).first()).toBeVisible();
+    if (departure.program) {
+      await expect(salidas.getByText(departure.program, { exact: true }).first()).toBeVisible();
+    }
     await page.goto("/destinos/bayahibe");
     await expect(page.getByText("Solo adultos").first()).toBeVisible();
   });
