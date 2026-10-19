@@ -8,6 +8,7 @@ import {
   formatCardOriginLine,
   formatDepartureMonthLabel,
   formatHomeCardPriceClause,
+  formatShownMoney,
   formatShownPrice,
   getCardOrigin,
   getDepartureBadge,
@@ -742,6 +743,11 @@ describe("readHomeDeparture", () => {
 });
 
 describe("formatShownPrice", () => {
+  it("keeps currency and amount as one money token", () => {
+    assert.equal(formatShownMoney("USD", 3375), "USD 3.375");
+    assert.equal(formatShownMoney("ARS", 620000), "$620.000");
+  });
+
   it("prints the card string and the chat clause from the same amount", () => {
     assert.equal(formatShownPrice({ kind: "ask" }), "Consultá precio");
     assert.equal(formatHomeCardPriceClause({ kind: "ask" }), "precio a consultar");

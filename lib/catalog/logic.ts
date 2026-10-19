@@ -617,7 +617,8 @@ export function formatCardOriginLine(
   }
 }
 
-function moneyToken(currency: "ARS" | "USD", amount: number): string {
+/** Currency + amount only. Keep this token unbreakable in UI (`whitespace-nowrap`). */
+export function formatShownMoney(currency: "ARS" | "USD", amount: number): string {
   const digits = amount.toLocaleString("es-AR");
   return currency === "USD" ? `USD ${digits}` : `$${digits}`;
 }
@@ -674,13 +675,13 @@ export function readHomeDeparture(
 export function formatShownPrice(price: ShownPrice): string {
   if (price.kind === "ask") return "Consultá precio";
   const prefix = price.quotedAs === "final" ? "Final" : "Desde";
-  return `${prefix} ${moneyToken(price.currency, price.amount)}`;
+  return `${prefix} ${formatShownMoney(price.currency, price.amount)}`;
 }
 
 export function formatHomeCardPriceClause(price: ShownPrice): string {
   if (price.kind === "ask") return "precio a consultar";
   const prefix = price.quotedAs === "final" ? "final" : "desde";
-  return `${prefix} ${moneyToken(price.currency, price.amount)}`;
+  return `${prefix} ${formatShownMoney(price.currency, price.amount)}`;
 }
 
 /**

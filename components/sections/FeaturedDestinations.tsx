@@ -5,7 +5,7 @@ import Link from "next/link";
 import {
   formatCardOriginLine,
   formatHomeCardPriceClause,
-  formatShownPrice,
+  formatShownMoney,
   getTransportLabel,
   readHomeDeparture,
 } from "@/lib/catalog/logic";
@@ -31,7 +31,7 @@ export function FeaturedDestinations({
             Próximas salidas
           </h2>
           <p className="max-w-xl text-[#0b4058]/80 text-sm md:text-base leading-relaxed text-pretty">
-            Grupales confirmadas, con fecha. Si no está el destino que buscás, lo armamos a medida.
+            Salidas grupales con fecha. Si no está el destino que buscás, lo armamos a medida.
           </p>
         </div>
         <Link
@@ -48,13 +48,13 @@ export function FeaturedDestinations({
           const view = readHomeDeparture(dest);
           const hasActiveDeps = view !== null;
           const transportType = view?.transport ?? "mix";
-          const priceText = formatShownPrice(view?.price ?? { kind: "ask" });
+          const shownPrice = view?.price ?? { kind: "ask" as const };
           const originText = view ? formatCardOriginLine(view.origin) : null;
 
           return (
             <article
               key={dest.slug}
-              className="group flex flex-col overflow-hidden rounded-2xl border border-[#0b4058]/10 bg-white shadow-sm shadow-[#0b4058]/5 transition-colors duration-200 hover:border-[#0b4058]/25"
+              className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-[#0b4058]/10 bg-white shadow-sm shadow-[#0b4058]/5 transition-colors duration-200 hover:border-[#0b4058]/25"
             >
               <Link
                 href={`/destinos/${dest.slug}`}
@@ -128,22 +128,23 @@ export function FeaturedDestinations({
                 </div>
 
                 <div className="space-y-3 pt-3 border-t border-[#0b4058]/5">
-                  <div className="flex items-baseline justify-between gap-2">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-2 gap-y-1">
                     <span className="text-[10px] text-[#0b4058]/75 uppercase font-black tracking-wider">
                       Tarifa base
                     </span>
-                    <div className="text-right">
-                      <span
-                        className={
-                          view?.price.kind === "amount"
-                            ? "text-lg font-extrabold text-[#0b4058] tabular-nums"
-                            : "text-xs font-bold text-[#0b4058]/80"
-                        }
-                      >
-                        {priceText}
-                      </span>
-                      {view?.price.kind === "amount" && dest.priceNote ? (
-                        <p className="text-[10px] text-[#0b4058]/75 mt-0.5">{dest.priceNote}</p>
+                    <div className="min-w-0 text-right">
+                      {shownPrice.kind === "amount" ? (
+                        <p className="text-lg font-extrabold text-[#0b4058]">
+                          <span>{shownPrice.quotedAs === "final" ? "Final" : "Desde"} </span>
+                          <span className="whitespace-nowrap tabular-nums">
+                            {formatShownMoney(shownPrice.currency, shownPrice.amount)}
+                          </span>
+                        </p>
+                      ) : (
+                        <span className="text-xs font-bold text-[#0b4058]/80">Consultá precio</span>
+                      )}
+                      {shownPrice.kind === "amount" && dest.priceNote ? (
+                        <p className="text-[10px] text-[#0b4058]/75 mt-0.5 text-pretty">{dest.priceNote}</p>
                       ) : null}
                     </div>
                   </div>
@@ -164,7 +165,7 @@ export function FeaturedDestinations({
                         id: "home-card",
                         destinationName: dest.name,
                         displayDate: view.displayDate,
-                        priceClause: formatHomeCardPriceClause(view.price),
+                        priceClause: formatHomeCardPriceClause(shownPrice),
                       })}
                       aria-label={`Consultar esta salida a ${dest.name} por WhatsApp`}
                     />
@@ -182,7 +183,7 @@ export function FeaturedDestinations({
             ¿Buscás otro destino?
           </h3>
           <p className="text-sm leading-relaxed text-[#0b4058]/75 text-pretty">
-            Tenemos salidas confirmadas adicionales y armamos itinerarios a medida nacionales e internacionales con la financiación que necesitás. También podés consultarnos por cualquier otro destino.
+            Tenemos más salidas y armamos itinerarios a medida, nacionales e internacionales. También podés consultarnos por cualquier otro destino.
           </p>
         </div>
         <div className="mt-6 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
