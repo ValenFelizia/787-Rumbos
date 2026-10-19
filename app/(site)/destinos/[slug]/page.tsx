@@ -7,6 +7,7 @@ import { Footer } from "@/components/sections/Footer";
 import { FAQ } from "@/components/sections/FAQ";
 import {
   departureBadgeSelectable,
+  formatShownPrice,
   getActiveUpcomingDepartures,
   getDepartureBadge,
   getDeparturePublishedPrice,
@@ -397,9 +398,9 @@ export default async function DestinoDetailPage({ params }: Props) {
                   {upcomingDepartures.map((dep, idx) => {
                     const badge = getDepartureBadge(dep);
                     const selectable = departureBadgeSelectable(badge);
-                    const publishedPrice =
-                      dep.priceFrom != null ? getDeparturePublishedPrice(dest, dep) : undefined;
-                    const showPriceSlot = dep.priceFrom != null;
+                    const publishedPrice = getDeparturePublishedPrice(dest, dep);
+                    // Own amount (even expired → “Consultá…”) or inherited base (Porto shape).
+                    const showPriceSlot = publishedPrice != null || dep.priceFrom != null;
 
                     return (
                       <div

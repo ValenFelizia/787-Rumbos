@@ -12,6 +12,7 @@ import {
   getCardOrigin,
   getDepartureBadge,
   getDepartureMonthKey,
+  getDeparturePublishedPrice,
   getListedPrice,
   getQuoteSuggestionNames,
   groupDestinationsForSort,
@@ -652,7 +653,27 @@ describe("readHomeDeparture", () => {
     assert.equal(view?.nights, 7);
   });
 
-  it("asks when the departure has no price of its own", () => {
+  it("inherits destination base when no hotel departure publishes its own price (Porto shape)", () => {
+    const porto = destinationsData.find((dest) => dest.slug === "porto-de-galinhas");
+    assert.ok(porto);
+    const view = readHomeDeparture(porto, cardToday);
+    assert.equal(view?.displayDate, "8 de Enero");
+    assert.deepEqual(view?.price, {
+      kind: "amount",
+      currency: "USD",
+      amount: 1670,
+      quotedAs: "desde",
+    });
+    const first = porto.departures.find((dep) => dep.date === "2027-01-08");
+    assert.ok(first);
+    assert.equal(first.priceFrom, undefined);
+    assert.deepEqual(getDeparturePublishedPrice(porto, first, cardToday), {
+      amount: 1670,
+      currency: "USD",
+    });
+  });
+
+  it("does not inherit dest.priceFrom when a sibling hotel departure has its own price (Río)", () => {
     const dest = destination({
       priceFrom: 980,
       currency: "USD",
@@ -661,6 +682,12 @@ describe("readHomeDeparture", () => {
           date: "2026-11-01",
           displayDate: "1 de Noviembre",
           priceFrom: undefined,
+        }),
+        departure({
+          date: "2026-12-30",
+          displayDate: "30 de Diciembre",
+          priceFrom: 1719,
+          currency: "USD",
         }),
       ],
     });
