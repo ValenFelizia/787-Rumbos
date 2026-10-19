@@ -1,10 +1,16 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
+  departureBadgeSelectable,
   destinationHasActiveDepartureInMonth,
   filterDestinationsByCurrency,
   filterDestinationsByDepartureMonth,
+  formatCardOriginLine,
   formatDepartureMonthLabel,
+  formatHomeCardPriceClause,
+  formatShownPrice,
+  getCardOrigin,
+  getDepartureBadge,
   getDepartureMonthKey,
   getListedPrice,
   getQuoteSuggestionNames,
@@ -13,9 +19,11 @@ import {
   isPriceExpired,
   isPriceSortMode,
   listAvailableDepartureMonths,
+  readHomeDeparture,
   resolveSelectedDepartureMonth,
 } from "./logic";
 import type { Departure, DestinationPage } from "./types";
+import { destinationsData } from "../../scripts/seed-data/destinations";
 
 const today = new Date(2026, 8, 23);
 
@@ -537,5 +545,220 @@ describe("getQuoteSuggestionNames", () => {
       ),
       [],
     );
+  });
+});
+
+const cardToday = new Date(2026, 9, 18);
+
+describe("getCardOrigin", () => {
+  it("reads Córdoba o Ezeiza from the note before transport", () => {
+    assert.equal(
+      getCardOrigin({ transport: "aereo", note: "Andes. Córdoba o Ezeiza" }),
+      "cordoba-or-ezeiza",
+    );
+    assert.equal(
+      getCardOrigin({ transport: "bus", note: "Salida en bus. Córdoba o Ezeiza" }),
+      "cordoba-or-ezeiza",
+    );
+  });
+
+  it("prints Bus only for bus transport without that phrase", () => {
+    assert.equal(getCardOrigin({ transport: "bus", note: "Cupos limitados" }), "bus");
+    assert.equal(getCardOrigin({ transport: "bus-cama" }), "bus");
+  });
+
+  it("omits a Córdoba-only note on a flight", () => {
+    assert.equal(
+      getCardOrigin({
+        transport: "aereo",
+        note: "Vuelo directo SKY desde Córdoba",
+      }),
+      "omit",
+    );
+    assert.equal(formatCardOriginLine("omit"), null);
+    assert.equal(formatCardOriginLine("bus"), "Bus");
+    assert.equal(formatCardOriginLine("cordoba-or-ezeiza"), "Córdoba o Ezeiza");
+  });
+});
+
+describe("readHomeDeparture", () => {
+  it("reads Salvador on 2026-10-18 as 26 de Diciembre at USD 1545", () => {
+    const salvador = destinationsData.find((dest) => dest.slug === "salvador-de-bahia");
+    assert.ok(salvador);
+    const view = readHomeDeparture(salvador, cardToday);
+    assert.equal(view?.displayDate, "26 de Diciembre");
+    assert.deepEqual(view?.price, {
+      kind: "amount",
+      currency: "USD",
+      amount: 1545,
+      quotedAs: "desde",
+    });
+    assert.equal(view?.origin, "cordoba-or-ezeiza");
+  });
+
+  it("keeps the nearest departure when a later one is cheaper", () => {
+    const dest = destination({
+      priceFrom: 100,
+      departures: [
+        departure({
+          date: "2026-11-01",
+          displayDate: "1 de Noviembre",
+          priceFrom: 2000,
+          currency: "USD",
+        }),
+        departure({
+          date: "2026-12-01",
+          displayDate: "1 de Diciembre",
+          priceFrom: 900,
+          currency: "USD",
+        }),
+      ],
+    });
+    const view = readHomeDeparture(dest, cardToday);
+    assert.equal(view?.displayDate, "1 de Noviembre");
+    assert.equal(view?.price.kind === "amount" && view.price.amount, 2000);
+  });
+
+  it("asks when the departure has no price of its own", () => {
+    const dest = destination({
+      priceFrom: 980,
+      currency: "USD",
+      departures: [
+        departure({
+          date: "2026-11-01",
+          displayDate: "1 de Noviembre",
+          priceFrom: undefined,
+        }),
+      ],
+    });
+    assert.deepEqual(readHomeDeparture(dest, cardToday)?.price, { kind: "ask" });
+  });
+
+  it("asks when the departure price is already expired", () => {
+    const dest = destination({
+      priceFrom: 500,
+      departures: [
+        departure({
+          date: "2026-11-01",
+          displayDate: "1 de Noviembre",
+          priceFrom: 2000,
+          currency: "USD",
+          priceValidUntil: "2026-10-01",
+        }),
+      ],
+    });
+    assert.deepEqual(readHomeDeparture(dest, cardToday)?.price, { kind: "ask" });
+  });
+
+  it("marks a closed fare as final", () => {
+    const dest = destination({
+      departures: [
+        departure({
+          date: "2026-11-01",
+          displayDate: "1 de Noviembre",
+          priceFrom: 850,
+          currency: "USD",
+          priceIsFinal: true,
+        }),
+      ],
+    });
+    assert.deepEqual(readHomeDeparture(dest, cardToday)?.price, {
+      kind: "amount",
+      currency: "USD",
+      amount: 850,
+      quotedAs: "final",
+    });
+  });
+
+  it("returns null when every departure is past or sold out", () => {
+    const dest = destination({
+      departures: [
+        departure({ date: "2026-09-01", status: "confirmed" }),
+        departure({ date: "2026-11-01", status: "sold-out" }),
+      ],
+    });
+    assert.equal(readHomeDeparture(dest, cardToday), null);
+  });
+});
+
+describe("formatShownPrice", () => {
+  it("prints the card string and the chat clause from the same amount", () => {
+    assert.equal(formatShownPrice({ kind: "ask" }), "Consultá precio");
+    assert.equal(formatHomeCardPriceClause({ kind: "ask" }), "precio a consultar");
+    const usd = {
+      kind: "amount" as const,
+      currency: "USD" as const,
+      amount: 1545,
+      quotedAs: "desde" as const,
+    };
+    const ars = {
+      kind: "amount" as const,
+      currency: "ARS" as const,
+      amount: 620000,
+      quotedAs: "desde" as const,
+    };
+    const finalFare = {
+      kind: "amount" as const,
+      currency: "USD" as const,
+      amount: 1670,
+      quotedAs: "final" as const,
+    };
+    assert.equal(formatShownPrice(usd), "Desde USD 1.545");
+    assert.equal(formatHomeCardPriceClause(usd), "desde USD 1.545");
+    assert.equal(formatShownPrice(ars), "Desde $620.000");
+    assert.equal(formatHomeCardPriceClause(ars), "desde $620.000");
+    assert.equal(formatShownPrice(finalFare), "Final USD 1.670");
+    assert.equal(formatHomeCardPriceClause(finalFare), "final USD 1.670");
+  });
+});
+
+describe("getDepartureBadge", () => {
+  it("asks when the status is inquire", () => {
+    const badge = getDepartureBadge(
+      { date: "2026-11-18", status: "inquire" },
+      cardToday,
+    );
+    assert.deepEqual(badge, { kind: "inquire", label: "Consultar disponibilidad" });
+    assert.equal(departureBadgeSelectable(badge), true);
+  });
+
+  it("treats an unknown status as inquire", () => {
+    const badge = getDepartureBadge(
+      { date: "2026-11-18", status: "waitlist" },
+      cardToday,
+    );
+    assert.equal(badge.label, "Consultar disponibilidad");
+    assert.notEqual(badge.label, "Salida Confirmada");
+  });
+
+  it("keeps confirmed and few-seats outside the three-day window", () => {
+    assert.deepEqual(
+      getDepartureBadge({ date: "2026-10-22", status: "confirmed" }, cardToday),
+      { kind: "confirmed", label: "Salida Confirmada" },
+    );
+    assert.deepEqual(
+      getDepartureBadge({ date: "2026-10-22", status: "few-seats" }, cardToday),
+      { kind: "few-seats", label: "Últimos Cupos" },
+    );
+  });
+
+  it("asks for places inside three days, even when the fare was confirmed", () => {
+    const soon = getDepartureBadge({ date: "2026-10-21", status: "confirmed" }, cardToday);
+    assert.deepEqual(soon, { kind: "soon", label: "Consultar Lugares" });
+    assert.equal(departureBadgeSelectable(soon), true);
+    assert.equal(
+      getDepartureBadge({ date: "2026-10-20", status: "few-seats" }, cardToday).kind,
+      "soon",
+    );
+    assert.equal(JSON.stringify(soon).includes("animate-pulse"), false);
+  });
+
+  it("closes sold-out and past departures", () => {
+    const sold = getDepartureBadge({ date: "2026-10-19", status: "sold-out" }, cardToday);
+    assert.deepEqual(sold, { kind: "sold-out", label: "Cupos Completos" });
+    assert.equal(departureBadgeSelectable(sold), false);
+    const past = getDepartureBadge({ date: "2026-10-17", status: "confirmed" }, cardToday);
+    assert.deepEqual(past, { kind: "past", label: "Viaje Realizado" });
+    assert.equal(departureBadgeSelectable(past), false);
   });
 });

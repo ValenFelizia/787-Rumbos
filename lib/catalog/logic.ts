@@ -548,3 +548,124 @@ export function groupDestinationsForSort<T extends DestinationListing>(
   }
   return groups;
 }
+
+/** City claim the home card may print. omit prints nothing. */
+export type CardOrigin = "cordoba-or-ezeiza" | "bus" | "omit";
+
+export type ShownPrice =
+  | {
+      kind: "amount";
+      currency: "ARS" | "USD";
+      amount: number;
+      quotedAs: "desde" | "final";
+    }
+  | { kind: "ask" };
+
+export type HomeDepartureView = {
+  displayDate: string;
+  transport: TransportType;
+  nights: number;
+  origin: CardOrigin;
+  price: ShownPrice;
+};
+
+export type DepartureBadge =
+  | { kind: "past"; label: "Viaje Realizado" }
+  | { kind: "sold-out"; label: "Cupos Completos" }
+  | { kind: "soon"; label: "Consultar Lugares" }
+  | { kind: "few-seats"; label: "Últimos Cupos" }
+  | { kind: "confirmed"; label: "Salida Confirmada" }
+  | { kind: "inquire"; label: "Consultar disponibilidad" };
+
+const MS_PER_DAY = 86_400_000;
+
+/**
+ * Note phrase wins over transport.
+ * Córdoba alone is not a claim.
+ */
+export function getCardOrigin(dep: {
+  transport: TransportType;
+  note?: string;
+}): CardOrigin {
+  if (dep.note && /Córdoba o Ezeiza/i.test(dep.note)) return "cordoba-or-ezeiza";
+  if (dep.transport === "bus" || dep.transport === "bus-cama") return "bus";
+  return "omit";
+}
+
+export function formatCardOriginLine(
+  origin: CardOrigin,
+): "Córdoba o Ezeiza" | "Bus" | null {
+  switch (origin) {
+    case "cordoba-or-ezeiza":
+      return "Córdoba o Ezeiza";
+    case "bus":
+      return "Bus";
+    case "omit":
+      return null;
+  }
+}
+
+function moneyToken(currency: "ARS" | "USD", amount: number): string {
+  const digits = amount.toLocaleString("es-AR");
+  return currency === "USD" ? `USD ${digits}` : `$${digits}`;
+}
+
+/** Published price of this departure only. A missing amount does not inherit dest.priceFrom. */
+export function readHomeDeparture(
+  dest: DestinationListing,
+  today = getTodayLocal(),
+): HomeDepartureView | null {
+  const dep = getNearestActiveDeparture(dest, today);
+  if (!dep) return null;
+  const published = getDeparturePublishedPrice(dest, dep, today);
+  const price: ShownPrice = published
+    ? {
+        kind: "amount",
+        currency: published.currency,
+        amount: published.amount,
+        quotedAs: dep.priceIsFinal ? "final" : "desde",
+      }
+    : { kind: "ask" };
+  return {
+    displayDate: dep.displayDate,
+    transport: dep.transport,
+    nights: dep.nights,
+    origin: getCardOrigin(dep),
+    price,
+  };
+}
+
+/** Card string. ask is Consultá precio. USD has a space. $ does not. */
+export function formatShownPrice(price: ShownPrice): string {
+  if (price.kind === "ask") return "Consultá precio";
+  const prefix = price.quotedAs === "final" ? "Final" : "Desde";
+  return `${prefix} ${moneyToken(price.currency, price.amount)}`;
+}
+
+export function formatHomeCardPriceClause(price: ShownPrice): string {
+  if (price.kind === "ask") return "precio a consultar";
+  const prefix = price.quotedAs === "final" ? "final" : "desde";
+  return `${prefix} ${moneyToken(price.currency, price.amount)}`;
+}
+
+/**
+ * First match wins. today is already midnight.
+ * A status outside the known set is inquire, never Salida Confirmada.
+ */
+export function getDepartureBadge(
+  dep: { date: string; status: string },
+  today = getTodayLocal(),
+): DepartureBadge {
+  const depDate = new Date(`${dep.date}T00:00:00`);
+  if (depDate < today) return { kind: "past", label: "Viaje Realizado" };
+  if (dep.status === "sold-out") return { kind: "sold-out", label: "Cupos Completos" };
+  const diffDays = Math.ceil((depDate.getTime() - today.getTime()) / MS_PER_DAY);
+  if (diffDays <= 3) return { kind: "soon", label: "Consultar Lugares" };
+  if (dep.status === "few-seats") return { kind: "few-seats", label: "Últimos Cupos" };
+  if (dep.status === "confirmed") return { kind: "confirmed", label: "Salida Confirmada" };
+  return { kind: "inquire", label: "Consultar disponibilidad" };
+}
+
+export function departureBadgeSelectable(badge: DepartureBadge): boolean {
+  return badge.kind !== "past" && badge.kind !== "sold-out";
+}
