@@ -17,6 +17,8 @@ export type DepartureListing = Pick<
   | "nights"
   | "stayLabel"
   | "priceValidUntil"
+  | "priceIsFinal"
+  | "note"
 >;
 
 /**
@@ -59,6 +61,8 @@ function toDepartureListing(dep: Departure): DepartureListing {
     ...(dep.currency ? { currency: dep.currency } : {}),
     ...(dep.stayLabel ? { stayLabel: dep.stayLabel } : {}),
     ...(dep.priceValidUntil ? { priceValidUntil: dep.priceValidUntil } : {}),
+    ...(dep.note ? { note: dep.note } : {}),
+    ...(dep.priceIsFinal ? { priceIsFinal: true } : {}),
   };
 }
 
