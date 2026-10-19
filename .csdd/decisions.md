@@ -95,6 +95,19 @@
   - Compartir la contraseña de una persona.
 - **Consequences:** `/api/mcp` es un endpoint público protegido por clave. `/api` queda `noindex`. Se vuelve a mirar si el bot puede publicar campos operativos cuando haya un historial de aciertos. El detalle está en [specs.md](./specs.md).
 
+### D-008 — La card de la home consulta esa salida por WhatsApp
+
+- **Status:** Proposed
+- **Date:** 2026-10-18
+- **Source:** Valentín, pending confirmation on the PR
+- **Decision:** La home titula la grilla “Próximas salidas”, sin ciudad. Cada card muestra la salida que ya usa el badge (`getNearestActiveDeparture`) y el precio publicado de esa salida. Si esa salida no tiene precio vigente, la card dice “Consultá precio”. La línea de origen sale del dato de esa salida: “Córdoba o Ezeiza” si la nota trae esa frase, o “Bus” si el transporte es bus o bus cama. Si no hay ese dato, la card no afirma ciudad. El botón de la card pasa a “Consultar esta salida” y abre WhatsApp con destino, fecha, el precio mostrado y la marca `(Web - Inicio <nombre>)`. El cotizador del hero se queda. En el hub de Brasil, “Cotizar Brasil por WhatsApp” se mueve debajo del párrafo de apertura, con el mismo texto. Las cards del hub no ganan botón de WhatsApp.
+- **Rationale:** La grilla ya ordena por la salida vigente. El precio y el chat tienen que hablar de esa misma salida, y la marca del mensaje tiene que decir de qué superficie salió el chat.
+- **Rejected alternatives:**
+  - Seguir con el H2 “desde Córdoba” y un precio “desde” calculado entre otras salidas.
+  - Una tabla de tags por slug.
+  - Un botón de WhatsApp en cada card del hub.
+- **Consequences:** D-004 sigue ordenando las cuatro cards. Cambia el título y el precio que ve el usuario. D-005 sigue impidiendo afirmar Córdoba cuando la salida no lo fija. Los chats de hero, cierre de grilla, pie y ficha quedan separables por la marca del mensaje.
+
 ## Open / needs human input
 
 Landings publicadas y siguientes candidatas (alimenta T-042):
