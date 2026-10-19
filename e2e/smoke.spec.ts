@@ -123,6 +123,41 @@ test.describe("rutas críticas", () => {
         })
         .first(),
     ).toBeVisible();
+    const heroWa = page
+      .locator("#hero")
+      .getByRole("link", { name: /escribinos por whatsapp/i })
+      .first();
+    await expect(heroWa).toHaveAttribute("href", /api\.whatsapp\.com/);
+    const heroText = decodeURIComponent(
+      new URL((await heroWa.getAttribute("href"))!).searchParams.get("text")!,
+    );
+    expect(heroText).toContain("(Web - Inicio)");
+    expect(heroText).not.toContain("Contacto Directo");
+
+    const gridWa = page
+      .locator("#destinos")
+      .getByRole("link", { name: /escribinos por whatsapp/i })
+      .first();
+    const gridText = decodeURIComponent(
+      new URL((await gridWa.getAttribute("href"))!).searchParams.get("text")!,
+    );
+    expect(gridText).toContain("(Web - Inicio grilla)");
+
+    const footerWa = page
+      .locator("footer")
+      .getByRole("link", { name: /whatsapp/i })
+      .first();
+    const footerText = decodeURIComponent(
+      new URL((await footerWa.getAttribute("href"))!).searchParams.get("text")!,
+    );
+    expect(footerText).toContain("(Web - Pie)");
+  });
+
+  test("cataratas inquire no se etiqueta Salida Confirmada", async ({ page }) => {
+    await page.goto("/destinos/cataratas-del-iguazu");
+    const salidas = page.locator("#salidas");
+    await expect(salidas.getByText("Consultar disponibilidad").first()).toBeVisible();
+    await expect(salidas.getByText("Salida Confirmada")).toHaveCount(0);
   });
 
   test("listado de destinos responde", async ({ page }) => {

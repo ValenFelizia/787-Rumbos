@@ -62,14 +62,6 @@ export const WHATSAPP_FAQ_LINK = whatsappLink(
   "Hola 787 Rumbos! Quería consultar por una duda del FAQ... (Web - FAQ)",
 );
 
-/** Destino destacado → agencia */
-export function whatsappDestino(destino: string): string {
-  return whatsappLink(
-    AGENCY_PHONE.whatsapp,
-    `Hola 787 Rumbos! Quiero consultar por un viaje a ${destino}. (Web - Destino Destacado)`,
-  );
-}
-
 /**
  * Ficha de Google Maps / Google Business Profile de 787 Rumbos
  * (hall de arribos, Aeropuerto de Córdoba — no usar búsqueda genérica del aeropuerto).

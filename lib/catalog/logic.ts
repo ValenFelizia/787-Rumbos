@@ -610,12 +610,35 @@ function moneyToken(currency: "ARS" | "USD", amount: number): string {
   return currency === "USD" ? `USD ${digits}` : `$${digits}`;
 }
 
+/**
+ * Same-date tie-break for the home card only: hotel before solo aéreo, then cheaper.
+ * Leaves `getNearestActiveDeparture` unchanged for hubs and sticky bars.
+ */
+function pickHomeCardDeparture(
+  dest: DestinationListing,
+  today: Date,
+): DepartureListing | undefined {
+  const active = getActiveUpcomingDepartures(dest, today);
+  if (active.length === 0) return undefined;
+  const nearestDate = active.reduce(
+    (min, dep) => (dep.date < min ? dep.date : min),
+    active[0].date,
+  );
+  return active
+    .filter((dep) => dep.date === nearestDate)
+    .slice()
+    .sort((a, b) => {
+      if (Boolean(a.stayLabel) !== Boolean(b.stayLabel)) return a.stayLabel ? 1 : -1;
+      return (a.priceFrom ?? Number.POSITIVE_INFINITY) - (b.priceFrom ?? Number.POSITIVE_INFINITY);
+    })[0];
+}
+
 /** Published price of this departure only. A missing amount does not inherit dest.priceFrom. */
 export function readHomeDeparture(
   dest: DestinationListing,
   today = getTodayLocal(),
 ): HomeDepartureView | null {
-  const dep = getNearestActiveDeparture(dest, today);
+  const dep = pickHomeCardDeparture(dest, today);
   if (!dep) return null;
   const published = getDeparturePublishedPrice(dest, dep, today);
   const price: ShownPrice = published

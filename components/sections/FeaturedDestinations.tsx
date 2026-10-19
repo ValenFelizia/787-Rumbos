@@ -105,23 +105,26 @@ export function FeaturedDestinations({
                     </Link>
                   </h3>
 
-                  <div className="flex items-center gap-1.5 text-xs text-[#0b4058]/70">
+                  <div className="flex flex-wrap items-center gap-1.5 text-xs text-[#0b4058]/70">
                     {transportType === "aereo" || transportType === "mix" ? (
                       <Plane className="h-3.5 w-3.5 text-sky-600 shrink-0" aria-hidden />
                     ) : (
                       <Bus className="h-3.5 w-3.5 text-emerald-600 shrink-0" aria-hidden />
                     )}
-                    <span className="font-semibold uppercase tracking-wider text-[10px] mr-1">
-                      {getTransportLabel(transportType)}
+                    <span className="font-semibold uppercase tracking-wider text-[10px]">
+                      {view?.origin === "bus" ? "Bus" : getTransportLabel(transportType)}
                     </span>
                     <span aria-hidden>·</span>
                     <span className="italic">
                       {view ? `${view.nights} noches` : "Itinerario flexible"}
                     </span>
+                    {originText && view?.origin === "cordoba-or-ezeiza" ? (
+                      <>
+                        <span aria-hidden>·</span>
+                        <span className="text-[11px] text-[#0b4058]/70">{originText}</span>
+                      </>
+                    ) : null}
                   </div>
-                  {originText ? (
-                    <p className="text-[11px] text-[#0b4058]/70">{originText}</p>
-                  ) : null}
                 </div>
 
                 <div className="space-y-3 pt-3 border-t border-[#0b4058]/5">
@@ -153,7 +156,7 @@ export function FeaturedDestinations({
                     <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
                   </Link>
 
-                  {view ? (
+                  {view && dest.name.trim() ? (
                     <SecondaryCta
                       size="full"
                       label="Consultar esta salida"

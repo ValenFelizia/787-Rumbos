@@ -619,6 +619,39 @@ describe("readHomeDeparture", () => {
     assert.equal(view?.price.kind === "amount" && view.price.amount, 2000);
   });
 
+  it("on the same date prefers hotel over solo aéreo, then the cheaper hotel", () => {
+    const dest = destination({
+      departures: [
+        departure({
+          date: "2026-11-01",
+          displayDate: "1 de Noviembre",
+          priceFrom: 850,
+          currency: "USD",
+          stayLabel: "Sin hotel",
+          priceIsFinal: true,
+          program: "Solo aéreo",
+        }),
+        departure({
+          date: "2026-11-01",
+          displayDate: "1 de Noviembre",
+          priceFrom: 1402,
+          currency: "USD",
+          program: "Morro",
+        }),
+        departure({
+          date: "2026-11-01",
+          displayDate: "1 de Noviembre",
+          priceFrom: 1284,
+          currency: "USD",
+          program: "Vila Galé",
+        }),
+      ],
+    });
+    const view = readHomeDeparture(dest, cardToday);
+    assert.equal(view?.price.kind === "amount" && view.price.amount, 1284);
+    assert.equal(view?.nights, 7);
+  });
+
   it("asks when the departure has no price of its own", () => {
     const dest = destination({
       priceFrom: 980,
