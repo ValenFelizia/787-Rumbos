@@ -21,12 +21,26 @@ import {
   getClusterDestinations,
   type ClusterPage,
 } from "@/lib/clusters-data";
-import { AGENCY_PHONE, whatsappLink } from "@/lib/constants";
+import { waHref } from "@/lib/wa-recipe";
 import { ArrowLeft, ArrowRight, Calendar, Check, MapPin } from "lucide-react";
 
 export async function ClusterHub({ cluster }: { cluster: ClusterPage }) {
   const destinations = getClusterDestinations(cluster, await getAllDestinations());
-  const whatsappUrl = whatsappLink(AGENCY_PHONE.whatsapp, cluster.whatsappText);
+  const whatsappUrl = waHref({ id: "cluster", clusterId: cluster.id });
+
+  function quoteLink() {
+    return (
+      <a
+        href={whatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="font-[family-name:var(--font-brand-heading)] inline-flex items-center gap-2 rounded-xl bg-[#dae553] hover:bg-[#c3cf3e] text-[#0b4058] px-8 py-3.5 text-sm font-black shadow-md transition-all active:scale-[0.96]"
+      >
+        <WhatsAppIcon size={16} className="h-5 w-5" />
+        {cluster.ctaLabel}
+      </a>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-[#f9f9f9] text-[#0b4058]">
@@ -68,6 +82,7 @@ export async function ClusterHub({ cluster }: { cluster: ClusterPage }) {
           <p className="max-w-2xl text-white/85 text-base md:text-lg leading-relaxed text-pretty">
             {cluster.intro}
           </p>
+          {cluster.ctaPlacement === "under-intro" ? quoteLink() : null}
         </div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent pointer-events-none" />
       </section>
@@ -215,24 +230,17 @@ export async function ClusterHub({ cluster }: { cluster: ClusterPage }) {
           )}
         </div>
 
-        {/* CTA cierre */}
-        <div className="rounded-3xl bg-gradient-to-br from-[#0b4058] to-[#00516e] text-white p-8 md:p-10 text-center space-y-5 border border-white/5">
-          <h2 className="font-[family-name:var(--font-brand-heading)] text-2xl md:text-3xl font-extrabold tracking-tight text-balance">
-            ¿Arrancamos tu cotización?
-          </h2>
-          <p className="text-white/80 text-sm max-w-xl mx-auto text-pretty">
-            Contanos fechas y cantidad de pasajeros. Te respondemos con opciones concretas.
-          </p>
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-[family-name:var(--font-brand-heading)] inline-flex items-center gap-2 rounded-xl bg-[#dae553] hover:bg-[#c3cf3e] text-[#0b4058] px-8 py-3.5 text-sm font-black shadow-md transition-all active:scale-[0.96]"
-          >
-            <WhatsAppIcon size={16} className="h-5 w-5" />
-            {cluster.ctaLabel}
-          </a>
-        </div>
+        {cluster.ctaPlacement === "closing" ? (
+          <div className="rounded-3xl bg-gradient-to-br from-[#0b4058] to-[#00516e] text-white p-8 md:p-10 text-center space-y-5 border border-white/5">
+            <h2 className="font-[family-name:var(--font-brand-heading)] text-2xl md:text-3xl font-extrabold tracking-tight text-balance">
+              ¿Arrancamos tu cotización?
+            </h2>
+            <p className="text-white/80 text-sm max-w-xl mx-auto text-pretty">
+              Contanos fechas y cantidad de pasajeros. Te respondemos con opciones concretas.
+            </p>
+            {quoteLink()}
+          </div>
+        ) : null}
       </section>
 
       <Footer />

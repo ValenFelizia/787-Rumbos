@@ -6,12 +6,15 @@ import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { FAQ } from "@/components/sections/FAQ";
 import {
+  departureBadgeSelectable,
   getActiveUpcomingDepartures,
+  getDepartureBadge,
   getDeparturePublishedPrice,
   getNearestActiveDeparture,
   getUpcomingDepartures,
   getTransportLabel,
   hasExpiredListedPrice,
+  type DepartureBadge,
 } from "@/lib/catalog/logic";
 import { buildDestinationTouristTripJsonLd } from "@/lib/catalog/json-ld";
 import {
@@ -22,7 +25,7 @@ import {
 } from "@/lib/catalog/repository";
 import type { Departure } from "@/lib/catalog/types";
 import { getPrimaryClusterForDestination } from "@/lib/clusters-data";
-import { AGENCY_PHONE, whatsappLink } from "@/lib/constants";
+import { waHref } from "@/lib/wa-recipe";
 import { buildPageMetadata } from "@/lib/seo-metadata";
 import { siteUrl } from "@/lib/site-url";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
@@ -72,92 +75,20 @@ export async function generateStaticParams() {
   }));
 }
 
-// 3. Función auxiliar para evaluar el estado inteligente de una salida
-function getDepartureStatus(dep: Departure): {
-  label: string;
-  colorClass: string;
-  isSelectable: boolean;
-  isPast: boolean;
-  isSoldOut: boolean;
-} {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const depDate = new Date(dep.date + "T00:00:00");
-
-  if (depDate < today) {
-    return {
-      label: "Viaje Realizado",
-      colorClass: "bg-gray-100 text-gray-400 border-gray-200 line-through",
-      isSelectable: false,
-      isPast: true,
-      isSoldOut: false,
-    };
-  }
-
-  if (dep.status === "sold-out") {
-    return {
-      label: "Cupos Completos",
-      colorClass: "bg-red-50 text-red-500 border-red-100 line-through font-semibold",
-      isSelectable: false,
-      isPast: false,
-      isSoldOut: true,
-    };
-  }
-
-  // Si faltan menos de 3 días para salir, forzar estado a consulta
-  const diffTime = depDate.getTime() - today.getTime();
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  if (diffDays <= 3) {
-    return {
-      label: "Consultar Lugares",
-      colorClass: "bg-amber-50 text-amber-600 border-amber-200 font-semibold animate-pulse",
-      isSelectable: true,
-      isPast: false,
-      isSoldOut: false,
-    };
-  }
-
-  if (dep.status === "few-seats") {
-    return {
-      label: "Últimos Cupos",
-      colorClass: "bg-orange-50 text-orange-600 border-orange-200 font-semibold",
-      isSelectable: true,
-      isPast: false,
-      isSoldOut: false,
-    };
-  }
-
-  return {
-    label: "Salida Confirmada",
-    colorClass: "bg-emerald-50 text-emerald-600 border-emerald-100 font-semibold",
-    isSelectable: true,
-    isPast: false,
-    isSoldOut: false,
-  };
-}
-
-// 4. Generador de link de WhatsApp personalizado por salida
-function getWhatsAppDepartureLink(destinoName: string, dep: Departure): string {
-  const programa = dep.program ? ` (${dep.program})` : "";
-  return whatsappLink(
-    AGENCY_PHONE.whatsapp,
-    `Hola, quiero consultar disponibilidad para la salida a ${destinoName} del ${dep.displayDate}${programa}. (Web - Detalle Destino)`,
-  );
-}
+const departureBadgeClass: Record<DepartureBadge["kind"], string> = {
+  past: "bg-gray-100 text-gray-400 border-gray-200 line-through",
+  "sold-out": "bg-red-50 text-red-500 border-red-100 line-through font-semibold",
+  soon: "bg-amber-50 text-amber-600 border-amber-200 font-semibold",
+  "few-seats": "bg-orange-50 text-orange-600 border-orange-200 font-semibold",
+  confirmed: "bg-emerald-50 text-emerald-600 border-emerald-100 font-semibold",
+  inquire: "bg-[#0b4058]/5 text-[#0b4058]/80 border-[#0b4058]/15",
+};
 
 function compareDepartures(a: Departure, b: Departure): number {
   const byDate = a.date.localeCompare(b.date);
   if (byDate !== 0) return byDate;
   if (Boolean(a.stayLabel) !== Boolean(b.stayLabel)) return a.stayLabel ? 1 : -1;
   return (a.priceFrom ?? 0) - (b.priceFrom ?? 0);
-}
-
-// 5. Generador de link de WhatsApp genérico para cotización a medida
-function getWhatsAppCustomLink(destinoName: string): string {
-  return whatsappLink(
-    AGENCY_PHONE.whatsapp,
-    `Hola, quiero consultar para armar un viaje a medida a ${destinoName}. (Web - Detalle Destino)`,
-  );
 }
 
 export default async function DestinoDetailPage({ params }: Props) {
@@ -438,7 +369,7 @@ export default async function DestinoDetailPage({ params }: Props) {
                   </p>
                 </div>
                 <a
-                  href={getWhatsAppCustomLink(dest.name)}
+                  href={waHref({ id: "detail-bespoke", destinationName: dest.name })}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-[family-name:var(--font-brand-heading)] inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#0b4058] hover:bg-[#006183] text-white py-3.5 text-sm font-bold shadow-md transition-all duration-200 active:scale-[0.96] cursor-pointer"
@@ -464,7 +395,8 @@ export default async function DestinoDetailPage({ params }: Props) {
 
                 <div className="space-y-4">
                   {upcomingDepartures.map((dep, idx) => {
-                    const statusInfo = getDepartureStatus(dep);
+                    const badge = getDepartureBadge(dep);
+                    const selectable = departureBadgeSelectable(badge);
                     const publishedPrice =
                       dep.priceFrom != null ? getDeparturePublishedPrice(dest, dep) : undefined;
                     const showPriceSlot = dep.priceFrom != null;
@@ -472,7 +404,7 @@ export default async function DestinoDetailPage({ params }: Props) {
                     return (
                       <div
                         key={`${dep.date}-${dep.program ?? idx}`}
-                        className={`rounded-xl border p-4 space-y-3 transition-all duration-200 ${statusInfo.isSelectable
+                        className={`rounded-xl border p-4 space-y-3 transition-all duration-200 ${selectable
                           ? "border-gray-200 hover:border-[#0b4058]/30 hover:shadow-md bg-white"
                           : "border-gray-100 bg-gray-50/50"
                           }`}
@@ -516,8 +448,8 @@ export default async function DestinoDetailPage({ params }: Props) {
                             </div>
                           </div>
 
-                          <span className={`shrink-0 whitespace-nowrap text-[10px] px-2.5 py-0.5 rounded-full border ${statusInfo.colorClass}`}>
-                            {statusInfo.label}
+                          <span className={`shrink-0 whitespace-nowrap text-[10px] px-2.5 py-0.5 rounded-full border ${departureBadgeClass[badge.kind]}`}>
+                            {badge.label}
                           </span>
                         </div>
 
@@ -528,9 +460,14 @@ export default async function DestinoDetailPage({ params }: Props) {
                         )}
 
                         {/* CTA Salida específica */}
-                        {statusInfo.isSelectable && (
+                        {selectable && (
                           <a
-                            href={getWhatsAppDepartureLink(dest.name, dep)}
+                            href={waHref({
+                              id: "detail-date",
+                              destinationName: dest.name,
+                              displayDate: dep.displayDate,
+                              program: dep.program ?? null,
+                            })}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="font-[family-name:var(--font-brand-heading)] flex w-full items-center justify-center gap-2 rounded-lg bg-[#25D366] hover:bg-[#1DA851] text-white py-2.5 text-xs font-bold transition-all duration-200 active:scale-[0.96] cursor-pointer"
@@ -547,7 +484,7 @@ export default async function DestinoDetailPage({ params }: Props) {
                 {/* Botón secundario a medida */}
                 <div className="pt-2 border-t border-[#0b4058]/5">
                   <a
-                    href={getWhatsAppCustomLink(dest.name)}
+                    href={waHref({ id: "detail-bespoke", destinationName: dest.name })}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="font-[family-name:var(--font-brand-heading)] flex w-full items-center justify-center gap-1.5 text-xs font-semibold text-[#006183] hover:text-[#0b4058] transition-colors py-2 text-center"
@@ -612,7 +549,7 @@ export default async function DestinoDetailPage({ params }: Props) {
             <>
               Dudas típicas de quienes viajan a {dest.name}. Si tu consulta es otra,{" "}
               <a
-                href={getWhatsAppCustomLink(dest.name)}
+                href={waHref({ id: "detail-bespoke", destinationName: dest.name })}
                 className="font-semibold text-[#006183] underline decoration-[#006183]/30 underline-offset-2 transition-colors hover:text-[#0b4058] hover:decoration-[#0b4058]/40"
                 target="_blank"
                 rel="noopener noreferrer"

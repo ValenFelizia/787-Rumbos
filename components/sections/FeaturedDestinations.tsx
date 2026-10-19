@@ -3,18 +3,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  getListedPrice,
-  getNearestActiveDeparture,
+  formatCardOriginLine,
+  formatHomeCardPriceClause,
+  formatShownPrice,
   getTransportLabel,
-  hasExpiredListedPrice,
+  readHomeDeparture,
 } from "@/lib/catalog/logic";
 import type { DestinationListing } from "@/lib/catalog/listing";
+import { waHref } from "@/lib/wa-recipe";
 import { Plane, Bus, ArrowRight, Calendar } from "lucide-react";
-import {
-  PrimaryCta,
-  SecondaryCta,
-  CTA_PRIMARY_LABEL,
-} from "@/components/conversion";
+import { PrimaryCta, SecondaryCta } from "@/components/conversion";
 import { useModal } from "@/lib/context/ModalContext";
 
 export function FeaturedDestinations({
@@ -30,7 +28,7 @@ export function FeaturedDestinations({
       <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div className="space-y-3">
           <h2 className="font-[family-name:var(--font-brand-heading)] text-3xl font-extrabold tracking-tight md:text-4xl text-[#0b4058] text-balance">
-            Próximas salidas desde Córdoba
+            Próximas salidas
           </h2>
           <p className="max-w-xl text-[#0b4058]/80 text-sm md:text-base leading-relaxed text-pretty">
             Grupales confirmadas, con fecha. Si no está el destino que buscás, lo armamos a medida.
@@ -47,10 +45,11 @@ export function FeaturedDestinations({
 
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {featured.map((dest) => {
-          const nextDep = getNearestActiveDeparture(dest) ?? null;
-          const hasActiveDeps = nextDep !== null;
-          const transportType = nextDep?.transport ?? "mix";
-          const listed = getListedPrice(dest);
+          const view = readHomeDeparture(dest);
+          const hasActiveDeps = view !== null;
+          const transportType = view?.transport ?? "mix";
+          const priceText = formatShownPrice(view?.price ?? { kind: "ask" });
+          const originText = view ? formatCardOriginLine(view.origin) : null;
 
           return (
             <article
@@ -77,13 +76,13 @@ export function FeaturedDestinations({
                   {dest.region === "nacional" ? "Nacional" : "Internacional"}
                 </div>
 
-                {nextDep ? (
+                {view ? (
                   <div
                     aria-hidden
                     className="absolute bottom-3 right-3 bg-[#dae553] text-[#0b4058] px-2.5 py-1 rounded-full text-[10px] font-black shadow-sm flex items-center gap-1"
                   >
                     <Calendar className="h-3 w-3 shrink-0" aria-hidden />
-                    <span>Salida: {nextDep.displayDate}</span>
+                    <span>Salida: {view.displayDate}</span>
                   </div>
                 ) : (
                   <div
@@ -117,9 +116,12 @@ export function FeaturedDestinations({
                     </span>
                     <span aria-hidden>·</span>
                     <span className="italic">
-                      {nextDep ? `${nextDep.nights} noches` : "Itinerario flexible"}
+                      {view ? `${view.nights} noches` : "Itinerario flexible"}
                     </span>
                   </div>
+                  {originText ? (
+                    <p className="text-[11px] text-[#0b4058]/70">{originText}</p>
+                  ) : null}
                 </div>
 
                 <div className="space-y-3 pt-3 border-t border-[#0b4058]/5">
@@ -127,24 +129,20 @@ export function FeaturedDestinations({
                     <span className="text-[10px] text-[#0b4058]/75 uppercase font-black tracking-wider">
                       Tarifa base
                     </span>
-                    {listed ? (
-                      <div className="text-right">
-                        <div>
-                          <span className="text-[10px] font-bold text-[#006183] mr-1">Desde</span>
-                          <span className="text-lg font-extrabold text-[#0b4058] tabular-nums">
-                            {listed.currency === "USD" ? "USD" : "$"}
-                            {listed.amount.toLocaleString("es-AR")}
-                          </span>
-                        </div>
-                        {dest.priceNote && (
-                          <p className="text-[10px] text-[#0b4058]/75 mt-0.5">{dest.priceNote}</p>
-                        )}
-                      </div>
-                    ) : hasExpiredListedPrice(dest) ? (
-                      <span className="text-xs font-bold text-[#0b4058]/80">Consultá precio actualizado</span>
-                    ) : (
-                      <span className="text-xs font-bold text-[#0b4058]/80">Consultar precio</span>
-                    )}
+                    <div className="text-right">
+                      <span
+                        className={
+                          view?.price.kind === "amount"
+                            ? "text-lg font-extrabold text-[#0b4058] tabular-nums"
+                            : "text-xs font-bold text-[#0b4058]/80"
+                        }
+                      >
+                        {priceText}
+                      </span>
+                      {view?.price.kind === "amount" && dest.priceNote ? (
+                        <p className="text-[10px] text-[#0b4058]/75 mt-0.5">{dest.priceNote}</p>
+                      ) : null}
+                    </div>
                   </div>
 
                   <Link
@@ -155,14 +153,19 @@ export function FeaturedDestinations({
                     <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
                   </Link>
 
-                  <button
-                    type="button"
-                    onClick={() => openModal(dest.name)}
-                    aria-label={`Armar viaje: ${dest.name} — abre el cotizador`}
-                    className="font-[family-name:var(--font-elaine)] flex w-full items-center justify-center rounded-xl border-2 border-[#f7a92a] bg-transparent px-3 py-2.5 text-xs font-bold text-[#0b4058] transition-all duration-200 hover:bg-gradient-to-r hover:from-[#f7a92a] hover:to-[#e6b451] active:scale-[0.96] cursor-pointer"
-                  >
-                    {CTA_PRIMARY_LABEL}
-                  </button>
+                  {view ? (
+                    <SecondaryCta
+                      size="full"
+                      label="Consultar esta salida"
+                      href={waHref({
+                        id: "home-card",
+                        destinationName: dest.name,
+                        displayDate: view.displayDate,
+                        priceClause: formatHomeCardPriceClause(view.price),
+                      })}
+                      aria-label={`Consultar esta salida a ${dest.name} por WhatsApp`}
+                    />
+                  ) : null}
                 </div>
               </div>
             </article>
@@ -186,6 +189,7 @@ export function FeaturedDestinations({
             className="font-bold"
           />
           <SecondaryCta
+            href={waHref({ id: "home-grid" })}
             aria-label="Escribinos por WhatsApp — abre el chat directo"
             className="font-bold"
           />

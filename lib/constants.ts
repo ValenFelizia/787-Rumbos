@@ -44,12 +44,6 @@ export const WHATSAPP_LINK = whatsappLink(
   "Hola 787 Rumbos! Quería hacer una consulta general... (Web - Contacto Directo)",
 );
 
-/** Cotizador (bypass o envío) → agencia */
-export const WHATSAPP_QUOTE_BYPASS = whatsappLink(
-  AGENCY_PHONE.whatsapp,
-  "Hola 787 Rumbos! Quería consultar directamente con un asesor... (Web - Cotizador Directo)",
-);
-
 /** Urgencias con viaje en curso — no usar en embudos de cotización */
 export const WHATSAPP_URGENT_LINK = whatsappLink(
   URGENT_PHONE.whatsapp,

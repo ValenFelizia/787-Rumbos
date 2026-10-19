@@ -27,7 +27,7 @@ export interface ClusterPage {
   intro: string;
   howWeWork: string[];
   ctaLabel: string;
-  whatsappText: string;
+  ctaPlacement: "under-intro" | "closing";
   /** Slugs fijos; si vacío, se resuelve dinámicamente (salidas grupales). */
   destinationSlugs?: string[];
 }
@@ -53,8 +53,7 @@ export const clustersData: ClusterPage[] = [
       "Oficina en el Aeropuerto de Córdoba y seguimiento durante el viaje.",
     ],
     ctaLabel: "Cotizar Brasil por WhatsApp",
-    whatsappText:
-      "Hola 787 Rumbos! Quiero consultar por un viaje a Brasil desde Córdoba. (Web - Cluster Brasil)",
+    ctaPlacement: "under-intro",
     destinationSlugs: [
       "rio-de-janeiro",
       "porto-de-galinhas",
@@ -86,8 +85,7 @@ export const clustersData: ClusterPage[] = [
       "Oficina en el Aeropuerto de Córdoba para resolver dudas en persona.",
     ],
     ctaLabel: "Cotizar Caribe por WhatsApp",
-    whatsappText:
-      "Hola 787 Rumbos! Quiero consultar por un viaje al Caribe desde Córdoba. (Web - Cluster Caribe)",
+    ctaPlacement: "closing",
     destinationSlugs: ["cancun", "playa-del-carmen", "riviera-maya", "punta-cana", "bayahibe"],
   },
   {
@@ -109,8 +107,7 @@ export const clustersData: ClusterPage[] = [
       "Asesoramiento humano para elegir fechas y régimen (pensión, desayuno, etc.).",
     ],
     ctaLabel: "Consultar viaje en bus",
-    whatsappText:
-      "Hola 787 Rumbos! Quiero consultar por un viaje en bus desde Córdoba. (Web - Cluster Argentina Bus)",
+    ctaPlacement: "closing",
     destinationSlugs: [
       "termas-rio-hondo",
       "cataratas-del-iguazu",
@@ -136,8 +133,7 @@ export const clustersData: ClusterPage[] = [
       "Si la salida se agotó, te proponemos la siguiente o un paquete a medida.",
     ],
     ctaLabel: "Consultar salidas grupales",
-    whatsappText:
-      "Hola 787 Rumbos! Quiero ver las próximas salidas grupales desde Córdoba. (Web - Cluster Salidas Grupales)",
+    ctaPlacement: "closing",
     // destinationSlugs omitido → se resuelve con salidas activas
   },
 ];
