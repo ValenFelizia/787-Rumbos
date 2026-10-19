@@ -5,7 +5,7 @@ import Link from "next/link";
 import {
   formatCardOriginLine,
   formatHomeCardPriceClause,
-  formatShownMoney,
+  formatShownPriceParts,
   getTransportLabel,
   readHomeDeparture,
 } from "@/lib/catalog/logic";
@@ -49,6 +49,7 @@ export function FeaturedDestinations({
           const hasActiveDeps = view !== null;
           const transportType = view?.transport ?? "mix";
           const shownPrice = view?.price ?? { kind: "ask" as const };
+          const priceParts = formatShownPriceParts(shownPrice);
           const originText = view ? formatCardOriginLine(view.origin) : null;
 
           return (
@@ -133,19 +134,25 @@ export function FeaturedDestinations({
                       Tarifa base
                     </span>
                     <div className="min-w-0 text-right">
-                      {shownPrice.kind === "amount" ? (
-                        <p className="text-lg font-extrabold text-[#0b4058]">
-                          <span>{shownPrice.quotedAs === "final" ? "Final" : "Desde"} </span>
-                          <span className="whitespace-nowrap tabular-nums">
-                            {formatShownMoney(shownPrice.currency, shownPrice.amount)}
-                          </span>
-                        </p>
+                      {priceParts.kind === "amount" ? (
+                        <div>
+                          <div className="flex flex-wrap items-baseline justify-end gap-x-1.5">
+                            <span className="text-xs font-bold text-[#006183]">
+                              {priceParts.prefix}
+                            </span>
+                            <span className="whitespace-nowrap tabular-nums text-lg font-extrabold text-[#0b4058]">
+                              {priceParts.amount}
+                            </span>
+                          </div>
+                          {dest.priceNote ? (
+                            <p className="mt-0.5 text-[10px] text-[#0b4058]/75 text-pretty">{dest.priceNote}</p>
+                          ) : null}
+                        </div>
                       ) : (
-                        <span className="text-xs font-bold text-[#0b4058]/80">Consultá precio</span>
+                        <span className="text-xs font-bold text-[#0b4058]/80">
+                          {priceParts.label}
+                        </span>
                       )}
-                      {shownPrice.kind === "amount" && dest.priceNote ? (
-                        <p className="text-[10px] text-[#0b4058]/75 mt-0.5 text-pretty">{dest.priceNote}</p>
-                      ) : null}
                     </div>
                   </div>
 

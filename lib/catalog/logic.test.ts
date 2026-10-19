@@ -10,6 +10,7 @@ import {
   formatHomeCardPriceClause,
   formatShownMoney,
   formatShownPrice,
+  formatShownPriceParts,
   getCardOrigin,
   getDepartureBadge,
   getDepartureMonthKey,
@@ -775,6 +776,50 @@ describe("formatShownPrice", () => {
     assert.equal(formatHomeCardPriceClause(ars), "desde $620.000");
     assert.equal(formatShownPrice(finalFare), "Final USD 1.670");
     assert.equal(formatHomeCardPriceClause(finalFare), "final USD 1.670");
+  });
+
+  it("decomposes price into structured qualifier and amount for cards", () => {
+    assert.deepEqual(formatShownPriceParts({ kind: "ask" }), {
+      kind: "ask",
+      label: "Consultá precio",
+    });
+    assert.deepEqual(formatShownPriceParts(null), {
+      kind: "ask",
+      label: "Consultá precio",
+    });
+    const usd = {
+      kind: "amount" as const,
+      currency: "USD" as const,
+      amount: 1545,
+      quotedAs: "desde" as const,
+    };
+    assert.deepEqual(formatShownPriceParts(usd), {
+      kind: "amount",
+      prefix: "desde USD",
+      amount: "1.545",
+    });
+    const ars = {
+      kind: "amount" as const,
+      currency: "ARS" as const,
+      amount: 620000,
+      quotedAs: "desde" as const,
+    };
+    assert.deepEqual(formatShownPriceParts(ars), {
+      kind: "amount",
+      prefix: "desde",
+      amount: "$620.000",
+    });
+    const finalFare = {
+      kind: "amount" as const,
+      currency: "USD" as const,
+      amount: 1670,
+      quotedAs: "final" as const,
+    };
+    assert.deepEqual(formatShownPriceParts(finalFare), {
+      kind: "amount",
+      prefix: "final USD",
+      amount: "1.670",
+    });
   });
 });
 

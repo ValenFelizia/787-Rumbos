@@ -684,6 +684,38 @@ export function formatHomeCardPriceClause(price: ShownPrice): string {
   return `${prefix} ${formatShownMoney(price.currency, price.amount)}`;
 }
 
+export type FormattedShownPriceParts =
+  | {
+      kind: "amount";
+      prefix: string;
+      amount: string;
+    }
+  | {
+      kind: "ask";
+      label: "Consultá precio";
+    };
+
+/**
+ * Partes estructuradas del precio para tarjetas donde el calificador
+ * ('desde USD' / 'desde') se maqueta con jerarquía visual distinta del importe.
+ */
+export function formatShownPriceParts(
+  price?: ShownPrice | null,
+): FormattedShownPriceParts {
+  if (!price || price.kind === "ask") {
+    return { kind: "ask", label: "Consultá precio" };
+  }
+  const prefixWord = price.quotedAs === "final" ? "final" : "desde";
+  const isUsd = price.currency === "USD";
+  return {
+    kind: "amount",
+    prefix: isUsd ? `${prefixWord} USD` : prefixWord,
+    amount: isUsd
+      ? price.amount.toLocaleString("es-AR")
+      : `$${price.amount.toLocaleString("es-AR")}`,
+  };
+}
+
 /**
  * First match wins. today is already midnight.
  * A status outside the known set is inquire, never Salida Confirmada.
