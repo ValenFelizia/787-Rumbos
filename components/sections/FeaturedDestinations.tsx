@@ -3,18 +3,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  getListedPrice,
-  getNearestActiveDeparture,
+  formatCardOriginLine,
+  formatHomeCardPriceClause,
+  formatShownPriceParts,
   getTransportLabel,
-  hasExpiredListedPrice,
+  readHomeDeparture,
 } from "@/lib/catalog/logic";
 import type { DestinationListing } from "@/lib/catalog/listing";
+import { waHref } from "@/lib/wa-recipe";
 import { Plane, Bus, ArrowRight, Calendar } from "lucide-react";
-import {
-  PrimaryCta,
-  SecondaryCta,
-  CTA_PRIMARY_LABEL,
-} from "@/components/conversion";
+import { PrimaryCta, SecondaryCta } from "@/components/conversion";
 import { useModal } from "@/lib/context/ModalContext";
 
 export function FeaturedDestinations({
@@ -30,10 +28,10 @@ export function FeaturedDestinations({
       <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div className="space-y-3">
           <h2 className="font-[family-name:var(--font-brand-heading)] text-3xl font-extrabold tracking-tight md:text-4xl text-[#0b4058] text-balance">
-            Próximas salidas desde Córdoba
+            Próximas salidas
           </h2>
           <p className="max-w-xl text-[#0b4058]/80 text-sm md:text-base leading-relaxed text-pretty">
-            Grupales confirmadas, con fecha. Si no está el destino que buscás, lo armamos a medida.
+            Salidas grupales con fecha. Si no está el destino que buscás, lo armamos a medida.
           </p>
         </div>
         <Link
@@ -47,15 +45,17 @@ export function FeaturedDestinations({
 
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {featured.map((dest) => {
-          const nextDep = getNearestActiveDeparture(dest) ?? null;
-          const hasActiveDeps = nextDep !== null;
-          const transportType = nextDep?.transport ?? "mix";
-          const listed = getListedPrice(dest);
+          const view = readHomeDeparture(dest);
+          const hasActiveDeps = view !== null;
+          const transportType = view?.transport ?? "mix";
+          const shownPrice = view?.price ?? { kind: "ask" as const };
+          const priceParts = formatShownPriceParts(shownPrice);
+          const originText = view ? formatCardOriginLine(view.origin) : null;
 
           return (
             <article
               key={dest.slug}
-              className="group flex flex-col overflow-hidden rounded-2xl border border-[#0b4058]/10 bg-white shadow-sm shadow-[#0b4058]/5 transition-colors duration-200 hover:border-[#0b4058]/25"
+              className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-[#0b4058]/10 bg-white shadow-sm shadow-[#0b4058]/5 transition-colors duration-200 hover:border-[#0b4058]/25"
             >
               <Link
                 href={`/destinos/${dest.slug}`}
@@ -77,13 +77,13 @@ export function FeaturedDestinations({
                   {dest.region === "nacional" ? "Nacional" : "Internacional"}
                 </div>
 
-                {nextDep ? (
+                {view ? (
                   <div
                     aria-hidden
                     className="absolute bottom-3 right-3 bg-[#dae553] text-[#0b4058] px-2.5 py-1 rounded-full text-[10px] font-black shadow-sm flex items-center gap-1"
                   >
                     <Calendar className="h-3 w-3 shrink-0" aria-hidden />
-                    <span>Salida: {nextDep.displayDate}</span>
+                    <span>Salida: {view.displayDate}</span>
                   </div>
                 ) : (
                   <div
@@ -106,45 +106,54 @@ export function FeaturedDestinations({
                     </Link>
                   </h3>
 
-                  <div className="flex items-center gap-1.5 text-xs text-[#0b4058]/70">
+                  <div className="flex flex-wrap items-center gap-1.5 text-xs text-[#0b4058]/70">
                     {transportType === "aereo" || transportType === "mix" ? (
                       <Plane className="h-3.5 w-3.5 text-sky-600 shrink-0" aria-hidden />
                     ) : (
                       <Bus className="h-3.5 w-3.5 text-emerald-600 shrink-0" aria-hidden />
                     )}
-                    <span className="font-semibold uppercase tracking-wider text-[10px] mr-1">
-                      {getTransportLabel(transportType)}
+                    <span className="font-semibold uppercase tracking-wider text-[10px]">
+                      {view?.origin === "bus" ? "Bus" : getTransportLabel(transportType)}
                     </span>
                     <span aria-hidden>·</span>
                     <span className="italic">
-                      {nextDep ? `${nextDep.nights} noches` : "Itinerario flexible"}
+                      {view ? `${view.nights} noches` : "Itinerario flexible"}
                     </span>
+                    {originText && view?.origin === "cordoba-or-ezeiza" ? (
+                      <>
+                        <span aria-hidden>·</span>
+                        <span className="text-[11px] text-[#0b4058]/70">{originText}</span>
+                      </>
+                    ) : null}
                   </div>
                 </div>
 
                 <div className="space-y-3 pt-3 border-t border-[#0b4058]/5">
-                  <div className="flex items-baseline justify-between gap-2">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-2 gap-y-1">
                     <span className="text-[10px] text-[#0b4058]/75 uppercase font-black tracking-wider">
                       Tarifa base
                     </span>
-                    {listed ? (
-                      <div className="text-right">
+                    <div className="min-w-0 text-right">
+                      {priceParts.kind === "amount" ? (
                         <div>
-                          <span className="text-[10px] font-bold text-[#006183] mr-1">Desde</span>
-                          <span className="text-lg font-extrabold text-[#0b4058] tabular-nums">
-                            {listed.currency === "USD" ? "USD" : "$"}
-                            {listed.amount.toLocaleString("es-AR")}
-                          </span>
+                          <div className="flex flex-wrap items-baseline justify-end gap-x-1.5">
+                            <span className="text-xs font-bold text-[#006183]">
+                              {priceParts.prefix}
+                            </span>
+                            <span className="whitespace-nowrap tabular-nums text-lg font-extrabold text-[#0b4058]">
+                              {priceParts.amount}
+                            </span>
+                          </div>
+                          {dest.priceNote ? (
+                            <p className="mt-0.5 text-[10px] text-[#0b4058]/75 text-pretty">{dest.priceNote}</p>
+                          ) : null}
                         </div>
-                        {dest.priceNote && (
-                          <p className="text-[10px] text-[#0b4058]/75 mt-0.5">{dest.priceNote}</p>
-                        )}
-                      </div>
-                    ) : hasExpiredListedPrice(dest) ? (
-                      <span className="text-xs font-bold text-[#0b4058]/80">Consultá precio actualizado</span>
-                    ) : (
-                      <span className="text-xs font-bold text-[#0b4058]/80">Consultar precio</span>
-                    )}
+                      ) : (
+                        <span className="text-xs font-bold text-[#0b4058]/80">
+                          {priceParts.label}
+                        </span>
+                      )}
+                    </div>
                   </div>
 
                   <Link
@@ -155,14 +164,19 @@ export function FeaturedDestinations({
                     <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
                   </Link>
 
-                  <button
-                    type="button"
-                    onClick={() => openModal(dest.name)}
-                    aria-label={`Armar viaje: ${dest.name} — abre el cotizador`}
-                    className="font-[family-name:var(--font-elaine)] flex w-full items-center justify-center rounded-xl border-2 border-[#f7a92a] bg-transparent px-3 py-2.5 text-xs font-bold text-[#0b4058] transition-all duration-200 hover:bg-gradient-to-r hover:from-[#f7a92a] hover:to-[#e6b451] active:scale-[0.96] cursor-pointer"
-                  >
-                    {CTA_PRIMARY_LABEL}
-                  </button>
+                  {view && dest.name.trim() ? (
+                    <SecondaryCta
+                      size="full"
+                      label="Consultar esta salida"
+                      href={waHref({
+                        id: "home-card",
+                        destinationName: dest.name,
+                        displayDate: view.displayDate,
+                        priceClause: formatHomeCardPriceClause(shownPrice),
+                      })}
+                      aria-label={`Consultar esta salida a ${dest.name} por WhatsApp`}
+                    />
+                  ) : null}
                 </div>
               </div>
             </article>
@@ -176,7 +190,7 @@ export function FeaturedDestinations({
             ¿Buscás otro destino?
           </h3>
           <p className="text-sm leading-relaxed text-[#0b4058]/75 text-pretty">
-            Tenemos salidas confirmadas adicionales y armamos itinerarios a medida nacionales e internacionales con la financiación que necesitás. También podés consultarnos por cualquier otro destino.
+            Tenemos más salidas y armamos itinerarios a medida, nacionales e internacionales. También podés consultarnos por cualquier otro destino.
           </p>
         </div>
         <div className="mt-6 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
@@ -186,6 +200,7 @@ export function FeaturedDestinations({
             className="font-bold"
           />
           <SecondaryCta
+            href={waHref({ id: "home-grid" })}
             aria-label="Escribinos por WhatsApp — abre el chat directo"
             className="font-bold"
           />

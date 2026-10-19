@@ -2,7 +2,8 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { X, ChevronRight, ChevronLeft, Calendar, Users, Plane, Info, Clock } from "lucide-react";
 import { useModal } from "@/lib/context/ModalContext";
-import { WHATSAPP_QUOTE_BYPASS, whatsappLink, AGENCY_PHONE } from "@/lib/constants";
+import { whatsappLink, AGENCY_PHONE } from "@/lib/constants";
+import { waHref } from "@/lib/wa-recipe";
 import { buildQuoteWhatsAppMessage } from "@/lib/quote-message";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { CTA_MODAL_SUBMIT_LABEL, CTA_SECONDARY_LABEL } from "@/components/conversion";
@@ -460,7 +461,7 @@ export function QuoteModal() {
           {/* Bypass Direct WhatsApp Link */}
           <div className="mt-4 text-center">
             <a
-              href={WHATSAPP_QUOTE_BYPASS}
+              href={waHref({ id: "quote-bypass" })}
               target="_blank"
               rel="noreferrer"
               onClick={closeModal}

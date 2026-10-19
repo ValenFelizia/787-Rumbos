@@ -2,6 +2,7 @@
 
 import { PrimaryCta, SecondaryCta, CTA_SLA_TEXT } from "@/components/conversion";
 import { useModal } from "@/lib/context/ModalContext";
+import { waHref } from "@/lib/wa-recipe";
 
 /** CTAs del hero — isla cliente; la imagen LCP vive en el RSC padre. */
 export function HeroActions() {
@@ -23,6 +24,7 @@ export function HeroActions() {
             aria-label="Armar viaje — abre el cotizador personalizado"
           />
           <SecondaryCta
+            href={waHref({ id: "home-hero" })}
             className="shadow-md shadow-black/10"
             aria-label="Escribinos por WhatsApp — abre el chat directo"
           />

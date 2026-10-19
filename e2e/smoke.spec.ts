@@ -64,12 +64,23 @@ test.describe("rutas críticas", () => {
     await page.goto("/");
     const section = page.locator("#destinos");
     await expect(
-      section.getByRole("heading", { name: "Próximas salidas desde Córdoba" }),
+      section.getByRole("heading", { name: "Próximas salidas", exact: true }),
     ).toBeVisible();
     await expect(
       section.getByRole("heading", { name: "Porto de Galinhas", level: 3 }),
     ).toBeVisible();
     await expect(section.getByRole("link", { name: "Ver detalles y salidas" })).toHaveCount(4);
+    const consult = section.getByRole("link", { name: /Consultar esta salida/ });
+    await expect(consult).toHaveCount(4);
+    const hrefs = await consult.evaluateAll((links) =>
+      links.map((link) => link.getAttribute("href") ?? ""),
+    );
+    for (const href of hrefs) {
+      expect(href).toContain("api.whatsapp.com");
+      const text = new URL(href).searchParams.get("text") ?? "";
+      expect(text).toMatch(/\(Web - Inicio [^)]+\)$/);
+      expect(text).toContain("Hola, vi ");
+    }
   });
 
   test("salvador publica enero, morro y el solo aéreo", async ({ page }) => {
@@ -112,6 +123,41 @@ test.describe("rutas críticas", () => {
         })
         .first(),
     ).toBeVisible();
+    const heroWa = page
+      .locator("#hero")
+      .getByRole("link", { name: /escribinos por whatsapp/i })
+      .first();
+    await expect(heroWa).toHaveAttribute("href", /api\.whatsapp\.com/);
+    const heroText = decodeURIComponent(
+      new URL((await heroWa.getAttribute("href"))!).searchParams.get("text")!,
+    );
+    expect(heroText).toContain("(Web - Inicio)");
+    expect(heroText).not.toContain("Contacto Directo");
+
+    const gridWa = page
+      .locator("#destinos")
+      .getByRole("link", { name: /escribinos por whatsapp/i })
+      .first();
+    const gridText = decodeURIComponent(
+      new URL((await gridWa.getAttribute("href"))!).searchParams.get("text")!,
+    );
+    expect(gridText).toContain("(Web - Inicio grilla)");
+
+    const footerWa = page
+      .locator("footer")
+      .getByRole("link", { name: /whatsapp/i })
+      .first();
+    const footerText = decodeURIComponent(
+      new URL((await footerWa.getAttribute("href"))!).searchParams.get("text")!,
+    );
+    expect(footerText).toContain("(Web - Pie)");
+  });
+
+  test("cataratas inquire no se etiqueta Salida Confirmada", async ({ page }) => {
+    await page.goto("/destinos/cataratas-del-iguazu");
+    const salidas = page.locator("#salidas");
+    await expect(salidas.getByText("Consultar disponibilidad").first()).toBeVisible();
+    await expect(salidas.getByText("Salida Confirmada")).toHaveCount(0);
   });
 
   test("listado de destinos responde", async ({ page }) => {
@@ -198,6 +244,35 @@ test.describe("rutas críticas", () => {
     await expect(dialog.getByLabel(/a dónde querés viajar/i)).toHaveValue(
       destName!,
     );
+  });
+
+  test("el hub de Brasil pone el CTA bajo la intro", async ({ page }) => {
+    await page.goto("/destinos/brasil-desde-cordoba");
+    const cta = page.getByRole("link", { name: "Cotizar Brasil por WhatsApp" });
+    await expect(cta).toBeVisible();
+    await expect(cta).toHaveAttribute("href", /api\.whatsapp\.com/);
+    const intro = page.getByText(/Armamos paquetes a Brasil desde Córdoba/);
+    const how = page.getByRole("heading", { name: /cómo lo armamos/i });
+    const introBox = await intro.boundingBox();
+    const ctaBox = await cta.boundingBox();
+    const howBox = await how.boundingBox();
+    expect(introBox).toBeTruthy();
+    expect(ctaBox).toBeTruthy();
+    expect(howBox).toBeTruthy();
+    expect(ctaBox!.y).toBeGreaterThan(introBox!.y);
+    expect(ctaBox!.y).toBeLessThan(howBox!.y);
+  });
+
+  test("el hub de Caribe cierra con el CTA", async ({ page }) => {
+    await page.goto("/destinos/caribe-desde-cordoba");
+    const cta = page.getByRole("link", { name: "Cotizar Caribe por WhatsApp" });
+    const gridHeading = page.getByRole("heading", { name: /destinos en este catálogo/i });
+    await expect(cta).toBeVisible();
+    const ctaBox = await cta.boundingBox();
+    const gridBox = await gridHeading.boundingBox();
+    expect(ctaBox).toBeTruthy();
+    expect(gridBox).toBeTruthy();
+    expect(ctaBox!.y).toBeGreaterThan(gridBox!.y);
   });
 
   test("cards de cluster en destinos abren el hub SEO", async ({ page }) => {

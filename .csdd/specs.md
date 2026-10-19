@@ -114,10 +114,17 @@ CMS ni scraping solo para sostener esa sección.
   sitemap actualizado.
 - Los hubs de Brasil, Caribe, Argentina en bus y salidas grupales desde Córdoba
   están publicados y enlazados con el catálogo y las fichas de destino.
-- En la home, “Próximas salidas desde Córdoba” muestra cuatro destinos con
+- En la home, “Próximas salidas” muestra cuatro destinos con
   salidas vigentes. El orden es cantidad de fechas distintas consultables y, ante empate,
   la salida más próxima. Varios programas el mismo día cuentan como una fecha.
-  No hay una lista fija de slugs. Cada tarjeta muestra la salida más cercana (D-004).
+  No hay una lista fija de slugs. Cada tarjeta usa la salida más cercana (D-004)
+  para la fecha, el precio publicado de esa salida y el origen. Si esa salida no
+  tiene precio vigente, la tarjeta dice “Consultá precio”. El origen se imprime
+  solo cuando la nota de esa salida trae “Córdoba o Ezeiza”, o cuando el transporte
+  es bus o bus cama (“Bus”). Si no hay ese dato, la tarjeta no afirma ciudad.
+  El botón de la tarjeta es “Consultar esta salida” y abre WhatsApp con destino,
+  fecha, el precio mostrado y la marca `(Web - Inicio <nombre corto>)`.
+  El cotizador del hero se queda (D-008).
 - Los cupos confirmados de enero 2027 (Salvador, Morro de São Paulo, Praia do Forte
   e Imbassaí), fin de año 2026 (Salvador, Río y Punta Cana) y octubre 2026
   (Punta Cana y Bayahibe) están en el catálogo. En esos cupos la ciudad de salida
@@ -158,8 +165,12 @@ CMS ni scraping solo para sostener esa sección.
 - La home debe distinguir de forma consistente dos caminos de conversión: una
   acción primaria que abre el cotizador y una acción secundaria explícita para
   WhatsApp directo. Labels canónicos: primaria `Armar viaje`, secundaria
-  `Escribinos por WhatsApp`; en destinos destacados el detalle conserva su link
-  y `Armar viaje` abre el cotizador con preselección. El submit del cotizador
+  `Escribinos por WhatsApp`. En la grilla de la home, “Consultar esta salida”
+  abre WhatsApp de esa salida y “Ver detalles y salidas” sigue a la ficha.
+  En `/destinos`, `Armar viaje` abre el cotizador con preselección.
+  Los chats de hero, cierre de grilla, pie y ficha llevan marcas distintas:
+  `(Web - Inicio)`, `(Web - Inicio grilla)`, `(Web - Pie)` y
+  `(Web - Ficha <nombre corto>)`. El submit del cotizador
   es `Cotizar por WhatsApp` (sí termina en WA). La misma intención conserva el
   mismo nombre y cada CTA debe anticipar correctamente su resultado.
   El SLA visible junto a los CTAs de conversión es: “En horario de atención,

@@ -16,11 +16,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Instagram, MapPin, Send, ShieldCheck, Clock } from "lucide-react";
 import { TrackedWhatsAppLink } from "@/components/conversion";
-import {
-  AGENCY_PHONE,
-  WHATSAPP_LINK,
-  OFFICE_HOURS,
-} from "@/lib/constants";
+import { AGENCY_PHONE, OFFICE_HOURS } from "@/lib/constants";
+import { waHref } from "@/lib/wa-recipe";
 
 export function Footer() {
   return (
@@ -142,7 +139,7 @@ export function Footer() {
             </li>
             <li>
               <TrackedWhatsAppLink
-                href={WHATSAPP_LINK}
+                href={waHref({ id: "footer" })}
                 surface="footer"
                 target="_blank"
                 rel="noreferrer"

@@ -1,5 +1,5 @@
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
-import { destinationInquiryWhatsAppLink } from "@/lib/whatsapp-inquiry";
+import { waHref } from "@/lib/wa-recipe";
 
 type DestinationMobileStickyBarProps = {
   destinationName: string;
@@ -15,10 +15,10 @@ export function DestinationMobileStickyBar({
   destinationName,
   nextDepartureDisplayDate,
 }: DestinationMobileStickyBarProps) {
-  const href = destinationInquiryWhatsAppLink({
+  const href = waHref({
+    id: "ficha",
     destinationName,
-    departureDisplayDate: nextDepartureDisplayDate,
-    source: "detail",
+    displayDate: nextDepartureDisplayDate ?? null,
   });
 
   return (

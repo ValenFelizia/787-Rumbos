@@ -44,12 +44,6 @@ export const WHATSAPP_LINK = whatsappLink(
   "Hola 787 Rumbos! Quería hacer una consulta general... (Web - Contacto Directo)",
 );
 
-/** Cotizador (bypass o envío) → agencia */
-export const WHATSAPP_QUOTE_BYPASS = whatsappLink(
-  AGENCY_PHONE.whatsapp,
-  "Hola 787 Rumbos! Quería consultar directamente con un asesor... (Web - Cotizador Directo)",
-);
-
 /** Urgencias con viaje en curso — no usar en embudos de cotización */
 export const WHATSAPP_URGENT_LINK = whatsappLink(
   URGENT_PHONE.whatsapp,
@@ -67,14 +61,6 @@ export const WHATSAPP_FAQ_LINK = whatsappLink(
   AGENCY_PHONE.whatsapp,
   "Hola 787 Rumbos! Quería consultar por una duda del FAQ... (Web - FAQ)",
 );
-
-/** Destino destacado → agencia */
-export function whatsappDestino(destino: string): string {
-  return whatsappLink(
-    AGENCY_PHONE.whatsapp,
-    `Hola 787 Rumbos! Quiero consultar por un viaje a ${destino}. (Web - Destino Destacado)`,
-  );
-}
 
 /**
  * Ficha de Google Maps / Google Business Profile de 787 Rumbos

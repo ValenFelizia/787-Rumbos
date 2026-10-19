@@ -66,9 +66,17 @@ describe("toDestinationListing", () => {
     assert.equal(serialized.includes("optionalExcursions"), false);
     assert.equal(serialized.includes("travelTip"), false);
     assert.equal(serialized.includes("faq"), false);
-    assert.equal(serialized.includes("Salida especial"), false);
+    assert.equal(listing.departures[0].note, "Salida especial");
     assert.equal(serialized.includes("Todo incluido"), false);
     assert.equal(serialized.includes("priceIsFinal"), false);
+  });
+
+  it("copies a final fare and leaves a non-final flag out", () => {
+    const source = fullDestination();
+    source.departures[0].priceIsFinal = true;
+    const listing = toDestinationListing(source);
+    assert.equal(listing.departures[0].priceIsFinal, true);
+    assert.equal(listing.departures[0].note, "Salida especial");
   });
 
   it("omits description for home featured cards", () => {

@@ -289,25 +289,6 @@ export type ListedOffer = {
   priceValidUntil?: string;
 };
 
-/**
- * Precio publicado de una salida en la ficha (mismo criterio que el Offer JSON-LD).
- * Solo montos propios de la salida; sin heredar el base del destino.
- */
-export function getDeparturePublishedPrice(
-  dest: DestinationListing,
-  dep: DepartureListing,
-  today = getTodayLocal(),
-): ListedOffer | undefined {
-  if (dep.priceFrom == null) return undefined;
-  if (isDeparturePriceExpired(dest, dep, today)) return undefined;
-  const priceValidUntil = validityDay(applicableValidity(dep, dest));
-  return {
-    amount: dep.priceFrom,
-    currency: dep.currency ?? dest.currency,
-    ...(priceValidUntil ? { priceValidUntil } : {}),
-  };
-}
-
 function destinationBaseOffer(
   dest: DestinationListing,
   today: Date,
@@ -324,10 +305,50 @@ function destinationBaseOffer(
 }
 
 /**
+ * Precio publicado de una salida (ficha, home card, JSON-LD por fila).
+ * Own amount if present and not expired.
+ * Else, when no active hotel departure publishes its own price, inherit dest.priceFrom
+ * (Porto / Cataratas shape). Never dilute an explicit sibling min with a stale base (Río).
+ * Solo aéreo without its own fare does not inherit the hotel package base.
+ */
+function departureOffer(
+  dest: DestinationListing,
+  dep: DepartureListing,
+  today: Date,
+  respectExpiry: boolean,
+): ListedOffer | undefined {
+  if (dep.priceFrom != null) {
+    const validity = applicableValidity(dep, dest);
+    if (respectExpiry && isPriceExpired(validity, today)) return undefined;
+    const priceValidUntil = validityDay(validity);
+    return {
+      amount: dep.priceFrom,
+      currency: dep.currency ?? dest.currency,
+      ...(priceValidUntil ? { priceValidUntil } : {}),
+    };
+  }
+
+  if (dep.stayLabel) return undefined;
+
+  const hotelTrips = getActiveUpcomingDepartures(dest, today).filter((row) => !row.stayLabel);
+  if (hotelTrips.some((row) => row.priceFrom != null)) return undefined;
+
+  return destinationBaseOffer(dest, today, respectExpiry);
+}
+
+/** Precio publicado de una salida en la ficha (mismo criterio que el Offer JSON-LD). */
+export function getDeparturePublishedPrice(
+  dest: DestinationListing,
+  dep: DepartureListing,
+  today = getTodayLocal(),
+): ListedOffer | undefined {
+  return departureOffer(dest, dep, today, true);
+}
+
+/**
  * Tarifa “desde” publicada.
- * Si hay salidas hotel con precio propio, usa solo esos montos vigentes (no diluye
- * con el base del destino en hermanas sin precio — evita el 980 vs 1719 de Río).
- * Si ninguna salida trae precio propio, hereda el base del destino.
+ * Min of per-departure offers (same resolver as ficha rows / home card).
+ * Empty hotel list falls back to destination base.
  */
 function listedOffer(
   dest: DestinationListing,
@@ -335,26 +356,17 @@ function listedOffer(
   respectExpiry: boolean,
 ): ListedOffer | undefined {
   const hotelTrips = getActiveUpcomingDepartures(dest, today).filter((dep) => !dep.stayLabel);
-  const anyPricedDeparture = hotelTrips.some((dep) => dep.priceFrom != null);
-
-  if (anyPricedDeparture) {
-    const explicit: ListedOffer[] = [];
-    for (const dep of hotelTrips) {
-      if (dep.priceFrom == null) continue;
-      const validity = applicableValidity(dep, dest);
-      if (respectExpiry && isPriceExpired(validity, today)) continue;
-      const priceValidUntil = validityDay(validity);
-      explicit.push({
-        amount: dep.priceFrom,
-        currency: dep.currency ?? dest.currency,
-        ...(priceValidUntil ? { priceValidUntil } : {}),
-      });
-    }
-    if (explicit.length === 0) return undefined;
-    return explicit.reduce((best, offer) => (offer.amount < best.amount ? offer : best));
+  if (hotelTrips.length === 0) {
+    return destinationBaseOffer(dest, today, respectExpiry);
   }
 
-  return destinationBaseOffer(dest, today, respectExpiry);
+  const offers: ListedOffer[] = [];
+  for (const dep of hotelTrips) {
+    const offer = departureOffer(dest, dep, today, respectExpiry);
+    if (offer) offers.push(offer);
+  }
+  if (offers.length === 0) return undefined;
+  return offers.reduce((best, offer) => (offer.amount < best.amount ? offer : best));
 }
 
 /** Oferta “desde” vigente (monto + currency + vigencia) para UI y JSON-LD. */
@@ -547,4 +559,181 @@ export function groupDestinationsForSort<T extends DestinationListing>(
     groups.push({ items: unpriced });
   }
   return groups;
+}
+
+/** City claim the home card may print. omit prints nothing. */
+export type CardOrigin = "cordoba-or-ezeiza" | "bus" | "omit";
+
+export type ShownPrice =
+  | {
+      kind: "amount";
+      currency: "ARS" | "USD";
+      amount: number;
+      quotedAs: "desde" | "final";
+    }
+  | { kind: "ask" };
+
+export type HomeDepartureView = {
+  displayDate: string;
+  transport: TransportType;
+  nights: number;
+  origin: CardOrigin;
+  price: ShownPrice;
+};
+
+export type DepartureBadge =
+  | { kind: "past"; label: "Viaje Realizado" }
+  | { kind: "sold-out"; label: "Cupos Completos" }
+  | { kind: "soon"; label: "Consultar Lugares" }
+  | { kind: "few-seats"; label: "Últimos Cupos" }
+  | { kind: "confirmed"; label: "Salida Confirmada" }
+  | { kind: "inquire"; label: "Consultar disponibilidad" };
+
+const MS_PER_DAY = 86_400_000;
+
+/**
+ * Note phrase wins over transport.
+ * Córdoba alone is not a claim.
+ */
+export function getCardOrigin(dep: {
+  transport: TransportType;
+  note?: string;
+}): CardOrigin {
+  if (dep.note && /Córdoba o Ezeiza/i.test(dep.note)) return "cordoba-or-ezeiza";
+  if (dep.transport === "bus" || dep.transport === "bus-cama") return "bus";
+  return "omit";
+}
+
+export function formatCardOriginLine(
+  origin: CardOrigin,
+): "Córdoba o Ezeiza" | "Bus" | null {
+  switch (origin) {
+    case "cordoba-or-ezeiza":
+      return "Córdoba o Ezeiza";
+    case "bus":
+      return "Bus";
+    case "omit":
+      return null;
+  }
+}
+
+/** Currency + amount only. Keep this token unbreakable in UI (`whitespace-nowrap`). */
+export function formatShownMoney(currency: "ARS" | "USD", amount: number): string {
+  const digits = amount.toLocaleString("es-AR");
+  return currency === "USD" ? `USD ${digits}` : `$${digits}`;
+}
+
+/**
+ * Same-date tie-break for the home card only: hotel before solo aéreo, then cheaper.
+ * Leaves `getNearestActiveDeparture` unchanged for hubs and sticky bars.
+ */
+function pickHomeCardDeparture(
+  dest: DestinationListing,
+  today: Date,
+): DepartureListing | undefined {
+  const active = getActiveUpcomingDepartures(dest, today);
+  if (active.length === 0) return undefined;
+  const nearestDate = active.reduce(
+    (min, dep) => (dep.date < min ? dep.date : min),
+    active[0].date,
+  );
+  return active
+    .filter((dep) => dep.date === nearestDate)
+    .slice()
+    .sort((a, b) => {
+      if (Boolean(a.stayLabel) !== Boolean(b.stayLabel)) return a.stayLabel ? 1 : -1;
+      return (a.priceFrom ?? Number.POSITIVE_INFINITY) - (b.priceFrom ?? Number.POSITIVE_INFINITY);
+    })[0];
+}
+
+/** Home card view of the nearest departure. Price uses getDeparturePublishedPrice. */
+export function readHomeDeparture(
+  dest: DestinationListing,
+  today = getTodayLocal(),
+): HomeDepartureView | null {
+  const dep = pickHomeCardDeparture(dest, today);
+  if (!dep) return null;
+  const published = getDeparturePublishedPrice(dest, dep, today);
+  const price: ShownPrice = published
+    ? {
+        kind: "amount",
+        currency: published.currency,
+        amount: published.amount,
+        quotedAs: dep.priceIsFinal ? "final" : "desde",
+      }
+    : { kind: "ask" };
+  return {
+    displayDate: dep.displayDate,
+    transport: dep.transport,
+    nights: dep.nights,
+    origin: getCardOrigin(dep),
+    price,
+  };
+}
+
+/** Card string. ask is Consultá precio. USD has a space. $ does not. */
+export function formatShownPrice(price: ShownPrice): string {
+  if (price.kind === "ask") return "Consultá precio";
+  const prefix = price.quotedAs === "final" ? "Final" : "Desde";
+  return `${prefix} ${formatShownMoney(price.currency, price.amount)}`;
+}
+
+export function formatHomeCardPriceClause(price: ShownPrice): string {
+  if (price.kind === "ask") return "precio a consultar";
+  const prefix = price.quotedAs === "final" ? "final" : "desde";
+  return `${prefix} ${formatShownMoney(price.currency, price.amount)}`;
+}
+
+export type FormattedShownPriceParts =
+  | {
+      kind: "amount";
+      prefix: string;
+      amount: string;
+    }
+  | {
+      kind: "ask";
+      label: "Consultá precio";
+    };
+
+/**
+ * Partes estructuradas del precio para tarjetas donde el calificador
+ * ('desde USD' / 'desde') se maqueta con jerarquía visual distinta del importe.
+ */
+export function formatShownPriceParts(
+  price?: ShownPrice | null,
+): FormattedShownPriceParts {
+  if (!price || price.kind === "ask") {
+    return { kind: "ask", label: "Consultá precio" };
+  }
+  const prefixWord = price.quotedAs === "final" ? "final" : "desde";
+  const isUsd = price.currency === "USD";
+  return {
+    kind: "amount",
+    prefix: isUsd ? `${prefixWord} USD` : prefixWord,
+    amount: isUsd
+      ? price.amount.toLocaleString("es-AR")
+      : `$${price.amount.toLocaleString("es-AR")}`,
+  };
+}
+
+/**
+ * First match wins. today is already midnight.
+ * A status outside the known set is inquire, never Salida Confirmada.
+ */
+export function getDepartureBadge(
+  dep: { date: string; status: string },
+  today = getTodayLocal(),
+): DepartureBadge {
+  const depDate = new Date(`${dep.date}T00:00:00`);
+  if (depDate < today) return { kind: "past", label: "Viaje Realizado" };
+  if (dep.status === "sold-out") return { kind: "sold-out", label: "Cupos Completos" };
+  const diffDays = Math.ceil((depDate.getTime() - today.getTime()) / MS_PER_DAY);
+  if (diffDays <= 3) return { kind: "soon", label: "Consultar Lugares" };
+  if (dep.status === "few-seats") return { kind: "few-seats", label: "Últimos Cupos" };
+  if (dep.status === "confirmed") return { kind: "confirmed", label: "Salida Confirmada" };
+  return { kind: "inquire", label: "Consultar disponibilidad" };
+}
+
+export function departureBadgeSelectable(badge: DepartureBadge): boolean {
+  return badge.kind !== "past" && badge.kind !== "sold-out";
 }
