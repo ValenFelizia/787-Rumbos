@@ -435,9 +435,12 @@ export default async function DestinoDetailPage({ params }: Props) {
                                   <span>·</span>
                                   {publishedPrice ? (
                                     <span className="font-bold text-[#0b4058] tabular-nums">
-                                      {dep.priceIsFinal ? "Final" : "Desde"}{" "}
-                                      {publishedPrice.currency === "USD" ? "USD" : "$"}
-                                      {publishedPrice.amount.toLocaleString("es-AR")}
+                                      {formatShownPrice({
+                                        kind: "amount",
+                                        currency: publishedPrice.currency,
+                                        amount: publishedPrice.amount,
+                                        quotedAs: dep.priceIsFinal ? "final" : "desde",
+                                      })}
                                     </span>
                                   ) : (
                                     <span className="font-bold text-[#0b4058]">
