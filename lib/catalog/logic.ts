@@ -574,6 +574,7 @@ export type ShownPrice =
   | { kind: "ask" };
 
 export type HomeDepartureView = {
+  dateIso: string;
   displayDate: string;
   transport: TransportType;
   nights: number;
@@ -623,10 +624,15 @@ export function formatShownMoney(currency: "ARS" | "USD", amount: number): strin
   return currency === "USD" ? `USD ${digits}` : `$${digits}`;
 }
 
-/**
- * Same-date tie-break for the home card only: hotel before solo aéreo, then cheaper.
- * Leaves `getNearestActiveDeparture` unchanged for hubs and sticky bars.
- */
+/** Hotel package before solo aéreo (`stayLabel`), then lower raw `priceFrom`. */
+function compareHotelBeforeSoloAir(
+  a: DepartureListing,
+  b: DepartureListing,
+): number {
+  if (Boolean(a.stayLabel) !== Boolean(b.stayLabel)) return a.stayLabel ? 1 : -1;
+  return (a.priceFrom ?? Number.POSITIVE_INFINITY) - (b.priceFrom ?? Number.POSITIVE_INFINITY);
+}
+
 function pickHomeCardDeparture(
   dest: DestinationListing,
   today: Date,
@@ -640,10 +646,7 @@ function pickHomeCardDeparture(
   return active
     .filter((dep) => dep.date === nearestDate)
     .slice()
-    .sort((a, b) => {
-      if (Boolean(a.stayLabel) !== Boolean(b.stayLabel)) return a.stayLabel ? 1 : -1;
-      return (a.priceFrom ?? Number.POSITIVE_INFINITY) - (b.priceFrom ?? Number.POSITIVE_INFINITY);
-    })[0];
+    .sort(compareHotelBeforeSoloAir)[0];
 }
 
 /** Home card view of the nearest departure. Price uses getDeparturePublishedPrice. */
@@ -663,6 +666,7 @@ export function readHomeDeparture(
       }
     : { kind: "ask" };
   return {
+    dateIso: dep.date,
     displayDate: dep.displayDate,
     transport: dep.transport,
     nights: dep.nights,
