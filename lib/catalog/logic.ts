@@ -574,6 +574,7 @@ export type ShownPrice =
   | { kind: "ask" };
 
 export type HomeDepartureView = {
+  date: string; // YYYY-MM-DD of the quoted departure
   displayDate: string;
   transport: TransportType;
   nights: number;
@@ -624,8 +625,9 @@ export function formatShownMoney(currency: "ARS" | "USD", amount: number): strin
 }
 
 /**
- * Same-date tie-break for the home card only: hotel before solo aéreo, then cheaper.
- * Leaves `getNearestActiveDeparture` unchanged for hubs and sticky bars.
+ * Same-date tie-break for the departure `readHomeDeparture` quotes:
+ * hotel before solo aéreo, then cheaper raw `priceFrom`.
+ * Sticky bars and hub badges stay on `getNearestActiveDeparture`.
  */
 function pickHomeCardDeparture(
   dest: DestinationListing,
@@ -663,6 +665,7 @@ export function readHomeDeparture(
       }
     : { kind: "ask" };
   return {
+    date: dep.date,
     displayDate: dep.displayDate,
     transport: dep.transport,
     nights: dep.nights,
