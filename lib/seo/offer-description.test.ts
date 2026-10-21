@@ -14,13 +14,13 @@ import {
 const TODAY = new Date(2026, 9, 21);
 
 const PORTO =
-  "Paquete a Porto de Galinhas, salida 8 de Enero, desde USD 1.670. Paquete con aéreo, hotel y traslados.";
+  "Porto de Galinhas: salida 8 de enero, desde USD 1.670 por persona. Aéreo, hotel y traslados incluidos. Consultanos por WhatsApp.";
 const RIO =
-  "Paquete a Río de Janeiro, salida 30 de Diciembre, desde USD 1.719. Paquete con aéreo, hotel y traslados.";
+  "Río de Janeiro: salida 30 de diciembre, desde USD 1.719 por persona. Aéreo, hotel y traslados incluidos. Consultanos por WhatsApp.";
 const CATARATAS =
-  "Paquete a Cataratas del Iguazú, salida 18 de Noviembre, desde $620.000. Paquete con hotel y traslados.";
+  "Cataratas del Iguazú: salida 18 de noviembre, desde $620.000 por persona. Hotel y traslados incluidos. Consultanos por WhatsApp.";
 const BRASIL =
-  "Paquetes a Brasil: Río, Porto, Camboriú. Próxima salida 26 de Diciembre, desde USD 1.545. Paquete con aéreo, hotel y traslados.";
+  "Paquetes a Brasil: Río, Porto de Galinhas, Camboriú y Salvador. Próxima salida: Salvador, 26 de diciembre, desde USD 1.545. Aéreo, hotel y traslados.";
 
 function departure(overrides: Partial<DepartureListing> = {}): DepartureListing {
   return {
@@ -71,13 +71,20 @@ describe("describeDestinationListing", () => {
     for (const text of [portoText, rioText, cataratasText]) {
       assert.ok(text.length >= 100 && text.length <= META_DESCRIPTION_MAX);
       assert.equal(META_DESCRIPTION_MAX, 155);
-      assert.match(text, /^Paquete a /);
+      assert.match(text, /: salida /);
+      assert.match(text, / de (enero|noviembre|diciembre)/);
+      assert.doesNotMatch(text, / de (Enero|Noviembre|Diciembre)/);
+      assert.doesNotMatch(text, /Paquete a |Paquete con/);
       assert.doesNotMatch(text, /desde córdoba/i);
       assert.doesNotMatch(text, /ezeiza/i);
       assert.doesNotMatch(text, /atenci[oó]n humana/i);
       assert.doesNotMatch(text, /v[ií]a bariloche/i);
       assert.doesNotMatch(text, /andes/i);
     }
+    assert.match(portoText, /Aéreo, hotel y traslados incluidos/);
+    assert.match(rioText, /Aéreo, hotel y traslados incluidos/);
+    assert.match(cataratasText, /Hotel y traslados incluidos/);
+    assert.doesNotMatch(cataratasText, /[Aa]éreo/);
   });
 
   it("keeps a desde Córdoba title and copies one description to og and twitter", () => {
@@ -125,8 +132,10 @@ describe("describeDestinationListing", () => {
       }),
       TODAY,
     );
-    assert.equal(text, "Paquete a Río de Janeiro, salida 1 de Noviembre. Consultá precio. 7 noches con aéreo.");
-    assert.match(text, /^Paquete a /);
+    assert.equal(
+      text,
+      "Río de Janeiro: salida 1 de noviembre. Aéreo incluidos. Consultá el precio por WhatsApp.",
+    );
     assert.doesNotMatch(text, /1719|980/);
     assert.doesNotMatch(text, /desde córdoba/i);
   });
@@ -147,7 +156,10 @@ describe("describeDestinationListing", () => {
       }),
       TODAY,
     );
-    assert.equal(text, "Paquete a Cerca, salida 1 de Noviembre, desde USD 2.000. 7 noches con aéreo.");
+    assert.equal(
+      text,
+      "Cerca: salida 1 de noviembre, desde USD 2.000 por persona. Aéreo incluidos. Consultanos por WhatsApp.",
+    );
   });
 
   it("prints final for a closed fare", () => {
@@ -158,16 +170,19 @@ describe("describeDestinationListing", () => {
       }),
       TODAY,
     );
-    assert.equal(text, "Paquete a Cerrado, salida 1 de Noviembre, final USD 850. 7 noches con aéreo.");
+    assert.equal(
+      text,
+      "Cerrado: salida 1 de noviembre, final USD 850 por persona. Aéreo incluidos. Consultanos por WhatsApp.",
+    );
     assert.doesNotMatch(text, /desde/);
   });
 
-  it("asks for departures and a price when the listing has no departure", () => {
+  it("asks for a price when the listing has no departure", () => {
     const text = describeDestinationListing(
       listing({ name: "Camboriú", priceFrom: 599, departures: [] }),
       TODAY,
     );
-    assert.equal(text, "Paquete a Camboriú. Consultá salidas y precio.");
+    assert.equal(text, "Camboriú. Consultá el precio por WhatsApp.");
     assert.doesNotMatch(text, /599/);
   });
 
@@ -179,7 +194,10 @@ describe("describeDestinationListing", () => {
         }),
         TODAY,
       );
-      assert.equal(text, "Paquete a Playa, salida 1 de Noviembre. Consultá precio. 7 noches con aéreo.");
+      assert.equal(
+        text,
+        "Playa: salida 1 de noviembre. Aéreo incluidos. Consultá el precio por WhatsApp.",
+      );
       assert.doesNotMatch(text, /NaN|Infinity/);
     }
   });
@@ -201,8 +219,14 @@ describe("describeDestinationListing", () => {
       }),
       TODAY,
     );
-    assert.equal(bariloche, "Paquete a Mendoza, salida 1 de Noviembre, desde USD 100. 7 noches con aéreo.");
-    assert.equal(andes, "Paquete a Mendoza, salida 1 de Noviembre, desde USD 100. 7 noches con aéreo.");
+    assert.equal(
+      bariloche,
+      "Mendoza: salida 1 de noviembre, desde USD 100 por persona. Aéreo incluidos. Consultanos por WhatsApp.",
+    );
+    assert.equal(
+      andes,
+      "Mendoza: salida 1 de noviembre, desde USD 100 por persona. Aéreo incluidos. Consultanos por WhatsApp.",
+    );
     assert.doesNotMatch(andes, /desde córdoba|andes|ezeiza/i);
     assert.doesNotMatch(bariloche, /bariloche/i);
   });
@@ -221,7 +245,10 @@ describe("describeDestinationListing", () => {
       }),
       TODAY,
     );
-    assert.equal(text, "Paquete a Cancún, salida 1 de Noviembre, desde USD 100. 7 noches All Inclusive.");
+    assert.equal(
+      text,
+      "Cancún: salida 1 de noviembre, desde USD 100 por persona. 7 noches All Inclusive. Consultanos por WhatsApp.",
+    );
     assert.doesNotMatch(text, /bariloche/i);
   });
 
@@ -236,7 +263,7 @@ describe("describeDestinationListing", () => {
     );
     assert.equal(
       text,
-      "Paquete a Cancún, salida 1 de Noviembre, desde USD 1.850. 7 noches All Inclusive.",
+      "Cancún: salida 1 de noviembre, desde USD 1.850 por persona. 7 noches All Inclusive. Consultanos por WhatsApp.",
     );
     assert.doesNotMatch(text, /Paquete con|córdoba/i);
   });
@@ -264,7 +291,7 @@ describe("describeDestinationListing", () => {
     );
     assert.equal(
       ignored,
-      "Paquete a Salvador, salida 1 de Noviembre, desde USD 1.284. 7 noches con aéreo.",
+      "Salvador: salida 1 de noviembre, desde USD 1.284 por persona. Aéreo incluidos. Consultanos por WhatsApp.",
     );
     assert.doesNotMatch(ignored, /All Inclusive|final/);
 
@@ -293,7 +320,7 @@ describe("describeDestinationListing", () => {
     );
     assert.equal(
       quoted,
-      "Paquete a Salvador, salida 1 de Noviembre, desde USD 1.284. 7 noches All Inclusive.",
+      "Salvador: salida 1 de noviembre, desde USD 1.284 por persona. 7 noches All Inclusive. Consultanos por WhatsApp.",
     );
   });
 
@@ -316,9 +343,12 @@ describe("describeDestinationListing", () => {
     );
     assert.equal(
       partial,
-      "Paquete a Playa, salida 1 de Noviembre, desde USD 100. Paquete con aéreo y traslados.",
+      "Playa: salida 1 de noviembre, desde USD 100 por persona. Aéreo y traslados incluidos. Consultanos por WhatsApp.",
     );
-    assert.equal(nightsOnly, "Paquete a Termas, salida 1 de Noviembre, desde USD 100. 4 noches.");
+    assert.equal(
+      nightsOnly,
+      "Termas: salida 1 de noviembre, desde USD 100 por persona. 4 noches. Consultanos por WhatsApp.",
+    );
   });
 
   it("replaces a banned sentence instead of deleting the phrase", () => {
@@ -336,8 +366,8 @@ describe("describeDestinationListing", () => {
       }),
       TODAY,
     );
-    assert.equal(named, "Paquete a Este destino. Consultá salidas y precio.");
-    assert.equal(wholesaler, "Paquete a Este destino. Consultá salidas y precio.");
+    assert.equal(named, "Este destino.");
+    assert.equal(wholesaler, "Este destino.");
     assert.doesNotMatch(named, /desde córdoba|USD/i);
   });
 
@@ -355,11 +385,14 @@ describe("describeDestinationListing", () => {
       }),
       TODAY,
     );
-    assert.equal(text, "Paquete a Playa, salida 5 de Noviembre, desde USD 100. 7 noches con aéreo.");
+    assert.equal(
+      text,
+      "Playa: salida 5 de noviembre, desde USD 100 por persona. Aéreo incluidos. Consultanos por WhatsApp.",
+    );
     assert.doesNotMatch(text, /tac/i);
   });
 
-  it("drops the intent tail before it drops the price", () => {
+  it("drops the WhatsApp clause before it drops the price", () => {
     const name = playas(16);
     const text = describeDestinationListing(
       listing({
@@ -368,12 +401,15 @@ describe("describeDestinationListing", () => {
       }),
       TODAY,
     );
-    assert.equal(text, `Paquete a ${name}, salida 1 de Noviembre, desde USD 10.000.000.`);
-    assert.equal(text.includes("noches"), false);
+    assert.equal(
+      text,
+      `Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa: salida 1 de noviembre, desde USD 10.000.000 por persona.`,
+    );
+    assert.equal(text.includes("WhatsApp"), false);
     assert.ok(text.length <= META_DESCRIPTION_MAX);
   });
 
-  it("drops a long money token whole and keeps the date", () => {
+  it("drops money before it drops the date when the priced line still exceeds 155", () => {
     const name = playas(17);
     const text = describeDestinationListing(
       listing({
@@ -382,13 +418,16 @@ describe("describeDestinationListing", () => {
       }),
       TODAY,
     );
-    assert.equal(text, `Paquete a ${name}, salida 1 de Noviembre. Consultá precio.`);
+    assert.equal(
+      text,
+      "Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa: salida 1 de noviembre. Aéreo incluidos.",
+    );
     assert.equal(text.length <= META_DESCRIPTION_MAX, true);
     assert.equal(text.includes("USD 10.000.000"), false);
     assert.equal(text.includes("10.000.000"), false);
   });
 
-  it("drops the date when the dated sentence still exceeds 155", () => {
+  it("keeps the date when an unpriced middle still fits under 155", () => {
     const name = playas(18);
     const text = describeDestinationListing(
       listing({
@@ -397,15 +436,18 @@ describe("describeDestinationListing", () => {
       }),
       TODAY,
     );
-    assert.equal(text, `Paquete a ${name}. Consultá salidas y precio.`);
-    assert.equal(text.includes("Noviembre"), false);
+    assert.equal(
+      text,
+      "Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa: salida 1 de noviembre. Aéreo incluidos.",
+    );
+    assert.equal(text.includes("noviembre"), true);
     assert.equal(text.includes("USD"), false);
     assert.ok(text.length <= META_DESCRIPTION_MAX);
   });
 
   it("cuts on a word boundary with no ellipsis", () => {
     const name = playas(22);
-    const full = `Paquete a ${name}. Consultá salidas y precio.`;
+    const full = `${name}.`;
     const text = describeDestinationListing(
       listing({
         name,
@@ -415,14 +457,13 @@ describe("describeDestinationListing", () => {
     );
     assert.equal(
       text,
-      "Paquete a Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa. Consultá",
+      "Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa Playa.",
     );
     assert.equal(text.includes("..."), false);
     assert.equal(text.includes("…"), false);
     assert.equal(text.includes("USD"), false);
     assert.ok(text.length <= META_DESCRIPTION_MAX);
-    assert.equal(full.startsWith(text), true);
-    assert.match(full[text.length] ?? "", /\s/);
+    assert.equal(full, text);
   });
 
   it("leaves out a token that is itself longer than 155", () => {
@@ -440,7 +481,7 @@ describe("describeDestinationListing", () => {
 });
 
 describe("describeClusterListings", () => {
-  it("quotes the earliest priced beach and the first three cluster beaches", () => {
+  it("quotes the earliest priced beach, names that destination, and lists hub beaches", () => {
     const cluster = getClusterBySlug("brasil-desde-cordoba");
     assert.ok(cluster);
     const members = getClusterDestinations(cluster, destinationsData);
@@ -453,6 +494,8 @@ describe("describeClusterListings", () => {
       before,
     );
     assert.ok(text.length >= 120 && text.length <= META_DESCRIPTION_MAX);
+    assert.match(text, /Próxima salida: Salvador, 26 de diciembre/);
+    assert.match(text, /Río, Porto de Galinhas, Camboriú y Salvador/);
     assert.doesNotMatch(text, /f1|grand premio|fórmula|formula|são paulo|sao paulo/i);
     assert.doesNotMatch(text, /desde córdoba/i);
     assert.doesNotMatch(text, /atenci[oó]n humana/i);
@@ -516,7 +559,10 @@ describe("describeClusterListings", () => {
       ],
       TODAY,
     );
-    assert.equal(text, "Paquetes a Brasil: Río, Porto, Camboriú. Consultá salidas y precio.");
+    assert.equal(
+      text,
+      "Paquetes a Brasil: Río, Porto de Galinhas y Camboriú. Consultá salidas y precio.",
+    );
     assert.doesNotMatch(text, /f1|grand premio|fórmula|formula|são paulo|2770|599|USD|\$/i);
   });
 
@@ -552,7 +598,7 @@ describe("describeClusterListings", () => {
     );
     assert.equal(
       text,
-      "Paquetes a Brasil: Fe de Mar, Praia do Forte. Próxima salida 5 de Noviembre, desde USD 10. 7 noches con aéreo.",
+      "Paquetes a Brasil: Fe de Mar y Praia do Forte. Próxima salida: Fe de Mar, 5 de noviembre, desde USD 10. Aéreo.",
     );
   });
 
@@ -582,7 +628,7 @@ describe("describeClusterListings", () => {
     );
     assert.equal(
       text,
-      "Paquetes a Brasil: Temprano, Tarde. Próxima salida 1 de Diciembre, desde USD 500. 7 noches con aéreo.",
+      "Paquetes a Brasil: Temprano y Tarde. Próxima salida: Tarde, 1 de diciembre, desde USD 500. Aéreo.",
     );
   });
 
@@ -648,11 +694,11 @@ describe("describeClusterListings", () => {
     );
     assert.equal(
       sameCurrency,
-      "Paquetes a Brasil: Caro, Barato. Próxima salida 5 de Noviembre, desde USD 3.000. 7 noches con aéreo.",
+      "Paquetes a Brasil: Caro y Barato. Próxima salida: Caro, 5 de noviembre, desde USD 3.000. Aéreo.",
     );
     assert.equal(
       mixed,
-      "Paquetes a Brasil: Pesos, Dolares. Próxima salida 5 de Noviembre, desde $9.000.000. 7 noches con aéreo.",
+      "Paquetes a Brasil: Pesos y Dolares. Próxima salida: Pesos, 5 de noviembre, desde $9.000.000. Aéreo.",
     );
   });
 
@@ -683,7 +729,7 @@ describe("describeClusterListings", () => {
     );
     assert.equal(
       text,
-      "Paquetes: Cataratas, Río. Próxima salida 1 de Noviembre, desde $620.000. 7 noches con aéreo.",
+      "Paquetes: Cataratas y Río. Próxima salida: Cataratas, 1 de noviembre, desde $620.000. Aéreo.",
     );
     assert.doesNotMatch(text, /Argentina|Brasil/);
   });
@@ -703,11 +749,11 @@ describe("describeClusterListings", () => {
       ],
       TODAY,
     );
-    assert.equal(shared, "Paquetes a Brasil: Uno, Dos. Consultá salidas y precio.");
-    assert.equal(mixed, "Paquetes: Uno, Dos. Consultá salidas y precio.");
+    assert.equal(shared, "Paquetes a Brasil: Uno y Dos. Consultá salidas y precio.");
+    assert.equal(mixed, "Paquetes: Uno y Dos. Consultá salidas y precio.");
   });
 
-  it("drops the intent tail before it drops the hub price", () => {
+  it("shortens the beach list before it drops the hub price", () => {
     const beach = "B".repeat(22);
     const text = describeClusterListings(
       [
@@ -731,9 +777,9 @@ describe("describeClusterListings", () => {
     );
     assert.equal(
       text,
-      `Paquetes a Brasil: ${beach}, ${beach}, ${beach}. Próxima salida 1 de Noviembre, desde USD 100.`,
+      `Paquetes a Brasil: ${beach} y ${beach}. Próxima salida: ${beach}, 1 de noviembre, desde USD 100. Aéreo.`,
     );
-    assert.equal(text.includes("noches"), false);
+    assert.match(text, /Próxima salida: B{22},/);
     assert.ok(text.length <= META_DESCRIPTION_MAX);
   });
 });

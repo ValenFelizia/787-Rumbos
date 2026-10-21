@@ -18,21 +18,21 @@ export type OfferDescriptionInput = Omit<DestinationListing, "departures"> & {
 };
 
 const MONTHS = [
-  "Enero",
-  "Febrero",
-  "Marzo",
-  "Abril",
-  "Mayo",
-  "Junio",
-  "Julio",
-  "Agosto",
-  "Septiembre",
-  "Octubre",
-  "Noviembre",
-  "Diciembre",
+  "enero",
+  "febrero",
+  "marzo",
+  "abril",
+  "mayo",
+  "junio",
+  "julio",
+  "agosto",
+  "septiembre",
+  "octubre",
+  "noviembre",
+  "diciembre",
 ] as const;
 
-const DISPLAY_DATE = new RegExp(`^\\d{1,2} de (${MONTHS.join("|")})$`);
+const DISPLAY_DATE = new RegExp(`^(\\d{1,2}) de (${MONTHS.join("|")})$`, "i");
 
 const BANNED: readonly RegExp[] = [
   /desde córdoba/i,
@@ -42,6 +42,8 @@ const BANNED: readonly RegExp[] = [
 ];
 
 const CONSULT_CLAUSE = "Consultá salidas y precio.";
+const WHATSAPP_PRICED = "Consultanos por WhatsApp.";
+const WHATSAPP_UNPRICED = "Consultá el precio por WhatsApp.";
 const ALL_INCLUSIVE = /all[\s-]*inclusive/i;
 const AIR_WORD = /a[eé]reos?|vuelos?|charter/i;
 const HOTEL_WORD = /hotels?|alojamientos?/i;
@@ -63,18 +65,21 @@ type Quote =
 type Ficha = {
   name: string;
   quote: Quote;
-  tail: string;
+  middle: string;
+  whatsapp: string;
 };
 
 type Hub = {
   country?: string;
   beaches: readonly string[];
+  nextName: string;
   quote: Quote;
-  tail: string;
+  middle: string;
 };
 
 type PricedRow = {
   index: number;
+  name: string;
   quote: Extract<Quote, { kind: "priced" }>;
   view: HomeDepartureView;
 };
@@ -91,10 +96,13 @@ export function describeDestinationListing(
   today = getTodayLocal(),
 ): string {
   const view = readHomeDeparture(dest, today);
+  const quote = toQuote(view);
+  const middle = fichaMiddle(intentFacts(dest, view, today));
   return finishFicha({
     name: dest.name,
-    quote: toQuote(view),
-    tail: intentTail(intentFacts(dest, view, today)),
+    quote,
+    middle,
+    whatsapp: quote.kind === "priced" ? WHATSAPP_PRICED : WHATSAPP_UNPRICED,
   });
 }
 
@@ -106,11 +114,16 @@ export function describeClusterListings(
   const country = sharedCountry(pool);
   const winner = pickEarliestPriced(pricedRows(pool, today));
   const winnerDest = winner ? pool[winner.index] : undefined;
+  const nextName = winner ? hubPlaceLabel(winner.name) : "";
   return finishHub({
     ...(country ? { country } : {}),
-    beaches: beachLabels(pool),
+    beaches: beachList(pool, winner?.index ?? null),
+    nextName,
     quote: winner ? winner.quote : { kind: "none" },
-    tail: winner && winnerDest ? intentTail(intentFacts(winnerDest, winner.view, today)) : "",
+    middle:
+      winner && winnerDest
+        ? hubMiddle(intentFacts(winnerDest, winner.view, today))
+        : "",
   });
 }
 
@@ -159,35 +172,47 @@ function hotelPackageBeforeLowerPrice(
   return (a.priceFrom ?? Number.POSITIVE_INFINITY) - (b.priceFrom ?? Number.POSITIVE_INFINITY);
 }
 
-function intentTail(facts: IntentFacts): string {
+function evidencedNouns(facts: IntentFacts): string[] {
+  const airWord = facts.inclusionTexts.some((text) => AIR_WORD.test(text));
+  const hotel = facts.inclusionTexts.some((text) => HOTEL_WORD.test(text));
+  const transfer = facts.inclusionTexts.some((text) => TRANSFER_WORD.test(text));
+  const nouns: string[] = [];
+  if (airWord || facts.airTransport) nouns.push("aéreo");
+  if (hotel) nouns.push("hotel");
+  if (transfer) nouns.push("traslados");
+  return nouns;
+}
+
+function formatNounList(nouns: readonly string[]): string {
+  if (nouns.length === 0) return "";
+  const titled = nouns.map((noun, index) =>
+    index === 0 ? noun.charAt(0).toUpperCase() + noun.slice(1) : noun,
+  );
+  if (titled.length === 1) return titled[0] ?? "";
+  if (titled.length === 2) return `${titled[0]} y ${titled[1]}`;
+  return `${titled.slice(0, -1).join(", ")} y ${titled[titled.length - 1]}`;
+}
+
+function fichaMiddle(facts: IntentFacts): string {
   if (facts.nights && facts.texts.some((text) => ALL_INCLUSIVE.test(text))) {
     return `${facts.nights} noches All Inclusive.`;
   }
-  const packaged = evidencedPackageTail(facts);
-  if (packaged) return packaged;
+  const nouns = evidencedNouns(facts);
+  if (nouns.length > 0) return `${formatNounList(nouns)} incluidos.`;
   if (facts.nights && facts.airTransport) return `${facts.nights} noches con aéreo.`;
   if (facts.nights) return `${facts.nights} noches.`;
   return "";
 }
 
-function evidencedPackageTail(facts: IntentFacts): string {
-  const airWord = facts.inclusionTexts.some((text) => AIR_WORD.test(text));
-  const hotel = facts.inclusionTexts.some((text) => HOTEL_WORD.test(text));
-  const transfer = facts.inclusionTexts.some((text) => TRANSFER_WORD.test(text));
-  if (!airWord && !hotel && !transfer) return "";
-  const nouns: string[] = [];
-  if (airWord || facts.airTransport) nouns.push("aéreo");
-  if (hotel) nouns.push("hotel");
-  if (transfer) nouns.push("traslados");
-  return joinPackage(nouns);
-}
-
-function joinPackage(nouns: readonly string[]): string {
-  const last = nouns[nouns.length - 1];
-  if (!last) return "";
-  if (nouns.length === 1) return `Paquete con ${last}.`;
-  const lead = nouns.slice(0, -1).join(", ");
-  return `Paquete con ${lead} y ${last}.`;
+function hubMiddle(facts: IntentFacts): string {
+  if (facts.nights && facts.texts.some((text) => ALL_INCLUSIVE.test(text))) {
+    return `${facts.nights} noches All Inclusive.`;
+  }
+  const nouns = evidencedNouns(facts);
+  if (nouns.length > 0) return `${formatNounList(nouns)}.`;
+  if (facts.nights && facts.airTransport) return `${facts.nights} noches con aéreo.`;
+  if (facts.nights) return `${facts.nights} noches.`;
+  return "";
 }
 
 function normalizeWords(value: string): string {
@@ -199,22 +224,72 @@ function subjectName(name: string): string {
   return trimmed.length > 0 ? trimmed : "Este destino";
 }
 
-function beachLabel(name: string): string {
+function hubPlaceLabel(name: string): string {
   const trimmed = normalizeWords(name);
-  const head = /^(.*)\s+de\s+\S+$/i.exec(trimmed)?.[1]?.trim() ?? "";
-  return [...head].length >= 3 ? head : trimmed;
+  if (/^r[ií]o de janeiro$/i.test(trimmed)) return "Río";
+  if (/^salvador de bah[ií]a$/i.test(trimmed)) return "Salvador";
+  return trimmed;
 }
 
-function beachLabels(members: readonly OfferDescriptionInput[]): string[] {
-  return members
-    .slice(0, 3)
-    .map((member) => beachLabel(member.name))
+function joinList(items: readonly string[]): string {
+  if (items.length === 0) return "";
+  if (items.length === 1) return items[0] ?? "";
+  if (items.length === 2) return `${items[0]} y ${items[1]}`;
+  return `${items.slice(0, -1).join(", ")} y ${items[items.length - 1]}`;
+}
+
+/** Up to four non-event members in cluster order; always includes the quoted destination. */
+function beachList(
+  members: readonly OfferDescriptionInput[],
+  winnerIndex: number | null,
+): string[] {
+  if (members.length === 0) return [];
+  const limit = Math.min(4, members.length);
+  const indices: number[] = [];
+  for (let index = 0; index < members.length && indices.length < limit; index++) {
+    indices.push(index);
+  }
+  if (
+    winnerIndex != null &&
+    winnerIndex >= 0 &&
+    winnerIndex < members.length &&
+    !indices.includes(winnerIndex)
+  ) {
+    indices[indices.length - 1] = winnerIndex;
+    indices.sort((a, b) => a - b);
+  }
+  return indices
+    .map((index) => members[index])
+    .filter((member): member is OfferDescriptionInput => Boolean(member))
+    .map((member) => hubPlaceLabel(member.name))
     .filter((label) => label.length > 0);
+}
+
+function shortenBeaches(
+  beaches: readonly string[],
+  nextName: string,
+): readonly (readonly string[])[] {
+  const variants: string[][] = [];
+  for (let size = beaches.length; size >= 1; size--) {
+    let slice = beaches.slice(0, size);
+    if (nextName && !slice.includes(nextName)) {
+      slice = [...slice.slice(0, Math.max(0, size - 1)), nextName];
+    }
+    variants.push(slice);
+  }
+  if (nextName) variants.push([nextName]);
+  variants.push([]);
+  return variants;
 }
 
 function labelFor(dateIso: string, displayDate: string): string | undefined {
   const shown = displayDate.trim();
-  if (DISPLAY_DATE.test(shown)) return shown;
+  const matched = DISPLAY_DATE.exec(shown);
+  if (matched) {
+    const day = matched[1];
+    const month = matched[2]?.toLowerCase();
+    if (day && month) return `${Number(day)} de ${month}`;
+  }
   const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateIso);
   if (!match) return undefined;
   const month = Number(match[2]);
@@ -248,42 +323,58 @@ function isBanned(text: string): boolean {
 }
 
 function renderFicha(sentence: Ficha): string {
-  let text: string;
+  const parts: string[] = [];
   switch (sentence.quote.kind) {
     case "priced": {
       const money = formatShownMoney(sentence.quote.money.currency, sentence.quote.money.amount);
-      text = `Paquete a ${sentence.name}, salida ${sentence.quote.dateLabel}, ${sentence.quote.money.quotedAs} ${money}.`;
+      parts.push(
+        `${sentence.name}: salida ${sentence.quote.dateLabel}, ${sentence.quote.money.quotedAs} ${money} por persona.`,
+      );
       break;
     }
     case "unpriced":
-      text = `Paquete a ${sentence.name}, salida ${sentence.quote.dateLabel}. Consultá precio.`;
+      parts.push(`${sentence.name}: salida ${sentence.quote.dateLabel}.`);
       break;
     case "none":
-      text = `Paquete a ${sentence.name}. Consultá salidas y precio.`;
+      parts.push(`${sentence.name}.`);
       break;
   }
-  return sentence.tail ? `${text} ${sentence.tail}` : text;
+  if (sentence.middle) parts.push(sentence.middle);
+  if (sentence.whatsapp) parts.push(sentence.whatsapp);
+  return parts.join(" ");
 }
 
 function fichaTexts(sentence: Ficha): string[] {
-  const texts: string[] = [];
-  if (sentence.tail) texts.push(renderFicha(sentence));
-  const bare: Ficha = { ...sentence, tail: "" };
-  texts.push(renderFicha(bare));
+  const texts: string[] = [renderFicha(sentence)];
+  if (sentence.whatsapp) {
+    texts.push(renderFicha({ ...sentence, whatsapp: "" }));
+  }
+  if (sentence.middle) {
+    texts.push(renderFicha({ ...sentence, middle: "", whatsapp: "" }));
+  }
   if (sentence.quote.kind === "priced") {
     texts.push(
       renderFicha({
-        ...bare,
+        name: sentence.name,
         quote: {
           kind: "unpriced",
           dateIso: sentence.quote.dateIso,
           dateLabel: sentence.quote.dateLabel,
         },
+        middle: sentence.middle,
+        whatsapp: "",
       }),
     );
   }
   if (sentence.quote.kind !== "none") {
-    texts.push(renderFicha({ ...bare, quote: { kind: "none" } }));
+    texts.push(
+      renderFicha({
+        name: sentence.name,
+        quote: { kind: "none" },
+        middle: "",
+        whatsapp: "",
+      }),
+    );
   }
   return texts;
 }
@@ -292,7 +383,8 @@ function fallbackFicha(name: string): Ficha {
   return {
     name: isBanned(name) ? "Este destino" : subjectName(name),
     quote: { kind: "none" },
-    tail: "",
+    middle: "",
+    whatsapp: "",
   };
 }
 
@@ -311,62 +403,76 @@ function hubHeading(country: string | undefined): string {
 function renderHub(sentence: Hub): string {
   const heading = hubHeading(sentence.country);
   const place =
-    sentence.beaches.length > 0 ? `${heading}: ${sentence.beaches.join(", ")}` : heading;
-  let text: string;
+    sentence.beaches.length > 0 ? `${heading}: ${joinList(sentence.beaches)}` : heading;
+  const parts: string[] = [];
   switch (sentence.quote.kind) {
     case "priced": {
       const money = formatShownMoney(sentence.quote.money.currency, sentence.quote.money.amount);
-      text = `${place}. Próxima salida ${sentence.quote.dateLabel}, ${sentence.quote.money.quotedAs} ${money}.`;
+      const dest = sentence.nextName || "destino";
+      parts.push(
+        `${place}. Próxima salida: ${dest}, ${sentence.quote.dateLabel}, ${sentence.quote.money.quotedAs} ${money}.`,
+      );
       break;
     }
-    case "unpriced":
-      text = `${place}. Próxima salida ${sentence.quote.dateLabel}. Consultá precio.`;
+    case "unpriced": {
+      const dest = sentence.nextName || "destino";
+      parts.push(`${place}. Próxima salida: ${dest}, ${sentence.quote.dateLabel}.`);
       break;
+    }
     case "none":
-      text = `${place}. Consultá salidas y precio.`;
+      parts.push(`${place}. ${CONSULT_CLAUSE}`);
       break;
   }
-  return sentence.tail ? `${text} ${sentence.tail}` : text;
+  if (sentence.quote.kind !== "none" && sentence.middle) parts.push(sentence.middle);
+  return parts.join(" ");
 }
 
 function hubTexts(sentence: Hub): string[] {
   const texts: string[] = [];
-  if (sentence.tail) texts.push(renderHub(sentence));
-  const bare: Hub = { ...sentence, tail: "" };
-  texts.push(renderHub(bare));
-  if (sentence.quote.kind === "priced") {
-    texts.push(
-      renderHub({
-        ...bare,
-        quote: {
-          kind: "unpriced",
-          dateIso: sentence.quote.dateIso,
-          dateLabel: sentence.quote.dateLabel,
-        },
-      }),
-    );
+  for (const beaches of shortenBeaches(sentence.beaches, sentence.nextName)) {
+    const withMiddle: Hub = { ...sentence, beaches };
+    texts.push(renderHub(withMiddle));
+    if (sentence.middle) {
+      texts.push(renderHub({ ...withMiddle, middle: "" }));
+    }
   }
-  if (sentence.quote.kind !== "none") {
-    texts.push(renderHub({ ...bare, quote: { kind: "none" } }));
-  }
-  if (bare.beaches.length > 0) {
-    texts.push(renderHub({ ...bare, beaches: [], quote: { kind: "none" } }));
-  }
-  if (bare.country) {
-    texts.push(renderHub({ country: undefined, beaches: [], quote: { kind: "none" }, tail: "" }));
-  }
+  texts.push(
+    renderHub({
+      country: sentence.country,
+      beaches: [],
+      nextName: "",
+      quote: { kind: "none" },
+      middle: "",
+    }),
+  );
   return texts;
 }
 
 function finishHub(sentence: Hub): string {
-  if (isBanned(renderHub(sentence))) return fitTexts(hubTexts(emptyHub()));
+  if (isBanned(renderHub(sentence))) {
+    return fitTexts(
+      hubTexts({
+        country: undefined,
+        beaches: [],
+        nextName: "",
+        quote: { kind: "none" },
+        middle: "",
+      }),
+    );
+  }
   const fitted = fitTexts(hubTexts(sentence));
-  if (isBanned(fitted)) return fitTexts(hubTexts(emptyHub()));
+  if (isBanned(fitted)) {
+    return fitTexts(
+      hubTexts({
+        country: undefined,
+        beaches: [],
+        nextName: "",
+        quote: { kind: "none" },
+        middle: "",
+      }),
+    );
+  }
   return fitted;
-}
-
-function emptyHub(): Hub {
-  return { beaches: [], quote: { kind: "none" }, tail: "" };
 }
 
 function fitTexts(texts: readonly string[]): string {
@@ -409,7 +515,7 @@ function pricedRows(members: readonly OfferDescriptionInput[], today: Date): Pri
     const view = readHomeDeparture(dest, today);
     const quote = toQuote(view);
     if (!view || quote.kind !== "priced") continue;
-    rows.push({ index, quote, view });
+    rows.push({ index, name: dest.name, quote, view });
   }
   return rows;
 }
