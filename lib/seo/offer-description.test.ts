@@ -20,7 +20,7 @@ const RIO =
 const CATARATAS =
   "Paquete a Cataratas del Iguazú, salida 18 de Noviembre, desde $620.000. Paquete con hotel y traslados.";
 const BRASIL =
-  "Paquetes a Brasil: Porto, Camboriú, Salvador. Próxima salida 26 de Diciembre, desde USD 1.545. Paquete con aéreo, hotel y traslados.";
+  "Paquetes a Brasil: Río, Porto, Camboriú. Próxima salida 26 de Diciembre, desde USD 1.545. Paquete con aéreo, hotel y traslados.";
 
 function departure(overrides: Partial<DepartureListing> = {}): DepartureListing {
   return {
@@ -440,7 +440,7 @@ describe("describeDestinationListing", () => {
 });
 
 describe("describeClusterListings", () => {
-  it("quotes the earliest priced beach and the three leads that include it", () => {
+  it("quotes the earliest priced beach and the first three cluster beaches", () => {
     const cluster = getClusterBySlug("brasil-desde-cordoba");
     assert.ok(cluster);
     const members = getClusterDestinations(cluster, destinationsData);

@@ -108,7 +108,7 @@ export function describeClusterListings(
   const winnerDest = winner ? pool[winner.index] : undefined;
   return finishHub({
     ...(country ? { country } : {}),
-    beaches: beachLabels(pool, winner ? winner.index : null),
+    beaches: beachLabels(pool),
     quote: winner ? winner.quote : { kind: "none" },
     tail: winner && winnerDest ? intentTail(intentFacts(winnerDest, winner.view, today)) : "",
   });
@@ -205,22 +205,11 @@ function beachLabel(name: string): string {
   return [...head].length >= 3 ? head : trimmed;
 }
 
-function beachLabels(
-  members: readonly OfferDescriptionInput[],
-  winnerIndex: number | null,
-): string[] {
-  return beachWindow(members, winnerIndex)
+function beachLabels(members: readonly OfferDescriptionInput[]): string[] {
+  return members
+    .slice(0, 3)
     .map((member) => beachLabel(member.name))
     .filter((label) => label.length > 0);
-}
-
-function beachWindow<T>(members: readonly T[], winnerIndex: number | null): T[] {
-  if (members.length <= 3) return [...members];
-  if (winnerIndex == null || winnerIndex < 0 || winnerIndex >= members.length) {
-    return members.slice(0, 3);
-  }
-  const start = Math.min(Math.max(0, winnerIndex - 2), members.length - 3);
-  return members.slice(start, start + 3);
 }
 
 function labelFor(dateIso: string, displayDate: string): string | undefined {
