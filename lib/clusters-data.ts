@@ -43,7 +43,7 @@ export const clustersData: ClusterPage[] = [
     cardImageAlt: "Río de Janeiro — paquetes a Brasil desde Córdoba",
     metaTitle: "Paquetes a Brasil desde Córdoba | 787 Rumbos",
     metaDescription:
-      "Río, Porto de Galinhas, Camboriú y Bahía desde Córdoba. Paquetes a medida o grupales. Cotizá tu viaje por WhatsApp con atención humana.",
+      "Río, Porto de Galinhas, Camboriú y Bahía desde Córdoba. Paquetes a medida o grupales. Cotizá tu viaje por WhatsApp.",
     intro:
       "Armamos paquetes a Brasil desde Córdoba: playa, ciudad o eventos. Cotizás por WhatsApp con una persona real y te enviamos opciones claras según fechas y presupuesto.",
     howWeWork: [
