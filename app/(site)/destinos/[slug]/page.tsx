@@ -27,6 +27,7 @@ import {
 import type { Departure } from "@/lib/catalog/types";
 import { getPrimaryClusterForDestination } from "@/lib/clusters-data";
 import { waHref } from "@/lib/wa-recipe";
+import { describeDestinationListing } from "@/lib/seo/offer-description";
 import { buildPageMetadata } from "@/lib/seo-metadata";
 import { siteUrl } from "@/lib/site-url";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
@@ -55,7 +56,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return buildPageMetadata({
     title: destination.metaTitle,
-    description: destination.metaDescription,
+    description: describeDestinationListing(destination),
     path: `/destinos/${slug}`,
     images: [
       {
