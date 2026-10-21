@@ -589,7 +589,7 @@ describe("readHomeDeparture", () => {
     const salvador = destinationsData.find((dest) => dest.slug === "salvador-de-bahia");
     assert.ok(salvador);
     const view = readHomeDeparture(salvador, cardToday);
-    assert.equal(view?.date, "2026-12-26");
+    assert.equal(view?.dateIso, "2026-12-26");
     assert.equal(view?.displayDate, "26 de Diciembre");
     assert.deepEqual(view?.price, {
       kind: "amount",
@@ -619,7 +619,7 @@ describe("readHomeDeparture", () => {
       ],
     });
     const view = readHomeDeparture(dest, cardToday);
-    assert.equal(view?.date, "2026-11-01");
+    assert.equal(view?.dateIso, "2026-11-01");
     assert.equal(view?.displayDate, "1 de Noviembre");
     assert.equal(view?.price.kind === "amount" && view.price.amount, 2000);
   });
@@ -661,7 +661,7 @@ describe("readHomeDeparture", () => {
     const porto = destinationsData.find((dest) => dest.slug === "porto-de-galinhas");
     assert.ok(porto);
     const view = readHomeDeparture(porto, cardToday);
-    assert.equal(view?.date, "2027-01-08");
+    assert.equal(view?.dateIso, "2027-01-08");
     assert.equal(view?.displayDate, "8 de Enero");
     assert.deepEqual(view?.price, {
       kind: "amount",
@@ -697,7 +697,7 @@ describe("readHomeDeparture", () => {
       ],
     });
     const view = readHomeDeparture(dest, cardToday);
-    assert.equal(view?.date, "2026-11-01");
+    assert.equal(view?.dateIso, "2026-11-01");
     assert.deepEqual(view?.price, { kind: "ask" });
   });
 

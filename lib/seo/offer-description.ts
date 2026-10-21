@@ -3,7 +3,6 @@ import {
   formatShownMoney,
   getTodayLocal,
   readHomeDeparture,
-  type CardOrigin,
   type HomeDepartureView,
 } from "@/lib/catalog/logic";
 
@@ -41,23 +40,20 @@ type ShownMoney = {
   quotedAs: "desde" | "final";
 };
 
-/** Priced quotes always carry a date label. A price with no date is not representable. */
 type Quote =
-  | { kind: "priced"; date: string; dateLabel: string; money: ShownMoney }
-  | { kind: "unpriced"; date: string; dateLabel: string }
+  | { kind: "priced"; dateIso: string; dateLabel: string; money: ShownMoney }
+  | { kind: "unpriced"; dateIso: string; dateLabel: string }
   | { kind: "none" };
 
 type Draft = {
   country?: string;
   name: string;
   quote: Quote;
-  city: "";
 };
 
 type DatedRow = {
   index: number;
   name: string;
-  origin: CardOrigin;
   quote: Exclude<Quote, { kind: "none" }>;
 };
 
@@ -69,40 +65,26 @@ export function describeDestinationListing(
   return finish({
     name: dest.name,
     quote: toQuote(view),
-    city: originClause(view?.origin ?? "omit"),
   });
 }
 
-/** `members` order is the same-day tie-break. Pass `getClusterDestinations` output. */
 export function describeClusterListings(
-  members: readonly DestinationListing[],
+  membersInClusterOrder: readonly DestinationListing[],
   today = getTodayLocal(),
 ): string {
-  const country = sharedCountry(members);
-  const winner = pickWinner(datedRows(members, today));
+  const country = sharedCountry(membersInClusterOrder);
+  const winner = pickEarliestDatedRow(datedRows(membersInClusterOrder, today));
   if (!winner) {
     return finish({
       name: country ? `Paquetes a ${country}` : "Paquetes",
       quote: { kind: "none" },
-      city: originClause("omit"),
     });
   }
   return finish({
     country,
     name: winner.name,
     quote: winner.quote,
-    city: originClause(winner.origin),
   });
-}
-
-/** No CardOrigin can say Córdoba alone, so the description prints no city. */
-function originClause(origin: CardOrigin): "" {
-  switch (origin) {
-    case "cordoba-or-ezeiza":
-    case "bus":
-    case "omit":
-      return "";
-  }
 }
 
 function normalizeWords(value: string): string {
@@ -114,10 +96,10 @@ function subjectName(name: string): string {
   return trimmed.length > 0 ? trimmed : "Este destino";
 }
 
-function labelFor(date: string, displayDate: string): string | undefined {
+function labelFor(dateIso: string, displayDate: string): string | undefined {
   const shown = displayDate.trim();
   if (DISPLAY_DATE.test(shown)) return shown;
-  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(date);
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateIso);
   if (!match) return undefined;
   const month = Number(match[2]);
   const day = Number(match[3]);
@@ -128,12 +110,12 @@ function labelFor(date: string, displayDate: string): string | undefined {
 
 function toQuote(view: HomeDepartureView | null): Quote {
   if (!view) return { kind: "none" };
-  const dateLabel = labelFor(view.date, view.displayDate);
+  const dateLabel = labelFor(view.dateIso, view.displayDate);
   if (!dateLabel) return { kind: "none" };
   if (view.price.kind === "amount" && Number.isFinite(view.price.amount)) {
     return {
       kind: "priced",
-      date: view.date,
+      dateIso: view.dateIso,
       dateLabel,
       money: {
         currency: view.price.currency,
@@ -142,7 +124,7 @@ function toQuote(view: HomeDepartureView | null): Quote {
       },
     };
   }
-  return { kind: "unpriced", date: view.date, dateLabel };
+  return { kind: "unpriced", dateIso: view.dateIso, dateLabel };
 }
 
 function isBanned(text: string): boolean {
@@ -151,21 +133,20 @@ function isBanned(text: string): boolean {
 
 function render(draft: Draft): string {
   const subject = draft.country ? `${draft.country}: ${draft.name}` : draft.name;
-  const city = draft.city;
   switch (draft.quote.kind) {
     case "priced": {
       const money = formatShownMoney(draft.quote.money.currency, draft.quote.money.amount);
-      return `${subject}, salida ${draft.quote.dateLabel}, ${draft.quote.money.quotedAs} ${money}.${city}`;
+      return `${subject}, salida ${draft.quote.dateLabel}, ${draft.quote.money.quotedAs} ${money}.`;
     }
     case "unpriced":
-      return `${subject}, salida ${draft.quote.dateLabel}. Consultá precio.${city}`;
+      return `${subject}, salida ${draft.quote.dateLabel}. Consultá precio.`;
     case "none":
-      return `${subject}. Consultá salidas y precio.${city}`;
+      return `${subject}. Consultá salidas y precio.`;
   }
 }
 
 function dropCountry(draft: Draft): Draft {
-  return { name: draft.name, quote: draft.quote, city: draft.city };
+  return { name: draft.name, quote: draft.quote };
 }
 
 function candidateSentences(draft: Draft): string[] {
@@ -178,7 +159,7 @@ function candidateSentences(draft: Draft): string[] {
         ...bare,
         quote: {
           kind: "unpriced",
-          date: draft.quote.date,
+          dateIso: draft.quote.dateIso,
           dateLabel: draft.quote.dateLabel,
         },
       }),
@@ -190,10 +171,6 @@ function candidateSentences(draft: Draft): string[] {
   return texts;
 }
 
-/**
- * A single token longer than the cap is left out whole.
- * The consult clause stands in when nothing before that token fits.
- */
 function truncate(text: string): string {
   if (text.length <= META_DESCRIPTION_MAX) return text;
   const limit = cutBeforeOversizedToken(text, META_DESCRIPTION_MAX);
@@ -227,16 +204,13 @@ function fit(draft: Draft): string {
   for (const text of candidateSentences(draft)) {
     if (text.length <= META_DESCRIPTION_MAX) return text;
   }
-  return truncate(
-    render({ name: draft.name, quote: { kind: "none" }, city: draft.city }),
-  );
+  return truncate(render({ name: draft.name, quote: { kind: "none" } }));
 }
 
 function consultFallback(name: string): Draft {
   return {
     name: isBanned(name) ? "Este destino" : name,
     quote: { kind: "none" },
-    city: originClause("omit"),
   };
 }
 
@@ -244,7 +218,6 @@ function finish(draft: Draft): string {
   const ready: Draft = {
     name: subjectName(draft.name),
     quote: draft.quote,
-    city: draft.city,
     ...(draft.country && normalizeWords(draft.country)
       ? { country: normalizeWords(draft.country) }
       : {}),
@@ -269,21 +242,17 @@ function datedRows(members: readonly DestinationListing[], today: Date): DatedRo
     const view = readHomeDeparture(dest, today);
     const quote = toQuote(view);
     if (!view || quote.kind === "none") continue;
-    rows.push({ index, name: dest.name, origin: view.origin, quote });
+    rows.push({ index, name: dest.name, quote });
   }
   return rows;
 }
 
-/**
- * Earliest ISO date, then earlier input index.
- * Amounts are not compared. ARS and USD are not one scale.
- */
-function pickWinner(rows: readonly DatedRow[]): DatedRow | undefined {
+function pickEarliestDatedRow(rows: readonly DatedRow[]): DatedRow | undefined {
   const priced = rows.filter((row) => row.quote.kind === "priced");
   const pool = priced.length > 0 ? priced : rows;
   return [...pool].sort((a, b) => {
-    if (a.quote.date < b.quote.date) return -1;
-    if (a.quote.date > b.quote.date) return 1;
+    if (a.quote.dateIso < b.quote.dateIso) return -1;
+    if (a.quote.dateIso > b.quote.dateIso) return 1;
     return a.index - b.index;
   })[0];
 }
