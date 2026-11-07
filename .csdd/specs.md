@@ -342,8 +342,9 @@ a esa superficie.
 
 ## Forma de trabajo y ramas
 
-- `.csdd/` es la fuente de verdad versionada para estado operativo y
-  especificaciones; cada verdad debe vivir en el documento que corresponda.
+- `.csdd/` es la fuente de verdad versionada para especificaciones, decisiones y
+  handoffs; cada verdad debe vivir en el documento que corresponda. El estado
+  de las tareas vive en [GitHub Issues](https://github.com/ValenFelizia/787-Rumbos/issues).
 - El trabajo se hace en ramas de feature, con pull requests hacia `master`.
   Valen revisa y mergea los PRs.
 - El historial de implementación no se mantiene en el estado activo: Git es la

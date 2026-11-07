@@ -149,7 +149,7 @@ lib/
   testimonials-data.ts
   clusters-data.ts
   instagram-posts.ts
-.csdd/                # Specs, decisiones y estado operativo (CSDD)
+.csdd/                # Specs, decisiones y handoffs (CSDD); tareas en GitHub Issues
 docs/                 # Guía del panel y análisis de contexto
 e2e/                  # Smoke tests
 NOTICE.md             # Uso y derechos del repositorio
