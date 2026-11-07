@@ -13,6 +13,7 @@
     "test:e2e": "npm run build:e2e && npm run test:e2e:ci",
     "test:e2e:ci": "node --env-file=e2e.env --env-file-if-exists=.env node_modules/@playwright/test/cli.js test",
     "test:e2e:ui": "npm run build:e2e && node --env-file=e2e.env --env-file-if-exists=.env node_modules/@playwright/test/cli.js test --ui",
+    "fonts:subset": "node scripts/subset-fonts.mjs",
     "snapshot:catalog": "tsx scripts/catalog-snapshot.ts",
     "payload": "payload",
     "cms:migrate": "payload migrate",
@@ -58,7 +59,9 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "^15.5.28",
+    "harfbuzzjs": "1.6.4",
     "postcss": "^8.5",
+    "subset-font": "2.9.0",
     "tailwindcss": "^4.1.9",
     "tsx": "4.23.15",
     "typescript": "^5"

@@ -10,6 +10,9 @@
  * Jerarquía tipográfica de 787 Rumbos (según manual de marca):
  *   - Elaine Sans → títulos, CTAs, textos destacados
  *   - Zalando Sans → cuerpo de texto, párrafos, etiquetas
+ *
+ * Los archivos .woff2 son subsets generados desde los .ttf con
+ * `npm run fonts:subset`; no editarlos a mano.
  */
 import localFont from "next/font/local";
 
@@ -18,17 +21,17 @@ import localFont from "next/font/local";
 export const elaineSans = localFont({
   src: [
     {
-      path: "../public/fonts/elaine-sans.medium.ttf",
+      path: "../public/fonts/elaine-sans.medium.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../public/fonts/elaine-sans.semibold.ttf",
+      path: "../public/fonts/elaine-sans.semibold.woff2",
       weight: "600",
       style: "normal",
     },
     {
-      path: "../public/fonts/elaine-sans.bold.ttf",
+      path: "../public/fonts/elaine-sans.bold.woff2",
       weight: "700",
       style: "normal",
     },
@@ -40,7 +43,7 @@ export const elaineSans = localFont({
 /** Zalando Sans — tipografía de cuerpo de la marca.
  *  Variable font: soporta cualquier peso entre 100 y 900. */
 export const zalandoSans = localFont({
-  src: "../public/fonts/ZalandoSans-VariableFont_wdth,wght.ttf",
+  src: "../public/fonts/ZalandoSans-VariableFont_wdth,wght.woff2",
   variable: "--font-zalando",
   display: "swap",
 });
