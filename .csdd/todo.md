@@ -122,6 +122,14 @@
 
 Retention: 12
 
+- [x] T-059 — Subir el rendimiento mobile de la home a ≥85 (Lighthouse, www)
+  - Owner: Valen
+  - Agent: Claude Code (Opus orchestrating, DeepSeek V4.1 Flash subagents)
+  - Scope: released
+  - Updated: 2026-11-07
+  - Landed: PRs #73, #74, #76, #77 on `master` (`daa251a`); #75 arregló el smoke de la promo F1 vencida
+  - Note: prod mobile (mediana de 5) home 77→85, bariloche 76→85, latam-cordoba 78→89; LCP ~6 s → 3.4–3.9 s; CLS 0. Palancas: Speed Insights, fuentes WOFF2 + subset (427→108 KB), sin precarga de fuentes (D-009), `sizes` de rumbos/nosotros, AFIP con dimensiones (sigue `<img>` crudo a propósito). Datos en `.lighthouse/t059-*`. Medir siempre en www: el redirect sin-www suma ~1.9 s al test.
+
 - [x] T-008 — Migrar catálogo y promo destacada a Payload CMS (D-006)
   - Owner: Valen
   - Agent: Cursor (Opus orchestrating, Grok subagents)
@@ -208,10 +216,4 @@ Retention: 12
   - Updated: 2026-08-03
   - Note: `og-image.jpg` 1200×630 / ~108 KB; logo + subtítulo aeropuerto + meta “Pasajes aéreos · Ómnibus · Paquetes a medida”; openGraph/twitter en layout; script `scripts/generate-og-image.mjs`. PNG legacy eliminado. Post-deploy: purgar caché LinkedIn/WhatsApp al validar preview.
 
-- [x] T-039 — Auditar y reducir el HTML inicial de la homepage (issue #16)
-  - Owner: Valen
-  - Agent: Cursor Grok
-  - Scope: released
-  - Updated: 2026-08-03
-  - Note: Baseline prod ~217 KB / ~25 KB br / ~32 KB gzip. Casi la mitad es payload RSC de Next. Decisión con Valen: no micro-opts ni recortes de contenido; umbral 200 KB de opengraph.to no justifica cambios. Issue #16 cerrado.
 

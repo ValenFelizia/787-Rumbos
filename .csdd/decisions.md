@@ -108,6 +108,18 @@
   - Un botón de WhatsApp en cada card del hub.
 - **Consequences:** D-004 sigue ordenando las cuatro cards. Cambia el título y el precio que ve el usuario. D-005 sigue impidiendo afirmar Córdoba cuando la salida no lo fija. Los chats de hero, cierre de grilla, pie y ficha quedan separables por la marca del mensaje.
 
+### D-009 — Las fuentes de marca no se precargan; la foto del hero va primero
+
+- **Status:** Accepted
+- **Date:** 2026-11-07
+- **Source:** Valentín, T-059 (PR #76)
+- **Decision:** `lib/fonts.ts` declara Elaine y Zalando con `preload: false` y `display: swap`. Las fuentes se sirven como WOFF2 subseteado (`npm run fonts:subset`), y Zalando lleva el eje `wdth` fijado en 100 porque el sitio no usa `font-stretch`.
+- **Rationale:** En 4G, las fuentes precargadas competían por el ancho de banda con la foto del hero, que es el LCP. A/B en preview (5 corridas): sin precarga, la mediana sube de 80 a 84 y el LCP baja de 4.9 s a 3.8 s, con CLS 0. Producción después de T-059: home 85, bariloche 85, latam-cordoba 89.
+- **Rejected alternatives:**
+  - Precargar todo: es el estado previo y deja el LCP alrededor de 4.9 s.
+  - Dejar sin precarga solo Elaine: tiene la misma mediana y un LCP peor (4.1 s).
+- **Consequences:** En la primera visita con mala señal el texto se ve ~1-2 s en la fuente del sistema y después cambia a la de marca. Valen lo aceptó. Agregar una fuente o un peso nuevo no debe reactivar la precarga sin medir antes. Si alguna vez se usa `font-stretch`, hay que quitar el pin de `wdth` en `scripts/subset-fonts.mjs`.
+
 ## Open / needs human input
 
 Landings publicadas y siguientes candidatas (alimenta T-042):
