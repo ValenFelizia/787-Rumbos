@@ -2,8 +2,12 @@
  * lib/fonts.ts — Fuentes tipográficas de marca de 787 Rumbos.
  *
  * Usamos `next/localFont` (y no @font-face en CSS) porque Next.js:
- * - Genera el preload automático en el <head>, evitando FOIT (Flash of Invisible Text)
  * - Aplica `font-display: swap` por defecto
+ * - Ajusta la fuente de respaldo para que el cambio a la de marca no mueva el layout
+ *
+ * `preload: false` a propósito (T-059): precargadas, las fuentes compiten con
+ * la foto del hero en 4G y retrasan el LCP. Sin precarga el texto aparece
+ * primero en la fuente del sistema y luego cambia a la de marca.
  * - Sirve las fuentes desde el mismo dominio (sin requests a Google/externos)
  * - Crea una clase CSS única que podemos pasar como className a cualquier elemento
  *
@@ -38,6 +42,7 @@ export const elaineSans = localFont({
   ],
   variable: "--font-elaine",
   display: "swap",
+  preload: false,
 });
 
 /** Zalando Sans — tipografía de cuerpo de la marca.
@@ -46,4 +51,5 @@ export const zalandoSans = localFont({
   src: "../public/fonts/ZalandoSans-VariableFont_wdth,wght.woff2",
   variable: "--font-zalando",
   display: "swap",
+  preload: false,
 });
