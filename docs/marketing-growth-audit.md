@@ -3,7 +3,7 @@
 > Fecha: 2026-07-06 (adenda 2026-07-13)
 > Alcance: diagnóstico de SEO, presencia local, contenido y conversión hacia
 > WhatsApp. No es un backlog: el trabajo vigente vive en
-> [`.csdd/todo.md`](../.csdd/todo.md).
+> [GitHub Issues](https://github.com/ValenFelizia/787-Rumbos/issues).
 >
 > Esta es una versión pública. Se conservan el razonamiento técnico y de
 > producto; se omiten métricas comerciales internas, presupuestos, detalle de
@@ -315,7 +315,7 @@ Si hay que elegir solo cinco acciones inmediatas:
 Esta adenda contrasta una segunda opinion sobre la home con el codigo, la version
 publica y el estado CSDD. El roadmap anterior se conserva como contexto; la lista
 operativa vigente y sus dependencias viven exclusivamente en
-[`../.csdd/todo.md`](../.csdd/todo.md).
+[GitHub Issues](https://github.com/ValenFelizia/787-Rumbos/issues).
 
 ### Conclusion
 

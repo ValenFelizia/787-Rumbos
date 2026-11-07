@@ -149,7 +149,7 @@ lib/
   testimonials-data.ts
   clusters-data.ts
   instagram-posts.ts
-.csdd/                # Specs, decisiones y estado operativo (CSDD)
+.csdd/                # Specs, decisiones y handoffs (CSDD); tareas en GitHub Issues
 docs/                 # Guía del panel y análisis de contexto
 e2e/                  # Smoke tests
 NOTICE.md             # Uso y derechos del repositorio
@@ -163,7 +163,7 @@ NOTICE.md             # Uso y derechos del repositorio
 - `master` — producción
 - Specs: [`.csdd/specs.md`](./.csdd/specs.md)
 - Decisiones: [`.csdd/decisions.md`](./.csdd/decisions.md)
-- Estado operativo: [`.csdd/todo.md`](./.csdd/todo.md)
+- Trabajo pendiente: [GitHub Issues](https://github.com/ValenFelizia/787-Rumbos/issues)
 - Diagnóstico SEO/producto (contexto, no backlog): [`docs/marketing-growth-audit.md`](./docs/marketing-growth-audit.md)
 
 ## Uso y derechos

@@ -1,7 +1,7 @@
 # 787 Rumbos — Decisiones
 
 > Elecciones consecuentes y su racional. El comportamiento observable queda en
-> [specs.md](./specs.md); el estado operativo en [todo.md](./todo.md).
+> [specs.md](./specs.md); el trabajo pendiente en [GitHub Issues](https://github.com/ValenFelizia/787-Rumbos/issues).
 
 ## Accepted
 
