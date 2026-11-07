@@ -19,7 +19,7 @@ export function AboutUs() {
               alt="Local de 787 Rumbos en el hall de arribos del Aeropuerto de Córdoba"
               width={800}
               height={600}
-              sizes="(max-width: 768px) 92vw, 380px"
+              sizes="(max-width: 767px) calc(100vw - 88px), (max-width: 1151px) calc(41.67vw - 96px), 384px"
               className="h-[260px] w-full object-cover object-[center_30%] md:h-[380px]"
             />
           </div>

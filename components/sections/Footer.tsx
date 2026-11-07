@@ -180,6 +180,10 @@ export function Footer() {
             <img
               src="/afip.jpg?v=20260503"
               alt="Data Fiscal ARCA"
+              width={239}
+              height={327}
+              loading="lazy"
+              decoding="async"
               className="h-full w-auto object-contain"
             />
           </a>

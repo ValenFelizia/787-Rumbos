@@ -104,7 +104,7 @@ export function RumboSelector() {
                   subtitle="Pasajes de múltiples aerolíneas, saliendo de Córdoba."
                   image="/rumbos/vuelos.jpg"
                   alt="Ala de un avión sobre las nubes al atardecer"
-                  sizes="(max-width: 768px) 100vw, 60vw"
+                  sizes="(max-width: 767px) calc(100vw - 48px), (max-width: 1151px) calc(58vw - 37px), 631px"
                   titleSize="hero"
                 />
               </Link>
@@ -119,7 +119,7 @@ export function RumboSelector() {
                     subtitle="Brasil desde Córdoba."
                     image="/rumbos/playa.jpg"
                     alt="Agua turquesa y velero en Porto de Galinhas, Brasil"
-                    sizes="(max-width: 768px) 100vw, 42vw"
+                    sizes="(max-width: 767px) calc(100vw - 48px), (max-width: 1151px) calc(42vw - 27px), 457px"
                     titleSize="tile"
                   />
                 </Link>
@@ -132,7 +132,7 @@ export function RumboSelector() {
                     subtitle="Salidas en bus desde Córdoba · Vía Bariloche"
                     image="/rumbos/argentina.jpg"
                     alt="Cataratas del Iguazú, un clásico del turismo argentino"
-                    sizes="(max-width: 768px) 100vw, 42vw"
+                    sizes="(max-width: 767px) calc(100vw - 48px), (max-width: 1151px) calc(42vw - 27px), 457px"
                     titleSize="tile"
                   />
                 </Link>
