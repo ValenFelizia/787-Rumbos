@@ -5,9 +5,9 @@
 > **pasajes aéreos** (hub + LATAM + GOL). El catálogo de destinos y la promo
 > destacada viven en Payload CMS en producción (T-008, D-006) y los editan los
 > agencieros en `/admin`. Lo siguiente es el alta de usuarios y la primera
-> carga de vigencias (T-055), y el backlog del CMS (T-049 a T-054).
+> carga de vigencias (#86), y el backlog del CMS (#87 a #92).
 
-El estado operativo vive en [todo.md](./todo.md). El diagnóstico SEO y de
+El trabajo pendiente vive en [GitHub Issues](https://github.com/ValenFelizia/787-Rumbos/issues). El diagnóstico SEO y de
 producto que sirve de contexto, pero no de lista de trabajo activa, se
 conserva en [../docs/marketing-growth-audit.md](../docs/marketing-growth-audit.md).
 
