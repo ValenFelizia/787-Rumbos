@@ -1,6 +1,11 @@
 import { expect, test } from "@playwright/test";
-import { getActiveUpcomingDepartures } from "@/lib/catalog/logic";
+import { getActiveUpcomingDepartures, getTodayLocal } from "@/lib/catalog/logic";
 import { destinationsData } from "@/scripts/seed-data/destinations";
+import { promoSeed } from "@/scripts/seed-data/promo";
+
+function isPromoSeedActive() {
+  return new Date(promoSeed.endsAt + "T00:00:00") >= getTodayLocal();
+}
 
 function firstActiveUpcomingDeparture(slug: string) {
   const dest = destinationsData.find((item) => item.slug === slug);
@@ -106,11 +111,16 @@ test.describe("rutas críticas", () => {
     await expect(page.getByText("Solo adultos").first()).toBeVisible();
   });
 
-  test("home carga con la marca, la promo y el CTA principal", async ({ page }) => {
+  test("home carga con la marca, la promo vigente y el CTA principal", async ({ page }) => {
     await page.goto("/");
-    await expect(
-      page.getByRole("button", { name: /Salida Especial Charter: F1 GP de São Paulo/i }),
-    ).toBeVisible();
+    const promoBar = page.getByRole("button", {
+      name: /Salida Especial Charter: F1 GP de São Paulo/i,
+    });
+    if (isPromoSeedActive()) {
+      await expect(promoBar).toBeVisible();
+    } else {
+      await expect(promoBar).toHaveCount(0);
+    }
     await expect(
       page.getByRole("heading", {
         name: /787 Rumbos: tu agencia en el Aeropuerto de Córdoba/i,
