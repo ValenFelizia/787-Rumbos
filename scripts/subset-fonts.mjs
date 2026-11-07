@@ -28,7 +28,13 @@ const UNICODE_RANGES = [
   "U+2212",
 ];
 
-const CHECK_STRING = "ÁÉÍÓÚáéíóúÑñÜü¿¡°ºª€$%&@“”‘’–—…·•→";
+// El sitio no usa `font-stretch`: fijar wdth en su default (100) no cambia
+// nada visible y reduce Zalando a menos de la mitad.
+const PINNED_AXES = {
+  "ZalandoSans-VariableFont_wdth,wght.ttf": { wdth: 100 },
+};
+
+const CHECK_STRING ="ÁÉÍÓÚáéíóúÑñÜü¿¡°ºª€$%&@“”‘’–—…·•→";
 
 function unicodeSetFromRanges(ranges) {
   const codepoints = new Set();
@@ -76,8 +82,10 @@ async function generate() {
     const targetPath = join(fontsDir, `${parse(file).name}.woff2`);
     const source = await readFile(sourcePath);
 
-    // Sin `variationAxes`: los ejes de las fuentes variables se conservan.
-    const subset = await subsetFont(source, text, { targetFormat: "woff2" });
+    const subset = await subsetFont(source, text, {
+      targetFormat: "woff2",
+      variationAxes: PINNED_AXES[file],
+    });
     await writeFile(targetPath, subset);
 
     const before = (await stat(sourcePath)).size;
@@ -103,8 +111,9 @@ async function check() {
       (char) => !unicodes.has(char.codePointAt(0)),
     );
     const axes = Object.keys(face.getAxisInfos());
+    const pinned = Object.keys(PINNED_AXES[ttf] ?? {});
     const lostAxes = Object.keys(source.getAxisInfos()).filter(
-      (axis) => !axes.includes(axis),
+      (axis) => !axes.includes(axis) && !pinned.includes(axis),
     );
     const problems = [
       ...(missing.length > 0 ? [`faltan ${missing.join(" ")}`] : []),
