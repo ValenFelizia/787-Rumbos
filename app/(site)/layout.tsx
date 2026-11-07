@@ -10,6 +10,7 @@
  */
 import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { elaineSans, zalandoSans } from '@/lib/fonts'
 import { ModalProvider } from '@/lib/context/ModalContext'
 import { QuoteModal } from '@/components/sections/QuoteModal'
@@ -148,6 +149,7 @@ export default async function RootLayout({
           {children}
           {/* Analytics solo en producción para no contaminar datos en desarrollo */}
           {process.env.NODE_ENV === 'production' && <Analytics />}
+          {process.env.NODE_ENV === 'production' && <SpeedInsights />}
           {/* Modal del cotizador */}
           <QuoteModal />
         </ModalProvider>
