@@ -7,10 +7,8 @@
  *   - Col 2: Dirección y servicios
  *   - Col 3: Contacto (WhatsApp x2, Instagram)
  *
- * El badge de AFIP usa un <img> estándar (no <Image>) porque:
- * 1. AFIP requiere que la imagen sea exactamente la que ellos proveen (no se puede
- *    manipular con optimizadores de terceros).
- * 2. El ?v= al final del src es un cache buster que ellos controlan.
+ * El badge de AFIP conserva el ?v= del src: es un cache buster que controla
+ * el organismo.
  */
 import Image from "next/image";
 import Link from "next/link";
@@ -169,7 +167,7 @@ export function Footer() {
       {/* Barra inferior: badges de confianza + copyright */}
       <div className="mx-auto mt-8 flex w-full max-w-6xl flex-col items-center justify-center gap-4 border-t border-white/10 px-6 pb-8 pt-8">
         <div className="flex flex-wrap items-center justify-center gap-6">
-          {/* Badge AFIP — usa <img> estándar, no <Image>. Ver comentario en el JSDoc del componente. */}
+          {/* Badge AFIP */}
           <a
             href="http://qr.afip.gob.ar/?qr=Huvxa1kUae-1lE_yjNzL2w,,"
             target="_F960AFIPInfo"
@@ -177,9 +175,12 @@ export function Footer() {
             aria-label="Verificar datos fiscales en AFIP"
             className="inline-flex h-12 items-center transition-opacity hover:opacity-80"
           >
-            <img
+            <Image
               src="/afip.jpg?v=20260503"
               alt="Data Fiscal ARCA"
+              width={239}
+              height={327}
+              sizes="35px"
               className="h-full w-auto object-contain"
             />
           </a>
