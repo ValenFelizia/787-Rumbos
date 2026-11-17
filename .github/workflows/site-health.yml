@@ -1,0 +1,30 @@
+# Revisa el sitio en producción y falla si alguna imagen no carga.
+#
+# Por qué existe: en noviembre de 2026 las fotos de los destinos dieron 404
+# durante días sin que nadie lo notara. El build pasaba bien; se rompían
+# recién cuando Vercel regeneraba las páginas (ISR).
+#
+# Cuando falla, GitHub manda un mail (Settings → Notifications → Actions).
+name: Site health
+
+on:
+  schedule:
+    - cron: "17 */3 * * *" # cada 3 horas
+  deployment_status:
+  workflow_dispatch:
+
+jobs:
+  images:
+    name: Imágenes en producción
+    if: >-
+      github.event_name != 'deployment_status' ||
+      (github.event.deployment_status.state == 'success' &&
+       github.event.deployment.environment == 'Production')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/check-site-images.mjs https://www.787rumbos.com.ar
