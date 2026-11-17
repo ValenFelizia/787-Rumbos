@@ -1,5 +1,4 @@
-import { existsSync } from "node:fs";
-import path from "node:path";
+import { PUBLIC_DESTINO_IMAGES } from "./public-media";
 
 export type MediaLike = {
   legacyPath?: string | null;
@@ -11,8 +10,7 @@ export type ResolveMediaUrlOptions = {
 };
 
 function defaultIsPublicAsset(legacyPath: string): boolean {
-  if (!legacyPath.startsWith("/") || legacyPath.includes("..")) return false;
-  return existsSync(path.join(process.cwd(), "public", legacyPath));
+  return PUBLIC_DESTINO_IMAGES.has(legacyPath);
 }
 
 function isAbsoluteHttpUrl(value: string): boolean {
