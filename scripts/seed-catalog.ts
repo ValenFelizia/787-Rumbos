@@ -1,7 +1,7 @@
 /**
  * Carga idempotente del catálogo estático en Payload.
  * Upsert por slug. Las imágenes de `public/destinos` se suben una vez
- * y guardan `legacyPath` para que el render siga usando esa ruta.
+ * y guardan `legacyPath` solo como clave para no subirlas dos veces.
  *
  * Uso: npm run cms:seed
  * Admin inicial si existen SEED_ADMIN_EMAIL y SEED_ADMIN_PASSWORD.
