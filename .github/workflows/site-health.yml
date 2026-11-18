@@ -27,4 +27,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      # Vercel avisa "success" unos segundos antes de que el dominio apunte
+      # al deploy nuevo: sin esta espera se revisaba el deploy anterior.
+      - if: github.event_name == 'deployment_status'
+        run: sleep 120
       - run: node scripts/check-site-images.mjs https://www.787rumbos.com.ar
