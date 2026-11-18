@@ -2,55 +2,24 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { resolveMediaUrl } from "./media-url";
 
-const publicLegacy = new Set(["/destinos/salta.png", "/destinos/bariloche.jpg"]);
-
-function isPublicAsset(path: string): boolean {
-  return publicLegacy.has(path);
-}
-
 describe("resolveMediaUrl", () => {
-  it("usa legacyPath solo cuando el archivo vive en /public", () => {
+  it("usa media.url", () => {
     assert.equal(
-      resolveMediaUrl(
-        { legacyPath: "/destinos/salta.png", url: "/api/media/file/salta.png" },
-        { isPublicAsset },
-      ),
-      "/destinos/salta.png",
+      resolveMediaUrl({ url: "/api/media/file/salta-1.png" }),
+      "/api/media/file/salta-1.png",
     );
   });
 
-  it("prefiere media.url cuando legacyPath no existe en /public", () => {
-    assert.equal(
-      resolveMediaUrl(
-        {
-          legacyPath: "/destinos/puerto-madryn.png",
-          url: "/api/media/file/puerto-madryn.png",
-        },
-        { isPublicAsset },
-      ),
-      "/api/media/file/puerto-madryn.png",
-    );
+  it("devuelve una URL absoluta de Blob tal cual", () => {
+    const blob = "https://abc123.public.blob.vercel-storage.com/puerto-madryn.png";
+    assert.equal(resolveMediaUrl({ url: blob }), blob);
   });
 
-  it("prefiere una URL absoluta de Blob sobre legacyPath", () => {
-    const blob =
-      "https://abc123.public.blob.vercel-storage.com/puerto-madryn.png";
-    assert.equal(
-      resolveMediaUrl(
-        {
-          legacyPath: "/destinos/puerto-madryn.png",
-          url: blob,
-        },
-        { isPublicAsset },
-      ),
-      blob,
-    );
-  });
-
-  it("devuelve undefined si falta el media o solo hay un id", () => {
-    assert.equal(resolveMediaUrl(undefined, { isPublicAsset }), undefined);
-    assert.equal(resolveMediaUrl(null, { isPublicAsset }), undefined);
-    assert.equal(resolveMediaUrl(27, { isPublicAsset }), undefined);
-    assert.equal(resolveMediaUrl("/destinos/salta.png", { isPublicAsset }), undefined);
+  it("devuelve undefined si falta el media, solo hay un id o no hay url", () => {
+    assert.equal(resolveMediaUrl(undefined), undefined);
+    assert.equal(resolveMediaUrl(null), undefined);
+    assert.equal(resolveMediaUrl(27), undefined);
+    assert.equal(resolveMediaUrl("/destinos/salta.png"), undefined);
+    assert.equal(resolveMediaUrl({ url: "  " }), undefined);
   });
 });

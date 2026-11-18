@@ -34,7 +34,7 @@ function doc(overrides: Partial<FeaturedPromoDoc> = {}): FeaturedPromoDoc {
     price: published.price,
     priceNote: published.priceNote,
     taxNote: published.taxNote,
-    image: { legacyPath: published.imageSrc },
+    image: { url: published.imageSrc },
     whatsappMsg: published.whatsappMsg,
     inclusions: published.inclusions,
     ...overrides,

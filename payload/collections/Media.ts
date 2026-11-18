@@ -43,7 +43,7 @@ export const Media: CollectionConfig = {
       index: true,
       admin: {
         description:
-          "Solo para imágenes del seed que siguen en /public (p. ej. /destinos/salta.png). Dejá vacío en cargas nuevas: el sitio usa la URL del archivo (Blob o /api/media/file/...).",
+          "Ya no se usa: el sitio siempre muestra el archivo subido. Dejalo vacío.",
         position: "sidebar",
       },
     },
