@@ -429,6 +429,7 @@ test.describe("cotizador", () => {
     expect(response?.headers()["content-security-policy"]).toContain(
       "upgrade-insecure-requests",
     );
+    expect(response?.headers()["content-security-policy"]).not.toContain("'unsafe-eval'");
     expect(response?.headers()["strict-transport-security"]).toContain(
       "max-age=63072000",
     );
