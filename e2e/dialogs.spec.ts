@@ -44,6 +44,37 @@ test.describe("quote modal", () => {
     await page.mouse.click(5, 5);
     await expect(dialog).toBeHidden();
   });
+
+  test("step 3 airline preference is a native radio group with keyboard arrow navigation", async ({
+    page,
+  }) => {
+    await page.goto("/");
+
+    await page.getByRole("button", { name: /armar viaje/i }).first().click();
+    const dialog = page.getByRole("dialog", { name: /armá tu viaje a medida/i });
+    await expect(dialog).toBeVisible();
+
+    await dialog.getByLabel(/¿a dónde querés viajar\?/i).fill("Brasil");
+    await dialog.getByRole("button", { name: /siguiente/i }).click();
+    await dialog.getByRole("button", { name: /siguiente/i }).click();
+
+    const radiogroup = dialog.getByRole("radiogroup", { name: /preferencia de aerolínea/i });
+    await expect(radiogroup).toBeVisible();
+
+    const radios = radiogroup.getByRole("radio");
+    await expect(radios).toHaveCount(8);
+
+    const noPref = radiogroup.getByRole("radio", { name: /sin preferencia/i });
+    await expect(noPref).toBeChecked();
+
+    await radiogroup.getByText("GOL", { exact: true }).click();
+    const gol = radiogroup.getByRole("radio", { name: "GOL" });
+    await expect(gol).toBeChecked();
+
+    await page.keyboard.press("ArrowRight");
+    await expect(radiogroup.getByRole("radio", { name: "Avianca" })).toBeChecked();
+    await expect(gol).not.toBeChecked();
+  });
 });
 
 test.describe("mobile navigation dialog", () => {
@@ -95,6 +126,7 @@ test.describe("mobile navigation dialog on rotation", () => {
     await expect(menuDialog).toBeHidden();
 
     const nav = page.getByRole("navigation", { name: "Navegación principal" });
+    await expect(nav.getByRole("link", { name: /787 Rumbos/i })).toBeFocused();
     await nav.getByRole("link", { name: "Destinos", exact: true }).click();
     await expect(page).toHaveURL(/\/destinos$/);
   });

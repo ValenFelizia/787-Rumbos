@@ -22,6 +22,11 @@ const DURATION_OPTIONS = [
 
 const AIRLINES = ["Copa Airlines", "JetSmart", "GOL", "Avianca", "Air Europa", "LATAM Airlines", "Arajet"];
 
+const AIRLINE_OPTIONS = [
+  { value: "Sin preferencia", label: "Sin preferencia/No viajo en avión" },
+  ...AIRLINES.map((airline) => ({ value: airline, label: airline })),
+];
+
 const getNext12Months = () => {
   const months = ["Próximos 3 meses", "Temporada Alta", "Temporada Baja"];
   const date = new Date();
@@ -313,38 +318,38 @@ export function QuoteModal() {
           {/* STEP 3: AIRLINE PREFERENCE */}
           {step === 3 && (
             <div className="space-y-4">
-              <p id="airline-preference-label" className="flex items-center gap-1.5 text-sm font-semibold text-[#0b4058]">
-                <Plane aria-hidden="true" className="h-4 w-4 text-[#f7a92a]" />
-                ¿Preferencia de aerolínea? (Opcional)
-              </p>
+              <fieldset role="radiogroup">
+                <legend className="mb-4 text-sm font-semibold text-[#0b4058]">
+                  <span className="flex items-center gap-1.5">
+                    <Plane aria-hidden="true" className="h-4 w-4 text-[#f7a92a]" />
+                    ¿Preferencia de aerolínea? (Opcional)
+                  </span>
+                </legend>
 
-              <div role="group" aria-labelledby="airline-preference-label" className="flex flex-wrap gap-2">
-                <button
-                  type="button"
-                  aria-pressed={aerolinea === "Sin preferencia"}
-                  onClick={() => setAerolinea("Sin preferencia")}
-                  className={`rounded-full px-3.5 py-2 text-xs transition duration-250 ${aerolinea === "Sin preferencia"
-                    ? "bg-[#0b4058] text-white font-medium"
-                    : "bg-gray-100 text-[#0b4058] hover:bg-gray-200"
-                    }`}
-                >
-                  Sin preferencia/No viajo en avión
-                </button>
-                {AIRLINES.map((air) => (
-                  <button
-                    key={air}
-                    type="button"
-                    aria-pressed={aerolinea === air}
-                    onClick={() => setAerolinea(air)}
-                    className={`rounded-full px-3.5 py-2 text-xs transition duration-250 ${aerolinea === air
-                      ? "bg-[#0b4058] text-white font-medium"
-                      : "bg-gray-100 text-[#0b4058] hover:bg-gray-200"
-                      }`}
-                  >
-                    {air}
-                  </button>
-                ))}
-              </div>
+                <div className="flex flex-wrap gap-2">
+                  {AIRLINE_OPTIONS.map((option, index) => {
+                    const inputId = `aerolinea-${index}`;
+                    return (
+                      <label
+                        key={option.value}
+                        htmlFor={inputId}
+                        className="cursor-pointer rounded-full bg-gray-100 px-3.5 py-2 text-xs text-[#0b4058] transition duration-250 hover:bg-gray-200 has-[:checked]:bg-[#0b4058] has-[:checked]:font-medium has-[:checked]:text-white has-[:checked]:hover:bg-[#0b4058] has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-[#f7a92a] has-[:focus-visible]:outline-offset-[3px]"
+                      >
+                        <input
+                          id={inputId}
+                          type="radio"
+                          name="aerolinea"
+                          value={option.value}
+                          checked={aerolinea === option.value}
+                          onChange={() => setAerolinea(option.value)}
+                          className="sr-only"
+                        />
+                        <span>{option.label}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </fieldset>
 
               <div className="flex items-center gap-2 rounded-xl bg-gray-50 p-3.5 text-xs text-gray-500">
                 <Info aria-hidden="true" className="h-4 w-4 shrink-0 text-[#006183]" />

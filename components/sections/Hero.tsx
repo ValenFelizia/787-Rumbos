@@ -9,7 +9,7 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-[calc(100vh-73px)] items-center overflow-hidden"
+      className="relative flex min-h-[calc(100svh-73px)] items-center overflow-hidden"
     >
       <Image
         src="/hero-bg.jpg"
