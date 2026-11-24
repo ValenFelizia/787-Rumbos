@@ -29,6 +29,7 @@ import { getPrimaryClusterForDestination } from "@/lib/clusters-data";
 import { waHref } from "@/lib/wa-recipe";
 import { describeDestinationListing } from "@/lib/seo/offer-description";
 import { buildPageMetadata } from "@/lib/seo-metadata";
+import { serializeJsonLd } from "@/lib/json-ld-script";
 import { siteUrl } from "@/lib/site-url";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { DestinationMobileStickyBar } from "@/components/conversion/DestinationMobileStickyBar";
@@ -142,11 +143,11 @@ export default async function DestinoDetailPage({ params }: Props) {
 
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbJsonLd) }}
       />
 
       {/* Hero Section */}
