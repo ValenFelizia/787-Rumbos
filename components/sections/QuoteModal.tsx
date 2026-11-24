@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { X, ChevronRight, ChevronLeft, Calendar, Users, Plane, Info, Clock } from "lucide-react";
 import { useModal } from "@/lib/context/ModalContext";
-import { DIALOG_CLOSEDBY_ANY, useModalDialog } from "@/lib/use-modal-dialog";
+import { DIALOG_CLOSEDBY_ANY, setAutofocus, useModalDialog } from "@/lib/use-modal-dialog";
 import { whatsappLink, AGENCY_PHONE } from "@/lib/constants";
 import { waHref } from "@/lib/wa-recipe";
 import { buildQuoteWhatsAppMessage } from "@/lib/quote-message";
@@ -40,6 +40,8 @@ export function QuoteModal() {
   const { isOpen, destination, suggestionDestinations, closeModal } = useModal();
   const [step, setStep] = useState(1);
   const dialogRef = useModalDialog(isOpen, closeModal);
+  // Close the dialog itself so the browser returns focus before React unmounts the form.
+  const closeDialog = () => dialogRef.current?.close();
 
   // Form state
   const [destino, setDestino] = useState("");
@@ -93,7 +95,7 @@ export function QuoteModal() {
       aerolinea,
     });
     window.open(whatsappLink(AGENCY_PHONE.whatsapp, text), "_blank");
-    closeModal();
+    closeDialog();
   };
 
   return (
@@ -115,12 +117,9 @@ export function QuoteModal() {
               Armá tu viaje a medida
             </h1>
             <button
-              ref={(el) => {
-                if (el && !el.autofocus) el.autofocus = true;
-              }}
+              ref={setAutofocus}
               type="button"
-              autoFocus
-              onClick={closeModal}
+              onClick={closeDialog}
               className="rounded-full p-1 text-white/80 transition hover:bg-white/10 hover:text-white"
               aria-label="Cerrar modal"
             >
@@ -397,7 +396,7 @@ export function QuoteModal() {
               href={waHref({ id: "quote-bypass" })}
               target="_blank"
               rel="noreferrer"
-              onClick={closeModal}
+              onClick={closeDialog}
               className="text-xs text-gray-400 underline transition hover:text-[#0b4058]"
             >
               ¿Preferís hablar directo con un asesor? {CTA_SECONDARY_LABEL}

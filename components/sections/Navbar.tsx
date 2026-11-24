@@ -12,7 +12,7 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { PrimaryCta, SecondaryCta } from "@/components/conversion";
 import { useModal } from "@/lib/context/ModalContext";
-import { DIALOG_CLOSEDBY_ANY, useModalDialog } from "@/lib/use-modal-dialog";
+import { DIALOG_CLOSEDBY_ANY, setAutofocus, useModalDialog } from "@/lib/use-modal-dialog";
 
 /** Sticky nav clearance; hero still below this → CTAs del nav ocultos. */
 const NAV_CLEARANCE_PX = 80;
@@ -42,6 +42,19 @@ export function Navbar({ isHome = false }: NavbarProps) {
   // Keep this route decision server-deterministic to avoid a hydration flash.
   const [showDesktopCtas, setShowDesktopCtas] = useState(!isHome);
   const menuDialogRef = useModalDialog(isOpen, () => setIsOpen(false));
+
+  // The menu is mobile-only; crossing to desktop width (e.g. rotating a phone) closes it
+  // instead of leaving an invisible modal that keeps the page inert.
+  useEffect(() => {
+    if (!isOpen) return;
+    const desktop = window.matchMedia("(min-width: 48rem)");
+    const closeOnDesktop = () => {
+      if (desktop.matches) setIsOpen(false);
+    };
+    closeOnDesktop();
+    desktop.addEventListener("change", closeOnDesktop);
+    return () => desktop.removeEventListener("change", closeOnDesktop);
+  }, [isOpen]);
   const desktopCtasRef = useRef<HTMLDivElement>(null);
   const logoLinkRef = useRef<HTMLAnchorElement>(null);
 
@@ -173,7 +186,7 @@ export function Navbar({ isHome = false }: NavbarProps) {
         ref={menuDialogRef}
         {...DIALOG_CLOSEDBY_ANY}
         aria-label="Menú de navegación"
-        className="open:flex md:open:hidden fixed inset-0 m-0 h-full w-full max-h-none max-w-none flex-col border-0 bg-[#0b4058] p-0 text-white backdrop:bg-transparent"
+        className="open:flex fixed inset-0 m-0 h-full w-full max-h-none max-w-none flex-col border-0 bg-[#0b4058] p-0 text-white backdrop:bg-transparent"
       >
         <div className="flex items-center justify-between px-6 py-3 border-b border-white/10 bg-[#0b4058]/90">
           <Link href="/" onClick={() => setIsOpen(false)} className="inline-flex items-center">
@@ -187,11 +200,8 @@ export function Navbar({ isHome = false }: NavbarProps) {
             />
           </Link>
           <button
-            ref={(el) => {
-              if (el && !el.autofocus) el.autofocus = true;
-            }}
+            ref={setAutofocus}
             type="button"
-            autoFocus
             onClick={() => setIsOpen(false)}
             aria-label="Cerrar menú de navegación"
             className="p-1.5 text-white transition-colors hover:text-[#dae553]"

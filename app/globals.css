@@ -124,6 +124,14 @@
   backdrop-filter: blur(var(--blur-sm, 8px));
 }
 
+/* A closed dialog stays in the top layer while its exit transition runs; let taps pass through. */
+#special-promo-dialog:not([open]),
+#special-promo-dialog:not([open])::backdrop,
+#mobile-navigation-dialog:not([open]),
+#mobile-navigation-dialog:not([open])::backdrop {
+  pointer-events: none;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .motion-hero-enter {
     animation: hero-enter 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;

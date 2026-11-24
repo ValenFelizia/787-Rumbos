@@ -7,6 +7,14 @@ export const DIALOG_CLOSEDBY_ANY = {
 } as Record<string, unknown>;
 
 /**
+ * React renders `autoFocus` as a `.focus()` call on mount, which fails while the
+ * dialog is closed. `showModal()` only honors the `autofocus` attribute.
+ */
+export function setAutofocus(el: HTMLElement | null) {
+  if (el) el.autofocus = true;
+}
+
+/**
  * Syncs a native `<dialog>` with React `open` state via `showModal()` / `close()`,
  * forwards native `close` events to the latest `onClose`, and adds light-dismiss
  * fallback when `closedBy` is unsupported.
@@ -30,12 +38,14 @@ export function useModalDialog(open: boolean, onClose: () => void) {
     }
   }, [open]);
 
+  // Keyed on `open` so a dialog that mounts after the first render still gets its listeners.
   useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) return;
 
+    // `close` fires asynchronously, so ignore it if the dialog was reopened meanwhile.
     const handleClose = () => {
-      onCloseRef.current();
+      if (!dialog.open) onCloseRef.current();
     };
     dialog.addEventListener("close", handleClose);
 
@@ -45,7 +55,8 @@ export function useModalDialog(open: boolean, onClose: () => void) {
       };
     }
 
-    const isOutside = (e: PointerEvent) => {
+    // Backdrop clicks target the dialog itself; test the pointer position against its box.
+    const isOutside = (e: MouseEvent) => {
       const rect = dialog.getBoundingClientRect();
       return (
         e.clientX < rect.left ||
@@ -57,24 +68,29 @@ export function useModalDialog(open: boolean, onClose: () => void) {
 
     let pressedOutside = false;
     const handlePointerDown = (e: PointerEvent) => {
-      pressedOutside = isOutside(e);
+      pressedOutside = e.button === 0 && e.target === dialog && isOutside(e);
     };
-    const handlePointerUp = (e: PointerEvent) => {
-      if (pressedOutside && isOutside(e) && dialog.getAttribute("closedby") === "any") {
-        dialog.close();
-      }
+    const handlePointerCancel = () => {
+      pressedOutside = false;
+    };
+    // Close on `click`, not `pointerup`: closing earlier un-inerts the page before
+    // iOS Safari's synthetic click, which would land on whatever sits underneath.
+    const handleClick = (e: MouseEvent) => {
+      if (pressedOutside && e.target === dialog && isOutside(e)) dialog.close();
       pressedOutside = false;
     };
 
     dialog.addEventListener("pointerdown", handlePointerDown);
-    dialog.addEventListener("pointerup", handlePointerUp);
+    dialog.addEventListener("pointercancel", handlePointerCancel);
+    dialog.addEventListener("click", handleClick);
 
     return () => {
       dialog.removeEventListener("close", handleClose);
       dialog.removeEventListener("pointerdown", handlePointerDown);
-      dialog.removeEventListener("pointerup", handlePointerUp);
+      dialog.removeEventListener("pointercancel", handlePointerCancel);
+      dialog.removeEventListener("click", handleClick);
     };
-  }, []);
+  }, [open]);
 
   return dialogRef;
 }

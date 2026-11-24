@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Plane, Calendar, Ticket, MapPin, X, ArrowRight } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { AGENCY_PHONE, whatsappLink } from "@/lib/constants";
-import { DIALOG_CLOSEDBY_ANY, useModalDialog } from "@/lib/use-modal-dialog";
+import { DIALOG_CLOSEDBY_ANY, setAutofocus, useModalDialog } from "@/lib/use-modal-dialog";
 import type { FeaturedPromo } from "@/lib/catalog/types";
 
 function isPromoActive(endsAt: string): boolean {
@@ -173,11 +173,8 @@ export function SpecialPromo({ promo }: { promo: FeaturedPromo | null }) {
             </span>
           </div>
           <button
-            ref={(el) => {
-              if (el && !el.autofocus) el.autofocus = true;
-            }}
+            ref={setAutofocus}
             type="button"
-            autoFocus
             onClick={closeModal}
             aria-label="Cerrar modal de promoción"
             className="shrink-0 p-2 -mr-1 -mt-1 text-white/70 hover:text-white hover:bg-white/10 rounded-full transition-all duration-200 cursor-pointer"
