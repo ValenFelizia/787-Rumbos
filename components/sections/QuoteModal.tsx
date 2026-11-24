@@ -1,7 +1,8 @@
 "use client";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { X, ChevronRight, ChevronLeft, Calendar, Users, Plane, Info, Clock } from "lucide-react";
 import { useModal } from "@/lib/context/ModalContext";
+import { DIALOG_CLOSEDBY_ANY, useModalDialog } from "@/lib/use-modal-dialog";
 import { whatsappLink, AGENCY_PHONE } from "@/lib/constants";
 import { waHref } from "@/lib/wa-recipe";
 import { buildQuoteWhatsAppMessage } from "@/lib/quote-message";
@@ -21,15 +22,6 @@ const DURATION_OPTIONS = [
 
 const AIRLINES = ["Copa Airlines", "JetSmart", "GOL", "Avianca", "Air Europa", "LATAM Airlines", "Arajet"];
 
-const FOCUSABLE_SELECTOR = [
-  "a[href]",
-  "button:not([disabled])",
-  "input:not([disabled])",
-  "select:not([disabled])",
-  "textarea:not([disabled])",
-  '[tabindex]:not([tabindex="-1"])',
-].join(",");
-
 const getNext12Months = () => {
   const months = ["Próximos 3 meses", "Temporada Alta", "Temporada Baja"];
   const date = new Date();
@@ -47,8 +39,7 @@ const getNext12Months = () => {
 export function QuoteModal() {
   const { isOpen, destination, suggestionDestinations, closeModal } = useModal();
   const [step, setStep] = useState(1);
-  const dialogRef = useRef<HTMLDivElement>(null);
-  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useModalDialog(isOpen, closeModal);
 
   // Form state
   const [destino, setDestino] = useState("");
@@ -79,62 +70,6 @@ export function QuoteModal() {
     }
   }, [isOpen, destination, months]);
 
-  // El modal bloquea el fondo, contiene el foco y lo devuelve al CTA que lo abrió.
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const previouslyFocusedElement =
-      document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    const previousOverflow = document.body.style.overflow;
-    const focusFrame = window.requestAnimationFrame(() => closeButtonRef.current?.focus());
-
-    document.body.style.overflow = "hidden";
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        e.preventDefault();
-        closeModal();
-        return;
-      }
-
-      if (e.key !== "Tab" || !dialogRef.current) return;
-
-      const focusableElements = Array.from(
-        dialogRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)
-      );
-      if (focusableElements.length === 0) {
-        e.preventDefault();
-        return;
-      }
-
-      const firstElement = focusableElements[0];
-      const lastElement = focusableElements[focusableElements.length - 1];
-      const activeElement = document.activeElement;
-
-      if (!dialogRef.current.contains(activeElement)) {
-        e.preventDefault();
-        (e.shiftKey ? lastElement : firstElement).focus();
-      } else if (e.shiftKey && activeElement === firstElement) {
-        e.preventDefault();
-        lastElement.focus();
-      } else if (!e.shiftKey && activeElement === lastElement) {
-        e.preventDefault();
-        firstElement.focus();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.cancelAnimationFrame(focusFrame);
-      window.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = previousOverflow;
-      if (previouslyFocusedElement?.isConnected) previouslyFocusedElement.focus();
-    };
-  }, [isOpen, closeModal]);
-
-  if (!isOpen) return null;
-
   const handleNext = () => {
     if (step < 3) {
       setStep((prev) => prev + 1);
@@ -162,38 +97,34 @@ export function QuoteModal() {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0b4058]/70 p-4 backdrop-blur-sm transition-opacity duration-300">
-      {/* Click outside to close */}
-      <div aria-hidden="true" className="absolute inset-0" onClick={closeModal} />
-
-      {/* Modal Card — role=dialog para accesibilidad y para que Playwright lo encuentre */}
-      <div
-        ref={dialogRef}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="quote-modal-title"
-        className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-white/10 bg-white shadow-2xl transition-all duration-300"
-      >
-
-        {/* Header */}
-        <div className="bg-gradient-to-r from-[#0b4058] to-[#006183] px-6 py-5 text-white">
-          <div className="flex items-center justify-between">
-            <h3
-              id="quote-modal-title"
-              className="font-[family-name:var(--font-elaine)] text-lg font-bold"
-            >
-              Armá tu viaje a medida
-            </h3>
-            <button
-              ref={closeButtonRef}
-              type="button"
-              onClick={closeModal}
-              className="rounded-full p-1 text-white/80 transition hover:bg-white/10 hover:text-white"
-              aria-label="Cerrar modal"
-            >
-              <X aria-hidden="true" className="h-5 w-5" />
-            </button>
-          </div>
+    <dialog
+      ref={dialogRef}
+      {...DIALOG_CLOSEDBY_ANY}
+      aria-labelledby="quote-modal-title"
+      className="m-auto w-[calc(100%-2rem)] max-w-lg max-h-[calc(100dvh-2rem)] overflow-y-auto rounded-2xl border border-white/10 bg-white p-0 text-[#0b4058] shadow-2xl backdrop:bg-[#0b4058]/70 backdrop:backdrop-blur-sm"
+    >
+      {/* Header */}
+      <div className="bg-gradient-to-r from-[#0b4058] to-[#006183] px-6 py-5 text-white">
+        <div className="flex items-center justify-between">
+          <h1
+            id="quote-modal-title"
+            className="font-[family-name:var(--font-elaine)] text-lg font-bold"
+          >
+            Armá tu viaje a medida
+          </h1>
+          <button
+            ref={(el) => {
+              if (el && !el.autofocus) el.autofocus = true;
+            }}
+            type="button"
+            autoFocus
+            onClick={closeModal}
+            className="rounded-full p-1 text-white/80 transition hover:bg-white/10 hover:text-white"
+            aria-label="Cerrar modal"
+          >
+            <X aria-hidden="true" className="h-5 w-5" />
+          </button>
+        </div>
 
           {/* Progress bar */}
           <div
@@ -472,7 +403,6 @@ export function QuoteModal() {
           </div>
 
         </form>
-      </div>
-    </div>
+    </dialog>
   );
 }

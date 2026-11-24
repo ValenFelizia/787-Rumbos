@@ -64,6 +64,15 @@
     outline-offset: 3px;
     border-radius: 4px;
   }
+
+  dialog:modal {
+    overscroll-behavior: contain;
+  }
+
+  dialog::backdrop {
+    overflow: hidden;
+    overscroll-behavior: contain;
+  }
 }
 
 /* Mantiene el colapso horizontal del grupo sin recortar el halo del CTA. */
