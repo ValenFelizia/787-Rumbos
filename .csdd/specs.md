@@ -312,6 +312,11 @@ a esa superficie.
   de API del MCP. La clave no se commitea. El endpoint exige Bearer; sin clave
   responde 401. Las operaciones del MCP corren con el usuario de la clave y sin
   saltear el access control.
+- **CSP:** en producción `script-src` no incluye `'unsafe-eval'` (#108); solo
+  `next dev` lo usa. `'unsafe-inline'` sigue porque los nonces obligarían a
+  renderizar cada página en cada visita y romperían el ISR. Antes de agregar en
+  Payload un campo `json` con `jsonSchema` (se compila con `Function(...)`) o un
+  campo `code` (Monaco), revisar la CSP: ambos necesitan eval.
 - **Seguridad fuera de alcance:** WAF dedicado, pentests formales y controles
   pensados para formularios públicos server-side o UGC.
 - **JSON-LD:** el `dangerouslySetInnerHTML` usa datos validados del CMS
