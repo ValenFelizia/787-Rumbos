@@ -24,15 +24,17 @@ const distDir = process.env.NEXT_DIST_DIR ?? ".next";
  * salvo que coincida con estas reglas.
  *
  * Notas para este proyecto:
- * - 'unsafe-inline' / 'unsafe-eval': Next.js aún los necesita en varios casos
- *   sin un esquema de nonces (más avanzado). Es un baseline razonable, no el
- *   CSP más estricto posible.
+ * - 'unsafe-inline': Next.js lo necesita para sus scripts inline mientras no
+ *   haya nonces, y los nonces obligan a renderizar cada página en cada visita
+ *   (rompería el ISR). Es un baseline razonable, no el CSP más estricto posible.
+ * - 'unsafe-eval': solo en `next dev`. El build de producción, Payload /admin y
+ *   los scripts de Vercel no usan eval (#108).
  * - va.vercel-scripts.com: Analytics en desarrollo; en producción suele ir por
  *   '/_vercel/insights/*' (cubierto por 'self').
  */
 const contentSecurityPolicy = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com",
+  `script-src 'self' 'unsafe-inline'${isProd ? "" : " 'unsafe-eval'"} https://va.vercel-scripts.com`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
