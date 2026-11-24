@@ -170,6 +170,25 @@
       backdrop-filter: blur(0px);
     }
   }
+
+  #mobile-navigation-dialog {
+    opacity: 0;
+    transform: translateY(0.5rem);
+    transition-property: opacity, transform, display, overlay;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+    transition-behavior: allow-discrete;
+  }
+
+  #mobile-navigation-dialog[open] {
+    opacity: 1;
+    transform: translateY(0);
+
+    @starting-style {
+      opacity: 0;
+      transform: translateY(0.5rem);
+    }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
