@@ -186,6 +186,7 @@ export function Navbar({ isHome = false }: NavbarProps) {
         ref={menuDialogRef}
         {...DIALOG_CLOSEDBY_ANY}
         aria-label="Menú de navegación"
+        inert={!isOpen}
         className="open:flex fixed inset-0 m-0 h-full w-full max-h-none max-w-none flex-col border-0 bg-[#0b4058] p-0 text-white backdrop:bg-transparent"
       >
         <div className="flex items-center justify-between px-6 py-3 border-b border-white/10 bg-[#0b4058]/90">

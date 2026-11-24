@@ -76,7 +76,14 @@ export function useModalDialog(open: boolean, onClose: () => void) {
     // Close on `click`, not `pointerup`: closing earlier un-inerts the page before
     // iOS Safari's synthetic click, which would land on whatever sits underneath.
     const handleClick = (e: MouseEvent) => {
-      if (pressedOutside && e.target === dialog && isOutside(e)) dialog.close();
+      if (
+        pressedOutside &&
+        e.target === dialog &&
+        isOutside(e) &&
+        dialog.getAttribute("closedby") === "any"
+      ) {
+        dialog.close();
+      }
       pressedOutside = false;
     };
 

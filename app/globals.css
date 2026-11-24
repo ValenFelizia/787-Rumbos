@@ -124,7 +124,8 @@
   backdrop-filter: blur(var(--blur-sm, 8px));
 }
 
-/* A closed dialog stays in the top layer while its exit transition runs; let taps pass through. */
+/* A closed dialog stays in the top layer while its exit transition runs; let taps pass through.
+   Keyboard focus is kept out by `inert` on the closed dialog. */
 #special-promo-dialog:not([open]),
 #special-promo-dialog:not([open])::backdrop,
 #mobile-navigation-dialog:not([open]),

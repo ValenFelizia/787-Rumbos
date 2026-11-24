@@ -157,6 +157,7 @@ export function SpecialPromo({ promo }: { promo: FeaturedPromo | null }) {
         ref={dialogRef}
         {...DIALOG_CLOSEDBY_ANY}
         aria-labelledby="special-promo-title"
+        inert={!isModalOpen}
         className="open:flex flex-col mt-auto mb-0 mx-auto sm:m-auto w-full sm:w-[calc(100%-2rem)] max-w-4xl max-h-[90dvh] overflow-hidden rounded-t-3xl sm:rounded-3xl border border-white/10 bg-gradient-to-br from-[#0b4058] to-[#004e6a] p-0 text-white shadow-2xl"
       >
         <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-[#f7a92a]/10 blur-3xl pointer-events-none" />
