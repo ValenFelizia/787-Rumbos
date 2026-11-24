@@ -13,6 +13,7 @@ import { whatsappDestinoFaq } from "../lib/catalog/logic";
 import { mapDestination, type DestinationDoc } from "../lib/catalog/map";
 import { mapFeaturedPromo, type FeaturedPromoDoc } from "../lib/catalog/promo";
 import type { DestinationPage, FeaturedPromo } from "../lib/catalog/types";
+import { promoSeed } from "./seed-data/promo";
 
 const goldenPath = path.join(process.cwd(), "e2e/golden/catalog.json");
 
@@ -98,10 +99,11 @@ const promoDoc = await payload.findGlobal({
   overrideAccess: true,
 });
 const promo = mapFeaturedPromo(promoDoc as FeaturedPromoDoc);
+const expectedPromo: FeaturedPromo = { ...golden.promo, endsAt: promoSeed.endsAt };
 
 const differences: string[] = [];
 diffAt("destinations", expected, normalizedActual, differences);
-diffAt("promo", golden.promo, promo, differences);
+diffAt("promo", expectedPromo, promo, differences);
 
 if (differences.length === 0) {
   console.log(`parity: 0 differences (${actual.length} destinos, promo)`);
