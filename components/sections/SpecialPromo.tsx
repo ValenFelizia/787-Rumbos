@@ -211,7 +211,7 @@ export function SpecialPromo({ promo }: { promo: FeaturedPromo | null }) {
             e.stopPropagation();
             setIsBannerVisible(false);
           }}
-          aria-label="Ocultar anuncio de Fórmula 1"
+          aria-label="Ocultar anuncio"
           className="absolute right-2 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full text-white/90 transition duration-200 hover:bg-white/10 hover:text-white"
         >
           <X aria-hidden="true" className="h-4 w-4" />
