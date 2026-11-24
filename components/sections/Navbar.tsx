@@ -12,12 +12,7 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { PrimaryCta, SecondaryCta } from "@/components/conversion";
 import { useModal } from "@/lib/context/ModalContext";
-
-const FOCUSABLE_SELECTOR = [
-  "a[href]",
-  "button:not([disabled])",
-  '[tabindex]:not([tabindex="-1"])',
-].join(",");
+import { DIALOG_CLOSEDBY_ANY, setAutofocus, useModalDialog } from "@/lib/use-modal-dialog";
 
 /** Sticky nav clearance; hero still below this → CTAs del nav ocultos. */
 const NAV_CLEARANCE_PX = 80;
@@ -46,9 +41,20 @@ export function Navbar({ isHome = false }: NavbarProps) {
   // Home: arrancar ocultos (Hero ya lleva el par). Otras rutas: siempre visibles.
   // Keep this route decision server-deterministic to avoid a hydration flash.
   const [showDesktopCtas, setShowDesktopCtas] = useState(!isHome);
-  const menuButtonRef = useRef<HTMLButtonElement>(null);
-  const menuDialogRef = useRef<HTMLDivElement>(null);
-  const closeMenuButtonRef = useRef<HTMLButtonElement>(null);
+  const menuDialogRef = useModalDialog(isOpen, () => setIsOpen(false));
+
+  // The menu is mobile-only; crossing to desktop width (e.g. rotating a phone) closes it
+  // instead of leaving an invisible modal that keeps the page inert.
+  useEffect(() => {
+    if (!isOpen) return;
+    const desktop = window.matchMedia("(min-width: 48rem)");
+    const closeOnDesktop = () => {
+      if (desktop.matches) setIsOpen(false);
+    };
+    closeOnDesktop();
+    desktop.addEventListener("change", closeOnDesktop);
+    return () => desktop.removeEventListener("change", closeOnDesktop);
+  }, [isOpen]);
   const desktopCtasRef = useRef<HTMLDivElement>(null);
   const logoLinkRef = useRef<HTMLAnchorElement>(null);
 
@@ -84,62 +90,6 @@ export function Navbar({ isHome = false }: NavbarProps) {
       logoLinkRef.current?.focus();
     }
   }, [showDesktopCtas]);
-
-  // El menú mobile funciona como overlay modal: foco contenido, Escape y retorno al disparador.
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const previouslyFocusedElement =
-      document.activeElement instanceof HTMLElement
-        ? document.activeElement
-        : menuButtonRef.current;
-    const previousOverflow = document.body.style.overflow;
-    const focusFrame = window.requestAnimationFrame(() => closeMenuButtonRef.current?.focus());
-
-    document.body.style.overflow = "hidden";
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        e.preventDefault();
-        setIsOpen(false);
-        return;
-      }
-
-      if (e.key !== "Tab" || !menuDialogRef.current) return;
-
-      const focusableElements = Array.from(
-        menuDialogRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)
-      );
-      if (focusableElements.length === 0) {
-        e.preventDefault();
-        return;
-      }
-
-      const firstElement = focusableElements[0];
-      const lastElement = focusableElements[focusableElements.length - 1];
-      const activeElement = document.activeElement;
-
-      if (!menuDialogRef.current.contains(activeElement)) {
-        e.preventDefault();
-        (e.shiftKey ? lastElement : firstElement).focus();
-      } else if (e.shiftKey && activeElement === firstElement) {
-        e.preventDefault();
-        lastElement.focus();
-      } else if (!e.shiftKey && activeElement === lastElement) {
-        e.preventDefault();
-        firstElement.focus();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.cancelAnimationFrame(focusFrame);
-      window.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = previousOverflow;
-      if (previouslyFocusedElement?.isConnected) previouslyFocusedElement.focus();
-    };
-  }, [isOpen]);
 
   const navLinks = [
     { label: "Inicio", href: "/#hero" },
@@ -218,7 +168,6 @@ export function Navbar({ isHome = false }: NavbarProps) {
             </div>
 
             <button
-              ref={menuButtonRef}
               type="button"
               onClick={() => setIsOpen(true)}
               aria-label="Abrir menú de navegación"
@@ -232,16 +181,13 @@ export function Navbar({ isHome = false }: NavbarProps) {
         </div>
       </nav>
 
-      <div
+      <dialog
         id="mobile-navigation-dialog"
         ref={menuDialogRef}
-        role="dialog"
-        aria-modal="true"
+        {...DIALOG_CLOSEDBY_ANY}
         aria-label="Menú de navegación"
-        aria-hidden={!isOpen}
         inert={!isOpen}
-        className={`fixed inset-0 z-50 md:hidden flex flex-col bg-[#0b4058] transition-all duration-300 ease-in-out ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none translate-y-2"
-          }`}
+        className="open:flex fixed inset-0 m-0 h-full w-full max-h-none max-w-none flex-col border-0 bg-[#0b4058] p-0 text-white backdrop:bg-transparent"
       >
         <div className="flex items-center justify-between px-6 py-3 border-b border-white/10 bg-[#0b4058]/90">
           <Link href="/" onClick={() => setIsOpen(false)} className="inline-flex items-center">
@@ -255,7 +201,7 @@ export function Navbar({ isHome = false }: NavbarProps) {
             />
           </Link>
           <button
-            ref={closeMenuButtonRef}
+            ref={setAutofocus}
             type="button"
             onClick={() => setIsOpen(false)}
             aria-label="Cerrar menú de navegación"
@@ -298,7 +244,7 @@ export function Navbar({ isHome = false }: NavbarProps) {
             />
           </div>
         </div>
-      </div>
+      </dialog>
     </>
   );
 }

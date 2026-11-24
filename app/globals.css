@@ -64,6 +64,15 @@
     outline-offset: 3px;
     border-radius: 4px;
   }
+
+  dialog:modal {
+    overscroll-behavior: contain;
+  }
+
+  dialog::backdrop {
+    overflow: hidden;
+    overscroll-behavior: contain;
+  }
 }
 
 /* Mantiene el colapso horizontal del grupo sin recortar el halo del CTA. */
@@ -110,24 +119,18 @@
   }
 }
 
-@keyframes promo-fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+#special-promo-dialog::backdrop {
+  background-color: rgb(0 0 0 / 0.6);
+  backdrop-filter: blur(var(--blur-sm, 8px));
 }
 
-@keyframes promo-scale-up {
-  from {
-    opacity: 0;
-    transform: translateY(12px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+/* A closed dialog stays in the top layer while its exit transition runs; let taps pass through.
+   Keyboard focus is kept out by `inert` on the closed dialog. */
+#special-promo-dialog:not([open]),
+#special-promo-dialog:not([open])::backdrop,
+#mobile-navigation-dialog:not([open]),
+#mobile-navigation-dialog:not([open])::backdrop {
+  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -139,12 +142,61 @@
     animation: about-settle 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
-  .animate-fade-in {
-    animation: promo-fade-in 0.25s ease-out both;
+  #special-promo-dialog {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+    transition-property: opacity, transform, display, overlay;
+    transition-duration: 0.3s;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    transition-behavior: allow-discrete;
   }
 
-  .animate-scale-up {
-    animation: promo-scale-up 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+  #special-promo-dialog[open] {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+
+    @starting-style {
+      opacity: 0;
+      transform: translateY(12px) scale(0.98);
+    }
+  }
+
+  #special-promo-dialog::backdrop {
+    background-color: rgb(0 0 0 / 0);
+    backdrop-filter: blur(0px);
+    transition-property: background-color, backdrop-filter, display, overlay;
+    transition-duration: 0.25s;
+    transition-timing-function: ease-out;
+    transition-behavior: allow-discrete;
+  }
+
+  #special-promo-dialog[open]::backdrop {
+    background-color: rgb(0 0 0 / 0.6);
+    backdrop-filter: blur(var(--blur-sm, 8px));
+
+    @starting-style {
+      background-color: rgb(0 0 0 / 0);
+      backdrop-filter: blur(0px);
+    }
+  }
+
+  #mobile-navigation-dialog {
+    opacity: 0;
+    transform: translateY(0.5rem);
+    transition-property: opacity, transform, display, overlay;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+    transition-behavior: allow-discrete;
+  }
+
+  #mobile-navigation-dialog[open] {
+    opacity: 1;
+    transform: translateY(0);
+
+    @starting-style {
+      opacity: 0;
+      transform: translateY(0.5rem);
+    }
   }
 }
 
@@ -154,9 +206,7 @@
   }
 
   .motion-hero-enter,
-  .motion-about-settle,
-  .animate-fade-in,
-  .animate-scale-up {
+  .motion-about-settle {
     animation: none !important;
   }
 }

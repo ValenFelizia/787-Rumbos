@@ -1,21 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Plane, Calendar, Ticket, MapPin, X, ArrowRight } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { AGENCY_PHONE, whatsappLink } from "@/lib/constants";
+import { DIALOG_CLOSEDBY_ANY, setAutofocus, useModalDialog } from "@/lib/use-modal-dialog";
 import type { FeaturedPromo } from "@/lib/catalog/types";
-
-const FOCUSABLE_SELECTOR = [
-  "a[href]",
-  "button:not([disabled])",
-  "input:not([disabled])",
-  "select:not([disabled])",
-  "textarea:not([disabled])",
-  '[tabindex]:not([tabindex="-1"])',
-].join(",");
 
 function isPromoActive(endsAt: string): boolean {
   const today = new Date();
@@ -123,77 +115,18 @@ function PromoPricingAndCtas({
 export function SpecialPromo({ promo }: { promo: FeaturedPromo | null }) {
   const [isBannerVisible, setIsBannerVisible] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const promoTriggerRef = useRef<HTMLButtonElement>(null);
-  const dialogRef = useRef<HTMLDivElement>(null);
-  const closeButtonRef = useRef<HTMLButtonElement>(null);
-
-  // El modal bloquea el fondo, contiene el foco y lo devuelve al disparador al cerrar.
-  useEffect(() => {
-    if (!isModalOpen) return;
-
-    const previouslyFocusedElement =
-      document.activeElement instanceof HTMLElement
-        ? document.activeElement
-        : promoTriggerRef.current;
-    const previousOverflow = document.body.style.overflow;
-    const focusFrame = window.requestAnimationFrame(() => closeButtonRef.current?.focus());
-
-    document.body.style.overflow = "hidden";
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        e.preventDefault();
-        setIsModalOpen(false);
-        return;
-      }
-
-      if (e.key !== "Tab" || !dialogRef.current) return;
-
-      const focusableElements = Array.from(
-        dialogRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)
-      );
-      if (focusableElements.length === 0) {
-        e.preventDefault();
-        return;
-      }
-
-      const firstElement = focusableElements[0];
-      const lastElement = focusableElements[focusableElements.length - 1];
-      const activeElement = document.activeElement;
-
-      if (!dialogRef.current.contains(activeElement)) {
-        e.preventDefault();
-        (e.shiftKey ? lastElement : firstElement).focus();
-      } else if (e.shiftKey && activeElement === firstElement) {
-        e.preventDefault();
-        lastElement.focus();
-      } else if (!e.shiftKey && activeElement === lastElement) {
-        e.preventDefault();
-        firstElement.focus();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.cancelAnimationFrame(focusFrame);
-      window.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = previousOverflow;
-      if (previouslyFocusedElement?.isConnected) previouslyFocusedElement.focus();
-    };
-  }, [isModalOpen]);
+  const closeModal = () => setIsModalOpen(false);
+  const dialogRef = useModalDialog(isModalOpen, closeModal);
 
   if (!promo || !isPromoActive(promo.endsAt) || !isBannerVisible) return null;
 
   const whatsappUrl = whatsappLink(AGENCY_PHONE.whatsapp, promo.whatsappMsg);
-  const closeModal = () => setIsModalOpen(false);
 
   return (
     <>
       {/* ─── BANNER DE NOTIFICACIÓN SUPERIOR (TOP BAR) ─── */}
       <div className="relative z-[40] flex w-full items-center bg-gradient-to-r from-red-700 via-red-600 to-red-700 text-center text-xs font-semibold text-white">
         <button
-          ref={promoTriggerRef}
           type="button"
           aria-haspopup="dialog"
           aria-controls="special-promo-dialog"
@@ -219,108 +152,99 @@ export function SpecialPromo({ promo }: { promo: FeaturedPromo | null }) {
       </div>
 
       {/* ─── MODAL DETALLADO DE PROMOCIÓN ─── */}
-      {isModalOpen && (
-        <div
-          className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center sm:p-4 bg-black/60 backdrop-blur-sm animate-fade-in"
-          onClick={closeModal}
-        >
-          {/* Sheet / card: viewport-constrained; scroll lives inside, not on the backdrop */}
-          <div
-            id="special-promo-dialog"
-            ref={dialogRef}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="special-promo-title"
-            className="relative flex w-full max-w-4xl max-h-[90dvh] flex-col overflow-hidden rounded-t-3xl sm:rounded-3xl border border-white/10 bg-gradient-to-br from-[#0b4058] to-[#004e6a] text-white shadow-2xl animate-scale-up"
-            onClick={(e) => e.stopPropagation()}
+      <dialog
+        id="special-promo-dialog"
+        ref={dialogRef}
+        {...DIALOG_CLOSEDBY_ANY}
+        aria-labelledby="special-promo-title"
+        inert={!isModalOpen}
+        className="open:flex flex-col mt-auto mb-0 mx-auto sm:m-auto w-full sm:w-[calc(100%-2rem)] max-w-4xl max-h-[90dvh] overflow-hidden rounded-t-3xl sm:rounded-3xl border border-white/10 bg-gradient-to-br from-[#0b4058] to-[#004e6a] p-0 text-white shadow-2xl"
+      >
+        <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-[#f7a92a]/10 blur-3xl pointer-events-none" />
+        <div className="absolute -left-20 -bottom-20 h-80 w-80 rounded-full bg-red-600/10 blur-3xl pointer-events-none" />
+
+        {/* Header sticky: badges + close */}
+        <div className="relative z-10 flex shrink-0 items-start justify-between gap-3 border-b border-white/10 px-5 pt-5 pb-3 sm:px-8 sm:pt-8 sm:pb-4">
+          <div className="flex flex-wrap items-center gap-2 pr-2">
+            <span className="inline-flex items-center gap-1 rounded-full bg-red-600/90 border border-red-500/20 px-3 py-1 text-[9px] font-black uppercase tracking-wider text-white">
+              {promo.badgeText}
+            </span>
+            <span className="inline-flex items-center gap-1 rounded-full bg-white/10 border border-white/15 px-3 py-1 text-[9px] font-black uppercase tracking-wider text-[#dae553]">
+              {promo.charterText}
+            </span>
+          </div>
+          <button
+            ref={setAutofocus}
+            type="button"
+            onClick={closeModal}
+            aria-label="Cerrar modal de promoción"
+            className="shrink-0 p-2 -mr-1 -mt-1 text-white/70 hover:text-white hover:bg-white/10 rounded-full transition-all duration-200 cursor-pointer"
           >
-            <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-[#f7a92a]/10 blur-3xl pointer-events-none" />
-            <div className="absolute -left-20 -bottom-20 h-80 w-80 rounded-full bg-red-600/10 blur-3xl pointer-events-none" />
+            <X aria-hidden="true" className="h-5 w-5" />
+          </button>
+        </div>
 
-            {/* Header sticky: badges + close */}
-            <div className="relative z-10 flex shrink-0 items-start justify-between gap-3 border-b border-white/10 px-5 pt-5 pb-3 sm:px-8 sm:pt-8 sm:pb-4">
-              <div className="flex flex-wrap items-center gap-2 pr-2">
-                <span className="inline-flex items-center gap-1 rounded-full bg-red-600/90 border border-red-500/20 px-3 py-1 text-[9px] font-black uppercase tracking-wider text-white">
-                  {promo.badgeText}
-                </span>
-                <span className="inline-flex items-center gap-1 rounded-full bg-white/10 border border-white/15 px-3 py-1 text-[9px] font-black uppercase tracking-wider text-[#dae553]">
-                  {promo.charterText}
-                </span>
-              </div>
-              <button
-                ref={closeButtonRef}
-                type="button"
-                onClick={closeModal}
-                aria-label="Cerrar modal de promoción"
-                className="shrink-0 p-2 -mr-1 -mt-1 text-white/70 hover:text-white hover:bg-white/10 rounded-full transition-all duration-200 cursor-pointer"
-              >
-                <X aria-hidden="true" className="h-5 w-5" />
-              </button>
+        {/* Body: mobile scrolls flyer+copy; desktop is two columns */}
+        <div className="relative z-10 flex min-h-0 flex-1 flex-col lg:flex-row lg:overflow-hidden">
+          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-4 sm:px-8 sm:py-5 lg:w-[60%] lg:pr-4">
+            {/* Folleto compacto — solo mobile (antes del copy) */}
+            <div className="mb-4 flex justify-center lg:hidden">
+              <PromoFlyer
+                promo={promo}
+                onNavigate={closeModal}
+                className="aspect-[4/5] w-full max-w-[160px]"
+              />
             </div>
 
-            {/* Body: mobile scrolls flyer+copy; desktop is two columns */}
-            <div className="relative z-10 flex min-h-0 flex-1 flex-col lg:flex-row lg:overflow-hidden">
-              <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-4 sm:px-8 sm:py-5 lg:w-[60%] lg:pr-4">
-                {/* Folleto compacto — solo mobile (antes del copy) */}
-                <div className="mb-4 flex justify-center lg:hidden">
-                  <PromoFlyer
-                    promo={promo}
-                    onNavigate={closeModal}
-                    className="aspect-[4/5] w-full max-w-[160px]"
-                  />
-                </div>
-
-                <div className="space-y-4">
-                  <div className="space-y-2">
-                    <h3
-                      id="special-promo-title"
-                      className="font-[family-name:var(--font-brand-heading)] text-2xl md:text-4xl font-extrabold tracking-tight leading-tight text-white text-balance"
-                    >
-                      {promo.title}
-                    </h3>
-                    <p className="text-white/80 text-xs md:text-sm leading-relaxed text-pretty">
-                      {promo.description}
-                    </p>
-                  </div>
-
-                  <div className="grid gap-3 sm:grid-cols-2 pt-1">
-                    {promo.inclusions.map((inc, i) => (
-                      <div
-                        key={i}
-                        className="flex items-center gap-2.5 bg-white/5 border border-white/5 rounded-xl p-2.5"
-                      >
-                        <InclusionIcon name={inc.icon} className="h-4 w-4 text-[#dae553] shrink-0" />
-                        <span className="text-[11px] font-semibold text-white/90 leading-snug">
-                          {inc.label}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Precio + CTAs — solo desktop (en mobile van al footer sticky) */}
-                <div className="mt-5 hidden border-t border-white/10 pt-4 lg:block">
-                  <PromoPricingAndCtas promo={promo} whatsappUrl={whatsappUrl} onNavigate={closeModal} />
-                </div>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <h1
+                  id="special-promo-title"
+                  className="font-[family-name:var(--font-brand-heading)] text-2xl md:text-4xl font-extrabold tracking-tight leading-tight text-white text-balance"
+                >
+                  {promo.title}
+                </h1>
+                <p className="text-white/80 text-xs md:text-sm leading-relaxed text-pretty">
+                  {promo.description}
+                </p>
               </div>
 
-              {/* Folleto — solo desktop */}
-              <div className="relative z-10 hidden shrink-0 items-center justify-center px-8 py-8 lg:flex lg:w-[40%]">
-                <PromoFlyer
-                  promo={promo}
-                  onNavigate={closeModal}
-                  className="aspect-[4/5] w-full max-w-[280px]"
-                />
+              <div className="grid gap-3 sm:grid-cols-2 pt-1">
+                {promo.inclusions.map((inc, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-2.5 bg-white/5 border border-white/5 rounded-xl p-2.5"
+                  >
+                    <InclusionIcon name={inc.icon} className="h-4 w-4 text-[#dae553] shrink-0" />
+                    <span className="text-[11px] font-semibold text-white/90 leading-snug">
+                      {inc.label}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Footer sticky — solo mobile: precio + CTAs siempre visibles */}
-            <div className="relative z-10 shrink-0 border-t border-white/10 bg-[#0b4058]/95 px-5 py-4 backdrop-blur-sm sm:px-8 lg:hidden">
+            {/* Precio + CTAs — solo desktop (en mobile van al footer sticky) */}
+            <div className="mt-5 hidden border-t border-white/10 pt-4 lg:block">
               <PromoPricingAndCtas promo={promo} whatsappUrl={whatsappUrl} onNavigate={closeModal} />
             </div>
           </div>
+
+          {/* Folleto — solo desktop */}
+          <div className="relative z-10 hidden shrink-0 items-center justify-center px-8 py-8 lg:flex lg:w-[40%]">
+            <PromoFlyer
+              promo={promo}
+              onNavigate={closeModal}
+              className="aspect-[4/5] w-full max-w-[280px]"
+            />
+          </div>
         </div>
-      )}
+
+        {/* Footer sticky — solo mobile: precio + CTAs siempre visibles */}
+        <div className="relative z-10 shrink-0 border-t border-white/10 bg-[#0b4058]/95 px-5 py-4 backdrop-blur-sm sm:px-8 lg:hidden">
+          <PromoPricingAndCtas promo={promo} whatsappUrl={whatsappUrl} onNavigate={closeModal} />
+        </div>
+      </dialog>
     </>
   );
 }
