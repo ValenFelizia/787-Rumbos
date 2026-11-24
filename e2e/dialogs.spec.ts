@@ -82,6 +82,24 @@ test.describe("mobile navigation dialog", () => {
   });
 });
 
+test.describe("mobile navigation dialog on rotation", () => {
+  test.use({ viewport: { width: 390, height: 844 } });
+
+  test("crossing to desktop width closes the menu and leaves the page usable", async ({ page }) => {
+    await page.goto("/");
+    await page.getByRole("button", { name: /abrir menú de navegación/i }).click();
+    const menuDialog = page.getByRole("dialog", { name: "Menú de navegación" });
+    await expect(menuDialog).toBeVisible();
+
+    await page.setViewportSize({ width: 1024, height: 768 });
+    await expect(menuDialog).toBeHidden();
+
+    const nav = page.getByRole("navigation", { name: "Navegación principal" });
+    await nav.getByRole("link", { name: "Destinos", exact: true }).click();
+    await expect(page).toHaveURL(/\/destinos$/);
+  });
+});
+
 test.describe("special promo dialog", () => {
   test("opens with focus inside, returns focus on Escape, and closes on outside click", async ({
     page,
