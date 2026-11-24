@@ -6,6 +6,7 @@
  */
 import type { ReactNode } from "react";
 import { ChevronDown } from "lucide-react";
+import { serializeJsonLd } from "@/lib/json-ld-script";
 import {
   faqItems as defaultFaqItems,
   faqAnswerToPlainText,
@@ -141,7 +142,7 @@ export function FAQ({
 
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(faqJsonLd) }}
       />
     </section>
   );

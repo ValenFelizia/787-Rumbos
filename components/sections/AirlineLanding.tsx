@@ -21,6 +21,7 @@ import {
   OFFICE_HOURS,
   whatsappLink,
 } from "@/lib/constants";
+import { serializeJsonLd } from "@/lib/json-ld-script";
 import { siteUrl } from "@/lib/site-url";
 import { ArrowLeft, Check, MapPin } from "lucide-react";
 
@@ -59,7 +60,7 @@ export function AirlineLanding({ airline }: { airline: AirlinePage }) {
     <main className="min-h-screen bg-[#f9f9f9] text-[#0b4058]">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbJsonLd) }}
       />
 
       <Navbar />

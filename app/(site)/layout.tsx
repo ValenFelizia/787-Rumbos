@@ -17,6 +17,7 @@ import { QuoteModal } from '@/components/sections/QuoteModal'
 import { getQuoteSuggestionNames } from '@/lib/catalog/repository'
 import { GOOGLE_MAPS_LINK, AGENCY_PHONE, OFFICE_GEO } from '@/lib/constants'
 import { getMetadataBase, siteUrl } from '@/lib/site-url'
+import { serializeJsonLd } from '@/lib/json-ld-script'
 import '../globals.css'
 
 const siteTitle = '787 Rumbos | Agencia de Viajes en Córdoba'
@@ -156,7 +157,7 @@ export default async function RootLayout({
         {/* Datos estructurados JSON-LD — visible para buscadores, no para usuarios */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
         />
       </body>
     </html>

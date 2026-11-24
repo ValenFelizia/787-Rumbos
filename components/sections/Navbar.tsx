@@ -175,13 +175,13 @@ export function Navbar({ isHome = false }: NavbarProps) {
 
           <div className="hidden md:flex min-w-0 flex-1 items-center justify-center gap-5 lg:gap-6">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 className="font-[family-name:var(--font-brand-heading)] shrink-0 whitespace-nowrap text-sm font-semibold text-white/70 transition-colors duration-200 hover:text-white"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -268,14 +268,14 @@ export function Navbar({ isHome = false }: NavbarProps) {
         <div className="flex-1 overflow-y-auto px-6 py-8 flex flex-col justify-between gap-8">
           <div className="flex flex-col gap-4">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
                 className="font-[family-name:var(--font-brand-heading)] text-2xl font-bold text-white/95 hover:text-[#dae553] transition-colors py-2 block border-b border-white/5"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
 
