@@ -103,28 +103,30 @@ export function QuoteModal() {
       aria-labelledby="quote-modal-title"
       className="m-auto w-[calc(100%-2rem)] max-w-lg max-h-[calc(100dvh-2rem)] overflow-y-auto rounded-2xl border border-white/10 bg-white p-0 text-[#0b4058] shadow-2xl backdrop:bg-[#0b4058]/70 backdrop:backdrop-blur-sm"
     >
-      {/* Header */}
-      <div className="bg-gradient-to-r from-[#0b4058] to-[#006183] px-6 py-5 text-white">
-        <div className="flex items-center justify-between">
-          <h1
-            id="quote-modal-title"
-            className="font-[family-name:var(--font-elaine)] text-lg font-bold"
-          >
-            Armá tu viaje a medida
-          </h1>
-          <button
-            ref={(el) => {
-              if (el && !el.autofocus) el.autofocus = true;
-            }}
-            type="button"
-            autoFocus
-            onClick={closeModal}
-            className="rounded-full p-1 text-white/80 transition hover:bg-white/10 hover:text-white"
-            aria-label="Cerrar modal"
-          >
-            <X aria-hidden="true" className="h-5 w-5" />
-          </button>
-        </div>
+      {isOpen && (
+        <>
+        {/* Header */}
+        <div className="bg-gradient-to-r from-[#0b4058] to-[#006183] px-6 py-5 text-white">
+          <div className="flex items-center justify-between">
+            <h1
+              id="quote-modal-title"
+              className="font-[family-name:var(--font-elaine)] text-lg font-bold"
+            >
+              Armá tu viaje a medida
+            </h1>
+            <button
+              ref={(el) => {
+                if (el && !el.autofocus) el.autofocus = true;
+              }}
+              type="button"
+              autoFocus
+              onClick={closeModal}
+              className="rounded-full p-1 text-white/80 transition hover:bg-white/10 hover:text-white"
+              aria-label="Cerrar modal"
+            >
+              <X aria-hidden="true" className="h-5 w-5" />
+            </button>
+          </div>
 
           {/* Progress bar */}
           <div
@@ -403,6 +405,8 @@ export function QuoteModal() {
           </div>
 
         </form>
+        </>
+      )}
     </dialog>
   );
 }
