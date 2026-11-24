@@ -428,7 +428,7 @@ test.describe("cotizador", () => {
       const w = window as unknown as { __cspViolations: string[] };
       w.__cspViolations = [];
       document.addEventListener("securitypolicyviolation", (e) =>
-        w.__cspViolations.push(`${e.violatedDirective} ${e.blockedURI}`),
+        w.__cspViolations.push(`${e.violatedDirective} ${e.blockedURI} ${e.sourceFile}:${e.lineNumber}`),
       );
     });
     const response = await page.goto("/");
