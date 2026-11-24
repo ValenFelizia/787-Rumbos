@@ -126,6 +126,7 @@ test.describe("mobile navigation dialog on rotation", () => {
     await expect(menuDialog).toBeHidden();
 
     const nav = page.getByRole("navigation", { name: "Navegación principal" });
+    await expect(nav.getByRole("link", { name: /787 Rumbos/i })).toBeFocused();
     await nav.getByRole("link", { name: "Destinos", exact: true }).click();
     await expect(page).toHaveURL(/\/destinos$/);
   });

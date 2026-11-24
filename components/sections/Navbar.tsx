@@ -41,22 +41,25 @@ export function Navbar({ isHome = false }: NavbarProps) {
   // Home: arrancar ocultos (Hero ya lleva el par). Otras rutas: siempre visibles.
   // Keep this route decision server-deterministic to avoid a hydration flash.
   const [showDesktopCtas, setShowDesktopCtas] = useState(!isHome);
+  const desktopCtasRef = useRef<HTMLDivElement>(null);
+  const logoLinkRef = useRef<HTMLAnchorElement>(null);
   const menuDialogRef = useModalDialog(isOpen, () => setIsOpen(false));
 
   // The menu is mobile-only; crossing to desktop width (e.g. rotating a phone) closes it
-  // instead of leaving an invisible modal that keeps the page inert.
+  // instead of leaving an invisible modal that keeps the page inert, then moves focus to
+  // the visible logo because native close() tries to restore to the hidden hamburger button.
   useEffect(() => {
     if (!isOpen) return;
     const desktop = window.matchMedia("(min-width: 48rem)");
     const closeOnDesktop = () => {
-      if (desktop.matches) setIsOpen(false);
+      if (!desktop.matches) return;
+      menuDialogRef.current?.close();
+      logoLinkRef.current?.focus();
     };
     closeOnDesktop();
     desktop.addEventListener("change", closeOnDesktop);
     return () => desktop.removeEventListener("change", closeOnDesktop);
-  }, [isOpen]);
-  const desktopCtasRef = useRef<HTMLDivElement>(null);
-  const logoLinkRef = useRef<HTMLAnchorElement>(null);
+  }, [isOpen, menuDialogRef]);
 
   // T-028/T-043: CTAs desktop siguen la geometría del Hero (sync + scroll/resize).
   useEffect(() => {
