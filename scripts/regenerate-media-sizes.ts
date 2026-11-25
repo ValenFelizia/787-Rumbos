@@ -8,7 +8,6 @@
  *
  * Uso: npm run cms:regen-sizes [-- --dry-run]
  */
-import { readFileSync } from "node:fs";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { createLocalReq, getPayload, type File, type Payload } from "payload";
@@ -28,16 +27,6 @@ const MIME_BY_EXT: Record<string, string> = {
   svg: "image/svg+xml",
   webp: "image/webp",
 };
-
-function isDryRunEnabled(): boolean {
-  if (process.argv.includes("--dry-run")) return true;
-  try {
-    const cmdline = readFileSync("/proc/self/cmdline", "utf8");
-    return cmdline.split("\0").includes("--dry-run");
-  } catch {
-    return false;
-  }
-}
 
 function getMissingSizes(doc: Media, sizeNames: readonly MediaSizeName[]): MediaSizeName[] {
   return sizeNames.filter((sizeName) => {
@@ -119,7 +108,8 @@ async function loadOriginalFile(payload: Payload, doc: Media): Promise<File> {
 }
 
 async function main(): Promise<void> {
-  const dryRun = isDryRunEnabled();
+  // `cms:regen-sizes` ends with `--` so `payload run` passes `--dry-run` through.
+  const dryRun = process.argv.includes("--dry-run");
   const payload = await getPayload({ config });
 
   const configuredSizes = (payload.collections.media.config.upload.imageSizes ?? []).map(
