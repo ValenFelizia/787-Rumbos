@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { resolveUniqueMediaFilename } from "./filename";
+import { normalizeUploadName, resolveUniqueMediaFilename } from "./filename";
 
 describe("resolveUniqueMediaFilename", () => {
   it("keeps the incoming filename when there is no basename clash", () => {
@@ -37,5 +37,16 @@ describe("resolveUniqueMediaFilename", () => {
     const first = resolveUniqueMediaFilename(`${long}.jpg`, []);
     assert.equal(first, `${"a".repeat(60)}.jpg`);
     assert.equal(resolveUniqueMediaFilename(`${long}.png`, [first]), `${"a".repeat(60)}-1.png`);
+  });
+
+  it("normalizes the uploaded name so the basename matches Payload's split", () => {
+    assert.equal(normalizeUploadName("photo.jpg.", "image/jpeg"), "photo.jpg");
+    assert.equal(normalizeUploadName("photo.JPEG", "image/jpeg"), "photo.jpg");
+    assert.equal(normalizeUploadName("photo", "image/png"), "photo.png");
+    assert.equal(normalizeUploadName("photo.png", "image/jpeg"), "photo.png.jpg");
+    assert.equal(
+      resolveUniqueMediaFilename(normalizeUploadName("photo.jpg.", "image/jpeg"), ["photo.jpeg"]),
+      "photo-1.jpg",
+    );
   });
 });

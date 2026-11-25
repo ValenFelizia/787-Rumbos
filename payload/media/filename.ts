@@ -29,6 +29,27 @@ export function sanitizeMediaFilename(filename: string): string {
   return `${sanitize(basename)}${ext}`;
 }
 
+const EXT_BY_MIME: Record<string, string> = {
+  "image/jpeg": ".jpg",
+  "image/png": ".png",
+  "image/webp": ".webp",
+  "image/avif": ".avif",
+};
+
+/**
+ * Deja el nombre subido como `<basename>.<ext>` con la extensión del mime real,
+ * para que el basename que se compara sea el mismo que Payload usa al nombrar las
+ * variantes (`photo.jpg.` o `photo` sin extensión se partirían distinto si no).
+ */
+export function normalizeUploadName(filename: string, mimeType: string | undefined): string {
+  const cleaned = sanitize(filename) || filename;
+  const ext = mimeType ? EXT_BY_MIME[mimeType] : undefined;
+  if (!ext) return cleaned;
+  const { basename, ext: currentExt } = splitMediaFilename(cleaned);
+  const keepsExt = currentExt.toLowerCase() === ext || (ext === ".jpg" && currentExt.toLowerCase() === ".jpeg");
+  return keepsExt ? `${basename}${ext}` : `${cleaned}${ext}`;
+}
+
 // Payload trunca el basename a 255 bytes al sanitizarlo, lo que borraría un sufijo
 // `-N` agregado al final. 60 caracteres son como mucho 240 bytes en UTF-8.
 const MAX_BASENAME_CHARS = 60;

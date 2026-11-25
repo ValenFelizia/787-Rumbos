@@ -1,5 +1,5 @@
 import { APIError, type CollectionBeforeOperationHook } from "payload";
-import { resolveUniqueMediaFilename } from "../media/filename";
+import { normalizeUploadName, resolveUniqueMediaFilename } from "../media/filename";
 
 /**
  * `getSafeFileName` de Payload solo exige unicidad del `filename` completo, pero
@@ -42,7 +42,10 @@ export const ensureUniqueMediaFilename: CollectionBeforeOperationHook = async ({
   // idénticos), así nunca cae en el basename de otro doc ni reutiliza URLs cacheadas.
   const takenFilenames = existing.docs.map((doc) => doc.filename);
 
-  const uniqueName = resolveUniqueMediaFilename(file.name, takenFilenames);
+  const uniqueName = resolveUniqueMediaFilename(
+    normalizeUploadName(file.name, file.mimetype),
+    takenFilenames,
+  );
   if (uniqueName !== file.name) {
     req.file = { ...file, name: uniqueName };
   }
