@@ -115,5 +115,6 @@ if (differences.length === 0) {
   console.error(`parity: ${differences.length} differences`);
   for (const line of differences.slice(0, 40)) console.error(line);
   if (differences.length > 40) console.error(`… y ${differences.length - 40} más`);
-  process.exitCode = 1;
+  // `payload run` calls process.exit(0) after importing the script, overriding process.exitCode.
+  process.exit(1);
 }
