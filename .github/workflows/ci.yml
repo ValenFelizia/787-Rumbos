@@ -60,6 +60,9 @@ jobs:
       - name: Migrate database
         run: npm run cms:migrate
 
+      - name: Payload types up to date
+        run: npm run generate:types && git diff --exit-code payload-types.ts
+
       - name: Seed catalog
         run: npm run cms:seed
 

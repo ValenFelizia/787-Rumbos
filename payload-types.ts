@@ -181,7 +181,7 @@ export interface Media {
   id: number;
   alt: string;
   /**
-   * Si viene del sitio estático, p. ej. /destinos/salta.png. El render la prefiere sobre la URL del archivo.
+   * Ya no se usa: el sitio siempre muestra el archivo subido. Dejalo vacío.
    */
   legacyPath?: string | null;
   updatedAt: string;
