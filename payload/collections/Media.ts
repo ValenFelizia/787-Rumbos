@@ -2,14 +2,14 @@ import path from "path";
 import { fileURLToPath } from "url";
 import type { CollectionConfig, GenerateImageName, ImageSize } from "payload";
 import { isAdminOrEncargado, isAuthenticated } from "../access";
+import { ensureUniqueMediaFilename } from "../hooks/mediaFilename";
 import {
   revalidateCatalogAfterChange,
   revalidateCatalogAfterDelete,
 } from "../hooks/revalidateCatalog";
+import { IMAGE_SIZE_WIDTHS } from "../media/filename";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
-
-const IMAGE_SIZE_WIDTHS = [640, 1280, 1920] as const;
 
 const generateWebpImageName: GenerateImageName = ({ originalName, sizeName }) =>
   `${originalName}-${sizeName}.webp`;
@@ -40,12 +40,13 @@ export const Media: CollectionConfig = {
     delete: isAdminOrEncargado,
   },
   hooks: {
+    beforeOperation: [ensureUniqueMediaFilename],
     afterChange: [revalidateCatalogAfterChange],
     afterDelete: [revalidateCatalogAfterDelete],
   },
   upload: {
     staticDir: path.resolve(dirname, "../../media"),
-    mimeTypes: ["image/*"],
+    mimeTypes: ["image/jpeg", "image/png", "image/webp", "image/avif"],
     imageSizes,
   },
   fields: [
