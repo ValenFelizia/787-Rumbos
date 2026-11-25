@@ -423,12 +423,21 @@ test.describe("admin", () => {
 
 test.describe("cotizador", () => {
   test("el CTA principal abre el modal de cotización", async ({ page }) => {
+    // Browsers report CSP violations through this event, not the console.
+    await page.addInitScript(() => {
+      const w = window as unknown as { __cspViolations: string[] };
+      w.__cspViolations = [];
+      document.addEventListener("securitypolicyviolation", (e) =>
+        w.__cspViolations.push(`${e.violatedDirective} ${e.blockedURI} ${e.sourceFile}:${e.lineNumber}`),
+      );
+    });
     const response = await page.goto("/");
 
     expect(response).not.toBeNull();
     expect(response?.headers()["content-security-policy"]).toContain(
       "upgrade-insecure-requests",
     );
+    expect(response?.headers()["content-security-policy"]).not.toContain("'unsafe-eval'");
     expect(response?.headers()["strict-transport-security"]).toContain(
       "max-age=63072000",
     );
@@ -452,6 +461,10 @@ test.describe("cotizador", () => {
     await expect(suggestionChips.first()).toBeVisible();
     expect(await suggestionChips.count()).toBeGreaterThan(0);
     expect(await suggestionChips.count()).toBeLessThanOrEqual(6);
+    const cspViolations = await page.evaluate(
+      () => (window as unknown as { __cspViolations: string[] }).__cspViolations,
+    );
+    expect(cspViolations).toEqual([]);
   });
 });
 
