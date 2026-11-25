@@ -39,8 +39,9 @@ export const Media: CollectionConfig = {
     update: isAuthenticated,
     delete: isAdminOrEncargado,
   },
-  // Duplicar no pasa por `ensureUniqueMediaFilename` (no hay `req.file` en
-  // beforeOperation) y podría pisar las variantes de otra imagen.
+  // Duplicar copiaría el archivo sin el chequeo de basename y podría pisar las
+  // variantes de otra imagen. Esto oculta el botón y frena la Local API; el
+  // endpoint REST lo rechaza `ensureUniqueMediaFilename`.
   disableDuplicate: true,
   hooks: {
     beforeOperation: [ensureUniqueMediaFilename],
