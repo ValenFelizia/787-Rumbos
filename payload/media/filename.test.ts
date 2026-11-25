@@ -30,4 +30,12 @@ describe("resolveUniqueMediaFilename", () => {
     assert.equal(resolveUniqueMediaFilename("beach?.png", ["beach.jpg"]), "beach-1.png");
     assert.equal(resolveUniqueMediaFilename("hero-w640 .jpg", []), "hero-w640-1.jpg");
   });
+
+  it("never lets Payload empty or truncate the stored basename", () => {
+    assert.equal(resolveUniqueMediaFilename("con.jpg", []), "imagen.jpg");
+    const long = "a".repeat(300);
+    const first = resolveUniqueMediaFilename(`${long}.jpg`, []);
+    assert.equal(first, `${"a".repeat(60)}.jpg`);
+    assert.equal(resolveUniqueMediaFilename(`${long}.png`, [first]), `${"a".repeat(60)}-1.png`);
+  });
 });
