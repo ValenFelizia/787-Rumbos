@@ -24,7 +24,11 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { createLocalReq, getPayload, type File, type Payload } from "payload";
 import config from "../payload.config";
-import { hasReservedMediaSizeSuffix, splitMediaFilename } from "../payload/media/filename";
+import {
+  hasReservedMediaSizeSuffix,
+  sanitizeMediaFilename,
+  splitMediaFilename,
+} from "../payload/media/filename";
 import type { Media } from "../payload-types";
 
 type MediaSizeName = keyof NonNullable<Media["sizes"]>;
@@ -285,6 +289,9 @@ async function main(): Promise<void> {
   const docsByBasename = new Map<string, string[]>();
   for (const doc of docs) {
     if (!doc.filename) continue;
+    if (sanitizeMediaFilename(doc.filename) !== doc.filename) {
+      throw new Error(`media#${doc.id} ${doc.filename}: Payload lo renombraría al resubirlo`);
+    }
     const key = splitMediaFilename(doc.filename).basename.toLowerCase();
     docsByBasename.set(key, [...(docsByBasename.get(key) ?? []), `media#${doc.id} ${doc.filename}`]);
     if (hasReservedMediaSizeSuffix(splitMediaFilename(doc.filename).basename)) {
