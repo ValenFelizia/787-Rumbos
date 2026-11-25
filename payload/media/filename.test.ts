@@ -1,0 +1,56 @@
+import assert from "node:assert/strict";
+import { describe, it } from "node:test";
+import { normalizeUploadName, resolveUniqueMediaFilename } from "./filename";
+
+describe("resolveUniqueMediaFilename", () => {
+  it("keeps the incoming filename when there is no basename clash", () => {
+    assert.equal(resolveUniqueMediaFilename("bariloche.jpg", ["salta.png", "mendoza.jpg"]), "bariloche.jpg");
+  });
+
+  it("renames x.png to x-1.png when x.jpg exists", () => {
+    assert.equal(resolveUniqueMediaFilename("x.png", ["x.jpg"]), "x-1.png");
+  });
+
+  it("increments to x-2.png when x and x-1 are already taken", () => {
+    assert.equal(resolveUniqueMediaFilename("x.png", ["x.jpg", "x-1.webp"]), "x-2.png");
+  });
+
+  it("renames filenames whose basename ends with a reserved size suffix (-w640/-w1280/-w1920)", () => {
+    assert.equal(resolveUniqueMediaFilename("hero-w640.jpg", []), "hero-w640-1.jpg");
+    assert.equal(resolveUniqueMediaFilename("hero-w1280.png", ["hero-w1280-1.jpg"]), "hero-w1280-2.png");
+    assert.equal(resolveUniqueMediaFilename("hero-w1920.webp", []), "hero-w1920-1.webp");
+  });
+
+  it("handles multi-dot filenames by splitting on the final dot", () => {
+    assert.equal(resolveUniqueMediaFilename("rio.de.janeiro.png", ["rio.de.janeiro.jpg"]), "rio.de.janeiro-1.png");
+  });
+
+  it("compares the name Payload will store after sanitizing it", () => {
+    assert.equal(resolveUniqueMediaFilename("beach .png", ["beach.jpg"]), "beach-1.png");
+    assert.equal(resolveUniqueMediaFilename("beach?.png", ["beach.jpg"]), "beach-1.png");
+    assert.equal(resolveUniqueMediaFilename("hero-w640 .jpg", []), "hero-w640-1.jpg");
+  });
+
+  it("never lets Payload empty or truncate the stored basename", () => {
+    assert.equal(resolveUniqueMediaFilename("con.jpg", []), "imagen.jpg");
+    const long = "a".repeat(300);
+    const first = resolveUniqueMediaFilename(`${long}.jpg`, []);
+    assert.equal(first, `${"a".repeat(60)}.jpg`);
+    assert.equal(resolveUniqueMediaFilename(`${long}.png`, [first]), `${"a".repeat(60)}-1.png`);
+  });
+
+  it("normalizes the uploaded name so the basename matches Payload's split", () => {
+    assert.equal(normalizeUploadName("photo.jpg.", "image/jpeg"), "photo.jpg");
+    assert.equal(normalizeUploadName("photo.JPEG", "image/jpeg"), "photo.jpg");
+    assert.equal(normalizeUploadName("photo", "image/png"), "photo.png");
+    assert.equal(normalizeUploadName("photo.png", "image/jpeg"), "photo.png.jpg");
+    assert.equal(
+      resolveUniqueMediaFilename(normalizeUploadName("photo.jpg.", "image/jpeg"), ["photo.jpeg"]),
+      "photo-1.jpg",
+    );
+  });
+
+  it("treats an existing original named like a variant as taking its base", () => {
+    assert.equal(resolveUniqueMediaFilename("hero.jpg", ["hero-w640.webp"]), "hero-1.jpg");
+  });
+});

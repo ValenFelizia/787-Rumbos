@@ -1,13 +1,31 @@
 import path from "path";
 import { fileURLToPath } from "url";
-import type { CollectionConfig } from "payload";
+import type { CollectionConfig, GenerateImageName, ImageSize } from "payload";
 import { isAdminOrEncargado, isAuthenticated } from "../access";
+import { ensureUniqueMediaFilename } from "../hooks/mediaFilename";
 import {
   revalidateCatalogAfterChange,
   revalidateCatalogAfterDelete,
 } from "../hooks/revalidateCatalog";
+import { IMAGE_SIZE_WIDTHS } from "../media/filename";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const generateWebpImageName: GenerateImageName = ({ originalName, sizeName }) =>
+  `${originalName}-${sizeName}.webp`;
+
+const imageSizes: ImageSize[] = IMAGE_SIZE_WIDTHS.map((width) => ({
+  name: `w${width}`,
+  width,
+  withoutEnlargement: true,
+  formatOptions: {
+    format: "webp",
+    options: {
+      quality: 75,
+    },
+  },
+  generateImageName: generateWebpImageName,
+}));
 
 export const Media: CollectionConfig = {
   slug: "media",
@@ -21,13 +39,19 @@ export const Media: CollectionConfig = {
     update: isAuthenticated,
     delete: isAdminOrEncargado,
   },
+  // Duplicar copiaría el archivo sin el chequeo de basename y podría pisar las
+  // variantes de otra imagen. Esto oculta el botón y frena la Local API; el
+  // endpoint REST lo rechaza `ensureUniqueMediaFilename`.
+  disableDuplicate: true,
   hooks: {
+    beforeOperation: [ensureUniqueMediaFilename],
     afterChange: [revalidateCatalogAfterChange],
     afterDelete: [revalidateCatalogAfterDelete],
   },
   upload: {
     staticDir: path.resolve(dirname, "../../media"),
-    mimeTypes: ["image/*"],
+    mimeTypes: ["image/jpeg", "image/png", "image/webp", "image/avif"],
+    imageSizes,
   },
   fields: [
     {
