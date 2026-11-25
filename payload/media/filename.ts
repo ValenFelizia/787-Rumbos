@@ -73,7 +73,13 @@ export function resolveUniqueMediaFilename(
   const takenBasenames = new Set<string>();
   for (const filename of existingFilenames) {
     if (!filename) continue;
-    takenBasenames.add(splitMediaFilename(filename).basename.toLowerCase());
+    const taken = splitMediaFilename(filename).basename.toLowerCase();
+    takenBasenames.add(taken);
+    // Un original anterior a esta regla llamado `hero-w640.webp` ocupa la variante
+    // de `hero`: ese basename tampoco se puede usar.
+    for (const suffix of RESERVED_SIZE_SUFFIXES) {
+      if (taken.endsWith(suffix)) takenBasenames.add(taken.slice(0, -suffix.length));
+    }
   }
 
   const { basename: rawBasename, ext } = splitMediaFilename(incomingFilename);

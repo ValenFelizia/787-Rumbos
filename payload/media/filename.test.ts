@@ -49,4 +49,8 @@ describe("resolveUniqueMediaFilename", () => {
       "photo-1.jpg",
     );
   });
+
+  it("treats an existing original named like a variant as taking its base", () => {
+    assert.equal(resolveUniqueMediaFilename("hero.jpg", ["hero-w640.webp"]), "hero-1.jpg");
+  });
 });
