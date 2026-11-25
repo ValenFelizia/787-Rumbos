@@ -1,6 +1,6 @@
 import path from "path";
 import { fileURLToPath } from "url";
-import type { CollectionConfig } from "payload";
+import type { CollectionConfig, GenerateImageName, ImageSize } from "payload";
 import { isAdminOrEncargado, isAuthenticated } from "../access";
 import {
   revalidateCatalogAfterChange,
@@ -8,6 +8,24 @@ import {
 } from "../hooks/revalidateCatalog";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const IMAGE_SIZE_WIDTHS = [640, 1280, 1920] as const;
+
+const generateWebpImageName: GenerateImageName = ({ originalName, sizeName }) =>
+  `${originalName}-${sizeName}.webp`;
+
+const imageSizes: ImageSize[] = IMAGE_SIZE_WIDTHS.map((width) => ({
+  name: `w${width}`,
+  width,
+  withoutEnlargement: true,
+  formatOptions: {
+    format: "webp",
+    options: {
+      quality: 75,
+    },
+  },
+  generateImageName: generateWebpImageName,
+}));
 
 export const Media: CollectionConfig = {
   slug: "media",
@@ -28,6 +46,7 @@ export const Media: CollectionConfig = {
   upload: {
     staticDir: path.resolve(dirname, "../../media"),
     mimeTypes: ["image/*"],
+    imageSizes,
   },
   fields: [
     {
