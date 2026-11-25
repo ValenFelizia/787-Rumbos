@@ -9,7 +9,7 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { getPayload } from "payload";
 import config from "../payload.config";
-import { whatsappDestinoFaq } from "../lib/catalog/logic";
+import { isPriceExpired, whatsappDestinoFaq } from "../lib/catalog/logic";
 import { mapDestination, type DestinationDoc } from "../lib/catalog/map";
 import { mapFeaturedPromo, type FeaturedPromoDoc } from "../lib/catalog/promo";
 import type { DestinationPage, FeaturedPromo } from "../lib/catalog/types";
@@ -98,10 +98,16 @@ const promoDoc = await payload.findGlobal({
   overrideAccess: true,
 });
 const promo = mapFeaturedPromo(promoDoc as FeaturedPromoDoc);
+// The seed writes `endsAt` relative to the day it ran, so compare the rest of the
+// promo with the golden and only require that the stored date is still active.
+const expectedPromo: FeaturedPromo = promo ? { ...golden.promo, endsAt: promo.endsAt } : golden.promo;
 
 const differences: string[] = [];
 diffAt("destinations", expected, normalizedActual, differences);
-diffAt("promo", golden.promo, promo, differences);
+diffAt("promo", expectedPromo, promo, differences);
+if (promo && isPriceExpired(promo.endsAt)) {
+  differences.push(`promo.endsAt: ${promo.endsAt} is in the past; reseed the fixture`);
+}
 
 if (differences.length === 0) {
   console.log(`parity: 0 differences (${actual.length} destinos, promo)`);

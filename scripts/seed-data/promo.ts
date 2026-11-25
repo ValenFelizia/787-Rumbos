@@ -1,9 +1,19 @@
+import { getTodayLocal } from "@/lib/catalog/logic";
 import type { FeaturedPromo } from "@/lib/catalog/types";
 
-/** Valores históricos de la promo. El seed los sube al global; la paridad los compara. */
+function relativeEndsAt(daysAhead = 60): string {
+  const target = getTodayLocal();
+  target.setDate(target.getDate() + daysAhead);
+  const year = target.getFullYear();
+  const month = String(target.getMonth() + 1).padStart(2, "0");
+  const day = String(target.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+/** Valores de la promo fixture (fin relativo al seed). El seed los sube al global; la paridad los compara. */
 export const promoSeed: FeaturedPromo = {
   slug: "f1-grand-premio-sao-paulo",
-  endsAt: "2026-11-05",
+  endsAt: relativeEndsAt(),
   topBarText: "🏎️ Salida Especial Charter: F1 GP de São Paulo (5 de Nov). ¡Últimos cupos! Ver Detalles →",
   badgeText: "🏎️ EVENTO DESTACADO F1",
   charterText: "✈️ VUELO CHARTER DIRECTO",
