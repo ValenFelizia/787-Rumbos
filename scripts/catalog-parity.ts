@@ -1,7 +1,10 @@
 /**
  * Compara el catálogo publicado en Postgres con e2e/golden/catalog.json.
  * Ignora clave ausente vs undefined. Si alguna parte FAQ quedó como
- * `whatsapp`, la reexpande al href antes de comparar.
+ * `whatsapp`, la reexpande al href antes de comparar. Los campos de imagen
+ * (`heroImage`, `flyerImage` y `promo.imageSrc`) se comparan por nombre de
+ * archivo porque el golden conserva la ruta de seed y el sitio sirve la URL
+ * del archivo subido.
  *
  * Uso: npm run test:parity
  */
@@ -102,9 +105,30 @@ const promo = mapFeaturedPromo(promoDoc as FeaturedPromoDoc);
 // promo with the golden and only require that the stored date is still active.
 const expectedPromo: FeaturedPromo = promo ? { ...golden.promo, endsAt: promo.endsAt } : golden.promo;
 
+function normalizeCatalogImages(
+  destinations: DestinationPage[],
+  promo: FeaturedPromo | null,
+): { destinations: DestinationPage[]; promo: FeaturedPromo | null } {
+  const fileName = (src: string): string => {
+    const queryStart = src.indexOf("?");
+    return path.posix.basename(queryStart === -1 ? src : src.slice(0, queryStart));
+  };
+  return {
+    destinations: destinations.map((dest) => ({
+      ...dest,
+      heroImage: fileName(dest.heroImage),
+      ...(dest.flyerImage !== undefined ? { flyerImage: fileName(dest.flyerImage) } : {}),
+    })),
+    promo: promo ? { ...promo, imageSrc: fileName(promo.imageSrc) } : null,
+  };
+}
+
+const expectedNormalized = normalizeCatalogImages(expected, expectedPromo);
+const actualNormalized = normalizeCatalogImages(normalizedActual, promo);
+
 const differences: string[] = [];
-diffAt("destinations", expected, normalizedActual, differences);
-diffAt("promo", expectedPromo, promo, differences);
+diffAt("destinations", expectedNormalized.destinations, actualNormalized.destinations, differences);
+diffAt("promo", expectedNormalized.promo, actualNormalized.promo, differences);
 if (promo && isPriceExpired(promo.endsAt)) {
   differences.push(`promo.endsAt: ${promo.endsAt} is in the past; reseed the fixture`);
 }
@@ -115,5 +139,6 @@ if (differences.length === 0) {
   console.error(`parity: ${differences.length} differences`);
   for (const line of differences.slice(0, 40)) console.error(line);
   if (differences.length > 40) console.error(`… y ${differences.length - 40} más`);
-  process.exitCode = 1;
+  // `payload run` calls process.exit(0) after importing the script, overriding process.exitCode.
+  process.exit(1);
 }
