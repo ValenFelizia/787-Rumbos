@@ -39,6 +39,9 @@ export const Media: CollectionConfig = {
     update: isAuthenticated,
     delete: isAdminOrEncargado,
   },
+  // Duplicar no pasa por `ensureUniqueMediaFilename` (no hay `req.file` en
+  // beforeOperation) y podría pisar las variantes de otra imagen.
+  disableDuplicate: true,
   hooks: {
     beforeOperation: [ensureUniqueMediaFilename],
     afterChange: [revalidateCatalogAfterChange],

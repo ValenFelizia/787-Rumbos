@@ -24,6 +24,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { createLocalReq, getPayload, type File, type Payload } from "payload";
 import config from "../payload.config";
+import { hasReservedMediaSizeSuffix, splitMediaFilename } from "../payload/media/filename";
 import type { Media } from "../payload-types";
 
 type MediaSizeName = keyof NonNullable<Media["sizes"]>;
@@ -278,6 +279,23 @@ async function main(): Promise<void> {
     missing: MediaSizeName[];
   }> = [];
   let skippedCount = 0;
+
+  // Las variantes se nombran por basename (`<basename>-w640.webp`): dos docs con el
+  // mismo basename se pisarían en el storage. Se revisan todos, no solo los pendientes.
+  const docsByBasename = new Map<string, string[]>();
+  for (const doc of docs) {
+    if (!doc.filename) continue;
+    const key = splitMediaFilename(doc.filename).basename.toLowerCase();
+    docsByBasename.set(key, [...(docsByBasename.get(key) ?? []), `media#${doc.id} ${doc.filename}`]);
+    if (hasReservedMediaSizeSuffix(splitMediaFilename(doc.filename).basename)) {
+      throw new Error(`media#${doc.id} ${doc.filename}: basename con sufijo reservado de variante`);
+    }
+  }
+  for (const [basename, owners] of docsByBasename) {
+    if (owners.length > 1) {
+      throw new Error(`basename '${basename}' repetido: ${owners.join(", ")}`);
+    }
+  }
 
   for (const doc of docs) {
     const missing = getMissingSizes(doc, REQUIRED_SIZES);

@@ -24,4 +24,10 @@ describe("resolveUniqueMediaFilename", () => {
   it("handles multi-dot filenames by splitting on the final dot", () => {
     assert.equal(resolveUniqueMediaFilename("rio.de.janeiro.png", ["rio.de.janeiro.jpg"]), "rio.de.janeiro-1.png");
   });
+
+  it("compares the name Payload will store after sanitizing it", () => {
+    assert.equal(resolveUniqueMediaFilename("beach .png", ["beach.jpg"]), "beach-1.png");
+    assert.equal(resolveUniqueMediaFilename("beach?.png", ["beach.jpg"]), "beach-1.png");
+    assert.equal(resolveUniqueMediaFilename("hero-w640 .jpg", []), "hero-w640-1.jpg");
+  });
 });

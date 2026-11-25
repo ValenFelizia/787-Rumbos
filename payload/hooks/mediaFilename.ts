@@ -1,5 +1,5 @@
 import type { CollectionBeforeOperationHook } from "payload";
-import { resolveUniqueMediaFilename } from "../media/filename";
+import { resolveUniqueMediaFilename, sanitizeMediaFilename } from "../media/filename";
 
 /**
  * `getSafeFileName` de Payload solo exige unicidad del `filename` completo, pero
@@ -38,7 +38,7 @@ export const ensureUniqueMediaFilename: CollectionBeforeOperationHook = async ({
       // En update sin `overwriteExistingFiles`, `getSafeFileName` incrementa si el
       // archivo entrante repite el `filename` actual del doc; conservarlo acá evita
       // que ese salto caiga en el basename de otro documento.
-      return doc.filename === file.name;
+      return doc.filename === sanitizeMediaFilename(file.name);
     })
     .map((doc) => doc.filename);
 
