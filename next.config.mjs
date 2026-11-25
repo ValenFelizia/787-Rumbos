@@ -78,6 +78,11 @@ const adminRobotsHeaders = [{ key: "X-Robots-Tag", value: "noindex" }];
 const nextConfig = {
   distDir,
   images: {
+    // Temporal: la cuota de optimización de imágenes del plan Hobby de Vercel
+    // se agotó y /_next/image responde 402, así que las fotos no cargaban.
+    // Se sirven los archivos tal cual hasta que Payload genere los tamaños
+    // livianos al subir cada foto.
+    unoptimized: true,
     // Formatos modernos: Next.js + Vercel sirven WebP/AVIF automáticamente
     // según lo que soporte el navegador del visitante.
     formats: ["image/avif", "image/webp"],
