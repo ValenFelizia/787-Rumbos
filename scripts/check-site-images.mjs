@@ -24,6 +24,12 @@ async function fetchHtml(pagePath) {
 function imageUrls(html) {
   const urls = new Set();
   for (const [, src] of html.matchAll(/<img\b[^>]*?\ssrc="([^"]+)"/g)) urls.add(decode(src));
+  for (const [, srcset] of html.matchAll(/<img\b[^>]*?\ssrcset="([^"]+)"/gi)) {
+    for (const candidate of srcset.split(",")) {
+      const url = candidate.trim().split(/\s+/)[0];
+      if (url) urls.add(decode(url));
+    }
+  }
   for (const [, src] of html.matchAll(/<meta\s+property="og:image"\s+content="([^"]+)"/g)) {
     urls.add(decode(src));
   }
