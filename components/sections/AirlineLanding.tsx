@@ -105,6 +105,7 @@ export function AirlineLanding({ airline }: { airline: AirlinePage }) {
                 alt={airline.logo.alt}
                 width={airline.logo.width}
                 height={airline.logo.height}
+                sizes="120px"
                 className="h-5 w-auto max-w-full object-contain object-left"
               />
             </div>
