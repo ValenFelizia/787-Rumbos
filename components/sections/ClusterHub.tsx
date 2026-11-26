@@ -141,7 +141,7 @@ export async function ClusterHub({ cluster }: { cluster: ClusterPage }) {
                         src={dest.heroImage}
                         alt={`${dest.name} — paquete con 787 Rumbos`}
                         fill
-                        sizes="(max-width: 768px) 100vw, 33vw"
+                        sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#0b4058]/55 via-transparent to-transparent pointer-events-none" />

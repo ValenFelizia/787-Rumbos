@@ -523,7 +523,7 @@ export default async function DestinoDetailPage({ params }: Props) {
                         src={item.heroImage}
                         alt={`Paquetes a ${item.name}`}
                         fill
-                        sizes="(max-width: 768px) 100vw, 33vw"
+                        sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
                         className="object-cover transition-transform duration-300 group-hover:scale-105"
                       />
                     </div>

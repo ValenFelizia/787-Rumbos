@@ -75,6 +75,18 @@ test.describe("rutas críticas", () => {
       section.getByRole("heading", { name: "Porto de Galinhas", level: 3 }),
     ).toBeVisible();
     await expect(section.getByRole("link", { name: "Ver detalles y salidas" })).toHaveCount(4);
+    const cardImage = section.locator("article img").first();
+    await expect(cardImage).toBeVisible();
+    const srcset = await cardImage.getAttribute("srcset");
+    expect(srcset).toBeTruthy();
+    const w640Url = srcset!
+      .split(",")
+      .map((entry) => entry.trim().split(/\s+/)[0])
+      .find((url) => url.endsWith("-w640.webp"));
+    expect(w640Url).toBeTruthy();
+    const imageResponse = await page.request.get(w640Url!);
+    expect(imageResponse.status()).toBe(200);
+    expect(imageResponse.headers()["content-type"]).toContain("image/webp");
     const consult = section.getByRole("link", { name: /Consultar esta salida/ });
     await expect(consult).toHaveCount(4);
     const hrefs = await consult.evaluateAll((links) =>
