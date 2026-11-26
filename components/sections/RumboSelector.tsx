@@ -149,7 +149,7 @@ export function RumboSelector() {
                   subtitle="Fechas confirmadas desde Córdoba."
                   image="/rumbos/grupal.jpg"
                   alt="Centro Cívico de Bariloche junto al lago Nahuel Huapi"
-                  sizes="(max-width: 640px) 100vw, 33vw"
+                  sizes="(max-width: 639px) calc(100vw - 48px), (max-width: 1151px) calc((100vw - 80px) / 3), 357px"
                   titleSize="tile"
                 />
               </Link>
@@ -162,7 +162,7 @@ export function RumboSelector() {
                   subtitle="All Inclusive en México y Punta Cana."
                   image="/destinos/cancun.jpg"
                   alt="Cancún — paquetes al Caribe desde Córdoba"
-                  sizes="(max-width: 640px) 100vw, 33vw"
+                  sizes="(max-width: 639px) calc(100vw - 48px), (max-width: 1151px) calc((100vw - 80px) / 3), 357px"
                   titleSize="tile"
                 />
               </Link>
@@ -178,7 +178,7 @@ export function RumboSelector() {
                   image="/rumbos/medida.jpg"
                   alt="Local de 787 Rumbos en el hall de arribos del Aeropuerto de Córdoba"
                   imagePosition="object-[22%_center]"
-                  sizes="(max-width: 640px) 100vw, 33vw"
+                  sizes="(max-width: 639px) calc(100vw - 48px), (max-width: 1151px) calc((100vw - 80px) / 3), 357px"
                   titleSize="tile"
                 />
               </button>

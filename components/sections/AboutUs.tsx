@@ -29,7 +29,7 @@ export function AboutUs() {
               alt="Fer, agenciera de 787 Rumbos, en la FIT América Latina"
               width={640}
               height={615}
-              sizes="(max-width: 768px) 50vw, 220px"
+              sizes="(max-width: 767px) 50vw, 267px"
               className="h-[150px] w-full object-cover object-[center_top] md:h-[220px]"
             />
           </div>

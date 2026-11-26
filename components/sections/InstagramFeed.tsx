@@ -41,7 +41,7 @@ export function InstagramFeed() {
                   src={post.imageSrc}
                   alt={post.alt}
                   fill
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
+                  sizes="(max-width: 767px) 50vw, (max-width: 1023px) 33vw, 16vw"
                   className="object-cover"
                 />
 
