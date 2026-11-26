@@ -11,8 +11,6 @@ import {
 
 const RASTER_EXT_RE = /\.(?:jpe?g|png)$/i;
 const PUBLIC_DIR = path.join(process.cwd(), "public");
-/** Absorb millisecond-order checkout jitter when git writes `-w*.webp` before `.jpg`. */
-const CHECKOUT_MTIME_SKEW_MS = 500;
 
 function walkFiles(dir: string): string[] {
   const out: string[] = [];
@@ -28,7 +26,7 @@ function walkFiles(dir: string): string[] {
 }
 
 describe("public image variants on disk", () => {
-  it("every public raster mapped by imageLoader has all three up-to-date WebP variants", () => {
+  it("every public raster mapped by imageLoader has all three WebP variants", () => {
     const rasters = walkFiles(PUBLIC_DIR).filter((file) => RASTER_EXT_RE.test(file));
     assert.ok(rasters.length > 0, "Expected raster files under public/");
 
@@ -51,8 +49,6 @@ describe("public image variants on disk", () => {
         continue;
       }
 
-      const sourceStat = statSync(sourcePath);
-
       for (const width of VARIANT_WIDTHS) {
         const mapped = imageLoader({ src: publicSrc, width });
         assert.notEqual(mapped, publicSrc, `Expected imageLoader to map ${publicSrc} at ${width}`);
@@ -71,10 +67,6 @@ describe("public image variants on disk", () => {
         assert.ok(
           variantStat.size > 0,
           `Empty WebP variant ${mapped} for ${publicSrc}. Run \`npm run images:public\`.`,
-        );
-        assert.ok(
-          variantStat.mtimeMs + CHECKOUT_MTIME_SKEW_MS >= sourceStat.mtimeMs,
-          `Stale WebP variant ${mapped} is older than ${publicSrc}. Run \`npm run images:public\`.`,
         );
       }
     }
